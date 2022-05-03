@@ -1,4 +1,4 @@
-# Algorithm Building Blocks
+# Nonlinear Systems of Equations
 
 Topics to cover:
 * Motivating examples and notation

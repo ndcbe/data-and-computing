@@ -1,4 +1,4 @@
-# Algorithm Building Blocks
+# Continuous Optimization
 
 Topics to cover:
 * Theory for continuous optimization
