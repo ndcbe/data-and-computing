@@ -45,8 +45,8 @@ def process_notebook(folder,filename,verbose=1):
         if verbose >= 1:
             print("  ",count," cells processed")
 
-    SOLUTION_CODE = "### BEGIN SOLUTION(.*)### END SOLUTION"
-    HIDDEN_TESTS = "### BEGIN HIDDEN TESTS(.*)### END HIDDEN TESTS"
+    SOLUTION_CODE = "### BEGIN SOLUTION(.*?)### END SOLUTION"
+    HIDDEN_TESTS = "### BEGIN HIDDEN TESTS(.*?)### END HIDDEN TESTS"
     replace_code(SOLUTION_CODE, "# Add your solution here")
     replace_code(HIDDEN_TESTS, "# Removed autograder test. You may delete this cell.")
 
