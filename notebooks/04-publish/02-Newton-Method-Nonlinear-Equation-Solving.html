@@ -1,0 +1,1360 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Solving Systems of Nonlinear Equations with Newton’s Method &#8212; Data and Computing for Chemical Engieers</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="More Newton-Type Methods" href="03-More-Newton-Type-Methods.html" />
+    <link rel="prev" title="Modeling Systems of Nonlinear Equations" href="01-Modeling-Systems-of-Nonlinear-Equations.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/cbe_logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Data and Computing for Chemical Engieers</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../intro.html">
+   Welcome to (Advanced) Data and Computing for Engineers
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../01/00-Python-Primer.html">
+   Python Primer
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/01-Jupyter-Notebooks.html">
+     Welcome to Jupyter Notebooks and Vocareum
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/02-Python-Basics-I-Variables-Strings-Bugs.html">
+     Python Basics I: Variables, Strings, and Bugs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/03b-Pseudocode.html">
+     Pseudocode
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/04-Functions-and-Scope.html">
+     Functions and Scope
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/04b-Recursion.html">
+     Recursion
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/04d-Example-High-Low-Game.html">
+     High/Low Guess My Number Game
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/05-Python-Basics-III-Lists-Dictionaries-Enumeration.html">
+     Python Basics III: Lists, Dictionaries, and Enumeration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/06-NumPy.html">
+     Linear Algebra with Numpy and Scipy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/07-Matplotlib.html">
+     Visualization with matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/08-Pandas.html">
+     Manipulating Data with Pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/09-Functions-as-Arguments.html">
+     Functions as Arguments
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/10-Testing-and-Debugging.html">
+     Testing and Debugging in Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../02/linear_algebra.html">
+   Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02-publish/01-Modeling-Systems-of-Linear-Equations.html">
+     Modeling Systems of Linear Equations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02-publish/02-Gauss-Elimination.html">
+     Gaussian Elimination
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02-publish/03-LU-Factorization.html">
+     LU Decomposition and Condition Number
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02-publish/04-Example-Atomic-Mass-Balances.html">
+     Example: Mass Balances and Linear Algebra
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../03/algorithms.html">
+   Algorithm Building Blocks
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03-publish/01-Taylor-Series.html">
+     Taylor Series Approximations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03-publish/02-Finite-Difference.html">
+     Finite Difference Derivative Approximations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03-publish/03-Example-Heating-a-Metal-Slab.html">
+     Example: Heating a Metal Slab
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../04/nonlinear_systems.html">
+   Nonlinear Systems of Equations
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="01-Modeling-Systems-of-Nonlinear-Equations.html">
+     Modeling Systems of Nonlinear Equations
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Solving Systems of Nonlinear Equations with Newton’s Method
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03-More-Newton-Type-Methods.html">
+     More Newton-Type Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04-Convergence-Analysis-Newton-Method.html">
+     Convergence Analysis for Newton’s Method
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="05-System-of-Equations-Newton-Method.html">
+     Newton’s Method for Systems of Equations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../05/optimization.html">
+   Continuous Optimization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../06/integration.html">
+   Numeric Integration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../07/stats.html">
+   Descriptive Statistics and Visualization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../08/probability.html">
+   Probability Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../09/distributions.html">
+   Common Probability Distributions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../10/uncertainty.html">
+   Uncertainty and Error Propagation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../11/inference.html">
+   Statistical Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../12/regression.html">
+   Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../13/advanced_regression.html">
+   Advanced Nonlinear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../14/design_of_experiments.html">
+   Design of Experiments
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/04-publish/02-Newton-Method-Nonlinear-Equation-Solving.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/ndcbe/data-and-computing"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/04-publish/02-Newton-Method-Nonlinear-Equation-Solving.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/04-publish/02-Newton-Method-Nonlinear-Equation-Solving.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/04-publish/02-Newton-Method-Nonlinear-Equation-Solving.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-objectives">
+   Learning Objectives
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#newton-s-method-aka-newton-raphson-method-with-an-example">
+   Newton’s Method (aka Newton-Raphson Method) with an Example
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#review-canonical-form">
+     Review Canonical Form
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#main-idea-through-an-example">
+     Main Idea Through an Example
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#algorithm-steps-and-iteration-1">
+     Algorithm Steps and Iteration 1
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#convergence">
+     Convergence
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#iteration-2">
+     Iteration 2
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#newton-s-method-generalized">
+   Newton’s Method Generalized
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#generalization">
+     Generalization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#algorithm-and-implementation">
+     Algorithm and Implementation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#unit-test-and-example">
+     Unit Test and Example
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#looking-deeper-into-the-unit-test">
+     Looking Deeper into the Unit Test
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#iteration-1">
+       Iteration 1
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id1">
+       Iteration 2
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#iteration-3">
+       Iteration 3
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Solving Systems of Nonlinear Equations with Newton’s Method</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-objectives">
+   Learning Objectives
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#newton-s-method-aka-newton-raphson-method-with-an-example">
+   Newton’s Method (aka Newton-Raphson Method) with an Example
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#review-canonical-form">
+     Review Canonical Form
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#main-idea-through-an-example">
+     Main Idea Through an Example
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#algorithm-steps-and-iteration-1">
+     Algorithm Steps and Iteration 1
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#convergence">
+     Convergence
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#iteration-2">
+     Iteration 2
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#newton-s-method-generalized">
+   Newton’s Method Generalized
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#generalization">
+     Generalization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#algorithm-and-implementation">
+     Algorithm and Implementation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#unit-test-and-example">
+     Unit Test and Example
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#looking-deeper-into-the-unit-test">
+     Looking Deeper into the Unit Test
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#iteration-1">
+       Iteration 1
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id1">
+       Iteration 2
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#iteration-3">
+       Iteration 3
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="solving-systems-of-nonlinear-equations-with-newton-s-method">
+<h1>Solving Systems of Nonlinear Equations with Newton’s Method<a class="headerlink" href="#solving-systems-of-nonlinear-equations-with-newton-s-method" title="Permalink to this headline">¶</a></h1>
+<p>CBE 20258. Numerical and Statistical Analysis. Spring 2020.</p>
+<p>© University of Notre Dame</p>
+<div class="section" id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">¶</a></h2>
+<p>After studying this notebook, completing the activities, and asking questions in class, you should be able to:</p>
+<ul class="simple">
+<li><p>Understand how Newton’s Method iterates through a function to approximate a root solution.</p></li>
+<li><p>Generalize Newton’s Method in code.</p></li>
+</ul>
+</div>
+<div class="section" id="motivation">
+<h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">¶</a></h2>
+<p>In this class, we will learn about a family of algorithms that quickly and reliably converges to a numeric value for <span class="math notranslate nohighlight">\(x\)</span> that satisfies <span class="math notranslate nohighlight">\(c(x) = 0\)</span> from an initial guess <span class="math notranslate nohighlight">\(x_0\)</span>.</p>
+<p>a.k.a. Newton-type methods produce good approximations for roots of real-valued functions using an iterative process.</p>
+</div>
+<div class="section" id="newton-s-method-aka-newton-raphson-method-with-an-example">
+<h2>Newton’s Method (aka Newton-Raphson Method) with an Example<a class="headerlink" href="#newton-s-method-aka-newton-raphson-method-with-an-example" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="review-canonical-form">
+<h3>Review Canonical Form<a class="headerlink" href="#review-canonical-form" title="Permalink to this headline">¶</a></h3>
+<p>In a previous notebook, we discussed <strong>canonical form</strong>, <span class="math notranslate nohighlight">\(c(x) = 0\)</span>, for a system of linear equations. Here, <span class="math notranslate nohighlight">\(c(x)\)</span> is a mathematical function that depends on variable <span class="math notranslate nohighlight">\(x\)</span>. <span class="math notranslate nohighlight">\(c(\cdot)\)</span> can be linear or nonlinear. <span class="math notranslate nohighlight">\(x\)</span> can be a scalar or vector.</p>
+<p>We say <span class="math notranslate nohighlight">\(c(x) = 0\)</span> is a <strong>square system</strong> if the number of variables equals the number of equations, i.e., there are zero degrees of freedom. In this notebook, we will focus on square systems. In a future notebook, we will talk about optimization problems which have extra degrees of freedom (more variables than equations).</p>
+<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
+<b>Home Activity</b>: Answer the following short answer questions below to review canonical form.
+</div><p><strong>Multiple Choice</strong> If <span class="math notranslate nohighlight">\(x\)</span> is a three dimensional vector and <span class="math notranslate nohighlight">\(c(x) = 0\)</span> is a square system, then…</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(c(x)\)</span> returns a scalar</p></li>
+<li><p><span class="math notranslate nohighlight">\(c(x)\)</span> returns a two dimensional vector</p></li>
+<li><p><span class="math notranslate nohighlight">\(c(x)\)</span> returns a three dimensional vector</p></li>
+<li><p>None of the above.</p></li>
+</ol>
+<p>Record your answer as an integer in the Python variable <code class="docutils literal notranslate"><span class="pre">ans_bi1</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We say a function is <strong>vector valued</strong> if it returns a vector and <strong>scalar valued</strong> if it returns a scalar.</p>
+<p><strong>Multiple Choice</strong> Which is the following is canonical form for the equation <span class="math notranslate nohighlight">\(x^2 - 1/x = 2\)</span>?</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(x^2 - 1/x - 2 = 0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\frac{x^3 - 2x - 1}{x} = 0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(2 x^2 - 2/x - 4 = 0\)</span></p></li>
+<li><p>All of the above are canonical form</p></li>
+</ol>
+<p>Store your answer as an integer in the Python variable <code class="docutils literal notranslate"><span class="pre">ans_bi2</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="main-idea-through-an-example">
+<h3>Main Idea Through an Example<a class="headerlink" href="#main-idea-through-an-example" title="Permalink to this headline">¶</a></h3>
+<p>An example is the easiest way to understand Newton’s method. Let’s find a root, i.e., values for <span class="math notranslate nohighlight">\(x\)</span> that satisfy <span class="math notranslate nohighlight">\(c(x)=0\)</span>, for the following equation:</p>
+<div class="math notranslate nohighlight">
+\[ c(x) = 3 x^3 + 2 x^2 - 5 x - 20 \]</div>
+<p><strong>Chemical Engineering Application</strong>: In Thermodynamics, you will learn about cubic equations of state. These are cubic polynomials in volume <span class="math notranslate nohighlight">\(V\)</span> (or equivalently compressibility <span class="math notranslate nohighlight">\(Z\)</span>) that accurately predict many important quantities (enthalpy, entropy, fugacity) for a wide range of mixtures. In fact, you can predict the equilibrium coefficients <span class="math notranslate nohighlight">\(K\)</span> in flash calculations with a cubic equation of state. But we won’t “steal the thunder” of cubic equations of state right now. We’ll just focus on the generic math problem above for simplicity.</p>
+<p>We will start by plotting the function <span class="math notranslate nohighlight">\(c(x)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="c1">#this next line is only needed in iPython notebooks</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline 
+
+<span class="k">def</span> <span class="nf">nonlinear_function</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; compute a nonlinear function for demonstration</span>
+<span class="sd">    Arguments:</span>
+<span class="sd">        x: scalar</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        c(x): scalar</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">5</span><span class="o">*</span><span class="n">x</span><span class="o">-</span><span class="mi">20</span>
+
+<span class="n">Np</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">Np</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">X</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;c(x)&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$x$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$c(x)$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/02-Newton-Method-Nonlinear-Equation-Solving_13_0.png" src="../../_images/02-Newton-Method-Nonlinear-Equation-Solving_13_0.png" />
+</div>
+</div>
+<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
+<b>Home Activity</b>: Based on the plot above, answer the following short answer questions.
+</div><p><strong>Multiple Choice</strong> How many real and imaginary roots are there for <span class="math notranslate nohighlight">\(c(x)\)</span>?</p>
+<ol class="simple">
+<li><p>One real root and two imaginary roots</p></li>
+<li><p>Three real roots</p></li>
+<li><p>Two real roots and one imaginary root</p></li>
+<li><p>One real root and no imaginary roots</p></li>
+<li><p>No real or imaginary roots</p></li>
+<li><p>None of the above</p></li>
+</ol>
+<p>Record your answer as an integer in the Python variable <code class="docutils literal notranslate"><span class="pre">ans_bii1</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Numeric Answer</strong> What is the real root for c(x) = 0 based on the plot? Approximate your answer to 1 decimal point and record in the Python variable <code class="docutils literal notranslate"><span class="pre">ans_bii2</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### BEGIN SOLUTION</span>
+<span class="n">ans_bii2</span> <span class="o">=</span> <span class="mf">1.9</span>
+<span class="c1">## END SOLUTION</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="algorithm-steps-and-iteration-1">
+<h3>Algorithm Steps and Iteration 1<a class="headerlink" href="#algorithm-steps-and-iteration-1" title="Permalink to this headline">¶</a></h3>
+<p>We will start Newton’s method at the initial guess <span class="math notranslate nohighlight">\(x_0 = 1.25\)</span>.</p>
+<p>For each iteration of the algorithm, we will do the following steps:</p>
+<ol class="simple">
+<li><p>Construct a tangent line at the current guess</p></li>
+<li><p>Solve the tangent line (a linear system!) to compute a new guess</p></li>
+<li><p>Check if our guess is “close enough” to the true solution to stop</p></li>
+</ol>
+<p>The Python code below does the first two steps described above. We’ll talk about good stopping criteria, i.e., knowing when we are “close enough”, soon.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">guess</span> <span class="o">=</span> <span class="mf">1.25</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Guess 0 =&quot;</span><span class="p">,</span><span class="n">guess</span><span class="p">,</span> <span class="s2">&quot;(initial)&quot;</span><span class="p">)</span>
+
+<span class="c1"># plot function again</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">X</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;c(x)&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+
+<span class="c1"># plot original guess</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">guess</span><span class="p">,</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">guess</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;guess 0&quot;</span><span class="p">,</span>
+            <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+
+<span class="c1">### construct tangent line</span>
+<span class="c1"># calculate slope with finite difference perturbation</span>
+<span class="n">slope</span> <span class="o">=</span> <span class="p">(</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">-</span> <span class="n">nonlinear_function</span><span class="p">(</span><span class="n">guess</span><span class="o">-</span><span class="mf">.0001</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mf">.0001</span><span class="p">)</span>
+
+<span class="c1"># plot tanget plane centered at guess</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">+</span> <span class="n">slope</span><span class="o">*</span><span class="p">(</span><span class="n">X</span><span class="o">-</span><span class="n">guess</span><span class="p">),</span>
+         <span class="s1">&#39;k-.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Tangent at guess&quot;</span><span class="p">)</span>
+
+<span class="c1">### calculate new guess and plot</span>
+<span class="n">new_guess</span> <span class="o">=</span> <span class="n">guess</span><span class="o">-</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span><span class="o">/</span><span class="n">slope</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">new_guess</span><span class="p">,</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">new_guess</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;guess 1&quot;</span><span class="p">,</span>
+            <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Guess 1 =&quot;</span><span class="p">,</span><span class="n">new_guess</span><span class="p">)</span>
+
+<span class="c1">### draw lines to guide eye</span>
+<span class="c1"># horizontal line at y=0</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="mi">0</span><span class="o">*</span><span class="n">X</span><span class="p">,</span><span class="s2">&quot;--&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;y = 0&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">)</span>
+
+<span class="c1"># vertical line from guess to y=0 line</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">guess</span><span class="p">,</span><span class="n">guess</span><span class="p">]),</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">guess</span><span class="p">)]),</span><span class="s1">&#39;r--&#39;</span><span class="p">)</span>
+
+<span class="c1"># vertical line from new_guess to y=0 line</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">new_guess</span><span class="p">,</span><span class="n">new_guess</span><span class="p">]),</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">new_guess</span><span class="p">)]),</span><span class="s1">&#39;r--&#39;</span><span class="p">)</span>
+
+<span class="c1"># root for c(x)=0</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="mf">1.94731</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Root&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">)</span>
+
+<span class="c1">### finish formatting plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;best&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Guess 0 and 1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Guess 0 = 1.25 (initial)
+Guess 1 = 2.4778934700108186
+</pre></div>
+</div>
+<img alt="../../_images/02-Newton-Method-Nonlinear-Equation-Solving_22_1.png" src="../../_images/02-Newton-Method-Nonlinear-Equation-Solving_22_1.png" />
+</div>
+</div>
+<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
+<b>Home Activity</b>: Study the Python code above. Then fill in the $?$s in the formulas below. These are the calculations done in Python.
+</div><p>Approximate the slope of the tangent line:</p>
+<div class="math notranslate nohighlight">
+\[s = \frac{c(x_0) - c(?)}{?}\]</div>
+<p>Compute the next guess:</p>
+<div class="math notranslate nohighlight">
+\[x_1 = ? - \frac{?}{?}\]</div>
+<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
+<b>Home Activity</b>: Write one question or observation to share during class about the code above.
+</div><p>Your question/observation:</p>
+</div>
+<div class="section" id="convergence">
+<h3>Convergence<a class="headerlink" href="#convergence" title="Permalink to this headline">¶</a></h3>
+<p><em>Are we there yet?</em> There are two popular stopping criteria for Newton’s method:</p>
+<ol class="simple">
+<li><p>Check the (norm of the) step size <span class="math notranslate nohighlight">\(\Delta x_i = x_i - x_{i-1}\)</span>. When our guess only changes by a very small amount, we should stop. We either arrived at the solution or should try something else.</p></li>
+<li><p>Check the (norm of the) residual(s) <span class="math notranslate nohighlight">\(c(x_i)\)</span>.  When the (norm of the) residual(s) is almost zero, then <span class="math notranslate nohighlight">\(x_i\)</span> is a good numeric approximation to the true (analytic) solution.</p></li>
+</ol>
+<p>Here <span class="math notranslate nohighlight">\(x_i\)</span> is the guess after iteration <span class="math notranslate nohighlight">\(i\)</span>. We called our initial guess <span class="math notranslate nohighlight">\(x_0\)</span>. Recall, <span class="math notranslate nohighlight">\(x\)</span> can be a vector and <span class="math notranslate nohighlight">\(c(x)\)</span> can be a vector valued function, hence the “(norm of the)” above.</p>
+<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
+<b>Home Activity</b>: Based on the graph above, answer the following short answer questions.
+</div><p><strong>Numeric Answer</strong>: What is <span class="math notranslate nohighlight">\(c(x_1)\)</span>, i.e., <span class="math notranslate nohighlight">\(c(\cdot)\)</span> evaluated at guess 1? Record your answer with two significant digits in the Python variable <tt>ans_biv1</tt>.</p>
+<p><em>Hint</em>: You can read this off of the plot we made above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Numeric Answer</strong>: What is <span class="math notranslate nohighlight">\(\Delta x_1 = x_1 - x_0\)</span>, i.e., <span class="math notranslate nohighlight">\(c(\cdot)\)</span> evaluated at guess 1? Record your answer with three significant digits in the Python variable <tt>ans_biv2</tt>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="iteration-2">
+<h3>Iteration 2<a class="headerlink" href="#iteration-2" title="Permalink to this headline">¶</a></h3>
+<p>Based on the large residual and large step size, we decide to continue with Newton’s method. We proceed to i) fit the tangent line around <span class="math notranslate nohighlight">\(x_1\)</span>, and then use the tangent line to calculate <span class="math notranslate nohighlight">\(x_2\)</span>. Please take a few minutes to read through the Python code below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">guess</span> <span class="o">=</span> <span class="n">new_guess</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Guess 1 =&quot;</span><span class="p">,</span><span class="n">guess</span><span class="p">)</span>
+
+<span class="c1"># plot function again</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">X</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;c(x)&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+
+<span class="c1"># plot original guess</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">guess</span><span class="p">,</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">guess</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;guess 1&quot;</span><span class="p">,</span>
+            <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+
+<span class="c1">### construct tangent line</span>
+<span class="c1"># calculate slope with finite difference perturbation</span>
+<span class="n">slope</span> <span class="o">=</span> <span class="p">(</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">-</span> <span class="n">nonlinear_function</span><span class="p">(</span><span class="n">guess</span><span class="o">-</span><span class="mf">.0001</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mf">.0001</span><span class="p">)</span>
+
+<span class="c1"># plot tanget plane centered at guess</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">+</span> <span class="n">slope</span><span class="o">*</span><span class="p">(</span><span class="n">X</span><span class="o">-</span><span class="n">guess</span><span class="p">),</span>
+         <span class="s1">&#39;k-.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Tangent at guess&quot;</span><span class="p">)</span>
+
+<span class="c1">### calculate new guess and plot</span>
+<span class="n">new_guess</span> <span class="o">=</span> <span class="n">guess</span><span class="o">-</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span><span class="o">/</span><span class="n">slope</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">new_guess</span><span class="p">,</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">new_guess</span><span class="p">),</span>
+            <span class="n">label</span><span class="o">=</span><span class="s2">&quot;guess 2&quot;</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Guess 2 =&quot;</span><span class="p">,</span><span class="n">new_guess</span><span class="p">)</span>
+
+<span class="c1">### draw lines to guide eye</span>
+<span class="c1"># horizontal line at y=0</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="mi">0</span><span class="o">*</span><span class="n">X</span><span class="p">,</span><span class="s2">&quot;--&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;y = 0&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">)</span>
+
+<span class="c1"># vertical line from guess to y=0 line</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">guess</span><span class="p">,</span><span class="n">guess</span><span class="p">]),</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">guess</span><span class="p">)]),</span><span class="s1">&#39;r--&#39;</span><span class="p">)</span>
+
+<span class="c1"># vertical line from new_guess to y=0 line</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">new_guess</span><span class="p">,</span><span class="n">new_guess</span><span class="p">]),</span>
+         <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">new_guess</span><span class="p">)]),</span><span class="s1">&#39;r--&#39;</span><span class="p">)</span>
+
+<span class="c1"># root for c(x)=0</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="mf">1.94731</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Root&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">)</span>
+
+<span class="c1">### finish formatting plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;best&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Guess 1 and 2&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span><span class="mi">60</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Guess 1 = 2.4778934700108186
+Guess 2 = 2.0535383605864483
+</pre></div>
+</div>
+<img alt="../../_images/02-Newton-Method-Nonlinear-Equation-Solving_37_1.png" src="../../_images/02-Newton-Method-Nonlinear-Equation-Solving_37_1.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="newton-s-method-generalized">
+<h2>Newton’s Method Generalized<a class="headerlink" href="#newton-s-method-generalized" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="generalization">
+<h3>Generalization<a class="headerlink" href="#generalization" title="Permalink to this headline">¶</a></h3>
+<p>As you can see, we get closer to the root each iteration.  This is due to the fact that close enough to a point, the tangent line is a reasonable approximation–just as the linear Taylor series can be a good approximation.  Of course, this is not always a good approximation as we will see later.</p>
+<p>The basic idea is to compute where the tangent line crosses the <span class="math notranslate nohighlight">\(x\)</span> axis. We do this by solving</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}f'(x_i) = \frac{f(x_{i+1}) - f(x_i)}{x_{i+1} - x_i},$$ with $f(x_{i+1}) = 0$ to get\\$$ x_{i+1} = x_i - \frac{f(x_i)}{f'(x_i)}.\end{aligned}\end{align} \]</div>
+<p>It’s that simple.</p>
+<p><strong>Notice</strong>: We switch from <span class="math notranslate nohighlight">\(c(x) = 0\)</span> to <span class="math notranslate nohighlight">\(f(x) = 0\)</span>. People use them <strong>interchangeably for canonical form</strong>.</p>
+</div>
+<div class="section" id="algorithm-and-implementation">
+<h3>Algorithm and Implementation<a class="headerlink" href="#algorithm-and-implementation" title="Permalink to this headline">¶</a></h3>
+<p>We can now implement a general purpose version of Newton’s method in Python.</p>
+<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
+<b>Home Activity</b>: Fill in the missing line in the general single-variable Newton's method function below.
+</div><p>Hints:</p>
+<ul class="simple">
+<li><p>Which formula (written above) should you use to update <code class="docutils literal notranslate"><span class="pre">x</span></code> each iteration?</p></li>
+<li><p>Read the document string.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f</span></code> and <code class="docutils literal notranslate"><span class="pre">fprime</span></code> are both functions. Review Chapter 01 Notebook 04 for more information on passing functions as an input argument to functions.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">newton</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">fprime</span><span class="p">,</span><span class="n">x0</span><span class="p">,</span><span class="n">epsilon</span><span class="o">=</span><span class="mf">1.0e-6</span><span class="p">,</span> <span class="n">LOUD</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Find the root of the function f(x) via Newton-Raphson method</span>
+<span class="sd">    Args:</span>
+<span class="sd">        f: the function, in canoncial form, we want to fix the root of [Python function]</span>
+<span class="sd">        fprime: the derivative of f [Python function]</span>
+<span class="sd">        x0: initial guess [float]</span>
+<span class="sd">        epsilon: tolerance [float]</span>
+<span class="sd">        LOUD: toggle on/off print statements [boolean]</span>
+<span class="sd">        max_iter: maximum number of iterations [int]</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        estimate of root [float]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">assert</span> <span class="n">callable</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="s2">&quot;Warning: &#39;f&#39; should be a Python function&quot;</span>
+    <span class="k">assert</span> <span class="n">callable</span><span class="p">(</span><span class="n">fprime</span><span class="p">),</span> <span class="s2">&quot;Warning: &#39;fprime&#39; should be a Python function&quot;</span>
+    <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">float</span> <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">int</span><span class="p">,</span> <span class="s2">&quot;Warning: &#39;x0&#39; should be a float or integer&quot;</span>
+    <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">epsilon</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">float</span><span class="p">,</span> <span class="s2">&quot;Warning: &#39;eps&#39; should be a float&quot;</span>
+    <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">max_iter</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">int</span><span class="p">,</span> <span class="s2">&quot;Warning: &#39;max_iter&#39; should be an integer&quot;</span>
+    <span class="k">assert</span> <span class="n">max_iter</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Warning: &#39;max_iter&#39; should be non-negative&quot;</span>
+    
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">LOUD</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x0 =&quot;</span><span class="p">,</span><span class="n">x0</span><span class="p">)</span>
+    <span class="n">iterations</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">converged</span> <span class="o">=</span> <span class="kc">False</span>
+    
+    <span class="c1"># Check if the residual is close enough to zero</span>
+    <span class="k">while</span> <span class="p">(</span><span class="ow">not</span> <span class="n">converged</span> <span class="ow">and</span> <span class="n">iterations</span> <span class="o">&lt;</span> <span class="n">max_iter</span><span class="p">):</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="n">LOUD</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x_&quot;</span><span class="p">,</span><span class="n">iterations</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;=&quot;</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="s2">&quot;-&quot;</span><span class="p">,</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="s2">&quot;/&quot;</span><span class="p">,</span>
+                  <span class="n">fprime</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="s2">&quot;=&quot;</span><span class="p">,</span><span class="n">x</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">fprime</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        
+        <span class="c1"># add general single-variable Newton&#39;s Method equation below</span>
+        <span class="c1"># Add your solution here</span>
+        
+        <span class="c1"># check if converged</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">fabs</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">&lt;</span> <span class="n">epsilon</span><span class="p">:</span>
+            <span class="n">converged</span> <span class="o">=</span> <span class="kc">True</span>
+        
+        <span class="n">iterations</span> <span class="o">+=</span> <span class="mi">1</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It took&quot;</span><span class="p">,</span><span class="n">iterations</span><span class="p">,</span><span class="s2">&quot;iterations&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">converged</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: Not a solution. Maximum number of iterations exceeded.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="c1">#return estimate of root</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="unit-test-and-example">
+<h3>Unit Test and Example<a class="headerlink" href="#unit-test-and-example" title="Permalink to this headline">¶</a></h3>
+<p>We created a function. We should immediately test it. Recall our test problem:</p>
+<div class="math notranslate nohighlight">
+\[ c(x) = 3 x^3 + 2 x^2 - 5 x - 20 \]</div>
+<p>Our friends at <a class="reference external" href="http://Wolframalpha.com">Wolframalpha.com</a> tell us the roots are <span class="math notranslate nohighlight">\(x \approx 1.9473\)</span> and <span class="math notranslate nohighlight">\(x \approx -1.3070 \pm 1.3097 i\)</span> where <span class="math notranslate nohighlight">\(i = \sqrt{-1}\)</span>. Because we know the solution, we can use this as a unit test. We will only focus on real roots in this class.</p>
+<p>To apply Newton’s method, we need the first derivative to create the tangent line:</p>
+<div class="math notranslate nohighlight">
+\[c'(x) = 9 x^2 + 4 x - 5\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Dnonlinear_function</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; compute 1st derivative of nonlinear function for demonstration</span>
+<span class="sd">    Arguments:</span>
+<span class="sd">        x: scalar</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        c&#39;(x): scalar</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="mi">9</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mi">5</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
+    <b>Home Activity</b>: How could we use a lambda function instead of a <tt>def</tt> function for the derivative calculation? Give it a try below.
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
+    <b>Home Activity</b>: Run the code to verify your modifications to <tt>newton</tt> are correct.
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">root</span> <span class="o">=</span> <span class="n">newton</span><span class="p">(</span><span class="n">nonlinear_function</span><span class="p">,</span><span class="n">Dnonlinear_function</span><span class="p">,</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span><span class="n">LOUD</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The root estimate is&quot;</span><span class="p">,</span><span class="n">root</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">f(&quot;</span><span class="p">,</span><span class="n">root</span><span class="p">,</span><span class="s2">&quot;) =&quot;</span><span class="p">,</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">root</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x0 = -1.5
+x_ 1 = -1.5 - -18.125 / 9.25 = 0.45945945945945943
+x_ 2 = -1.5 - -18.125 / 9.25 = 0.45945945945945943
+x_ 3 = -1.5 - -18.125 / 9.25 = 0.45945945945945943
+x_ 4 = -1.5 - -18.125 / 9.25 = 0.45945945945945943
+x_ 5 = -1.5 - -18.125 / 9.25 = 0.45945945945945943
+x_ 6 = -1.5 - -18.125 / 9.25 = 0.45945945945945943
+x_ 7 = -1.5 - -18.125 / 9.25 = 0.45945945945945943
+x_ 8 = -1.5 - -18.125 / 9.25 = 0.45945945945945943
+x_ 9 = -1.5 - -18.125 / 9.25 = 0.45945945945945943
+x_ 10 = -1.5 - -18.125 / 9.25 = 0.45945945945945943
+x_ 11 = -1.5 - -18.125 / 9.25 = 0.45945945945945943
+x_ 12 = -1.5 - -18.125 / 9.25 = 0.45945945945945943
+x_ 13 = -1.5 - -18.125 / 9.25 = 0.45945945945945943
+x_ 14 = -1.5 - -18.125 / 9.25 = 0.45945945945945943
+x_ 15 = -1.5 - -18.125 / 9.25 = 0.45945945945945943
+It took 15 iterations
+Warning: Not a solution. Maximum number of iterations exceeded.
+The root estimate is -1.5 
+f( -1.5 ) = -18.125
+</pre></div>
+</div>
+</div>
+</div>
+<p>You should see the following output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x0</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.5</span>
+<span class="n">x_</span> <span class="mi">1</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.5</span> <span class="o">-</span> <span class="o">-</span><span class="mf">18.125</span> <span class="o">/</span> <span class="mf">9.25</span> <span class="o">=</span> <span class="mf">0.45945945945945943</span>
+<span class="n">x_</span> <span class="mi">2</span> <span class="o">=</span> <span class="mf">0.45945945945945943</span> <span class="o">-</span> <span class="o">-</span><span class="mf">21.584111503760884</span> <span class="o">/</span> <span class="o">-</span><span class="mf">1.2622352081811545</span> <span class="o">=</span> <span class="o">-</span><span class="mf">16.64045295295295</span>
+<span class="n">x_</span> <span class="mi">3</span> <span class="o">=</span> <span class="o">-</span><span class="mf">16.64045295295295</span> <span class="o">-</span> <span class="o">-</span><span class="mf">13206.446010659996</span> <span class="o">/</span> <span class="mf">2420.5802585031524</span> <span class="o">=</span> <span class="o">-</span><span class="mf">11.184552053047796</span>
+<span class="n">x_</span> <span class="mi">4</span> <span class="o">=</span> <span class="o">-</span><span class="mf">11.184552053047796</span> <span class="o">-</span> <span class="o">-</span><span class="mf">3911.2567600472344</span> <span class="o">/</span> <span class="mf">1076.1096334338297</span> <span class="o">=</span> <span class="o">-</span><span class="mf">7.54992539557002</span>
+<span class="n">x_</span> <span class="mi">5</span> <span class="o">=</span> <span class="o">-</span><span class="mf">7.54992539557002</span> <span class="o">-</span> <span class="o">-</span><span class="mf">1159.3159776918205</span> <span class="o">/</span> <span class="mf">477.81265972577813</span> <span class="o">=</span> <span class="o">-</span><span class="mf">5.123627234367753</span>
+<span class="n">x_</span> <span class="mi">6</span> <span class="o">=</span> <span class="o">-</span><span class="mf">5.123627234367753</span> <span class="o">-</span> <span class="o">-</span><span class="mf">345.3883141179978</span> <span class="o">/</span> <span class="mf">210.7694953933235</span> <span class="o">=</span> <span class="o">-</span><span class="mf">3.484925611661592</span>
+<span class="n">x_</span> <span class="mi">7</span> <span class="o">=</span> <span class="o">-</span><span class="mf">3.484925611661592</span> <span class="o">-</span> <span class="o">-</span><span class="mf">105.25615528465704</span> <span class="o">/</span> <span class="mf">90.36265622268793</span> <span class="o">=</span> <span class="o">-</span><span class="mf">2.320106429882939</span>
+<span class="n">x_</span> <span class="mi">8</span> <span class="o">=</span> <span class="o">-</span><span class="mf">2.320106429882939</span> <span class="o">-</span> <span class="o">-</span><span class="mf">35.100340028952424</span> <span class="o">/</span> <span class="mf">34.165618894325654</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.2927478991471761</span>
+<span class="n">x_</span> <span class="mi">9</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.2927478991471761</span> <span class="o">-</span> <span class="o">-</span><span class="mf">16.675175982276617</span> <span class="o">/</span> <span class="mf">4.869782580156233</span> <span class="o">=</span> <span class="mf">2.131465750600949</span>
+<span class="n">x_</span> <span class="mi">10</span> <span class="o">=</span> <span class="mf">2.131465750600949</span> <span class="o">-</span> <span class="mf">7.479645608829035</span> <span class="o">/</span> <span class="mf">44.41417921626759</span> <span class="o">=</span> <span class="mf">1.963059044886359</span>
+<span class="n">x_</span> <span class="mi">11</span> <span class="o">=</span> <span class="mf">1.963059044886359</span> <span class="o">-</span> <span class="mf">0.5864442011938849</span> <span class="o">/</span> <span class="mf">37.53464350293673</span> <span class="o">=</span> <span class="mf">1.9474349667957278</span>
+<span class="n">x_</span> <span class="mi">12</span> <span class="o">=</span> <span class="mf">1.9474349667957278</span> <span class="o">-</span> <span class="mf">0.004789634744607696</span> <span class="o">/</span> <span class="mf">36.92226641627101</span> <span class="o">=</span> <span class="mf">1.947305244673835</span>
+<span class="n">It</span> <span class="n">took</span> <span class="mi">12</span> <span class="n">iterations</span>
+<span class="n">The</span> <span class="n">root</span> <span class="n">estimate</span> <span class="ow">is</span> <span class="mf">1.947305244673835</span> 
+<span class="n">f</span><span class="p">(</span> <span class="mf">1.947305244673835</span> <span class="p">)</span> <span class="o">=</span> <span class="mf">3.2858902798693634e-07</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s look at what happened.  We had a bad initial guess so the method went the wrong way at first, but it eventually honed in on the solution. This highlights a feature of open methods: the root estimate can get worse, and even diverge. This is in comparison with closed methods (such as bisection) where the root is confined to an interval. On the other hand, open methods only require an initial guess instead of knowledge of an interval where the root lies.</p>
+<p>Run the code below to see what happens when we exceed the number if iterations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">root</span> <span class="o">=</span> <span class="n">newton</span><span class="p">(</span><span class="n">nonlinear_function</span><span class="p">,</span><span class="n">Dnonlinear_function</span><span class="p">,</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span><span class="n">LOUD</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The root estimate is&quot;</span><span class="p">,</span><span class="n">root</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">f(&quot;</span><span class="p">,</span><span class="n">root</span><span class="p">,</span><span class="s2">&quot;) =&quot;</span><span class="p">,</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">root</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x0 = -1.5
+x_ 1 = -1.5 - -18.125 / 9.25 = 0.45945945945945943
+x_ 2 = -1.5 - -18.125 / 9.25 = 0.45945945945945943
+x_ 3 = -1.5 - -18.125 / 9.25 = 0.45945945945945943
+It took 3 iterations
+Warning: Not a solution. Maximum number of iterations exceeded.
+The root estimate is -1.5 
+f( -1.5 ) = -18.125
+</pre></div>
+</div>
+</div>
+</div>
+<p>You should get:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x0</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.5</span>
+<span class="n">x_</span> <span class="mi">1</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.5</span> <span class="o">-</span> <span class="o">-</span><span class="mf">18.125</span> <span class="o">/</span> <span class="mf">9.25</span> <span class="o">=</span> <span class="mf">0.45945945945945943</span>
+<span class="n">x_</span> <span class="mi">2</span> <span class="o">=</span> <span class="mf">0.45945945945945943</span> <span class="o">-</span> <span class="o">-</span><span class="mf">21.584111503760884</span> <span class="o">/</span> <span class="o">-</span><span class="mf">1.2622352081811545</span> <span class="o">=</span> <span class="o">-</span><span class="mf">16.64045295295295</span>
+<span class="n">x_</span> <span class="mi">3</span> <span class="o">=</span> <span class="o">-</span><span class="mf">16.64045295295295</span> <span class="o">-</span> <span class="o">-</span><span class="mf">13206.446010659996</span> <span class="o">/</span> <span class="mf">2420.5802585031524</span> <span class="o">=</span> <span class="o">-</span><span class="mf">11.184552053047796</span>
+<span class="n">It</span> <span class="n">took</span> <span class="mi">3</span> <span class="n">iterations</span>
+<span class="ne">Warning</span><span class="p">:</span> <span class="n">Not</span> <span class="n">a</span> <span class="n">solution</span><span class="o">.</span> <span class="n">Maximum</span> <span class="n">number</span> <span class="n">of</span> <span class="n">iterations</span> <span class="n">exceeded</span><span class="o">.</span>
+<span class="n">The</span> <span class="n">root</span> <span class="n">estimate</span> <span class="ow">is</span> <span class="o">-</span><span class="mf">11.184552053047796</span> 
+<span class="n">f</span><span class="p">(</span> <span class="o">-</span><span class="mf">11.184552053047796</span> <span class="p">)</span> <span class="o">=</span> <span class="o">-</span><span class="mf">3911.2567600472344</span>
+</pre></div>
+</div>
+<p>The next bit of code demonstrates graphically what happened in the Newton solve.</p>
+</div>
+<div class="section" id="looking-deeper-into-the-unit-test">
+<h3>Looking Deeper into the Unit Test<a class="headerlink" href="#looking-deeper-into-the-unit-test" title="Permalink to this headline">¶</a></h3>
+<p><strong>Warning 1:</strong> You must rerun the following three cells in order and only once. If you want to rerun a cell (say Iteration 3), you must start with Iteration 1 and rerun them in order.</p>
+<p><strong>Warning 2:</strong> Make sure your modification to <code class="docutils literal notranslate"><span class="pre">newton</span></code> is correct. Otherwise, the code below will not work correctly.</p>
+<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
+    <b>Home Activity</b>: Run the code below.
+</div><div class="section" id="iteration-1">
+<h4>Iteration 1<a class="headerlink" href="#iteration-1" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">Np</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">X</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+<span class="n">guess</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.5</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Initial Guess =&quot;</span><span class="p">,</span><span class="n">guess</span><span class="p">)</span>
+<span class="n">slope</span> <span class="o">=</span> <span class="p">(</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">-</span> <span class="n">nonlinear_function</span><span class="p">(</span><span class="n">guess</span><span class="o">-</span><span class="mf">.0001</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mf">.0001</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="mi">0</span><span class="o">*</span><span class="n">X</span><span class="p">,</span><span class="s2">&quot;--&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;y = 0&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">+</span> <span class="n">slope</span><span class="o">*</span><span class="p">(</span><span class="n">X</span><span class="o">-</span><span class="n">guess</span><span class="p">),</span><span class="s1">&#39;k-.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Tangent at guess&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">guess</span><span class="p">,</span><span class="n">guess</span><span class="p">]),</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">guess</span><span class="p">)]),</span><span class="s1">&#39;r--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">guess</span><span class="p">,</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">guess</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;guess 0&quot;</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;^&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">new_guess</span> <span class="o">=</span> <span class="n">guess</span><span class="o">-</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span><span class="o">/</span><span class="n">slope</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">new_guess</span><span class="p">,</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">new_guess</span><span class="p">),</span><span class="n">marker</span><span class="o">=</span><span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;guess 1&quot;</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">new_guess</span><span class="p">,</span><span class="n">new_guess</span><span class="p">]),</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">new_guess</span><span class="p">)]),</span><span class="s1">&#39;r--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="mf">1.94731</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Root&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;best&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Guess 0 and 1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Initial Guess = -1.5
+</pre></div>
+</div>
+<img alt="../../_images/02-Newton-Method-Nonlinear-Equation-Solving_62_1.png" src="../../_images/02-Newton-Method-Nonlinear-Equation-Solving_62_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="id1">
+<h4>Iteration 2<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">17</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">400</span><span class="p">)</span>
+<span class="n">guess</span> <span class="o">=</span> <span class="n">new_guess</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Guess 1 =&quot;</span><span class="p">,</span><span class="n">guess</span><span class="p">)</span>
+<span class="n">slope</span> <span class="o">=</span> <span class="p">(</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">-</span> <span class="n">nonlinear_function</span><span class="p">(</span><span class="n">guess</span><span class="o">-</span><span class="mf">.0001</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mf">.0001</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">X</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="mi">0</span><span class="o">*</span><span class="n">X</span><span class="p">,</span><span class="s2">&quot;--&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;y = 0&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">+</span> <span class="n">slope</span><span class="o">*</span><span class="p">(</span><span class="n">X</span><span class="o">-</span><span class="n">guess</span><span class="p">),</span><span class="s1">&#39;k-.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Tangent at guess&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">guess</span><span class="p">,</span><span class="n">guess</span><span class="p">]),</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">guess</span><span class="p">)]),</span><span class="s1">&#39;r--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">guess</span><span class="p">,</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">guess</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;guess $1$&quot;</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s2">&quot;^&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">new_guess</span> <span class="o">=</span> <span class="n">guess</span><span class="o">-</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span><span class="o">/</span><span class="n">slope</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Guess 2 =&quot;</span><span class="p">,</span><span class="n">new_guess</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">new_guess</span><span class="p">,</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">new_guess</span><span class="p">),</span><span class="n">marker</span><span class="o">=</span><span class="s2">&quot;*&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;guess $2$&quot;</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">new_guess</span><span class="p">,</span><span class="n">new_guess</span><span class="p">]),</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">new_guess</span><span class="p">)]),</span><span class="s1">&#39;r--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="mf">1.94731</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Root&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;best&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mi">17</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span><span class="mi">60</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Guess 1 and 2&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Guess 1 = 0.4592158749161699
+Guess 2 = -16.591800422397238
+</pre></div>
+</div>
+<img alt="../../_images/02-Newton-Method-Nonlinear-Equation-Solving_64_1.png" src="../../_images/02-Newton-Method-Nonlinear-Equation-Solving_64_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="iteration-3">
+<h4>Iteration 3<a class="headerlink" href="#iteration-3" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">17</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">400</span><span class="p">)</span>
+<span class="n">guess</span> <span class="o">=</span> <span class="n">new_guess</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Guess 2 =&quot;</span><span class="p">,</span><span class="n">guess</span><span class="p">)</span>
+<span class="n">slope</span> <span class="o">=</span> <span class="p">(</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">-</span> <span class="n">nonlinear_function</span><span class="p">(</span><span class="n">guess</span><span class="o">-</span><span class="mf">.0001</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mf">.0001</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">X</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="mi">0</span><span class="o">*</span><span class="n">X</span><span class="p">,</span><span class="s2">&quot;--&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;y = 0&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">+</span> <span class="n">slope</span><span class="o">*</span><span class="p">(</span><span class="n">X</span><span class="o">-</span><span class="n">guess</span><span class="p">),</span><span class="s1">&#39;k-.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Tangent at guess&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">guess</span><span class="p">,</span><span class="n">guess</span><span class="p">]),</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">guess</span><span class="p">)]),</span><span class="s1">&#39;r--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">guess</span><span class="p">,</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">guess</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;guess $2$&quot;</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s2">&quot;^&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">new_guess</span> <span class="o">=</span> <span class="n">guess</span><span class="o">-</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span><span class="o">/</span><span class="n">slope</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Guess 3 =&quot;</span><span class="p">,</span><span class="n">new_guess</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">new_guess</span><span class="p">,</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">new_guess</span><span class="p">),</span><span class="n">marker</span><span class="o">=</span><span class="s2">&quot;*&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;guess $3$&quot;</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">new_guess</span><span class="p">,</span><span class="n">new_guess</span><span class="p">]),</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">nonlinear_function</span><span class="p">(</span><span class="n">new_guess</span><span class="p">)]),</span><span class="s1">&#39;r--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="mf">1.94731</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Root&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;best&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mi">17</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">15000</span><span class="p">,</span><span class="mi">1000</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Guess 2 and 3&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Guess 2 = -16.591800422397238
+Guess 3 = -11.152177441789688
+</pre></div>
+</div>
+<img alt="../../_images/02-Newton-Method-Nonlinear-Equation-Solving_66_1.png" src="../../_images/02-Newton-Method-Nonlinear-Equation-Solving_66_1.png" />
+</div>
+</div>
+<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
+    <b>Home Activity</b>: Fill in 2 or 3 observations here.
+</div><p><strong>Describe your observations here:</strong></p>
+<ol class="simple">
+<li><p>Fill in…</p></li>
+<li><p>Fill in…</p></li>
+<li><p>Optional…</p></li>
+</ol>
+<p>In hindsight, it’s pretty amazing that it actually found the root.  This demonstrates that method has some robustness.</p>
+<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
+<b>Class Activity</b>: Share your observations with a partner. Then we'll regroup and discuss as a class.
+</div></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks/04-publish"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="01-Modeling-Systems-of-Nonlinear-Equations.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Modeling Systems of Nonlinear Equations</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="03-More-Newton-Type-Methods.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">More Newton-Type Methods</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
