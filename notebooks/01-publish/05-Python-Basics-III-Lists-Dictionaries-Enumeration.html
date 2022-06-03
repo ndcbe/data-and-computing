@@ -1,0 +1,1240 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Python Basics III: Lists, Dictionaries, and Enumeration &#8212; Data and Computing for Chemical Engieers</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Linear Algebra with Numpy and Scipy" href="06-NumPy.html" />
+    <link rel="prev" title="High/Low Guess My Number Game" href="04d-Example-High-Low-Game.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/cbe_logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Data and Computing for Chemical Engieers</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../intro.html">
+   Welcome to (Advanced) Data and Computing for Engineers
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../01/00-Python-Primer.html">
+   Python Primer
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="01-Jupyter-Notebooks.html">
+     Welcome to Jupyter Notebooks and Vocareum
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02-Python-Basics-I-Variables-Strings-Bugs.html">
+     Python Basics I: Variables, Strings, and Bugs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03b-Pseudocode.html">
+     Pseudocode
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04-Functions-and-Scope.html">
+     Functions and Scope
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04b-Recursion.html">
+     Recursion
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04d-Example-High-Low-Game.html">
+     High/Low Guess My Number Game
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Python Basics III: Lists, Dictionaries, and Enumeration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="06-NumPy.html">
+     Linear Algebra with Numpy and Scipy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="07-Matplotlib.html">
+     Visualization with matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="08-Pandas.html">
+     Manipulating Data with Pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="09-Functions-as-Arguments.html">
+     Functions as Arguments
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="10-Testing-and-Debugging.html">
+     Testing and Debugging in Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../02/linear_algebra.html">
+   Linear Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03/algorithms.html">
+   Algorithm Building Blocks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../04/nonlinear_systems.html">
+   Nonlinear Systems of Equations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../05/optimization.html">
+   Continuous Optimization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../06/integration.html">
+   Numeric Integration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../07/stats.html">
+   Descriptive Statistics and Visualization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../08/probability.html">
+   Probability Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../09/distributions.html">
+   Common Probability Distributions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../10/uncertainty.html">
+   Uncertainty and Error Propagation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../11/inference.html">
+   Statistical Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../12/regression.html">
+   Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../13/advanced_regression.html">
+   Advanced Nonlinear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../14/design_of_experiments.html">
+   Design of Experiments
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/01-publish/05-Python-Basics-III-Lists-Dictionaries-Enumeration.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/ndcbe/data-and-computing"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/01-publish/05-Python-Basics-III-Lists-Dictionaries-Enumeration.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/01-publish/05-Python-Basics-III-Lists-Dictionaries-Enumeration.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/01-publish/05-Python-Basics-III-Lists-Dictionaries-Enumeration.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-objectives">
+   Learning Objectives
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lists">
+   Lists
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dictionaries">
+   Dictionaries
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-shopping-list">
+     Example: Shopping List
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#another-example-chemical-symbols-and-element-names">
+     Another Example: Chemical Symbols and Element Names
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dictionary-of-dictionaries">
+     Dictionary of Dictionaries
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#enumerate">
+   Enumerate
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Lists
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Dictionaries
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Python Basics III: Lists, Dictionaries, and Enumeration</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-objectives">
+   Learning Objectives
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lists">
+   Lists
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dictionaries">
+   Dictionaries
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-shopping-list">
+     Example: Shopping List
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#another-example-chemical-symbols-and-element-names">
+     Another Example: Chemical Symbols and Element Names
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dictionary-of-dictionaries">
+     Dictionary of Dictionaries
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#enumerate">
+   Enumerate
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Lists
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Dictionaries
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="python-basics-iii-lists-dictionaries-and-enumeration">
+<h1>Python Basics III: Lists, Dictionaries, and Enumeration<a class="headerlink" href="#python-basics-iii-lists-dictionaries-and-enumeration" title="Permalink to this headline">¶</a></h1>
+<p><strong>Reference</strong>: Chapters 2 and 5 of <em>Computational Nuclear Engineering and Radiological Science Using Python</em>, R. McClarren (2018)</p>
+<div class="section" id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">¶</a></h2>
+<p>After studying this notebook, completing the activities, and asking questions in class, you should be able to:</p>
+<ul class="simple">
+<li><p>Create lists with numeric and non-numeric items and add to a previously created list.</p></li>
+<li><p>Enumerate a list using various syntax.</p></li>
+<li><p>Create dictionaries with numeric and non-numeric key-value pairs and add to a previously created dictionary.</p></li>
+<li><p>Enumerate a dictionary using various syntax.</p></li>
+</ul>
+</div>
+<div class="section" id="lists">
+<h2>Lists<a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h2>
+<p>You can also do other fun stuff with for loops.  For instance, you can have the control variable take on non-numeric things:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#silly hat code</span>
+<span class="n">hats</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;fedora&quot;</span><span class="p">,</span><span class="s2">&quot;trilby&quot;</span><span class="p">,</span><span class="s2">&quot;porkpie&quot;</span><span class="p">,</span><span class="s2">&quot;tam o&#39;shanter&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Phrygian cap&quot;</span><span class="p">,</span><span class="s2">&quot;Beefeaters&#39; hat&quot;</span><span class="p">,</span><span class="s2">&quot;sombrero&quot;</span><span class="p">]</span>
+<span class="n">days</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Monday&quot;</span><span class="p">,</span><span class="s2">&quot;Tuesday&quot;</span><span class="p">,</span><span class="s2">&quot;Wednesday&quot;</span><span class="p">,</span><span class="s2">&quot;Thursday&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Friday&quot;</span><span class="p">,</span><span class="s2">&quot;Saturday&quot;</span><span class="p">,</span><span class="s2">&quot;Sunday&quot;</span><span class="p">]</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">today</span> <span class="ow">in</span> <span class="n">hats</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It is&quot;</span><span class="p">,</span><span class="n">days</span><span class="p">[</span><span class="n">count</span><span class="p">],</span><span class="s2">&quot;and I will wear a&quot;</span><span class="p">,</span><span class="n">today</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It is Monday and I will wear a fedora
+It is Tuesday and I will wear a trilby
+It is Wednesday and I will wear a porkpie
+It is Thursday and I will wear a tam o&#39;shanter
+It is Friday and I will wear a Phrygian cap
+It is Saturday and I will wear a Beefeaters&#39; hat
+It is Sunday and I will wear a sombrero
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice what else we did here: we defined a list called <code class="docutils literal notranslate"><span class="pre">days</span></code> that contained strings for the names of the days of the week.  Inside our <code class="docutils literal notranslate"><span class="pre">for</span></code> loop we had a numeric variable that kept track of what number the day of the week was (0 for Monday in this case).  Then when we access days[count] it returns the string in position count.</p>
+<p>We can go one step beyond and plan our wardrobe a month in advance using random numbers. The code below generates a random integer between 0 and 6:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="n">my_random_number</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_random_number</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+</pre></div>
+</div>
+</div>
+</div>
+<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
+<b>Home Activity</b>: Modify the code below to loop over 30 days. For each day, randomly select which hat to wear.
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#silly hat code</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="n">hats</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;fedora&quot;</span><span class="p">,</span><span class="s2">&quot;trilby&quot;</span><span class="p">,</span><span class="s2">&quot;porkpie&quot;</span><span class="p">,</span><span class="s2">&quot;tam o&#39;shanter&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Phrygian cap&quot;</span><span class="p">,</span><span class="s2">&quot;Beefeaters&#39; hat&quot;</span><span class="p">,</span><span class="s2">&quot;sombrero&quot;</span><span class="p">]</span>
+<span class="n">days</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Monday&quot;</span><span class="p">,</span><span class="s2">&quot;Tuesday&quot;</span><span class="p">,</span><span class="s2">&quot;Wednesday&quot;</span><span class="p">,</span><span class="s2">&quot;Thursday&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Friday&quot;</span><span class="p">,</span><span class="s2">&quot;Saturday&quot;</span><span class="p">,</span><span class="s2">&quot;Sunday&quot;</span><span class="p">]</span>
+
+<span class="c1"># loop over 30 days</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Lists</strong> are like vectors in MATLAB, except, as you can see above, we can store more than just numbers in them. We will talk about using a package <code class="docutils literal notranslate"><span class="pre">numpy</span></code> to represent vectors and matrices in a future notebook.</p>
+<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
+<b>Home Activity</b>: Fix the three examples below to count from 1 to 10.
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Attempt 1</span>
+<span class="n">N</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">N</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+2
+3
+4
+5
+6
+7
+8
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Attempt 2</span>
+<span class="n">N</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">N</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">N</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+2
+3
+4
+5
+6
+7
+11
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Attempt 3</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="dictionaries">
+<h2>Dictionaries<a class="headerlink" href="#dictionaries" title="Permalink to this headline">¶</a></h2>
+<p>So far, we have used lists to store a sequence of numbers or more generally Python objects. Lists (and NumPy arrays - stay tuned) access elements by position and have an inherent ordering.</p>
+<p>A dictionary is a set of <strong>key</strong> : <strong>value</strong> pairs. You can think of a dictionary as a fancy list that instead of accessing via the position, you access using a key.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#simple dictionary</span>
+<span class="n">days_of_week</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;M&quot;</span><span class="p">:</span><span class="s2">&quot;Monday&quot;</span><span class="p">,</span> <span class="s2">&quot;T&quot;</span><span class="p">:</span><span class="s2">&quot;Tuesday&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;W&quot;</span><span class="p">:</span><span class="s2">&quot;Wednesday&quot;</span><span class="p">,</span> <span class="s2">&quot;R&quot;</span><span class="p">:</span><span class="s2">&quot;Thursday&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;F&quot;</span><span class="p">:</span><span class="s2">&quot;Friday&quot;</span><span class="p">,</span> <span class="s2">&quot;S&quot;</span><span class="p">:</span><span class="s2">&quot;Saturday&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;U&quot;</span><span class="p">:</span><span class="s2">&quot;Sunday&quot;</span><span class="p">}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Key M gives&quot;</span><span class="p">,</span> <span class="n">days_of_week</span><span class="p">[</span><span class="s2">&quot;M&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Key R gives&quot;</span><span class="p">,</span> <span class="n">days_of_week</span><span class="p">[</span><span class="s2">&quot;R&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Key M gives Monday
+Key R gives Thursday
+</pre></div>
+</div>
+</div>
+</div>
+<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
+<b>Home Activity</b>: Store the value for key <tt>F</tt> in the variable <tt>answer</tt>.
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Calling <code class="docutils literal notranslate"><span class="pre">days_of_week.keys()</span></code> returns a special list of the keys of the dictionary.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">days_of_week</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_keys([&#39;M&#39;, &#39;T&#39;, &#39;W&#39;, &#39;R&#39;, &#39;F&#39;, &#39;S&#39;, &#39;U&#39;])
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also check if <code class="docutils literal notranslate"><span class="pre">G</span></code> is a valid key for the dictionary.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;G&quot;</span> <span class="ow">in</span> <span class="n">days_of_week</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="c1">#is G a key in days_of_week?</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Main idea:</strong> With dictionaries, we access elements using the <strong>key</strong>. In contrast, we access elements of strings, lists, and Numpy arrays using the position.</p>
+<div class="section" id="example-shopping-list">
+<h3>Example: Shopping List<a class="headerlink" href="#example-shopping-list" title="Permalink to this headline">¶</a></h3>
+<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
+<b>Home Activity</b>: Create a dictionary to store the following shopping list. The keys should be the item names and the elements should be the quantity of the items.
+</div><ul class="simple">
+<li><p>1.5 bananas (pounds)</p></li>
+<li><p>3 cans of soup</p></li>
+<li><p>6 apples</p></li>
+<li><p>2.3 pork tenderloin (pounds)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="another-example-chemical-symbols-and-element-names">
+<h3>Another Example: Chemical Symbols and Element Names<a class="headerlink" href="#another-example-chemical-symbols-and-element-names" title="Permalink to this headline">¶</a></h3>
+<p>Below is code that parses <code class="docutils literal notranslate"><span class="pre">ChemicalSymbols.csv</span></code> and stores the data in dictionary.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">csv</span>
+<span class="n">element_dict</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1">#create a blank dictionary</span>
+
+<span class="c1"># this block will only execute if the file opens</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../data/ChemicalSymbols.csv&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span> 
+    <span class="n">chemreader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">csvfile</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">chemreader</span><span class="p">:</span> <span class="c1"># have for loop that loops over each line</span>
+        <span class="n">element_dict</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># add a key:value pair</span>
+
+<span class="c1"># Ask user to enter a chemical symbol        </span>
+<span class="n">key</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a valid chemical symbol: &quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">element_dict</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="s2">&quot;is&quot;</span><span class="p">,</span><span class="n">element_dict</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Not a valid element&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">StdinNotImplementedError</span><span class="g g-Whitespace">                  </span>Traceback (most recent call last)
+<span class="nn">Input In [17],</span> in <span class="ni">&lt;cell line: 11&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>         <span class="n">element_dict</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># add a key:value pair</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="c1"># Ask user to enter a chemical symbol        </span>
+<span class="ne">---&gt; </span><span class="mi">11</span> <span class="n">key</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a valid chemical symbol: &quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">element_dict</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="s2">&quot;is&quot;</span><span class="p">,</span><span class="n">element_dict</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+
+<span class="nn">File ~/opt/anaconda3/envs/jbook/lib/python3.9/site-packages/ipykernel/kernelbase.py:1158,</span> in <span class="ni">Kernel.raw_input</span><span class="nt">(self, prompt)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1151</span> <span class="sd">&quot;&quot;&quot;Forward raw_input to frontends</span>
+<span class="g g-Whitespace">   </span><span class="mi">1152</span><span class="sd"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">1153</span><span class="sd"> Raises</span>
+<span class="g g-Whitespace">   </span><span class="mi">1154</span><span class="sd"> ------</span>
+<span class="g g-Whitespace">   </span><span class="mi">1155</span><span class="sd"> StdinNotImplementedError if active frontend doesn&#39;t support stdin.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1156</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1157</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_allow_stdin</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1158</span>     <span class="k">raise</span> <span class="n">StdinNotImplementedError</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1159</span>         <span class="s2">&quot;raw_input was called, but this frontend does not support input requests.&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1160</span>     <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1161</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_request</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1162</span>     <span class="nb">str</span><span class="p">(</span><span class="n">prompt</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1163</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_parent_ident</span><span class="p">[</span><span class="s2">&quot;shell&quot;</span><span class="p">],</span>
+<span class="g g-Whitespace">   </span><span class="mi">1164</span>     <span class="bp">self</span><span class="o">.</span><span class="n">get_parent</span><span class="p">(</span><span class="s2">&quot;shell&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1165</span>     <span class="n">password</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1166</span> <span class="p">)</span>
+
+<span class="ne">StdinNotImplementedError</span>: raw_input was called, but this frontend does not support input requests.
+</pre></div>
+</div>
+</div>
+</div>
+<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
+<b>Home Activity</b>: Run the code above twice. Try first with a valid chemical symbol. Then try with a chemical symbol not on the periodic table of elements.
+</div><p>We can also print out the dictionary.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">element_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Ac&#39;: &#39;Actinium&#39;, &#39;Ag&#39;: &#39;Silver&#39;, &#39;Al&#39;: &#39;Aluminium (Aluminum)&#39;, &#39;Am&#39;: &#39;Americium&#39;, &#39;Ar&#39;: &#39;Argon&#39;, &#39;As&#39;: &#39;Arsenic&#39;, &#39;At&#39;: &#39;Astatine&#39;, &#39;Au&#39;: &#39;Gold&#39;, &#39;B&#39;: &#39;Boron&#39;, &#39;Ba&#39;: &#39;Barium&#39;, &#39;Be&#39;: &#39;Beryllium&#39;, &#39;Bh&#39;: &#39;Bohrium&#39;, &#39;Bi&#39;: &#39;Bismuth&#39;, &#39;Bk&#39;: &#39;Berkelium&#39;, &#39;Br&#39;: &#39;Bromine&#39;, &#39;C&#39;: &#39;Carbon&#39;, &#39;Ca&#39;: &#39;Calcium&#39;, &#39;Cd&#39;: &#39;Cadmium&#39;, &#39;Ce&#39;: &#39;Cerium&#39;, &#39;Cf&#39;: &#39;Californium&#39;, &#39;Cl&#39;: &#39;Chlorine&#39;, &#39;Cm&#39;: &#39;Curium&#39;, &#39;Cn&#39;: &#39;Copernicium&#39;, &#39;Co&#39;: &#39;Cobalt&#39;, &#39;Cr&#39;: &#39;Chromium&#39;, &#39;Cs&#39;: &#39;Caesium (Cesium)&#39;, &#39;Cu&#39;: &#39;Copper&#39;, &#39;Db&#39;: &#39;Dubnium&#39;, &#39;Ds&#39;: &#39;Darmstadtium&#39;, &#39;Dy&#39;: &#39;Dysprosium&#39;, &#39;Er&#39;: &#39;Erbium&#39;, &#39;Es&#39;: &#39;Einsteinium&#39;, &#39;Eu&#39;: &#39;Europium&#39;, &#39;F&#39;: &#39;Fluorine&#39;, &#39;Fe&#39;: &#39;Iron&#39;, &#39;Fl&#39;: &#39;Flerovium&#39;, &#39;Fm&#39;: &#39;Fermium&#39;, &#39;Fr&#39;: &#39;Francium&#39;, &#39;Ga&#39;: &#39;Gallium&#39;, &#39;Gd&#39;: &#39;Gadolinium&#39;, &#39;Ge&#39;: &#39;Germanium&#39;, &#39;H&#39;: &#39;Hydrogen&#39;, &#39;He&#39;: &#39;Helium&#39;, &#39;Hf&#39;: &#39;Hafnium&#39;, &#39;Hg&#39;: &#39;Mercury&#39;, &#39;Ho&#39;: &#39;Holmium&#39;, &#39;Hs&#39;: &#39;Hassium&#39;, &#39;I&#39;: &#39;Iodine&#39;, &#39;In&#39;: &#39;Indium&#39;, &#39;Ir&#39;: &#39;Iridium&#39;, &#39;K&#39;: &#39;Potassium&#39;, &#39;Kr&#39;: &#39;Krypton&#39;, &#39;La&#39;: &#39;Lanthanum&#39;, &#39;Li&#39;: &#39;Lithium&#39;, &#39;Lr&#39;: &#39;Lawrencium&#39;, &#39;Lu&#39;: &#39;Lutetium&#39;, &#39;Lv&#39;: &#39;Livermorium&#39;, &#39;Md&#39;: &#39;Mendelevium&#39;, &#39;Mg&#39;: &#39;Magnesium&#39;, &#39;Mn&#39;: &#39;Manganese&#39;, &#39;Mo&#39;: &#39;Molybdenum&#39;, &#39;Mt&#39;: &#39;Meitnerium&#39;, &#39;N&#39;: &#39;Nitrogen&#39;, &#39;Na&#39;: &#39;Sodium&#39;, &#39;Nb&#39;: &#39;Niobium&#39;, &#39;Nd&#39;: &#39;Neodymium&#39;, &#39;Ne&#39;: &#39;Neon&#39;, &#39;Ni&#39;: &#39;Nickel&#39;, &#39;No&#39;: &#39;Nobelium&#39;, &#39;Np&#39;: &#39;Neptunium&#39;, &#39;O&#39;: &#39;Oxygen&#39;, &#39;Os&#39;: &#39;Osmium&#39;, &#39;P&#39;: &#39;Phosphorus&#39;, &#39;Pa&#39;: &#39;Protactinium&#39;, &#39;Pb&#39;: &#39;Lead&#39;, &#39;Pd&#39;: &#39;Palladium&#39;, &#39;Pm&#39;: &#39;Promethium&#39;, &#39;Po&#39;: &#39;Polonium&#39;, &#39;Pr&#39;: &#39;Praseodymium&#39;, &#39;Pt&#39;: &#39;Platinum&#39;, &#39;Pu&#39;: &#39;Plutonium&#39;, &#39;Ra&#39;: &#39;Radium&#39;, &#39;Rb&#39;: &#39;Rubidium&#39;, &#39;Re&#39;: &#39;Rhenium&#39;, &#39;Rf&#39;: &#39;Rutherfordium&#39;, &#39;Rg&#39;: &#39;Roentgenium&#39;, &#39;Rh&#39;: &#39;Rhodium&#39;, &#39;Rn&#39;: &#39;Radon&#39;, &#39;Ru&#39;: &#39;Ruthenium&#39;, &#39;S&#39;: &#39;Sulfur (Sulphur)&#39;, &#39;Sb&#39;: &#39;Antimony&#39;, &#39;Sc&#39;: &#39;Scandium&#39;, &#39;Se&#39;: &#39;Selenium&#39;, &#39;Sg&#39;: &#39;Seaborgium&#39;, &#39;Si&#39;: &#39;Silicon&#39;, &#39;Sm&#39;: &#39;Samarium&#39;, &#39;Sn&#39;: &#39;Tin&#39;, &#39;Sr&#39;: &#39;Strontium&#39;, &#39;Ta&#39;: &#39;Tantalum&#39;, &#39;Tb&#39;: &#39;Terbium&#39;, &#39;Tc&#39;: &#39;Technetium&#39;, &#39;Te&#39;: &#39;Tellurium&#39;, &#39;Th&#39;: &#39;Thorium&#39;, &#39;Ti&#39;: &#39;Titanium&#39;, &#39;Tl&#39;: &#39;Thallium&#39;, &#39;Tm&#39;: &#39;Thulium&#39;, &#39;U&#39;: &#39;Uranium&#39;, &#39;Uuo&#39;: &#39;Ununoctium&#39;, &#39;Uup&#39;: &#39;Ununpentium&#39;, &#39;Uus&#39;: &#39;Ununseptium&#39;, &#39;Uut&#39;: &#39;Ununtrium&#39;, &#39;V&#39;: &#39;Vanadium&#39;, &#39;W&#39;: &#39;Tungsten&#39;, &#39;Xe&#39;: &#39;Xenon&#39;, &#39;Y&#39;: &#39;Yttrium&#39;, &#39;Yb&#39;: &#39;Ytterbium&#39;, &#39;Zn&#39;: &#39;Zinc&#39;, &#39;Zr&#39;: &#39;Zirconium&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">element_dict</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Ac&#39;: &#39;Actinium&#39;,
+ &#39;Ag&#39;: &#39;Silver&#39;,
+ &#39;Al&#39;: &#39;Aluminium (Aluminum)&#39;,
+ &#39;Am&#39;: &#39;Americium&#39;,
+ &#39;Ar&#39;: &#39;Argon&#39;,
+ &#39;As&#39;: &#39;Arsenic&#39;,
+ &#39;At&#39;: &#39;Astatine&#39;,
+ &#39;Au&#39;: &#39;Gold&#39;,
+ &#39;B&#39;: &#39;Boron&#39;,
+ &#39;Ba&#39;: &#39;Barium&#39;,
+ &#39;Be&#39;: &#39;Beryllium&#39;,
+ &#39;Bh&#39;: &#39;Bohrium&#39;,
+ &#39;Bi&#39;: &#39;Bismuth&#39;,
+ &#39;Bk&#39;: &#39;Berkelium&#39;,
+ &#39;Br&#39;: &#39;Bromine&#39;,
+ &#39;C&#39;: &#39;Carbon&#39;,
+ &#39;Ca&#39;: &#39;Calcium&#39;,
+ &#39;Cd&#39;: &#39;Cadmium&#39;,
+ &#39;Ce&#39;: &#39;Cerium&#39;,
+ &#39;Cf&#39;: &#39;Californium&#39;,
+ &#39;Cl&#39;: &#39;Chlorine&#39;,
+ &#39;Cm&#39;: &#39;Curium&#39;,
+ &#39;Cn&#39;: &#39;Copernicium&#39;,
+ &#39;Co&#39;: &#39;Cobalt&#39;,
+ &#39;Cr&#39;: &#39;Chromium&#39;,
+ &#39;Cs&#39;: &#39;Caesium (Cesium)&#39;,
+ &#39;Cu&#39;: &#39;Copper&#39;,
+ &#39;Db&#39;: &#39;Dubnium&#39;,
+ &#39;Ds&#39;: &#39;Darmstadtium&#39;,
+ &#39;Dy&#39;: &#39;Dysprosium&#39;,
+ &#39;Er&#39;: &#39;Erbium&#39;,
+ &#39;Es&#39;: &#39;Einsteinium&#39;,
+ &#39;Eu&#39;: &#39;Europium&#39;,
+ &#39;F&#39;: &#39;Fluorine&#39;,
+ &#39;Fe&#39;: &#39;Iron&#39;,
+ &#39;Fl&#39;: &#39;Flerovium&#39;,
+ &#39;Fm&#39;: &#39;Fermium&#39;,
+ &#39;Fr&#39;: &#39;Francium&#39;,
+ &#39;Ga&#39;: &#39;Gallium&#39;,
+ &#39;Gd&#39;: &#39;Gadolinium&#39;,
+ &#39;Ge&#39;: &#39;Germanium&#39;,
+ &#39;H&#39;: &#39;Hydrogen&#39;,
+ &#39;He&#39;: &#39;Helium&#39;,
+ &#39;Hf&#39;: &#39;Hafnium&#39;,
+ &#39;Hg&#39;: &#39;Mercury&#39;,
+ &#39;Ho&#39;: &#39;Holmium&#39;,
+ &#39;Hs&#39;: &#39;Hassium&#39;,
+ &#39;I&#39;: &#39;Iodine&#39;,
+ &#39;In&#39;: &#39;Indium&#39;,
+ &#39;Ir&#39;: &#39;Iridium&#39;,
+ &#39;K&#39;: &#39;Potassium&#39;,
+ &#39;Kr&#39;: &#39;Krypton&#39;,
+ &#39;La&#39;: &#39;Lanthanum&#39;,
+ &#39;Li&#39;: &#39;Lithium&#39;,
+ &#39;Lr&#39;: &#39;Lawrencium&#39;,
+ &#39;Lu&#39;: &#39;Lutetium&#39;,
+ &#39;Lv&#39;: &#39;Livermorium&#39;,
+ &#39;Md&#39;: &#39;Mendelevium&#39;,
+ &#39;Mg&#39;: &#39;Magnesium&#39;,
+ &#39;Mn&#39;: &#39;Manganese&#39;,
+ &#39;Mo&#39;: &#39;Molybdenum&#39;,
+ &#39;Mt&#39;: &#39;Meitnerium&#39;,
+ &#39;N&#39;: &#39;Nitrogen&#39;,
+ &#39;Na&#39;: &#39;Sodium&#39;,
+ &#39;Nb&#39;: &#39;Niobium&#39;,
+ &#39;Nd&#39;: &#39;Neodymium&#39;,
+ &#39;Ne&#39;: &#39;Neon&#39;,
+ &#39;Ni&#39;: &#39;Nickel&#39;,
+ &#39;No&#39;: &#39;Nobelium&#39;,
+ &#39;Np&#39;: &#39;Neptunium&#39;,
+ &#39;O&#39;: &#39;Oxygen&#39;,
+ &#39;Os&#39;: &#39;Osmium&#39;,
+ &#39;P&#39;: &#39;Phosphorus&#39;,
+ &#39;Pa&#39;: &#39;Protactinium&#39;,
+ &#39;Pb&#39;: &#39;Lead&#39;,
+ &#39;Pd&#39;: &#39;Palladium&#39;,
+ &#39;Pm&#39;: &#39;Promethium&#39;,
+ &#39;Po&#39;: &#39;Polonium&#39;,
+ &#39;Pr&#39;: &#39;Praseodymium&#39;,
+ &#39;Pt&#39;: &#39;Platinum&#39;,
+ &#39;Pu&#39;: &#39;Plutonium&#39;,
+ &#39;Ra&#39;: &#39;Radium&#39;,
+ &#39;Rb&#39;: &#39;Rubidium&#39;,
+ &#39;Re&#39;: &#39;Rhenium&#39;,
+ &#39;Rf&#39;: &#39;Rutherfordium&#39;,
+ &#39;Rg&#39;: &#39;Roentgenium&#39;,
+ &#39;Rh&#39;: &#39;Rhodium&#39;,
+ &#39;Rn&#39;: &#39;Radon&#39;,
+ &#39;Ru&#39;: &#39;Ruthenium&#39;,
+ &#39;S&#39;: &#39;Sulfur (Sulphur)&#39;,
+ &#39;Sb&#39;: &#39;Antimony&#39;,
+ &#39;Sc&#39;: &#39;Scandium&#39;,
+ &#39;Se&#39;: &#39;Selenium&#39;,
+ &#39;Sg&#39;: &#39;Seaborgium&#39;,
+ &#39;Si&#39;: &#39;Silicon&#39;,
+ &#39;Sm&#39;: &#39;Samarium&#39;,
+ &#39;Sn&#39;: &#39;Tin&#39;,
+ &#39;Sr&#39;: &#39;Strontium&#39;,
+ &#39;Ta&#39;: &#39;Tantalum&#39;,
+ &#39;Tb&#39;: &#39;Terbium&#39;,
+ &#39;Tc&#39;: &#39;Technetium&#39;,
+ &#39;Te&#39;: &#39;Tellurium&#39;,
+ &#39;Th&#39;: &#39;Thorium&#39;,
+ &#39;Ti&#39;: &#39;Titanium&#39;,
+ &#39;Tl&#39;: &#39;Thallium&#39;,
+ &#39;Tm&#39;: &#39;Thulium&#39;,
+ &#39;U&#39;: &#39;Uranium&#39;,
+ &#39;Uuo&#39;: &#39;Ununoctium&#39;,
+ &#39;Uup&#39;: &#39;Ununpentium&#39;,
+ &#39;Uus&#39;: &#39;Ununseptium&#39;,
+ &#39;Uut&#39;: &#39;Ununtrium&#39;,
+ &#39;V&#39;: &#39;Vanadium&#39;,
+ &#39;W&#39;: &#39;Tungsten&#39;,
+ &#39;Xe&#39;: &#39;Xenon&#39;,
+ &#39;Y&#39;: &#39;Yttrium&#39;,
+ &#39;Yb&#39;: &#39;Ytterbium&#39;,
+ &#39;Zn&#39;: &#39;Zinc&#39;,
+ &#39;Zr&#39;: &#39;Zirconium&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="dictionary-of-dictionaries">
+<h3>Dictionary of Dictionaries<a class="headerlink" href="#dictionary-of-dictionaries" title="Permalink to this headline">¶</a></h3>
+<p>We can make dictionaries even more powerful if we make a dictionary of dictionaries.</p>
+<p><strong>Top Level</strong>. Day of the week.</p>
+<ul class="simple">
+<li><p>Key: symbol “M”, “T”, etc.</p></li>
+<li><p>Value: Another dictionary!</p></li>
+</ul>
+<p><strong>Second Level</strong>. Data for each day.</p>
+<ul class="simple">
+<li><p>Keys: “name”, “weekday”, “weekend”</p></li>
+<li><p>Values: string, boolean (True or False), boolean</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#simple dictionary of dictionaries</span>
+<span class="n">days_of_week</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;M&quot;</span><span class="p">:{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Monday&quot;</span><span class="p">,</span><span class="s2">&quot;weekday&quot;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s2">&quot;weekend&quot;</span><span class="p">:</span><span class="kc">False</span><span class="p">},</span>
+                <span class="s2">&quot;T&quot;</span><span class="p">:{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Tuesday&quot;</span><span class="p">,</span><span class="s2">&quot;weekday&quot;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s2">&quot;weekend&quot;</span><span class="p">:</span><span class="kc">False</span><span class="p">},</span>
+                <span class="s2">&quot;W&quot;</span><span class="p">:{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Wednesday&quot;</span><span class="p">,</span><span class="s2">&quot;weekday&quot;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s2">&quot;weekend&quot;</span><span class="p">:</span><span class="kc">False</span><span class="p">},</span>
+                <span class="s2">&quot;R&quot;</span><span class="p">:{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Thursday&quot;</span><span class="p">,</span><span class="s2">&quot;weekday&quot;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s2">&quot;weekend&quot;</span><span class="p">:</span><span class="kc">False</span><span class="p">},</span>
+                <span class="s2">&quot;F&quot;</span><span class="p">:{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Friday&quot;</span><span class="p">,</span><span class="s2">&quot;weekday&quot;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s2">&quot;weekend&quot;</span><span class="p">:</span><span class="kc">False</span><span class="p">},</span>
+                <span class="s2">&quot;S&quot;</span><span class="p">:{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Saturday&quot;</span><span class="p">,</span><span class="s2">&quot;weekday&quot;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span><span class="s2">&quot;weekend&quot;</span><span class="p">:</span><span class="kc">True</span><span class="p">},</span>
+                <span class="s2">&quot;U&quot;</span><span class="p">:{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Sunday&quot;</span><span class="p">,</span><span class="s2">&quot;weekday&quot;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span><span class="s2">&quot;weekend&quot;</span><span class="p">:</span><span class="kc">True</span><span class="p">}}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The days that are weekdays are&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">day</span> <span class="ow">in</span> <span class="n">days_of_week</span><span class="p">:</span> <span class="c1">#for loop over dictionary, loops over keys</span>
+    <span class="k">if</span> <span class="n">days_of_week</span><span class="p">[</span><span class="n">day</span><span class="p">][</span><span class="s2">&quot;weekday&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">days_of_week</span><span class="p">[</span><span class="n">day</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">],</span><span class="s2">&quot;is a weekday.&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The days that are weekend days are&quot;</span><span class="p">)</span>        
+<span class="k">for</span> <span class="n">day</span> <span class="ow">in</span> <span class="n">days_of_week</span><span class="p">:</span> <span class="c1">#for loop over dictionary, loops over keys</span>
+    <span class="k">if</span> <span class="n">days_of_week</span><span class="p">[</span><span class="n">day</span><span class="p">][</span><span class="s2">&quot;weekend&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">days_of_week</span><span class="p">[</span><span class="n">day</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">],</span><span class="s2">&quot;is a weekend, whoop.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The days that are weekdays are
+Monday is a weekday.
+Tuesday is a weekday.
+Wednesday is a weekday.
+Thursday is a weekday.
+Friday is a weekday.
+The days that are weekend days are
+Saturday is a weekend, whoop.
+Sunday is a weekend, whoop.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice that when you loop over a dictionary in a for loop, the loop variable will get each of the keys of the dictionary.</p>
+<p>The dictionary has been modified to include the day name in Spanish.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#more complicated dictionary of dictionaries</span>
+<span class="n">days_of_week2</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;M&quot;</span><span class="p">:{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Monday&quot;</span><span class="p">,</span><span class="s2">&quot;weekday&quot;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s2">&quot;Spanish&quot;</span><span class="p">:</span><span class="s2">&quot;Lunes&quot;</span><span class="p">},</span>
+                <span class="s2">&quot;T&quot;</span><span class="p">:{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Tuesday&quot;</span><span class="p">,</span><span class="s2">&quot;weekday&quot;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s2">&quot;Spanish&quot;</span><span class="p">:</span><span class="s2">&quot;Martes&quot;</span><span class="p">},</span>
+                <span class="s2">&quot;W&quot;</span><span class="p">:{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Wednesday&quot;</span><span class="p">,</span><span class="s2">&quot;weekday&quot;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s2">&quot;Spanish&quot;</span><span class="p">:</span><span class="s2">&quot;Miércoles&quot;</span><span class="p">},</span>
+                <span class="s2">&quot;R&quot;</span><span class="p">:{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Thursday&quot;</span><span class="p">,</span><span class="s2">&quot;weekday&quot;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s2">&quot;Spanish&quot;</span><span class="p">:</span><span class="s2">&quot;Jueves&quot;</span><span class="p">},</span>
+                <span class="s2">&quot;F&quot;</span><span class="p">:{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Friday&quot;</span><span class="p">,</span><span class="s2">&quot;weekday&quot;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s2">&quot;Spanish&quot;</span><span class="p">:</span><span class="s2">&quot;Viernes&quot;</span><span class="p">},</span>
+                <span class="s2">&quot;S&quot;</span><span class="p">:{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Saturday&quot;</span><span class="p">,</span><span class="s2">&quot;weekday&quot;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span><span class="s2">&quot;Spanish&quot;</span><span class="p">:</span><span class="s2">&quot;Sábado&quot;</span><span class="p">},</span>
+                <span class="s2">&quot;U&quot;</span><span class="p">:{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Sunday&quot;</span><span class="p">,</span><span class="s2">&quot;weekday&quot;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span><span class="s2">&quot;Spanish&quot;</span><span class="p">:</span><span class="s2">&quot;Domingo&quot;</span><span class="p">}}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
+<b>Class Activity</b>: With a partner, write pseudocode to loop over the days of the week. Print off the day name in Spanish and whether it is a weekend or weekday.
+</div><div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
+<b>Class Activity</b>: Implement your pseudocode in Python.
+</div></div>
+</div>
+<div class="section" id="enumerate">
+<h2>Enumerate<a class="headerlink" href="#enumerate" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Lists<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Let’s see some syntax for growing lists.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a list with nothing</span>
+
+<span class="n">students</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># add a student</span>
+<span class="n">students</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Joe Smith&quot;</span><span class="p">)</span>
+
+<span class="c1"># add another student</span>
+<span class="n">students</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Jane Doe&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">students</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Joe Smith&#39;, &#39;Jane Doe&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>How to loop over the list? Let’s review.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Approach 1</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">students</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Joe Smith
+Jane Doe
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Approach 2</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">students</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;: &quot;</span><span class="p">,</span><span class="n">students</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 :  Joe Smith
+1 :  Jane Doe
+</pre></div>
+</div>
+</div>
+</div>
+<p>Can we simply the syntax? It is really convienent to access the index with <code class="docutils literal notranslate"><span class="pre">i</span></code> and the student with <code class="docutils literal notranslate"><span class="pre">s</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">students</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;: &quot;</span><span class="p">,</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 :  Joe Smith
+1 :  Jane Doe
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h3>Dictionaries<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>How about adding key-value pairs to a dictionary? Let’s take a look.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a dictionary with nothing</span>
+
+<span class="n">pantry</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># add a pantry item and quantity</span>
+<span class="n">pantry</span><span class="p">[</span><span class="s2">&quot;pasta&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="c1"># add another pantry item and quantity</span>
+<span class="n">pantry</span><span class="p">[</span><span class="s2">&quot;green beans&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">pantry</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;pasta&#39;: 3, &#39;green beans&#39;: 4}
+</pre></div>
+</div>
+</div>
+</div>
+<p>If the key already exists in the dictionary, it will update with the newly assigned value rather than add another pair.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pantry</span><span class="p">[</span><span class="s2">&quot;pasta&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pantry</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;pasta&#39;: 2, &#39;green beans&#39;: 4}
+</pre></div>
+</div>
+</div>
+</div>
+<p>How do we loop over the dictionary? Here it is again.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># to print out just the keys</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">pantry</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pasta
+green beans
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># to print out just the values</span>
+<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">pantry</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+4
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># to print out the key-value pairs together</span>
+<span class="k">for</span> <span class="n">food</span> <span class="ow">in</span> <span class="n">pantry</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">food</span><span class="p">,</span> <span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">pantry</span><span class="p">[</span><span class="n">food</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pasta : 2
+green beans : 4
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks/01-publish"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="04d-Example-High-Low-Game.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">High/Low Guess My Number Game</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="06-NumPy.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Linear Algebra with Numpy and Scipy</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
