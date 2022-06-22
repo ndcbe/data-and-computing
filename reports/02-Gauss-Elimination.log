@@ -1,45 +1,35 @@
 Traceback (most recent call last):
-  File "/Users/adowling/opt/anaconda3/envs/jbook2/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+  File "/Users/adowling/opt/anaconda3/envs/jbook/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
     executenb(
-  File "/Users/adowling/opt/anaconda3/envs/jbook2/lib/python3.9/site-packages/nbclient/client.py", line 1204, in execute
+  File "/Users/adowling/opt/anaconda3/envs/jbook/lib/python3.9/site-packages/nbclient/client.py", line 1204, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-  File "/Users/adowling/opt/anaconda3/envs/jbook2/lib/python3.9/site-packages/nbclient/util.py", line 84, in wrapped
+  File "/Users/adowling/opt/anaconda3/envs/jbook/lib/python3.9/site-packages/nbclient/util.py", line 84, in wrapped
     return just_run(coro(*args, **kwargs))
-  File "/Users/adowling/opt/anaconda3/envs/jbook2/lib/python3.9/site-packages/nbclient/util.py", line 62, in just_run
+  File "/Users/adowling/opt/anaconda3/envs/jbook/lib/python3.9/site-packages/nbclient/util.py", line 62, in just_run
     return loop.run_until_complete(coro)
-  File "/Users/adowling/opt/anaconda3/envs/jbook2/lib/python3.9/asyncio/base_events.py", line 647, in run_until_complete
+  File "/Users/adowling/opt/anaconda3/envs/jbook/lib/python3.9/asyncio/base_events.py", line 647, in run_until_complete
     return future.result()
-  File "/Users/adowling/opt/anaconda3/envs/jbook2/lib/python3.9/site-packages/nbclient/client.py", line 663, in async_execute
+  File "/Users/adowling/opt/anaconda3/envs/jbook/lib/python3.9/site-packages/nbclient/client.py", line 663, in async_execute
     await self.async_execute_cell(
-  File "/Users/adowling/opt/anaconda3/envs/jbook2/lib/python3.9/site-packages/nbclient/client.py", line 965, in async_execute_cell
+  File "/Users/adowling/opt/anaconda3/envs/jbook/lib/python3.9/site-packages/nbclient/client.py", line 965, in async_execute_cell
     await self._check_raise_for_error(cell, cell_index, exec_reply)
-  File "/Users/adowling/opt/anaconda3/envs/jbook2/lib/python3.9/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+  File "/Users/adowling/opt/anaconda3/envs/jbook/lib/python3.9/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# make a 3x4 matrix filled with random numbers
-not_an_augmented_matrix = np.random.rand(3,4)
-print(not_an_augmented_matrix)
-
-x = BackSub(not_an_augmented_matrix)
+import numpy as np
+import matplotlib.pyplot as plt
+#this line is only needed in Jupyter notebooks
+%matplotlib inline
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mAssertionError[0m                            Traceback (most recent call last)
-Input [0;32mIn [14][0m, in [0;36m<cell line: 5>[0;34m()[0m
-[1;32m      2[0m not_an_augmented_matrix [38;5;241m=[39m np[38;5;241m.[39mrandom[38;5;241m.[39mrand([38;5;241m3[39m,[38;5;241m4[39m)
-[1;32m      3[0m [38;5;28mprint[39m(not_an_augmented_matrix)
-[0;32m----> 5[0m x [38;5;241m=[39m [43mBackSub[49m[43m([49m[43mnot_an_augmented_matrix[49m[43m)[49m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Input [0;32mIn [1][0m, in [0;36m<cell line: 1>[0;34m()[0m
+[0;32m----> 1[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
+[1;32m      2[0m [38;5;28;01mimport[39;00m [38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m [38;5;28;01mas[39;00m [38;5;21;01mplt[39;00m
+[1;32m      3[0m [38;5;66;03m#this line is only needed in Jupyter notebooks[39;00m
 
-Input [0;32mIn [13][0m, in [0;36mBackSub[0;34m(aug_matrix, z_tol)[0m
-[1;32m     23[0m [38;5;28;01mfor[39;00m r [38;5;129;01min[39;00m [38;5;28mrange[39m(Nrow):
-[1;32m     24[0m     [38;5;28;01mfor[39;00m c [38;5;129;01min[39;00m [38;5;28mrange[39m([38;5;241m0[39m,r):
-[0;32m---> 25[0m         [38;5;28;01massert[39;00m np[38;5;241m.[39mabs(aug_matrix[r,c]) [38;5;241m<[39m z_tol, [38;5;124m"[39m[38;5;130;01m\n[39;00m[38;5;124mWarning! Nonzero in position [39m[38;5;124m"[39m[38;5;241m+[39m[38;5;28mstr[39m(r)[38;5;241m+[39m[38;5;124m"[39m[38;5;124m,[39m[38;5;124m"[39m[38;5;241m+[39m[38;5;28mstr[39m(c)
-[1;32m     27[0m [38;5;66;03m# create vector of zeros to store solution[39;00m
-[1;32m     28[0m x [38;5;241m=[39m np[38;5;241m.[39mzeros(Nrow)
-
-[0;31mAssertionError[0m: 
-Warning! Nonzero in position 1,0
-AssertionError: 
-Warning! Nonzero in position 1,0
+[0;31mModuleNotFoundError[0m: No module named 'numpy'
+ModuleNotFoundError: No module named 'numpy'
 

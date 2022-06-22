@@ -122,6 +122,11 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="03-Flow-control.html">
+     Python Basics II: Loopy Logic
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="03b-Pseudocode.html">
      Pseudocode
     </a>
@@ -699,6 +704,23 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="nn">Input In [1],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="k">def</span> <span class="nf">P_conc</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">P0</span><span class="p">,</span> <span class="n">k1prime</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">LOUD</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="sd">&quot;&quot;&quot; Computes the concentration of phenolphthalein as a function of time</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span><span class="sd">     </span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span><span class="sd">     Args:</span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span><span class="sd">         concentration, either a scalar (float) or vector (numpy array) depending on arg. t</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span><span class="sd">     &quot;&quot;&quot;</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;numpy&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <p>We will now go through several tests to see if our function behaves correctly. <em>Note:</em> There are a few intentional mistakes above to make this exercise more interesting.</p>
 </div>
@@ -1163,6 +1185,24 @@ Passed Test 3.
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Testing initial condition with following specifications:
+P0 =  1.0   k1prime =  1.0   k2 =  1.0
+Calculate value of P =  1.0
+Test passed.
+
+Testing initial condition with following specifications:
+P0 =  5.0   k1prime =  1.0   k2 =  0.001
+Calculate value of P =  5.000000000000001
+Test passed.
+</pre></div>
+</div>
+<img alt="../../_images/10-Testing-and-Debugging_36_1.png" src="../../_images/10-Testing-and-Debugging_36_1.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test Passed.
+Passed Test 3.
+</pre></div>
+</div>
+</div>
 </div>
 <div style="background-color: rgba(255,0,0,0.05) ; padding: 10px; border: 1px solid darkred;"> 
 <b>Tutorial Activity</b>: When first typing this model, I mistakenly specified <tt>pre_expon = -(k1prime) + k2*t</tt>. Without running any Python code, which tests would fail with this bug? (This is a good exam practice question.)
@@ -1253,7 +1293,7 @@ P_conc_docs(t, P0, k1prime, k2, LOUD=False)
         k2: reverse reaction rate constant, MUST BE POSITIVE
         
     Returns:
-        concentration, either a scalar (float) or vector (numpy array) depending on arg. t
+        concentration, either a scalar (float) or vector (numpy array) depening in arg. t
 
 With negative P0, P(t=10) = -5.000000010305769
 </pre></div>
@@ -1271,21 +1311,16 @@ With negative P0, P(t=10) = -5.000000010305769
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ZeroDivisionError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="nn">Input In [17],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="nn">&lt;ipython-input-17-b294912d3709&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">test_P</span> <span class="o">=</span> <span class="n">P_conc_docs</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">P0</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="n">k1prime</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">k2</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;With negative k1prime and negative k2, P(t=10) =&quot;</span><span class="p">,</span> <span class="n">test_P</span><span class="p">)</span>
 
-<span class="nn">Input In [15],</span> in <span class="ni">P_conc_docs</span><span class="nt">(t, P0, k1prime, k2, LOUD)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="sd">&quot;&quot;&quot; Computes the concentration of phenolphthalein as a function of time</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span><span class="sd"> </span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span><span class="sd"> Args:</span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span><span class="sd">     concentration, either a scalar (float) or vector (numpy array) depending on arg. t</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span><span class="sd"> &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="c1"># compute first fraction in formula</span>
-<span class="ne">---&gt; </span><span class="mi">16</span> <span class="n">frac1</span> <span class="o">=</span> <span class="n">k2</span><span class="o">/</span><span class="p">(</span><span class="n">k1prime</span> <span class="o">+</span> <span class="n">k2</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="c1"># compute second fraction in formula</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="n">frac2</span> <span class="o">=</span> <span class="n">k1prime</span><span class="o">/</span><span class="p">(</span><span class="n">k1prime</span> <span class="o">+</span> <span class="n">k2</span><span class="p">)</span>
+<span class="nn">&lt;ipython-input-15-f333314c111d&gt;</span> in <span class="ni">P_conc_docs</span><span class="nt">(t, P0, k1prime, k2, LOUD)</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span><span class="s2">     # compute first fraction in formula</span>
+<span class="ne">---&gt; </span><span class="mi">16</span><span class="s2">     frac1 = k2/(k1prime + k2)</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span><span class="s2"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span><span class="s2">     # compute section fraction in formula</span>
 
 <span class="ne">ZeroDivisionError</span>: float division by zero
 </pre></div>

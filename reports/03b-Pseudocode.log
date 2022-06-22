@@ -1,0 +1,63 @@
+Traceback (most recent call last):
+  File "/Users/adowling/opt/anaconda3/envs/jbook/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/Users/adowling/opt/anaconda3/envs/jbook/lib/python3.9/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/adowling/opt/anaconda3/envs/jbook/lib/python3.9/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/Users/adowling/opt/anaconda3/envs/jbook/lib/python3.9/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/Users/adowling/opt/anaconda3/envs/jbook/lib/python3.9/asyncio/base_events.py", line 647, in run_until_complete
+    return future.result()
+  File "/Users/adowling/opt/anaconda3/envs/jbook/lib/python3.9/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/Users/adowling/opt/anaconda3/envs/jbook/lib/python3.9/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/adowling/opt/anaconda3/envs/jbook/lib/python3.9/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import numpy as np
+import matplotlib.pyplot as plt
+#this line is only needed in iPython notebooks
+%matplotlib inline 
+
+#pick our points
+number_of_points = 10**3
+x = np.random.uniform(-1,1,number_of_points)
+y = np.random.uniform(-1,1,number_of_points)
+#compute pi
+n_inside = np.sum(x**2 + y**2 <= 1)
+print(str(number_of_points) + " darts were thrown, and")
+print(str(n_inside) + " darts landed inside the circle")
+
+pi_approx = 4.0*n_inside/number_of_points
+#now make a scatter plot
+maize = "#ffcb05"
+blue = "#00274c"
+fig = plt.figure(figsize=(4,4), dpi=200)
+plt.scatter(x, y, alpha=0.5, color=maize) #scatter plot with hex color
+#draw a circle of radius 1 with center (0,0)
+circle = plt.Circle((0,0),1,color=blue, 
+                    alpha=0.7, fill=False, linewidth=4)
+#add the circle to the plot
+plt.gca().add_patch(circle)
+#make sure that the axes are square so that our circle is circular
+plt.axis([-1,1,-1,1])
+#set axes bounds: axis([min x, max x, min y, max y])
+plt.axis([-1.05,1.05,-1.05,1.05])
+#make the title have the approximation to pi
+plt.title("$\\pi \\approx $" + str(pi_approx))
+plt.show()
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Input [0;32mIn [3][0m, in [0;36m<cell line: 1>[0;34m()[0m
+[0;32m----> 1[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
+[1;32m      2[0m [38;5;28;01mimport[39;00m [38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m [38;5;28;01mas[39;00m [38;5;21;01mplt[39;00m
+[1;32m      3[0m [38;5;66;03m#this line is only needed in iPython notebooks[39;00m
+
+[0;31mModuleNotFoundError[0m: No module named 'numpy'
+ModuleNotFoundError: No module named 'numpy'
+
