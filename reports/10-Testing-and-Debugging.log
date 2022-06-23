@@ -17,57 +17,63 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import numpy as np
-def P_conc(t, P0, k1prime, k2, LOUD=False):
-    """ Computes the concentration of phenolphthalein as a function of time
+import matplotlib.pyplot as plt
+#this line is only needed in iPython notebooks
+%matplotlib inline 
+
+def test2(Pfunc, P0, k1prime, k2):
+    '''Asymptotics test
     
     Args:
-        t: time, either a scalar (float) or vector (numpy array)
-        P0: initial concentration of phenolphthalein
-        k1prime: forward reaction rate constant
-        k2: reverse reaction rate constant
+        Pfunc: a Python function to calculate P concentration. Expects 4 inputs.
+        P0: initial condition to test
+        k1prime: rate constant to test
+        k2: rate constant to test
         
     Returns:
-        concentration, either a scalar (float) or vector (numpy array) depending on arg. t
-    """
-    # compute first fraction in formula
-    frac1 = k2/(k1prime + k2)
+        Boolean (true or false) indicates if our function passed or failed the test
     
-    # compute second fraction in formula
-    frac2 = k1prime/(k1prime + k2)
+    Side Effect:
+        Creates a plot. Prints if test passed or failed.
+    '''
+
+    # Generate 20 points from 10^-1 to 10^4
+    t = np.logspace(-1,4,20)
+    P = P_conc(t, P0, k1prime, k2)
     
-    # compute term that goes into exponent
-    pre_expon = -(k1prime * k2)*t
+    P_infty = P0*k2/(k1prime + k2)
+    # plot calculated value
+    plt.semilogx(t,P,'o-',label="function")
     
-    # evaluate exponent
-    expon = np.exp(pre_expon)
+    # plot calculated asymptotic value
+    plt.semilogx(t,P_infty*np.ones(len(t)),color='r',linestyle="--",label="$([P]_0 \cdot k_{2}) / (k_{1}'+k_{2})$")
     
-    # combine together
-    P = P0*(frac1 + frac2*expon)
+    # label plot
+    plt.xlabel('Time (units not given)')
+    plt.ylabel('$[P]$ (units not given)')
+    plt.title("$[P]_0$ = " + str(P0) + "    $k_1'$ = " + str(k1prime) + "    $k_2$ = " + str(k2))
+    plt.legend()
+    plt.show()
     
-    if LOUD:
-        print("frac1 = ",frac1)
-        print("frac2 = ",frac2)
-        print("pre_expon = ",pre_expon)
-        print("expon = ",expon)
-        print("P = ",P)
+    # check if solution converges to asymptotic value
+    if math.fabs(P[-1] - P_infty) < 1E-6:
+        # Note: P[-1] accesses the last value in array P
+        print("Test Passed.")
+        return True
+    else:
+        print("Test Failed. Either debug code or increase time in test.")
+        return False
     
-    # return final value
-    return P
+test2(P_conc, 100, 10.0, 0.001)
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Input [0;32mIn [1][0m, in [0;36m<cell line: 1>[0;34m()[0m
-[0;32m----> 1[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
-[1;32m      2[0m [38;5;28;01mdef[39;00m [38;5;21mP_conc[39m(t, P0, k1prime, k2, LOUD[38;5;241m=[39m[38;5;28;01mFalse[39;00m):
-[1;32m      3[0m     [38;5;124;03m""" Computes the concentration of phenolphthalein as a function of time[39;00m
-[1;32m      4[0m [38;5;124;03m    [39;00m
-[1;32m      5[0m [38;5;124;03m    Args:[39;00m
-[0;32m   (...)[0m
-[1;32m     12[0m [38;5;124;03m        concentration, either a scalar (float) or vector (numpy array) depending on arg. t[39;00m
-[1;32m     13[0m [38;5;124;03m    """[39;00m
+Input [0;32mIn [6][0m, in [0;36m<cell line: 1>[0;34m()[0m
+[0;32m----> 1[0m [38;5;28;01mimport[39;00m [38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m [38;5;28;01mas[39;00m [38;5;21;01mplt[39;00m
+[1;32m      2[0m [38;5;66;03m#this line is only needed in iPython notebooks[39;00m
+[1;32m      3[0m get_ipython()[38;5;241m.[39mrun_line_magic([38;5;124m'[39m[38;5;124mmatplotlib[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124minline[39m[38;5;124m'[39m)
 
-[0;31mModuleNotFoundError[0m: No module named 'numpy'
-ModuleNotFoundError: No module named 'numpy'
+[0;31mModuleNotFoundError[0m: No module named 'matplotlib'
+ModuleNotFoundError: No module named 'matplotlib'
 

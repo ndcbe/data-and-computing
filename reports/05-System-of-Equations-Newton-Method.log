@@ -17,18 +17,36 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import numpy as np
-x0 = np.array([0.5, 0.5, 0.55, 0.45, 0.65, 0.35])
-print("J(x0) = \n",my_J(x0))
+x0_break1 = np.array([0.99, 0.01, 0.5, 0.5, 0.5, 0.5])
+xsln = newton_system(my_f,x0_break1,exact_Jac=my_J,LOUD=True)
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Input [0;32mIn [3][0m, in [0;36m<cell line: 1>[0;34m()[0m
-[0;32m----> 1[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
-[1;32m      2[0m x0 [38;5;241m=[39m np[38;5;241m.[39marray([[38;5;241m0.5[39m, [38;5;241m0.5[39m, [38;5;241m0.55[39m, [38;5;241m0.45[39m, [38;5;241m0.65[39m, [38;5;241m0.35[39m])
-[1;32m      3[0m [38;5;28mprint[39m([38;5;124m"[39m[38;5;124mJ(x0) = [39m[38;5;130;01m\n[39;00m[38;5;124m"[39m,my_J(x0))
+[0;31mLinAlgError[0m                               Traceback (most recent call last)
+Input [0;32mIn [13][0m, in [0;36m<cell line: 2>[0;34m()[0m
+[1;32m      1[0m x0_break1 [38;5;241m=[39m np[38;5;241m.[39marray([[38;5;241m0.99[39m, [38;5;241m0.01[39m, [38;5;241m0.5[39m, [38;5;241m0.5[39m, [38;5;241m0.5[39m, [38;5;241m0.5[39m])
+[0;32m----> 2[0m xsln [38;5;241m=[39m [43mnewton_system[49m[43m([49m[43mmy_f[49m[43m,[49m[43mx0_break1[49m[43m,[49m[43mexact_Jac[49m[38;5;241;43m=[39;49m[43mmy_J[49m[43m,[49m[43mLOUD[49m[38;5;241;43m=[39;49m[38;5;28;43;01mTrue[39;49;00m[43m)[49m
 
-[0;31mModuleNotFoundError[0m: No module named 'numpy'
-ModuleNotFoundError: No module named 'numpy'
+Input [0;32mIn [10][0m, in [0;36mnewton_system[0;34m(f, x0, exact_Jac, delta, epsilon, LOUD)[0m
+[1;32m     26[0m RHS [38;5;241m=[39m [38;5;241m-[39mfx;
+[1;32m     28[0m [38;5;66;03m# solve linear system[39;00m
+[1;32m     29[0m [38;5;66;03m# We could have used GaussElimPivotSolve here instead[39;00m
+[0;32m---> 30[0m delta_x [38;5;241m=[39m [43mnp[49m[38;5;241;43m.[39;49m[43mlinalg[49m[38;5;241;43m.[39;49m[43msolve[49m[43m([49m[43mJ[49m[43m,[49m[43mRHS[49m[43m)[49m
+[1;32m     32[0m [38;5;66;03m# Check if GE returned any NaN values[39;00m
+[1;32m     33[0m [38;5;28;01mif[39;00m np[38;5;241m.[39misnan(delta_x)[38;5;241m.[39many():
+
+File [0;32m<__array_function__ internals>:180[0m, in [0;36msolve[0;34m(*args, **kwargs)[0m
+
+File [0;32m~/opt/anaconda3/envs/jbook/lib/python3.9/site-packages/numpy/linalg/linalg.py:393[0m, in [0;36msolve[0;34m(a, b)[0m
+[1;32m    391[0m signature [38;5;241m=[39m [38;5;124m'[39m[38;5;124mDD->D[39m[38;5;124m'[39m [38;5;28;01mif[39;00m isComplexType(t) [38;5;28;01melse[39;00m [38;5;124m'[39m[38;5;124mdd->d[39m[38;5;124m'[39m
+[1;32m    392[0m extobj [38;5;241m=[39m get_linalg_error_extobj(_raise_linalgerror_singular)
+[0;32m--> 393[0m r [38;5;241m=[39m [43mgufunc[49m[43m([49m[43ma[49m[43m,[49m[43m [49m[43mb[49m[43m,[49m[43m [49m[43msignature[49m[38;5;241;43m=[39;49m[43msignature[49m[43m,[49m[43m [49m[43mextobj[49m[38;5;241;43m=[39;49m[43mextobj[49m[43m)[49m
+[1;32m    395[0m [38;5;28;01mreturn[39;00m wrap(r[38;5;241m.[39mastype(result_t, copy[38;5;241m=[39m[38;5;28;01mFalse[39;00m))
+
+File [0;32m~/opt/anaconda3/envs/jbook/lib/python3.9/site-packages/numpy/linalg/linalg.py:88[0m, in [0;36m_raise_linalgerror_singular[0;34m(err, flag)[0m
+[1;32m     87[0m [38;5;28;01mdef[39;00m [38;5;21m_raise_linalgerror_singular[39m(err, flag):
+[0;32m---> 88[0m     [38;5;28;01mraise[39;00m LinAlgError([38;5;124m"[39m[38;5;124mSingular matrix[39m[38;5;124m"[39m)
+
+[0;31mLinAlgError[0m: Singular matrix
+LinAlgError: Singular matrix
 
