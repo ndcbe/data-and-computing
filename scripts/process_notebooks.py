@@ -83,7 +83,10 @@ def replace_code(pattern, replacement, verbose):
 # Testing
 #process_notebook("./notebooks/01","03-Flow-control.ipynb")
 
-folders = ["01","02","03","04","05","06","07","08","09","10","11","12","13","14"]
+#folders = ["01","02","03","04","05","06","07","08","09","10","11","12","13","14"]
+
+
+folders = ["01","02","03","04","05","06","07","08","09","10","11","12","13"]
 
 for fld in folders:
     
