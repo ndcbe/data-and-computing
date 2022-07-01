@@ -1,0 +1,1381 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multivariate Linear Regression &#8212; Data and Computing for Chemical Engieers</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Advanced Nonlinear Regression" href="../13/advanced_regression.html" />
+    <link rel="prev" title="Linear Regression Practice Problems" href="03-Linear-Regression-Practice-Problems.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/cbe_logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Data and Computing for Chemical Engieers</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../intro.html">
+   Welcome to (Advanced) Data and Computing for Engineers
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../01/00-Python-Primer.html">
+   Python Primer
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/01-Jupyter-Notebooks.html">
+     Welcome to Jupyter Notebooks and Vocareum
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/02-Python-Basics-I-Variables-Strings-Bugs.html">
+     Python Basics I: Variables, Strings, and Bugs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/03-Flow-control.html">
+     Python Basics II: Loopy Logic
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/03b-Pseudocode.html">
+     Pseudocode
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/04-Functions-and-Scope.html">
+     Functions and Scope
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/04b-Recursion.html">
+     Recursion
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/04c-Modules-and-Files.html">
+     Functions, Scoping, and Other Fun Stuff
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/04d-Example-High-Low-Game.html">
+     High/Low Guess My Number Game
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/05-Python-Basics-III-Lists-Dictionaries-Enumeration.html">
+     Python Basics III: Lists, Dictionaries, and Enumeration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/06-NumPy.html">
+     Linear Algebra with Numpy and Scipy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/07-Matplotlib.html">
+     Visualization with matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/08-Pandas.html">
+     Manipulating Data with Pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/09-Functions-as-Arguments.html">
+     Functions as Arguments
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/10-Testing-and-Debugging.html">
+     Testing and Debugging in Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../02/linear_algebra.html">
+   Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02-publish/01-Modeling-Systems-of-Linear-Equations.html">
+     Modeling Systems of Linear Equations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02-publish/02-Gauss-Elimination.html">
+     Gaussian Elimination
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02-publish/03-LU-Factorization.html">
+     LU Decomposition and Condition Number
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02-publish/04-Example-Atomic-Mass-Balances.html">
+     Example: Mass Balances and Linear Algebra
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../03/algorithms.html">
+   Algorithm Building Blocks
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03-publish/01-Taylor-Series.html">
+     Taylor Series Approximations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03-publish/02-Finite-Difference.html">
+     Finite Difference Derivative Approximations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03-publish/03-Example-Heating-a-Metal-Slab.html">
+     Example: Heating a Metal Slab
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../04/nonlinear_systems.html">
+   Nonlinear Systems of Equations
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/01-Modeling-Systems-of-Nonlinear-Equations.html">
+     Modeling Systems of Nonlinear Equations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/02-Newton-Method-Nonlinear-Equation-Solving.html">
+     Solving Systems of Nonlinear Equations with Newton’s Method
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/03-More-Newton-Type-Methods.html">
+     More Newton-Type Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/04-Convergence-Analysis-Newton-Method.html">
+     Convergence Analysis for Newton’s Method
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/05-System-of-Equations-Newton-Method.html">
+     Newton’s Method for Systems of Equations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../05/optimization.html">
+   Continuous Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05-publish/01-Pyomo-Basics.html">
+     Pyomo Basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05-publish/02-Electricity-Market-Optimization.html">
+     Electricity Market Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05-publish/03-Flash-Calculations-in-Pyomo.html">
+     Flash Calculations in Pyomo
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../06/integration.html">
+   Numeric Integration
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/01-Intro-and-Newton-Cotes.html">
+     Introduction and Newton-Cotes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/02-Gauss-Quadrature.html">
+     Gauss Quadrature
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/03-Adaptive-Methods-and-Scipy.html">
+     Adaptive Methods for Newton-Cotes and Gauss Quadrature, Scipy Library
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/04-Application-Inertial-Navigation-Systems.html">
+     Application: Inertial Navigation Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/05-Forward-and-Backward-Euler.html">
+     Forward and Backward Euler Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/06-Trapezoid-Rule.html">
+     Crank-Nicolson (Trapezoid Rule)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/07-Stability-Analysis.html">
+     Stability Analysis of Forward/Backward Euler and Crank-Nicolson Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/08-Explicit-Runge-Kutta.html">
+     Explicit Range Kutta Method
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/09-Systems-of-Differential-Equations-and-Scipy.html">
+     Systems of Differential Equations and Scipy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/10-Example-Reaction-Rates.html">
+     Example: Reaction Rates
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../07/stats.html">
+   Descriptive Statistics and Visualization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07-publish/01-Sampling.html">
+     Sampling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07-publish/02-Summary-Statistics.html">
+     Summary Statistics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07-publish/03-Visualizing-Data.html">
+     Visualizing Data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../08/probability.html">
+   Probability Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../08-publish/01-Random-Variables.html">
+     Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../08-publish/02-Jointly-Distributed-Random-Variables.html">
+     Jointly Distributed Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../08-publish/03-Practice-Problems.html">
+     Practice Problems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../09/distributions.html">
+   Common Probability Distributions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../09-publish/03-Poisson-Probability-Distribution.html">
+     Poisson Probability Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../09-publish/04-Normal-Probability-Distribution.html">
+     Normal Probability Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../09-publish/05-Common-Probability-Distributions-Summary.html">
+     Common Probability Distributions Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../10/uncertainty.html">
+   Uncertainty and Error Propagation
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../11/inference.html">
+   Statistical Inference
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/01-Central-Limit-Theorem.html">
+     Central Limit Theorem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/02-Standard-Normal-Distribution.html">
+     Standard Normal Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/03-Confidence-Intervals.html">
+     Confidence Intervals
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/04-Students-t-Distribution.html">
+     Student’s t-Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/05-First-Hypothesis-Testing.html">
+     First Hypothesis Testing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/06-Hypothesis-Testing-Review-and-Type-I-Type-II-Errors.html">
+     Hypothesis Testing Review and Type I/Type II Errors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/07-Flavors-of-Hypothesis-Testing.html">
+     Flavors of Hypothesis Testing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/08-Statistical-Power-Basics.html">
+     Statistical Power Basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/09-Statistical-Power-in-Python.html">
+     Statistical Power in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/10-Statistical-Power-Practice-Problems.html">
+     Statistical Power Practice Problems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../12/regression.html">
+   Regression
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="02-Uncertainty-Analysis-and-Statistical-Inference.html">
+     Uncertainty Analysis and Statistical Inference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03-Linear-Regression-Practice-Problems.html">
+     Linear Regression Practice Problems
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Multivariate Linear Regression
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../13/advanced_regression.html">
+   Advanced Nonlinear Regression
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/01-Transformations-and-Linear-Regression.html">
+     Transformations and Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/02-Nonlinear-Regression.html">
+     Nonlinear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/03-Nonlinear-Regression-Practice-Problem.html">
+     Nonlinear Regression Practice Problem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/04-Weighted-Regression.html">
+     Weighted Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/05-Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression.html">
+     Monte Carlo Uncertainty Analysis for Nonlinear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/06-Bootstrap-Confidence-Intervals.html">
+     Bootstrap Confidence Intervals
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/07-Nonlinear-Case-Study-Adsorptive-Membranes.html">
+     Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../14/design_of_experiments.html">
+   Design of Experiments
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/12-publish/04-Multivariate-Linear-Regression.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/ndcbe/data-and-computing"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/12-publish/04-Multivariate-Linear-Regression.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/12-publish/04-Multivariate-Linear-Regression.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/12-publish/04-Multivariate-Linear-Regression.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-objectives">
+   Learning Objectives
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multivariate-regression">
+   Multivariate Regression
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#motivating-example-predict-bluegills-age">
+     Motivating Example: Predict Bluegills Age
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#normal-equations">
+     Normal Equations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#attempt-1-linear-model">
+     Attempt 1. Linear Model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#attempt-2-quadratic-model">
+     Attempt 2. Quadratic Model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-select-the-best-model">
+     How to select the best model?
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Multivariate Linear Regression</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-objectives">
+   Learning Objectives
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multivariate-regression">
+   Multivariate Regression
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#motivating-example-predict-bluegills-age">
+     Motivating Example: Predict Bluegills Age
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#normal-equations">
+     Normal Equations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#attempt-1-linear-model">
+     Attempt 1. Linear Model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#attempt-2-quadratic-model">
+     Attempt 2. Quadratic Model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-select-the-best-model">
+     How to select the best model?
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="multivariate-linear-regression">
+<h1>Multivariate Linear Regression<a class="headerlink" href="#multivariate-linear-regression" title="Permalink to this headline">¶</a></h1>
+<p>CBE 20258. Numerical and Statistical Analysis. Spring 2020.</p>
+<p>© University of Notre Dame</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load libraries</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.optimize</span> <span class="k">as</span> <span class="nn">optimize</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">¶</a></h2>
+<p>After studying this notebook and your lecture notes, you should be able to:</p>
+<ul class="simple">
+<li><p>Fit multivariate models (including polynomials) using linear regression</p></li>
+<li><p>Using the 538 blog post as an example, explain why claiming a trend line is “statistically significant” can be misleading or not informative</p></li>
+</ul>
+</div>
+<div class="section" id="multivariate-regression">
+<h2>Multivariate Regression<a class="headerlink" href="#multivariate-regression" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="motivating-example-predict-bluegills-age">
+<h3>Motivating Example: Predict Bluegills Age<a class="headerlink" href="#motivating-example-predict-bluegills-age" title="Permalink to this headline">¶</a></h3>
+<p>Data source: <a class="reference external" href="https://newonlinecourses.science.psu.edu/stat501/node/325/">https://newonlinecourses.science.psu.edu/stat501/node/325/</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># age of fish in years</span>
+<span class="n">age</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span>
+                <span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span>
+                <span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+
+<span class="c1"># length of fish in mm</span>
+<span class="n">length</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">67</span><span class="p">,</span><span class="mi">62</span><span class="p">,</span><span class="mi">109</span><span class="p">,</span><span class="mi">83</span><span class="p">,</span><span class="mi">91</span><span class="p">,</span><span class="mi">88</span><span class="p">,</span><span class="mi">137</span><span class="p">,</span><span class="mi">131</span><span class="p">,</span><span class="mi">122</span><span class="p">,</span><span class="mi">122</span><span class="p">,</span><span class="mi">118</span><span class="p">,</span><span class="mi">115</span><span class="p">,</span><span class="mi">131</span><span class="p">,</span><span class="mi">143</span><span class="p">,</span><span class="mi">142</span><span class="p">,</span><span class="mi">123</span><span class="p">,</span><span class="mi">122</span><span class="p">,</span>
+                   <span class="mi">138</span><span class="p">,</span><span class="mi">135</span><span class="p">,</span><span class="mi">146</span><span class="p">,</span><span class="mi">146</span><span class="p">,</span><span class="mi">145</span><span class="p">,</span><span class="mi">145</span><span class="p">,</span><span class="mi">144</span><span class="p">,</span><span class="mi">140</span><span class="p">,</span><span class="mi">150</span><span class="p">,</span><span class="mi">152</span><span class="p">,</span><span class="mi">157</span><span class="p">,</span><span class="mi">155</span><span class="p">,</span><span class="mi">153</span><span class="p">,</span><span class="mi">154</span><span class="p">,</span><span class="mi">158</span><span class="p">,</span><span class="mi">162</span><span class="p">,</span>
+                   <span class="mi">161</span><span class="p">,</span><span class="mi">162</span><span class="p">,</span><span class="mi">165</span><span class="p">,</span><span class="mi">171</span><span class="p">,</span><span class="mi">171</span><span class="p">,</span><span class="mi">162</span><span class="p">,</span><span class="mi">169</span><span class="p">,</span><span class="mi">167</span><span class="p">,</span><span class="mi">188</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">109</span><span class="p">,</span><span class="mi">150</span><span class="p">,</span><span class="mi">140</span><span class="p">,</span><span class="mi">170</span><span class="p">,</span><span class="mi">150</span><span class="p">,</span><span class="mi">140</span><span class="p">,</span>
+                   <span class="mi">140</span><span class="p">,</span><span class="mi">150</span><span class="p">,</span><span class="mi">150</span><span class="p">,</span><span class="mi">140</span><span class="p">,</span><span class="mi">150</span><span class="p">,</span><span class="mi">150</span><span class="p">,</span><span class="mi">150</span><span class="p">,</span><span class="mi">160</span><span class="p">,</span><span class="mi">140</span><span class="p">,</span><span class="mi">150</span><span class="p">,</span><span class="mi">170</span><span class="p">,</span><span class="mi">150</span><span class="p">,</span><span class="mi">150</span><span class="p">,</span><span class="mi">150</span><span class="p">,</span><span class="mi">150</span><span class="p">,</span><span class="mi">150</span><span class="p">,</span>
+                   <span class="mi">150</span><span class="p">,</span><span class="mi">160</span><span class="p">,</span><span class="mi">140</span><span class="p">,</span><span class="mi">160</span><span class="p">,</span><span class="mi">130</span><span class="p">,</span><span class="mi">160</span><span class="p">,</span><span class="mi">130</span><span class="p">,</span><span class="mi">170</span><span class="p">,</span><span class="mi">170</span><span class="p">,</span><span class="mi">160</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="mi">160</span><span class="p">,</span><span class="mi">170</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="n">length</span><span class="p">,</span><span class="s1">&#39;b.&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Age [years]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Length [mm]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/04-Multivariate-Linear-Regression_5_0.png" src="../../_images/04-Multivariate-Linear-Regression_5_0.png" />
+</div>
+</div>
+<p>Can we use the age of the fish to predict its length?</p>
+</div>
+<div class="section" id="normal-equations">
+<h3>Normal Equations<a class="headerlink" href="#normal-equations" title="Permalink to this headline">¶</a></h3>
+<p>Recall from 12-02 and 12-03 the formulation for <strong>multivariate linear regression</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+\underbrace{\vec{y}}_{\mathbb{R}^{n x 1}} = \underbrace{\mathbf{X}}_{\mathbb{R}^{n x m}} \cdot \underbrace{\vec{\beta}}_{\mathbb{R}^{m x 1}} + \underbrace{\vec{\epsilon}}_{\mathbb{R}^{n x 1}}
+\]</div>
+<p>Observations: <span class="math notranslate nohighlight">\(\vec{y} = [y_1, y_2, ..., x_n]^T\)</span></p>
+<p>Fitted Parameters: <span class="math notranslate nohighlight">\(\vec{\beta} = [\beta_0, \beta_1, ..., \beta_{m}]^T\)</span></p>
+<p>Data / Feature Matrix:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{X} = \begin{bmatrix} 1 &amp; x_{1,1} &amp; x_{1,2} &amp; \dots &amp; x_{1,m} \\
+1 &amp; x_{2,1} &amp; x_{2,2} &amp; \dots &amp; x_{2,m} \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+1 &amp; x_{n,1} &amp; x_{n,2} &amp; \dots &amp; x_{n,m}
+\end{bmatrix}
+\end{split}\]</div>
+<p>For example, we could fit a linear model where reactor yield depended on both temperature, pressure and inlet compositions.</p>
+<p>The linear regression best fit estimates can be easily computed with linear algebra:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{X}^T \mathbf{X} \hat{\beta} = \mathbf{X}^T y\]</div>
+<p>or</p>
+<div class="math notranslate nohighlight">
+\[ \hat{\beta} = (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T y\]</div>
+<p>where the <span class="math notranslate nohighlight">\(\vec{~}\)</span> is omitted for simplicity. Above are know as the <strong>normal equations</strong>.</p>
+<p>By applying the error propagation formula to the above equation, we can easily calculate the <strong>covariance matrix of the fitted parameters</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\Sigma_{\hat{\beta}} = \hat{\sigma}^2  (\mathbf{X}^T \mathbf{X})^{-1}\]</div>
+</div>
+<div class="section" id="attempt-1-linear-model">
+<h3>Attempt 1. Linear Model<a class="headerlink" href="#attempt-1-linear-model" title="Permalink to this headline">¶</a></h3>
+<p>Let’s start with a simple regression model:</p>
+<div class="math notranslate nohighlight">
+\[
+y = \beta_0 + \beta_1 x_1
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(x_1\)</span> is the length of the fish.</p>
+<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
+    <b>Class Activity</b>: Construct the feature matrix <tt>X</tt>.
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nfish</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">age</span><span class="p">)</span>
+
+<span class="c1"># feature matrix (store in &#39;X&#39;)</span>
+<span class="c1"># Add your solution here</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;X =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>X =
+ [[1. 1.]
+ [1. 1.]
+ [1. 2.]
+ [1. 2.]
+ [1. 2.]
+ [1. 2.]
+ [1. 3.]
+ [1. 3.]
+ [1. 3.]
+ [1. 3.]
+ [1. 3.]
+ [1. 3.]
+ [1. 3.]
+ [1. 3.]
+ [1. 3.]
+ [1. 2.]
+ [1. 3.]
+ [1. 4.]
+ [1. 4.]
+ [1. 4.]
+ [1. 4.]
+ [1. 4.]
+ [1. 4.]
+ [1. 4.]
+ [1. 4.]
+ [1. 4.]
+ [1. 4.]
+ [1. 4.]
+ [1. 4.]
+ [1. 4.]
+ [1. 4.]
+ [1. 4.]
+ [1. 4.]
+ [1. 4.]
+ [1. 4.]
+ [1. 4.]
+ [1. 4.]
+ [1. 5.]
+ [1. 4.]
+ [1. 4.]
+ [1. 4.]
+ [1. 5.]
+ [1. 2.]
+ [1. 2.]
+ [1. 4.]
+ [1. 3.]
+ [1. 4.]
+ [1. 3.]
+ [1. 4.]
+ [1. 4.]
+ [1. 4.]
+ [1. 4.]
+ [1. 3.]
+ [1. 3.]
+ [1. 3.]
+ [1. 4.]
+ [1. 4.]
+ [1. 3.]
+ [1. 4.]
+ [1. 5.]
+ [1. 4.]
+ [1. 5.]
+ [1. 4.]
+ [1. 4.]
+ [1. 3.]
+ [1. 5.]
+ [1. 5.]
+ [1. 4.]
+ [1. 5.]
+ [1. 3.]
+ [1. 4.]
+ [1. 3.]
+ [1. 4.]
+ [1. 6.]
+ [1. 4.]
+ [1. 5.]
+ [1. 4.]
+ [1. 4.]]
+</pre></div>
+</div>
+</div>
+</div>
+<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
+    <b>Class Activity</b>: Compute $(\mathbf{X}^T \mathbf{X})^{-1}$ and store in <tt>XXinv</tt>.
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate inverse of XT * X</span>
+<span class="c1"># Add your solution here</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;inv(XT X) =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">XXinv</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>inv(XT X) =
+ [[ 0.21161665 -0.05479187]
+ [-0.05479187  0.01510165]]
+</pre></div>
+</div>
+</div>
+</div>
+<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
+    <b>Class Activity</b>: Compute $\hat{\mathbf{\beta}}$ (fitted coefficients) and store in <tt>beta_hat</tt>.
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># recall we can calculate the best fit coefficients with linear algebra</span>
+<span class="c1"># Add your solution here</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;beta_hat =&quot;</span><span class="p">,</span><span class="n">beta_hat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>beta_hat = [62.64898354 22.31229429]
+</pre></div>
+</div>
+</div>
+</div>
+<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
+    <b>Class Activity</b>: Complete the code below to evaluate the model and plot the predictions.
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## evaluate predictions</span>
+
+<span class="c1"># create ages to evaluate model with</span>
+<span class="n">age_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># create new X matrix with 100 rows and 2 columns</span>
+<span class="n">Xplot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">age_plot</span><span class="p">),</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="c1"># fill in second column</span>
+<span class="c1"># Add your solution here</span>
+
+<span class="c1"># evaluate model and store in `length_plot`</span>
+<span class="c1"># Add your solution here</span>
+
+<span class="c1"># plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="n">length</span><span class="p">,</span><span class="s1">&#39;b.&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">age_plot</span><span class="p">,</span><span class="n">length_plot</span><span class="p">,</span><span class="s1">&#39;r-&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Best Fit&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Age [years]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Length [mm]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/04-Multivariate-Linear-Regression_16_0.png" src="../../_images/04-Multivariate-Linear-Regression_16_0.png" />
+</div>
+</div>
+<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
+    <b>Class Activity</b>: Calculate and plot the residuals.
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate residuals, store in `e`</span>
+<span class="c1"># Add your solution here</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="s1">&#39;b.&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Age [years]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Residuals [mm]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/04-Multivariate-Linear-Regression_18_0.png" src="../../_images/04-Multivariate-Linear-Regression_18_0.png" />
+</div>
+</div>
+<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
+    <b>Class Activity</b>: Compute the variance of the residuals. Then compute the covariance of the fitted parameters.
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># compute variance of residuals, store in `se`</span>
+<span class="c1"># Add your solution here</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;variance of residuals = &quot;</span><span class="p">,</span><span class="n">se</span><span class="p">,</span><span class="s2">&quot;add units&quot;</span><span class="p">)</span>
+
+<span class="c1"># compute covariance matrix, store in `Sigma_beta`</span>
+<span class="c1"># Add your solution here</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;covariance matrix:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">Sigma_beta</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>variance of residuals =  156.48469455342126 add units
+covariance matrix:
+ [[ 5181.95418684 -1341.71366411]
+ [-1341.71366411   369.80093923]]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="attempt-2-quadratic-model">
+<h3>Attempt 2. Quadratic Model<a class="headerlink" href="#attempt-2-quadratic-model" title="Permalink to this headline">¶</a></h3>
+<p>Let’s try a quadratic model now:</p>
+<div class="math notranslate nohighlight">
+\[
+y = \beta_0 + \beta_1 x_1 + \beta_2 x_2
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(x_1\)</span> is the age and <span class="math notranslate nohighlight">\(x_2\)</span> is age squared.</p>
+<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
+    <b>Class Activity</b>: With a partner, modify the code below (copied from previous example) to and fit the quadratic model.
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># construct the feature matrix</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">nfish</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="c1"># Add your solution here</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;X =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>X =
+ [[ 1.  1.  1.]
+ [ 1.  1.  1.]
+ [ 1.  2.  4.]
+ [ 1.  2.  4.]
+ [ 1.  2.  4.]
+ [ 1.  2.  4.]
+ [ 1.  3.  9.]
+ [ 1.  3.  9.]
+ [ 1.  3.  9.]
+ [ 1.  3.  9.]
+ [ 1.  3.  9.]
+ [ 1.  3.  9.]
+ [ 1.  3.  9.]
+ [ 1.  3.  9.]
+ [ 1.  3.  9.]
+ [ 1.  2.  4.]
+ [ 1.  3.  9.]
+ [ 1.  4. 16.]
+ [ 1.  4. 16.]
+ [ 1.  4. 16.]
+ [ 1.  4. 16.]
+ [ 1.  4. 16.]
+ [ 1.  4. 16.]
+ [ 1.  4. 16.]
+ [ 1.  4. 16.]
+ [ 1.  4. 16.]
+ [ 1.  4. 16.]
+ [ 1.  4. 16.]
+ [ 1.  4. 16.]
+ [ 1.  4. 16.]
+ [ 1.  4. 16.]
+ [ 1.  4. 16.]
+ [ 1.  4. 16.]
+ [ 1.  4. 16.]
+ [ 1.  4. 16.]
+ [ 1.  4. 16.]
+ [ 1.  4. 16.]
+ [ 1.  5. 25.]
+ [ 1.  4. 16.]
+ [ 1.  4. 16.]
+ [ 1.  4. 16.]
+ [ 1.  5. 25.]
+ [ 1.  2.  4.]
+ [ 1.  2.  4.]
+ [ 1.  4. 16.]
+ [ 1.  3.  9.]
+ [ 1.  4. 16.]
+ [ 1.  3.  9.]
+ [ 1.  4. 16.]
+ [ 1.  4. 16.]
+ [ 1.  4. 16.]
+ [ 1.  4. 16.]
+ [ 1.  3.  9.]
+ [ 1.  3.  9.]
+ [ 1.  3.  9.]
+ [ 1.  4. 16.]
+ [ 1.  4. 16.]
+ [ 1.  3.  9.]
+ [ 1.  4. 16.]
+ [ 1.  5. 25.]
+ [ 1.  4. 16.]
+ [ 1.  5. 25.]
+ [ 1.  4. 16.]
+ [ 1.  4. 16.]
+ [ 1.  3.  9.]
+ [ 1.  5. 25.]
+ [ 1.  5. 25.]
+ [ 1.  4. 16.]
+ [ 1.  5. 25.]
+ [ 1.  3.  9.]
+ [ 1.  4. 16.]
+ [ 1.  3.  9.]
+ [ 1.  4. 16.]
+ [ 1.  6. 36.]
+ [ 1.  4. 16.]
+ [ 1.  5. 25.]
+ [ 1.  4. 16.]
+ [ 1.  4. 16.]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate inverse of XT * X, store in XXinv</span>
+<span class="c1"># Add your solution here</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;inv(XT X) =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">XXinv</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>inv(XT X) =
+ [[ 1.02032931 -0.57830612  0.07783618]
+ [-0.57830612  0.35399479 -0.05038669]
+ [ 0.07783618 -0.05038669  0.0074915 ]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># recall we can calculate the best fit coefficients with linear algebra, store in beta_hat</span>
+<span class="c1"># Add your solution here</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;beta_hat =&quot;</span><span class="p">,</span><span class="n">beta_hat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>beta_hat = [13.62237616 54.04931191 -4.71866479]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## evaluate predictions</span>
+
+<span class="c1"># create ages to evaluate model with</span>
+<span class="n">age_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># create new X matrix with 100 rows and 2 columns</span>
+<span class="n">Xplot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">age_plot</span><span class="p">),</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="c1"># fill in second and third column</span>
+<span class="c1"># Add your solution here</span>
+
+<span class="c1"># evaluate model, store predictions in length_plot</span>
+<span class="c1"># Add your solution here</span>
+
+<span class="c1"># plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="n">length</span><span class="p">,</span><span class="s1">&#39;b.&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">age_plot</span><span class="p">,</span><span class="n">length_plot</span><span class="p">,</span><span class="s1">&#39;r-&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Best Fit&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Age [years]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Length [mm]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/04-Multivariate-Linear-Regression_27_0.png" src="../../_images/04-Multivariate-Linear-Regression_27_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate residuals, store in `e`</span>
+<span class="c1"># Add your solution here</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="s1">&#39;b.&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Age [years]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Residuals [mm]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/04-Multivariate-Linear-Regression_28_0.png" src="../../_images/04-Multivariate-Linear-Regression_28_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># compute the variance of residuals, store in `e`</span>
+<span class="c1"># Add your solution here</span>
+
+
+<span class="c1"># compute covariance matrix, store in `Sigma_beta`</span>
+<span class="c1"># Add your solution here</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;covariance matrix:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">Sigma_beta</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>covariance matrix:
+ [[14434.94954579 -8181.49557518  1101.17523061]
+ [-8181.49557518  5008.08601591  -712.8377746 ]
+ [ 1101.17523061  -712.8377746    105.98483278]]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="how-to-select-the-best-model">
+<h3>How to select the best model?<a class="headerlink" href="#how-to-select-the-best-model" title="Permalink to this headline">¶</a></h3>
+<p>We can calculate a p-value to determine if a model is statistically significant.</p>
+<p><a class="reference external" href="https://fivethirtyeight.com/features/science-isnt-broken/#part1">https://fivethirtyeight.com/features/science-isnt-broken/#part1</a></p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks/12-publish"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="03-Linear-Regression-Practice-Problems.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Linear Regression Practice Problems</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../13/advanced_regression.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Advanced Nonlinear Regression</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

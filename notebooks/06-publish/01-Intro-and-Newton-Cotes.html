@@ -1,0 +1,1903 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Introduction and Newton-Cotes &#8212; Data and Computing for Chemical Engieers</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Gauss Quadrature" href="02-Gauss-Quadrature.html" />
+    <link rel="prev" title="Numeric Integration" href="../06/integration.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/cbe_logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Data and Computing for Chemical Engieers</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../intro.html">
+   Welcome to (Advanced) Data and Computing for Engineers
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../01/00-Python-Primer.html">
+   Python Primer
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/01-Jupyter-Notebooks.html">
+     Welcome to Jupyter Notebooks and Vocareum
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/02-Python-Basics-I-Variables-Strings-Bugs.html">
+     Python Basics I: Variables, Strings, and Bugs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/03-Flow-control.html">
+     Python Basics II: Loopy Logic
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/03b-Pseudocode.html">
+     Pseudocode
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/04-Functions-and-Scope.html">
+     Functions and Scope
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/04b-Recursion.html">
+     Recursion
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/04c-Modules-and-Files.html">
+     Functions, Scoping, and Other Fun Stuff
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/04d-Example-High-Low-Game.html">
+     High/Low Guess My Number Game
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/05-Python-Basics-III-Lists-Dictionaries-Enumeration.html">
+     Python Basics III: Lists, Dictionaries, and Enumeration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/06-NumPy.html">
+     Linear Algebra with Numpy and Scipy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/07-Matplotlib.html">
+     Visualization with matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/08-Pandas.html">
+     Manipulating Data with Pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/09-Functions-as-Arguments.html">
+     Functions as Arguments
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/10-Testing-and-Debugging.html">
+     Testing and Debugging in Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../02/linear_algebra.html">
+   Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02-publish/01-Modeling-Systems-of-Linear-Equations.html">
+     Modeling Systems of Linear Equations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02-publish/02-Gauss-Elimination.html">
+     Gaussian Elimination
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02-publish/03-LU-Factorization.html">
+     LU Decomposition and Condition Number
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02-publish/04-Example-Atomic-Mass-Balances.html">
+     Example: Mass Balances and Linear Algebra
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../03/algorithms.html">
+   Algorithm Building Blocks
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03-publish/01-Taylor-Series.html">
+     Taylor Series Approximations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03-publish/02-Finite-Difference.html">
+     Finite Difference Derivative Approximations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03-publish/03-Example-Heating-a-Metal-Slab.html">
+     Example: Heating a Metal Slab
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../04/nonlinear_systems.html">
+   Nonlinear Systems of Equations
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/01-Modeling-Systems-of-Nonlinear-Equations.html">
+     Modeling Systems of Nonlinear Equations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/02-Newton-Method-Nonlinear-Equation-Solving.html">
+     Solving Systems of Nonlinear Equations with Newton’s Method
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/03-More-Newton-Type-Methods.html">
+     More Newton-Type Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/04-Convergence-Analysis-Newton-Method.html">
+     Convergence Analysis for Newton’s Method
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/05-System-of-Equations-Newton-Method.html">
+     Newton’s Method for Systems of Equations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../05/optimization.html">
+   Continuous Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05-publish/01-Pyomo-Basics.html">
+     Pyomo Basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05-publish/02-Electricity-Market-Optimization.html">
+     Electricity Market Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05-publish/03-Flash-Calculations-in-Pyomo.html">
+     Flash Calculations in Pyomo
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../06/integration.html">
+   Numeric Integration
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Introduction and Newton-Cotes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02-Gauss-Quadrature.html">
+     Gauss Quadrature
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03-Adaptive-Methods-and-Scipy.html">
+     Adaptive Methods for Newton-Cotes and Gauss Quadrature, Scipy Library
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04-Application-Inertial-Navigation-Systems.html">
+     Application: Inertial Navigation Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="05-Forward-and-Backward-Euler.html">
+     Forward and Backward Euler Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="06-Trapezoid-Rule.html">
+     Crank-Nicolson (Trapezoid Rule)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="07-Stability-Analysis.html">
+     Stability Analysis of Forward/Backward Euler and Crank-Nicolson Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="08-Explicit-Runge-Kutta.html">
+     Explicit Range Kutta Method
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="09-Systems-of-Differential-Equations-and-Scipy.html">
+     Systems of Differential Equations and Scipy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="10-Example-Reaction-Rates.html">
+     Example: Reaction Rates
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../07/stats.html">
+   Descriptive Statistics and Visualization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07-publish/01-Sampling.html">
+     Sampling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07-publish/02-Summary-Statistics.html">
+     Summary Statistics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07-publish/03-Visualizing-Data.html">
+     Visualizing Data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../08/probability.html">
+   Probability Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../08-publish/01-Random-Variables.html">
+     Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../08-publish/02-Jointly-Distributed-Random-Variables.html">
+     Jointly Distributed Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../08-publish/03-Practice-Problems.html">
+     Practice Problems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../09/distributions.html">
+   Common Probability Distributions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../09-publish/03-Poisson-Probability-Distribution.html">
+     Poisson Probability Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../09-publish/04-Normal-Probability-Distribution.html">
+     Normal Probability Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../09-publish/05-Common-Probability-Distributions-Summary.html">
+     Common Probability Distributions Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../10/uncertainty.html">
+   Uncertainty and Error Propagation
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../11/inference.html">
+   Statistical Inference
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/01-Central-Limit-Theorem.html">
+     Central Limit Theorem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/02-Standard-Normal-Distribution.html">
+     Standard Normal Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/03-Confidence-Intervals.html">
+     Confidence Intervals
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/04-Students-t-Distribution.html">
+     Student’s t-Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/05-First-Hypothesis-Testing.html">
+     First Hypothesis Testing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/06-Hypothesis-Testing-Review-and-Type-I-Type-II-Errors.html">
+     Hypothesis Testing Review and Type I/Type II Errors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/07-Flavors-of-Hypothesis-Testing.html">
+     Flavors of Hypothesis Testing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/08-Statistical-Power-Basics.html">
+     Statistical Power Basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/09-Statistical-Power-in-Python.html">
+     Statistical Power in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/10-Statistical-Power-Practice-Problems.html">
+     Statistical Power Practice Problems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../12/regression.html">
+   Regression
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12-publish/02-Uncertainty-Analysis-and-Statistical-Inference.html">
+     Uncertainty Analysis and Statistical Inference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12-publish/03-Linear-Regression-Practice-Problems.html">
+     Linear Regression Practice Problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12-publish/04-Multivariate-Linear-Regression.html">
+     Multivariate Linear Regression
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../13/advanced_regression.html">
+   Advanced Nonlinear Regression
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/01-Transformations-and-Linear-Regression.html">
+     Transformations and Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/02-Nonlinear-Regression.html">
+     Nonlinear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/03-Nonlinear-Regression-Practice-Problem.html">
+     Nonlinear Regression Practice Problem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/04-Weighted-Regression.html">
+     Weighted Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/05-Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression.html">
+     Monte Carlo Uncertainty Analysis for Nonlinear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/06-Bootstrap-Confidence-Intervals.html">
+     Bootstrap Confidence Intervals
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/07-Nonlinear-Case-Study-Adsorptive-Membranes.html">
+     Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../14/design_of_experiments.html">
+   Design of Experiments
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/06-publish/01-Intro-and-Newton-Cotes.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/ndcbe/data-and-computing"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/06-publish/01-Intro-and-Newton-Cotes.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/06-publish/01-Intro-and-Newton-Cotes.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/06-publish/01-Intro-and-Newton-Cotes.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-objectives">
+   Learning Objectives
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivating-example-and-main-idea">
+   Motivating Example and Main Idea
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-integrate-normal-distribution">
+     Example: Integrate Normal Distribution
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-let-s-revisit-that-unbounded-assumption">
+     Example: Let’s Revisit that Unbounded Assumption
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#main-idea">
+     Main Idea
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#newton-cotes-formulas">
+   Newton-Cotes Formulas
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#midpoint-rule">
+     1) Midpoint Rule
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#trapezoid-rule">
+     2) Trapezoid Rule
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#main-idea-and-graphical-example">
+       Main Idea and Graphical Example
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#trapezoid-rule-with-multiple-pieces">
+       Trapezoid Rule with Multiple Pieces
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#general-purpose-function-and-test-case">
+       General Purpose Function and Test Case
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#error-analysis">
+       Error Analysis
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simpson-s-rule">
+     Simpson’s Rule
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#quadratic-interpolation">
+       Quadratic Interpolation
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id1">
+       General Purpose Function and Test Case
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id2">
+       Error Analysis
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#another-example-approximating-pi">
+       Another Example: Approximating
+       <span class="math notranslate nohighlight">
+        \(\pi\)
+       </span>
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Introduction and Newton-Cotes</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-objectives">
+   Learning Objectives
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivating-example-and-main-idea">
+   Motivating Example and Main Idea
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-integrate-normal-distribution">
+     Example: Integrate Normal Distribution
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-let-s-revisit-that-unbounded-assumption">
+     Example: Let’s Revisit that Unbounded Assumption
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#main-idea">
+     Main Idea
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#newton-cotes-formulas">
+   Newton-Cotes Formulas
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#midpoint-rule">
+     1) Midpoint Rule
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#trapezoid-rule">
+     2) Trapezoid Rule
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#main-idea-and-graphical-example">
+       Main Idea and Graphical Example
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#trapezoid-rule-with-multiple-pieces">
+       Trapezoid Rule with Multiple Pieces
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#general-purpose-function-and-test-case">
+       General Purpose Function and Test Case
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#error-analysis">
+       Error Analysis
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simpson-s-rule">
+     Simpson’s Rule
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#quadratic-interpolation">
+       Quadratic Interpolation
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id1">
+       General Purpose Function and Test Case
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id2">
+       Error Analysis
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#another-example-approximating-pi">
+       Another Example: Approximating
+       <span class="math notranslate nohighlight">
+        \(\pi\)
+       </span>
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="introduction-and-newton-cotes">
+<h1>Introduction and Newton-Cotes<a class="headerlink" href="#introduction-and-newton-cotes" title="Permalink to this headline">¶</a></h1>
+<p>CBE 20258. Numerical and Statistical Analysis. Spring 2020.</p>
+<p>© University of Notre Dame</p>
+<p><strong>Reference</strong>: Chapters 15 and 16 in McClarren (2018). There are two copies in reserve at the library.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load libraries</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">integrate</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib.patches</span> <span class="kn">import</span> <span class="n">Polygon</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">¶</a></h2>
+<p>After studying this notebook, completing the activities, and asking questions in class, you should be able to:</p>
+<ul class="simple">
+<li><p>Draw a sketch to illustrate the main idea behind midpoint, trapezoid and Simpson rules, or identify the rule name from a sketch</p></li>
+<li><p>Derive the error order for midpoint and trapezoid rules from a Taylor series expansion</p></li>
+<li><p>Approximate a definite integral using Newton-Cotes formulas or quadrature rules in Python</p></li>
+</ul>
+</div>
+<div class="section" id="motivating-example-and-main-idea">
+<h2>Motivating Example and Main Idea<a class="headerlink" href="#motivating-example-and-main-idea" title="Permalink to this headline">¶</a></h2>
+<p>Often in engineering, we want or must numerically approximate definite integrals.</p>
+<div class="section" id="example-integrate-normal-distribution">
+<h3>Example: Integrate Normal Distribution<a class="headerlink" href="#example-integrate-normal-distribution" title="Permalink to this headline">¶</a></h3>
+<p>In a few weeks, we will learn how to model random phenomena with probability distributions. Often, standardized test scores follow a normal distribution, a.k.a.,  Gaussian distribution or bell curve.</p>
+<p><img alt="sat" src="../../_images/sat.jpg" /></p>
+<p>These data (which I found online and did not verify… we are just using this as an example) suggest the average SAT score was 1500 with a standard deviation of 250 points. Briefly, mean is the average and standard deviation measures spread. We will mathematically define these quantities in a few class sessions.</p>
+<p>Imagine we randomly select a student that took the SAT. What is the probability they received a score of <span class="math notranslate nohighlight">\(a = 1800\)</span> points? By assuming the SAT scores are normally distributed, we can express this probability as follows:</p>
+<div class="math notranslate nohighlight">
+\[P(X = a) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{- \frac{(x-\mu)^2}{2 \sigma^2}}\]</div>
+<p>This is known as the <strong>probability density function</strong> (PDF). <span class="math notranslate nohighlight">\(\mu\)</span> is the mean and <span class="math notranslate nohighlight">\(\sigma\)</span> is the standard deviation. For our SAT data, <span class="math notranslate nohighlight">\(\mu = 1500\)</span> and <span class="math notranslate nohighlight">\(\sigma = 250\)</span>. <span class="math notranslate nohighlight">\(X\)</span> is the outcome of the random experiment, which, for this example, is the SAT score of a randomly selected person. <span class="math notranslate nohighlight">\(X\)</span> is capital because it is a random variable. We will formally study all of this in a few notebooks. I am sharing now just to help build comfort.</p>
+<p>For convenience, I will use <span class="math notranslate nohighlight">\(p(x)\)</span> as shorthand for the PDF:</p>
+<div class="math notranslate nohighlight">
+\[
+p(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{- \frac{(x-\mu)^2}{2 \sigma^2}}
+\]</div>
+<p>Below is a Python function to evaluate the probability density function. Notice I created a lambda function <code class="docutils literal notranslate"><span class="pre">my_p</span></code> with the mean and standard deviation for the SAT example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">normal_pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">mean</span><span class="p">,</span><span class="n">stdev</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Probability density function (PDF) for normal distribution</span>
+<span class="sd">    Arg:</span>
+<span class="sd">        x: outcome value</span>
+<span class="sd">        mean: mean</span>
+<span class="sd">        stdev: standard deviation</span>
+<span class="sd">    </span>
+<span class="sd">    Return: probability    </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="k">assert</span> <span class="n">stdev</span> <span class="o">&gt;</span> <span class="mf">0.0</span>
+    
+    <span class="n">var</span> <span class="o">=</span> <span class="n">stdev</span><span class="o">**</span><span class="mi">2</span>
+    
+    <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">var</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">var</span><span class="p">)</span>
+
+<span class="c1"># Integrate numerically. We&#39;ll learn the details of how this works later in the class.</span>
+
+<span class="n">my_p</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">normal_pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="mi">1500</span><span class="p">,</span> <span class="n">stdev</span><span class="o">=</span><span class="mi">250</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s calculate the probability a randomly selected test taker scored 1800. We just need to evaluate <span class="math notranslate nohighlight">\(p(1800)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_p</span><span class="p">(</span><span class="mi">1800</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0007767442199328519
+</pre></div>
+</div>
+</div>
+</div>
+<p>0.07% is a very small number! Often, we really want to ask <em>what is the probability a random test taker scored <span class="math notranslate nohighlight">\(a\)</span> or less?</em> We can write this as a <strong>definite integral</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+P(X \leq a) = \int_{-\infty}^{a} p(x) dx =  \int_{-\infty}^{a} \frac{1}{\sqrt{2 \pi \sigma^2}} e^{- \frac{(x-\mu)^2}{2 \sigma^2}} dx
+\]</div>
+<p>We are integrating the probability density function <span class="math notranslate nohighlight">\(p(x)\)</span> from the lowest possible value, <span class="math notranslate nohighlight">\(-\infty\)</span>, to <span class="math notranslate nohighlight">\(a\)</span>. <em>Wait, how do you get a negative SAT score?!?!</em> This is a great practical point. We’ll learn in a few weeks that the normal distribution allows for random variable outcomes between <span class="math notranslate nohighlight">\(-\infty\)</span> and <span class="math notranslate nohighlight">\(\infty\)</span>. But because the probability of really extreme scores is so low, we can still use the normal distribution for many problems, such as the SAT, with valid outcomes over only a finite range, e.g., 0 to 2400.</p>
+<p>You decided to trust me on this point, although you are still a little skeptical. So, just substitute <span class="math notranslate nohighlight">\(a=1800\)</span>, <span class="math notranslate nohighlight">\(\mu = 1500\)</span> and <span class="math notranslate nohighlight">\(\sigma = 250\)</span> and integrate? The integral looks really hard. I hope it is not on the next exam!</p>
+<p>The integral above actually does not have an analytic solution except for some special cases. (You can show analytically that integrating from <span class="math notranslate nohighlight">\(-\infty\)</span> and <span class="math notranslate nohighlight">\(\infty\)</span> gives 1.) We need to integrate numerically, making it a great motivating example for the next few notebooks on <strong>numeric integration</strong>.</p>
+<p>We first replaced the <span class="math notranslate nohighlight">\(-\infty\)</span> with <span class="math notranslate nohighlight">\(-10000\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+P(X \leq a) \approx \int_{-10000}^{a} \frac{1}{\sqrt{2 \pi \sigma^2}} e^{- \frac{(x-\mu)^2}{2 \sigma^2}} dx
+\]</div>
+<p>and then integrated numerically using <code class="docutils literal notranslate"><span class="pre">scipy.integrate.quad</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">value</span><span class="p">,</span> <span class="n">tol</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">my_p</span><span class="p">,</span><span class="o">-</span><span class="mi">10000</span><span class="p">,</span><span class="mi">1800</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Integral value = &quot;</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Integration tolerance (approximate error) = &quot;</span><span class="p">,</span><span class="n">tol</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Integral value =  0.8849303297782916
+Integration tolerance (approximate error) =  6.5792911954510715e-12
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see that if we randomly selected an SAT test taker, there is a 88.5% probably they scored 1800 or less. Alternately, if someone scores 1800, we say they are in the 88th percentile. In the rest of this class, we will learn what <code class="docutils literal notranslate"><span class="pre">quad</span></code> and other <code class="docutils literal notranslate"><span class="pre">scipy</span></code> functions do “under the hood”.</p>
+</div>
+<div class="section" id="example-let-s-revisit-that-unbounded-assumption">
+<h3>Example: Let’s Revisit that Unbounded Assumption<a class="headerlink" href="#example-let-s-revisit-that-unbounded-assumption" title="Permalink to this headline">¶</a></h3>
+<p>The normal distribution assumes the random variable can have outcomes between <span class="math notranslate nohighlight">\(-\infty\)</span> to <span class="math notranslate nohighlight">\(\infty\)</span>. But, for this year, valid SAT scores were between 0 and 2400. What is the error caused by approximating SAT scores with a normal distribution?</p>
+<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
+<b>Home Activity</b>: Using the normal distribution, compute the probability of a score between -10,000 and 0. Store your answer in the Python float <tt>ans_aii1</tt>.
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Integral value =  9.865965575048534e-10
+Integration tolerance =  1.874391547379387e-09
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
+<b>Home Activity</b>: Using the normal distribution, compute the probability of a score between 2400 and 10,000. Store your answer in the Python float <tt>ans_aii2</tt>.
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Integral value =  0.00015910859015752824
+Integration tolerance =  9.36189270348194e-10
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
+<b>Home Activity</b>: Write a sentence to defend or refute our choice to model SAT scores with a normal distribution.
+</div><p><strong>Home Activity Answer:</strong></p>
+</div>
+<div class="section" id="main-idea">
+<h3>Main Idea<a class="headerlink" href="#main-idea" title="Permalink to this headline">¶</a></h3>
+<p>We will approximate an integral by a sum with a finite number of terms:
+$<span class="math notranslate nohighlight">\(\int\limits_a^b f(x)\,dx \approx \sum_{l=0}^{L}w_l f(x_l).\)</span>$</p>
+<p>The function <span class="math notranslate nohighlight">\(f( )\)</span> is evaluated at locations (nodes) <span class="math notranslate nohighlight">\(x_l\)</span>. Each function evaluation is multiplied by weight <span class="math notranslate nohighlight">\(w_l\)</span> and then summed.</p>
+<p>This approach is known as a <strong>quadrature</strong> rule or simply <strong>numerical integration</strong>. We will focus on two broad families of methods: <strong>Newton-Cotes formulas</strong> and <strong>Gaussian quadrature rules</strong>.</p>
+<p><strong>Connection back to Calculus II</strong>: Writing an integral as a finite sum is analogous to the definition of an integral as a Riemann sum.  Therefore, just as in finite difference derivatives, we use finite mathematics to approximate
+the infinitesimals of calculus.</p>
+</div>
+</div>
+<div class="section" id="newton-cotes-formulas">
+<h2>Newton-Cotes Formulas<a class="headerlink" href="#newton-cotes-formulas" title="Permalink to this headline">¶</a></h2>
+<p>This is a broad family of numerical methods that follow the same general recipe:</p>
+<ol class="simple">
+<li><p>Fit a polynomial through the function evaluations.</p></li>
+<li><p>Integrate the polynomial approximation exactly.</p></li>
+</ol>
+<p>We will not discuss the general theory of Newton-Cotes formulas, but instead focus on three important methods commonly used.</p>
+<div class="section" id="midpoint-rule">
+<h3>1) Midpoint Rule<a class="headerlink" href="#midpoint-rule" title="Permalink to this headline">¶</a></h3>
+<p>In the midpoint rule, we approximate the integral by the value of the function in the middle of the range of integration times the length of the region. This simple formula is
+$<span class="math notranslate nohighlight">\(I_{midpoint} = h\, f\!\left(\frac{a+b}{2}\right) \approx \int\limits_{a}^b f(x)\,dx,\)</span><span class="math notranslate nohighlight">\(
+where \)</span>h = b-a$. We can demonstrate this with a <strong>graphical example</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = (x-3) (x-5) (x-7) + 100
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define and plot function</span>
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">7</span><span class="p">)</span><span class="o">+</span><span class="mi">110</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;f(x)&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+
+<span class="c1"># get current axes</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+
+<span class="c1">## draw polygon</span>
+<span class="c1"># define a and b</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">8</span>
+
+<span class="c1"># evaluate midpoint</span>
+<span class="n">midpoint</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span>
+<span class="n">fmid</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">midpoint</span><span class="p">)</span>
+
+<span class="c1"># estimate integral</span>
+<span class="n">Imid</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">fmid</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Integral estimate = &quot;</span><span class="p">,</span><span class="n">Imid</span><span class="p">)</span>
+
+<span class="c1"># draw rectangle</span>
+<span class="n">verts</span> <span class="o">=</span> <span class="p">[(</span><span class="n">a</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="n">a</span><span class="p">,</span><span class="n">fmid</span><span class="p">),</span> <span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">fmid</span><span class="p">),(</span><span class="n">b</span><span class="p">,</span><span class="mi">0</span><span class="p">)]</span>
+<span class="n">poly</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">(</span><span class="n">verts</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;0.8&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">((</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">((</span><span class="s1">&#39;a=&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="s1">&#39;b=&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">)))</span>
+
+<span class="c1"># add labels</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Midpoint Rule&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Integral estimate =  660.0
+</pre></div>
+</div>
+<img alt="../../_images/01-Intro-and-Newton-Cotes_25_1.png" src="../../_images/01-Intro-and-Newton-Cotes_25_1.png" />
+</div>
+</div>
+<p>The resulting approximation is not terrible, but there are clearly parts of the function where the rectangle does not match the function well. We can do better than a rectangle that approximates the function as flat.</p>
+<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
+<b>Home Activity</b>: Copy the code from above to the cell below. Then modify the copied code to integrate $g(x) = x(1-\sin(x))$ from $a=3$ to $b=7$ using the midpoint rule. Save the numeric approximation in the Python variable <tt>ans_bi</tt>. Hint: Use the function <tt>np.sin</tt>.
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Integral estimate =  39.17848549326277
+</pre></div>
+</div>
+<img alt="../../_images/01-Intro-and-Newton-Cotes_28_1.png" src="../../_images/01-Intro-and-Newton-Cotes_28_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="trapezoid-rule">
+<h3>2) Trapezoid Rule<a class="headerlink" href="#trapezoid-rule" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="main-idea-and-graphical-example">
+<h4>Main Idea and Graphical Example<a class="headerlink" href="#main-idea-and-graphical-example" title="Permalink to this headline">¶</a></h4>
+<p>Instead of approximating with a rectangle (midpoint rule), use a trapezoid:</p>
+<ol class="simple">
+<li><p>Fit a line between <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>. This is a polynomial (linear) approximation to <span class="math notranslate nohighlight">\(f(x)\)</span>.</p></li>
+<li><p>Integrate the polynomial exactly</p></li>
+</ol>
+<p>The formula for this is
+$<span class="math notranslate nohighlight">\( I_\mathrm{trap} \equiv \frac{h}{2}(f(a) + f(b)) \approx \int\limits_a^b f(x)\,dx,\)</span><span class="math notranslate nohighlight">\( where
+\)</span>h = b - a.$ Here is a graphical example on a polynomial function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define and plot function</span>
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">7</span><span class="p">)</span><span class="o">+</span><span class="mi">110</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;f(x)&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+
+<span class="c1"># get current axes</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+
+<span class="c1"># draw polygon</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">verts</span> <span class="o">=</span> <span class="p">[(</span><span class="n">a</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="n">a</span><span class="p">,</span><span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)),</span> <span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">f</span><span class="p">(</span><span class="n">b</span><span class="p">)),(</span><span class="n">b</span><span class="p">,</span><span class="mi">0</span><span class="p">)]</span>
+<span class="n">poly</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">(</span><span class="n">verts</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;0.8&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">((</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">((</span><span class="s1">&#39;a=&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="s1">&#39;b=&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">)))</span>
+
+<span class="c1"># estimate integral</span>
+<span class="n">Itrap</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Integral estimate = &quot;</span><span class="p">,</span><span class="n">Itrap</span><span class="p">)</span>
+
+<span class="c1"># add labels</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Trapezoid Rule&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Integral estimate =  660.0
+</pre></div>
+</div>
+<img alt="../../_images/01-Intro-and-Newton-Cotes_31_1.png" src="../../_images/01-Intro-and-Newton-Cotes_31_1.png" />
+</div>
+</div>
+<p>You can see in the figure that the approximation is not exact because the trapezoid does not exactly follow the function, but if <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are close enough together it should give a good approximation because any well-behaved function can be approximated linearly over a narrow enough domain.</p>
+<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
+<b>Home Activity</b>: Copy the code from above to the cell below. Then modify the copied code to integrate $g(x) = x(1-\sin(x))$ from $a=3$ to $b=7$ using the trapezoid rule. Save the numeric approximation in the Python variable <tt>ans_bii1</tt>.
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### BEGIN HIDDEN SOLUTION</span>
+<span class="c1"># define and plot function</span>
+<span class="n">g</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;g(x)&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+
+<span class="c1"># get current axes</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+
+<span class="c1"># draw polygon</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">verts</span> <span class="o">=</span> <span class="p">[(</span><span class="n">a</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="n">a</span><span class="p">,</span><span class="n">g</span><span class="p">(</span><span class="n">a</span><span class="p">)),</span> <span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">g</span><span class="p">(</span><span class="n">b</span><span class="p">)),(</span><span class="n">b</span><span class="p">,</span><span class="mi">0</span><span class="p">)]</span>
+<span class="n">poly</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">(</span><span class="n">verts</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;0.8&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">((</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">((</span><span class="s1">&#39;a=&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="s1">&#39;b=&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">)))</span>
+
+<span class="c1"># estimate integral</span>
+<span class="n">Itrap</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">g</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Integral estimate = &quot;</span><span class="p">,</span><span class="n">Itrap</span><span class="p">)</span>
+<span class="n">ans_bii1</span> <span class="o">=</span> <span class="n">Itrap</span>
+
+<span class="c1"># add labels</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;g(x)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Trapezoid Rule&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1">### END HIDDEN SOLUTION</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Integral estimate =  9.955467569577749
+</pre></div>
+</div>
+<img alt="../../_images/01-Intro-and-Newton-Cotes_34_1.png" src="../../_images/01-Intro-and-Newton-Cotes_34_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="trapezoid-rule-with-multiple-pieces">
+<h4>Trapezoid Rule with Multiple Pieces<a class="headerlink" href="#trapezoid-rule-with-multiple-pieces" title="Permalink to this headline">¶</a></h4>
+<p>That leads to a variation to the trapezoid rule (and any other rule for that matter).  We can break up the domain <span class="math notranslate nohighlight">\([a,b]\)</span> into many smaller domains and integrate each of these.  Here’s an example where we break <span class="math notranslate nohighlight">\([a,b]\)</span> into 4 pieces:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#graphical example of 4 pieces</span>
+
+<span class="c1"># define polynomial and plot</span>
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">7</span><span class="p">)</span><span class="o">+</span><span class="mi">110</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;f(x)&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="n">a</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="c1"># draw trapezoids and integrate</span>
+<span class="n">Itrap</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">xleft</span> <span class="o">=</span> <span class="n">a</span><span class="o">+</span><span class="n">i</span><span class="o">*</span><span class="n">h</span><span class="o">/</span><span class="n">N</span>
+    <span class="n">fleft</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">xleft</span><span class="p">)</span>
+    <span class="n">xright</span> <span class="o">=</span> <span class="n">a</span><span class="o">+</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">h</span><span class="o">/</span><span class="n">N</span>
+    <span class="n">fright</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">xright</span><span class="p">)</span>
+    
+    <span class="n">Itrap</span> <span class="o">+=</span> <span class="p">(</span><span class="n">h</span><span class="o">/</span><span class="n">N</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">fleft</span> <span class="o">+</span> <span class="n">fright</span><span class="p">)</span>
+    
+    <span class="n">verts</span> <span class="o">=</span> <span class="p">[(</span><span class="n">xleft</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="n">xleft</span><span class="p">,</span><span class="n">fleft</span><span class="p">),</span> <span class="p">(</span><span class="n">xright</span><span class="p">,</span><span class="n">fright</span><span class="p">),(</span><span class="n">xright</span><span class="p">,</span><span class="mi">0</span><span class="p">)]</span>
+    <span class="n">poly</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">(</span><span class="n">verts</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;0.8&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
+    
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">((</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">((</span><span class="s1">&#39;a=&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="s1">&#39;b=&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">)))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Trapezoid Rule with &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot; pieces&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Integral estimate with&quot;</span><span class="p">,</span><span class="n">N</span><span class="p">,</span><span class="s2">&quot;pieces = &quot;</span><span class="p">,</span><span class="n">Itrap</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/01-Intro-and-Newton-Cotes_37_0.png" src="../../_images/01-Intro-and-Newton-Cotes_37_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Integral estimate with 4 pieces =  660.0
+</pre></div>
+</div>
+</div>
+</div>
+<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> <b>Home Activity</b>: Copy the code from above to the cell below. Then modify the copied code to integrate $g(x) = x(1-\sin(x))$ from $a=3$ to $b=7$ using the trapezoid rule with $N$ pieces. Per WolframaAlpha, the answer is 27.7314266795455... Determine the minimum number of pieces needed such that approximation, when rounded, matches the exact answer to one decimal place. Store your answer as an integer in <tt>ans_bii2</tt>.
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/01-Intro-and-Newton-Cotes_39_0.png" src="../../_images/01-Intro-and-Newton-Cotes_39_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Integral estimate with 12 pieces =  27.650117867008063
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="general-purpose-function-and-test-case">
+<h4>General Purpose Function and Test Case<a class="headerlink" href="#general-purpose-function-and-test-case" title="Permalink to this headline">¶</a></h4>
+<p>We can write a trapezoid rule function that will take in a function, <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(b\)</span>, and the number of pieces and perform this integration. Also, because the right side of each piece is the left side of the next piece, if we’re clever we can only evaluate the function once <span class="math notranslate nohighlight">\(N+1\)</span> times where <span class="math notranslate nohighlight">\(N\)</span> is the number of pieces.</p>
+<p>The following function implements the trapezoid rule, and will produce a graph of the approximation when the parameter <tt>graph</tt> is set to true.</p>
+<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
+<b>Home Activity</b>: Study the code below. Write at least two questions to ask your neighbor during class.
+</div><p>Question 1:</p>
+<p>Question 2:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">trapezoid</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">pieces</span><span class="p">,</span> <span class="n">graph</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Find the integral of the function f between a and b using pieces trapezoids</span>
+<span class="sd">    Args:</span>
+<span class="sd">        f: function to integrate</span>
+<span class="sd">        a: lower bound of integral</span>
+<span class="sd">        b: upper bound of integral</span>
+<span class="sd">        pieces: number of pieces to chop [a,b] into</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        estimate of integral</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># set integral sum to zero</span>
+    <span class="n">integral</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="c1"># calculate total width</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="n">a</span>
+    
+    <span class="c1"># plot true function</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">graph</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;f(x)&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+    
+    <span class="c1"># initialize the left function evaluation</span>
+    <span class="n">fa</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">pieces</span><span class="p">):</span>
+        <span class="c1"># evaluate the function at the right end of the current piece</span>
+        <span class="n">fb</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">h</span><span class="o">/</span><span class="n">pieces</span><span class="p">)</span>
+        
+        <span class="c1"># add to integral</span>
+        <span class="n">integral</span> <span class="o">+=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">h</span><span class="o">/</span><span class="n">pieces</span><span class="o">*</span><span class="p">(</span><span class="n">fa</span> <span class="o">+</span> <span class="n">fb</span><span class="p">)</span>
+        
+        <span class="c1"># plot the current piece</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">graph</span><span class="p">):</span>
+            <span class="n">verts</span> <span class="o">=</span> <span class="p">[(</span><span class="n">a</span><span class="o">+</span><span class="n">i</span><span class="o">*</span><span class="n">h</span><span class="o">/</span><span class="n">pieces</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="n">a</span><span class="o">+</span><span class="n">i</span><span class="o">*</span><span class="n">h</span><span class="o">/</span><span class="n">pieces</span><span class="p">,</span><span class="n">fa</span><span class="p">),</span> <span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">h</span><span class="o">/</span><span class="n">pieces</span><span class="p">,</span><span class="n">fb</span><span class="p">),(</span><span class="n">a</span><span class="o">+</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">h</span><span class="o">/</span><span class="n">pieces</span><span class="p">,</span><span class="mi">0</span><span class="p">)]</span>
+            <span class="n">poly</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">(</span><span class="n">verts</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;0.9&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
+            
+        <span class="c1"># now make the left function evaluation the right for the next step</span>
+        <span class="n">fa</span> <span class="o">=</span> <span class="n">fb</span>
+    
+    <span class="c1"># label plot</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">graph</span><span class="p">):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">((</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">))</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">((</span><span class="s1">&#39;a=&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="s1">&#39;b=&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">)))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">pieces</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Trapezoid Rule with &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">pieces</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; pieces&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Trapezoid Rule with &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">pieces</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; piece&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">integral</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
+<b>Home Activity</b>: Run the code below.<p>Let’s test this method on a function that we know the integral of $<span class="math notranslate nohighlight">\(\int\limits_0^\pi \sin x\,dx = 2.\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">integral_estimate</span> <span class="o">=</span> <span class="n">trapezoid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="n">pieces</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">graph</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Estimate is&quot;</span><span class="p">,</span><span class="n">integral_estimate</span><span class="p">,</span><span class="s2">&quot;while the actual value is 2&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/01-Intro-and-Newton-Cotes_47_0.png" src="../../_images/01-Intro-and-Newton-Cotes_47_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimate is 1.8961188979370398 while the actual value is 2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">integral_estimate</span> <span class="o">=</span> <span class="n">trapezoid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="n">pieces</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">graph</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Estimate is&quot;</span><span class="p">,</span><span class="n">integral_estimate</span><span class="p">,</span><span class="s2">&quot;while the actual value is 2&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/01-Intro-and-Newton-Cotes_48_0.png" src="../../_images/01-Intro-and-Newton-Cotes_48_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimate is 1.999341983076262 while the actual value is 2
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="error-analysis">
+<h4>Error Analysis<a class="headerlink" href="#error-analysis" title="Permalink to this headline">¶</a></h4>
+<p>How does the error change as we increase the number pieces (i.e., decrease the step size <span class="math notranslate nohighlight">\(h\)</span>)?</p>
+<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
+<b>Home Activity</b>: Run the code below.<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pieces</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pieces</span><span class="p">:</span>
+    <span class="n">error</span><span class="p">[</span><span class="n">count</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fabs</span><span class="p">(</span><span class="n">trapezoid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="n">pieces</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="n">graph</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-</span> <span class="mf">2.0</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="n">pieces</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="n">error</span><span class="p">,</span><span class="s1">&#39;o-&#39;</span><span class="p">)</span>
+<span class="n">slope</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">error</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">error</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Trapezoid Rule Error: slope = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">slope</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;h&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Absolute Error&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/01-Intro-and-Newton-Cotes_51_0.png" src="../../_images/01-Intro-and-Newton-Cotes_51_0.png" />
+</div>
+</div>
+<p>Similar to what we did for finite difference derivatives, we can plot the error versus number of pieces on a log-log scale. The error in the trapezoid rule that we observe is second-order in <span class="math notranslate nohighlight">\(h\)</span>, because the slope of the error on the log-log scale is 2.</p>
+<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
+<b>Class Activity</b>: Go through the derivation below on the chalkboard.
+</div><p><strong>We will now use a Taylor series to show why the slope is 2.</strong></p>
+<p>We can see that this is the expected error in the estimate by looking at the linear approximation to a function around <span class="math notranslate nohighlight">\(x = a\)</span>:
+$<span class="math notranslate nohighlight">\(f(x) = f(a) + (x-a) f'(a) + \frac{(x-a)^2}{2} f''(a) + O((x-a)^3).\)</span><span class="math notranslate nohighlight">\(
+We can approximate the derivative using a forward difference:
+\)</span><span class="math notranslate nohighlight">\(f'(a) \approx \frac{f(b) - f(a)}{h} + O(h),\)</span><span class="math notranslate nohighlight">\(
+where \)</span>h = b-a<span class="math notranslate nohighlight">\(. Now the integral of \)</span>f(x)<span class="math notranslate nohighlight">\( from \)</span>a<span class="math notranslate nohighlight">\( to \)</span>b<span class="math notranslate nohighlight">\( becomes
+\)</span><span class="math notranslate nohighlight">\(\int \limits_a^b f(x)\,dx = h f(a) + \int\limits_a^b (x-a) f'(a)\,dx +\int\limits_a^b \frac{(x-a)^2}{2} f''(a)\,dx + O(h^4).\)</span><span class="math notranslate nohighlight">\(
+The integral \)</span><span class="math notranslate nohighlight">\(\int\limits_a^b (x-a) f'(a) dx = \frac{(b-a)^2}{2}f'(a) = \frac{h^2}{2}\left(\frac{f(b) - f(a)}{h} + O(h)\right)
+= \frac{h}{2}\left(f(b)-f(a)\right) + O(h^3).\)</span><span class="math notranslate nohighlight">\(
+Additionally,
+\)</span><span class="math notranslate nohighlight">\(\int\limits_a^b \frac{(x-a)^2}{2} f''(a)\,dx = -\frac{h^3}{6} f''(a) = O(h^3).\)</span><span class="math notranslate nohighlight">\(
+When we plug this into the original integral we get
+\)</span><span class="math notranslate nohighlight">\(\int \limits_a^b f(x)\,dx = \frac{h}{2} (f(a) + f(b)) + O(h^3).\)</span><span class="math notranslate nohighlight">\(
+This says that error in one piece of the trapezoid rule is third-order accurate, which means the error can be written as \)</span>C h^3 + O(h^4)<span class="math notranslate nohighlight">\(.  However, when we break the interval into \)</span>N<span class="math notranslate nohighlight">\( pieces, each of size \)</span>h = (b-a)/N<span class="math notranslate nohighlight">\(, the error terms add and each piece has its own constant so that
+\)</span><span class="math notranslate nohighlight">\(\sum_{i=1}^N C_i h^3 \leq N h^3 C_\mathrm{max} = (b-a)C_\mathrm{max} h^2,\)</span><span class="math notranslate nohighlight">\(
+where \)</span>C_\mathrm{max}<span class="math notranslate nohighlight">\( is the maximum value of \)</span>|C_i|<span class="math notranslate nohighlight">\(.  Therefore, the error in the sum of trapezoid rules decreases as \)</span>h^2<span class="math notranslate nohighlight">\(, which we observed above.  This analysis can be extended to show that the error terms in the trapezoid rule only have even powers of \)</span>h<span class="math notranslate nohighlight">\(: \)</span><span class="math notranslate nohighlight">\(\mathrm{Error} = C_2 h^2 + C_4 h^4 + \dots\)</span>$</p>
+</div>
+</div>
+<div class="section" id="simpson-s-rule">
+<h3>Simpson’s Rule<a class="headerlink" href="#simpson-s-rule" title="Permalink to this headline">¶</a></h3>
+<p>We will now take the idea of the trapezoid rule a step further by <strong>fitting a parabola</strong> between three points: <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(b\)</span>, and <span class="math notranslate nohighlight">\((a+b)/2\)</span>.  The formula for this is
+$<span class="math notranslate nohighlight">\( I_\mathrm{Simpson} \equiv \frac{h}{6}\left(f(a) + 4 f\left(a + \frac{h}{2}\right) + f(b)\right) \approx \int\limits_a^b f(x)\,dx,\)</span><span class="math notranslate nohighlight">\( where
+\)</span>h = b - a.$</p>
+<p>Footnote: This is sometimes called Simpsions 1/3 rule.</p>
+<div class="section" id="quadratic-interpolation">
+<h4>Quadratic Interpolation<a class="headerlink" href="#quadratic-interpolation" title="Permalink to this headline">¶</a></h4>
+<p>Before examining Simpson’s rule, we need to quickly discuss quadratic interpolation. Let’s say I have evaluated the function <span class="math notranslate nohighlight">\(g(x)\)</span> at three points: <span class="math notranslate nohighlight">\(a_1\)</span>, <span class="math notranslate nohighlight">\(a_2\)</span> and <span class="math notranslate nohighlight">\(a_3\)</span>. I now want to approximate <span class="math notranslate nohighlight">\(g(x)\)</span> and any point <span class="math notranslate nohighlight">\(x\)</span> using <strong>quadratic interpolation</strong>.</p>
+<div class="math notranslate nohighlight">
+\[
+g(x) \approx \frac{(x-a_2)(x-a_3)}{(a_1 - a_2)(a_1 - a_3)} g(a_1) + \frac{(x-a_1)(x-a_3)}{(a_2 - a_1)(a_2 - a_3)} g(a_2) + \frac{(x-a_1)(x-a_2)}{(a_3 - a_1)(a_3 - a_2)} g(a_3)
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">quadratic_interp</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compute at quadratic interpolant</span>
+<span class="sd">    Args:</span>
+<span class="sd">        a: array of the 3 points</span>
+<span class="sd">        f: array of the value of f(a) at the 3 points</span>
+<span class="sd">        x: point to interpolate at</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        The value of the linear interpolant at x</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">*</span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> 
+    <span class="n">answer</span> <span class="o">+=</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">*</span><span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> 
+    <span class="n">answer</span> <span class="o">+=</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="n">f</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> 
+    <span class="k">return</span> <span class="n">answer</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s return to the example <span class="math notranslate nohighlight">\(f(x) = (x-3)(x-5)(x-7)+110\)</span> to test our function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">7</span><span class="p">)</span><span class="o">+</span><span class="mi">110</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s test our quadratic interpolation formula. We’ll choose <span class="math notranslate nohighlight">\(x=0\)</span>, <span class="math notranslate nohighlight">\(x=1\)</span>, and <span class="math notranslate nohighlight">\(x=2\)</span> as the three node locations. We’ll start by evaluating our function <span class="math notranslate nohighlight">\(f(x)\)</span> at these three points.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])</span>
+<span class="n">f_nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">))</span>
+
+<span class="c1"># loop over elements of x_node</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">)):</span>
+    <span class="c1"># evaluate f() and store answer in f_nodes</span>
+    <span class="n">f_nodes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="c1"># print to screen</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;f(&quot;</span><span class="p">,</span><span class="n">x_nodes</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="s2">&quot;) =&quot;</span><span class="p">,</span><span class="n">f_nodes</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>f( 0.0 ) = 5.0
+f( 1.0 ) = 62.0
+f( 2.0 ) = 95.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s evaluate our interpolation function <span class="math notranslate nohighlight">\(g(x)\)</span> at these three points:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">quadratic_interp</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">,</span> <span class="n">f_nodes</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21.5
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x_nodes</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;g(&quot;</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;) =&quot;</span><span class="p">,</span><span class="n">quadratic_interp</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">,</span> <span class="n">f_nodes</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>g( 0.0 ) = 5.0
+g( 1.0 ) = 62.0
+g( 2.0 ) = 95.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see the quadratice interpolation <span class="math notranslate nohighlight">\(g(x)\)</span> is exact at the three nodes. Please verify this makes sense based on the formula for <span class="math notranslate nohighlight">\(g(x)\)</span>.</p>
+<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
+<b>Home Activity</b>: Evaluate the original function $f(x)$ and the quadratic interpolation approximation $g(x)$ at $x=0.25$. Record your answer in <tt>f_b_iii</tt> and <tt>g_b_iii</tt>. Use the same nodes as the example, i.e., do not modify <tt>x_nodes</tt> and <tt>f_nodes</tt>.
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>f( 0.25 ) = 21.828125
+g( 0.25 ) = 21.5
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You should see the quadratic interpolant is a good approximation, but not perfect.</p>
+<p>The code below graphically explores <span class="math notranslate nohighlight">\(g(x)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot true function in blue</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;f(x)&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+
+<span class="c1"># assemble nodes of three points, plot as circles</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">),</span><span class="n">b</span><span class="p">]</span>
+<span class="n">fnodes</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">a</span><span class="p">,</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">),</span><span class="n">b</span><span class="p">]))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">fnodes</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+
+<span class="c1"># plot polygon to visualize quadratic interpolation</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="n">iy</span> <span class="o">=</span> <span class="n">quadratic_interp</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span><span class="n">fnodes</span><span class="p">,</span><span class="n">ix</span><span class="p">)</span>
+<span class="n">verts</span> <span class="o">=</span> <span class="p">[(</span><span class="n">a</span><span class="p">,</span><span class="mi">0</span><span class="p">)]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">ix</span><span class="p">,</span><span class="n">iy</span><span class="p">))</span> <span class="o">+</span> <span class="p">[(</span><span class="n">b</span><span class="p">,</span><span class="mi">0</span><span class="p">)]</span>
+<span class="n">poly</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Polygon</span><span class="p">(</span><span class="n">verts</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;0.9&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
+
+<span class="c1"># label axes</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">((</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">((</span><span class="s1">&#39;a=&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="s1">&#39;b=&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">)))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Simpson&#39;s Rule&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/01-Intro-and-Newton-Cotes_71_0.png" src="../../_images/01-Intro-and-Newton-Cotes_71_0.png" />
+</div>
+</div>
+<p>We can see the quadratic function fits <span class="math notranslate nohighlight">\(f(x)\)</span> really well. This is not that surprising, as <span class="math notranslate nohighlight">\(f(x)\)</span> is a cubic.</p>
+<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
+<b>Home Activity</b>: Copy the code above to below. Adapt the copied code to explore $g(x) = x (1-\sin(x))$. Write a sentence to discuss the results.
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/01-Intro-and-Newton-Cotes_74_0.png" src="../../_images/01-Intro-and-Newton-Cotes_74_0.png" />
+</div>
+</div>
+<p><strong>Home Activity Discussion:</strong></p>
+</div>
+<div class="section" id="id1">
+<h4>General Purpose Function and Test Case<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
+<b>Home Activity</b>: Study the code below. Write at least two questions to ask your neighbor during class.
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simpsons</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">pieces</span><span class="p">,</span> <span class="n">graph</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Find the integral of the function f between a and b using Simpson&#39;s rule</span>
+<span class="sd">    Args:</span>
+<span class="sd">        f: function to integrate</span>
+<span class="sd">        a: lower bound of integral</span>
+<span class="sd">        b: upper bound of integral</span>
+<span class="sd">        pieces: number of pieces to chop [a,b] into</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        estimate of integral</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># set integral counter to 0</span>
+    <span class="n">integral</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="c1"># calculate total witdth</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="n">a</span>
+    
+    <span class="c1"># compute and save 1/6</span>
+    <span class="n">one_sixth</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="mf">6.0</span>
+    
+    <span class="c1"># plot function</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">graph</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;f(x)&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+    
+    <span class="c1">#initialize the left function evaluation</span>
+    <span class="n">fa</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">pieces</span><span class="p">):</span>
+        <span class="c1"># evaluate the function at the right end of the piece</span>
+        <span class="n">fb</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">h</span><span class="o">/</span><span class="n">pieces</span><span class="p">)</span>
+        <span class="n">fmid</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span><span class="o">*</span><span class="n">h</span><span class="o">/</span><span class="n">pieces</span><span class="p">)</span>
+        <span class="n">integral</span> <span class="o">+=</span> <span class="n">one_sixth</span><span class="o">*</span><span class="n">h</span><span class="o">/</span><span class="n">pieces</span><span class="o">*</span><span class="p">(</span><span class="n">fa</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">fmid</span> <span class="o">+</span> <span class="n">fb</span><span class="p">)</span>
+        
+        <span class="c1"># visualize piece</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">graph</span><span class="p">):</span>
+            <span class="n">ix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">i</span><span class="o">*</span><span class="n">h</span><span class="o">/</span><span class="n">pieces</span><span class="p">,</span> <span class="n">a</span><span class="o">+</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">h</span><span class="o">/</span><span class="n">pieces</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">)</span>
+            <span class="n">iy</span> <span class="o">=</span> <span class="n">quadratic_interp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">a</span><span class="o">+</span><span class="n">i</span><span class="o">*</span><span class="n">h</span><span class="o">/</span><span class="n">pieces</span><span class="p">,</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">h</span><span class="o">/</span><span class="n">pieces</span><span class="o">+</span> <span class="n">a</span><span class="o">+</span><span class="n">i</span><span class="o">*</span><span class="n">h</span><span class="o">/</span><span class="n">pieces</span><span class="p">),</span><span class="n">a</span><span class="o">+</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">h</span><span class="o">/</span><span class="n">pieces</span><span class="p">]),</span>
+                                  <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">fa</span><span class="p">,</span><span class="n">fmid</span><span class="p">,</span><span class="n">fb</span><span class="p">]),</span><span class="n">ix</span><span class="p">)</span>
+            <span class="n">verts</span> <span class="o">=</span> <span class="p">[(</span><span class="n">a</span><span class="o">+</span><span class="n">i</span><span class="o">*</span><span class="n">h</span><span class="o">/</span><span class="n">pieces</span><span class="p">,</span><span class="mi">0</span><span class="p">)]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">ix</span><span class="p">,</span><span class="n">iy</span><span class="p">))</span> <span class="o">+</span> <span class="p">[(</span><span class="n">a</span><span class="o">+</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">h</span><span class="o">/</span><span class="n">pieces</span><span class="p">,</span><span class="mi">0</span><span class="p">)]</span>
+            <span class="n">poly</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Polygon</span><span class="p">(</span><span class="n">verts</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;0.9&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
+        
+        <span class="c1"># now make the left function evaluation the right for the next step</span>
+        <span class="n">fa</span> <span class="o">=</span> <span class="n">fb</span>
+        
+    <span class="c1"># label plot    </span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">graph</span><span class="p">):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">((</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">))</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">((</span><span class="s1">&#39;a=&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="s1">&#39;b=&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">)))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;f(x)&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Simpsons Rule with &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">pieces</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; pieces&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">integral</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
+<b>Class Activity</b>: Complete the activity on the handout.
+</div><p>We wrote a function. Now let’s test it by approximating:</p>
+<div class="math notranslate nohighlight">
+\[
+\int_{0}^{\pi} \sin(x) dx
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">integral_estimate</span> <span class="o">=</span> <span class="n">simpsons</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="n">pieces</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">graph</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Estimate is&quot;</span><span class="p">,</span><span class="n">integral_estimate</span><span class="p">,</span><span class="s2">&quot;while the actual value is 2&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/01-Intro-and-Newton-Cotes_81_0.png" src="../../_images/01-Intro-and-Newton-Cotes_81_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimate is 2.000863189673536 while the actual value is 2
+</pre></div>
+</div>
+</div>
+</div>
+<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
+<b>Home Activity</b>: Recompute the integral estimate with 50 pieces. Store the answer in <tt>ans_biii_50</tt>.
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### BEGIN SOLUTION</span>
+<span class="n">integral_estimate</span> <span class="o">=</span> <span class="n">simpsons</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="n">pieces</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">graph</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Estimate is&quot;</span><span class="p">,</span><span class="n">integral_estimate</span><span class="p">,</span><span class="s2">&quot;Actual value is 2&quot;</span><span class="p">)</span>
+<span class="n">ans_biii_50</span> <span class="o">=</span> <span class="n">integral_estimate</span>
+<span class="c1">### END SOLTUON</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/01-Intro-and-Newton-Cotes_83_0.png" src="../../_images/01-Intro-and-Newton-Cotes_83_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimate is 2.0000000108245035 Actual value is 2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h4>Error Analysis<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
+<b>Home Activity</b>: Run the code below.
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pieces</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pieces</span><span class="p">:</span>
+    <span class="n">error</span><span class="p">[</span><span class="n">count</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fabs</span><span class="p">(</span><span class="n">simpsons</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="n">pieces</span><span class="o">=</span><span class="n">p</span><span class="p">,</span><span class="n">graph</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-</span> <span class="mf">2.0</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="n">pieces</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="n">error</span><span class="p">,</span><span class="s1">&#39;o-&#39;</span><span class="p">)</span>
+<span class="n">slope</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">error</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">error</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Simpson&#39;s Rule Error: slope = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">slope</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;h&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Absolute Error&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/01-Intro-and-Newton-Cotes_87_0.png" src="../../_images/01-Intro-and-Newton-Cotes_87_0.png" />
+</div>
+</div>
+<p>Simpson’s rule is fourth-order in the piece size. This means that every time I double the number of pieces the error goes down by a factor of <span class="math notranslate nohighlight">\(2^4 = 16\)</span>.</p>
+</div>
+<div class="section" id="another-example-approximating-pi">
+<h4>Another Example: Approximating <span class="math notranslate nohighlight">\(\pi\)</span><a class="headerlink" href="#another-example-approximating-pi" title="Permalink to this headline">¶</a></h4>
+<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
+<b>Class Activity</b>: Run code below and discuss.
+</div>
+<p>We can approximate <span class="math notranslate nohighlight">\(\pi\)</span> with the following integral:</p>
+<div class="math notranslate nohighlight">
+\[ \int\limits_0^1 4 \sqrt{1-x^2}\,dx = \pi\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">integrand</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">simpsons</span><span class="p">(</span><span class="n">integrand</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">pieces</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span><span class="n">graph</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1">#actual value is 3.14159</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/01-Intro-and-Newton-Cotes_92_0.png" src="../../_images/01-Intro-and-Newton-Cotes_92_0.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.1211891697754175
+</pre></div>
+</div>
+</div>
+</div>
+<p>Most of the error comes at <span class="math notranslate nohighlight">\(x=1\)</span>. This is because the derivative of <span class="math notranslate nohighlight">\(\sqrt{1-x^2}\)</span> is singular at <span class="math notranslate nohighlight">\(x=1\)</span>, which makes it difficult to build an accurate polynomial approximation.</p>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks/06-publish"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="../06/integration.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Numeric Integration</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="02-Gauss-Quadrature.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Gauss Quadrature</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

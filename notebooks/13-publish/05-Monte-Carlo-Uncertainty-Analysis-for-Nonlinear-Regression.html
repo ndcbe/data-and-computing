@@ -1,0 +1,1700 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Monte Carlo Uncertainty Analysis for Nonlinear Regression &#8212; Data and Computing for Chemical Engieers</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Bootstrap Confidence Intervals" href="06-Bootstrap-Confidence-Intervals.html" />
+    <link rel="prev" title="Weighted Linear Regression" href="04-Weighted-Regression.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/cbe_logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Data and Computing for Chemical Engieers</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../intro.html">
+   Welcome to (Advanced) Data and Computing for Engineers
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../01/00-Python-Primer.html">
+   Python Primer
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/01-Jupyter-Notebooks.html">
+     Welcome to Jupyter Notebooks and Vocareum
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/02-Python-Basics-I-Variables-Strings-Bugs.html">
+     Python Basics I: Variables, Strings, and Bugs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/03-Flow-control.html">
+     Python Basics II: Loopy Logic
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/03b-Pseudocode.html">
+     Pseudocode
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/04-Functions-and-Scope.html">
+     Functions and Scope
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/04b-Recursion.html">
+     Recursion
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/04c-Modules-and-Files.html">
+     Functions, Scoping, and Other Fun Stuff
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/04d-Example-High-Low-Game.html">
+     High/Low Guess My Number Game
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/05-Python-Basics-III-Lists-Dictionaries-Enumeration.html">
+     Python Basics III: Lists, Dictionaries, and Enumeration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/06-NumPy.html">
+     Linear Algebra with Numpy and Scipy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/07-Matplotlib.html">
+     Visualization with matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/08-Pandas.html">
+     Manipulating Data with Pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/09-Functions-as-Arguments.html">
+     Functions as Arguments
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/10-Testing-and-Debugging.html">
+     Testing and Debugging in Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../02/linear_algebra.html">
+   Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02-publish/01-Modeling-Systems-of-Linear-Equations.html">
+     Modeling Systems of Linear Equations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02-publish/02-Gauss-Elimination.html">
+     Gaussian Elimination
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02-publish/03-LU-Factorization.html">
+     LU Decomposition and Condition Number
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02-publish/04-Example-Atomic-Mass-Balances.html">
+     Example: Mass Balances and Linear Algebra
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../03/algorithms.html">
+   Algorithm Building Blocks
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03-publish/01-Taylor-Series.html">
+     Taylor Series Approximations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03-publish/02-Finite-Difference.html">
+     Finite Difference Derivative Approximations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03-publish/03-Example-Heating-a-Metal-Slab.html">
+     Example: Heating a Metal Slab
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../04/nonlinear_systems.html">
+   Nonlinear Systems of Equations
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/01-Modeling-Systems-of-Nonlinear-Equations.html">
+     Modeling Systems of Nonlinear Equations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/02-Newton-Method-Nonlinear-Equation-Solving.html">
+     Solving Systems of Nonlinear Equations with Newton’s Method
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/03-More-Newton-Type-Methods.html">
+     More Newton-Type Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/04-Convergence-Analysis-Newton-Method.html">
+     Convergence Analysis for Newton’s Method
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/05-System-of-Equations-Newton-Method.html">
+     Newton’s Method for Systems of Equations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../05/optimization.html">
+   Continuous Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05-publish/01-Pyomo-Basics.html">
+     Pyomo Basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05-publish/02-Electricity-Market-Optimization.html">
+     Electricity Market Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05-publish/03-Flash-Calculations-in-Pyomo.html">
+     Flash Calculations in Pyomo
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../06/integration.html">
+   Numeric Integration
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/01-Intro-and-Newton-Cotes.html">
+     Introduction and Newton-Cotes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/02-Gauss-Quadrature.html">
+     Gauss Quadrature
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/03-Adaptive-Methods-and-Scipy.html">
+     Adaptive Methods for Newton-Cotes and Gauss Quadrature, Scipy Library
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/04-Application-Inertial-Navigation-Systems.html">
+     Application: Inertial Navigation Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/05-Forward-and-Backward-Euler.html">
+     Forward and Backward Euler Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/06-Trapezoid-Rule.html">
+     Crank-Nicolson (Trapezoid Rule)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/07-Stability-Analysis.html">
+     Stability Analysis of Forward/Backward Euler and Crank-Nicolson Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/08-Explicit-Runge-Kutta.html">
+     Explicit Range Kutta Method
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/09-Systems-of-Differential-Equations-and-Scipy.html">
+     Systems of Differential Equations and Scipy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/10-Example-Reaction-Rates.html">
+     Example: Reaction Rates
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../07/stats.html">
+   Descriptive Statistics and Visualization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07-publish/01-Sampling.html">
+     Sampling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07-publish/02-Summary-Statistics.html">
+     Summary Statistics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07-publish/03-Visualizing-Data.html">
+     Visualizing Data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../08/probability.html">
+   Probability Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../08-publish/01-Random-Variables.html">
+     Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../08-publish/02-Jointly-Distributed-Random-Variables.html">
+     Jointly Distributed Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../08-publish/03-Practice-Problems.html">
+     Practice Problems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../09/distributions.html">
+   Common Probability Distributions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../09-publish/03-Poisson-Probability-Distribution.html">
+     Poisson Probability Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../09-publish/04-Normal-Probability-Distribution.html">
+     Normal Probability Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../09-publish/05-Common-Probability-Distributions-Summary.html">
+     Common Probability Distributions Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../10/uncertainty.html">
+   Uncertainty and Error Propagation
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../11/inference.html">
+   Statistical Inference
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/01-Central-Limit-Theorem.html">
+     Central Limit Theorem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/02-Standard-Normal-Distribution.html">
+     Standard Normal Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/03-Confidence-Intervals.html">
+     Confidence Intervals
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/04-Students-t-Distribution.html">
+     Student’s t-Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/05-First-Hypothesis-Testing.html">
+     First Hypothesis Testing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/06-Hypothesis-Testing-Review-and-Type-I-Type-II-Errors.html">
+     Hypothesis Testing Review and Type I/Type II Errors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/07-Flavors-of-Hypothesis-Testing.html">
+     Flavors of Hypothesis Testing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/08-Statistical-Power-Basics.html">
+     Statistical Power Basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/09-Statistical-Power-in-Python.html">
+     Statistical Power in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/10-Statistical-Power-Practice-Problems.html">
+     Statistical Power Practice Problems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../12/regression.html">
+   Regression
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12-publish/02-Uncertainty-Analysis-and-Statistical-Inference.html">
+     Uncertainty Analysis and Statistical Inference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12-publish/03-Linear-Regression-Practice-Problems.html">
+     Linear Regression Practice Problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12-publish/04-Multivariate-Linear-Regression.html">
+     Multivariate Linear Regression
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../13/advanced_regression.html">
+   Advanced Nonlinear Regression
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="01-Transformations-and-Linear-Regression.html">
+     Transformations and Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02-Nonlinear-Regression.html">
+     Nonlinear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03-Nonlinear-Regression-Practice-Problem.html">
+     Nonlinear Regression Practice Problem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04-Weighted-Regression.html">
+     Weighted Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Monte Carlo Uncertainty Analysis for Nonlinear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="06-Bootstrap-Confidence-Intervals.html">
+     Bootstrap Confidence Intervals
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="07-Nonlinear-Case-Study-Adsorptive-Membranes.html">
+     Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../14/design_of_experiments.html">
+   Design of Experiments
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/13-publish/05-Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/ndcbe/data-and-computing"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/13-publish/05-Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/13-publish/05-Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/13-publish/05-Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#simulation">
+   Simulation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-simulation-to-estimate-a-probability">
+     Using Simulation to Estimate a Probability
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-simulation-to-estimate-means-and-variances">
+     Using Simulation to Estimate Means and Variances
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-simulation-to-determine-whether-a-population-is-approximately-normal">
+     Using Simulation to Determine Whether a Population is Approximately Normal
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#monte-carlo-error-propagation">
+   Monte Carlo Error Propagation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#motivating-example-cart-incline">
+     Motivating Example: Cart + Incline
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#student-1">
+       Student 1
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#standard-error-propagation">
+         Standard Error Propagation
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#id1">
+         Monte Carlo Error Propagation
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#student-2">
+       Student 2
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#id2">
+         Standard Error Propagation
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#id3">
+         Monte Carlo Error Propagation
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#uncertainty-analysis-for-nonlinear-regression">
+     Uncertainty Analysis for Nonlinear Regression
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#motivating-example-michaelis-menten-enzymatic-reaction-kinetics">
+       Motivating Example: Michaelis-Menten Enzymatic Reaction Kinetics
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#nonlinear-regression-linearized-uncertainty-analysis">
+       Nonlinear Regression + Linearized Uncertainty Analysis
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#step-1-calculate-best-fit-and-plot">
+         Step 1. Calculate Best Fit and Plot
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#step-2-residual-analysis">
+         Step 2. Residual Analysis
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#step-3-uncertainty-analysis-calculate-covariance-matrix">
+         Step 3. Uncertainty Analysis / Calculate Covariance Matrix
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#nonlinear-regression-monte-carlo-uncertainty-analysis">
+       Nonlinear Regression + Monte Carlo Uncertainty Analysis
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#pseudocode">
+         Pseudocode
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#python-hints">
+         Python Hints
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#implement-in-python">
+         Implement in Python
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#visualize-distribution-of-fitted-parameters">
+         Visualize Distribution of Fitted Parameters
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#compute-covariance-matrix">
+         Compute Covariance Matrix
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Monte Carlo Uncertainty Analysis for Nonlinear Regression</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#simulation">
+   Simulation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-simulation-to-estimate-a-probability">
+     Using Simulation to Estimate a Probability
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-simulation-to-estimate-means-and-variances">
+     Using Simulation to Estimate Means and Variances
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-simulation-to-determine-whether-a-population-is-approximately-normal">
+     Using Simulation to Determine Whether a Population is Approximately Normal
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#monte-carlo-error-propagation">
+   Monte Carlo Error Propagation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#motivating-example-cart-incline">
+     Motivating Example: Cart + Incline
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#student-1">
+       Student 1
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#standard-error-propagation">
+         Standard Error Propagation
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#id1">
+         Monte Carlo Error Propagation
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#student-2">
+       Student 2
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#id2">
+         Standard Error Propagation
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#id3">
+         Monte Carlo Error Propagation
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#uncertainty-analysis-for-nonlinear-regression">
+     Uncertainty Analysis for Nonlinear Regression
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#motivating-example-michaelis-menten-enzymatic-reaction-kinetics">
+       Motivating Example: Michaelis-Menten Enzymatic Reaction Kinetics
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#nonlinear-regression-linearized-uncertainty-analysis">
+       Nonlinear Regression + Linearized Uncertainty Analysis
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#step-1-calculate-best-fit-and-plot">
+         Step 1. Calculate Best Fit and Plot
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#step-2-residual-analysis">
+         Step 2. Residual Analysis
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#step-3-uncertainty-analysis-calculate-covariance-matrix">
+         Step 3. Uncertainty Analysis / Calculate Covariance Matrix
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#nonlinear-regression-monte-carlo-uncertainty-analysis">
+       Nonlinear Regression + Monte Carlo Uncertainty Analysis
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#pseudocode">
+         Pseudocode
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#python-hints">
+         Python Hints
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#implement-in-python">
+         Implement in Python
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#visualize-distribution-of-fitted-parameters">
+         Visualize Distribution of Fitted Parameters
+        </a>
+       </li>
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#compute-covariance-matrix">
+         Compute Covariance Matrix
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="monte-carlo-uncertainty-analysis-for-nonlinear-regression">
+<h1>Monte Carlo Uncertainty Analysis for Nonlinear Regression<a class="headerlink" href="#monte-carlo-uncertainty-analysis-for-nonlinear-regression" title="Permalink to this headline">¶</a></h1>
+<p>CBE 20258. Numerical and Statistical Analysis. Spring 2020.</p>
+<p>© University of Notre Dame</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load libraries</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.optimize</span> <span class="k">as</span> <span class="nn">optimize</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="simulation">
+<h2>Simulation<a class="headerlink" href="#simulation" title="Permalink to this headline">¶</a></h2>
+<p><strong>Further Reading:</strong> §4.12</p>
+<p>Consider two resistors in parallel with resistances <span class="math notranslate nohighlight">\(X \sim \mathcal{N}(10~\Omega,~10^2~\Omega^2)\)</span> and <span class="math notranslate nohighlight">\(Y \sim \mathcal{N}(25~\Omega,~2.5^2~\Omega^2)\)</span>. The total resistance of the circuit is</p>
+<div class="math notranslate nohighlight">
+\[R = \frac{X Y}{X + Y}\]</div>
+<p>Assume <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are independent.</p>
+<p>What is <span class="math notranslate nohighlight">\(P(19~\Omega \leq X \leq 21~\Omega)\)</span>, i.e., the probability the circuit is within specification?</p>
+<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
+<b>Class Activity</b>: Spend 3 minutes with a partner outlining your solution strategy using probability theory. First, write down the main steps. Then, if you have time, write down the formulas.
+</div><div class="section" id="using-simulation-to-estimate-a-probability">
+<h3>Using Simulation to Estimate a Probability<a class="headerlink" href="#using-simulation-to-estimate-a-probability" title="Permalink to this headline">¶</a></h3>
+<p>Instead of all of that calculus, we can use simulation to estimate this probability.</p>
+<p>Repeat 1000s of times:</p>
+<ul class="simple">
+<li><p>Generate X and Y using a random number generator</p></li>
+<li><p>Compute <span class="math notranslate nohighlight">\(R\)</span> and record the value</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># specify number of simulations</span>
+<span class="n">nsim</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="c1"># create vector to store the results</span>
+<span class="n">R_sim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nsim</span><span class="p">)</span>
+
+
+<span class="c1"># create normally distributed noise</span>
+<span class="c1"># loc = mean</span>
+<span class="c1"># scale = standard deviation</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">nsim</span><span class="p">))</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="mi">25</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">nsim</span><span class="p">))</span>
+    
+<span class="c1"># calculate a1, store result</span>
+<span class="n">R_sim</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="o">/</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
+<b>Class Activity</b>: Estimate $P(19~\Omega \leq X \leq 21~\Omega)$ using your simulation results.
+</div></div>
+<div class="section" id="using-simulation-to-estimate-means-and-variances">
+<h3>Using Simulation to Estimate Means and Variances<a class="headerlink" href="#using-simulation-to-estimate-means-and-variances" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># print some descriptive statistics</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean: &quot;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">R_sim</span><span class="p">),</span><span class="s2">&quot; Ohms&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Median: &quot;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">R_sim</span><span class="p">),</span><span class="s2">&quot; Ohms&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Standard Deviation: &quot;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">R_sim</span><span class="p">,</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span><span class="s2">&quot; Ohms&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean:  20.0013635236533  Ohms
+Median:  19.98083833958203  Ohms
+Standard Deviation:  1.7275464430683998  Ohms
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="using-simulation-to-determine-whether-a-population-is-approximately-normal">
+<h3>Using Simulation to Determine Whether a Population is Approximately Normal<a class="headerlink" href="#using-simulation-to-determine-whether-a-population-is-approximately-normal" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create histogram of calculated a1 values</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">R_sim</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Circuit Resistance ($\Omega$)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Number of Simulations&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/05-Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression_15_0.png" src="../../_images/05-Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression_15_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="monte-carlo-error-propagation">
+<h2>Monte Carlo Error Propagation<a class="headerlink" href="#monte-carlo-error-propagation" title="Permalink to this headline">¶</a></h2>
+<p><strong>Further Reading:</strong> §4.12</p>
+<div class="section" id="motivating-example-cart-incline">
+<h3>Motivating Example: Cart + Incline<a class="headerlink" href="#motivating-example-cart-incline" title="Permalink to this headline">¶</a></h3>
+<p>You and a classmate want to measure the acceleration of a cart rolling down an incline plane, but disagree on the best approach. The cart starts at rest and travels distance <span class="math notranslate nohighlight">\(l = 1.0\)</span> m. The location of the <em>finish line</em> is measured with negligible uncertainty. You (student 1) measure the instantaneous velocity <span class="math notranslate nohighlight">\(v = 3.2 \pm 0.1 \)</span> m/s at the finish line. Your classmate (student 2) instead measures the elapsed time <span class="math notranslate nohighlight">\(t = 0.63 \pm 0.01\)</span>s.</p>
+<div class="section" id="student-1">
+<h4>Student 1<a class="headerlink" href="#student-1" title="Permalink to this headline">¶</a></h4>
+<p>Using instantaneous velocity, we can acceleration as follows:</p>
+<div class="math notranslate nohighlight">
+\[
+a_1 = \frac{v^2}{2l}
+\]</div>
+<p>First, let’s recap the <em>standard</em> error propagation approach from our homework.</p>
+<div class="section" id="standard-error-propagation">
+<h5>Standard Error Propagation<a class="headerlink" href="#standard-error-propagation" title="Permalink to this headline">¶</a></h5>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Results of &#39;standard&#39; error analysis (from homework)</span>
+
+<span class="c1"># define distance travelled</span>
+<span class="n">l</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># m </span>
+
+<span class="c1"># define function to calculate a1</span>
+<span class="n">calc_a1</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">v</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">l</span><span class="p">)</span>
+
+<span class="c1"># define velocity measurement and uncertainty</span>
+<span class="n">v</span> <span class="o">=</span> <span class="mf">3.2</span>
+<span class="n">v_std</span> <span class="o">=</span> <span class="mf">0.1</span>
+
+<span class="c1"># calculate a1</span>
+<span class="n">a1</span> <span class="o">=</span> <span class="n">calc_a1</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+<span class="c1"># estimate gradient with forward finite difference</span>
+<span class="n">da1dv</span> <span class="o">=</span> <span class="p">(</span><span class="n">calc_a1</span><span class="p">(</span><span class="n">v</span> <span class="o">+</span> <span class="mf">1E-6</span><span class="p">)</span> <span class="o">-</span> <span class="n">a1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mf">1E-6</span><span class="p">)</span>
+
+<span class="c1"># calculate uncertainty</span>
+<span class="n">sigma_a1</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">da1dv</span><span class="p">)</span><span class="o">*</span><span class="n">v_std</span>
+
+<span class="c1"># report answer</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Calculated acceleration: &quot;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="s2">&quot;+/-&quot;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">sigma_a1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="s2">&quot;m/s/s&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calculated acceleration:  5.12 +/- 0.32 m/s/s
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id1">
+<h5>Monte Carlo Error Propagation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h5>
+<p>We can also estimate the uncertainty in <span class="math notranslate nohighlight">\(a_1\)</span> using simulation. Below is the <strong>main idea</strong>.</p>
+<p>Repeat 1000s of times:</p>
+<ul class="simple">
+<li><p>Add <span class="math notranslate nohighlight">\(\mathcal{N}(0,0.1^2)\)</span> uncertainty to velocity measurement</p></li>
+<li><p>Recalculate <span class="math notranslate nohighlight">\(a_1\)</span> and store result</p></li>
+</ul>
+<p>Then calculate the standard deviation of the stored <span class="math notranslate nohighlight">\(a_1\)</span> results. In other words, we are simulated what would happen if we repeated the experiment many many times with an assumed random measurement error.</p>
+<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
+<b>Class Activity</b>: With a partner, complete the code below.
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># specify number of simulations</span>
+<span class="n">nsim</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="c1"># create vector to store the results</span>
+<span class="n">a1_sim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nsim</span><span class="p">)</span>
+
+<span class="c1"># Add your solution here</span>
+    
+<span class="c1"># create histogram of calculated a1 values</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">a1_sim</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Acceleration (m/s/s)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Number of Simulations&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># print some descriptive statistics</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean: &quot;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">a1_sim</span><span class="p">),</span><span class="s2">&quot; m/s/s&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Median: &quot;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">a1_sim</span><span class="p">),</span><span class="s2">&quot; m/s/s&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Standard Deviation: &quot;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">a1_sim</span><span class="p">),</span><span class="s2">&quot; m/s/s&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/05-Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression_22_0.png" src="../../_images/05-Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression_22_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean:  5.113776787070997  m/s/s
+Median:  5.115916657943146  m/s/s
+Standard Deviation:  0.306782158290633  m/s/s
+</pre></div>
+</div>
+</div>
+</div>
+<p>This standard deviation matches the uncertainty calculated with the error propagation formulas.</p>
+</div>
+</div>
+<div class="section" id="student-2">
+<h4>Student 2<a class="headerlink" href="#student-2" title="Permalink to this headline">¶</a></h4>
+<p>Using instantaneous velocity, we can calculate acceleration as follows:</p>
+<div class="math notranslate nohighlight">
+\[
+a_2 = \frac{2 l}{t^2} 
+\]</div>
+<p>First, lets recap the solution to the homework.</p>
+<div class="section" id="id2">
+<h5>Standard Error Propagation<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h5>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Results of &#39;standard&#39; error analysis (from homework)</span>
+
+<span class="c1"># define distance travelled</span>
+<span class="n">l</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># m</span>
+
+<span class="c1"># define function to calculate a2</span>
+<span class="n">calc_a2</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="mi">2</span><span class="o">*</span><span class="n">l</span> <span class="o">/</span> <span class="n">t</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="c1"># define time measurement and uncertainty</span>
+<span class="n">t</span> <span class="o">=</span> <span class="mf">0.63</span>
+<span class="n">t_std</span> <span class="o">=</span> <span class="mf">0.01</span>
+
+<span class="c1"># calculate a2</span>
+<span class="n">a2</span> <span class="o">=</span> <span class="n">calc_a2</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+<span class="c1"># estimate gradient with forward finite difference</span>
+<span class="n">da2dt</span> <span class="o">=</span> <span class="p">(</span><span class="n">calc_a2</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="mf">1E-6</span><span class="p">)</span> <span class="o">-</span> <span class="n">a2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mf">1E-6</span><span class="p">)</span>
+
+<span class="c1"># calculate uncertainty</span>
+<span class="n">sigma_a2</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">da2dt</span><span class="p">)</span><span class="o">*</span><span class="n">t_std</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Calculated acceleration: &quot;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">a2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="s2">&quot;+/-&quot;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">sigma_a2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="s2">&quot;m/s/s&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Calculated acceleration:  5.04 +/- 0.16 m/s/s
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id3">
+<h5>Monte Carlo Error Propagation<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h5>
+<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
+<b>Class Activity</b>: Apply the Monte Carlo approach to Student 2's calculation. Start by copying and pasting the code from above.
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/05-Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression_28_0.png" src="../../_images/05-Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression_28_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean:  5.04614403662456  m/s/s
+Median:  5.036806168624843  m/s/s
+Standard Deviation:  0.15841862599598272  m/s/s
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="uncertainty-analysis-for-nonlinear-regression">
+<h3>Uncertainty Analysis for Nonlinear Regression<a class="headerlink" href="#uncertainty-analysis-for-nonlinear-regression" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="motivating-example-michaelis-menten-enzymatic-reaction-kinetics">
+<h4>Motivating Example: Michaelis-Menten Enzymatic Reaction Kinetics<a class="headerlink" href="#motivating-example-michaelis-menten-enzymatic-reaction-kinetics" title="Permalink to this headline">¶</a></h4>
+<p>The <strong>Michaelis-Menten</strong> equation is an extremely popular model to describe the rate of enzymatic reactions.</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{E} + \mathrm{S} \leftrightharpoons \mathrm{ES} \rightarrow \mathrm{E} + \mathrm{P}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+r = V_{max} \frac{[\mathrm{S}]}{K_M + [\mathrm{S}]}
+\]</div>
+<p>Additional information: <a class="reference external" href="https://en.wikipedia.org/wiki/Michaelis%E2%80%93Menten_kinetics">https://en.wikipedia.org/wiki/Michaelis–Menten_kinetics</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Create dataset</span>
+
+<span class="c1"># Define exact coefficients</span>
+<span class="n">Vmaxexact</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span>
+<span class="n">Kmexact</span><span class="o">=</span><span class="mi">5</span><span class="p">;</span>
+
+<span class="c1"># Evaluate model</span>
+<span class="n">Sexp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">.3</span><span class="p">,</span> <span class="mf">.4</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">]);</span>
+<span class="n">rexp</span> <span class="o">=</span> <span class="n">Vmaxexact</span><span class="o">*</span><span class="n">Sexp</span> <span class="o">/</span> <span class="p">(</span><span class="n">Kmexact</span><span class="o">+</span><span class="n">Sexp</span><span class="p">);</span>
+
+<span class="c1"># Add some random error to simulate </span>
+<span class="n">rexp</span> <span class="o">+=</span> <span class="mf">0.05</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">Sexp</span><span class="p">))</span>
+
+<span class="c1"># Evaluate model to plot smooth curve</span>
+<span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">Sexp</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">Sexp</span><span class="p">),</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">Vmaxexact</span><span class="o">*</span><span class="n">S</span> <span class="o">/</span> <span class="p">(</span><span class="n">Kmexact</span><span class="o">+</span><span class="n">S</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="nonlinear-regression-linearized-uncertainty-analysis">
+<h4>Nonlinear Regression + Linearized Uncertainty Analysis<a class="headerlink" href="#nonlinear-regression-linearized-uncertainty-analysis" title="Permalink to this headline">¶</a></h4>
+<p><strong>Main idea</strong>: Solve the best fit optimization problem,</p>
+<div class="math notranslate nohighlight">
+\[\min_{\hat{\theta}} \quad (y_i - \hat{y}_i)^2\]</div>
+<p>computationally. This works even if <span class="math notranslate nohighlight">\(\hat{y_i} = f(\hat{\theta}, x)\)</span> is a nonlinear function.</p>
+<p>Recall <span class="math notranslate nohighlight">\(\theta\)</span> = [<span class="math notranslate nohighlight">\(V_{max}\)</span>, <span class="math notranslate nohighlight">\(K_m\)</span>] for our example.</p>
+<div class="section" id="step-1-calculate-best-fit-and-plot">
+<h5>Step 1. Calculate Best Fit and Plot<a class="headerlink" href="#step-1-calculate-best-fit-and-plot" title="Permalink to this headline">¶</a></h5>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## define function that includes nonlinear model</span>
+<span class="k">def</span> <span class="nf">model</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Michaelis-Menten model</span>
+<span class="sd">    Arguments:</span>
+<span class="sd">        theta: parameter vector</span>
+<span class="sd">        x: independent variable vector (S concentration)</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        yhat: dependent variable prediction (r rate)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">yhat</span> <span class="o">=</span> <span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span> 
+    <span class="k">return</span> <span class="n">yhat</span>
+    
+<span class="k">def</span> <span class="nf">regression_func</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Function to define regression function for least-squares fitting</span>
+<span class="sd">    Arguments:</span>
+<span class="sd">        theta: parameter vector</span>
+<span class="sd">        x: independent variable vector</span>
+<span class="sd">        y: dependent variable vector (measurements)</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        e: residual vector</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">model</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">x</span><span class="p">);</span>
+    
+    <span class="k">return</span> <span class="n">e</span>
+
+<span class="c1">## specify initial guess</span>
+<span class="n">theta0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">])</span>
+
+<span class="c1">## specify bounds</span>
+<span class="c1"># first array: lower bounds</span>
+<span class="c1"># second array: upper bounds</span>
+<span class="n">bnds</span> <span class="o">=</span> <span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">])</span>
+
+<span class="c1">## use least squares optimizer in scipy</span>
+<span class="c1"># notice that &#39;args&#39; is used to pass the data vectors</span>
+<span class="n">nl_results</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">least_squares</span><span class="p">(</span><span class="n">regression_func</span><span class="p">,</span> <span class="n">theta0</span><span class="p">,</span><span class="n">bounds</span><span class="o">=</span><span class="n">bnds</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;trf&#39;</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">Sexp</span><span class="p">,</span> <span class="n">rexp</span><span class="p">))</span>
+
+<span class="n">theta</span> <span class="o">=</span> <span class="n">nl_results</span><span class="o">.</span><span class="n">x</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;theta = &quot;</span><span class="p">,</span><span class="n">theta</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>theta =  [2.00960162 5.04822594]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># generate predictions</span>
+<span class="n">S_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">Sexp</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">Sexp</span><span class="p">),</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">r_pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">S_pred</span><span class="p">)</span>
+
+<span class="c1"># create plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Sexp</span><span class="p">,</span><span class="n">rexp</span><span class="p">,</span><span class="s1">&#39;.b&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">S_pred</span><span class="p">,</span><span class="n">r_pred</span><span class="p">,</span><span class="s1">&#39;--g&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Best Fit Line&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s1">&#39;r-&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;True Model&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;[S] (mol / L)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;r (mol / L / s)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/05-Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression_34_0.png" src="../../_images/05-Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression_34_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="step-2-residual-analysis">
+<h5>Step 2. Residual Analysis<a class="headerlink" href="#step-2-residual-analysis" title="Permalink to this headline">¶</a></h5>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## calculate residuals</span>
+<span class="n">y_hat2</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">Sexp</span><span class="p">)</span>
+<span class="n">e2</span> <span class="o">=</span> <span class="n">rexp</span> <span class="o">-</span> <span class="n">y_hat2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">e2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 0.07276519 -0.09333686 -0.01954843 -0.05600921  0.00861823  0.01787977
+  0.05370262 -0.03878427]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">e2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Residual (mol / L / s)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frequency (count)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/05-Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression_37_0.png" src="../../_images/05-Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression_37_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_hat2</span><span class="p">,</span><span class="n">e2</span><span class="p">,</span><span class="s2">&quot;b.&quot;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Predicted r (mol / s / L)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Residual (mol / s / L)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Residuals vs. Predicted Value&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/05-Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression_38_0.png" src="../../_images/05-Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression_38_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Sexp</span><span class="p">,</span><span class="n">e2</span><span class="p">,</span><span class="s2">&quot;b.&quot;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Dependent Variable [S] (mol / L)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Residual (mol / s / L)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Residuals vs. Dependent Variable&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/05-Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression_39_0.png" src="../../_images/05-Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression_39_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="step-3-uncertainty-analysis-calculate-covariance-matrix">
+<h5>Step 3. Uncertainty Analysis / Calculate Covariance Matrix<a class="headerlink" href="#step-3-uncertainty-analysis-calculate-covariance-matrix" title="Permalink to this headline">¶</a></h5>
+<div class="math notranslate nohighlight">
+\[
+\Sigma_{\theta} \approx \hat{\sigma}_e^2 (J^T J)^{-1}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(J\)</span> is the Jacobian of the residuals w.r.t. <span class="math notranslate nohighlight">\(\theta\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+J_{i,j} = \frac{\partial(y_i - \hat{y}_i)}{\partial \theta_j}
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jacobian =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nl_results</span><span class="o">.</span><span class="n">jac</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jacobian =
+
+[[-0.05609337  0.02107714]
+ [-0.0734184   0.02708069]
+ [-0.0901189   0.03264162]
+ [-0.16533774  0.05493561]
+ [-0.28375935  0.08090592]
+ [-0.44207561  0.09818453]
+ [-0.61311017  0.09442718]
+ [-0.76015908  0.07257699]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sigre</span> <span class="o">=</span> <span class="p">(</span><span class="n">e2</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">e2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">e2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">Sigma_theta2</span> <span class="o">=</span> <span class="n">sigre</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">nl_results</span><span class="o">.</span><span class="n">jac</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">nl_results</span><span class="o">.</span><span class="n">jac</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Covariance matrix:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">Sigma_theta2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Covariance matrix:
+ [[0.01765168 0.0964166 ]
+ [0.0964166  0.63099146]]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="nonlinear-regression-monte-carlo-uncertainty-analysis">
+<h4>Nonlinear Regression + Monte Carlo Uncertainty Analysis<a class="headerlink" href="#nonlinear-regression-monte-carlo-uncertainty-analysis" title="Permalink to this headline">¶</a></h4>
+<p><strong>Main Idea</strong></p>
+<ul class="simple">
+<li><p>Use residuals to estimate uncertainty in dependent variable</p></li>
+<li><p>Simulate regression procedure 1000s of times, adding random noise to dependent variable</p></li>
+<li><p>Examine distribution of fitted values</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># variance of residuals</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sigre</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.003717977540144133
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="pseudocode">
+<h5>Pseudocode<a class="headerlink" href="#pseudocode" title="Permalink to this headline">¶</a></h5>
+<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
+<b>Class Activity</b>: Write pseudocode with a partner.
+</div></div>
+<div class="section" id="python-hints">
+<h5>Python Hints<a class="headerlink" href="#python-hints" title="Permalink to this headline">¶</a></h5>
+<p>Let’s say we want to generate a vector with 5 elements, each normally distributed with mean 0 and standard deviation 2. We can do this in one line using Python:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">scale</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_vec</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-2.71241136  0.91627376 -0.96646476  2.57309647  0.73030355]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="implement-in-python">
+<h5>Implement in Python<a class="headerlink" href="#implement-in-python" title="Permalink to this headline">¶</a></h5>
+<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
+<b>Class Activity</b>: Implement your pseudocode in Python.
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Number of Monte Carlo samples</span>
+<span class="n">nmc</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>
+
+<span class="c1"># Number of data points</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rexp</span><span class="p">)</span>
+
+<span class="c1"># Declare a matrix to save the fitted parameters</span>
+<span class="n">theta_mc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nmc</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="c1"># Recall, the standard deviation of the residuals is sigre**0.5</span>
+
+<span class="c1"># Perform Monte Carlo simulation</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="visualize-distribution-of-fitted-parameters">
+<h5>Visualize Distribution of Fitted Parameters<a class="headerlink" href="#visualize-distribution-of-fitted-parameters" title="Permalink to this headline">¶</a></h5>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Histogram for Vmax</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">theta_mc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Best Fit Value for $V_</span><span class="si">{max}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Number of MC Simulations&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/05-Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression_53_0.png" src="../../_images/05-Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression_53_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Histogram for Km</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">theta_mc</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Best Fit Value for $K_</span><span class="si">{m}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Number of MC Simulations&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/05-Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression_54_0.png" src="../../_images/05-Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression_54_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We can even make a 2D histogram</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist2d</span><span class="p">(</span><span class="n">theta_mc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">theta_mc</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Best Fit Value for $V_</span><span class="si">{max}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Best Fit Value for $K_</span><span class="si">{m}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/05-Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression_55_0.png" src="../../_images/05-Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression_55_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="compute-covariance-matrix">
+<h5>Compute Covariance Matrix<a class="headerlink" href="#compute-covariance-matrix" title="Permalink to this headline">¶</a></h5>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## We can calculate covariance in one, carefully constructed line</span>
+<span class="c1"># For some reason, the NumPy developers choose to assume each ROW is a new variable</span>
+<span class="c1"># and each COLUMN is a different observation. I would have choose a flipped convention.</span>
+<span class="c1"># Our &#39;theta_mc&#39; has each row as a different observation (simulation).</span>
+<span class="c1"># &#39;rowvar=False&#39; tells NumPy to flip its convention. This is a great example of</span>
+<span class="c1"># WHY YOU SHOULD ALWAYS CHECK THE DOCUMENTATION!!!</span>
+<span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">theta_mc</span><span class="p">,</span><span class="n">rowvar</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.01497054, 0.08128554],
+       [0.08128554, 0.54461604]])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks/13-publish"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="04-Weighted-Regression.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Weighted Linear Regression</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="06-Bootstrap-Confidence-Intervals.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Bootstrap Confidence Intervals</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
