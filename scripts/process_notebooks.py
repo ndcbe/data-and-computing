@@ -102,7 +102,7 @@ for fld in folders:
     
     print("Processing files in ",full_folder_name)
     
-    for file in os.listdir(full_folder_name):
+    for file in sorted(os.listdir(full_folder_name)):
         
         # Check if file is a notebook using ending
         if re.match("(.*?)\.ipynb$",file):
