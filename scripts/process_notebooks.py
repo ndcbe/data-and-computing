@@ -15,7 +15,7 @@ def process_notebook(folder,filename,verbose=1):
     input_notebook = folder + "/" + filename
     with open(input_notebook, "r") as fp:
         if verbose >= 1:
-            print("\nOpenning ",input_notebook)
+            print("\nOpening ",input_notebook)
         nb = nbformat.read(fp, as_version=4)
 
     # display file metadata
