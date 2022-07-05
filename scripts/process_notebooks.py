@@ -54,8 +54,7 @@ def process_notebook(folder, filename, verbose=1):
     IMAGE = "!\[(.*?)\]\(\.\./\.\./media/(.*\.*).*?\)"
     for cell in nb.cells:
         if cell.cell_type == "markdown" and re.findall(IMAGE, cell.source):
-            cell.source = re.sub(IMAGE, r'!(\1)[https://ndcbe.github.io/data-and-computing/_images/\2]', cell.source)
-  
+            cell.source = re.sub(IMAGE, r'![\1](https://ndcbe.github.io/data-and-computing/_images/\2)', cell.source)
 
     ## Save new notebook
     output_notebook = folder + "-publish/" + filename
