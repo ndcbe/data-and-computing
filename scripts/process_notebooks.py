@@ -3,7 +3,7 @@ from nbformat.v4.nbbase import new_code_cell, new_markdown_cell, new_notebook
 import re
 import os
 
-def process_notebook(folder,filename,verbose=1):
+def process_notebook(folder, filename, verbose=1):
 
     ''' Remove nbgrader content from notebooks and save updated version
     
@@ -49,6 +49,13 @@ def process_notebook(folder,filename,verbose=1):
     HIDDEN_TESTS = "### BEGIN HIDDEN TESTS(.*?)### END HIDDEN TESTS"
     replace_code(SOLUTION_CODE, "# Add your solution here")
     replace_code(HIDDEN_TESTS, "# Removed autograder test. You may delete this cell.")
+    
+    # replace links to media with urls
+    IMAGE = "!\[(.*?)\]\(\.\./\.\./media/(.*\.*).*?\)"
+    for cell in nb.cells:
+        if cell.cell_type == "markdown" and re.findall(IMAGE, cell.source):
+            cell.source = re.sub(IMAGE, r'!(\1)[https://ndcbe.github.io/data-and-computing/_images/\2]', cell.source)
+  
 
     ## Save new notebook
     output_notebook = folder + "-publish/" + filename
@@ -101,4 +108,4 @@ for fld in folders:
         if re.match("(.*?)\.ipynb$",file):
             
             # process the notebook!
-            process_notebook(full_folder_name,file,verbose=1)
+            process_notebook(full_folder_name, file, verbose=1)
