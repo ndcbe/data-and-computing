@@ -51,11 +51,12 @@ def process_notebook(folder, filename, verbose=1):
     replace_code(HIDDEN_TESTS, "# Removed autograder test. You may delete this cell.")
     
     # replace links to media with urls
-    IMAGE = "!\[(.*?)\]\(\.\./\.\./media/(.*\.*).*?\)"
+    IMAGE = "!\[(.*)\]\(\.\./\.\./media/(.*\..*)\)"
     for cell in nb.cells:
         if cell.cell_type == "markdown" and re.findall(IMAGE, cell.source):
             cell.source = re.sub(IMAGE, r'![\1](https://ndcbe.github.io/data-and-computing/_images/\2)', cell.source)
-
+            print(cell.source)
+            
     ## Save new notebook
     output_notebook = folder + "-publish/" + filename
     
