@@ -12,7 +12,7 @@ def process_notebook(folder, filename, verbose=1):
     ## Setup
 
     # read notebook file
-    input_notebook = folder + "/" + filename
+    input_notebook = os.path.join(folder, file)
     with open(input_notebook, "r") as fp:
         if verbose >= 1:
             print("\nOpening ",input_notebook)
