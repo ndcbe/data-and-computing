@@ -7,8 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gaussian Elimination &#8212; Data and Computing for Chemical Engieers</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet">
-  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,20 +19,16 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -39,12 +36,13 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -64,7 +62,21 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -73,9 +85,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -93,14 +106,15 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../intro.html">
-   Welcome to (Advanced) Data and Computing for Engineers
-  </a>
- </li>
-</ul>
-<ul class="current nav bd-sidenav">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome to (Advanced) Data and Computing for Engineers
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../01/00-Python-Primer.html">
    Python Primer
@@ -598,112 +612,227 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/02-publish/02-Gauss-Elimination.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/ndcbe/data-and-computing"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/02-publish/02-Gauss-Elimination.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/02-publish/02-Gauss-Elimination.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/02-publish/02-Gauss-Elimination.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/02-publish/02-Gauss-Elimination.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/02-publish/02-Gauss-Elimination.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ndcbe/data-and-computing"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/02-publish/02-Gauss-Elimination.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/notebooks/02-publish/02-Gauss-Elimination.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#learning-objectives">
    Learning Objectives
@@ -858,12 +987,11 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Gaussian Elimination</h1>
@@ -1034,16 +1162,17 @@ const thebe_selector_output = ".output, .cell_output"
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="gaussian-elimination">
-<h1>Gaussian Elimination<a class="headerlink" href="#gaussian-elimination" title="Permalink to this headline">¶</a></h1>
+<h1>Gaussian Elimination<a class="headerlink" href="#gaussian-elimination" title="Permalink to this headline">#</a></h1>
 <p>CBE 20258. Numerical and Statistical Analysis. Spring 2020.</p>
 <p>© University of Notre Dame</p>
 <p>Note: Gaussian Elimination is also known as <strong>row reduction</strong>.</p>
 <div class="section" id="learning-objectives">
-<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">¶</a></h2>
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">#</a></h2>
 <p>After studying this notebook, completing the activities, and asking questions in class, you should be able to:</p>
 <ul class="simple">
 <li><p>Explain the Invertible Matrix Theorem to a classmate.</p></li>
@@ -1069,7 +1198,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="section" id="linear-algebra-invertible-matrix-theorem">
-<h2>Linear Algebra: Invertible Matrix Theorem<a class="headerlink" href="#linear-algebra-invertible-matrix-theorem" title="Permalink to this headline">¶</a></h2>
+<h2>Linear Algebra: Invertible Matrix Theorem<a class="headerlink" href="#linear-algebra-invertible-matrix-theorem" title="Permalink to this headline">#</a></h2>
 <p>Please review <strong>The Invertible Matrix Theorem</strong> in your linear algebra textbook (by Lay et al).</p>
 <p>To paraphrase, <span class="math notranslate nohighlight">\( A \)</span> is a square <span class="math notranslate nohighlight">\(n \times n\)</span> matrix. The following statements are equivalent (all true or all false):</p>
 <ul class="simple">
@@ -1086,7 +1215,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </div>
 <div class="section" id="motivating-example-and-gaussian-elimination">
-<h2>Motivating Example and Gaussian Elimination<a class="headerlink" href="#motivating-example-and-gaussian-elimination" title="Permalink to this headline">¶</a></h2>
+<h2>Motivating Example and Gaussian Elimination<a class="headerlink" href="#motivating-example-and-gaussian-elimination" title="Permalink to this headline">#</a></h2>
 <p>We want to solve the following system:</p>
 <div class="math notranslate nohighlight">
 \[3 x_1 + 2 x_2 + x_3 = 6\]</div>
@@ -1105,9 +1234,11 @@ const thebe_selector_output = ".output, .cell_output"
 \left(\begin{array}{ccc|c}   3 &amp; 2 &amp; 1 &amp;6\\ -1 &amp; 4 &amp; 5&amp;8\\ 2&amp; -8 &amp; 10&amp;4\end{array}\right)
 \end{split}\]</div>
 <p>How would you solve this? <strong>Gaussian elimination</strong> (a.k.a. row reduction), covered in linear algebra, is the way to go.</p>
-<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
-<b>Home Activity</b>: Perform Gaussian elimination with pencil and paper to convert the above matrix into row echelon form (e.g., all zeros below the diagonal).
-</div><p>Now that you have solved the system of equations “by hand”, we will walk through the step in Python. First, let’s assemble to augmented matrix.</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Perform Gaussian elimination with pencil and paper to convert the above matrix into row echelon form (e.g., all zeros below the diagonal).</p>
+</div>
+<p>Now that you have solved the system of equations “by hand”, we will walk through the step in Python. First, let’s assemble to augmented matrix.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Declare matrix</span>
@@ -1132,8 +1263,11 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;">  <b>Home Activity</b>: Why it is important to use <tt>.copy()</tt> in the above code? Record your multiple choice answer (1, 2, or 3) in <tt>ans_6b</tt> below.
-</div><p>Multiple choice options:</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Why it is important to use <tt>.copy()</tt> in the above code? Record your multiple choice answer (1, 2, or 3) in <tt>ans_6b</tt> below.</p>
+</div>
+<p>Multiple choice options:</p>
 <ol class="simple">
 <li><p>Nice try with the trick question! We actually do not need to use <code class="docutils literal notranslate"><span class="pre">.copy()</span></code></p></li>
 <li><p>By default, <code class="docutils literal notranslate"><span class="pre">=</span></code> without <code class="docutils literal notranslate"><span class="pre">.copy()</span></code> creates a “pointer” to the original numpy matrix. Thus when we change <code class="docutils literal notranslate"><span class="pre">aug_matrix</span></code>, we would also change <code class="docutils literal notranslate"><span class="pre">A33</span></code> and/or <code class="docutils literal notranslate"><span class="pre">b3</span></code>.</p></li>
@@ -1154,7 +1288,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="section" id="gaussian-elimination-take-care-of-first-column">
-<h3>Gaussian Elimination: Take Care of First Column<a class="headerlink" href="#gaussian-elimination-take-care-of-first-column" title="Permalink to this headline">¶</a></h3>
+<h3>Gaussian Elimination: Take Care of First Column<a class="headerlink" href="#gaussian-elimination-take-care-of-first-column" title="Permalink to this headline">#</a></h3>
 <p>We will now walk through the Guassian elimination steps in Python. These steps should match your paper and pencil work from a previous home activity.</p>
 <p><strong>Step 1</strong>: Eliminate the <strong>-1</strong> in the first column, second row.</p>
 <p>Multiply first row by (1/3) and add to second row:</p>
@@ -1202,7 +1336,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="section" id="gaussian-elimination-take-care-of-second-column">
-<h3>Gaussian Elimination: Take Care of Second Column<a class="headerlink" href="#gaussian-elimination-take-care-of-second-column" title="Permalink to this headline">¶</a></h3>
+<h3>Gaussian Elimination: Take Care of Second Column<a class="headerlink" href="#gaussian-elimination-take-care-of-second-column" title="Permalink to this headline">#</a></h3>
 <p><strong>Step 3</strong>: Eliminate <strong>-9<span class="math notranslate nohighlight">\(\frac{1}{3}\)</span></strong> from the last row.</p>
 <p>Multiply row 2 by 9<span class="math notranslate nohighlight">\(\frac{1}{3}\)</span>/4<span class="math notranslate nohighlight">\(\frac{2}{3}\)</span> and add to last row:</p>
 <div class="cell docutils container">
@@ -1232,22 +1366,24 @@ $<span class="math notranslate nohighlight">\(
 or
 \)</span>$
 \left(\begin{array}{ccc}   3 &amp; 2 &amp; 1 \ 0 &amp; 4\frac{2}{3} &amp; 5\frac{1}{3}\ 0&amp; 0 &amp; 20\end{array}\right) \begin{pmatrix}x_1\x_2\x_3\end{pmatrix} =</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c6f1dd78-b8c0-4bb2-8ba4-c9a5c68431ff">
-<span class="eqno">(1)<a class="headerlink" href="#equation-c6f1dd78-b8c0-4bb2-8ba4-c9a5c68431ff" title="Permalink to this equation">¶</a></span>\[\begin{pmatrix} 6\\10\\20\end{pmatrix}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-951635f7-85f7-484b-aa37-c5f545a8c3b7">
+<span class="eqno">(1)<a class="headerlink" href="#equation-951635f7-85f7-484b-aa37-c5f545a8c3b7" title="Permalink to this equation">#</a></span>\[\begin{pmatrix} 6\\10\\20\end{pmatrix}\]</div>
 <p>$$</p>
 </div>
 </div>
 <div class="section" id="motivating-example-and-back-substitution">
-<h2>Motivating Example and Back Substitution<a class="headerlink" href="#motivating-example-and-back-substitution" title="Permalink to this headline">¶</a></h2>
+<h2>Motivating Example and Back Substitution<a class="headerlink" href="#motivating-example-and-back-substitution" title="Permalink to this headline">#</a></h2>
 <p>We can easily solve this via <strong>back substitution</strong>:</p>
 <ol class="simple">
 <li><p>Take the last equation and solve for <span class="math notranslate nohighlight">\(x_3\)</span>.</p></li>
 <li><p>Plug the value for <span class="math notranslate nohighlight">\(x_3\)</span> into the second equation, solve for <span class="math notranslate nohighlight">\(x_2\)</span>.</p></li>
 <li><p>Plug both into the first equation and solve for <span class="math notranslate nohighlight">\(x_1\)</span>.</p></li>
 </ol>
-<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
-<b>Home Activity</b>: Using the steps above, solve for $x_1$, $x_2$, and $x_3$ with pencil and paper.
-</div><p>We will now perform backward substitution in Python.</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Using the steps above, solve for <span class="math notranslate nohighlight">\(x_1\)</span>, <span class="math notranslate nohighlight">\(x_2\)</span>, and <span class="math notranslate nohighlight">\(x_3\)</span> with pencil and paper.</p>
+</div>
+<p>We will now perform backward substitution in Python.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#backsubstitution</span>
@@ -1272,11 +1408,13 @@ x1 = 1.0
 </div>
 <p>The solution we get is $<span class="math notranslate nohighlight">\(x_1 = 1,\)</span><span class="math notranslate nohighlight">\( \)</span><span class="math notranslate nohighlight">\(x_2 = 1,\)</span><span class="math notranslate nohighlight">\( \)</span><span class="math notranslate nohighlight">\(x_3 = 1.\)</span>$ We can check this by plugging it in.</p>
 <div class="section" id="verify-solution">
-<h3>Verify Solution<a class="headerlink" href="#verify-solution" title="Permalink to this headline">¶</a></h3>
+<h3>Verify Solution<a class="headerlink" href="#verify-solution" title="Permalink to this headline">#</a></h3>
 <p>We can verify our solution is correct by computing <span class="math notranslate nohighlight">\(\mathbf{A} \cdot \mathbf{x}\)</span> and comparing to <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>.</p>
-<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
-<b>Home Activity</b>: Perform this matrix multiplication with pencil and paper. (This is good practice, especially if you took linear algebra a few semesters ago.) Verify your pencil and paper solution for $x$ is correct.
-</div><p>We can easily perform this matrix multiplication by Python too.</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Perform this matrix multiplication with pencil and paper. (This is good practice, especially if you took linear algebra a few semesters ago.) Verify your pencil and paper solution for <span class="math notranslate nohighlight">\(x\)</span> is correct.</p>
+</div>
+<p>We can easily perform this matrix multiplication by Python too.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
@@ -1291,9 +1429,11 @@ x1 = 1.0
 </div>
 </div>
 <p>Perfect.</p>
-<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
-<b>Home Activity</b>: Compute $\mathbf{A} \cdot \mathbf{x}$ in Python using alternate syntax, i.e., not <tt>.dot</tt>, for matrix multiplication.
-</div><div class="cell docutils container">
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Compute <span class="math notranslate nohighlight">\(\mathbf{A} \cdot \mathbf{x}\)</span> in Python using alternate syntax, i.e., not <tt>.dot</tt>, for matrix multiplication.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
 </pre></div>
@@ -1308,17 +1448,22 @@ x1 = 1.0
 </div>
 </div>
 <div class="section" id="generalized-gaussian-elimination">
-<h2>Generalized Gaussian Elimination<a class="headerlink" href="#generalized-gaussian-elimination" title="Permalink to this headline">¶</a></h2>
+<h2>Generalized Gaussian Elimination<a class="headerlink" href="#generalized-gaussian-elimination" title="Permalink to this headline">#</a></h2>
 <p>Now we will generalize our strategy to any <span class="math notranslate nohighlight">\(N \times N\)</span> linear system.</p>
 <div class="section" id="pseudocode">
-<h3>Pseudocode<a class="headerlink" href="#pseudocode" title="Permalink to this headline">¶</a></h3>
-<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
-<b>Home Activity</b>: Write pseudocode for a function that performs Gaussian elimination on two inputs: matrix $\mathbf{A}$ and vector $\mathbf{b}$.
-</div></div>
+<h3>Pseudocode<a class="headerlink" href="#pseudocode" title="Permalink to this headline">#</a></h3>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Write pseudocode for a function that performs Gaussian elimination on two inputs: matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> and vector <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>.</p>
+</div>
+</div>
 <div class="section" id="python-implementation">
-<h3>Python Implementation<a class="headerlink" href="#python-implementation" title="Permalink to this headline">¶</a></h3>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Working with a partner, compare your pseudocode to the function below. Write down one observation or question to share with the class.</div><p>Question or observation to share:</p>
+<h3>Python Implementation<a class="headerlink" href="#python-implementation" title="Permalink to this headline">#</a></h3>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Working with a partner, compare your pseudocode to the function below. Write down one observation or question to share with the class.</p>
+</div>
+<p>Question or observation to share:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;Warning: If you add print statements to the code below (optional), </span>
@@ -1383,7 +1528,7 @@ x1 = 1.0
 </div>
 </div>
 <div class="section" id="unit-test-motivating-example">
-<h3>Unit Test: Motivating Example<a class="headerlink" href="#unit-test-motivating-example" title="Permalink to this headline">¶</a></h3>
+<h3>Unit Test: Motivating Example<a class="headerlink" href="#unit-test-motivating-example" title="Permalink to this headline">#</a></h3>
 <p>Immediately after creating our function, we should test it. Let’s use the 3x3 motivating example.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1404,17 +1549,22 @@ x1 = 1.0
 </div>
 </div>
 <div class="section" id="generalized-back-substitution">
-<h2>Generalized Back Substitution<a class="headerlink" href="#generalized-back-substitution" title="Permalink to this headline">¶</a></h2>
+<h2>Generalized Back Substitution<a class="headerlink" href="#generalized-back-substitution" title="Permalink to this headline">#</a></h2>
 <div class="section" id="id1">
-<h3>Pseudocode<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
-<b>Home Activity</b>: Write pseudocode for a function that takes an augmented matrix as an input, performs back substitution, and returns the solution vector.
-</div></div>
+<h3>Pseudocode<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Write pseudocode for a function that takes an augmented matrix as an input, performs back substitution, and returns the solution vector.</p>
+</div>
+</div>
 <div class="section" id="id2">
-<h3>Python Implementation<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<h3>Python Implementation<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
 <p>Now let’s program our back substitution function in Python.</p>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Working with a partner, compare your pseudocode to the function below. Write down one observation or question to share with the class.</div><p>Question or observation to share:</p>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Working with a partner, compare your pseudocode to the function below. Write down one observation or question to share with the class.</p>
+</div>
+<p>Question or observation to share:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">BackSub</span><span class="p">(</span><span class="n">aug_matrix</span><span class="p">,</span><span class="n">z_tol</span><span class="o">=</span><span class="mf">1E-8</span><span class="p">):</span>
@@ -1570,7 +1720,7 @@ x1 = 1.0
 </div>
 </div>
 <div class="section" id="additional-testing-random-linear-systems">
-<h2>Additional Testing: Random Linear Systems<a class="headerlink" href="#additional-testing-random-linear-systems" title="Permalink to this headline">¶</a></h2>
+<h2>Additional Testing: Random Linear Systems<a class="headerlink" href="#additional-testing-random-linear-systems" title="Permalink to this headline">#</a></h2>
 <p>Both our functions gave the expected results for the motivating example, but we want to ensure the functions work for a general NxN linear system.</p>
 <p>Here is an idea. Let’s randomly generate many <span class="math notranslate nohighlight">\(N x N\)</span> linear systems and solve them with our Gaussian elimination code.</p>
 <div class="cell docutils container">
@@ -1636,11 +1786,13 @@ diff =  [4.38982184e-13 7.44293516e-13 1.99340544e-12 2.43344234e-12]
 </div>
 </div>
 </div>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Run the code above a few times. Does anyone observe it only fails some of the time? Any ideas as to why this happens?
-</div></div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Run the code above a few times. Does anyone observe it only fails some of the time? Any ideas as to why this happens?</p>
+</div>
+</div>
 <div class="section" id="round-off-and-pivoting">
-<h2>Round off and Pivoting<a class="headerlink" href="#round-off-and-pivoting" title="Permalink to this headline">¶</a></h2>
+<h2>Round off and Pivoting<a class="headerlink" href="#round-off-and-pivoting" title="Permalink to this headline">#</a></h2>
 <p>For matrices with a large discrepancy in the magnitude of the elements, we’ll see that Gauss elimination doesn’t perform quite as well.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1729,11 +1881,15 @@ b= [2. 6.]
 \[\begin{split}\underbrace{\begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}}_{\mathbf{A}} ~
 \underbrace{\begin{pmatrix} x_1\\x_2 \end{pmatrix}}_{\mathbf{x}} = \underbrace{\begin{pmatrix}6\\2\end{pmatrix}}_{\mathbf{b}}
 \end{split}\]</div>
-<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
-<b>Home Activity</b>: Write a 1 or 2 sentence explaining what will happen when we apply Gaussian elimination to the above system. You should be able to answer this question without running any Python code.
-</div><div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
-<b>Home Activity</b>: Run the code below.
-</div><div class="cell docutils container">
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Write a 1 or 2 sentence explaining what will happen when we apply Gaussian elimination to the above system. You should be able to answer this question without running any Python code.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Run the code below.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="mi">0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">),(</span><span class="mf">1.0</span><span class="p">,</span><span class="mi">0</span><span class="p">)])</span>
 <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">6.</span><span class="p">,</span><span class="mf">2.0</span><span class="p">])</span>
@@ -1791,12 +1947,14 @@ aug_mat =
 <p>We can correct this by checking before we pivot, and <strong>rearranging the equations</strong> to pivot with the largest possible entry.</p>
 <p>It is worth mentioning that <strong>largest is relative</strong> to the size of the other entries in the row. Consider two rows: <span class="math notranslate nohighlight">\((11,10,10)\)</span> and <span class="math notranslate nohighlight">\((2,1,1)\)</span>. The 2 is actually a better pivot because it is large relative to the other elements of a row.</p>
 <div class="section" id="swapping-rows">
-<h3>Swapping Rows<a class="headerlink" href="#swapping-rows" title="Permalink to this headline">¶</a></h3>
+<h3>Swapping Rows<a class="headerlink" href="#swapping-rows" title="Permalink to this headline">#</a></h3>
 <p><strong>Linear Algebra Check</strong> Why is it valid to swap rows? What does swapping two rows mean for the system of linear equations we are solving?</p>
 <p>To do pivoting we will need a means to swap rows in our augmented matrix.</p>
-<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
-<b>Home Activity</b>: Run the code below.
-</div><div class="cell docutils container">
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Run the code below.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">swap_rows</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Rows two rows in a matrix, switch row a with row b</span>
@@ -1846,11 +2004,13 @@ After swapping 0 and 1, A =
 </div>
 </div>
 <div class="section" id="selecting-pivot">
-<h3>Selecting Pivot<a class="headerlink" href="#selecting-pivot" title="Permalink to this headline">¶</a></h3>
+<h3>Selecting Pivot<a class="headerlink" href="#selecting-pivot" title="Permalink to this headline">#</a></h3>
 <p>The next step is figuring out how to swap during each step. At the beginning of the solve we want to find the <strong>maximum row element size</strong> using a piece of code like this:</p>
-<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
-<b>Home Activity</b>: Run the code below.
-</div><div class="cell docutils container">
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Run the code below.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a random matrix</span>
 <span class="n">N</span> <span class="o">=</span> <span class="mi">5</span>
@@ -2005,7 +2165,7 @@ argmax =  1
 </div>
 </div>
 <div class="section" id="put-it-all-together">
-<h3>Put it All Together<a class="headerlink" href="#put-it-all-together" title="Permalink to this headline">¶</a></h3>
+<h3>Put it All Together<a class="headerlink" href="#put-it-all-together" title="Permalink to this headline">#</a></h3>
 <p>Now it’s time to put this all together in a new version of Gauss elimination. Here are the main steps:</p>
 <ul class="simple">
 <li><p>Assembles augmented matrix</p></li>
@@ -2019,9 +2179,11 @@ argmax =  1
 <li><p>Calls backsolve</p></li>
 </ul>
 <p>We will use this in place of pseudocode this time. We already have code that does each step.</p>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Spend 5 minutes discussing the code below with a partner. Write down at least 1 question to ask the class.
-</div><div class="cell docutils container">
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Spend 5 minutes discussing the code below with a partner. Write down at least 1 question to ask the class.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">GaussElimPivotSolve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">LOUD</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;create a Gaussian elimination with pivoting matrix for a system</span>
@@ -2098,7 +2260,7 @@ argmax =  1
 </div>
 </div>
 <div class="section" id="id3">
-<h3>Unit Test: Motivating Example<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<h3>Unit Test: Motivating Example<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">A33</span><span class="p">)</span>
@@ -2135,7 +2297,7 @@ The residual (errors) are [[0. 0. 0.]]
 <p>Success, but not that impressive. Vanilla Gauss elimination also worked here. Pivoting was never used.</p>
 </div>
 <div class="section" id="unit-test-troublesome-system">
-<h3>Unit Test: Troublesome System<a class="headerlink" href="#unit-test-troublesome-system" title="Permalink to this headline">¶</a></h3>
+<h3>Unit Test: Troublesome System<a class="headerlink" href="#unit-test-troublesome-system" title="Permalink to this headline">#</a></h3>
 <p>Now we can try this on the systems that didn’t work so well before:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2194,12 +2356,14 @@ The residual (errors) are [ 0.00000000e+00 -1.11022302e-16  0.00000000e+00]
 </div>
 </div>
 <div class="section" id="timing">
-<h2>Timing<a class="headerlink" href="#timing" title="Permalink to this headline">¶</a></h2>
+<h2>Timing<a class="headerlink" href="#timing" title="Permalink to this headline">#</a></h2>
 <p>If you look in any textbook, you’ll see that Gaussian elimination takes <span class="math notranslate nohighlight">\(O(n^3)\)</span> operations where <span class="math notranslate nohighlight">\(n\times n\)</span> is the size of the matrix.  The notation <span class="math notranslate nohighlight">\(O(n^3)\)</span> means that as the matrix grows, the asymptotic (i.e., <span class="math notranslate nohighlight">\(n\)</span> large) growth rate of the number of floating point operations (add, subtract, multiply, and divide are all floating point operations) grows as <span class="math notranslate nohighlight">\(n^3\)</span>.  Therefore, if we double the size of the matrix, the number of operations goes up by a factor of <span class="math notranslate nohighlight">\(2^3=8\)</span>.</p>
 <p>Let’s use the time module that python provides to time how long it takes to run our Gaussian elimination code as we increase <span class="math notranslate nohighlight">\(n\)</span>.</p>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Run the code below.
-</div><div class="cell docutils container">
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Run the code below.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
 
@@ -2264,14 +2428,14 @@ The residual (errors) are [ 0.00000000e+00 -1.11022302e-16  0.00000000e+00]
 The actual slope is closer to 2, the slope of the green dashed line.  This implies that the time to solution is not growing as fast as the theory.  The reason for this is that python (probably numpy) is helping us out and grouping operations together and executing some of them in parallel so that the number of floating point operations is not linearly related to the time.</p>
 </div>
 <div class="section" id="mass-balance-example-adapted-from-an-old-exam-problem">
-<h2>Mass Balance Example (Adapted from an Old Exam Problem)<a class="headerlink" href="#mass-balance-example-adapted-from-an-old-exam-problem" title="Permalink to this headline">¶</a></h2>
+<h2>Mass Balance Example (Adapted from an Old Exam Problem)<a class="headerlink" href="#mass-balance-example-adapted-from-an-old-exam-problem" title="Permalink to this headline">#</a></h2>
 <p>Let’s see how Gaussian elimination can be applied to mass balance problems.</p>
 <p>We want to convert A into valuable product B using a process with a mixer, reactor, and separator.</p>
-<p><img alt="flowsheet" src="https://ndcbe.github.io/data-and-computing/_images/1b_fig.png" /></p>
+<p><img alt="flowsheet" src="../../_images/1b_fig.png" /></p>
 <p>A feed enters at a rate of 100 moles per hour and is composed 99 mole % A and the remainder B. Unfortunately, the reactor only has a 10% per pass conversion efficiency. This means that only 10% of A that enters the reactor undergoes the reaction <span class="math notranslate nohighlight">\(A \rightarrow B\)</span>. The separator splits the reactor effluent into two streams: the product and the recycle. The separator operates such that for every 1 mole of A in the product streams, there are 4 moles of A in the recycle stream. Likewise, for every 8 moles of B in the product stream, there is 1 mole of B in the recycle stream.</p>
 <p>As shown in the figure above, we can model the process using component molar flowrates as variables. The first subscript is the stream (<span class="math notranslate nohighlight">\(m\)</span>, <span class="math notranslate nohighlight">\(e\)</span>, <span class="math notranslate nohighlight">\(r\)</span>, or <span class="math notranslate nohighlight">\(p\)</span>) and the second subscript is the component (<span class="math notranslate nohighlight">\(A\)</span> or <span class="math notranslate nohighlight">\(B\)</span>).</p>
 <div class="section" id="mathematical-model-old-exam-question">
-<h3>Mathematical Model (Old Exam Question)<a class="headerlink" href="#mathematical-model-old-exam-question" title="Permalink to this headline">¶</a></h3>
+<h3>Mathematical Model (Old Exam Question)<a class="headerlink" href="#mathematical-model-old-exam-question" title="Permalink to this headline">#</a></h3>
 <p>Your classmate proposes the following mathematical model</p>
 <p>Equation A:   <span class="math notranslate nohighlight">\(n_{f,A} + n_{r,A} = n_{m,A}\)</span></p>
 <p>Equation B:   <span class="math notranslate nohighlight">\(n_{f,B} + n_{r,B} = n_{m,B}\)</span></p>
@@ -2305,9 +2469,11 @@ The actual slope is closer to 2, the slope of the green dashed line.  This impli
 <li><p>None of the above</p></li>
 </ol>
 <p>Hint: Choice 19 does not include a typo. It is meant to be 1 and 1.</p>
-<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
-<b>Home Activity</b>: Match each equation to a description above. Record your answer in the dictionary <tt>eqn_names</tt> using the keys A,...,F and the values 1,...,20.
-</div><div class="cell docutils container">
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Match each equation to a description above. Record your answer in the dictionary <tt>eqn_names</tt> using the keys A,…,F and the values 1,…,20.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eqn_names</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;A&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">}</span>
 
@@ -2325,7 +2491,7 @@ The actual slope is closer to 2, the slope of the green dashed line.  This impli
 </div>
 </div>
 <div class="section" id="matrix-form-old-exam-question">
-<h3>Matrix Form (Old Exam Question)<a class="headerlink" href="#matrix-form-old-exam-question" title="Permalink to this headline">¶</a></h3>
+<h3>Matrix Form (Old Exam Question)<a class="headerlink" href="#matrix-form-old-exam-question" title="Permalink to this headline">#</a></h3>
 <div class="math notranslate nohighlight">
 \[\begin{split}\mathbf{x} = 	\begin{bmatrix}n_{m,A} \\
 		n_{m,B} \\
@@ -2335,11 +2501,13 @@ The actual slope is closer to 2, the slope of the green dashed line.  This impli
 		n_{p,B} \\
 		n_{r,A} \\
 		n_{r,B} \end{bmatrix}\end{split}\]</div>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Convert the model to matrix form.
-</div></div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Convert the model to matrix form.</p>
+</div>
+</div>
 <div class="section" id="solve-with-gaussian-elimination">
-<h3>Solve with Gaussian Elimination<a class="headerlink" href="#solve-with-gaussian-elimination" title="Permalink to this headline">¶</a></h3>
+<h3>Solve with Gaussian Elimination<a class="headerlink" href="#solve-with-gaussian-elimination" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">print_solution</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
@@ -2367,9 +2535,11 @@ The actual slope is closer to 2, the slope of the green dashed line.  This impli
 </div>
 </div>
 </div>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Finish populating <tt>A_ex</tt> and <tt>b_ex</tt> below.
-</div><div class="cell docutils container">
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Finish populating <tt>A_ex</tt> and <tt>b_ex</tt> below.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Assemble A matrix</span>
 <span class="n">A_ex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
@@ -2481,7 +2651,7 @@ recycle: B =  4.544642857142856
 </div>
 </div>
 <div class="section" id="flip-the-order-of-the-row">
-<h3>Flip the order of the row<a class="headerlink" href="#flip-the-order-of-the-row" title="Permalink to this headline">¶</a></h3>
+<h3>Flip the order of the row<a class="headerlink" href="#flip-the-order-of-the-row" title="Permalink to this headline">#</a></h3>
 <p>What happens if we write the equations in reserve order?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2726,7 +2896,7 @@ recycle: B =  4.544642857142858
 <p>For this problem, we must use pivoting if we start with the equations in a certain order.</p>
 </div>
 <div class="section" id="replace-the-8th-equation-with-an-overall-mole-balance">
-<h3>Replace the 8th equation with an overall mole balance<a class="headerlink" href="#replace-the-8th-equation-with-an-overall-mole-balance" title="Permalink to this headline">¶</a></h3>
+<h3>Replace the 8th equation with an overall mole balance<a class="headerlink" href="#replace-the-8th-equation-with-an-overall-mole-balance" title="Permalink to this headline">#</a></h3>
 <div class="math notranslate nohighlight">
 \[n_{p,A} + n_{p_B} = n_{f,A} + n_{f,B} = 100\]</div>
 <div class="cell docutils container">
@@ -2804,9 +2974,11 @@ Final aug_matrix is
 </div>
 </div>
 <p>Why did this fail? Because 1 mole of A converts to 1 mole of B, the overall mole balance is a valid equation!</p>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Discuss with a partner. Hint: How is the invertible matrix theorem helpful?
-</div><div class="cell docutils container">
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Discuss with a partner. Hint: How is the invertible matrix theorem helpful?</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># hint: find the rank of A_ex</span>
 <span class="c1"># Add your solution here</span>
@@ -2858,9 +3030,11 @@ Final aug_matrix is
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="01-Modeling-Systems-of-Linear-Equations.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -2876,24 +3050,28 @@ Final aug_matrix is
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
     
-      By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>

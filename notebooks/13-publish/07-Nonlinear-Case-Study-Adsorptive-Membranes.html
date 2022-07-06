@@ -7,8 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes &#8212; Data and Computing for Chemical Engieers</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet">
-  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,20 +19,16 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -39,12 +36,13 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -64,7 +62,21 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -73,9 +85,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -93,14 +106,15 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../intro.html">
-   Welcome to (Advanced) Data and Computing for Engineers
-  </a>
- </li>
-</ul>
-<ul class="current nav bd-sidenav">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome to (Advanced) Data and Computing for Engineers
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../01/00-Python-Primer.html">
    Python Primer
@@ -598,112 +612,227 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/13-publish/07-Nonlinear-Case-Study-Adsorptive-Membranes.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/ndcbe/data-and-computing"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/13-publish/07-Nonlinear-Case-Study-Adsorptive-Membranes.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/13-publish/07-Nonlinear-Case-Study-Adsorptive-Membranes.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/13-publish/07-Nonlinear-Case-Study-Adsorptive-Membranes.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/13-publish/07-Nonlinear-Case-Study-Adsorptive-Membranes.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/13-publish/07-Nonlinear-Case-Study-Adsorptive-Membranes.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ndcbe/data-and-computing"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/13-publish/07-Nonlinear-Case-Study-Adsorptive-Membranes.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/notebooks/13-publish/07-Nonlinear-Case-Study-Adsorptive-Membranes.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#background">
    Background
@@ -838,12 +967,11 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes</h1>
@@ -994,15 +1122,16 @@ const thebe_selector_output = ".output, .cell_output"
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="nonlinear-regression-case-study-adsorptive-nanoporous-membranes">
-<h1>Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes<a class="headerlink" href="#nonlinear-regression-case-study-adsorptive-nanoporous-membranes" title="Permalink to this headline">¶</a></h1>
+<h1>Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes<a class="headerlink" href="#nonlinear-regression-case-study-adsorptive-nanoporous-membranes" title="Permalink to this headline">#</a></h1>
 <p>© Elvis A. Eugene and Alexander W. Dowling, University of Notre Dame</p>
 <p>CBE20258, Spring 2020</p>
 <div class="section" id="background">
-<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">#</a></h2>
 <p>Prof. William Phillip has been developing novel adsorptive nanoporous membranes to remove heavy metals from water. He has asked for your help designing a water treatment system. Specifically, <strong>given laboratory data for these membrane systems, how much Pb (lead) can be removed per batch?</strong></p>
 <p>As seniors, you will learn about <strong>adsorption-based systems in Separation Processes</strong>. For this project, you only need to know some basics: adsorptive systems preferentially adsorb a contaminant from a bulk fluid, similar to how dust sticks to a Swiffer cleaning cloth. The amount of contaminant, Pb in this project, that adsorbs (i.e. sticks) to the water treatment membranes can be modeled with the <strong>Langmuir isotherm</strong>:</p>
 <div class="math notranslate nohighlight">
@@ -1044,9 +1173,11 @@ const thebe_selector_output = ".output, .cell_output"
 </ol>
 <p>Moreover, we will compare three different regression strategies for Step 1; we will then see how our choices propagate through Steps 2 and 3.</p>
 <p>This comprehensive case study combines several key concepts from all three pillars of this class: Python, numerical methods, and data analytics. The <strong>final project</strong> will follow a similar structure. Much of the Python code can be adapted from previous homework assignments and class activities.</p>
-<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
-<b>Home Activity</b>: Determine the units of $K$ and $Q$. Hint: $1$ in the denominator of the Langmuir isotherm is dimensionless.
-</div><div class="cell docutils container">
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Determine the units of <span class="math notranslate nohighlight">\(K\)</span> and <span class="math notranslate nohighlight">\(Q\)</span>. Hint: <span class="math notranslate nohighlight">\(1\)</span> in the denominator of the Langmuir isotherm is dimensionless.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load libraries</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -1069,7 +1200,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="section" id="regression-analysis">
-<h2>1. Regression Analysis<a class="headerlink" href="#regression-analysis" title="Permalink to this headline">¶</a></h2>
+<h2>1. Regression Analysis<a class="headerlink" href="#regression-analysis" title="Permalink to this headline">#</a></h2>
 <p>We will now compare three different regression strategies for the Langmuir isotherm problem:</p>
 <ol class="simple">
 <li><p>Linear Regression after Transformation</p></li>
@@ -1086,18 +1217,20 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>Compute the covariance matrix for the fitted parameters, transform to the original parameters (if applicable)</p></li>
 </ul>
 <div class="section" id="a-paramter-estimation-using-a-transformation-and-linear-regression">
-<h3>A. Paramter estimation using a transformation and linear regression<a class="headerlink" href="#a-paramter-estimation-using-a-transformation-and-linear-regression" title="Permalink to this headline">¶</a></h3>
+<h3>A. Paramter estimation using a transformation and linear regression<a class="headerlink" href="#a-paramter-estimation-using-a-transformation-and-linear-regression" title="Permalink to this headline">#</a></h3>
 <div class="section" id="step-i-setup-and-best-fit">
-<h4>Step i: Setup and Best Fit<a class="headerlink" href="#step-i-setup-and-best-fit" title="Permalink to this headline">¶</a></h4>
+<h4>Step i: Setup and Best Fit<a class="headerlink" href="#step-i-setup-and-best-fit" title="Permalink to this headline">#</a></h4>
 <p>We will start our analysis by performing a transformation; this is neccessary to apply linear regression. We start with the Languir isotherm:</p>
 <div class="math notranslate nohighlight">
 \[ q = \frac{Q \cdot K \cdot c}{1 + K \cdot c}\]</div>
 <p>With a little bit of algebra, we obtain:</p>
 <div class="math notranslate nohighlight">
 \[ \frac{c}{q} =  \frac{c}{Q} + \frac{1}{Q \cdot K} \]</div>
-<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
-<b>Home Activity</b>: Write down the mathematical steps to go from the original isotherm $q=~...$ to the transformed isotherm $c/q =~...~$.
-</div><p>You may be asking yourselves, <em>how is that model linear</em>?!? We just need to define our variables and parameters carefully:</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Write down the mathematical steps to go from the original isotherm <span class="math notranslate nohighlight">\(q=~...\)</span> to the transformed isotherm <span class="math notranslate nohighlight">\(c/q =~...~\)</span>.</p>
+</div>
+<p>You may be asking yourselves, <em>how is that model linear</em>?!? We just need to define our variables and parameters carefully:</p>
 <div class="math notranslate nohighlight">
 \[ \underbrace{\frac{c}{q}}_{y} =  \underbrace{\frac{1}{Q}}_{\beta_1} \cdot \underbrace{c}_{x} + \underbrace{\frac{1}{K \cdot Q}}_{\beta_0}   \]</div>
 <p>Recall <span class="math notranslate nohighlight">\(x\)</span> is the independent variable, <span class="math notranslate nohighlight">\(y\)</span> is the observed variable, <span class="math notranslate nohighlight">\(\beta_0\)</span> is the intercept, and <span class="math notranslate nohighlight">\(\beta_1\)</span> is the slope. With this transformation, we can compute the regression coefficients:</p>
@@ -1145,7 +1278,7 @@ Q (linear regression) = 1.5 mmol/g_membrane
 </div>
 </div>
 <div class="section" id="step-ii-setup-best-fit-plot-for-best-fit-model-and-residuals">
-<h4>Step ii: Setup Best Fit Plot for Best Fit Model and Residuals<a class="headerlink" href="#step-ii-setup-best-fit-plot-for-best-fit-model-and-residuals" title="Permalink to this headline">¶</a></h4>
+<h4>Step ii: Setup Best Fit Plot for Best Fit Model and Residuals<a class="headerlink" href="#step-ii-setup-best-fit-plot-for-best-fit-model-and-residuals" title="Permalink to this headline">#</a></h4>
 <p>Now we want to visualize the quality of the fit. Because we plan to repeat the regression analysis two more times, we invested in writing functions for the visualization. This means we just need to declare the plotting procedures once and we can reuse them. This is a good programming practice; use functions to maximize code reuse.</p>
 <p>We’ll start by defining the first function which <strong>plots the linearized isotherm</strong> and <strong>plots the transformed residuals</strong>.</p>
 <div class="cell docutils container">
@@ -1305,7 +1438,7 @@ Q (linear regression) = 1.5 mmol/g_membrane
 <p><strong>Interpretation (Residuals)</strong>: This residual plot has a very similar pattern to the transformed residual plot. (Notice the vertical axis is different). The interpreation from above also applies to this plot.</p>
 </div>
 <div class="section" id="step-iii-compute-covariance-matricies">
-<h4>Step iii: Compute Covariance Matricies<a class="headerlink" href="#step-iii-compute-covariance-matricies" title="Permalink to this headline">¶</a></h4>
+<h4>Step iii: Compute Covariance Matricies<a class="headerlink" href="#step-iii-compute-covariance-matricies" title="Permalink to this headline">#</a></h4>
 <p>Next, we will compute the <strong>covariance matrix for the fitted parameters <span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span></strong>.</p>
 <p>We will start by computing the variance of the residuals. Recall the formula is:</p>
 <div class="math notranslate nohighlight">
@@ -1456,9 +1589,11 @@ Jacobian Matrix:
 </div>
 </div>
 </div>
-<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
-<b>Home Activity</b>: Write down at least three questions or observations you have about the code for the first transformated regression model (all of Section 1A). We will start class by answering your questions.
-</div><p><strong>Your Questions:</strong></p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Write down at least three questions or observations you have about the code for the first transformated regression model (all of Section 1A). We will start class by answering your questions.</p>
+</div>
+<p><strong>Your Questions:</strong></p>
 <ol class="simple">
 <li></li>
 <li></li>
@@ -1467,20 +1602,24 @@ Jacobian Matrix:
 </div>
 </div>
 <div class="section" id="b-paramter-estimation-using-an-alternate-transformation-and-linear-regression">
-<h3>B. Paramter estimation using an alternate transformation and linear regression<a class="headerlink" href="#b-paramter-estimation-using-an-alternate-transformation-and-linear-regression" title="Permalink to this headline">¶</a></h3>
+<h3>B. Paramter estimation using an alternate transformation and linear regression<a class="headerlink" href="#b-paramter-estimation-using-an-alternate-transformation-and-linear-regression" title="Permalink to this headline">#</a></h3>
 <div class="section" id="id1">
-<h4>Step i: Setup and Best Fit<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<h4>Step i: Setup and Best Fit<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h4>
 <p>We start with the Languir isotherm:</p>
 <div class="math notranslate nohighlight">
 \[ q = \frac{Q \cdot K \cdot c}{1 + K \cdot c}\]</div>
 <p>With a little bit of algebra, we obtain:</p>
 <div class="math notranslate nohighlight">
 \[ \frac{1}{q} =  \frac{1}{Q} + \frac{1}{Q \cdot K} \cdot \frac{1}{c} \]</div>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Identify $x$, $y$, $\beta_0$, and $\beta_1$ in the alternate transformed model.
-</div><div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Use `stats.linregress` to compute the best fit line. To maximize code reuse, save the results in variables <tt>slope</tt> and <tt>intercept</tt>.
-</div><div class="cell docutils container">
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Identify <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>, <span class="math notranslate nohighlight">\(\beta_0\)</span>, and <span class="math notranslate nohighlight">\(\beta_1\)</span> in the alternate transformed model.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">stats.linregress</span></code> to compute the best fit line. To maximize code reuse, save the results in variables <tt>slope</tt> and <tt>intercept</tt>.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
 </pre></div>
@@ -1493,13 +1632,17 @@ intercept = 0.6714412635365661
 </div>
 </div>
 </div>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Determine the new formulas to compute $K$ and $Q$ from the new fitted parameters $\beta_0$ and $\beta_1$. We recommend writing this on paper first. To typeset your answer below, just double click on the markdown cell and edit the formula. You do not need to turn in your on paper work.
-</div><div class="math notranslate nohighlight">
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Determine the new formulas to compute <span class="math notranslate nohighlight">\(K\)</span> and <span class="math notranslate nohighlight">\(Q\)</span> from the new fitted parameters <span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span>. We recommend writing this on paper first. To typeset your answer below, just double click on the markdown cell and edit the formula. You do not need to turn in your on paper work.</p>
+</div>
+<div class="math notranslate nohighlight">
 \[K = \frac{?}{?}, \qquad Q = \frac{?}{?}, \]</div>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Compute $K$ and $Q$ from new model. Store your answers in the variances <tt>Klin2</tt> and <tt>Qlin2</tt>.
-</div><div class="cell docutils container">
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Compute <span class="math notranslate nohighlight">\(K\)</span> and <span class="math notranslate nohighlight">\(Q\)</span> from new model. Store your answers in the variances <tt>Klin2</tt> and <tt>Qlin2</tt>.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Reverse transformation to obtain Q and K and display results</span>
 <span class="c1"># Add your solution here</span>
@@ -1515,9 +1658,11 @@ Q (alternate linear regression) = 1.5 mmol/g_membrane
 </div>
 </div>
 </div>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Plot the transformed model and the transformed residuals. Hint: When using the <tt>plot_liniso</tt> function, enter <tt>'lin2'</tt> as the fourth argument. This will add the appropraite units to the plot.
-</div><div class="cell docutils container">
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Plot the transformed model and the transformed residuals. Hint: When using the <tt>plot_liniso</tt> function, enter <tt>’lin2’</tt> as the fourth argument. This will add the appropraite units to the plot.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
 </pre></div>
@@ -1528,17 +1673,21 @@ Q (alternate linear regression) = 1.5 mmol/g_membrane
 <img alt="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_43_1.png" src="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_43_1.png" />
 </div>
 </div>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Interpret the plot. Write 3 bullet points (sentences) with your observations.
-</div><p><strong>Your Observations:</strong></p>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Interpret the plot. Write 3 bullet points (sentences) with your observations.</p>
+</div>
+<p><strong>Your Observations:</strong></p>
 <ol class="simple">
 <li></li>
 <li></li>
 <li></li>
 </ol>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Plot the Langmuir isotherm model and the (non-transformed) residuals. Hint: When using the <tt>plot_langiso</tt> function, enter <tt>'first transformed'</tt> as the fifth argument. This will add the appropriate title to the plot. Also remember to use <tt>Klin2</tt> and <tt>Qlin2</tt>.
-</div><div class="cell docutils container">
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Plot the Langmuir isotherm model and the (non-transformed) residuals. Hint: When using the <tt>plot_langiso</tt> function, enter <tt>’first transformed’</tt> as the fifth argument. This will add the appropriate title to the plot. Also remember to use <tt>Klin2</tt> and <tt>Qlin2</tt>.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot Langmuir isotherm</span>
 <span class="c1"># Add your solution here</span>
@@ -1550,17 +1699,21 @@ Q (alternate linear regression) = 1.5 mmol/g_membrane
 <img alt="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_47_1.png" src="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_47_1.png" />
 </div>
 </div>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Interpret these plots. Write 3 bullet points (sentences) with your observations.
-</div><p><strong>Your Observations:</strong></p>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Interpret these plots. Write 3 bullet points (sentences) with your observations.</p>
+</div>
+<p><strong>Your Observations:</strong></p>
 <ol class="simple">
 <li></li>
 <li></li>
 <li></li>
 </ol>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Calculate the residuals and store in variable <tt>r2</tt>.
-</div><div class="cell docutils container">
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Calculate the residuals and store in variable <tt>r2</tt>.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate residuals</span>
 <span class="c1"># Add your solution here</span>
@@ -1568,9 +1721,11 @@ Q (alternate linear regression) = 1.5 mmol/g_membrane
 </div>
 </div>
 </div>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Calculate the variance of the residuals. Store in variable <tt>var_r2</tt>.
-</div><div class="cell docutils container">
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Calculate the variance of the residuals. Store in variable <tt>var_r2</tt>.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># variance of residuals</span>
 <span class="c1"># Add your solution here</span>
@@ -1585,9 +1740,11 @@ Q (alternate linear regression) = 1.5 mmol/g_membrane
 </div>
 </div>
 </div>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Assemble the feature matrix and store in variable <tt>X2</tt>.
-</div><div class="cell docutils container">
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Assemble the feature matrix and store in variable <tt>X2</tt>.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># matrix of predictors</span>
 <span class="c1"># Add your solution here</span>
@@ -1608,9 +1765,11 @@ Q (alternate linear regression) = 1.5 mmol/g_membrane
 </div>
 </div>
 </div>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Calculate the covariance of the linear regression parameters. Store the result in <tt>cov_b2</tt>.
-</div><div class="cell docutils container">
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Calculate the covariance of the linear regression parameters. Store the result in <tt>cov_b2</tt>.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># assemble covariance matrix for regression parameters</span>
 <span class="c1"># Add your solution here</span>
@@ -1627,9 +1786,11 @@ Q (alternate linear regression) = 1.5 mmol/g_membrane
 </div>
 </div>
 </div>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Study the code below for the gradients of $K$ and $Q$ with respect to the new $\beta_0$ and $\beta_1$. Do you agree with this calculation? Did we make a mistake?
-</div><div class="cell docutils container">
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Study the code below for the gradients of <span class="math notranslate nohighlight">\(K\)</span> and <span class="math notranslate nohighlight">\(Q\)</span> with respect to the new <span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span>. Do you agree with this calculation? Did we make a mistake?</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gradK2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="o">/</span><span class="n">slope</span><span class="p">,</span> <span class="o">-</span><span class="n">intercept</span><span class="o">/</span><span class="n">slope</span><span class="o">**</span><span class="mi">2</span><span class="p">])</span>
 <span class="n">gradQ2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">intercept</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
@@ -1646,9 +1807,11 @@ Gradient of Q: [-2.21811442  0.        ]
 </div>
 </div>
 </div>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Assemble the gradients into the Jacobian matrix. Store the matrix in <tt>jac2</tt>.
-</div><div class="cell docutils container">
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Assemble the gradients into the Jacobian matrix. Store the matrix in <tt>jac2</tt>.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
 
@@ -1664,9 +1827,11 @@ Gradient of Q: [-2.21811442  0.        ]
 </div>
 </div>
 </div>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Apply the multivariate general nonlinear error propagation formulation. Store the covariance matrix of the original model parameters in <tt>cov_theta_lin2</tt>.
-</div><div class="cell docutils container">
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Apply the multivariate general nonlinear error propagation formulation. Store the covariance matrix of the original model parameters in <tt>cov_theta_lin2</tt>.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Apply nonlinear error propagation formula</span>
 <span class="c1"># Add your solution here</span>
@@ -1686,11 +1851,13 @@ Gradient of Q: [-2.21811442  0.        ]
 </div>
 </div>
 <div class="section" id="c-parameter-estimation-using-nonlinear-regression">
-<h3>C. Parameter estimation using nonlinear regression<a class="headerlink" href="#c-parameter-estimation-using-nonlinear-regression" title="Permalink to this headline">¶</a></h3>
+<h3>C. Parameter estimation using nonlinear regression<a class="headerlink" href="#c-parameter-estimation-using-nonlinear-regression" title="Permalink to this headline">#</a></h3>
 <p>We will now apply nonlinear regression to our problem. First, we need to define a function to evaluate the model.</p>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Fill in the missing line in <tt>model_func</tt> below.
-</div><div class="cell docutils container">
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Fill in the missing line in <tt>model_func</tt> below.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Code for parameter estimation using nonlinear regression</span>
 
@@ -1712,9 +1879,11 @@ Gradient of Q: [-2.21811442  0.        ]
 </div>
 </div>
 <p>Next we need to define a function to calculate the residuals for each data point.</p>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Fill in the missing line in <tt>regression_func</tt> below.
-</div><div class="cell docutils container">
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Fill in the missing line in <tt>regression_func</tt> below.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define function to return residuals of model being fitted</span>
 <span class="k">def</span> <span class="nf">regression_func</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
@@ -1737,9 +1906,11 @@ Gradient of Q: [-2.21811442  0.        ]
 </div>
 </div>
 <p>Now we perform nonlinear regression.</p>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Use the function <tt>optimize.least_squares</tt> to compute the best fit. Store the results in the variable <tt>theta_fit</tt>.
-</div><div class="cell docutils container">
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Use the function <tt>optimize.least_squares</tt> to compute the best fit. Store the results in the variable <tt>theta_fit</tt>.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Perform nonlinear parameter estimation</span>
 
@@ -1767,9 +1938,11 @@ Q (nonlinear regression) = 1.5 mmol/g_membrane
 </div>
 </div>
 </div>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Plot the fitted model and residuals. Hint: Use the function <tt>plot_langiso</tt>. Enter <tt>'nonlinear'</tt> as the fifth argument.
-</div><div class="cell docutils container">
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Plot the fitted model and residuals. Hint: Use the function <tt>plot_langiso</tt>. Enter <tt>’nonlinear’</tt> as the fifth argument.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
 </pre></div>
@@ -1780,18 +1953,22 @@ Q (nonlinear regression) = 1.5 mmol/g_membrane
 <img alt="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_75_1.png" src="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_75_1.png" />
 </div>
 </div>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Interpret these plots. Write 3 bullet points (sentences) with your observations.
-</div><p><strong>Your Observations:</strong></p>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Interpret these plots. Write 3 bullet points (sentences) with your observations.</p>
+</div>
+<p><strong>Your Observations:</strong></p>
 <ol class="simple">
 <li></li>
 <li></li>
 <li></li>
 </ol>
 <p>We will complete the nonlinear regression analysis by estimating the covariance of the fitted parameters <span class="math notranslate nohighlight">\(\mathbf{\Sigma}_{\vec{\theta}}\)</span>.</p>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Calculate the residuals and store in <tt>r3</tt>. Next calculate the variance of the residuals and store in <tt>var_r3</tt>.
-</div><div class="cell docutils container">
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Calculate the residuals and store in <tt>r3</tt>. Next calculate the variance of the residuals and store in <tt>var_r3</tt>.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate residuals. Hint: use model_func</span>
 <span class="c1">### BEGIN SOLUTON</span>
@@ -1823,9 +2000,11 @@ J_{i,j} = \frac{\partial(y_i - \hat{y}_i)}{\partial \theta_j}
 <p>This IS NOT the same Jacobian matrix for nonlinear error propagation. Does this formula look familar? Recall, for LINEAR REGRESSION, the covariance estimate is:</p>
 <div class="math notranslate nohighlight">
 \[\Sigma_{\hat{\beta}} = \hat{\sigma}_r^2  (\mathbf{X}^T \mathbf{X})^{-1}\]</div>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Compare the nonlinear regression and linear regression covariance formulas. Compute the elements of the Jacobian matrix for a linear model using $\vec{\theta} = \vec{\beta}$. How are $\mathbf{J}$ and $\mathbf{X}$ related? Discuss then write one sentence.
-</div><p><strong>Discussion</strong>:</p>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Compare the nonlinear regression and linear regression covariance formulas. Compute the elements of the Jacobian matrix for a linear model using <span class="math notranslate nohighlight">\(\vec{\theta} = \vec{\beta}\)</span>. How are <span class="math notranslate nohighlight">\(\mathbf{J}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> related? Discuss then write one sentence.</p>
+</div>
+<p><strong>Discussion</strong>:</p>
 <p>Luckily, <code class="docutils literal notranslate"><span class="pre">optimize.least_squares</span></code> computes this Jacobian for us automatically.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1845,9 +2024,11 @@ J_{i,j} = \frac{\partial(y_i - \hat{y}_i)}{\partial \theta_j}
 </div>
 </div>
 </div>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Compute the covariance matrix $\mathbf{\Sigma_{\vec{\theta}}}$. Store your answer in <tt>cov_theta_nl</tt>.
-</div><div class="cell docutils container">
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Compute the covariance matrix <span class="math notranslate nohighlight">\(\mathbf{\Sigma_{\vec{\theta}}}\)</span>. Store your answer in <tt>cov_theta_nl</tt>.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># assemble covariance matrix</span>
 <span class="c1"># Add your solution here</span>
@@ -1866,7 +2047,7 @@ J_{i,j} = \frac{\partial(y_i - \hat{y}_i)}{\partial \theta_j}
 </div>
 </div>
 <div class="section" id="d-comparison-of-three-regression-approaches">
-<h3>D. Comparison of Three Regression Approaches<a class="headerlink" href="#d-comparison-of-three-regression-approaches" title="Permalink to this headline">¶</a></h3>
+<h3>D. Comparison of Three Regression Approaches<a class="headerlink" href="#d-comparison-of-three-regression-approaches" title="Permalink to this headline">#</a></h3>
 <p><strong>First Transformation + Linear Regression</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1931,9 +2112,11 @@ Covariance Matrix of Original Model Parameters (K,Q):
 </div>
 </div>
 </div>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Discussion the following question. Write a one sentence answer for each question.
-</div><p><strong>Discussion</strong>:</p>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Discussion the following question. Write a one sentence answer for each question.</p>
+</div>
+<p><strong>Discussion</strong>:</p>
 <ol class="simple">
 <li><p><em>How many significant figures are we estimating for <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(K\)</span> based on the original data?</em> <strong>Answer:</strong> Fill in here…</p></li>
 <li><p><em>Do the three regression strategies give the same or different estimates for <span class="math notranslate nohighlight">\(K\)</span> (within reasonable significant figures)?</em> <strong>Answer:</strong> Fill in here…</p></li>
@@ -1944,7 +2127,7 @@ Covariance Matrix of Original Model Parameters (K,Q):
 </div>
 </div>
 <div class="section" id="estimate-batch-processing-time-with-numeric-integration">
-<h2>2. Estimate Batch Processing Time with Numeric Integration<a class="headerlink" href="#estimate-batch-processing-time-with-numeric-integration" title="Permalink to this headline">¶</a></h2>
+<h2>2. Estimate Batch Processing Time with Numeric Integration<a class="headerlink" href="#estimate-batch-processing-time-with-numeric-integration" title="Permalink to this headline">#</a></h2>
 <p>Our ultimate goal is to design a point-of-use semi-batch adsorptive membrane system to remove Pb from water. Water with contaminant concentration <span class="math notranslate nohighlight">\(c_{in} =\)</span> 150 parts per billion (ppb) enters the system. Some of the contaminant adsorbs such that the outlet concentration, <span class="math notranslate nohighlight">\(c(t)\)</span>, is in equilibrium and can be related to the sorbent loading, <span class="math notranslate nohighlight">\(q(t)\)</span>, using the Langmuir isotherm <span class="math notranslate nohighlight">\(q=f(K,Q)\)</span>. Using a differential mass balance (you will learn more about this in Transport I and II as Juniors), one can derive:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1952,7 +2135,7 @@ Covariance Matrix of Original Model Parameters (K,Q):
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(m = \)</span> 1 kg is the total mass of the membrane and <span class="math notranslate nohighlight">\(F = \)</span> 2 ml/s is the flow rate of water. We will operate the membrane until time <span class="math notranslate nohighlight">\(t_f\)</span> where <span class="math notranslate nohighlight">\(c(t_f) = c_{max} = \)</span> 15 ppb, which corresponds to maximum contaminant limit from the US EPA. At time <span class="math notranslate nohighlight">\(t_f\)</span> the membrane is regenerated (e.g., washed with a low pH solution to remove the Pb contaminant) and the operating cycle repeats. For simplicity, we will assume the membrane is completely regenerated such that <span class="math notranslate nohighlight">\(q(0) = 0\)</span>.</p>
 <div class="section" id="a-model-manipulation-and-setup">
-<h3>A. Model Manipulation and Setup<a class="headerlink" href="#a-model-manipulation-and-setup" title="Permalink to this headline">¶</a></h3>
+<h3>A. Model Manipulation and Setup<a class="headerlink" href="#a-model-manipulation-and-setup" title="Permalink to this headline">#</a></h3>
 <p>We want to integrate the differential equation above to find the final time <span class="math notranslate nohighlight">\(t_f\)</span> where <span class="math notranslate nohighlight">\(c(t_f) = c_{max} = \)</span> 15 ppb. This is a boundary value problem. We have three choices for a solution approach:</p>
 <ol class="simple">
 <li><p>Analytically integrate the differential equation. (You can do this with WolframAlpha, but the answer is complicated.)</p></li>
@@ -1997,10 +2180,12 @@ t_f = \frac{m}{F}  \int_{q_0}^{q_f} \frac{1}{\left( c_{in} - \frac{q(t)}{Q \cdot
 <p>We can approximate this integral with a quadrature rule.</p>
 </div>
 <div class="section" id="b-numeric-integration">
-<h3>B. Numeric Integration<a class="headerlink" href="#b-numeric-integration" title="Permalink to this headline">¶</a></h3>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Complete the function below to estimate $t_f$.
-</div><div class="cell docutils container">
+<h3>B. Numeric Integration<a class="headerlink" href="#b-numeric-integration" title="Permalink to this headline">#</a></h3>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Complete the function below to estimate <span class="math notranslate nohighlight">\(t_f\)</span>.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Code for numerical integration and calculation of tf</span>
 
@@ -2085,7 +2270,7 @@ tf = 13.17 hours
 </div>
 </div>
 <div class="section" id="uncertainty-propagation-nonlinear-formula">
-<h2>3. Uncertainty Propagation (Nonlinear Formula)<a class="headerlink" href="#uncertainty-propagation-nonlinear-formula" title="Permalink to this headline">¶</a></h2>
+<h2>3. Uncertainty Propagation (Nonlinear Formula)<a class="headerlink" href="#uncertainty-propagation-nonlinear-formula" title="Permalink to this headline">#</a></h2>
 <p>We now want to propagate the covariance of our fitted parameters <span class="math notranslate nohighlight">\(\mathbf{\Sigma_{\vec{\theta}}}\)</span> to estimate the uncertainty in the calculated batch time <span class="math notranslate nohighlight">\(\sigma_{t_f}\)</span>. To do this, we will apply the general nonlinear error propagation formula:</p>
 <div class="math notranslate nohighlight">
 \[ \sigma_{t_f} \approx \left( \nabla_{\vec{\theta}} t_f \right) \left(\mathbf{\Sigma_{\vec{\theta}}} \right) \left( \nabla_{\vec{\theta}} t_f \right)^{T}
@@ -2097,10 +2282,12 @@ tf = 13.17 hours
 \]</div>
 <p>Note: During some class notes we define the gradiant vector with a transpose, which requires the transpose to move in the error propagation formula. Either way is common in textbooks. Our apologies for the inconsistency and any confusion. Here is a good rule: just make sure the matrix dimensions work for multiplication and add a transpose if needed!</p>
 <div class="section" id="a-define-functions">
-<h3>A. Define Functions<a class="headerlink" href="#a-define-functions" title="Permalink to this headline">¶</a></h3>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Complete the function below to estimate $uc_tf$.
-</div><div class="cell docutils container">
+<h3>A. Define Functions<a class="headerlink" href="#a-define-functions" title="Permalink to this headline">#</a></h3>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Complete the function below to estimate <span class="math notranslate nohighlight">\(uc_tf\)</span>.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define a function to perform nonlinear error propagation</span>
 <span class="k">def</span> <span class="nf">nonlinear_error_propagation</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">cov_theta</span><span class="p">,</span><span class="n">LOUD</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -2179,9 +2366,11 @@ Uncertainty (standard deviation) of tf: 2.25 hours
 </div>
 </div>
 <p>Great, our function works. We can also calculate a 95% confidence interval for the estimated batch time.</p>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Discuss the code below with a partner. Then write a comment to explain the calculation.
-</div><div class="cell docutils container">
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Discuss the code below with a partner. Then write a comment to explain the calculation.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define a function to print the 95% confidence interval</span>
 <span class="k">def</span> <span class="nf">conf_int</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t_uc</span><span class="p">,</span> <span class="n">dof</span><span class="p">):</span>
@@ -2225,10 +2414,12 @@ Uncertainty (standard deviation) of tf: 2.25 hours
 <p>Now we can apply these two functions to our three regression strategies.</p>
 </div>
 <div class="section" id="b-first-transformation-linear-regression">
-<h3>B. First Transformation + Linear Regression<a class="headerlink" href="#b-first-transformation-linear-regression" title="Permalink to this headline">¶</a></h3>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Calculate the uncertainty in the $t_f$ predictions and a 95% confidence interval.
-</div><div class="cell docutils container">
+<h3>B. First Transformation + Linear Regression<a class="headerlink" href="#b-first-transformation-linear-regression" title="Permalink to this headline">#</a></h3>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Calculate the uncertainty in the <span class="math notranslate nohighlight">\(t_f\)</span> predictions and a 95% confidence interval.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
 </pre></div>
@@ -2246,10 +2437,12 @@ Uncertainty (standard deviation) of tf: 2.25 hours
 </div>
 </div>
 <div class="section" id="c-second-alternate-transformation-linear-regression">
-<h3>C. Second (Alternate) Transformation + Linear Regression<a class="headerlink" href="#c-second-alternate-transformation-linear-regression" title="Permalink to this headline">¶</a></h3>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Calculate the uncertainty in the $t_f$ predictions and a 95% confidence interval.
-</div><div class="cell docutils container">
+<h3>C. Second (Alternate) Transformation + Linear Regression<a class="headerlink" href="#c-second-alternate-transformation-linear-regression" title="Permalink to this headline">#</a></h3>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Calculate the uncertainty in the <span class="math notranslate nohighlight">\(t_f\)</span> predictions and a 95% confidence interval.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
 </pre></div>
@@ -2267,10 +2460,12 @@ Uncertainty (standard deviation) of tf: 0.65 hours
 </div>
 </div>
 <div class="section" id="d-nonlinear-regression">
-<h3>D. Nonlinear Regression<a class="headerlink" href="#d-nonlinear-regression" title="Permalink to this headline">¶</a></h3>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Calculate the uncertainty in the $t_f$ predictions and a 95% confidence interval.
-</div><div class="cell docutils container">
+<h3>D. Nonlinear Regression<a class="headerlink" href="#d-nonlinear-regression" title="Permalink to this headline">#</a></h3>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Calculate the uncertainty in the <span class="math notranslate nohighlight">\(t_f\)</span> predictions and a 95% confidence interval.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
 </pre></div>
@@ -2288,10 +2483,12 @@ Uncertainty (standard deviation) of tf: 1.70 hours
 </div>
 </div>
 <div class="section" id="e-discussion">
-<h3>E. Discussion<a class="headerlink" href="#e-discussion" title="Permalink to this headline">¶</a></h3>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Compare the uncertainty estimates for batch time from the three regression approaches. Then write one sentence to answer each of the following questions.
-</div><p><strong>Disucssion</strong>:</p>
+<h3>E. Discussion<a class="headerlink" href="#e-discussion" title="Permalink to this headline">#</a></h3>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Compare the uncertainty estimates for batch time from the three regression approaches. Then write one sentence to answer each of the following questions.</p>
+</div>
+<p><strong>Disucssion</strong>:</p>
 <ol class="simple">
 <li><p><em>Order the three regression estimates from smallest to largest uncertainty in batch time.</em> <strong>Answer:</strong> Fill in here…</p></li>
 <li><p><em>Which one regression result do you trust more than the other two?</em> <strong>Answer:</strong> Fill in here…</p></li>
@@ -2300,11 +2497,11 @@ Uncertainty (standard deviation) of tf: 1.70 hours
 </div>
 </div>
 <div class="section" id="monte-carlo-uncertainty-propogation">
-<h2>4. Monte Carlo Uncertainty Propogation<a class="headerlink" href="#monte-carlo-uncertainty-propogation" title="Permalink to this headline">¶</a></h2>
+<h2>4. Monte Carlo Uncertainty Propogation<a class="headerlink" href="#monte-carlo-uncertainty-propogation" title="Permalink to this headline">#</a></h2>
 <p>We will revisit this notebook <strong>in a later chapter</strong>.</p>
 <p>To keep this example concise, we will only apply MC uncertainty propogation to the nonlinear regression method. We recommend nonlinear regression for most engineering examples.</p>
 <div class="section" id="a-inspect-residuals">
-<h3>A. Inspect Residuals<a class="headerlink" href="#a-inspect-residuals" title="Permalink to this headline">¶</a></h3>
+<h3>A. Inspect Residuals<a class="headerlink" href="#a-inspect-residuals" title="Permalink to this headline">#</a></h3>
 <p>We will start by characterizing the residuals for the nonlinear regression case. Let’s start by plotting a histogram:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2336,10 +2533,12 @@ Uncertainty (standard deviation) of tf: 1.70 hours
 </div>
 </div>
 <div class="section" id="b-monte-carlo-python-code">
-<h3>B. Monte Carlo Python Code<a class="headerlink" href="#b-monte-carlo-python-code" title="Permalink to this headline">¶</a></h3>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Fill in the steps in the MC code below.
-</div><div class="cell docutils container">
+<h3>B. Monte Carlo Python Code<a class="headerlink" href="#b-monte-carlo-python-code" title="Permalink to this headline">#</a></h3>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Fill in the steps in the MC code below.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Number of Monte Carlo samples</span>
 <span class="n">nmc</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span> 
@@ -2373,7 +2572,7 @@ Uncertainty (standard deviation) of tf: 1.70 hours
 </div>
 </div>
 <div class="section" id="c-visualize-and-interpret-mc-results-fitted-parameters">
-<h3>C. Visualize and Interpret MC Results: Fitted Parameters<a class="headerlink" href="#c-visualize-and-interpret-mc-results-fitted-parameters" title="Permalink to this headline">¶</a></h3>
+<h3>C. Visualize and Interpret MC Results: Fitted Parameters<a class="headerlink" href="#c-visualize-and-interpret-mc-results-fitted-parameters" title="Permalink to this headline">#</a></h3>
 <p>We will start by inspecting historgrams of the fitted parameters:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2388,9 +2587,11 @@ Uncertainty (standard deviation) of tf: 1.70 hours
 <img alt="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_138_0.png" src="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_138_0.png" />
 </div>
 </div>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Make a histogram for $Q$.
-</div><div class="cell docutils container">
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Make a histogram for <span class="math notranslate nohighlight">\(Q\)</span>.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
 </pre></div>
@@ -2583,10 +2784,12 @@ Uncertainty (standard deviation) of tf: 1.70 hours
 <p>These results are similar! Why do we not expect them to match exactly?</p>
 </div>
 <div class="section" id="d-visualize-and-interpret-mc-results-batch-time">
-<h3>D. Visualize and Interpret MC Results: Batch Time<a class="headerlink" href="#d-visualize-and-interpret-mc-results-batch-time" title="Permalink to this headline">¶</a></h3>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Make a histogram for $t_f$.
-</div><div class="cell docutils container">
+<h3>D. Visualize and Interpret MC Results: Batch Time<a class="headerlink" href="#d-visualize-and-interpret-mc-results-batch-time" title="Permalink to this headline">#</a></h3>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Make a histogram for <span class="math notranslate nohighlight">\(t_f\)</span>.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
 </pre></div>
@@ -2664,9 +2867,11 @@ Uncertainty (standard deviation) of tf: 1.70 hours
 </div>
 </div>
 </div>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Compare the uncertainty estimates in batch time and the standard deviation.
-</div></div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Compare the uncertainty estimates in batch time and the standard deviation.</p>
+</div>
+</div>
 </div>
 </div>
 
@@ -2692,9 +2897,11 @@ Uncertainty (standard deviation) of tf: 1.70 hours
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="06-Bootstrap-Confidence-Intervals.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -2710,24 +2917,28 @@ Uncertainty (standard deviation) of tf: 1.70 hours
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
     
-      By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>

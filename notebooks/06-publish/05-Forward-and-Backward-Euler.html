@@ -7,8 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Forward and Backward Euler Methods &#8212; Data and Computing for Chemical Engieers</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet">
-  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,20 +19,16 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -39,12 +36,13 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -64,7 +62,21 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -73,9 +85,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -93,14 +106,15 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../intro.html">
-   Welcome to (Advanced) Data and Computing for Engineers
-  </a>
- </li>
-</ul>
-<ul class="current nav bd-sidenav">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome to (Advanced) Data and Computing for Engineers
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../01/00-Python-Primer.html">
    Python Primer
@@ -598,112 +612,227 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/06-publish/05-Forward-and-Backward-Euler.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/ndcbe/data-and-computing"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/06-publish/05-Forward-and-Backward-Euler.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/06-publish/05-Forward-and-Backward-Euler.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/06-publish/05-Forward-and-Backward-Euler.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/06-publish/05-Forward-and-Backward-Euler.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/06-publish/05-Forward-and-Backward-Euler.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ndcbe/data-and-computing"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/06-publish/05-Forward-and-Backward-Euler.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/notebooks/06-publish/05-Forward-and-Backward-Euler.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#learning-objectives">
    Learning Objectives
@@ -765,12 +894,11 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Forward and Backward Euler Methods</h1>
@@ -848,16 +976,17 @@ const thebe_selector_output = ".output, .cell_output"
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="forward-and-backward-euler-methods">
-<h1>Forward and Backward Euler Methods<a class="headerlink" href="#forward-and-backward-euler-methods" title="Permalink to this headline">¶</a></h1>
+<h1>Forward and Backward Euler Methods<a class="headerlink" href="#forward-and-backward-euler-methods" title="Permalink to this headline">#</a></h1>
 <p>CBE 20258. Numerical and Statistical Analysis. Spring 2020.</p>
 <p>© University of Notre Dame</p>
 <p>Reference: Chapter 17 in McClarren.</p>
 <div class="section" id="learning-objectives">
-<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">¶</a></h2>
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">#</a></h2>
 <p>After studying this notebook, completing the activties, and attending class, you should be able to:</p>
 <ul class="simple">
 <li><p>Explain the difference between forward and backward Euler methods to approximate solutions to IVP.</p>
@@ -879,7 +1008,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="section" id="main-idea">
-<h2>Main Idea<a class="headerlink" href="#main-idea" title="Permalink to this headline">¶</a></h2>
+<h2>Main Idea<a class="headerlink" href="#main-idea" title="Permalink to this headline">#</a></h2>
 <p>In the next few notebooks, we will discuss techniques to compute approximate solutions to <strong>initial value problems (IVP)</strong>. Every IVP has two parts:</p>
 <ul class="simple">
 <li><p>System of differential equations.</p></li>
@@ -894,9 +1023,9 @@ const thebe_selector_output = ".output, .cell_output"
 <p>These next few notebooks focus on solving this problem. You’ll notice a lot of similarities to notebooks 01-04 in this chapter, involving numeric integration, as integrals and differential equations are closely related.</p>
 </div>
 <div class="section" id="forward-explicit-euler">
-<h2>Forward (Explicit) Euler<a class="headerlink" href="#forward-explicit-euler" title="Permalink to this headline">¶</a></h2>
+<h2>Forward (Explicit) Euler<a class="headerlink" href="#forward-explicit-euler" title="Permalink to this headline">#</a></h2>
 <div class="section" id="id1">
-<h3>Main Idea<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<h3>Main Idea<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
 <p>Let’s numerically approximate the above integral! One rule that is so basic that we didn’t talk about it in the chapters on numerical integration is the left-hand rectangle rule.  Here we estimate the integral as</p>
 <div class="math notranslate nohighlight">
 \[\int_{0}^{\Delta t} f(y,t)\,dt \approx \Delta t f(y(0), 0).\]</div>
@@ -946,15 +1075,21 @@ $<span class="math notranslate nohighlight">\(y(\Delta t) = y(0) + \Delta t f(y(
 <p><span class="math notranslate nohighlight">\(N\)</span> times for <span class="math notranslate nohighlight">\(n=1\)</span> to <span class="math notranslate nohighlight">\(n=N\)</span>.</p>
 </div>
 <div class="section" id="generalization-and-python-implementation">
-<h3>Generalization and Python Implementation<a class="headerlink" href="#generalization-and-python-implementation" title="Permalink to this headline">¶</a></h3>
-<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
-<b>Home Activity</b>: Write psuedocode for a Python function with four inputs: a function to evaluate the right-hand side of the differential equation, i.e., $f(y,t)$, the initial condition $y_0$, the time step $\Delta t$, and the number of timesteps $N$. Your function should use the forward Euler method to estimate $y(t=\Delta t)$, $y(t=2 \Delta t)$, ..., $y(t=N \Delta t)$. Your function should return two numpy arrays: one for time $t$ and one for $y$. <b>This is excellent practice for the next exam.</b> Converting a list of instructions into pseudocode is a key skill we teach (and assess) in this class.
-</div><p>We now define a Python function that for a given right-hand side, initial condition, and time step and number of time steps, <span class="math notranslate nohighlight">\(N\)</span>, performs the forward Euler method. This function will take the name of the function on the right-hand side as an input.</p>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Trade pseudocode with a partner. Compare your partner's pseudocode to the Python code below. Offer your partner one piece of constructive feedback.
-</div><div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
-<b>Home Activity</b>: Complete the function <tt>forward_euler</tt> by filling in the missing line. Hint: The equation $y^{n+1}=$ ... in the reading is important.
-</div><div class="cell docutils container">
+<h3>Generalization and Python Implementation<a class="headerlink" href="#generalization-and-python-implementation" title="Permalink to this headline">#</a></h3>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Write psuedocode for a Python function with four inputs: a function to evaluate the right-hand side of the differential equation, i.e., <span class="math notranslate nohighlight">\(f(y,t)\)</span>, the initial condition <span class="math notranslate nohighlight">\(y_0\)</span>, the time step <span class="math notranslate nohighlight">\(\Delta t\)</span>, and the number of timesteps <span class="math notranslate nohighlight">\(N\)</span>. Your function should use the forward Euler method to estimate <span class="math notranslate nohighlight">\(y(t=\Delta t)\)</span>, <span class="math notranslate nohighlight">\(y(t=2 \Delta t)\)</span>, …, <span class="math notranslate nohighlight">\(y(t=N \Delta t)\)</span>. Your function should return two numpy arrays: one for time <span class="math notranslate nohighlight">\(t\)</span> and one for <span class="math notranslate nohighlight">\(y\)</span>. <b>This is excellent practice for the next exam.</b> Converting a list of instructions into pseudocode is a key skill we teach (and assess) in this class.</p>
+</div>
+<p>We now define a Python function that for a given right-hand side, initial condition, and time step and number of time steps, <span class="math notranslate nohighlight">\(N\)</span>, performs the forward Euler method. This function will take the name of the function on the right-hand side as an input.</p>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Trade pseudocode with a partner. Compare your partner’s pseudocode to the Python code below. Offer your partner one piece of constructive feedback.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Complete the function <tt>forward_euler</tt> by filling in the missing line. Hint: The equation <span class="math notranslate nohighlight">\(y^{n+1}=\)</span> … in the reading is important.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">forward_euler</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">Delta_t</span><span class="p">,</span><span class="n">numsteps</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Perform numsteps of the forward euler method starting at y0</span>
@@ -994,7 +1129,7 @@ $<span class="math notranslate nohighlight">\(y(\Delta t) = y(0) + \Delta t f(y(
 </div>
 </div>
 <div class="section" id="test-problem">
-<h3>Test Problem<a class="headerlink" href="#test-problem" title="Permalink to this headline">¶</a></h3>
+<h3>Test Problem<a class="headerlink" href="#test-problem" title="Permalink to this headline">#</a></h3>
 <p>We created a function. Now let’s test this on a simple problem:</p>
 <div class="math notranslate nohighlight">
 \[y'(t) = -y(t), \qquad y_0 = 1.$$ The solution to this problem is 
@@ -1142,7 +1277,7 @@ $$y(t) = e^{-t}.\]</div>
 </div>
 </div>
 <div class="section" id="impact-of-step-size-on-integration-error">
-<h3>Impact of Step Size on Integration Error<a class="headerlink" href="#impact-of-step-size-on-integration-error" title="Permalink to this headline">¶</a></h3>
+<h3>Impact of Step Size on Integration Error<a class="headerlink" href="#impact-of-step-size-on-integration-error" title="Permalink to this headline">#</a></h3>
 <p>We could re-do this with different size time steps and compare the solutions as a function of <span class="math notranslate nohighlight">\(\Delta t\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1180,17 +1315,21 @@ $$y(t) = e^{-t}.\]</div>
 <p>Notice that the error indicates that this is a first-order method in <span class="math notranslate nohighlight">\(\Delta t\)</span>: when I decrease <span class="math notranslate nohighlight">\(\Delta t\)</span> by a factor of 2, the error decreases by a factor of 2.  In this case we measured the error with a slightly different error norm:
 $<span class="math notranslate nohighlight">\(\mathrm{Error} = \frac{1}{\sqrt{N}}\sqrt{\sum_{n=1}^{N} \left(y^n_\mathrm{approx} - y^n_\mathrm{exact}\right)^2},\)</span><span class="math notranslate nohighlight">\(
 where \)</span>N$ is the number of steps the ODE is solved over.</p>
-<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
-<b>Home Activity</b>: For this test problem, why does the numeric solution always appear to underestimate the exact solution? Why is the approximation worse with larger $\Delta t$. Write 2 or 3 sentences below.
-</div><p><strong>Home Activity Answer</strong>:</p>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Discuss your answer with a partner.
-</div></div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>For this test problem, why does the numeric solution always appear to underestimate the exact solution? Why is the approximation worse with larger <span class="math notranslate nohighlight">\(\Delta t\)</span>. Write 2 or 3 sentences below.</p>
+</div>
+<p><strong>Home Activity Answer</strong>:</p>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Discuss your answer with a partner.</p>
+</div>
+</div>
 </div>
 <div class="section" id="backward-implicit-euler">
-<h2>Backward (Implicit) Euler<a class="headerlink" href="#backward-implicit-euler" title="Permalink to this headline">¶</a></h2>
+<h2>Backward (Implicit) Euler<a class="headerlink" href="#backward-implicit-euler" title="Permalink to this headline">#</a></h2>
 <div class="section" id="id2">
-<h3>Main Idea<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<h3>Main Idea<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
 <p>We could use a different method to integrate our original ODE rather than the left-hand rectangle rule.  An obvious alternative is the right-hand rectangle rule:</p>
 <div class="math notranslate nohighlight">
 \[y^{n+1} = y^n + \Delta t f(y^{n+1}, t^{n+1}).\]</div>
@@ -1224,15 +1363,19 @@ where \)</span>N$ is the number of steps the ODE is solved over.</p>
 <div class="math notranslate nohighlight">
 \[ y^{n+1} - y^{n} - \Delta t f(y^{n+1},t^{n+1}) = 0,\]</div>
 <p>using a nonlinear solver (unless <span class="math notranslate nohighlight">\(f\)</span> is linear in <span class="math notranslate nohighlight">\(y\)</span>).  Therefore, this method is a bit harder to implement, but still fairly simple.</p>
-<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
-<b>Home Activity</b>: Spend 5 minutes reviewing your notes from the Chapter 4 Newton Methods notebooks.
-</div><p>The main algorithm to apply forward and backward Euler to a problem is essentially the same. With forward Euler, we could explicitly compute the next step <span class="math notranslate nohighlight">\(y^{n+1}\)</span> with a simple formula. For backward Euler, we need to solve a system of equations.</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Spend 5 minutes reviewing your notes from the Chapter 4 Newton Methods notebooks.</p>
+</div>
+<p>The main algorithm to apply forward and backward Euler to a problem is essentially the same. With forward Euler, we could explicitly compute the next step <span class="math notranslate nohighlight">\(y^{n+1}\)</span> with a simple formula. For backward Euler, we need to solve a system of equations.</p>
 </div>
 <div class="section" id="python-implementation">
-<h3>Python Implementation<a class="headerlink" href="#python-implementation" title="Permalink to this headline">¶</a></h3>
-<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
-<b>Home Activity</b>: Complete the function below. In the commented out spot, you'll need to solve a nonlinear equation to calculate $y^{n+1}$. Hints: You want to write two lines of code. The <b>first line</b> will use a lambda function to define the nonlinear equation to be solved. The <b>second line</b> will call <tt>inexact_newton</tt> to solve the system and store the answer in <tt>y[n]</tt>. <b>Read these instructions again carefully.</b>
-</div><div class="cell docutils container">
+<h3>Python Implementation<a class="headerlink" href="#python-implementation" title="Permalink to this headline">#</a></h3>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Complete the function below. In the commented out spot, you’ll need to solve a nonlinear equation to calculate <span class="math notranslate nohighlight">\(y^{n+1}\)</span>. Hints: You want to write two lines of code. The <b>first line</b> will use a lambda function to define the nonlinear equation to be solved. The <b>second line</b> will call <tt>inexact_newton</tt> to solve the system and store the answer in <tt>y[n]</tt>. <b>Read these instructions again carefully.</b></p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">inexact_newton</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x0</span><span class="p">,</span><span class="n">delta</span> <span class="o">=</span> <span class="mf">1.0e-7</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1.0e-6</span><span class="p">,</span> <span class="n">LOUD</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Find the root of the function f via Newton-Raphson method</span>
@@ -1337,9 +1480,11 @@ y = 0.6830134552988206
 <img alt="../../_images/05-Forward-and-Backward-Euler_38_1.png" src="../../_images/05-Forward-and-Backward-Euler_38_1.png" />
 </div>
 </div>
-<div style="background-color: rgba(255,0,0,0.05) ; padding: 10px; border: 1px solid darkred;"> 
-<b>Important</b>: Test your function with both <tt>LOUD=True</tt> and <tt>LOUD=False</tt> options. You should get the same answer.
-</div><p>Your function in the last home activity works if it computes the following values:</p>
+<div class="admonition danger">
+<p class="admonition-title">Note</p>
+<p><b>Important</b>: Test your function with both <tt>LOUD=True</tt> and <tt>LOUD=False</tt> options. You should get the same answer.</p>
+</div>
+<p>Your function in the last home activity works if it computes the following values:</p>
 <table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p>t</p></th>
@@ -1373,7 +1518,7 @@ y = 0.6830134552988206
 </div>
 </div>
 <div class="section" id="id3">
-<h3>Impact of Step Size on Integration Error<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<h3>Impact of Step Size on Integration Error<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
 <p>Perhaps you’ve detected a pattern. After we implement and test a numerical method, we often want to know how the error rate changes with step size. As a first look, let’s conduct a computational experiment with the same test problem.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1409,16 +1554,20 @@ y = 0.6830134552988206
 </div>
 </div>
 <p>A couple of things to notice from the plots: the backward Euler method approaches the solution from above, and the convergence of the error is at the same rate as forward Euler.</p>
-<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
-<b>Home Activity</b>: <i> Exam Practice Question </i> Above are two plots exploring how the step size impacts the error of the backwards Euler method for the test problem $\dot{y} = e^{-t},~y(0)=1.0$. Write a sentence to answer each of the following questions. 
-</div><p><strong>Home Activity Questions and Answers</strong></p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p><i> Exam Practice Question </i> Above are two plots exploring how the step size impacts the error of the backwards Euler method for the test problem <span class="math notranslate nohighlight">\(\dot{y} = e^{-t},~y(0)=1.0\)</span>. Write a sentence to answer each of the following questions.</p>
+</div>
+<p><strong>Home Activity Questions and Answers</strong></p>
 <ol class="simple">
 <li><p>Why does this method always overapproximate the exact solution? Answer:</p></li>
 <li><p>How does the error for this method scale with the step size <span class="math notranslate nohighlight">\(\Delta t\)</span>? Answer:</p></li>
 </ol>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Share your answer with a partner.
-</div></div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Share your answer with a partner.</p>
+</div>
+</div>
 </div>
 </div>
 
@@ -1444,9 +1593,11 @@ y = 0.6830134552988206
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="04-Application-Inertial-Navigation-Systems.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1462,24 +1613,28 @@ y = 0.6830134552988206
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
     
-      By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>

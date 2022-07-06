@@ -7,8 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Introduction and Newton-Cotes &#8212; Data and Computing for Chemical Engieers</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet">
-  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,20 +19,16 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -39,12 +36,13 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -64,7 +62,21 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -73,9 +85,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -93,14 +106,15 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../intro.html">
-   Welcome to (Advanced) Data and Computing for Engineers
-  </a>
- </li>
-</ul>
-<ul class="current nav bd-sidenav">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome to (Advanced) Data and Computing for Engineers
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../01/00-Python-Primer.html">
    Python Primer
@@ -598,112 +612,227 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/06-publish/01-Intro-and-Newton-Cotes.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/ndcbe/data-and-computing"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/06-publish/01-Intro-and-Newton-Cotes.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/06-publish/01-Intro-and-Newton-Cotes.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/06-publish/01-Intro-and-Newton-Cotes.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/06-publish/01-Intro-and-Newton-Cotes.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/06-publish/01-Intro-and-Newton-Cotes.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ndcbe/data-and-computing"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/06-publish/01-Intro-and-Newton-Cotes.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/notebooks/06-publish/01-Intro-and-Newton-Cotes.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#learning-objectives">
    Learning Objectives
@@ -802,12 +931,11 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Introduction and Newton-Cotes</h1>
@@ -922,11 +1050,12 @@ const thebe_selector_output = ".output, .cell_output"
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="introduction-and-newton-cotes">
-<h1>Introduction and Newton-Cotes<a class="headerlink" href="#introduction-and-newton-cotes" title="Permalink to this headline">¶</a></h1>
+<h1>Introduction and Newton-Cotes<a class="headerlink" href="#introduction-and-newton-cotes" title="Permalink to this headline">#</a></h1>
 <p>CBE 20258. Numerical and Statistical Analysis. Spring 2020.</p>
 <p>© University of Notre Dame</p>
 <p><strong>Reference</strong>: Chapters 15 and 16 in McClarren (2018). There are two copies in reserve at the library.</p>
@@ -942,7 +1071,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="section" id="learning-objectives">
-<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">¶</a></h2>
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">#</a></h2>
 <p>After studying this notebook, completing the activities, and asking questions in class, you should be able to:</p>
 <ul class="simple">
 <li><p>Draw a sketch to illustrate the main idea behind midpoint, trapezoid and Simpson rules, or identify the rule name from a sketch</p></li>
@@ -951,12 +1080,12 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </div>
 <div class="section" id="motivating-example-and-main-idea">
-<h2>Motivating Example and Main Idea<a class="headerlink" href="#motivating-example-and-main-idea" title="Permalink to this headline">¶</a></h2>
+<h2>Motivating Example and Main Idea<a class="headerlink" href="#motivating-example-and-main-idea" title="Permalink to this headline">#</a></h2>
 <p>Often in engineering, we want or must numerically approximate definite integrals.</p>
 <div class="section" id="example-integrate-normal-distribution">
-<h3>Example: Integrate Normal Distribution<a class="headerlink" href="#example-integrate-normal-distribution" title="Permalink to this headline">¶</a></h3>
+<h3>Example: Integrate Normal Distribution<a class="headerlink" href="#example-integrate-normal-distribution" title="Permalink to this headline">#</a></h3>
 <p>In a few weeks, we will learn how to model random phenomena with probability distributions. Often, standardized test scores follow a normal distribution, a.k.a.,  Gaussian distribution or bell curve.</p>
-<p><img alt="sat" src="https://ndcbe.github.io/data-and-computing/_images/sat.jpg" /></p>
+<p><img alt="sat" src="../../_images/sat.jpg" /></p>
 <p>These data (which I found online and did not verify… we are just using this as an example) suggest the average SAT score was 1500 with a standard deviation of 250 points. Briefly, mean is the average and standard deviation measures spread. We will mathematically define these quantities in a few class sessions.</p>
 <p>Imagine we randomly select a student that took the SAT. What is the probability they received a score of <span class="math notranslate nohighlight">\(a = 1800\)</span> points? By assuming the SAT scores are normally distributed, we can express this probability as follows:</p>
 <div class="math notranslate nohighlight">
@@ -1038,11 +1167,13 @@ Integration tolerance (approximate error) =  6.5792911954510715e-12
 <p>We can see that if we randomly selected an SAT test taker, there is a 88.5% probably they scored 1800 or less. Alternately, if someone scores 1800, we say they are in the 88th percentile. In the rest of this class, we will learn what <code class="docutils literal notranslate"><span class="pre">quad</span></code> and other <code class="docutils literal notranslate"><span class="pre">scipy</span></code> functions do “under the hood”.</p>
 </div>
 <div class="section" id="example-let-s-revisit-that-unbounded-assumption">
-<h3>Example: Let’s Revisit that Unbounded Assumption<a class="headerlink" href="#example-let-s-revisit-that-unbounded-assumption" title="Permalink to this headline">¶</a></h3>
+<h3>Example: Let’s Revisit that Unbounded Assumption<a class="headerlink" href="#example-let-s-revisit-that-unbounded-assumption" title="Permalink to this headline">#</a></h3>
 <p>The normal distribution assumes the random variable can have outcomes between <span class="math notranslate nohighlight">\(-\infty\)</span> to <span class="math notranslate nohighlight">\(\infty\)</span>. But, for this year, valid SAT scores were between 0 and 2400. What is the error caused by approximating SAT scores with a normal distribution?</p>
-<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
-<b>Home Activity</b>: Using the normal distribution, compute the probability of a score between -10,000 and 0. Store your answer in the Python float <tt>ans_aii1</tt>.
-</div><div class="cell docutils container">
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Using the normal distribution, compute the probability of a score between -10,000 and 0. Store your answer in the Python float <tt>ans_aii1</tt>.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
 </pre></div>
@@ -1062,9 +1193,11 @@ Integration tolerance =  1.874391547379387e-09
 </div>
 </div>
 </div>
-<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
-<b>Home Activity</b>: Using the normal distribution, compute the probability of a score between 2400 and 10,000. Store your answer in the Python float <tt>ans_aii2</tt>.
-</div><div class="cell docutils container">
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Using the normal distribution, compute the probability of a score between 2400 and 10,000. Store your answer in the Python float <tt>ans_aii2</tt>.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
 </pre></div>
@@ -1084,12 +1217,14 @@ Integration tolerance =  9.36189270348194e-10
 </div>
 </div>
 </div>
-<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
-<b>Home Activity</b>: Write a sentence to defend or refute our choice to model SAT scores with a normal distribution.
-</div><p><strong>Home Activity Answer:</strong></p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Write a sentence to defend or refute our choice to model SAT scores with a normal distribution.</p>
+</div>
+<p><strong>Home Activity Answer:</strong></p>
 </div>
 <div class="section" id="main-idea">
-<h3>Main Idea<a class="headerlink" href="#main-idea" title="Permalink to this headline">¶</a></h3>
+<h3>Main Idea<a class="headerlink" href="#main-idea" title="Permalink to this headline">#</a></h3>
 <p>We will approximate an integral by a sum with a finite number of terms:
 $<span class="math notranslate nohighlight">\(\int\limits_a^b f(x)\,dx \approx \sum_{l=0}^{L}w_l f(x_l).\)</span>$</p>
 <p>The function <span class="math notranslate nohighlight">\(f( )\)</span> is evaluated at locations (nodes) <span class="math notranslate nohighlight">\(x_l\)</span>. Each function evaluation is multiplied by weight <span class="math notranslate nohighlight">\(w_l\)</span> and then summed.</p>
@@ -1099,7 +1234,7 @@ the infinitesimals of calculus.</p>
 </div>
 </div>
 <div class="section" id="newton-cotes-formulas">
-<h2>Newton-Cotes Formulas<a class="headerlink" href="#newton-cotes-formulas" title="Permalink to this headline">¶</a></h2>
+<h2>Newton-Cotes Formulas<a class="headerlink" href="#newton-cotes-formulas" title="Permalink to this headline">#</a></h2>
 <p>This is a broad family of numerical methods that follow the same general recipe:</p>
 <ol class="simple">
 <li><p>Fit a polynomial through the function evaluations.</p></li>
@@ -1107,7 +1242,7 @@ the infinitesimals of calculus.</p>
 </ol>
 <p>We will not discuss the general theory of Newton-Cotes formulas, but instead focus on three important methods commonly used.</p>
 <div class="section" id="midpoint-rule">
-<h3>1) Midpoint Rule<a class="headerlink" href="#midpoint-rule" title="Permalink to this headline">¶</a></h3>
+<h3>1) Midpoint Rule<a class="headerlink" href="#midpoint-rule" title="Permalink to this headline">#</a></h3>
 <p>In the midpoint rule, we approximate the integral by the value of the function in the middle of the range of integration times the length of the region. This simple formula is
 $<span class="math notranslate nohighlight">\(I_{midpoint} = h\, f\!\left(\frac{a+b}{2}\right) \approx \int\limits_{a}^b f(x)\,dx,\)</span><span class="math notranslate nohighlight">\(
 where \)</span>h = b-a$. We can demonstrate this with a <strong>graphical example</strong>:</p>
@@ -1161,9 +1296,11 @@ f(x) = (x-3) (x-5) (x-7) + 100
 </div>
 </div>
 <p>The resulting approximation is not terrible, but there are clearly parts of the function where the rectangle does not match the function well. We can do better than a rectangle that approximates the function as flat.</p>
-<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
-<b>Home Activity</b>: Copy the code from above to the cell below. Then modify the copied code to integrate $g(x) = x(1-\sin(x))$ from $a=3$ to $b=7$ using the midpoint rule. Save the numeric approximation in the Python variable <tt>ans_bi</tt>. Hint: Use the function <tt>np.sin</tt>.
-</div><div class="cell docutils container">
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Copy the code from above to the cell below. Then modify the copied code to integrate <span class="math notranslate nohighlight">\(g(x) = x(1-\sin(x))\)</span> from <span class="math notranslate nohighlight">\(a=3\)</span> to <span class="math notranslate nohighlight">\(b=7\)</span> using the midpoint rule. Save the numeric approximation in the Python variable <tt>ans_bi</tt>. Hint: Use the function <tt>np.sin</tt>.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
 </pre></div>
@@ -1185,9 +1322,9 @@ f(x) = (x-3) (x-5) (x-7) + 100
 </div>
 </div>
 <div class="section" id="trapezoid-rule">
-<h3>2) Trapezoid Rule<a class="headerlink" href="#trapezoid-rule" title="Permalink to this headline">¶</a></h3>
+<h3>2) Trapezoid Rule<a class="headerlink" href="#trapezoid-rule" title="Permalink to this headline">#</a></h3>
 <div class="section" id="main-idea-and-graphical-example">
-<h4>Main Idea and Graphical Example<a class="headerlink" href="#main-idea-and-graphical-example" title="Permalink to this headline">¶</a></h4>
+<h4>Main Idea and Graphical Example<a class="headerlink" href="#main-idea-and-graphical-example" title="Permalink to this headline">#</a></h4>
 <p>Instead of approximating with a rectangle (midpoint rule), use a trapezoid:</p>
 <ol class="simple">
 <li><p>Fit a line between <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>. This is a polynomial (linear) approximation to <span class="math notranslate nohighlight">\(f(x)\)</span>.</p></li>
@@ -1235,9 +1372,11 @@ $<span class="math notranslate nohighlight">\( I_\mathrm{trap} \equiv \frac{h}{2
 </div>
 </div>
 <p>You can see in the figure that the approximation is not exact because the trapezoid does not exactly follow the function, but if <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are close enough together it should give a good approximation because any well-behaved function can be approximated linearly over a narrow enough domain.</p>
-<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
-<b>Home Activity</b>: Copy the code from above to the cell below. Then modify the copied code to integrate $g(x) = x(1-\sin(x))$ from $a=3$ to $b=7$ using the trapezoid rule. Save the numeric approximation in the Python variable <tt>ans_bii1</tt>.
-</div><div class="cell docutils container">
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Copy the code from above to the cell below. Then modify the copied code to integrate <span class="math notranslate nohighlight">\(g(x) = x(1-\sin(x))\)</span> from <span class="math notranslate nohighlight">\(a=3\)</span> to <span class="math notranslate nohighlight">\(b=7\)</span> using the trapezoid rule. Save the numeric approximation in the Python variable <tt>ans_bii1</tt>.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### BEGIN HIDDEN SOLUTION</span>
 <span class="c1"># define and plot function</span>
@@ -1288,7 +1427,7 @@ $<span class="math notranslate nohighlight">\( I_\mathrm{trap} \equiv \frac{h}{2
 </div>
 </div>
 <div class="section" id="trapezoid-rule-with-multiple-pieces">
-<h4>Trapezoid Rule with Multiple Pieces<a class="headerlink" href="#trapezoid-rule-with-multiple-pieces" title="Permalink to this headline">¶</a></h4>
+<h4>Trapezoid Rule with Multiple Pieces<a class="headerlink" href="#trapezoid-rule-with-multiple-pieces" title="Permalink to this headline">#</a></h4>
 <p>That leads to a variation to the trapezoid rule (and any other rule for that matter).  We can break up the domain <span class="math notranslate nohighlight">\([a,b]\)</span> into many smaller domains and integrate each of these.  Here’s an example where we break <span class="math notranslate nohighlight">\([a,b]\)</span> into 4 pieces:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1336,8 +1475,11 @@ $<span class="math notranslate nohighlight">\( I_\mathrm{trap} \equiv \frac{h}{2
 </div>
 </div>
 </div>
-<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> <b>Home Activity</b>: Copy the code from above to the cell below. Then modify the copied code to integrate $g(x) = x(1-\sin(x))$ from $a=3$ to $b=7$ using the trapezoid rule with $N$ pieces. Per WolframaAlpha, the answer is 27.7314266795455... Determine the minimum number of pieces needed such that approximation, when rounded, matches the exact answer to one decimal place. Store your answer as an integer in <tt>ans_bii2</tt>.
-</div><div class="cell docutils container">
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Copy the code from above to the cell below. Then modify the copied code to integrate <span class="math notranslate nohighlight">\(g(x) = x(1-\sin(x))\)</span> from <span class="math notranslate nohighlight">\(a=3\)</span> to <span class="math notranslate nohighlight">\(b=7\)</span> using the trapezoid rule with <span class="math notranslate nohighlight">\(N\)</span> pieces. Per WolframaAlpha, the answer is 27.7314266795455… Determine the minimum number of pieces needed such that approximation, when rounded, matches the exact answer to one decimal place. Store your answer as an integer in <tt>ans_bii2</tt>.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
 </pre></div>
@@ -1359,12 +1501,14 @@ $<span class="math notranslate nohighlight">\( I_\mathrm{trap} \equiv \frac{h}{2
 </div>
 </div>
 <div class="section" id="general-purpose-function-and-test-case">
-<h4>General Purpose Function and Test Case<a class="headerlink" href="#general-purpose-function-and-test-case" title="Permalink to this headline">¶</a></h4>
+<h4>General Purpose Function and Test Case<a class="headerlink" href="#general-purpose-function-and-test-case" title="Permalink to this headline">#</a></h4>
 <p>We can write a trapezoid rule function that will take in a function, <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(b\)</span>, and the number of pieces and perform this integration. Also, because the right side of each piece is the left side of the next piece, if we’re clever we can only evaluate the function once <span class="math notranslate nohighlight">\(N+1\)</span> times where <span class="math notranslate nohighlight">\(N\)</span> is the number of pieces.</p>
 <p>The following function implements the trapezoid rule, and will produce a graph of the approximation when the parameter <tt>graph</tt> is set to true.</p>
-<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
-<b>Home Activity</b>: Study the code below. Write at least two questions to ask your neighbor during class.
-</div><p>Question 1:</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Study the code below. Write at least two questions to ask your neighbor during class.</p>
+</div>
+<p>Question 1:</p>
 <p>Question 2:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1426,8 +1570,11 @@ $<span class="math notranslate nohighlight">\( I_\mathrm{trap} \equiv \frac{h}{2
 </div>
 </div>
 </div>
-<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
-<b>Home Activity</b>: Run the code below.<p>Let’s test this method on a function that we know the integral of $<span class="math notranslate nohighlight">\(\int\limits_0^\pi \sin x\,dx = 2.\)</span>$</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Run the code below.</p>
+</div>
+<p>Let’s test this method on a function that we know the integral of $<span class="math notranslate nohighlight">\(\int\limits_0^\pi \sin x\,dx = 2.\)</span>$</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">integral_estimate</span> <span class="o">=</span> <span class="n">trapezoid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="n">pieces</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">graph</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1458,10 +1605,13 @@ $<span class="math notranslate nohighlight">\( I_\mathrm{trap} \equiv \frac{h}{2
 </div>
 </div>
 <div class="section" id="error-analysis">
-<h4>Error Analysis<a class="headerlink" href="#error-analysis" title="Permalink to this headline">¶</a></h4>
+<h4>Error Analysis<a class="headerlink" href="#error-analysis" title="Permalink to this headline">#</a></h4>
 <p>How does the error change as we increase the number pieces (i.e., decrease the step size <span class="math notranslate nohighlight">\(h\)</span>)?</p>
-<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
-<b>Home Activity</b>: Run the code below.<div class="cell docutils container">
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Run the code below.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pieces</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
 <span class="n">error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
@@ -1484,9 +1634,11 @@ $<span class="math notranslate nohighlight">\( I_\mathrm{trap} \equiv \frac{h}{2
 </div>
 </div>
 <p>Similar to what we did for finite difference derivatives, we can plot the error versus number of pieces on a log-log scale. The error in the trapezoid rule that we observe is second-order in <span class="math notranslate nohighlight">\(h\)</span>, because the slope of the error on the log-log scale is 2.</p>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Go through the derivation below on the chalkboard.
-</div><p><strong>We will now use a Taylor series to show why the slope is 2.</strong></p>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Go through the derivation below on the chalkboard.</p>
+</div>
+<p><strong>We will now use a Taylor series to show why the slope is 2.</strong></p>
 <p>We can see that this is the expected error in the estimate by looking at the linear approximation to a function around <span class="math notranslate nohighlight">\(x = a\)</span>:
 $<span class="math notranslate nohighlight">\(f(x) = f(a) + (x-a) f'(a) + \frac{(x-a)^2}{2} f''(a) + O((x-a)^3).\)</span><span class="math notranslate nohighlight">\(
 We can approximate the derivative using a forward difference:
@@ -1505,13 +1657,13 @@ where \)</span>C_\mathrm{max}<span class="math notranslate nohighlight">\( is th
 </div>
 </div>
 <div class="section" id="simpson-s-rule">
-<h3>Simpson’s Rule<a class="headerlink" href="#simpson-s-rule" title="Permalink to this headline">¶</a></h3>
+<h3>Simpson’s Rule<a class="headerlink" href="#simpson-s-rule" title="Permalink to this headline">#</a></h3>
 <p>We will now take the idea of the trapezoid rule a step further by <strong>fitting a parabola</strong> between three points: <span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(b\)</span>, and <span class="math notranslate nohighlight">\((a+b)/2\)</span>.  The formula for this is
 $<span class="math notranslate nohighlight">\( I_\mathrm{Simpson} \equiv \frac{h}{6}\left(f(a) + 4 f\left(a + \frac{h}{2}\right) + f(b)\right) \approx \int\limits_a^b f(x)\,dx,\)</span><span class="math notranslate nohighlight">\( where
 \)</span>h = b - a.$</p>
 <p>Footnote: This is sometimes called Simpsions 1/3 rule.</p>
 <div class="section" id="quadratic-interpolation">
-<h4>Quadratic Interpolation<a class="headerlink" href="#quadratic-interpolation" title="Permalink to this headline">¶</a></h4>
+<h4>Quadratic Interpolation<a class="headerlink" href="#quadratic-interpolation" title="Permalink to this headline">#</a></h4>
 <p>Before examining Simpson’s rule, we need to quickly discuss quadratic interpolation. Let’s say I have evaluated the function <span class="math notranslate nohighlight">\(g(x)\)</span> at three points: <span class="math notranslate nohighlight">\(a_1\)</span>, <span class="math notranslate nohighlight">\(a_2\)</span> and <span class="math notranslate nohighlight">\(a_3\)</span>. I now want to approximate <span class="math notranslate nohighlight">\(g(x)\)</span> and any point <span class="math notranslate nohighlight">\(x\)</span> using <strong>quadratic interpolation</strong>.</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1596,9 +1748,11 @@ g( 2.0 ) = 95.0
 </div>
 </div>
 <p>We see the quadratice interpolation <span class="math notranslate nohighlight">\(g(x)\)</span> is exact at the three nodes. Please verify this makes sense based on the formula for <span class="math notranslate nohighlight">\(g(x)\)</span>.</p>
-<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
-<b>Home Activity</b>: Evaluate the original function $f(x)$ and the quadratic interpolation approximation $g(x)$ at $x=0.25$. Record your answer in <tt>f_b_iii</tt> and <tt>g_b_iii</tt>. Use the same nodes as the example, i.e., do not modify <tt>x_nodes</tt> and <tt>f_nodes</tt>.
-</div><div class="cell docutils container">
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Evaluate the original function <span class="math notranslate nohighlight">\(f(x)\)</span> and the quadratic interpolation approximation <span class="math notranslate nohighlight">\(g(x)\)</span> at <span class="math notranslate nohighlight">\(x=0.25\)</span>. Record your answer in <tt>f_b_iii</tt> and <tt>g_b_iii</tt>. Use the same nodes as the example, i.e., do not modify <tt>x_nodes</tt> and <tt>f_nodes</tt>.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
 </pre></div>
@@ -1656,9 +1810,11 @@ g( 0.25 ) = 21.5
 </div>
 </div>
 <p>We can see the quadratic function fits <span class="math notranslate nohighlight">\(f(x)\)</span> really well. This is not that surprising, as <span class="math notranslate nohighlight">\(f(x)\)</span> is a cubic.</p>
-<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
-<b>Home Activity</b>: Copy the code above to below. Adapt the copied code to explore $g(x) = x (1-\sin(x))$. Write a sentence to discuss the results.
-</div><div class="cell docutils container">
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Copy the code above to below. Adapt the copied code to explore <span class="math notranslate nohighlight">\(g(x) = x (1-\sin(x))\)</span>. Write a sentence to discuss the results.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
 </pre></div>
@@ -1671,10 +1827,12 @@ g( 0.25 ) = 21.5
 <p><strong>Home Activity Discussion:</strong></p>
 </div>
 <div class="section" id="id1">
-<h4>General Purpose Function and Test Case<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
-<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
-<b>Home Activity</b>: Study the code below. Write at least two questions to ask your neighbor during class.
-</div><div class="cell docutils container">
+<h4>General Purpose Function and Test Case<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h4>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Study the code below. Write at least two questions to ask your neighbor during class.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simpsons</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">pieces</span><span class="p">,</span> <span class="n">graph</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Find the integral of the function f between a and b using Simpson&#39;s rule</span>
@@ -1736,9 +1894,11 @@ g( 0.25 ) = 21.5
 </div>
 </div>
 </div>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Complete the activity on the handout.
-</div><p>We wrote a function. Now let’s test it by approximating:</p>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Complete the activity on the handout.</p>
+</div>
+<p>We wrote a function. Now let’s test it by approximating:</p>
 <div class="math notranslate nohighlight">
 \[
 \int_{0}^{\pi} \sin(x) dx
@@ -1757,9 +1917,11 @@ g( 0.25 ) = 21.5
 </div>
 </div>
 </div>
-<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
-<b>Home Activity</b>: Recompute the integral estimate with 50 pieces. Store the answer in <tt>ans_biii_50</tt>.
-</div><div class="cell docutils container">
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Recompute the integral estimate with 50 pieces. Store the answer in <tt>ans_biii_50</tt>.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### BEGIN SOLUTION</span>
 <span class="n">integral_estimate</span> <span class="o">=</span> <span class="n">simpsons</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="n">pieces</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">graph</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1785,10 +1947,12 @@ g( 0.25 ) = 21.5
 </div>
 </div>
 <div class="section" id="id2">
-<h4>Error Analysis<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
-<div style="background-color: rgba(0,255,0,0.05) ; padding: 10px; border: 1px solid darkgreen;"> 
-<b>Home Activity</b>: Run the code below.
-</div><div class="cell docutils container">
+<h4>Error Analysis<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h4>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Run the code below.</p>
+</div>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pieces</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
 <span class="n">error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
@@ -1813,9 +1977,10 @@ g( 0.25 ) = 21.5
 <p>Simpson’s rule is fourth-order in the piece size. This means that every time I double the number of pieces the error goes down by a factor of <span class="math notranslate nohighlight">\(2^4 = 16\)</span>.</p>
 </div>
 <div class="section" id="another-example-approximating-pi">
-<h4>Another Example: Approximating <span class="math notranslate nohighlight">\(\pi\)</span><a class="headerlink" href="#another-example-approximating-pi" title="Permalink to this headline">¶</a></h4>
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Run code below and discuss.
+<h4>Another Example: Approximating <span class="math notranslate nohighlight">\(\pi\)</span><a class="headerlink" href="#another-example-approximating-pi" title="Permalink to this headline">#</a></h4>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Run code below and discuss.</p>
 </div>
 <p>We can approximate <span class="math notranslate nohighlight">\(\pi\)</span> with the following integral:</p>
 <div class="math notranslate nohighlight">
@@ -1862,9 +2027,11 @@ g( 0.25 ) = 21.5
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="../06/integration.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1880,24 +2047,28 @@ g( 0.25 ) = 21.5
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
     
-      By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>
