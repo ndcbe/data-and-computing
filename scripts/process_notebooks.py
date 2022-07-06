@@ -74,21 +74,25 @@ def process_notebook(folder, filename, verbose=1):
             print("\t",count," cells processed")
     
     # Process Home Activity Boxes
-    replace_markdown('style=\"background-color: rgba\(0,255,0,0.05\) ; padding: 10px; border: 1px solid darkgreen;\"','class=\"admonition seealso\"')
-    replace_markdown('<b>Home Activity</b>:','<p class=\"title\"><b>Home Activity</b></p>\n')
-    replace_markdown('<b>Optional Home Activity</b>:','<p class=\"title\"><b>Optional Home Activity</b></p>\n')
+    replace_markdown('style=\"background-color: rgba\(0,255,0,0.05\) ; padding: 10px; border: 1px solid darkgreen;\"',
+                     'class=\"admonition seealso\"')
+    replace_markdown('<b>Home Activity</b>:', '<p class=\"title\"><b>Home Activity</b></p>\n')
+    replace_markdown('<b>Optional Home Activity</b>:', '<p class=\"title\"><b>Optional Home Activity</b></p>\n')
     
     # Process Tutorial Activity Boxes
-    replace_markdown('style=\"background-color: rgba\(255,0,0,0.05\) ; padding: 10px; border: 1px solid darkred;\"','class=\"admonition danger\"')
-    replace_markdown('<b>Tutorial Activity</b>:','<p class=\"title\"><b>Tutorial Activity</b></p>\n')
+    replace_markdown('style=\"background-color: rgba\(255,0,0,0.05\) ; padding: 10px; border: 1px solid darkred;\"',
+                     'class=\"admonition danger\"')
+    replace_markdown('<b>Tutorial Activity</b>:', '<p class=\"title\"><b>Tutorial Activity</b></p>\n')
     
     # Process Class Activity Boxes
-    replace_markdown('style=\"background-color: rgba\(0,0,255,0.05\) ; padding: 10px; border: 1px solid darkblue;\"','class=\"admonition note\"')
-    replace_markdown('<b>Class Activity</b>:','<p class=\"title\"><b>Class Activity</b></p>\n')
+    replace_markdown('style=\"background-color: rgba\(0,0,255,0.05\) ; padding: 10px; border: 1px solid darkblue;\"',
+                     'class=\"admonition note\"')
+    replace_markdown('<b>Class Activity</b>:', '<p class=\"title\"><b>Class Activity</b></p>\n')
     
     # Process Note Boxes
-    replace_markdown('style=\"background-color: rgba\(255,255,0,0.05\) ; padding: 10px; border: 1px solid black;\"','class=\"admonition tip\"')
-    replace_markdown('<b>Note</b>:','<p class=\"title\"><b>Note</b></p>\n')
+    replace_markdown('style=\"background-color: rgba\(255,255,0,0.05\) ; padding: 10px; border: 1px solid black;\"',
+                     'class=\"admonition tip\"')
+    replace_markdown('<b>Note</b>:', '<p class=\"title\"><b>Note</b></p>\n')
     
     # replace links to media with urls
     MEDIA_LINK = '!\[(.*)\]\(\.\./\.\./media/(.*\..*)\)'
@@ -100,11 +104,11 @@ def process_notebook(folder, filename, verbose=1):
             # copy media files to _images
             for txt, media_file in media_links:
                 path_to_media_file = f"./media/{media_file}"
-                print(f"    Found link to media: ![{txt}](../../media/{media_file})")
+                print(f"    found link to media file: ![{txt}](../../media/{media_file})")
                 if not os.path.exists(path_to_media_file):
-                    print(f"    WARNING: {path_to_media_file} doesn't exist.")
+                    print(f"    WARNING: media file {path_to_media_file} not found.")
                 else:
-                    print(f"    copy {media_file} to _images")
+                    print(f"    copy media file {media_file} to _images")
                     shutil.copy2(path_to_media_file, "./_build/html/_images")
             # replace media files with urls to _images
             cell.source = re.sub(MEDIA_LINK, IMAGE_LINK, cell.source)
@@ -114,31 +118,27 @@ def process_notebook(folder, filename, verbose=1):
     
     with open(output_notebook, "w") as fp:
         if verbose >= 1:
-            print("Saving ",output_notebook)
+            print("Saving ", output_notebook)
         nbformat.write(nb, fp)
     
 
 # Testing
-#process_notebook("./notebooks/01","03-Flow-control.ipynb")
+#process_notebook("./notebooks/01", "03-Flow-control.ipynb")
 
-folders = ["01","02","03","04","05","06","07","08","09","10","11","12","13","14"]
-
-
-#folders = ["01","02","03","04","05","06","07","08","09","10","11","12","13"]
-
-# folders = ["01"]
+folders = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14"]
 
 for fld in folders:
     
     # Loop over filenames
-    full_folder_name = "./notebooks/"+fld
+    full_folder_name = "./notebooks/" + fld
     
-    print("Processing files in ",full_folder_name)
+    print("Processing files in ", full_folder_name)
     
     for file in sorted(os.listdir(full_folder_name)):
         
         # Check if file is a notebook using ending
-        if re.match("(.*?)\.ipynb$",file):
+        if re.match("(.*?)\.ipynb$", file):
             
             # process the notebook!
             process_notebook(full_folder_name, file, verbose=1)
+            
