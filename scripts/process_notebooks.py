@@ -26,12 +26,12 @@ def process_notebook(folder, filename, verbose=1):
     ## Remove code elements with specific tag
     def replace_code(pattern, replacement):
         ''' Replace content in code by applying regular expression
-        
+    
         '''
-        
+    
         if verbose >= 1:
             print("Removing following expression: ", pattern)
-        
+    
         count = 0
     
         regex = re.compile(pattern, re.DOTALL)
@@ -43,19 +43,56 @@ def process_notebook(folder, filename, verbose=1):
                     print(f" - {pattern} removed")
                 
         if verbose >= 1:
-            print("  ",count," cells processed")
-
+            print("\t",count," cells processed")
+    
     SOLUTION_CODE = "### BEGIN SOLUTION(.*?)### END SOLUTION"
     HIDDEN_TESTS = "### BEGIN HIDDEN TESTS(.*?)### END HIDDEN TESTS"
     replace_code(SOLUTION_CODE, "# Add your solution here")
     replace_code(HIDDEN_TESTS, "# Removed autograder test. You may delete this cell.")
     
+    ## Replace elements in markdown cells
+    def replace_markdown(pattern, replacement):
+        ''' Replace content in markdown by applying regular expression
+    
+        '''
+    
+        if verbose >= 1:
+            print("Removing following expression: ", pattern)
+    
+        count = 0
+    
+        regex = re.compile(pattern, re.DOTALL)
+        for cell in nb.cells:
+            if cell.cell_type == "markdown" and regex.findall(cell.source):
+                cell.source = regex.sub(replacement, cell.source)
+                count += 1
+                if verbose >= 2:
+                    print(f" - {pattern} removed")
+                
+        if verbose >= 1:
+            print("\t",count," cells processed")
+    
+    # Process Home Activity Boxes
+    replace_markdown('style=\"background-color: rgba\(0,255,0,0.05\) ; padding: 10px; border: 1px solid darkgreen;\"','class=\"admonition seealso\" name=\"html-admonition\"')
+    replace_markdown('<b>Home Activity</b>:','<p class=\"title\"><b>Home Activity</b></p>\n')
+    
+    # Process Tutorial Activity Boxes
+    replace_markdown('style=\"background-color: rgba\(255,0,0,0.05\) ; padding: 10px; border: 1px solid darkred;\"','class=\"admonition danger\" name=\"html-admonition\"')
+    replace_markdown('<b>Tutorial Activity</b>:','<p class=\"title\"><b>Tutorial Activity</b></p>\n')
+    replace_markdown('<b>Note</b>:','<p class=\"title\"><b>Important Note</b></p>\n')
+    
+    # Process Class Activity Boxes
+    replace_markdown('style=\"background-color: rgba\(0,0,255,0.05\) ; padding: 10px; border: 1px solid darkblue;\"','class=\"admonition note\" name=\"html-admonition\"')
+    replace_markdown('<b>Class Activity</b>:','<p class=\"title\"><b>Class Activity</b></p>\n')
+    
     # replace links to media with urls
+    '''
     MEDIA_LINK = '!\[(.*)\]\(\.\./\.\./media/(.*\..*)\)'
     IMAGE_LINK = r'![\1](https://ndcbe.github.io/data-and-computing/_images/\2)'
     for cell in nb.cells:
         if cell.cell_type == "markdown" and re.findall(MEDIA_LINK, cell.source):
            cell.source = re.sub(MEDIA_LINK, IMAGE_LINK, cell.source)
+    '''
 
     ## Save new notebook
     output_notebook = folder + "-publish/" + filename
@@ -66,34 +103,17 @@ def process_notebook(folder, filename, verbose=1):
         nbformat.write(nb, fp)
     
 
-def replace_code(pattern, replacement, verbose):
-    ''' Replace content in code by applying regular expression
-    
-    '''
-    
-    if verbose >= 1:
-        print("Removing following expression: ", pattern)
-    
-    count = 0
-    
-    regex = re.compile(pattern, re.DOTALL)
-    for cell in nb.cells:
-        if cell.cell_type == "code" and regex.findall(cell.source):
-            cell.source = regex.sub(replacement, cell.source)
-            count += 1
-            if verbose >= 2:
-                print(f" - {pattern} removed")
-                
-    if verbose >= 1:
-        print("\t",count," cells processed")
+
 
 # Testing
 #process_notebook("./notebooks/01","03-Flow-control.ipynb")
 
-#folders = ["01","02","03","04","05","06","07","08","09","10","11","12","13","14"]
+folders = ["01","02","03","04","05","06","07","08","09","10","11","12","13","14"]
 
 
-folders = ["01","02","03","04","05","06","07","08","09","10","11","12","13"]
+#folders = ["01","02","03","04","05","06","07","08","09","10","11","12","13"]
+
+# folders = ["01"]
 
 for fld in folders:
     
