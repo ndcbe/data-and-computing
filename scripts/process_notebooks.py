@@ -2,6 +2,7 @@ import nbformat
 from nbformat.v4.nbbase import new_code_cell, new_markdown_cell, new_notebook
 import re
 import os
+import shutil
 
 def process_notebook(folder, filename, verbose=1):
 
@@ -90,13 +91,23 @@ def process_notebook(folder, filename, verbose=1):
     replace_markdown('<b>Note</b>:','<p class=\"title\"><b>Note</b></p>\n')
     
     # replace links to media with urls
-    '''
     MEDIA_LINK = '!\[(.*)\]\(\.\./\.\./media/(.*\..*)\)'
     IMAGE_LINK = r'![\1](https://ndcbe.github.io/data-and-computing/_images/\2)'
+    
     for cell in nb.cells:
-        if cell.cell_type == "markdown" and re.findall(MEDIA_LINK, cell.source):
-           cell.source = re.sub(MEDIA_LINK, IMAGE_LINK, cell.source)
-    '''
+        if cell.cell_type == "markdown":
+            media_links = re.findall(MEDIA_LINK, cell.source)
+            # copy media files to _images
+            for txt, media_file in media_links:
+                path_to_media_file = f"./media/{media_file}"
+                print(f"    Found link to media: ![{txt}](../../media/{media_file})")
+                if not os.path.exists(path_to_media_file):
+                    print(f"    WARNING: {path_to_media_file} doesn't exist.")
+                else:
+                    print(f"    copy {media_file} to _images")
+                    shutil.copy2(path_to_media_file, "./_build/html/_images")
+            # replace media files with urls to _images
+            cell.source = re.sub(MEDIA_LINK, IMAGE_LINK, cell.source)
 
     ## Save new notebook
     output_notebook = os.path.join(folder + "-publish", filename)
@@ -106,8 +117,6 @@ def process_notebook(folder, filename, verbose=1):
             print("Saving ",output_notebook)
         nbformat.write(nb, fp)
     
-
-
 
 # Testing
 #process_notebook("./notebooks/01","03-Flow-control.ipynb")
