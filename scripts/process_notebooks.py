@@ -86,7 +86,7 @@ def process_notebook(folder, filename, verbose=1):
     replace_markdown('<b>Class Activity</b>:','<p class=\"title\"><b>Class Activity</b></p>\n')
     
     # Process Note Boxes
-    replace_markdown('style=\"background-color: rgba\(255,255,0,0.05\) ; padding: 10px; border: 1px solid black;\"','class=\"admonition note\"')
+    replace_markdown('style=\"background-color: rgba\(255,255,0,0.05\) ; padding: 10px; border: 1px solid black;\"','class=\"admonition tip\"')
     replace_markdown('<b>Note</b>:','<p class=\"title\"><b>Note</b></p>\n')
     
     # replace links to media with urls
