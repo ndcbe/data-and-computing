@@ -99,7 +99,7 @@ def process_notebook(folder, filename, verbose=1):
     '''
 
     ## Save new notebook
-    output_notebook = folder + "-publish/" + filename
+    output_notebook = os.path.join(folder + "-publish", filename)
     
     with open(output_notebook, "w") as fp:
         if verbose >= 1:
