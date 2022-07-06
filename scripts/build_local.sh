@@ -2,3 +2,4 @@
 
 python ./scripts/process_notebooks.py
 jb build ../data-and-computing/
+open ./_build/html/index.html
