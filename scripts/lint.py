@@ -10,8 +10,6 @@ import os
 import re
 import requests
 import nbformat
-from nbformat.v4.nbbase import new_code_cell, new_markdown_cell, new_notebook
-
 
 URL = r'(http|ftp|https):\/\/([\w\-_]+(?:(?:\.[\w\-_]+)+))([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?'
 
@@ -29,13 +27,13 @@ def lint_notebook(full_folder_name, file):
             for protocol, domain, target in urls:
                 url = "://".join([protocol, "".join([domain, target])])
                 try:
-                    get = requests.get(url)
+                    get = requests.get(url, timeout=10)
                     if get.status_code == 200:
                         print(f"    OK: {url} is reachable")
                     else:
                         print(f"    WARNING: {url} is not reachable, status_code: {get.status_code}")
                 except requests.exceptions.RequestException as e:
-                    raise SystemExit(f"{url}: is Not reachable \nErr: {e}")
+                    print(f"    ERROR: {url} {e}")
 
 
 
