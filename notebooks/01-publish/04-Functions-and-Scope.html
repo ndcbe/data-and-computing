@@ -1,0 +1,1515 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Functions and Scope &#8212; Data and Computing for Chemical Engieers</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Recursion" href="04b-Recursion.html" />
+    <link rel="prev" title="Pseudocode" href="03b-Pseudocode.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/cbe_logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Data and Computing for Chemical Engieers</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../intro.html">
+   Welcome to (Advanced) Data and Computing for Engineers
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="00-Python-Primer.html">
+   Python Primer
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="01-Jupyter-Notebooks.html">
+     Welcome to Jupyter Notebooks and Vocareum
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02-Python-Basics-I-Variables-Strings-Bugs.html">
+     Python Basics I: Variables, Strings, and Bugs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03-Flow-control.html">
+     Python Basics II: Loopy Logic
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03b-Pseudocode.html">
+     Pseudocode
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Functions and Scope
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04b-Recursion.html">
+     Recursion
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04c-Modules-and-Files.html">
+     Functions, Scoping, and Other Fun Stuff
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04d-Example-High-Low-Game.html">
+     High/Low Guess My Number Game
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="05-Python-Basics-III-Lists-Dictionaries-Enumeration.html">
+     Python Basics III: Lists, Dictionaries, and Enumeration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="06-NumPy.html">
+     Linear Algebra with Numpy and Scipy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="07-Matplotlib.html">
+     Visualization with matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="08-Pandas.html">
+     Manipulating Data with Pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="09-Functions-as-Arguments.html">
+     Functions as Arguments
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="10-Testing-and-Debugging.html">
+     Testing and Debugging in Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../02/linear_algebra.html">
+   Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02-publish/01-Modeling-Systems-of-Linear-Equations.html">
+     Modeling Systems of Linear Equations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02-publish/02-Gauss-Elimination.html">
+     Gaussian Elimination
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02-publish/03-LU-Factorization.html">
+     LU Decomposition and Condition Number
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02-publish/04-Example-Atomic-Mass-Balances.html">
+     Example: Mass Balances and Linear Algebra
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../03/algorithms.html">
+   Algorithm Building Blocks
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03-publish/01-Taylor-Series.html">
+     Taylor Series Approximations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03-publish/02-Finite-Difference.html">
+     Finite Difference Derivative Approximations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03-publish/03-Example-Heating-a-Metal-Slab.html">
+     Example: Heating a Metal Slab
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../04/nonlinear_systems.html">
+   Nonlinear Systems of Equations
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/01-Modeling-Systems-of-Nonlinear-Equations.html">
+     Modeling Systems of Nonlinear Equations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/02-Newton-Method-Nonlinear-Equation-Solving.html">
+     Solving Systems of Nonlinear Equations with Newton’s Method
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/03-More-Newton-Type-Methods.html">
+     More Newton-Type Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/04-Convergence-Analysis-Newton-Method.html">
+     Convergence Analysis for Newton’s Method
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/05-System-of-Equations-Newton-Method.html">
+     Newton’s Method for Systems of Equations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../05/optimization.html">
+   Continuous Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05-publish/01-Pyomo-Basics.html">
+     Pyomo Basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05-publish/02-Electricity-Market-Optimization.html">
+     Electricity Market Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05-publish/03-Flash-Calculations-in-Pyomo.html">
+     Flash Calculations in Pyomo
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../06/integration.html">
+   Numeric Integration
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/01-Intro-and-Newton-Cotes.html">
+     Introduction and Newton-Cotes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/02-Gauss-Quadrature.html">
+     Gauss Quadrature
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/03-Adaptive-Methods-and-Scipy.html">
+     Adaptive Methods for Newton-Cotes and Gauss Quadrature, Scipy Library
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/04-Application-Inertial-Navigation-Systems.html">
+     Application: Inertial Navigation Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/05-Forward-and-Backward-Euler.html">
+     Forward and Backward Euler Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/06-Trapezoid-Rule.html">
+     Crank-Nicolson (Trapezoid Rule)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/07-Stability-Analysis.html">
+     Stability Analysis of Forward/Backward Euler and Crank-Nicolson Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/08-Explicit-Runge-Kutta.html">
+     Explicit Range Kutta Method
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/09-Systems-of-Differential-Equations-and-Scipy.html">
+     Systems of Differential Equations and Scipy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/10-Example-Reaction-Rates.html">
+     Example: Reaction Rates
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../07/stats.html">
+   Descriptive Statistics and Visualization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07-publish/01-Sampling.html">
+     Sampling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07-publish/02-Summary-Statistics.html">
+     Summary Statistics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07-publish/03-Visualizing-Data.html">
+     Visualizing Data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../08/probability.html">
+   Probability Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../08-publish/01-Random-Variables.html">
+     Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../08-publish/02-Jointly-Distributed-Random-Variables.html">
+     Jointly Distributed Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../08-publish/03-Practice-Problems.html">
+     Practice Problems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../09/distributions.html">
+   Common Probability Distributions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../09-publish/01-Bernoulli-Probability-Distribution.html">
+     Bernoulli Probability Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../09-publish/03-Poisson-Probability-Distribution.html">
+     Poisson Probability Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../09-publish/04-Normal-Probability-Distribution.html">
+     Normal Probability Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../09-publish/05-Common-Probability-Distributions-Summary.html">
+     Common Probability Distributions Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../10/uncertainty.html">
+   Uncertainty and Error Propagation
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10-publish/01-Measurement-Error.html">
+     Measurement Error
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10-publish/02-Error-Propagation.html">
+     Error Propagation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10-publish/03-Measuring-Flowrate-Example.html">
+     Measuring Flowrate Example
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10-publish/04-Practice-Problems.html">
+     Practice Problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10-publish/05-Simulation.html">
+     Simulation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../11/inference.html">
+   Statistical Inference
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/01-Central-Limit-Theorem.html">
+     Central Limit Theorem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/02-Standard-Normal-Distribution.html">
+     Standard Normal Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/03-Confidence-Intervals.html">
+     Confidence Intervals
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/04-Students-t-Distribution.html">
+     Student’s t-Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/05-First-Hypothesis-Testing.html">
+     First Hypothesis Testing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/06-Hypothesis-Testing-Review-and-Type-I-Type-II-Errors.html">
+     Hypothesis Testing Review and Type I/Type II Errors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/07-Flavors-of-Hypothesis-Testing.html">
+     Flavors of Hypothesis Testing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/08-Statistical-Power-Basics.html">
+     Statistical Power Basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/09-Statistical-Power-in-Python.html">
+     Statistical Power in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/10-Statistical-Power-Practice-Problems.html">
+     Statistical Power Practice Problems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../12/regression.html">
+   Regression
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12-publish/02-Uncertainty-Analysis-and-Statistical-Inference.html">
+     Uncertainty Analysis and Statistical Inference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12-publish/03-Linear-Regression-Practice-Problems.html">
+     Linear Regression Practice Problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12-publish/04-Multivariate-Linear-Regression.html">
+     Multivariate Linear Regression
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../13/advanced_regression.html">
+   Advanced Nonlinear Regression
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/01-Transformations-and-Linear-Regression.html">
+     Transformations and Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/02-Nonlinear-Regression.html">
+     Nonlinear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/03-Nonlinear-Regression-Practice-Problem.html">
+     Nonlinear Regression Practice Problem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/04-Weighted-Regression.html">
+     Weighted Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/05-Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression.html">
+     Monte Carlo Uncertainty Analysis for Nonlinear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/06-Bootstrap-Confidence-Intervals.html">
+     Bootstrap Confidence Intervals
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/07-Nonlinear-Case-Study-Adsorptive-Membranes.html">
+     Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../14/design_of_experiments.html">
+   Design of Experiments
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/01-publish/04-Functions-and-Scope.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/ndcbe/data-and-computing"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/01-publish/04-Functions-and-Scope.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/01-publish/04-Functions-and-Scope.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/01-publish/04-Functions-and-Scope.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-objectives">
+   Learning Objectives
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functions">
+   Functions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#motivating-example">
+     Motivating Example
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#calling-functions">
+     Calling functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#return-values">
+     Return Values
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#docstrings-and-help">
+     Docstrings and Help
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#scope">
+   Scope
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Functions and Scope</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-objectives">
+   Learning Objectives
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functions">
+   Functions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#motivating-example">
+     Motivating Example
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#calling-functions">
+     Calling functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#return-values">
+     Return Values
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#docstrings-and-help">
+     Docstrings and Help
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#scope">
+   Scope
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="functions-and-scope">
+<h1>Functions and Scope<a class="headerlink" href="#functions-and-scope" title="Permalink to this headline">¶</a></h1>
+<p>(not the mouthwash)</p>
+<p><strong>Reference</strong>: Chapter 3 of <em>Computational Nuclear Engineering and Radiological Science Using Python</em>, R. McClarren (2018)</p>
+<div class="section" id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">¶</a></h2>
+<p>After studying this notebook, completing the activities, and asking questions in class, you should be able to:</p>
+<ul class="simple">
+<li><p>Know good practices for creating functions and adding a reasonable docstring.</p></li>
+<li><p>Be able to call functions with correct inputs and access the outputs.</p></li>
+<li><p>Understand local versus global scope and basic scoping rules with functions.</p></li>
+</ul>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="motivating-example">
+<h3>Motivating Example<a class="headerlink" href="#motivating-example" title="Permalink to this headline">¶</a></h3>
+<p>Why use functions? We want to write, debug, and test code <strong>once</strong> and then <strong>reuse</strong> as much as possible.</p>
+<p>Soon, we’ll formulate mass balances as linear systems and solve them using Python. But for now, let’s just consider a problem you would expect to see in math class:</p>
+<p>We want to solve the linear system,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \mathrm{Eqn.~1}:\quad 4.5 x + 3 y = 10.5\\\mathrm{Eqn.~2}:\quad 1.5 x + 3 y = 7.5.\end{split}\]</div>
+<p>One way to do this is using Python as calculator. In the comments below, we walk through the steps.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;python code to solve </span>
+<span class="sd">4.5 x + 3 y = 10.5</span>
+<span class="sd">1.5 x + 3 y = 7.5</span>
+<span class="sd">by solving the second equation for y first,</span>
+<span class="sd">and then solving for x&quot;&quot;&quot;</span>
+<span class="c1">#step 1 solve for y, multiply equation 2 by -3, </span>
+<span class="c1">## and add to first equation</span>
+<span class="n">LHS_coefficient</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">3</span> <span class="c1">#the coefficient for y</span>
+<span class="n">RHS</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="mf">7.5</span> <span class="o">+</span> <span class="mf">10.5</span> <span class="c1">#the right-hand side</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;LHS_coefficient:&#39;</span><span class="p">,</span><span class="n">LHS_coefficient</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;RHS:&#39;</span><span class="p">,</span><span class="n">RHS</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LHS_coefficient: -6
+RHS: -12.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Mathematically, we started by multiplying equation 2,</p>
+<div class="math notranslate nohighlight">
+\[1.5 x + 3 y = 7.5\]</div>
+<p>by -3,</p>
+<div class="math notranslate nohighlight">
+\[(-3) \times 1.5 x + (-3) \times 3 y = (-3) \times 7.5\]</div>
+<p>and then added this scaled equation 2 to equation 1, giving:</p>
+<div class="math notranslate nohighlight">
+\[(4.5 - 3 \times 1.5) x + (3 - 3 \times 3) y = 10.5 - 3 \times 7.5\]</div>
+<p>Notice that our choice of scaling equation 2 by -3 means that the coefficient for x becomes zero after addition. The coefficient for <span class="math notranslate nohighlight">\(y\)</span> is <code class="docutils literal notranslate"><span class="pre">LHS_coefficient</span></code> is our code. <code class="docutils literal notranslate"><span class="pre">RHS</span></code> is the right hand side of the new equation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#now divide right-hand side by left-hand side coefficient</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">RHS</span> <span class="o">/</span> <span class="n">LHS_coefficient</span>
+<span class="c1">#plug y into first equation</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="mf">10.5</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="mf">4.5</span> 
+<span class="c1">#print the solution, note \n produces a linebreak</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The solution to:</span><span class="se">\n</span><span class="s2">4.5 x + 3 y = 10.5</span><span class="se">\n</span><span class="s2">1.5 x + 3 y = 7.5</span><span class="se">\n</span><span class="s2"> is x =&quot;</span><span class="p">,</span>
+      <span class="n">x</span><span class="p">,</span><span class="s2">&quot;y=&quot;</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The solution to:
+4.5 x + 3 y = 10.5
+1.5 x + 3 y = 7.5
+ is x = 1.0 y= 2.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>How to extend this code to another linear system?</p>
+<p><strong>Let’s define a function</strong> that will solve the system for (almost) any coefficients and right-hand side.</p>
+<p>I’ll define such a function to solve $<span class="math notranslate nohighlight">\(a_1 x + b_1 y = c_1\\ a_2 x + b_2 y = c_2.\)</span>$</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Write pseudocode to generalize the steps from the motivating example to solve the linear system with coefficients a1, a2, b1, b2, c1, and c2.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Discuss your pseudocode with a partner. Give one compliment and one suggestion to partner’s pseudocode. We’ll then regroup and write it together as a class.</p>
+</div>
+<p>Below is a function that solves (most) 2x2 linear systems. Take a few minutes to study the code below. Specifically:</p>
+<ul class="simple">
+<li><p>Notice the function has seven inputs. The first six are the coefficients. The seventh, <code class="docutils literal notranslate"><span class="pre">LOUD</span></code>, is followed by <code class="docutils literal notranslate"><span class="pre">=False</span></code>. This sets the default value of <code class="docutils literal notranslate"><span class="pre">LOUD</span></code> to false.</p></li>
+<li><p>The input <code class="docutils literal notranslate"><span class="pre">LOUD</span></code> toggles on/off a print statement.</p></li>
+<li><p>This function has a long comment string at the top. It includes a brief description, then a list of inputs (arguments) and finally a list of outputs (returns). All of the functions you write in this class must be commented in the same style.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">two_by_two_solver</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span><span class="n">b1</span><span class="p">,</span><span class="n">c1</span><span class="p">,</span><span class="n">a2</span><span class="p">,</span><span class="n">b2</span><span class="p">,</span><span class="n">c2</span><span class="p">,</span> <span class="n">LOUD</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculate the solution of the system </span>
+<span class="sd">    a1 x + b1 y = c1, </span>
+<span class="sd">    a2 x + b2 y = c2</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        a1: x coefficient in first equation (cannot be zero)</span>
+<span class="sd">        b1: y coefficient in first equation</span>
+<span class="sd">        c1: right-hand side in first equation</span>
+<span class="sd">        a2: x coefficient in second equation </span>
+<span class="sd">        b2: y coefficient in second equation </span>
+<span class="sd">        c2: right-hand side in second equation</span>
+<span class="sd">        LOUD: boolean that decides whether to print out the answer</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        list containing the solution in the format [x,y]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">#step one, eliminate x from the second equation by </span>
+    <span class="c1">#multiplying first equation by -a2/a1</span>
+    <span class="c1">#and then adding it to second equation</span>
+    <span class="n">new_b2</span> <span class="o">=</span> <span class="n">b2</span> <span class="o">-</span> <span class="n">a2</span><span class="o">/</span><span class="n">a1</span><span class="o">*</span><span class="n">b1</span>
+    <span class="n">new_c2</span> <span class="o">=</span> <span class="n">c2</span> <span class="o">-</span> <span class="n">a2</span><span class="o">/</span><span class="n">a1</span><span class="o">*</span><span class="n">c1</span>
+    <span class="c1">#solve the new equation 2</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">new_c2</span><span class="o">/</span><span class="n">new_b2</span>
+    <span class="c1">#plug y into original equation 1</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">c1</span><span class="o">-</span><span class="n">b1</span><span class="o">*</span><span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="n">a1</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="n">LOUD</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The solution to:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">a1</span><span class="p">,</span><span class="s2">&quot;x +&quot;</span><span class="p">,</span><span class="n">b1</span><span class="p">,</span><span class="s2">&quot;y =&quot;</span><span class="p">,</span><span class="n">c1</span><span class="p">,</span>
+              <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">a2</span><span class="p">,</span><span class="s2">&quot;x +&quot;</span><span class="p">,</span><span class="n">b2</span><span class="p">,</span><span class="s2">&quot;y =&quot;</span><span class="p">,</span><span class="n">c2</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> is x =&quot;</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="s2">&quot;y=&quot;</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can call this function for the problem above by typing</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">two_by_two_solver</span><span class="p">(</span><span class="mf">4.5</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mf">10.5</span><span class="p">,</span><span class="mf">1.5</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mf">7.5</span><span class="p">,</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The solution to:
+ 4.5 x + 3 y = 10.5 
+ 1.5 x + 3 y = 7.5 
+ is x = 1.0 y= 2.0
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1.0, 2.0]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also solve other systems, including simple ones</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">two_by_two_solver</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The solution to:
+ 1 x + 0 y = 3 
+ 0 x + 1 y = 2 
+ is x = 3.0 y= 2.0
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[3.0, 2.0]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can’t solve systems where <span class="math notranslate nohighlight">\(a_1\)</span> is zero because our function divides by <span class="math notranslate nohighlight">\(a_1\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">two_by_two_solver</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ZeroDivisionError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">Input In [5],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">two_by_two_solver</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nn">Input In [2],</span> in <span class="ni">two_by_two_solver</span><span class="nt">(a1, b1, c1, a2, b2, c2, LOUD)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="sd">&quot;&quot;&quot;Calculate the solution of the system </span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span><span class="sd"> a1 x + b1 y = c1, </span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span><span class="sd"> a2 x + b2 y = c2</span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span><span class="sd">     list containing the solution in the format [x,y]</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="c1">#step one, eliminate x from the second equation by </span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="c1">#multiplying first equation by -a2/a1</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="c1">#and then adding it to second equation</span>
+<span class="ne">---&gt; </span><span class="mi">21</span> <span class="n">new_b2</span> <span class="o">=</span> <span class="n">b2</span> <span class="o">-</span> <span class="n">a2</span><span class="o">/</span><span class="n">a1</span><span class="o">*</span><span class="n">b1</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="n">new_c2</span> <span class="o">=</span> <span class="n">c2</span> <span class="o">-</span> <span class="n">a2</span><span class="o">/</span><span class="n">a1</span><span class="o">*</span><span class="n">c1</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="c1">#solve the new equation 2</span>
+
+<span class="ne">ZeroDivisionError</span>: division by zero
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="calling-functions">
+<h3>Calling functions<a class="headerlink" href="#calling-functions" title="Permalink to this headline">¶</a></h3>
+<p><strong>Approach above: give inputs in order</strong></p>
+<p>We called the function <tt>two_by_two_solver</tt> by listing out the arguments in the order that it expects them <tt>a1, b1, c1, a2, b2, c2, LOUD</tt>.</p>
+<p><strong>Another option: use keywords</strong></p>
+<p>Python allows you to call them in any order, as long as you are explicit in what goes where.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">two_by_two_solver</span><span class="p">(</span><span class="n">a1</span> <span class="o">=</span> <span class="mf">4.5</span><span class="p">,</span> <span class="n">b1</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> 
+                  <span class="n">a2</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">,</span> <span class="n">b2</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> 
+                  <span class="n">c1</span> <span class="o">=</span> <span class="mf">10.5</span><span class="p">,</span> <span class="n">c2</span> <span class="o">=</span> <span class="mf">7.5</span><span class="p">,</span> <span class="n">LOUD</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The solution to:
+ 4.5 x + 3 y = 10.5 
+ 1.5 x + 3 y = 7.5 
+ is x = 1.0 y= 2.0
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1.0, 2.0]
+</pre></div>
+</div>
+</div>
+</div>
+<p>It is often a good idea to call a function explicitly (with keywords). That way if you mess up the order of the arguments, it does not matter.</p>
+<p>Notice that in the function definition, the argument <tt>LOUD</tt> has <tt>=False</tt> after it.  This indicates that if the function is called without a value for <tt>LOUD</tt>, it assumes the caller does not what the function to “be loud”.</p>
+<p>In other words, <tt>False</tt> is the <strong>default</strong> for argument <tt>LOUD</tt>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">two_by_two_solver</span><span class="p">(</span><span class="n">a1</span> <span class="o">=</span> <span class="mf">4.5</span><span class="p">,</span> <span class="n">b1</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">a2</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">,</span> 
+                  <span class="n">b2</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">c1</span> <span class="o">=</span> <span class="mf">10.5</span><span class="p">,</span> <span class="n">c2</span> <span class="o">=</span> <span class="mf">7.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice that it didn’t print out it’s spiel about the system.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">two_by_two_solver</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">a2</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">c2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">b2</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="return-values">
+<h3>Return Values<a class="headerlink" href="#return-values" title="Permalink to this headline">¶</a></h3>
+<p>At the end of the function we have a return statement.  This tells python what the function is returning to the caller.  In this case we return a list that has the solution for <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>.  We can store this in a new variable, or do whatever we like with it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">answer</span> <span class="o">=</span> <span class="n">two_by_two_solver</span><span class="p">(</span><span class="n">a1</span> <span class="o">=</span> <span class="mf">4.5</span><span class="p">,</span> <span class="n">b1</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">a2</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">,</span> 
+                           <span class="n">b2</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">c1</span> <span class="o">=</span> <span class="mf">10.5</span><span class="p">,</span> <span class="n">c2</span> <span class="o">=</span> <span class="mf">7.5</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">answer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1">#store in the variable x the first value in the list answer</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">answer</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1">#store in the variable y the second value in the list answer</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The list&quot;</span><span class="p">,</span><span class="n">answer</span><span class="p">,</span><span class="s2">&quot;contains&quot;</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="s2">&quot;and&quot;</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">Input In [1],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">answer</span> <span class="o">=</span> <span class="n">two_by_two_solver</span><span class="p">(</span><span class="n">a1</span> <span class="o">=</span> <span class="mf">4.5</span><span class="p">,</span> <span class="n">b1</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">a2</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">,</span> 
+<span class="g g-Whitespace">      </span><span class="mi">2</span>                            <span class="n">b2</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">c1</span> <span class="o">=</span> <span class="mf">10.5</span><span class="p">,</span> <span class="n">c2</span> <span class="o">=</span> <span class="mf">7.5</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">x</span> <span class="o">=</span> <span class="n">answer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1">#store in the variable x the first value in the list answer</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">y</span> <span class="o">=</span> <span class="n">answer</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1">#store in the variable y the second value in the list answer</span>
+
+<span class="ne">NameError</span>: name &#39;two_by_two_solver&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Solve the linear system given below and store the answers in <code class="docutils literal notranslate"><span class="pre">my_x</span></code> and <code class="docutils literal notranslate"><span class="pre">my_y</span></code>.</p>
+</div>
+<div class="math notranslate nohighlight">
+\[\begin{split} 2 x -1 y = 3\\ -4 x + 3 y = 0.\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can do even fancier things, if we are so bold</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#just get x</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">two_by_two_solver</span><span class="p">(</span><span class="n">a1</span> <span class="o">=</span> <span class="mf">4.5</span><span class="p">,</span> <span class="n">b1</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">a2</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">,</span> 
+                      <span class="n">b2</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">c1</span> <span class="o">=</span> <span class="mf">10.5</span><span class="p">,</span> <span class="n">c2</span> <span class="o">=</span> <span class="mf">7.5</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x =&quot;</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1">#assign variables to the output on the fly</span>
+<span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">two_by_two_solver</span><span class="p">(</span><span class="n">a1</span> <span class="o">=</span> <span class="mf">4.5</span><span class="p">,</span> <span class="n">b1</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">a2</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">,</span> 
+                        <span class="n">b2</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">c1</span> <span class="o">=</span> <span class="mf">10.5</span><span class="p">,</span> <span class="n">c2</span> <span class="o">=</span> <span class="mf">7.5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x =&quot;</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="s2">&quot;y =&quot;</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x = 1.0
+x = 1.0 y = 2.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>These examples are more advanced and they are designed to show you some of the neat tricks you can do in python.</p>
+</div>
+<div class="section" id="docstrings-and-help">
+<h3>Docstrings and Help<a class="headerlink" href="#docstrings-and-help" title="Permalink to this headline">¶</a></h3>
+<p>Our 2x2 solver code had a long, and pretty detailed comment at the beginning of it.  This is called a <strong>docstring</strong> and it is printed by a user by typing</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">two_by_two_solver</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The point of this long comment is to communicate to other people:</p>
+<ol class="simple">
+<li><p>The main idea behind the function.</p></li>
+<li><p>What the function expects from you: <strong>Inputs.</strong></p></li>
+<li><p>What the function gives you: <strong>Outputs.</strong></p></li>
+</ol>
+<p>In this example we can see that we need to provide at least 6 numbers, and possibly an optional boolean (true/false).</p>
+<p><b>It is good programming practice to include good docstrings.  It will be mandatory for any code you turn in this class.</b></p>
+<p>Let’s look at the docstring for some members of the <tt>math</tt> module and the <tt>random</tt> module.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="n">help</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">fabs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on built-in function fabs in module math:
+
+fabs(x, /)
+    Return the absolute value of the float x.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="n">help</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on method uniform in module random:
+
+uniform(a, b) method of random.Random instance
+    Get a random number in the range [a, b) or [a, b] depending on rounding.
+</pre></div>
+</div>
+</div>
+</div>
+<p>We don’t have the source code for these functions in front of us, but if we want to know how to call them (and we didn’t want to Google® them), the docstrings tell us what to do.</p>
+<p>You may wonder why those docstrings are a bit different that the one I used.  The format for mine is derived from the <a class="reference external" href="https://google.github.io/styleguide/pyguide.html#383-functions-and-methods">Google coding standards for python docstrings.</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># another example</span>
+<span class="k">def</span> <span class="nf">nothing</span><span class="p">():</span>
+    <span class="c1">#this function does nothing</span>
+    <span class="c1">#docstring?</span>
+    <span class="k">return</span> <span class="mi">0</span>
+<span class="n">help</span><span class="p">(</span><span class="n">nothing</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on function nothing in module __main__:
+
+nothing()
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="scope">
+<h2>Scope<a class="headerlink" href="#scope" title="Permalink to this headline">¶</a></h2>
+<p>When we call a function, it carves out in the computer’s memory its own space. Variables that live in the special space, known as <em>local scope</em> are completely different than those in other parts of the program. Here’s a simple, but illustrative example:</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Before you run the code below, predict the output. This is good practice for exam questions, where you’ll be asked to predict the output of Python code without access to a computer.</p>
+</div>
+<p><strong>Home Activity - Your Predictions</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> </code></p>
+<p><code class="docutils literal notranslate"><span class="pre">new_x</span> <span class="pre">=</span> </code></p>
+<p><code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> </code></p>
+<p><code class="docutils literal notranslate"><span class="pre">new_y</span> <span class="pre">=</span> </code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">scope_demonstration</span><span class="p">(</span><span class="n">input_variable</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; A simple demonstration of scoping rules</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        input_variable: a string or number</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        x: --REDACTED TO NOT GIVE AWAY THE ACTIVITY ANSWER --</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">input_variable</span><span class="o">*</span><span class="mi">3</span>
+    <span class="k">return</span> <span class="n">x</span>
+
+<span class="c1">#now call the function after defining some variables</span>
+<span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;oui &quot;</span>
+<span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;no &quot;</span>
+
+<span class="n">new_x</span> <span class="o">=</span> <span class="n">scope_demonstration</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">new_y</span> <span class="o">=</span> <span class="n">scope_demonstration</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x =&quot;</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">new_x =&quot;</span><span class="p">,</span><span class="n">new_x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;y =&quot;</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">new_y =&quot;</span><span class="p">,</span><span class="n">new_y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x = oui  
+new_x = oui oui oui 
+y = no  
+new_y = no no no 
+</pre></div>
+</div>
+</div>
+</div>
+<p>When I call <tt>scope_demonstration</tt> it creates its own memory space and any variable I create in there is different than in the rest of the program, even if the variables have the same name.</p>
+<p>There are many subleties in scoping rules, but this example outlines just about everything that you’ll need to know as a neophyte programmer.</p>
+<p>A variable declared at the top level Python file, i.e., outside a function, is in the global scope for that file. This is easiest to see in an example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_var</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="k">def</span> <span class="nf">print_my_var</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39; Another scope demonstration</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        Nothing</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Nothing</span>
+<span class="sd">        </span>
+<span class="sd">    Other:</span>
+<span class="sd">        prints `my_var`</span>
+<span class="sd">    </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">my_var</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">None</span>
+
+<span class="n">print_my_var</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+</div>
+</div>
+<p>We were able to access <code class="docutils literal notranslate"><span class="pre">my_var</span></code> inside the function even though it was not an input to a function.</p>
+<p>The next natural guess is can we modify <code class="docutils literal notranslate"><span class="pre">my_var</span></code> with a function? Let’s see.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">change_my_var</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39; A third scope demonstration</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        Nothing</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Nothing</span>
+<span class="sd">        </span>
+<span class="sd">    Other:</span>
+<span class="sd">        Attempts to change `my_var&#39;, prints to screen</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="n">my_var</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="n">my_var</span> <span class="o">+</span> <span class="mi">2</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;my_var = &quot;</span><span class="p">,</span><span class="n">my_var</span><span class="p">,</span><span class="s2">&quot; inside the function&quot;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="kc">None</span>
+
+<span class="n">change_my_var</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;my_var =&quot;</span><span class="p">,</span><span class="n">my_var</span><span class="p">,</span><span class="s2">&quot; outside the function&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">UnboundLocalError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">Input In [14],</span> in <span class="ni">&lt;cell line: 19&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;my_var = &quot;</span><span class="p">,</span><span class="n">my_var</span><span class="p">,</span><span class="s2">&quot; inside the function&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="k">return</span> <span class="kc">None</span>
+<span class="ne">---&gt; </span><span class="mi">19</span> <span class="n">change_my_var</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;my_var =&quot;</span><span class="p">,</span><span class="n">my_var</span><span class="p">,</span><span class="s2">&quot; outside the function&quot;</span><span class="p">)</span>
+
+<span class="nn">Input In [14],</span> in <span class="ni">change_my_var</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">def</span> <span class="nf">change_my_var</span><span class="p">():</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="sd">&#39;&#39;&#39; A third scope demonstration</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span><span class="sd">     </span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span><span class="sd">     Args:</span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span><span class="sd">         Attempts to change `my_var&#39;, prints to screen</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span><span class="sd">     &#39;&#39;&#39;</span>
+<span class="ne">---&gt; </span><span class="mi">14</span>     <span class="n">my_var</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="n">my_var</span> <span class="o">+</span> <span class="mi">2</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;my_var = &quot;</span><span class="p">,</span><span class="n">my_var</span><span class="p">,</span><span class="s2">&quot; inside the function&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="k">return</span> <span class="kc">None</span>
+
+<span class="ne">UnboundLocalError</span>: local variable &#39;my_var&#39; referenced before assignment
+</pre></div>
+</div>
+</div>
+</div>
+<p>We got an error message! In Python, we can only access <code class="docutils literal notranslate"><span class="pre">my_var</span></code> inside functions. We cannot change it inside functions. If we wanted to change my_var, we would need to do the following:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">change_my_var2</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39; A third scope demonstration</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        Nothing</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        New value of my_var</span>
+<span class="sd">        </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="k">return</span> <span class="mi">3</span><span class="o">*</span><span class="n">my_var</span> <span class="o">+</span> <span class="mi">2</span>
+
+<span class="n">my_var</span> <span class="o">=</span> <span class="n">change_my_var2</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Now my_var =&quot;</span><span class="p">,</span><span class="n">my_var</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Now my_var = 5
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Take 30 seconds to predict the output of the code below without running it. Below are multiple choice answers.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_func1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; A simple function to demonstrate the nuances of scope</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        x: scalar real number</span>
+<span class="sd">        y: scalar real number</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        z: scalar real number</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">z</span> <span class="o">-</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">z</span>
+
+<span class="c1"># Run the function</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">my_func1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="c1"># Print values of x, y, and z to screen</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x =&quot;</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="s2">&quot;  y =&quot;</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="s2">&quot;  z =&quot;</span><span class="p">,</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x = 1   y = 1   z = 2
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Class Activity multiple choice answers</strong>:</p>
+<ol class="simple">
+<li><p>x=1, y=1, z=2</p></li>
+<li><p>x=1, y=1, z=3</p></li>
+<li><p>x=3, y=0, z=2</p></li>
+<li><p>x=3, y=0, x=3</p></li>
+<li><p>None of these</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Create your answer here.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks/01-publish"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="03b-Pseudocode.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Pseudocode</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="04b-Recursion.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Recursion</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,2846 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes &#8212; Data and Computing for Chemical Engieers</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Design of Experiments" href="../14/design_of_experiments.html" />
+    <link rel="prev" title="Bootstrap Confidence Intervals" href="06-Bootstrap-Confidence-Intervals.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/cbe_logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Data and Computing for Chemical Engieers</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../intro.html">
+   Welcome to (Advanced) Data and Computing for Engineers
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../01-publish/00-Python-Primer.html">
+   Python Primer
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/01-Jupyter-Notebooks.html">
+     Welcome to Jupyter Notebooks and Vocareum
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/02-Python-Basics-I-Variables-Strings-Bugs.html">
+     Python Basics I: Variables, Strings, and Bugs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/03-Flow-control.html">
+     Python Basics II: Loopy Logic
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/03b-Pseudocode.html">
+     Pseudocode
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/04-Functions-and-Scope.html">
+     Functions and Scope
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/04b-Recursion.html">
+     Recursion
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/04c-Modules-and-Files.html">
+     Functions, Scoping, and Other Fun Stuff
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/04d-Example-High-Low-Game.html">
+     High/Low Guess My Number Game
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/05-Python-Basics-III-Lists-Dictionaries-Enumeration.html">
+     Python Basics III: Lists, Dictionaries, and Enumeration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/06-NumPy.html">
+     Linear Algebra with Numpy and Scipy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/07-Matplotlib.html">
+     Visualization with matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/08-Pandas.html">
+     Manipulating Data with Pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/09-Functions-as-Arguments.html">
+     Functions as Arguments
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/10-Testing-and-Debugging.html">
+     Testing and Debugging in Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../02/linear_algebra.html">
+   Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02-publish/01-Modeling-Systems-of-Linear-Equations.html">
+     Modeling Systems of Linear Equations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02-publish/02-Gauss-Elimination.html">
+     Gaussian Elimination
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02-publish/03-LU-Factorization.html">
+     LU Decomposition and Condition Number
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02-publish/04-Example-Atomic-Mass-Balances.html">
+     Example: Mass Balances and Linear Algebra
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../03/algorithms.html">
+   Algorithm Building Blocks
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03-publish/01-Taylor-Series.html">
+     Taylor Series Approximations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03-publish/02-Finite-Difference.html">
+     Finite Difference Derivative Approximations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03-publish/03-Example-Heating-a-Metal-Slab.html">
+     Example: Heating a Metal Slab
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../04/nonlinear_systems.html">
+   Nonlinear Systems of Equations
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/01-Modeling-Systems-of-Nonlinear-Equations.html">
+     Modeling Systems of Nonlinear Equations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/02-Newton-Method-Nonlinear-Equation-Solving.html">
+     Solving Systems of Nonlinear Equations with Newton’s Method
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/03-More-Newton-Type-Methods.html">
+     More Newton-Type Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/04-Convergence-Analysis-Newton-Method.html">
+     Convergence Analysis for Newton’s Method
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/05-System-of-Equations-Newton-Method.html">
+     Newton’s Method for Systems of Equations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../05/optimization.html">
+   Continuous Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05-publish/01-Pyomo-Basics.html">
+     Pyomo Basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05-publish/02-Electricity-Market-Optimization.html">
+     Electricity Market Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05-publish/03-Flash-Calculations-in-Pyomo.html">
+     Flash Calculations in Pyomo
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../06/integration.html">
+   Numeric Integration
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/01-Intro-and-Newton-Cotes.html">
+     Introduction and Newton-Cotes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/02-Gauss-Quadrature.html">
+     Gauss Quadrature
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/03-Adaptive-Methods-and-Scipy.html">
+     Adaptive Methods for Newton-Cotes and Gauss Quadrature, Scipy Library
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/04-Application-Inertial-Navigation-Systems.html">
+     Application: Inertial Navigation Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/05-Forward-and-Backward-Euler.html">
+     Forward and Backward Euler Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/06-Trapezoid-Rule.html">
+     Crank-Nicolson (Trapezoid Rule)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/07-Stability-Analysis.html">
+     Stability Analysis of Forward/Backward Euler and Crank-Nicolson Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/08-Explicit-Runge-Kutta.html">
+     Explicit Range Kutta Method
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/09-Systems-of-Differential-Equations-and-Scipy.html">
+     Systems of Differential Equations and Scipy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/10-Example-Reaction-Rates.html">
+     Example: Reaction Rates
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../07/stats.html">
+   Descriptive Statistics and Visualization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07-publish/01-Sampling.html">
+     Sampling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07-publish/02-Summary-Statistics.html">
+     Summary Statistics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07-publish/03-Visualizing-Data.html">
+     Visualizing Data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../08/probability.html">
+   Probability Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../08-publish/01-Random-Variables.html">
+     Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../08-publish/02-Jointly-Distributed-Random-Variables.html">
+     Jointly Distributed Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../08-publish/03-Practice-Problems.html">
+     Practice Problems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../09/distributions.html">
+   Common Probability Distributions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../09-publish/01-Bernoulli-Probability-Distribution.html">
+     Bernoulli Probability Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../09-publish/03-Poisson-Probability-Distribution.html">
+     Poisson Probability Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../09-publish/04-Normal-Probability-Distribution.html">
+     Normal Probability Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../09-publish/05-Common-Probability-Distributions-Summary.html">
+     Common Probability Distributions Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../10/uncertainty.html">
+   Uncertainty and Error Propagation
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10-publish/01-Measurement-Error.html">
+     Measurement Error
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10-publish/02-Error-Propagation.html">
+     Error Propagation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10-publish/03-Measuring-Flowrate-Example.html">
+     Measuring Flowrate Example
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10-publish/04-Practice-Problems.html">
+     Practice Problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10-publish/05-Simulation.html">
+     Simulation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../11/inference.html">
+   Statistical Inference
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/01-Central-Limit-Theorem.html">
+     Central Limit Theorem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/02-Standard-Normal-Distribution.html">
+     Standard Normal Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/03-Confidence-Intervals.html">
+     Confidence Intervals
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/04-Students-t-Distribution.html">
+     Student’s t-Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/05-First-Hypothesis-Testing.html">
+     First Hypothesis Testing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/06-Hypothesis-Testing-Review-and-Type-I-Type-II-Errors.html">
+     Hypothesis Testing Review and Type I/Type II Errors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/07-Flavors-of-Hypothesis-Testing.html">
+     Flavors of Hypothesis Testing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/08-Statistical-Power-Basics.html">
+     Statistical Power Basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/09-Statistical-Power-in-Python.html">
+     Statistical Power in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/10-Statistical-Power-Practice-Problems.html">
+     Statistical Power Practice Problems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../12/regression.html">
+   Regression
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12-publish/02-Uncertainty-Analysis-and-Statistical-Inference.html">
+     Uncertainty Analysis and Statistical Inference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12-publish/03-Linear-Regression-Practice-Problems.html">
+     Linear Regression Practice Problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12-publish/04-Multivariate-Linear-Regression.html">
+     Multivariate Linear Regression
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../13/advanced_regression.html">
+   Advanced Nonlinear Regression
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="01-Transformations-and-Linear-Regression.html">
+     Transformations and Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02-Nonlinear-Regression.html">
+     Nonlinear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03-Nonlinear-Regression-Practice-Problem.html">
+     Nonlinear Regression Practice Problem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04-Weighted-Regression.html">
+     Weighted Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="05-Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression.html">
+     Monte Carlo Uncertainty Analysis for Nonlinear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="06-Bootstrap-Confidence-Intervals.html">
+     Bootstrap Confidence Intervals
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../14/design_of_experiments.html">
+   Design of Experiments
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/13-publish/07-Nonlinear-Case-Study-Adsorptive-Membranes.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/ndcbe/data-and-computing"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/13-publish/07-Nonlinear-Case-Study-Adsorptive-Membranes.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/13-publish/07-Nonlinear-Case-Study-Adsorptive-Membranes.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/13-publish/07-Nonlinear-Case-Study-Adsorptive-Membranes.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#background">
+   Background
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#regression-analysis">
+   1. Regression Analysis
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-paramter-estimation-using-a-transformation-and-linear-regression">
+     A. Paramter estimation using a transformation and linear regression
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#step-i-setup-and-best-fit">
+       Step i: Setup and Best Fit
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#step-ii-setup-best-fit-plot-for-best-fit-model-and-residuals">
+       Step ii: Setup Best Fit Plot for Best Fit Model and Residuals
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#step-iii-compute-covariance-matricies">
+       Step iii: Compute Covariance Matricies
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#b-paramter-estimation-using-an-alternate-transformation-and-linear-regression">
+     B. Paramter estimation using an alternate transformation and linear regression
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id1">
+       Step i: Setup and Best Fit
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#c-parameter-estimation-using-nonlinear-regression">
+     C. Parameter estimation using nonlinear regression
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#d-comparison-of-three-regression-approaches">
+     D. Comparison of Three Regression Approaches
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#estimate-batch-processing-time-with-numeric-integration">
+   2. Estimate Batch Processing Time with Numeric Integration
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-model-manipulation-and-setup">
+     A. Model Manipulation and Setup
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#b-numeric-integration">
+     B. Numeric Integration
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#uncertainty-propagation-nonlinear-formula">
+   3. Uncertainty Propagation (Nonlinear Formula)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-define-functions">
+     A. Define Functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#b-first-transformation-linear-regression">
+     B. First Transformation + Linear Regression
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#c-second-alternate-transformation-linear-regression">
+     C. Second (Alternate) Transformation + Linear Regression
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#d-nonlinear-regression">
+     D. Nonlinear Regression
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#e-discussion">
+     E. Discussion
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#monte-carlo-uncertainty-propogation">
+   4. Monte Carlo Uncertainty Propogation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-inspect-residuals">
+     A. Inspect Residuals
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#b-monte-carlo-python-code">
+     B. Monte Carlo Python Code
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#c-visualize-and-interpret-mc-results-fitted-parameters">
+     C. Visualize and Interpret MC Results: Fitted Parameters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#d-visualize-and-interpret-mc-results-batch-time">
+     D. Visualize and Interpret MC Results: Batch Time
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#background">
+   Background
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#regression-analysis">
+   1. Regression Analysis
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-paramter-estimation-using-a-transformation-and-linear-regression">
+     A. Paramter estimation using a transformation and linear regression
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#step-i-setup-and-best-fit">
+       Step i: Setup and Best Fit
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#step-ii-setup-best-fit-plot-for-best-fit-model-and-residuals">
+       Step ii: Setup Best Fit Plot for Best Fit Model and Residuals
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#step-iii-compute-covariance-matricies">
+       Step iii: Compute Covariance Matricies
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#b-paramter-estimation-using-an-alternate-transformation-and-linear-regression">
+     B. Paramter estimation using an alternate transformation and linear regression
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id1">
+       Step i: Setup and Best Fit
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#c-parameter-estimation-using-nonlinear-regression">
+     C. Parameter estimation using nonlinear regression
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#d-comparison-of-three-regression-approaches">
+     D. Comparison of Three Regression Approaches
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#estimate-batch-processing-time-with-numeric-integration">
+   2. Estimate Batch Processing Time with Numeric Integration
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-model-manipulation-and-setup">
+     A. Model Manipulation and Setup
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#b-numeric-integration">
+     B. Numeric Integration
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#uncertainty-propagation-nonlinear-formula">
+   3. Uncertainty Propagation (Nonlinear Formula)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-define-functions">
+     A. Define Functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#b-first-transformation-linear-regression">
+     B. First Transformation + Linear Regression
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#c-second-alternate-transformation-linear-regression">
+     C. Second (Alternate) Transformation + Linear Regression
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#d-nonlinear-regression">
+     D. Nonlinear Regression
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#e-discussion">
+     E. Discussion
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#monte-carlo-uncertainty-propogation">
+   4. Monte Carlo Uncertainty Propogation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-inspect-residuals">
+     A. Inspect Residuals
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#b-monte-carlo-python-code">
+     B. Monte Carlo Python Code
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#c-visualize-and-interpret-mc-results-fitted-parameters">
+     C. Visualize and Interpret MC Results: Fitted Parameters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#d-visualize-and-interpret-mc-results-batch-time">
+     D. Visualize and Interpret MC Results: Batch Time
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="nonlinear-regression-case-study-adsorptive-nanoporous-membranes">
+<h1>Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes<a class="headerlink" href="#nonlinear-regression-case-study-adsorptive-nanoporous-membranes" title="Permalink to this headline">¶</a></h1>
+<p>© Elvis A. Eugene and Alexander W. Dowling, University of Notre Dame</p>
+<p>CBE20258, Spring 2020</p>
+<div class="section" id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
+<p>Prof. William Phillip has been developing novel adsorptive nanoporous membranes to remove heavy metals from water. He has asked for your help designing a water treatment system. Specifically, <strong>given laboratory data for these membrane systems, how much Pb (lead) can be removed per batch?</strong></p>
+<p>As seniors, you will learn about <strong>adsorption-based systems in Separation Processes</strong>. For this project, you only need to know some basics: adsorptive systems preferentially adsorb a contaminant from a bulk fluid, similar to how dust sticks to a Swiffer cleaning cloth. The amount of contaminant, Pb in this project, that adsorbs (i.e. sticks) to the water treatment membranes can be modeled with the <strong>Langmuir isotherm</strong>:</p>
+<div class="math notranslate nohighlight">
+\[q = \frac{Q \cdot K \cdot c}{1 + K \cdot c}\]</div>
+<p>where <span class="math notranslate nohighlight">\(c\)</span> is the concentration of contaminant in the bulk fluid (water), <span class="math notranslate nohighlight">\(q\)</span> is the loading of contaminant on the sorbent (membrane), <span class="math notranslate nohighlight">\(K\)</span> is the binding affinity and <span class="math notranslate nohighlight">\(Q\)</span> is the capacity.</p>
+<p>Prof. Phillip’s lab has provided us with the following data:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Contaminant Concentration in Bulk (mM)</p></th>
+<th class="head"><p>Contaminant Loading on Sorbent (mmol/g)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>2.5</p></td>
+<td><p>0.9</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>1.33</p></td>
+</tr>
+<tr class="row-even"><td><p>20</p></td>
+<td><p>1.3</p></td>
+</tr>
+<tr class="row-odd"><td><p>40</p></td>
+<td><p>1.4</p></td>
+</tr>
+</tbody>
+</table>
+<p>In this case study, you will analyze these data as consultants for Prof. Phillip:</p>
+<ol class="simple">
+<li><p>Fit a Langmuir isotherm (i.e., determine <span class="math notranslate nohighlight">\(K\)</span> and <span class="math notranslate nohighlight">\(Q\)</span>) using provided, real data (<span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(q\)</span>).</p></li>
+<li><p>Integrate a differential equation model to calculate the batch time.</p></li>
+<li><p>Estimate the uncertainty in the fitted parameters and propagate this uncertainty through the systems model.</p></li>
+</ol>
+<p>Moreover, we will compare three different regression strategies for Step 1; we will then see how our choices propagate through Steps 2 and 3.</p>
+<p>This comprehensive case study combines several key concepts from all three pillars of this class: Python, numerical methods, and data analytics. The <strong>final project</strong> will follow a similar structure. Much of the Python code can be adapted from previous homework assignments and class activities.</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Determine the units of <span class="math notranslate nohighlight">\(K\)</span> and <span class="math notranslate nohighlight">\(Q\)</span>. Hint: <span class="math notranslate nohighlight">\(1\)</span> in the denominator of the Langmuir isotherm is dimensionless.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load libraries</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">optimize</span><span class="p">,</span> <span class="n">stats</span><span class="p">,</span> <span class="n">integrate</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># define the data</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">]);</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.33</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">]);</span>
+
+<span class="c1"># number of observations</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+
+<span class="c1"># number of fitted parameters</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="regression-analysis">
+<h2>1. Regression Analysis<a class="headerlink" href="#regression-analysis" title="Permalink to this headline">¶</a></h2>
+<p>We will now compare three different regression strategies for the Langmuir isotherm problem:</p>
+<ol class="simple">
+<li><p>Linear Regression after Transformation</p></li>
+<li><p>Linear Regression after a Different Transformation</p></li>
+<li><p>Nonlinear Regression</p></li>
+</ol>
+<p>For each strategy, we will follow the same basic steps:</p>
+<ul class="simple">
+<li><p>Set up the problem, including deriving the transformation (if applicable)</p></li>
+<li><p>Perform the regression calculation</p></li>
+<li><p>Plot the experimental data (with transformed variables if applicable)</p></li>
+<li><p>Plot the experimental data versus fitted model (<span class="math notranslate nohighlight">\(q\)</span> vs <span class="math notranslate nohighlight">\(c\)</span>)</p></li>
+<li><p>Graphically inspect the residuals</p></li>
+<li><p>Compute the covariance matrix for the fitted parameters, transform to the original parameters (if applicable)</p></li>
+</ul>
+<div class="section" id="a-paramter-estimation-using-a-transformation-and-linear-regression">
+<h3>A. Paramter estimation using a transformation and linear regression<a class="headerlink" href="#a-paramter-estimation-using-a-transformation-and-linear-regression" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="step-i-setup-and-best-fit">
+<h4>Step i: Setup and Best Fit<a class="headerlink" href="#step-i-setup-and-best-fit" title="Permalink to this headline">¶</a></h4>
+<p>We will start our analysis by performing a transformation; this is neccessary to apply linear regression. We start with the Languir isotherm:</p>
+<div class="math notranslate nohighlight">
+\[ q = \frac{Q \cdot K \cdot c}{1 + K \cdot c}\]</div>
+<p>With a little bit of algebra, we obtain:</p>
+<div class="math notranslate nohighlight">
+\[ \frac{c}{q} =  \frac{c}{Q} + \frac{1}{Q \cdot K} \]</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Write down the mathematical steps to go from the original isotherm <span class="math notranslate nohighlight">\(q=~...\)</span> to the transformed isotherm <span class="math notranslate nohighlight">\(c/q =~...~\)</span>.</p>
+</div>
+<p>You may be asking yourselves, <em>how is that model linear</em>?!? We just need to define our variables and parameters carefully:</p>
+<div class="math notranslate nohighlight">
+\[ \underbrace{\frac{c}{q}}_{y} =  \underbrace{\frac{1}{Q}}_{\beta_1} \cdot \underbrace{c}_{x} + \underbrace{\frac{1}{K \cdot Q}}_{\beta_0}   \]</div>
+<p>Recall <span class="math notranslate nohighlight">\(x\)</span> is the independent variable, <span class="math notranslate nohighlight">\(y\)</span> is the observed variable, <span class="math notranslate nohighlight">\(\beta_0\)</span> is the intercept, and <span class="math notranslate nohighlight">\(\beta_1\)</span> is the slope. With this transformation, we can compute the regression coefficients:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Code for parameter estimation using linear regression</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">c</span><span class="p">;</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">c</span><span class="o">/</span><span class="n">q</span><span class="p">;</span>
+
+<span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">r_value</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">std_err</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;slope =&quot;</span><span class="p">,</span><span class="n">slope</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;intercept =&quot;</span><span class="p">,</span><span class="n">intercept</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;R-squared:&quot;</span><span class="p">,</span><span class="n">r_value</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope = 0.6861090472380716
+intercept = 1.23217641968572
+R-squared: 0.9987035006310445
+</pre></div>
+</div>
+</div>
+</div>
+<p>Alright, we now have estimates for <span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span>. But we really care about <span class="math notranslate nohighlight">\(K\)</span> and <span class="math notranslate nohighlight">\(Q\)</span>. Let’s reverse the transformation.</p>
+<div class="math notranslate nohighlight">
+\[Q = \frac{1}{\beta_1}, \qquad  K = \frac{\beta_1}{\beta_0}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Reverse transformation to obtain Q and K and display results</span>
+<span class="n">Qlin1</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">slope</span><span class="p">;</span>
+<span class="n">Klin1</span> <span class="o">=</span> <span class="n">slope</span><span class="o">/</span><span class="n">intercept</span><span class="p">;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">K (linear regression) = </span><span class="si">{0:0.1f}</span><span class="s2"> l/mmol&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Klin1</span><span class="p">));</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Q (linear regression) = </span><span class="si">{0:0.1f}</span><span class="s2"> mmol/g_membrane&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Qlin1</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>K (linear regression) = 0.6 l/mmol
+Q (linear regression) = 1.5 mmol/g_membrane
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="step-ii-setup-best-fit-plot-for-best-fit-model-and-residuals">
+<h4>Step ii: Setup Best Fit Plot for Best Fit Model and Residuals<a class="headerlink" href="#step-ii-setup-best-fit-plot-for-best-fit-model-and-residuals" title="Permalink to this headline">¶</a></h4>
+<p>Now we want to visualize the quality of the fit. Because we plan to repeat the regression analysis two more times, we invested in writing functions for the visualization. This means we just need to declare the plotting procedures once and we can reuse them. This is a good programming practice; use functions to maximize code reuse.</p>
+<p>We’ll start by defining the first function which <strong>plots the linearized isotherm</strong> and <strong>plots the transformed residuals</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define a function to plot linearized isotherm </span>
+<span class="k">def</span> <span class="nf">plot_liniso</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">slope</span><span class="p">,</span><span class="n">intercept</span><span class="p">,</span><span class="n">title</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    function to plot the linearized model and residuals</span>
+<span class="sd">    Arguments:</span>
+<span class="sd">        x: transformed independent variable (float vector)</span>
+<span class="sd">        y: transformed independent variable (float vector)</span>
+<span class="sd">        slope: fitted parameter 1 (float)</span>
+<span class="sd">        intercept: fitted parameter 2 (float)</span>
+<span class="sd">        title: keyword in plot title (string). Either &#39;lin1&#39; or &#39;lin2&#39;</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        nothing</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="k">assert</span> <span class="p">(</span><span class="n">title</span> <span class="o">==</span> <span class="s1">&#39;lin1&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">title</span> <span class="o">==</span> <span class="s1">&#39;lin2&#39;</span><span class="p">),</span> <span class="s2">&quot;Argument title must be &#39;lin1&#39; or &#39;lin2&#39;&quot;</span>
+    
+    <span class="c1">## evaluate the best fit line</span>
+    <span class="c1"># determine the max value of x</span>
+    <span class="n">xmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+    <span class="c1"># define range of x to evaluate the model</span>
+    <span class="n">x_span</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">1.2</span><span class="o">*</span><span class="n">xmax</span><span class="p">,</span><span class="mi">50</span><span class="p">);</span>
+    <span class="c1"># evaluate the model</span>
+    <span class="n">y_hat</span> <span class="o">=</span> <span class="n">slope</span><span class="o">*</span><span class="n">x_span</span> <span class="o">+</span> <span class="n">intercept</span>
+    
+    <span class="c1">## plot the best fit line</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="s1">&#39;ro&#39;</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;data&#39;</span><span class="p">);</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_span</span><span class="p">,</span> <span class="n">y_hat</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;best fit&#39;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="n">title</span> <span class="o">==</span> <span class="s1">&#39;lin1&#39;</span><span class="p">):</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;c (mM)&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;c/q (grams membrane / L)&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="n">title</span> <span class="o">==</span> <span class="s1">&#39;lin2&#39;</span><span class="p">):</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;1/c (l/mmol)&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;1/q (grams membrane / mmol)&quot;</span><span class="p">)</span>            
+            
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Transformed Linear Langmuir Isotherm&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+    
+    <span class="c1">## calculate the residuals</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">slope</span> <span class="o">+</span> <span class="n">intercept</span><span class="p">);</span>
+    
+    <span class="c1">## plot the residuals versus concentration</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s1">&#39;ro&#39;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="n">title</span> <span class="o">==</span> <span class="s1">&#39;lin1&#39;</span><span class="p">):</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Residual (grams membrane / L)&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="n">title</span> <span class="o">==</span> <span class="s1">&#39;lin2&#39;</span><span class="p">):</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Residual (grams membrane / mmol)&#39;</span><span class="p">)</span>
+                      
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Equilibrium concentration (mM)&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Transformed Residuals&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+<span class="c1"># End: define a function to linearized isotherm </span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot linearized isotherm versus data</span>
+<span class="c1"># The last argument toggles between the two transformations we&#39;ll consider</span>
+<span class="n">plot_liniso</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">slope</span><span class="p">,</span><span class="n">intercept</span><span class="p">,</span><span class="s1">&#39;lin1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_13_0.png" src="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_13_0.png" />
+<img alt="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_13_1.png" src="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_13_1.png" />
+</div>
+</div>
+<p><strong>Interpretation (Regression Plot)</strong>: We see an excellent fit with the transformed data. Or so it seems…</p>
+<p><strong>Interpretation (Transformed Residuals)</strong>: We start with a disclaimer; it is very difficult to interpret residuals for 6 data points. Recall, our regression analysis assumes the experimental observation errors are normally distributed. It is nearly impossible to determine if 6 points are normally distributed.</p>
+<p>Instead, we will focus on checking for any problematic trends in the residuals. We see:</p>
+<ul class="simple">
+<li><p>The residuals are heteroskedastic, i.e., their variance is not constant. Notice the residuals near <span class="math notranslate nohighlight">\(c=0\)</span> and <span class="math notranslate nohighlight">\(c=40\)</span> are small, but the residuals between <span class="math notranslate nohighlight">\(5 \leq c \leq 20\)</span> are large.</p></li>
+<li><p>There is only one data point at the extreme value <span class="math notranslate nohighlight">\(x=40\)</span>. This means the data point has <strong>high leverage</strong> and influences the best fit. Large errors for this experiment can greatly influence fitted parameters.</p></li>
+</ul>
+<p>The plot above uses the transformed variables. They were computed with the transformed variables <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+<p>Next, we will define the second function which <strong>plots the fitted Langmuir isotherm</strong> without transformation and <strong>plots the non-transformed residuals</strong>. Notice the function can be directly reused for each regression strategy.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define a function to plot Langmuir isotherm</span>
+<span class="k">def</span> <span class="nf">plot_langiso</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">Q</span><span class="p">,</span><span class="n">title</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    function to plot fitted Langmuir isotherm and data</span>
+<span class="sd">    Arguments:</span>
+<span class="sd">        c: independent variable i.e. concentration - experimental data [mM] (float vector)</span>
+<span class="sd">        q: membrane loading - experimental data [l/gram membrane] (float vector)</span>
+<span class="sd">        K: fitted parameter [1/mmol] (float scalar)</span>
+<span class="sd">        Q: fitted parameter [mol/gram membrane] (float scalar)</span>
+<span class="sd">        title: name of regression to add to title (string)</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        nothing</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="c1">## evaluate the model</span>
+    <span class="c1"># determine maximum value of c</span>
+    <span class="n">cmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+    <span class="c1"># define range of x to evaluate the model</span>
+    <span class="n">c_span</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">1.2</span><span class="o">*</span><span class="n">cmax</span><span class="p">,</span><span class="mi">50</span><span class="p">);</span>
+    <span class="c1"># evaluate the model</span>
+    <span class="n">q_hat</span> <span class="o">=</span> <span class="n">Q</span><span class="o">*</span><span class="n">K</span><span class="o">*</span><span class="n">c_span</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">K</span><span class="o">*</span><span class="n">c_span</span><span class="p">)</span>
+    
+    <span class="c1"># plot the best fit model</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Langmuir Isotherm&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">c_span</span><span class="p">,</span><span class="n">q_hat</span><span class="p">,</span><span class="s1">&#39;b-&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Fitted Model&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="s1">&#39;r.&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Experimental Data&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Concentration (mM)&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Loading (mmol / grams membrane)&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+    <span class="c1">## calculate the residuals</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">q</span> <span class="o">-</span> <span class="n">Q</span><span class="o">*</span><span class="n">K</span><span class="o">*</span><span class="n">c</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">K</span><span class="o">*</span><span class="n">c</span><span class="p">)</span>
+    
+    <span class="c1">## plot the residuals</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s1">&#39;ro&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Residual (mmol / grams membrane)&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Equilibrium concentration (mM)&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Residuals from </span><span class="si">{0}</span><span class="s1"> regression&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">title</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+<span class="c1"># End: define a function to plot Langmuir isotherm</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot Langmuir isotherm</span>
+<span class="n">plot_langiso</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">Klin1</span><span class="p">,</span><span class="n">Qlin1</span><span class="p">,</span><span class="s1">&#39;first transformed&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_17_0.png" src="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_17_0.png" />
+<img alt="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_17_1.png" src="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_17_1.png" />
+</div>
+</div>
+<p><strong>Interpretation (Regression Plot)</strong>: By plotting in the original variables, we see the fit is not great. There is a significant residual for the <span class="math notranslate nohighlight">\(c=10\)</span> mM experiment.</p>
+<p><strong>Interpretation (Residuals)</strong>: This residual plot has a very similar pattern to the transformed residual plot. (Notice the vertical axis is different). The interpreation from above also applies to this plot.</p>
+</div>
+<div class="section" id="step-iii-compute-covariance-matricies">
+<h4>Step iii: Compute Covariance Matricies<a class="headerlink" href="#step-iii-compute-covariance-matricies" title="Permalink to this headline">¶</a></h4>
+<p>Next, we will compute the <strong>covariance matrix for the fitted parameters <span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span></strong>.</p>
+<p>We will start by computing the variance of the residuals. Recall the formula is:</p>
+<div class="math notranslate nohighlight">
+\[\hat{\sigma}_r = \frac{1}{n-p} \sum_{i=1}^{n} (r_i - 0)^2\]</div>
+<p>Here <span class="math notranslate nohighlight">\(n\)</span> is the number of observations, <span class="math notranslate nohighlight">\(p\)</span> is the number of fitted parameters, and <span class="math notranslate nohighlight">\(r_i\)</span> is the residual for observation <span class="math notranslate nohighlight">\(i\)</span>. An interesting property of linear regression is that the mean of the residuals is always zero.</p>
+<p>We can write the above formula with linear algebra in one line of code:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># compute the residuals (using the transformed variables)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">slope</span> <span class="o">+</span> <span class="n">intercept</span><span class="p">);</span>
+
+<span class="c1"># variance of residuals</span>
+<span class="n">var_r</span> <span class="o">=</span> <span class="n">r</span> <span class="o">@</span> <span class="n">r</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">p</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Variance of residuals =&quot;</span><span class="p">,</span><span class="n">var_r</span><span class="p">,</span><span class="s2">&quot; (g / L)^2&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variance of residuals = 0.16885199230665526  (g / L)^2
+</pre></div>
+</div>
+</div>
+</div>
+<p>Recall from the previous class, <code class="docutils literal notranslate"><span class="pre">stats.linregress</span></code> does not directly compute the covariance of the linear regression parameters. Instead, we need to write the regression problem in matrix notation:</p>
+<div class="math notranslate nohighlight">
+\[
+\underbrace{\vec{y}}_{\mathbb{R}^{n x 1}} = \underbrace{\mathbf{X}}_{\mathbb{R}^{n x m}} \cdot \underbrace{\vec{\beta}}_{\mathbb{R}^{m x 1}} + \underbrace{\vec{\epsilon}}_{\mathbb{R}^{n x 1}}
+\]</div>
+<p>Observations: <span class="math notranslate nohighlight">\(\vec{y} = [y_1, y_2, ..., y_n]^T\)</span></p>
+<p>Fitted Parameters: <span class="math notranslate nohighlight">\(\vec{\beta} = [\beta_0, \beta_1, ..., \beta_{m}]^T\)</span></p>
+<p>Data / Feature Matrix:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{X} = \begin{bmatrix} 1 &amp; x_{1,1} &amp; x_{1,2} &amp; \dots &amp; x_{1,m} \\
+1 &amp; x_{2,1} &amp; x_{2,2} &amp; \dots &amp; x_{2,m} \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+1 &amp; x_{n,1} &amp; x_{n,2} &amp; \dots &amp; x_{n,m}
+\end{bmatrix}
+\end{split}\]</div>
+<p>For our transformed membrane, the feature matrix is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{X} = \begin{bmatrix} 1 &amp; c_1 \\
+1 &amp; c_{2} \\
+\vdots &amp; \vdots \\
+1 &amp; c_{n}
+\end{bmatrix}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># feature matrix, a.k.a. data matrix, a.k.a. predictor matrix</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;X=</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>X=
+ [[ 1.   1. ]
+ [ 1.   2.5]
+ [ 1.   5. ]
+ [ 1.  10. ]
+ [ 1.  20. ]
+ [ 1.  40. ]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we will compute the <strong>covariance matrix of the fitted parameters</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\Sigma_{\hat{\beta}} = \hat{\sigma}_r^2  (\mathbf{X}^T \mathbf{X})^{-1}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># assemble covariance matrix for regression parameters</span>
+<span class="n">cov_b</span> <span class="o">=</span> <span class="n">var_r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span> <span class="o">@</span> <span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, we will propagate the covariance matrix of the transformed fitted parameters, <span class="math notranslate nohighlight">\(\mathbf{\Sigma_{\vec{\beta}}}\)</span>, to determine the <strong>covariance matrix of the desired isotherm parameters</strong>, <span class="math notranslate nohighlight">\(\mathbf{\Sigma_{\vec{\theta}}}\)</span>.</p>
+<p>Recall of model transformation:</p>
+<div class="math notranslate nohighlight">
+\[K = \frac{\beta_1}{\beta_0}, \qquad Q = \frac{1}{\beta_1}, \]</div>
+<p>We will define the vector of model parameters as <span class="math notranslate nohighlight">\(\vec{\theta} = [K, Q]^T\)</span>.</p>
+<p>In anticipation of applying the general nonlinear error propagation formula, we will calculate the following <strong>partial derivatives</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial K}{\partial \beta_0} = -\frac{\beta_0}{\beta_1^2}, \qquad \frac{\partial K}{\partial \beta_1} = \frac{1}{\beta_0}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial Q}{\partial \beta_0} = 0, \qquad \frac{\partial Q}{\partial \beta_1} = -\frac{1}{\beta_1^2}
+\]</div>
+<p>We can then assemble these gradients into the Jacobian matrix:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{\nabla_{\vec{\beta}} \vec{\theta}} = \begin{bmatrix}
+\frac{\partial K}{\partial \beta_0} &amp; \frac{\partial K}{\partial \beta_1} \\
+\frac{\partial Q}{\partial \beta_0} &amp; \frac{\partial Q}{\partial \beta_1}
+\end{bmatrix}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Assemble gradient vectors for K and Q</span>
+<span class="n">gradK</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="n">slope</span> <span class="o">/</span> <span class="n">intercept</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="n">intercept</span><span class="p">])</span>
+<span class="n">gradQ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">slope</span><span class="o">**</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Gradient of K:&quot;</span><span class="p">,</span><span class="n">gradK</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Gradient of Q:&quot;</span><span class="p">,</span><span class="n">gradQ</span><span class="p">)</span>
+
+<span class="c1"># Assemble gradient vector</span>
+<span class="n">jac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">((</span><span class="n">gradK</span><span class="p">,</span> <span class="n">gradQ</span><span class="p">));</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Jacobian Matrix:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">jac</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gradient of K: [-0.45190522  0.8115721 ]
+Gradient of Q: [ 0.         -2.12428953]
+
+Jacobian Matrix:
+ [[-0.45190522  0.8115721 ]
+ [ 0.         -2.12428953]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>For this problem, calculating the partial derivates was very straightforward; but for more complex expression, we can use a finite difference approximation. We’ll see this later in the case study.</p>
+<p>We can now apply the <strong>general nonlinear error propagation formula</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+    \Sigma_{\hat{\theta}} \approx \left( \mathbf{\nabla_{\vec{\beta}} \vec{\theta}} \right) \left(\Sigma_{\hat{\beta}} \right) \left(\mathbf{\nabla_{\vec{\beta}} \vec{\theta}}\right)^T\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Apply nonlinear error propagation formula</span>
+<span class="n">cov_theta_lin1</span> <span class="o">=</span> <span class="n">jac</span> <span class="o">@</span> <span class="n">cov_b</span> <span class="o">@</span> <span class="n">jac</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Covariance of Original Model Parameters (K,Q):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">cov_theta_lin1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Covariance of Original Model Parameters (K,Q):
+ [[ 0.01265455 -0.00218224]
+ [-0.00218224  0.00068943]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Write down at least three questions or observations you have about the code for the first transformated regression model (all of Section 1A). We will start class by answering your questions.</p>
+</div>
+<p><strong>Your Questions:</strong></p>
+<ol class="simple">
+<li></li>
+<li></li>
+<li></li>
+</ol>
+</div>
+</div>
+<div class="section" id="b-paramter-estimation-using-an-alternate-transformation-and-linear-regression">
+<h3>B. Paramter estimation using an alternate transformation and linear regression<a class="headerlink" href="#b-paramter-estimation-using-an-alternate-transformation-and-linear-regression" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id1">
+<h4>Step i: Setup and Best Fit<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<p>We start with the Languir isotherm:</p>
+<div class="math notranslate nohighlight">
+\[ q = \frac{Q \cdot K \cdot c}{1 + K \cdot c}\]</div>
+<p>With a little bit of algebra, we obtain:</p>
+<div class="math notranslate nohighlight">
+\[ \frac{1}{q} =  \frac{1}{Q} + \frac{1}{Q \cdot K} \cdot \frac{1}{c} \]</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Identify <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>, <span class="math notranslate nohighlight">\(\beta_0\)</span>, and <span class="math notranslate nohighlight">\(\beta_1\)</span> in the alternate transformed model.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">stats.linregress</span></code> to compute the best fit line. To maximize code reuse, save the results in variables <tt>slope</tt> and <tt>intercept</tt>.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope = 1.3058364578345456
+intercept = 0.6714412635365661
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Determine the new formulas to compute <span class="math notranslate nohighlight">\(K\)</span> and <span class="math notranslate nohighlight">\(Q\)</span> from the new fitted parameters <span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span>. We recommend writing this on paper first. To typeset your answer below, just double click on the markdown cell and edit the formula. You do not need to turn in your on paper work.</p>
+</div>
+<div class="math notranslate nohighlight">
+\[K = \frac{?}{?}, \qquad Q = \frac{?}{?}, \]</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Compute <span class="math notranslate nohighlight">\(K\)</span> and <span class="math notranslate nohighlight">\(Q\)</span> from new model. Store your answers in the variances <tt>Klin2</tt> and <tt>Qlin2</tt>.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Reverse transformation to obtain Q and K and display results</span>
+<span class="c1"># Add your solution here</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">K (alternate linear regression) = </span><span class="si">{0:0.1f}</span><span class="s2"> L/mmol&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Klin2</span><span class="p">));</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Q (alternate linear regression) = </span><span class="si">{0:0.1f}</span><span class="s2"> mmol/g_membrane&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Qlin2</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>K (alternate linear regression) = 0.5 L/mmol
+Q (alternate linear regression) = 1.5 mmol/g_membrane
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Plot the transformed model and the transformed residuals. Hint: When using the <tt>plot_liniso</tt> function, enter <tt>’lin2’</tt> as the fourth argument. This will add the appropraite units to the plot.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_43_0.png" src="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_43_0.png" />
+<img alt="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_43_1.png" src="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_43_1.png" />
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Interpret the plot. Write 3 bullet points (sentences) with your observations.</p>
+</div>
+<p><strong>Your Observations:</strong></p>
+<ol class="simple">
+<li></li>
+<li></li>
+<li></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Plot the Langmuir isotherm model and the (non-transformed) residuals. Hint: When using the <tt>plot_langiso</tt> function, enter <tt>’first transformed’</tt> as the fifth argument. This will add the appropriate title to the plot. Also remember to use <tt>Klin2</tt> and <tt>Qlin2</tt>.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot Langmuir isotherm</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_47_0.png" src="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_47_0.png" />
+<img alt="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_47_1.png" src="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_47_1.png" />
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Interpret these plots. Write 3 bullet points (sentences) with your observations.</p>
+</div>
+<p><strong>Your Observations:</strong></p>
+<ol class="simple">
+<li></li>
+<li></li>
+<li></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Calculate the residuals and store in variable <tt>r2</tt>.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate residuals</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Calculate the variance of the residuals. Store in variable <tt>var_r2</tt>.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># variance of residuals</span>
+<span class="c1"># Add your solution here</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Variance of residuals =&quot;</span><span class="p">,</span><span class="n">var_r2</span><span class="p">,</span><span class="s2">&quot; (g / mmol)^2&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variance of residuals = 0.0038915047452551866  (g / mmol)^2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Assemble the feature matrix and store in variable <tt>X2</tt>.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># matrix of predictors</span>
+<span class="c1"># Add your solution here</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;X2 =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">X2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>X2 =
+ [[1.    1.   ]
+ [1.    0.4  ]
+ [1.    0.2  ]
+ [1.    0.1  ]
+ [1.    0.05 ]
+ [1.    0.025]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Calculate the covariance of the linear regression parameters. Store the result in <tt>cov_b2</tt>.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># assemble covariance matrix for regression parameters</span>
+<span class="c1"># Add your solution here</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Covariance of Transformed (Linearized) Regression Parameters (1/KQ, 1/Q):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">cov_b2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Covariance of Transformed (Linearized) Regression Parameters (1/KQ, 1/Q):
+ [[ 0.00114359 -0.00167326]
+ [-0.00167326  0.00565609]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Study the code below for the gradients of <span class="math notranslate nohighlight">\(K\)</span> and <span class="math notranslate nohighlight">\(Q\)</span> with respect to the new <span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span>. Do you agree with this calculation? Did we make a mistake?</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gradK2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="o">/</span><span class="n">slope</span><span class="p">,</span> <span class="o">-</span><span class="n">intercept</span><span class="o">/</span><span class="n">slope</span><span class="o">**</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">gradQ2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">intercept</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Gradient of K:&quot;</span><span class="p">,</span><span class="n">gradK2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Gradient of Q:&quot;</span><span class="p">,</span><span class="n">gradQ2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gradient of K: [ 0.76579268 -0.39375896]
+Gradient of Q: [-2.21811442  0.        ]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Assemble the gradients into the Jacobian matrix. Store the matrix in <tt>jac2</tt>.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Jacobian Matrix:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">jac2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jacobian Matrix:
+ [[ 0.76579268 -0.39375896]
+ [-2.21811442  0.        ]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Apply the multivariate general nonlinear error propagation formulation. Store the covariance matrix of the original model parameters in <tt>cov_theta_lin2</tt>.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Apply nonlinear error propagation formula</span>
+<span class="c1"># Add your solution here</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Covariance of Original Model Parameters (K,Q):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">cov_theta_lin2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Covariance of Original Model Parameters (K,Q):
+ [[ 0.0025567  -0.00340395]
+ [-0.00340395  0.0056265 ]]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="c-parameter-estimation-using-nonlinear-regression">
+<h3>C. Parameter estimation using nonlinear regression<a class="headerlink" href="#c-parameter-estimation-using-nonlinear-regression" title="Permalink to this headline">¶</a></h3>
+<p>We will now apply nonlinear regression to our problem. First, we need to define a function to evaluate the model.</p>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Fill in the missing line in <tt>model_func</tt> below.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Code for parameter estimation using nonlinear regression</span>
+
+<span class="c1"># define function for the model being fitted</span>
+<span class="k">def</span> <span class="nf">model_func</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Function to define model being fitted</span>
+<span class="sd">    Arguments:</span>
+<span class="sd">        theta: parameter vector (K, Q)</span>
+<span class="sd">        c: concentration(s) to evaluate (scalar or vector)</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        qhat: predicted loading(s), (scalar or vector)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1"># Add your solution here</span>
+    <span class="k">return</span> <span class="n">qhat</span>
+<span class="c1"># End: define function for the model being fitted</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next we need to define a function to calculate the residuals for each data point.</p>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Fill in the missing line in <tt>regression_func</tt> below.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define function to return residuals of model being fitted</span>
+<span class="k">def</span> <span class="nf">regression_func</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Function to define regression function for least-squares fitting</span>
+<span class="sd">    Arguments:</span>
+<span class="sd">        theta: parameter vector</span>
+<span class="sd">        c: concentration(s) to evaluate (vector)</span>
+<span class="sd">        q: loading(s) to fit (vector)</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        ls_func: evaluation of loss function</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">qhat</span> <span class="o">=</span> <span class="n">model_func</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+
+    <span class="c1"># Add your solution here</span>
+    <span class="k">return</span> <span class="n">r</span>
+<span class="c1"># End: define function to return residuals of model being fitted</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we perform nonlinear regression.</p>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Use the function <tt>optimize.least_squares</tt> to compute the best fit. Store the results in the variable <tt>theta_fit</tt>.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Perform nonlinear parameter estimation</span>
+
+<span class="c1"># initial guess</span>
+<span class="n">theta_guess</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># nonlinear regression</span>
+<span class="c1"># Add your solution here</span>
+
+<span class="c1"># Extract fitted parameters and display results</span>
+<span class="n">Knl</span> <span class="o">=</span> <span class="n">theta_fit</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">Qnl</span> <span class="o">=</span> <span class="n">theta_fit</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">K (nonlinear regression) = </span><span class="si">{0:0.1f}</span><span class="s2"> l/mmol&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Knl</span><span class="p">));</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Q (nonlinear regression) = </span><span class="si">{0:0.1f}</span><span class="s2"> mmol/g_membrane&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Qnl</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>`ftol` termination condition is satisfied.
+Function evaluations 20, initial cost 2.7019e-01, final cost 9.2968e-03, first-order optimality 1.11e-08.
+
+K (nonlinear regression) = 0.6 l/mmol
+Q (nonlinear regression) = 1.5 mmol/g_membrane
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Plot the fitted model and residuals. Hint: Use the function <tt>plot_langiso</tt>. Enter <tt>’nonlinear’</tt> as the fifth argument.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_75_0.png" src="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_75_0.png" />
+<img alt="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_75_1.png" src="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_75_1.png" />
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Interpret these plots. Write 3 bullet points (sentences) with your observations.</p>
+</div>
+<p><strong>Your Observations:</strong></p>
+<ol class="simple">
+<li></li>
+<li></li>
+<li></li>
+</ol>
+<p>We will complete the nonlinear regression analysis by estimating the covariance of the fitted parameters <span class="math notranslate nohighlight">\(\mathbf{\Sigma}_{\vec{\theta}}\)</span>.</p>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Calculate the residuals and store in <tt>r3</tt>. Next calculate the variance of the residuals and store in <tt>var_r3</tt>.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate residuals. Hint: use model_func</span>
+<span class="c1">### BEGIN SOLUTON</span>
+<span class="c1"># calculate residuals</span>
+<span class="n">r3</span><span class="o">=</span> <span class="n">q</span> <span class="o">-</span> <span class="n">model_func</span><span class="p">(</span><span class="n">theta_fit</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="c1">### END SOLUTION</span>
+
+<span class="c1"># Calculate the variance of the residuals</span>
+<span class="c1"># Add your solution here</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Variance of the residuals: &quot;</span><span class="p">,</span><span class="n">var_r3</span><span class="p">,</span><span class="s2">&quot;(mmol/g)^2&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variance of the residuals:  0.004648376875480317 (mmol/g)^2
+</pre></div>
+</div>
+</div>
+</div>
+<p>Recall from the previous class the covariance matrix for nonlinear regression has a similar formula to the linear regression case:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{\Sigma_{\vec{\theta}}} \approx \hat{\sigma}_r^2 (\mathbf{J}^T \mathbf{J})^{-1}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{J}\)</span> is the Jacobian of the residuals w.r.t. <span class="math notranslate nohighlight">\(\vec{\theta}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+J_{i,j} = \frac{\partial(y_i - \hat{y}_i)}{\partial \theta_j}
+\]</div>
+<p>This IS NOT the same Jacobian matrix for nonlinear error propagation. Does this formula look familar? Recall, for LINEAR REGRESSION, the covariance estimate is:</p>
+<div class="math notranslate nohighlight">
+\[\Sigma_{\hat{\beta}} = \hat{\sigma}_r^2  (\mathbf{X}^T \mathbf{X})^{-1}\]</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Compare the nonlinear regression and linear regression covariance formulas. Compute the elements of the Jacobian matrix for a linear model using <span class="math notranslate nohighlight">\(\vec{\theta} = \vec{\beta}\)</span>. How are <span class="math notranslate nohighlight">\(\mathbf{J}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> related? Discuss then write one sentence.</p>
+</div>
+<p><strong>Discussion</strong>:</p>
+<p>Luckily, <code class="docutils literal notranslate"><span class="pre">optimize.least_squares</span></code> computes this Jacobian for us automatically.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;J =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">theta_fit</span><span class="o">.</span><span class="n">jac</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>J =
+ [[-0.60433286 -0.3573991 ]
+ [-0.6402919  -0.5816669 ]
+ [-0.51189153 -0.73551125]
+ [-0.33990149 -0.84760183]
+ [-0.19914358 -0.91751568]
+ [-0.10832244 -0.95698376]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Compute the covariance matrix <span class="math notranslate nohighlight">\(\mathbf{\Sigma_{\vec{\theta}}}\)</span>. Store your answer in <tt>cov_theta_nl</tt>.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># assemble covariance matrix</span>
+<span class="c1"># Add your solution here</span>
+<span class="c1"># plot Langmuir isotherm</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Covariance Matrix of Original Model Parameters (K,Q):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">cov_theta_nl</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Covariance Matrix of Original Model Parameters (K,Q):
+ [[ 0.00887448 -0.00392218]
+ [-0.00392218  0.00306799]]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="d-comparison-of-three-regression-approaches">
+<h3>D. Comparison of Three Regression Approaches<a class="headerlink" href="#d-comparison-of-three-regression-approaches" title="Permalink to this headline">¶</a></h3>
+<p><strong>First Transformation + Linear Regression</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">K (linear regression) = </span><span class="si">{0:0.3f}</span><span class="s2"> l/mmol&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Klin1</span><span class="p">));</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Q (linear regression) = </span><span class="si">{0:0.3f}</span><span class="s2"> mmol/g_membrane&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Qlin1</span><span class="p">));</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Covariance of Original Model Parameters (K,Q):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">cov_theta_lin1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>K (linear regression) = 0.557 l/mmol
+Q (linear regression) = 1.457 mmol/g_membrane
+
+Covariance of Original Model Parameters (K,Q):
+ [[ 0.01265455 -0.00218224]
+ [-0.00218224  0.00068943]]
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Second (Alternative) Transformation + Linear Regression</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">K (alternate linear regression) = </span><span class="si">{0:0.3f}</span><span class="s2"> L/mmol&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Klin1</span><span class="p">));</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Q (alternate linear regression) = </span><span class="si">{0:0.3f}</span><span class="s2"> mmol/g_membrane&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Qlin2</span><span class="p">));</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Covariance of Original Model Parameters (K,Q):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">cov_theta_lin2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>K (alternate linear regression) = 0.557 L/mmol
+Q (alternate linear regression) = 1.489 mmol/g_membrane
+
+Covariance of Original Model Parameters (K,Q):
+ [[ 0.0025567  -0.00340395]
+ [-0.00340395  0.0056265 ]]
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Nonlinear Regression</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">K (nonlinear regression) = </span><span class="si">{0:0.3f}</span><span class="s2"> l/mmol&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Knl</span><span class="p">));</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Q (nonlinear regression) = </span><span class="si">{0:0.3f}</span><span class="s2"> mmol/g_membrane&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Qnl</span><span class="p">));</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Covariance Matrix of Original Model Parameters (K,Q):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">cov_theta_nl</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>K (nonlinear regression) = 0.556 l/mmol
+Q (nonlinear regression) = 1.464 mmol/g_membrane
+
+Covariance Matrix of Original Model Parameters (K,Q):
+ [[ 0.00887448 -0.00392218]
+ [-0.00392218  0.00306799]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Discussion the following question. Write a one sentence answer for each question.</p>
+</div>
+<p><strong>Discussion</strong>:</p>
+<ol class="simple">
+<li><p><em>How many significant figures are we estimating for <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(K\)</span> based on the original data?</em> <strong>Answer:</strong> Fill in here…</p></li>
+<li><p><em>Do the three regression strategies give the same or different estimates for <span class="math notranslate nohighlight">\(K\)</span> (within reasonable significant figures)?</em> <strong>Answer:</strong> Fill in here…</p></li>
+<li><p><em>Do the three regression strategies give the same or different estimates for <span class="math notranslate nohighlight">\(Q\)</span> (within reasonable significant figures)?</em> <strong>Answer:</strong> Fill in here…</p></li>
+<li><p><em>Do the three regression strategies give the same estimate for uncertainty (covariance)?</em></p></li>
+<li><p><em>Which regression technique is best suited for this problem?</em> <strong>Answer:</strong> Fill in here…</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="estimate-batch-processing-time-with-numeric-integration">
+<h2>2. Estimate Batch Processing Time with Numeric Integration<a class="headerlink" href="#estimate-batch-processing-time-with-numeric-integration" title="Permalink to this headline">¶</a></h2>
+<p>Our ultimate goal is to design a point-of-use semi-batch adsorptive membrane system to remove Pb from water. Water with contaminant concentration <span class="math notranslate nohighlight">\(c_{in} =\)</span> 150 parts per billion (ppb) enters the system. Some of the contaminant adsorbs such that the outlet concentration, <span class="math notranslate nohighlight">\(c(t)\)</span>, is in equilibrium and can be related to the sorbent loading, <span class="math notranslate nohighlight">\(q(t)\)</span>, using the Langmuir isotherm <span class="math notranslate nohighlight">\(q=f(K,Q)\)</span>. Using a differential mass balance (you will learn more about this in Transport I and II as Juniors), one can derive:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{d}{dt} q(t) = \frac{F}{m}(c_{in} - c(t))
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(m = \)</span> 1 kg is the total mass of the membrane and <span class="math notranslate nohighlight">\(F = \)</span> 2 ml/s is the flow rate of water. We will operate the membrane until time <span class="math notranslate nohighlight">\(t_f\)</span> where <span class="math notranslate nohighlight">\(c(t_f) = c_{max} = \)</span> 15 ppb, which corresponds to maximum contaminant limit from the US EPA. At time <span class="math notranslate nohighlight">\(t_f\)</span> the membrane is regenerated (e.g., washed with a low pH solution to remove the Pb contaminant) and the operating cycle repeats. For simplicity, we will assume the membrane is completely regenerated such that <span class="math notranslate nohighlight">\(q(0) = 0\)</span>.</p>
+<div class="section" id="a-model-manipulation-and-setup">
+<h3>A. Model Manipulation and Setup<a class="headerlink" href="#a-model-manipulation-and-setup" title="Permalink to this headline">¶</a></h3>
+<p>We want to integrate the differential equation above to find the final time <span class="math notranslate nohighlight">\(t_f\)</span> where <span class="math notranslate nohighlight">\(c(t_f) = c_{max} = \)</span> 15 ppb. This is a boundary value problem. We have three choices for a solution approach:</p>
+<ol class="simple">
+<li><p>Analytically integrate the differential equation. (You can do this with WolframAlpha, but the answer is complicated.)</p></li>
+<li><p>Numerically integrate the differential equation with <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code>. Then use interpolation or Newton’s method to find the value of <span class="math notranslate nohighlight">\(t_f\)</span> that satisfies the boundary condition.</p></li>
+<li><p>Rearrange the model then integrate with a quadrature rule.</p></li>
+</ol>
+<p>Let’s use option 3.</p>
+<p>We will first start with the Langmuir isotherm:</p>
+<div class="math notranslate nohighlight">
+\[
+q(t) = \frac{K \cdot Q \cdot c(t)}{1 + K \cdot c(t)}
+\]</div>
+<p>We can rearrange the isotherm to obtain:
+$<span class="math notranslate nohighlight">\(
+c(t) = \frac{q(t)}{Q \cdot K - q(t) \cdot K}
+\)</span>$</p>
+<p>We will then substitute the expression for <span class="math notranslate nohighlight">\(c(t)\)</span> into the differential equation to obtain:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{d}{dt} q(t) = \frac{F}{m} \left( c_{in} - \frac{q(t)}{Q \cdot K - q(t) \cdot K} \right)
+\]</div>
+<p>For solution approach 2, we can numerically integrate this differential equation. But for solution approach 3, we will rearrange the equation as follows:</p>
+<div class="math notranslate nohighlight">
+\[
+dt = \frac{m}{F} \frac{1}{\left( c_{in} - \frac{q(t)}{Q \cdot K - q(t) \cdot K} \right)} dq(t)
+\]</div>
+<p>Integrating both sides of the equation gives:</p>
+<div class="math notranslate nohighlight">
+\[
+\int_{t_0}^{t_f} dt = \int_{q_0}^{q_f}  \frac{m}{F} \frac{1}{\left( c_{in} - \frac{q(t)}{Q \cdot K - q(t) \cdot K} \right)} dq(t)
+\]</div>
+<p>By assuming <span class="math notranslate nohighlight">\(t_0=0\)</span>, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+t_f = \int_{q_0}^{q_f}  \frac{m}{F} \frac{1}{\left( c_{in} - \frac{q(t)}{Q \cdot K - q(t) \cdot K} \right)} dq(t)
+\]</div>
+<p>Because <span class="math notranslate nohighlight">\(\frac{m}{F}\)</span> is a constant, we can move it out of the integral:</p>
+<div class="math notranslate nohighlight">
+\[
+t_f = \frac{m}{F}  \int_{q_0}^{q_f} \frac{1}{\left( c_{in} - \frac{q(t)}{Q \cdot K - q(t) \cdot K} \right)} dq(t)
+\]</div>
+<p>We can approximate this integral with a quadrature rule.</p>
+</div>
+<div class="section" id="b-numeric-integration">
+<h3>B. Numeric Integration<a class="headerlink" href="#b-numeric-integration" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Complete the function below to estimate <span class="math notranslate nohighlight">\(t_f\)</span>.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Code for numerical integration and calculation of tf</span>
+
+<span class="c1"># Define a function to numerically integrate the differential mass balance to give tf</span>
+<span class="k">def</span> <span class="nf">calculate_tf</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">LOUD</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    Calculate the elapsed time (tf) in seconds before the bed needs to be regenerated</span>
+<span class="sd">    Arguments:</span>
+<span class="sd">        theta: vector of model parameters where K(l/mmol) = theta[0] and Q (mmol/g_membrane) = theta[1] (floats)</span>
+<span class="sd">        LOUD: toggle on/off print statement</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        tf (hours) : time at which the membrane needs to be regenerated (float)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="n">K</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="n">cin_ppb</span> <span class="o">=</span> <span class="mi">150</span> <span class="c1"># ppb</span>
+    <span class="n">clim_ppb</span> <span class="o">=</span> <span class="mi">15</span> <span class="c1"># ppb</span>
+    
+    <span class="n">F</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="mf">1e-3</span><span class="p">;</span> <span class="c1"># [L/s]</span>
+    
+    <span class="c1"># Convert cin and clim to mM units, to make it consistent with our model</span>
+    <span class="c1"># ppb = 1mg/m3 = (1x10^-3/207.2) mol / (1000 l) = (1/207.2) x 10^-3 mM</span>
+
+    <span class="n">cin</span> <span class="o">=</span> <span class="p">(</span><span class="n">cin_ppb</span><span class="o">/</span><span class="mf">207.2</span><span class="p">)</span><span class="o">*</span><span class="mf">1e-3</span> <span class="c1"># mM</span>
+    <span class="n">clim</span> <span class="o">=</span> <span class="p">(</span><span class="n">clim_ppb</span><span class="o">/</span><span class="mf">207.2</span><span class="p">)</span><span class="o">*</span><span class="mf">1e-3</span> <span class="c1"># mM</span>
+    
+    <span class="n">q0</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># [mmol/g-membrane]</span>
+    
+    <span class="n">m</span> <span class="o">=</span> <span class="mi">1000</span> <span class="c1"># g-membrane</span>
+    
+    <span class="c1"># define a lambda function for the Langmuir isotherm</span>
+    <span class="c1"># save the function in the variable &#39;calc_q&#39;</span>
+    <span class="c1"># Add your solution here</span>
+        
+    <span class="c1">## Step 1: Calculate qf using isotherm</span>
+    <span class="n">qf</span> <span class="o">=</span> <span class="n">calc_q</span><span class="p">(</span><span class="n">clim</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">LOUD</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;qf =&quot;</span><span class="p">,</span><span class="n">qf</span><span class="p">,</span><span class="s2">&quot;mmol/g&quot;</span><span class="p">)</span>
+    
+    <span class="c1">## Step 2: Apply quadrature rule to integrate dq</span>
+    <span class="c1">#</span>
+    <span class="c1"># Define a lambda function for the integrand</span>
+    <span class="c1"># Then use &#39;integrate.quad&#39;</span>
+    <span class="c1"># Finally, calculate &#39;tf&#39;</span>
+    <span class="c1"># Add your solution here</span>
+    
+    <span class="c1"># Convert from seconds to hours</span>
+    <span class="k">return</span> <span class="n">tf</span> <span class="o">/</span> <span class="mi">3600</span>
+<span class="c1"># End: Define a function to numerically integrate the differential mass balance to give tf</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will now test our function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Unit Test:</span>
+<span class="n">Qtest</span> <span class="o">=</span> <span class="mf">1.5</span> <span class="c1"># mmol/g_membrane</span>
+<span class="n">Ktest</span> <span class="o">=</span> <span class="mf">0.6</span> <span class="c1"># L/mmol</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unit Test:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;K =&quot;</span><span class="p">,</span><span class="n">Ktest</span><span class="p">,</span><span class="s2">&quot;L/mmol&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Q =&quot;</span><span class="p">,</span><span class="n">Qtest</span><span class="p">,</span><span class="s2">&quot;mmol/g_membrane&quot;</span><span class="p">)</span>
+<span class="n">tf_test</span> <span class="o">=</span> <span class="n">calculate_tf</span><span class="p">([</span><span class="n">Ktest</span><span class="p">,</span><span class="n">Qtest</span><span class="p">],</span><span class="n">LOUD</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;tf = </span><span class="si">{0:0.2f}</span><span class="s2"> hours&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tf_test</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Unit Test:
+K = 0.6 L/mmol
+Q = 1.5 mmol/g_membrane
+qf = 6.515161020998122e-05 mmol/g
+tf = 13.17 hours
+</pre></div>
+</div>
+</div>
+</div>
+<p>Success. We have calculated the regeneration time of the membrane system.</p>
+</div>
+</div>
+<div class="section" id="uncertainty-propagation-nonlinear-formula">
+<h2>3. Uncertainty Propagation (Nonlinear Formula)<a class="headerlink" href="#uncertainty-propagation-nonlinear-formula" title="Permalink to this headline">¶</a></h2>
+<p>We now want to propagate the covariance of our fitted parameters <span class="math notranslate nohighlight">\(\mathbf{\Sigma_{\vec{\theta}}}\)</span> to estimate the uncertainty in the calculated batch time <span class="math notranslate nohighlight">\(\sigma_{t_f}\)</span>. To do this, we will apply the general nonlinear error propagation formula:</p>
+<div class="math notranslate nohighlight">
+\[ \sigma_{t_f} \approx \left( \nabla_{\vec{\theta}} t_f \right) \left(\mathbf{\Sigma_{\vec{\theta}}} \right) \left( \nabla_{\vec{\theta}} t_f \right)^{T}
+\]</div>
+<p>This requires us to compute (or estimate!) the gradient vector:</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla_{\vec{\theta}} t_f = \begin{bmatrix} \frac{\partial t_f}{\partial K},~ \frac{\partial t_f}{\partial Q} \end{bmatrix}
+\]</div>
+<p>Note: During some class notes we define the gradiant vector with a transpose, which requires the transpose to move in the error propagation formula. Either way is common in textbooks. Our apologies for the inconsistency and any confusion. Here is a good rule: just make sure the matrix dimensions work for multiplication and add a transpose if needed!</p>
+<div class="section" id="a-define-functions">
+<h3>A. Define Functions<a class="headerlink" href="#a-define-functions" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Complete the function below to estimate <span class="math notranslate nohighlight">\(uc_tf\)</span>.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define a function to perform nonlinear error propagation</span>
+<span class="k">def</span> <span class="nf">nonlinear_error_propagation</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">cov_theta</span><span class="p">,</span><span class="n">LOUD</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Function to perform nonlinear error propagation through regeneration time calculations</span>
+<span class="sd">    using forward finite difference gradient</span>
+<span class="sd">    </span>
+<span class="sd">    Arguments:</span>
+<span class="sd">        theta: vector of model parameters where K(l/mmol) = theta[0] </span>
+<span class="sd">        and Q (mmol/g_membrane) = theta[1] (vector floats)</span>
+<span class="sd">        cov_theta: covariance matrix of theta (matrix of floats)</span>
+<span class="sd">        LOUD: toggle on/off printing</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        uc_tf (hours) : uncertainty (standard deviation) in time at which the membrane needs to be regenerated</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="c1">## Step 1. Calculate gradient of tf calculate to Q and K</span>
+    <span class="c1"># We will use finite difference!</span>
+
+    <span class="n">tf_ref</span> <span class="o">=</span> <span class="n">calculate_tf</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+    
+    <span class="n">theta_copy</span> <span class="o">=</span> <span class="n">theta</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    
+    <span class="n">grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    
+    <span class="n">eps</span> <span class="o">=</span> <span class="mf">1E-6</span>
+    
+    <span class="c1"># Instructions: fill in the three missing lines below.</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        
+        <span class="c1"># perturb</span>
+        <span class="c1"># Add your solution here</span>
+        
+        <span class="c1"># forward finite difference</span>
+        <span class="c1"># Add your solution here</span>
+        
+        <span class="c1"># reset</span>
+        <span class="c1"># Add your solution here</span>
+        
+    <span class="k">if</span> <span class="n">LOUD</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;grad=&#39;</span><span class="p">,</span><span class="n">grad</span><span class="p">)</span>
+        
+    <span class="c1">## Step 2. Apply nonlinear error propagation formula</span>
+    <span class="c1"># Instructions: fill in the missing line</span>
+    <span class="c1"># store the result in the variable &#39;var_tf&#39;</span>
+    <span class="c1"># Hint: Numpy is smart enough to know that &#39;grad&#39; is a vector. It will add a transpose as</span>
+    <span class="c1"># need to matrix the matrix dimensions.</span>
+    <span class="c1"># Add your solution here</span>
+    
+    <span class="c1">## Step 3. Calculate standard deviation</span>
+    <span class="n">uc_tf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">var_tf</span><span class="p">)</span>
+    
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Uncertainty (standard deviation) of tf: </span><span class="si">{0:0.2f}</span><span class="s2"> hours&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">uc_tf</span><span class="p">))</span>
+    
+    <span class="k">return</span> <span class="n">uc_tf</span>
+<span class="c1"># end: define a function to perform nonlinear error propagation</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s test our function with the results for the first transformed model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sigma_tf_test</span> <span class="o">=</span> <span class="n">nonlinear_error_propagation</span><span class="p">([</span><span class="n">Klin1</span><span class="p">,</span> <span class="n">Qlin1</span><span class="p">],</span> <span class="n">cov_theta_lin1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>grad= [21.32635417  8.14794015]
+
+Uncertainty (standard deviation) of tf: 2.25 hours
+</pre></div>
+</div>
+</div>
+</div>
+<p>Great, our function works. We can also calculate a 95% confidence interval for the estimated batch time.</p>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Discuss the code below with a partner. Then write a comment to explain the calculation.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define a function to print the 95% confidence interval</span>
+<span class="k">def</span> <span class="nf">conf_int</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t_uc</span><span class="p">,</span> <span class="n">dof</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    function to calculate, print and return the 95% confidence interval for </span>
+<span class="sd">    tf</span>
+<span class="sd">    </span>
+<span class="sd">    args</span>
+<span class="sd">    t (s): regeneration time for the membrane (float)</span>
+<span class="sd">    t_uc (s) : uncertainty (standard deviation) in t (float)</span>
+<span class="sd">    dof (-) : degrees of freedom in the system (int)</span>
+<span class="sd">    </span>
+<span class="sd">    returns</span>
+<span class="sd">    t_cint (s) : 95% confidence interval for t (float vector)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="c1">## Add a comment here to explain this line</span>
+    <span class="n">t_cint</span> <span class="o">=</span> <span class="n">t</span> <span class="o">+</span> <span class="n">t_uc</span><span class="o">*</span><span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">ppf</span><span class="p">([</span><span class="mf">.025</span><span class="p">,</span> <span class="mf">.975</span><span class="p">],</span> <span class="n">dof</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">95</span><span class="si">% c</span><span class="s2">onfidence interval for tf: [</span><span class="si">{0:0.2f}</span><span class="s2"> hr, </span><span class="si">{1:0.2f}</span><span class="s2"> hr]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t_cint</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">t_cint</span><span class="p">[</span><span class="mi">1</span><span class="p">]));</span>
+    
+    <span class="k">return</span> <span class="n">t_cint</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s test our function with the results for the first transformed model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cint_tf_test</span> <span class="o">=</span> <span class="n">conf_int</span><span class="p">(</span><span class="n">tf_test</span><span class="p">,</span> <span class="n">sigma_tf_test</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>95% confidence interval for tf: [6.93 hr, 19.40 hr]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note we used <code class="docutils literal notranslate"><span class="pre">tf_test</span></code> for this unit test which does not correspond to our regression results. Do not attempt to interpret the above results.</p>
+<p>Now we can apply these two functions to our three regression strategies.</p>
+</div>
+<div class="section" id="b-first-transformation-linear-regression">
+<h3>B. First Transformation + Linear Regression<a class="headerlink" href="#b-first-transformation-linear-regression" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Calculate the uncertainty in the <span class="math notranslate nohighlight">\(t_f\)</span> predictions and a 95% confidence interval.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>grad= [21.32635417  8.14794015]
+
+Uncertainty (standard deviation) of tf: 2.25 hours
+
+95% confidence interval for tf: [5.64 hr, 18.11 hr]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="c-second-alternate-transformation-linear-regression">
+<h3>C. Second (Alternate) Transformation + Linear Regression<a class="headerlink" href="#c-second-alternate-transformation-linear-regression" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Calculate the uncertainty in the <span class="math notranslate nohighlight">\(t_f\)</span> predictions and a 95% confidence interval.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>grad= [21.79237003  7.52398947]
+
+Uncertainty (standard deviation) of tf: 0.65 hours
+
+95% confidence interval for tf: [9.41 hr, 13.00 hr]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="d-nonlinear-regression">
+<h3>D. Nonlinear Regression<a class="headerlink" href="#d-nonlinear-regression" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Calculate the uncertainty in the <span class="math notranslate nohighlight">\(t_f\)</span> predictions and a 95% confidence interval.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>grad= [21.41427393  8.13841288]
+
+Uncertainty (standard deviation) of tf: 1.70 hours
+
+95% confidence interval for tf: [7.18 hr, 16.64 hr]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="e-discussion">
+<h3>E. Discussion<a class="headerlink" href="#e-discussion" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Compare the uncertainty estimates for batch time from the three regression approaches. Then write one sentence to answer each of the following questions.</p>
+</div>
+<p><strong>Disucssion</strong>:</p>
+<ol class="simple">
+<li><p><em>Order the three regression estimates from smallest to largest uncertainty in batch time.</em> <strong>Answer:</strong> Fill in here…</p></li>
+<li><p><em>Which one regression result do you trust more than the other two?</em> <strong>Answer:</strong> Fill in here…</p></li>
+<li><p><em>Waiting too long to regenerate the membrane can result in accidental lead exposure. Based on our analysis, what is the maximum batch time you recommend before regenerating the membrane?</em> <strong>Answer:</strong> Fill in here…</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="monte-carlo-uncertainty-propogation">
+<h2>4. Monte Carlo Uncertainty Propogation<a class="headerlink" href="#monte-carlo-uncertainty-propogation" title="Permalink to this headline">¶</a></h2>
+<p>We will revisit this notebook <strong>in a later chapter</strong>.</p>
+<p>To keep this example concise, we will only apply MC uncertainty propogation to the nonlinear regression method. We recommend nonlinear regression for most engineering examples.</p>
+<div class="section" id="a-inspect-residuals">
+<h3>A. Inspect Residuals<a class="headerlink" href="#a-inspect-residuals" title="Permalink to this headline">¶</a></h3>
+<p>We will start by characterizing the residuals for the nonlinear regression case. Let’s start by plotting a histogram:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">r3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Residuals (mmol/g)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Count&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Histogram of Residuals for Nonlinear Regression&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_130_0.png" src="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_130_0.png" />
+</div>
+</div>
+<p>Becase there are only 6 data points, this plot is not very revealing. We do not see any extreme outliers, which is pretty much all we can check. If we had more than 10 or 20 samples, we could expect the histogram of residuals to be approximately normally distributed.</p>
+<p>Finally, recall that the variance of the residuals is stored in <code class="docutils literal notranslate"><span class="pre">var_r3</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Variance of the residuals: &quot;</span><span class="p">,</span><span class="n">var_r3</span><span class="p">,</span><span class="s2">&quot;(mmol/g)^2&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variance of the residuals:  0.004648376875480317 (mmol/g)^2
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="b-monte-carlo-python-code">
+<h3>B. Monte Carlo Python Code<a class="headerlink" href="#b-monte-carlo-python-code" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Fill in the steps in the MC code below.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Number of Monte Carlo samples</span>
+<span class="n">nmc</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span> 
+
+<span class="c1"># Declare a matrix to save the Monte Carlo samples</span>
+<span class="c1"># Rows: simulations</span>
+<span class="c1"># Columns: fitted parameters</span>
+<span class="n">theta_mc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nmc</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="c1"># Declare a vector to save Monte Carlo sample</span>
+<span class="n">tf_mc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nmc</span><span class="p">)</span>
+
+<span class="c1"># Estimate fitted paramters for the random samples</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nmc</span><span class="p">):</span>
+    
+    <span class="c1"># Add noise to the experimental data. Store the &#39;new&#39; data in the vector &#39;noisy_data&#39;</span>
+    <span class="c1"># Add your solution here</span>
+    
+    <span class="c1">## Perform nonlinear regression</span>
+    <span class="c1"># Add your solution here</span>
+    
+    <span class="c1">## Store the results from regression</span>
+    <span class="c1"># Add your solution here</span>
+    
+    <span class="c1">## Calculate tf</span>
+    <span class="c1"># Add your solution here</span>
+<span class="c1"># end main MC loop</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="c-visualize-and-interpret-mc-results-fitted-parameters">
+<h3>C. Visualize and Interpret MC Results: Fitted Parameters<a class="headerlink" href="#c-visualize-and-interpret-mc-results-fitted-parameters" title="Permalink to this headline">¶</a></h3>
+<p>We will start by inspecting historgrams of the fitted parameters:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">theta_mc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;K (1/mM)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frequency&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_138_0.png" src="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_138_0.png" />
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Make a histogram for <span class="math notranslate nohighlight">\(Q\)</span>.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_140_0.png" src="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_140_0.png" />
+</div>
+</div>
+<p>We can also make a scatter plot to see the relationship between uncertainty in <span class="math notranslate nohighlight">\(K\)</span> and <span class="math notranslate nohighlight">\(Q\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">theta_mc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">theta_mc</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;K (1/mM)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Q (mmol/g)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_142_0.png" src="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_142_0.png" />
+</div>
+</div>
+<p>We can also compute the covariance between <span class="math notranslate nohighlight">\(K\)</span> and <span class="math notranslate nohighlight">\(Q\)</span>. We’ll start by loading our MC results into a Pandas DataFrame:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mc</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">theta_mc</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;K&quot;</span><span class="p">,</span><span class="s2">&quot;Q&quot;</span><span class="p">})</span>
+<span class="n">mc</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Q</th>
+      <th>K</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.543323</td>
+      <td>1.439788</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.836513</td>
+      <td>1.328493</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.517219</td>
+      <td>1.469476</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.612102</td>
+      <td>1.448838</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.630198</td>
+      <td>1.435805</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Then we can compute covariance and correlation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mc</span><span class="o">.</span><span class="n">cov</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Q</th>
+      <th>K</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Q</th>
+      <td>0.009217</td>
+      <td>-0.003801</td>
+    </tr>
+    <tr>
+      <th>K</th>
+      <td>-0.003801</td>
+      <td>0.002993</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mc</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Q</th>
+      <th>K</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Q</th>
+      <td>1.000000</td>
+      <td>-0.723613</td>
+    </tr>
+    <tr>
+      <th>K</th>
+      <td>-0.723613</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Let’s compare against our covariance matrix from Section 1C:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Covariance Matrix of Original Model Parameters (K,Q):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">cov_theta_nl</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Covariance Matrix of Original Model Parameters (K,Q):
+ [[ 0.00887448 -0.00392218]
+ [-0.00392218  0.00306799]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>These results are similar! Why do we not expect them to match exactly?</p>
+</div>
+<div class="section" id="d-visualize-and-interpret-mc-results-batch-time">
+<h3>D. Visualize and Interpret MC Results: Batch Time<a class="headerlink" href="#d-visualize-and-interpret-mc-results-batch-time" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Make a histogram for <span class="math notranslate nohighlight">\(t_f\)</span>.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_153_0.png" src="../../_images/07-Nonlinear-Case-Study-Adsorptive-Membranes_153_0.png" />
+</div>
+</div>
+<p>We can also calculate the mean and median batch time:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mean batch time =&quot;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">tf_mc</span><span class="p">),</span><span class="s2">&quot; hours&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;median batch time =&quot;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">tf_mc</span><span class="p">),</span><span class="s2">&quot; hours&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mean batch time = 12.053119807330656  hours
+median batch time = 11.89763249975178  hours
+</pre></div>
+</div>
+</div>
+</div>
+<p>As well as the standard deviation of batch time from the Monte Carlo simulations:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Choose ddof=0 (default) versus ddof=1 with N=1000 do not matter that much</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;standard deviation of batch time =&quot;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">tf_mc</span><span class="p">),</span> <span class="s2">&quot;hours&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>standard deviation of batch time = 1.7391541439633778 hours
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also calculate the 2.5%-ile and 97.5%-ile of batch time from the MC simulations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2.5</span><span class="si">%-i</span><span class="s2">le batch time =&quot;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">tf_mc</span><span class="p">,</span><span class="mf">2.5</span><span class="p">),</span><span class="s2">&quot; hours&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;97.5</span><span class="si">%-i</span><span class="s2">le batch time =&quot;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">tf_mc</span><span class="p">,</span><span class="mf">97.5</span><span class="p">),</span><span class="s2">&quot; hours&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.5%-ile batch time = 9.139668461665977  hours
+97.5%-ile batch time = 15.961301994903163  hours
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, let’s compare the standard deviation and percentiles to <span class="math notranslate nohighlight">\(\sigma_{t_f}\)</span> and the 95% confidence interval calculated in Section 3D (code copied for convienence):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate tf using parameters from nonlinear regression</span>
+<span class="n">tf_nl</span> <span class="o">=</span> <span class="n">calculate_tf</span><span class="p">([</span><span class="n">Knl</span><span class="p">,</span> <span class="n">Qnl</span><span class="p">]);</span>
+
+<span class="c1"># Code for uncertainty propagation with nonlinear regression</span>
+<span class="n">sigma_tf_nl</span> <span class="o">=</span> <span class="n">nonlinear_error_propagation</span><span class="p">([</span><span class="n">Knl</span><span class="p">,</span> <span class="n">Qnl</span><span class="p">],</span> <span class="n">cov_theta_nl</span><span class="p">)</span>
+
+<span class="c1"># 95% confidence interval for nonlinear regression</span>
+<span class="n">cint_tf_nl</span> <span class="o">=</span> <span class="n">conf_int</span><span class="p">(</span><span class="n">tf_nl</span><span class="p">,</span> <span class="n">sigma_tf_nl</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>grad= [21.41427393  8.13841288]
+
+Uncertainty (standard deviation) of tf: 1.70 hours
+
+95% confidence interval for tf: [7.18 hr, 16.64 hr]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Compare the uncertainty estimates in batch time and the standard deviation.</p>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks/13-publish"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="06-Bootstrap-Confidence-Intervals.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Bootstrap Confidence Intervals</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../14/design_of_experiments.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Design of Experiments</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

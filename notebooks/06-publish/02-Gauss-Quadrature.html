@@ -1,0 +1,1424 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gauss Quadrature &#8212; Data and Computing for Chemical Engieers</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Adaptive Methods for Newton-Cotes and Gauss Quadrature, Scipy Library" href="03-Adaptive-Methods-and-Scipy.html" />
+    <link rel="prev" title="Introduction and Newton-Cotes" href="01-Intro-and-Newton-Cotes.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/cbe_logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Data and Computing for Chemical Engieers</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../intro.html">
+   Welcome to (Advanced) Data and Computing for Engineers
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../01-publish/00-Python-Primer.html">
+   Python Primer
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/01-Jupyter-Notebooks.html">
+     Welcome to Jupyter Notebooks and Vocareum
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/02-Python-Basics-I-Variables-Strings-Bugs.html">
+     Python Basics I: Variables, Strings, and Bugs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/03-Flow-control.html">
+     Python Basics II: Loopy Logic
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/03b-Pseudocode.html">
+     Pseudocode
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/04-Functions-and-Scope.html">
+     Functions and Scope
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/04b-Recursion.html">
+     Recursion
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/04c-Modules-and-Files.html">
+     Functions, Scoping, and Other Fun Stuff
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/04d-Example-High-Low-Game.html">
+     High/Low Guess My Number Game
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/05-Python-Basics-III-Lists-Dictionaries-Enumeration.html">
+     Python Basics III: Lists, Dictionaries, and Enumeration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/06-NumPy.html">
+     Linear Algebra with Numpy and Scipy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/07-Matplotlib.html">
+     Visualization with matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/08-Pandas.html">
+     Manipulating Data with Pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/09-Functions-as-Arguments.html">
+     Functions as Arguments
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/10-Testing-and-Debugging.html">
+     Testing and Debugging in Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../02/linear_algebra.html">
+   Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02-publish/01-Modeling-Systems-of-Linear-Equations.html">
+     Modeling Systems of Linear Equations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02-publish/02-Gauss-Elimination.html">
+     Gaussian Elimination
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02-publish/03-LU-Factorization.html">
+     LU Decomposition and Condition Number
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02-publish/04-Example-Atomic-Mass-Balances.html">
+     Example: Mass Balances and Linear Algebra
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../03/algorithms.html">
+   Algorithm Building Blocks
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03-publish/01-Taylor-Series.html">
+     Taylor Series Approximations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03-publish/02-Finite-Difference.html">
+     Finite Difference Derivative Approximations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03-publish/03-Example-Heating-a-Metal-Slab.html">
+     Example: Heating a Metal Slab
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../04/nonlinear_systems.html">
+   Nonlinear Systems of Equations
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/01-Modeling-Systems-of-Nonlinear-Equations.html">
+     Modeling Systems of Nonlinear Equations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/02-Newton-Method-Nonlinear-Equation-Solving.html">
+     Solving Systems of Nonlinear Equations with Newton’s Method
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/03-More-Newton-Type-Methods.html">
+     More Newton-Type Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/04-Convergence-Analysis-Newton-Method.html">
+     Convergence Analysis for Newton’s Method
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/05-System-of-Equations-Newton-Method.html">
+     Newton’s Method for Systems of Equations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../05/optimization.html">
+   Continuous Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05-publish/01-Pyomo-Basics.html">
+     Pyomo Basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05-publish/02-Electricity-Market-Optimization.html">
+     Electricity Market Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05-publish/03-Flash-Calculations-in-Pyomo.html">
+     Flash Calculations in Pyomo
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../06/integration.html">
+   Numeric Integration
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="01-Intro-and-Newton-Cotes.html">
+     Introduction and Newton-Cotes
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Gauss Quadrature
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03-Adaptive-Methods-and-Scipy.html">
+     Adaptive Methods for Newton-Cotes and Gauss Quadrature, Scipy Library
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04-Application-Inertial-Navigation-Systems.html">
+     Application: Inertial Navigation Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="05-Forward-and-Backward-Euler.html">
+     Forward and Backward Euler Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="06-Trapezoid-Rule.html">
+     Crank-Nicolson (Trapezoid Rule)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="07-Stability-Analysis.html">
+     Stability Analysis of Forward/Backward Euler and Crank-Nicolson Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="08-Explicit-Runge-Kutta.html">
+     Explicit Range Kutta Method
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="09-Systems-of-Differential-Equations-and-Scipy.html">
+     Systems of Differential Equations and Scipy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="10-Example-Reaction-Rates.html">
+     Example: Reaction Rates
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../07/stats.html">
+   Descriptive Statistics and Visualization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07-publish/01-Sampling.html">
+     Sampling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07-publish/02-Summary-Statistics.html">
+     Summary Statistics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07-publish/03-Visualizing-Data.html">
+     Visualizing Data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../08/probability.html">
+   Probability Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../08-publish/01-Random-Variables.html">
+     Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../08-publish/02-Jointly-Distributed-Random-Variables.html">
+     Jointly Distributed Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../08-publish/03-Practice-Problems.html">
+     Practice Problems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../09/distributions.html">
+   Common Probability Distributions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../09-publish/01-Bernoulli-Probability-Distribution.html">
+     Bernoulli Probability Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../09-publish/03-Poisson-Probability-Distribution.html">
+     Poisson Probability Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../09-publish/04-Normal-Probability-Distribution.html">
+     Normal Probability Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../09-publish/05-Common-Probability-Distributions-Summary.html">
+     Common Probability Distributions Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../10/uncertainty.html">
+   Uncertainty and Error Propagation
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10-publish/01-Measurement-Error.html">
+     Measurement Error
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10-publish/02-Error-Propagation.html">
+     Error Propagation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10-publish/03-Measuring-Flowrate-Example.html">
+     Measuring Flowrate Example
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10-publish/04-Practice-Problems.html">
+     Practice Problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10-publish/05-Simulation.html">
+     Simulation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../11/inference.html">
+   Statistical Inference
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/01-Central-Limit-Theorem.html">
+     Central Limit Theorem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/02-Standard-Normal-Distribution.html">
+     Standard Normal Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/03-Confidence-Intervals.html">
+     Confidence Intervals
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/04-Students-t-Distribution.html">
+     Student’s t-Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/05-First-Hypothesis-Testing.html">
+     First Hypothesis Testing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/06-Hypothesis-Testing-Review-and-Type-I-Type-II-Errors.html">
+     Hypothesis Testing Review and Type I/Type II Errors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/07-Flavors-of-Hypothesis-Testing.html">
+     Flavors of Hypothesis Testing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/08-Statistical-Power-Basics.html">
+     Statistical Power Basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/09-Statistical-Power-in-Python.html">
+     Statistical Power in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/10-Statistical-Power-Practice-Problems.html">
+     Statistical Power Practice Problems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../12/regression.html">
+   Regression
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12-publish/02-Uncertainty-Analysis-and-Statistical-Inference.html">
+     Uncertainty Analysis and Statistical Inference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12-publish/03-Linear-Regression-Practice-Problems.html">
+     Linear Regression Practice Problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12-publish/04-Multivariate-Linear-Regression.html">
+     Multivariate Linear Regression
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../13/advanced_regression.html">
+   Advanced Nonlinear Regression
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/01-Transformations-and-Linear-Regression.html">
+     Transformations and Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/02-Nonlinear-Regression.html">
+     Nonlinear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/03-Nonlinear-Regression-Practice-Problem.html">
+     Nonlinear Regression Practice Problem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/04-Weighted-Regression.html">
+     Weighted Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/05-Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression.html">
+     Monte Carlo Uncertainty Analysis for Nonlinear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/06-Bootstrap-Confidence-Intervals.html">
+     Bootstrap Confidence Intervals
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/07-Nonlinear-Case-Study-Adsorptive-Membranes.html">
+     Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../14/design_of_experiments.html">
+   Design of Experiments
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/06-publish/02-Gauss-Quadrature.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/ndcbe/data-and-computing"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/06-publish/02-Gauss-Quadrature.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/06-publish/02-Gauss-Quadrature.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/06-publish/02-Gauss-Quadrature.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-objectives">
+   Learning Objectives
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gauss-quadrature-rules">
+   Gauss Quadrature Rules
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#integral-bounds-transformation">
+     Integral Bounds Transformation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transformation-example">
+     Transformation Example
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#integrate-a-linear-function">
+     Integrate a Linear Function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#weights-and-nodes">
+     Weights and Nodes
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#where-did-these-points-come-from-optional">
+       Where did these points come from? (optional)
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#code-for-gauss-legendre-quadrature">
+     Code for Gauss-Legendre Quadrature
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#visualize-quadrature-weights">
+     Visualize Quadrature Weights
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#polynomial-example">
+     Polynomial Example
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sine-example-revisited">
+     Sine Example Revisited
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-more-complicated-example">
+     A More Complicated Example
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Gauss Quadrature</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-objectives">
+   Learning Objectives
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gauss-quadrature-rules">
+   Gauss Quadrature Rules
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#integral-bounds-transformation">
+     Integral Bounds Transformation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#transformation-example">
+     Transformation Example
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#integrate-a-linear-function">
+     Integrate a Linear Function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#weights-and-nodes">
+     Weights and Nodes
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#where-did-these-points-come-from-optional">
+       Where did these points come from? (optional)
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#code-for-gauss-legendre-quadrature">
+     Code for Gauss-Legendre Quadrature
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#visualize-quadrature-weights">
+     Visualize Quadrature Weights
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#polynomial-example">
+     Polynomial Example
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sine-example-revisited">
+     Sine Example Revisited
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-more-complicated-example">
+     A More Complicated Example
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="gauss-quadrature">
+<h1>Gauss Quadrature<a class="headerlink" href="#gauss-quadrature" title="Permalink to this headline">¶</a></h1>
+<p>CBE 20258. Numerical and Statistical Analysis. Spring 2020.</p>
+<p>© University of Notre Dame</p>
+<p><strong>Reference</strong>: Chapters 15 and 16 in McClarren (2018). There are two copies in reserve at the library.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load libraries</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">integrate</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">¶</a></h2>
+<p>After studying this notebook, completing the activities, and asking questions in class, you should be able to:</p>
+<ul class="simple">
+<li><p>Quickly determine the number of points to integrate a given polynomial exactly with Gauss quadrature</p></li>
+</ul>
+</div>
+<div class="section" id="gauss-quadrature-rules">
+<h2>Gauss Quadrature Rules<a class="headerlink" href="#gauss-quadrature-rules" title="Permalink to this headline">¶</a></h2>
+<p>To recap, <strong>Newton-Cotes formulas</strong> approximate integrals by fitting the integrand with an interpolating polynomial and then integrating the polynomial exactly. In contrast, <strong>Gauss quadrature</strong> methods guarantees the <strong>maximum accuracy</strong> for a given number of points. Both Newton-Cotes and Gauss quadrature approximate integrals as a sum of function evaluations and weights:</p>
+<div class="math notranslate nohighlight">
+\[\int\limits_a^b f(x)\,dx \approx \sum_{l=0}^{L}w_l f(x_l).\]</div>
+<p>The “magic” of Gauss quadrature is selecting the weights <span class="math notranslate nohighlight">\(w_l\)</span> and nodes (i.e., abscissas) <span class="math notranslate nohighlight">\(x_l\)</span> to maximize accuracy. There are many different types of Gauss quadrature rules. We will focus our discussion on the <strong>Gauss-Legendre</strong> variety.</p>
+<div class="section" id="integral-bounds-transformation">
+<h3>Integral Bounds Transformation<a class="headerlink" href="#integral-bounds-transformation" title="Permalink to this headline">¶</a></h3>
+<p>The Gauss-Legendre quadrature rule is for integrals of the form
+$<span class="math notranslate nohighlight">\(\int\limits_{-1}^1 f(x)\,dx \approx \sum_{l=1}^L w_l f(x_l).\)</span><span class="math notranslate nohighlight">\(
+The integral does not need to be limited just to the range, \)</span>[-1,1]<span class="math notranslate nohighlight">\(, however. If we want to integrate \)</span>f(x)<span class="math notranslate nohighlight">\( from \)</span>[a,b]$, we define a variable</p>
+<div class="math notranslate nohighlight">
+\[x = \frac{a+b}{2} + \frac{b-a}{2}z, \qquad dx = \frac{b-a}{2} dz,\]</div>
+<p>where <span class="math notranslate nohighlight">\(z \in [-1, 1]\)</span>. This makes the transformation</p>
+<div class="math notranslate nohighlight">
+\[\int_a^b f(x)\,dx = \frac{b-a}{2} \int_{-1}^1 f\left(\frac{b-a}{2}z + \frac{a+b}{2}\right)\,dz.\]</div>
+</div>
+<div class="section" id="transformation-example">
+<h3>Transformation Example<a class="headerlink" href="#transformation-example" title="Permalink to this headline">¶</a></h3>
+<p>Which of the following is the correct transformation? <span class="math notranslate nohighlight">\(\int_{0}^{2} (x + x^2)dx =\)</span> …</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\int_{-1}^{1} (z + z^2)dz\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\int_{-1}^{1} ((z+1) + (z+1)^2)dz\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\int_{-1}^{1} ((z-1) + (z-1)^2)dz\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\frac{1}{2}\int_{-1}^{1} (z + z^2)dz\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\frac{1}{2}\int_{-1}^{1} ((z+1) + (z+1)^2)dz\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\frac{1}{2}\int_{-1}^{1} ((z-1) + (z-1)^2)dz\)</span></p></li>
+<li><p>None of the above.</p></li>
+</ol>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Store your answer in the Python integer <tt>ans_c_transform</tt>.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="integrate-a-linear-function">
+<h3>Integrate a Linear Function<a class="headerlink" href="#integrate-a-linear-function" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Discuss the following questions with a partner.</p>
+</div>
+<ol class="simple">
+<li><p>What is the minimum number of <span class="math notranslate nohighlight">\(x\)</span> location(s) you need to evaluate <span class="math notranslate nohighlight">\(f(x) = ax + b\)</span> to compute <span class="math notranslate nohighlight">\(\int_{-1}^{1} f(x)dx\)</span> exactly?</p></li>
+<li><p>Where do you evaluate <span class="math notranslate nohighlight">\(x\)</span>?</p></li>
+<li><p>Why?</p></li>
+</ol>
+<p><img alt="monte_python" src="https://vignette.wikia.nocookie.net/montypython/images/c/c1/Bridge_of_Death_monty_python_and_the_holy_grail_591679_800_4411271399897.jpg/revision/latest?cb=20130716234623" /></p>
+</div>
+<div class="section" id="weights-and-nodes">
+<h3>Weights and Nodes<a class="headerlink" href="#weights-and-nodes" title="Permalink to this headline">¶</a></h3>
+<p>The weights, <span class="math notranslate nohighlight">\(w_l\)</span>, and abscissas, <span class="math notranslate nohighlight">\(x_l\)</span>, are chosen so that the rule is as accurate as possible with <span class="math notranslate nohighlight">\(L\)</span> points.</p>
+<p>It turns out that we can pick the weights and abscissas such that the Gauss-Legendre quadrature formula is <b>exact</b> for polynomials of degree <span class="math notranslate nohighlight">\(2L-1\)</span> or less. This should not be a complete surprise because the integral of a <span class="math notranslate nohighlight">\(2L-1\)</span> degree polynomial is a degree <span class="math notranslate nohighlight">\(2L\)</span> polynomial.  Such a polynomial has <span class="math notranslate nohighlight">\(2L + 1\)</span> coefficients, only <span class="math notranslate nohighlight">\(2L\)</span> of these depend on the original polynomial because the constant term is determined by the integration bounds.  Therefore, the integral has <span class="math notranslate nohighlight">\(2L\)</span> degrees of freedom, the exact number of degrees of freedom we have with our <span class="math notranslate nohighlight">\(L\)</span> weights and abscissas. We will not go into the construction of these quadrature sets, but it is important to know that they have this property.</p>
+<p>The weights and abscissas are given for <span class="math notranslate nohighlight">\(L\)</span> up to 8:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p><span class="math notranslate nohighlight">\(L\)</span></p></th>
+<th class="text-align:center head"><p><span class="math notranslate nohighlight">\(x_l\)</span></p></th>
+<th class="text-align:center head"><p><span class="math notranslate nohighlight">\(w_l\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p><div style="width:290px"></div></p></td>
+<td class="text-align:center"><p><div style="width:290px"></div></p></td>
+<td class="text-align:center"><p><div style="width:290px"></div></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(1\)</span></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(0\)</span></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(2.0000000000000000000000000\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(2\)</span></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(±0.5773502691896257645091488\)</span></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(1.0000000000000000000000000\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(3\)</span></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(0\)</span> <br> <span class="math notranslate nohighlight">\(±0.7745966692414833770358531\)</span></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(0.8888888888888888888888889\)</span> <br> <span class="math notranslate nohighlight">\(0.5555555555555555555555556\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(4\)</span></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(±0.3399810435848562648026658\)</span> <br> <span class="math notranslate nohighlight">\(±0.8611363115940525752239465\)</span></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(0.6521451548625461426269361\)</span> <br> <span class="math notranslate nohighlight">\(0.3478548451374538573730639\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(5\)</span></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(0\)</span> <br> <span class="math notranslate nohighlight">\(±0.5384693101056830910363144\)</span> <br> <span class="math notranslate nohighlight">\(±0.9061798459386639927976269\)</span></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(0.5688888888888888888888889\)</span> <br> <span class="math notranslate nohighlight">\(0.4786286704993664680412915\)</span> <br><span class="math notranslate nohighlight">\(0.2369268850561890875142640\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(6\)</span></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(±0.2386191860831969086305017\)</span> <br> <span class="math notranslate nohighlight">\(±0.6612093864662645136613996\)</span> <br> <span class="math notranslate nohighlight">\(±0.9324695142031520278123016\)</span></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(0.4679139345726910473898703\)</span> <br> <span class="math notranslate nohighlight">\(0.3607615730481386075698335\)</span> <br> <span class="math notranslate nohighlight">\(0.1713244923791703450402961\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(7\)</span></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(0\)</span> <br> <span class="math notranslate nohighlight">\(±0.4058451513773971669066064\)</span> <br> <span class="math notranslate nohighlight">\(±0.7415311855993944398638648\)</span> <br> <span class="math notranslate nohighlight">\(±0.9491079123427585245261897\)</span></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(0.4179591836734693877551020\)</span> <br> <span class="math notranslate nohighlight">\(0.3818300505051189449503698\)</span> <br> <span class="math notranslate nohighlight">\(0.2797053914892766679014678\)</span> <br> <span class="math notranslate nohighlight">\(0.1294849661688696932706114\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(8\)</span></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(±0.1834346424956498049394761\)</span> <br> <span class="math notranslate nohighlight">\(±0.5255324099163289858177390\)</span> <br>  <span class="math notranslate nohighlight">\(±0.7966664774136267395915539\)</span> <br>  <span class="math notranslate nohighlight">\(±0.9602898564975362316835609\)</span></p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(0.3626837833783619829651504\)</span> <br> <span class="math notranslate nohighlight">\(0.3137066458778872873379622\)</span> <br> <span class="math notranslate nohighlight">\(0.2223810344533744705443560\)</span> <br> <span class="math notranslate nohighlight">\(0.1012285362903762591525314\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>Notice that the odd <span class="math notranslate nohighlight">\(L\)</span> sets all have <span class="math notranslate nohighlight">\(x=0\)</span> in the set.  Also, the sum of the <span class="math notranslate nohighlight">\(w_l\)</span> adds up to 2 because the range of integration has a length of 2.</p>
+<div class="section" id="where-did-these-points-come-from-optional">
+<h4>Where did these points come from? (optional)<a class="headerlink" href="#where-did-these-points-come-from-optional" title="Permalink to this headline">¶</a></h4>
+<p>One way to derive the Gauss-Legendre quadrature rules is by looking at the integral generic monomials of degree 0 up to <span class="math notranslate nohighlight">\(2L-1\)</span> and setting each equal to the <span class="math notranslate nohighlight">\(L\)</span> point Gauss-Legendre quadrature rule:
+$<span class="math notranslate nohighlight">\( \int\limits_{-1}^{1} dx\, a_0 x^0 =  a_0\sum_{l=0}^L w_l x_l^0,\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\( \int\limits_{-1}^{1} dx\, a_1 x^1 = a_1\sum_{l=0}^L w_l x_l^1,\)</span><span class="math notranslate nohighlight">\(
+and continuing until
+\)</span><span class="math notranslate nohighlight">\( \int\limits_{-1}^{1} dx\, a_{2L-1} x^{2L-1} = a_{2L-1}\sum_{l=0}^L w_l x_l^{2L-1}.\)</span><span class="math notranslate nohighlight">\(
+Notice that the \)</span>a_i<span class="math notranslate nohighlight">\( constants cancel out of each equation so they do not matter. This system is \)</span>2L<span class="math notranslate nohighlight">\( equations with \)</span>L<span class="math notranslate nohighlight">\( weights, \)</span>w_l<span class="math notranslate nohighlight">\(, and \)</span>L<span class="math notranslate nohighlight">\( abscissas, \)</span>x_l$. We could solve these equations to get the weights and abscissas, though this is not how it is done in practice generally—this is accomplished by using the theory of orthogonal polynomials.</p>
+</div>
+</div>
+<div class="section" id="code-for-gauss-legendre-quadrature">
+<h3>Code for Gauss-Legendre Quadrature<a class="headerlink" href="#code-for-gauss-legendre-quadrature" title="Permalink to this headline">¶</a></h3>
+<p>We will now write a function that will compute the integral of a function from <span class="math notranslate nohighlight">\([-1,1]\)</span> using these quadrature rules. For values of <span class="math notranslate nohighlight">\(L\)</span> beyond 8, we will use a NumPy function that generates the points and weights. The NumPy documentation asserts that the rules for <span class="math notranslate nohighlight">\(L&gt;100\)</span> have not been tested and may be inaccurate.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">GLQuad</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">dataReturn</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compute the Gauss-Legendre Quadrature estimate </span>
+<span class="sd">    of the integral of f(x) from -1 to 1</span>
+<span class="sd">    Inputs:</span>
+<span class="sd">    f:   name of function to integrate</span>
+<span class="sd">    L:   Order of integration rule (8 or less)</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    G-L Quadrature estimate&quot;&quot;&quot;</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">L</span><span class="o">&gt;=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">L</span><span class="o">==</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span>
+        <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="n">L</span><span class="o">==</span><span class="mi">2</span><span class="p">):</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="mf">3.0</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="mf">3.0</span><span class="p">)])</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="n">L</span><span class="o">==</span><span class="mi">3</span><span class="p">):</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.8888888888888888888888889</span><span class="p">,</span>
+                            <span class="mf">0.5555555555555555555555556</span><span class="p">,</span>
+                            <span class="mf">0.5555555555555555555555556</span><span class="p">])</span>
+        <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span><span class="o">-</span><span class="mf">0.7745966692414833770358531</span><span class="p">,</span>
+                       <span class="mf">0.7745966692414833770358531</span><span class="p">])</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="n">L</span><span class="o">==</span><span class="mi">4</span><span class="p">):</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.6521451548625461426269361</span><span class="p">,</span><span class="mf">0.6521451548625461426269361</span><span class="p">,</span>
+                            <span class="mf">0.3478548451374538573730639</span><span class="p">,</span><span class="mf">0.3478548451374538573730639</span><span class="p">])</span>
+        <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.3399810435848562648026658</span><span class="p">,</span> <span class="mf">0.3399810435848562648026658</span><span class="p">,</span>
+                       <span class="o">-</span><span class="mf">0.8611363115940525752239465</span><span class="p">,</span> <span class="mf">0.8611363115940525752239465</span><span class="p">])</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="n">L</span><span class="o">==</span><span class="mi">5</span><span class="p">):</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5688888888888888888888889</span><span class="p">,</span>
+                            <span class="mf">0.4786286704993664680412915</span><span class="p">,</span><span class="mf">0.4786286704993664680412915</span><span class="p">,</span>
+                            <span class="mf">0.2369268850561890875142640</span><span class="p">,</span><span class="mf">0.2369268850561890875142640</span><span class="p">])</span>
+        <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span><span class="o">-</span><span class="mf">0.5384693101056830910363144</span><span class="p">,</span><span class="mf">0.5384693101056830910363144</span><span class="p">,</span>
+                       <span class="o">-</span><span class="mf">0.9061798459386639927976269</span><span class="p">,</span><span class="mf">0.9061798459386639927976269</span><span class="p">])</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="n">L</span><span class="o">==</span><span class="mi">6</span><span class="p">):</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.4679139345726910473898703</span><span class="p">,</span><span class="mf">0.4679139345726910473898703</span><span class="p">,</span>
+                            <span class="mf">0.3607615730481386075698335</span><span class="p">,</span><span class="mf">0.3607615730481386075698335</span><span class="p">,</span>
+                            <span class="mf">0.1713244923791703450402961</span><span class="p">,</span><span class="mf">0.1713244923791703450402961</span><span class="p">])</span>
+        <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.2386191860831969086305017</span><span class="p">,</span> <span class="mf">0.2386191860831969086305017</span><span class="p">,</span>
+                       <span class="o">-</span><span class="mf">0.6612093864662645136613996</span><span class="p">,</span> <span class="mf">0.6612093864662645136613996</span><span class="p">,</span>
+                       <span class="o">-</span><span class="mf">0.9324695142031520278123016</span><span class="p">,</span> <span class="mf">0.9324695142031520278123016</span><span class="p">])</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="n">L</span><span class="o">==</span><span class="mi">7</span><span class="p">):</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.4179591836734693877551020</span><span class="p">,</span>
+                            <span class="mf">0.3818300505051189449503698</span><span class="p">,</span><span class="mf">0.3818300505051189449503698</span><span class="p">,</span>
+                            <span class="mf">0.2797053914892766679014678</span><span class="p">,</span><span class="mf">0.2797053914892766679014678</span><span class="p">,</span>
+                            <span class="mf">0.1294849661688696932706114</span><span class="p">,</span><span class="mf">0.1294849661688696932706114</span><span class="p">])</span>
+        <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span><span class="o">-</span><span class="mf">0.4058451513773971669066064</span><span class="p">,</span><span class="mf">0.4058451513773971669066064</span><span class="p">,</span>
+                       <span class="o">-</span><span class="mf">0.7415311855993944398638648</span><span class="p">,</span><span class="mf">0.7415311855993944398638648</span><span class="p">,</span>
+                       <span class="o">-</span><span class="mf">0.9491079123427585245261897</span><span class="p">,</span><span class="mf">0.9491079123427585245261897</span><span class="p">])</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="n">L</span><span class="o">==</span><span class="mi">8</span><span class="p">):</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.3626837833783619829651504</span><span class="p">,</span><span class="mf">0.3626837833783619829651504</span><span class="p">,</span>
+                            <span class="mf">0.3137066458778872873379622</span><span class="p">,</span><span class="mf">0.3137066458778872873379622</span><span class="p">,</span>
+                            <span class="mf">0.2223810344533744705443560</span><span class="p">,</span><span class="mf">0.2223810344533744705443560</span><span class="p">,</span>
+                            <span class="mf">0.1012285362903762591525314</span><span class="p">,</span><span class="mf">0.1012285362903762591525314</span><span class="p">])</span>
+        <span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.1834346424956498049394761</span><span class="p">,</span> <span class="mf">0.1834346424956498049394761</span><span class="p">,</span>
+                       <span class="o">-</span><span class="mf">0.5255324099163289858177390</span><span class="p">,</span> <span class="mf">0.5255324099163289858177390</span><span class="p">,</span>
+                       <span class="o">-</span><span class="mf">0.7966664774136267395915539</span><span class="p">,</span> <span class="mf">0.7966664774136267395915539</span><span class="p">,</span>
+                       <span class="o">-</span><span class="mf">0.9602898564975362316835609</span><span class="p">,</span> <span class="mf">0.9602898564975362316835609</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span> <span class="c1">#use numpy&#39;s function</span>
+        <span class="n">xs</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polynomial</span><span class="o">.</span><span class="n">legendre</span><span class="o">.</span><span class="n">leggauss</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+    
+    <span class="n">quad_estimate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">weights</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">xs</span><span class="p">))</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">dataReturn</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">quad_estimate</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">xs</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">quad_estimate</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="visualize-quadrature-weights">
+<h3>Visualize Quadrature Weights<a class="headerlink" href="#visualize-quadrature-weights" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span>
+<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">L</span><span class="p">:</span>
+    <span class="n">quad_est</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">xs</span> <span class="o">=</span> <span class="n">GLQuad</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">dataReturn</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">levels</span> <span class="o">=</span> <span class="n">weights</span><span class="o">*</span><span class="mi">0</span> <span class="o">+</span> <span class="n">l</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">levels</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">weights</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;L&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Gauss-Legendre Quadrature Points</span><span class="se">\n</span><span class="s2">Size of point is weight&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/02-Gauss-Quadrature_21_0.png" src="../../_images/02-Gauss-Quadrature_21_0.png" />
+</div>
+</div>
+<p>Each <em>row</em> in the plot above corresponds to a different <span class="math notranslate nohighlight">\(L\)</span> value. The rows are colored to guide your eyes. The center of each dot shows the node location. The size of the circle indicates the weight for each node.</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Write a few sentences to describe the two trends in the plot above.</p>
+</div>
+<p><strong>Home Activity Discussion</strong>:</p>
+</div>
+<div class="section" id="polynomial-example">
+<h3>Polynomial Example<a class="headerlink" href="#polynomial-example" title="Permalink to this headline">¶</a></h3>
+<p>As a simple demonstration of the Gauss-Legendre quadrature, let’s show that it integrates polynomials of degree <span class="math notranslate nohighlight">\(2L-1\)</span> exactly.  Consider the integral
+$<span class="math notranslate nohighlight">\(\int\limits_{-1}^1 (x+1)^{2L-1}\,dx = \frac{2^{2 L-1}}{L}.\)</span>$</p>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Find a partner. Flip an imaginary coin to decide who is partner “A”. First, partner “A” explains the code below. Then partner “B” explains the output. Why does this example show the power of Gauss-Legendre quadrature?</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">12</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">L</span><span class="p">:</span>
+    
+    <span class="c1"># Create f</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c1"># Evaluate exact (analytic) solution</span>
+    <span class="n">integral</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">l</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">l</span>
+    
+    <span class="c1"># Evaluate quadrature rule</span>
+    <span class="n">GLintegral</span> <span class="o">=</span> <span class="n">GLQuad</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">l</span><span class="p">)</span>
+    
+    <span class="c1"># Print results</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">L =&quot;</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2"> Estimate is&quot;</span><span class="p">,</span><span class="n">GLintegral</span><span class="p">,</span>
+          <span class="s2">&quot;Exact value is&quot;</span><span class="p">,</span><span class="n">integral</span><span class="p">,</span> 
+          <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Abs. Relative Error is&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">GLintegral</span><span class="o">-</span><span class="n">integral</span><span class="p">)</span><span class="o">/</span><span class="n">integral</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>L = 1 	 Estimate is 2.0 Exact value is 2.0 
+Abs. Relative Error is 0.0
+
+L = 2 	 Estimate is 3.9999999999999996 Exact value is 4.0 
+Abs. Relative Error is 1.1102230246251565e-16
+
+L = 3 	 Estimate is 10.666666666666668 Exact value is 10.666666666666666 
+Abs. Relative Error is 1.6653345369377348e-16
+
+L = 4 	 Estimate is 31.99999999999999 Exact value is 32.0 
+Abs. Relative Error is 3.3306690738754696e-16
+
+L = 5 	 Estimate is 102.39999999999995 Exact value is 102.4 
+Abs. Relative Error is 5.551115123125783e-16
+
+L = 6 	 Estimate is 341.33333333333337 Exact value is 341.3333333333333 
+Abs. Relative Error is 1.6653345369377348e-16
+
+L = 7 	 Estimate is 1170.2857142857135 Exact value is 1170.2857142857142 
+Abs. Relative Error is 5.828670879282072e-16
+
+L = 8 	 Estimate is 4096.000000000003 Exact value is 4096.0 
+Abs. Relative Error is 6.661338147750939e-16
+
+L = 9 	 Estimate is 14563.555555555577 Exact value is 14563.555555555555 
+Abs. Relative Error is 1.4988010832439613e-15
+
+L = 10 	 Estimate is 52428.799999999974 Exact value is 52428.8 
+Abs. Relative Error is 5.551115123125783e-16
+
+L = 11 	 Estimate is 190650.181818181 Exact value is 190650.18181818182 
+Abs. Relative Error is 4.274358644806853e-15
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="sine-example-revisited">
+<h3>Sine Example Revisited<a class="headerlink" href="#sine-example-revisited" title="Permalink to this headline">¶</a></h3>
+<p>Let’s see how it performs on the sine example, which is not polynomial:
+$<span class="math notranslate nohighlight">\(\int_{0}^\pi \sin(x)\,dx = 2\)</span>$</p>
+<p>Before proceeding, we need to transform (scale) the bounds. Here is a general function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generalGL</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">L</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compute the Gauss-Legendre Quadrature estimate </span>
+<span class="sd">    of the integral of f(x) from a to b</span>
+<span class="sd">    Inputs:</span>
+<span class="sd">    f:   name of function to integrate</span>
+<span class="sd">    a:   lower bound of integral</span>
+<span class="sd">    b:   upper bound of integral</span>
+<span class="sd">    L:   Order of integration rule (8 or less)</span>
+<span class="sd">    Returns:</span>
+<span class="sd">    G-L Quadrature estimate&quot;&quot;&quot;</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">L</span><span class="o">&gt;=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1">#define a re-scaled f</span>
+    <span class="n">f_rescaled</span> <span class="o">=</span> <span class="k">lambda</span>  <span class="n">z</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">z</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">))</span>
+    <span class="n">integral</span> <span class="o">=</span> <span class="n">GLQuad</span><span class="p">(</span><span class="n">f_rescaled</span><span class="p">,</span><span class="n">L</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">integral</span><span class="o">*</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="mf">0.5</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can now proceed with the example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">errors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">L</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">integral</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">L</span><span class="p">:</span>
+    <span class="n">GLintegral</span> <span class="o">=</span> <span class="n">generalGL</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="n">l</span><span class="p">)</span>
+    <span class="n">errors</span><span class="p">[</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fabs</span><span class="p">(</span><span class="n">GLintegral</span><span class="o">-</span><span class="n">integral</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;L =&quot;</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="s2">&quot;Estimate is&quot;</span><span class="p">,</span><span class="n">GLintegral</span><span class="p">,</span><span class="s2">&quot;Exact value is&quot;</span><span class="p">,</span><span class="n">integral</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">errors</span><span class="p">,</span><span class="s1">&#39;o-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;L&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Absolute Error&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Estimate of $\int_</span><span class="si">{0}</span><span class="s2">^\pi \sin(x)\,dx = 2$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="o">**-</span><span class="mi">16</span><span class="p">,</span><span class="mi">10</span><span class="o">**</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>L = 1 Estimate is 3.141592653589793 Exact value is 2
+L = 2 Estimate is 1.9358195746511373 Exact value is 2
+L = 3 Estimate is 2.0013889136077436 Exact value is 2
+L = 4 Estimate is 1.999984228457722 Exact value is 2
+L = 5 Estimate is 2.000000110284472 Exact value is 2
+L = 6 Estimate is 1.9999999994772704 Exact value is 2
+L = 7 Estimate is 2.0000000000017906 Exact value is 2
+L = 8 Estimate is 1.9999999999999951 Exact value is 2
+L = 9 Estimate is 1.9999999999999998 Exact value is 2
+L = 10 Estimate is 2.0000000000000004 Exact value is 2
+L = 11 Estimate is 2.0000000000000013 Exact value is 2
+L = 12 Estimate is 1.9999999999999987 Exact value is 2
+L = 13 Estimate is 1.9999999999999998 Exact value is 2
+L = 14 Estimate is 1.999999999999999 Exact value is 2
+</pre></div>
+</div>
+<img alt="../../_images/02-Gauss-Quadrature_31_1.png" src="../../_images/02-Gauss-Quadrature_31_1.png" />
+</div>
+</div>
+<p>Notice that we get to machine-precision by evaluating the integral at only 8 points!</p>
+<p>This exponential convergence will only be obtained on smooth solutions without singularities in the function or its derivatives.</p>
+</div>
+<div class="section" id="a-more-complicated-example">
+<h3>A More Complicated Example<a class="headerlink" href="#a-more-complicated-example" title="Permalink to this headline">¶</a></h3>
+<p>Consider:
+$<span class="math notranslate nohighlight">\( \int\limits_0^1 4 \sqrt{1-x^2}\,dx = \pi.\)</span><span class="math notranslate nohighlight">\(
+This integral has a singularity in its derivative at \)</span>x=1$. Gauss-Legendre quadrature will not have exponential convergence on this function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">40</span><span class="p">)</span>
+<span class="n">errors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">L</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">4.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">integral</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">L</span><span class="p">:</span>
+    <span class="n">GLintegral</span> <span class="o">=</span> <span class="n">generalGL</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">l</span><span class="p">)</span>
+    <span class="n">errors</span><span class="p">[</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fabs</span><span class="p">(</span><span class="n">GLintegral</span><span class="o">-</span><span class="n">integral</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;L =&quot;</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="s2">&quot;Estimate is&quot;</span><span class="p">,</span><span class="n">GLintegral</span><span class="p">,</span><span class="s2">&quot;Exact value is&quot;</span><span class="p">,</span><span class="n">integral</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">errors</span><span class="p">,</span><span class="s1">&#39;o-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;L&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Absolute Error&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Estimate of $ \int_0^1 4\sqrt{1-x^2} \, dx = \pi$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="o">**-</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="o">**</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">slope</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">errors</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">errors</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Slope of line from L = 8 to 11 is&quot;</span><span class="p">,</span><span class="n">slope</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>L = 1 Estimate is 3.4641016151377544 Exact value is 3.141592653589793
+L = 2 Estimate is 3.184452077509094 Exact value is 3.141592653589793
+L = 3 Estimate is 3.156072695039818 Exact value is 3.141592653589793
+L = 4 Estimate is 3.1482294686216954 Exact value is 3.141592653589793
+L = 5 Estimate is 3.1451817756693496 Exact value is 3.141592653589793
+L = 6 Estimate is 3.1437514508015596 Exact value is 3.141592653589793
+L = 7 Estimate is 3.1429916780932854 Exact value is 3.141592653589793
+L = 8 Estimate is 3.1425508648538196 Exact value is 3.141592653589793
+L = 9 Estimate is 3.1422775824170497 Exact value is 3.141592653589793
+L = 10 Estimate is 3.1420991700052934 Exact value is 3.141592653589793
+L = 11 Estimate is 3.1419777569660723 Exact value is 3.141592653589793
+L = 12 Estimate is 3.141892268737024 Exact value is 3.141592653589793
+L = 13 Estimate is 3.141830335674392 Exact value is 3.141592653589793
+L = 14 Estimate is 3.1417843690029263 Exact value is 3.141592653589793
+L = 15 Estimate is 3.1417495357969707 Exact value is 3.141592653589793
+L = 16 Estimate is 3.141722658178849 Exact value is 3.141592653589793
+L = 17 Estimate is 3.1417015878568084 Exact value is 3.141592653589793
+L = 18 Estimate is 3.141684836935859 Exact value is 3.141592653589793
+L = 19 Estimate is 3.1416713526382183 Exact value is 3.141592653589793
+L = 20 Estimate is 3.1416603757628048 Exact value is 3.141592653589793
+L = 21 Estimate is 3.1416513494235643 Exact value is 3.141592653589793
+L = 22 Estimate is 3.1416438588294406 Exact value is 3.141592653589793
+L = 23 Estimate is 3.1416375907129095 Exact value is 3.141592653589793
+L = 24 Estimate is 3.1416323054778177 Exact value is 3.141592653589793
+L = 25 Estimate is 3.141627817750008 Exact value is 3.141592653589793
+L = 26 Estimate is 3.1416239825825443 Exact value is 3.141592653589793
+L = 27 Estimate is 3.141620685530997 Exact value is 3.141592653589793
+L = 28 Estimate is 3.141617835418813 Exact value is 3.141592653589793
+L = 29 Estimate is 3.141615358999378 Exact value is 3.141592653589793
+L = 30 Estimate is 3.1416131969731325 Exact value is 3.141592653589793
+L = 31 Estimate is 3.141611300984699 Exact value is 3.141592653589793
+L = 32 Estimate is 3.141609631336806 Exact value is 3.141592653589793
+L = 33 Estimate is 3.141608155234139 Exact value is 3.141592653589793
+L = 34 Estimate is 3.141606845422818 Exact value is 3.141592653589793
+L = 35 Estimate is 3.1416056791279456 Exact value is 3.141592653589793
+L = 36 Estimate is 3.1416046372177497 Exact value is 3.141592653589793
+L = 37 Estimate is 3.141603703541395 Exact value is 3.141592653589793
+L = 38 Estimate is 3.141602864400813 Exact value is 3.141592653589793
+L = 39 Estimate is 3.1416021081268766 Exact value is 3.141592653589793
+</pre></div>
+</div>
+<img alt="../../_images/02-Gauss-Quadrature_34_1.png" src="../../_images/02-Gauss-Quadrature_34_1.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Slope of line from L = 8 to 11 is -2.848973886563485
+</pre></div>
+</div>
+</div>
+</div>
+<p>There is a big difference between exponential convergence we saw in the integral of the sine function and the polynomial convergence in this problem. Even at a high rate of convergence (order 2.8), the error converges slowly in that we are still only accurate to 3 digits at <span class="math notranslate nohighlight">\(L=13.\)</span></p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks/06-publish"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="01-Intro-and-Newton-Cotes.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Introduction and Newton-Cotes</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="03-Adaptive-Methods-and-Scipy.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Adaptive Methods for Newton-Cotes and Gauss Quadrature, Scipy Library</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
