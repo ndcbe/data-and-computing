@@ -20,7 +20,7 @@ def lint_notebook(full_folder_name, file):
         nb = nbformat.read(fp, as_version=4)
         
     # check that urls are reachable
-    print("urls ...")
+    print("finding and testing urls ...")
     for cell in nb.cells:
         if cell.cell_type == "markdown":
             urls = re.findall(URL, cell.source)
@@ -35,6 +35,14 @@ def lint_notebook(full_folder_name, file):
                 except requests.exceptions.RequestException as e:
                     print(f"    ERROR: {url} {e}")
 
+    # check that urls are reachable
+    print("finding all headers")
+    MARKDOWN_HEADER = re.compile(r'(^|\n)(?P<level>#{1,6})(?P<header>.*?)#*(\n|$)')
+    for cell in nb.cells:
+        if cell.cell_type == "markdown":
+            headers = re.findall(MARKDOWN_HEADER, cell.source)
+            if headers:
+                print(headers)
 
 
 folders = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13"]
