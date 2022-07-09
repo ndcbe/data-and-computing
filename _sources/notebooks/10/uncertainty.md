@@ -1,9 +1,10 @@
 # Uncertainty and Error Propagation
 
-Topics to cover:
-* Linearization
-* Monte Carlo
-* Flow measurement example
-* Simulation
-
 ## Chapter Learning Objectives
+1. Estimate and propagate uncertainty, especially for engineering experiments and models
+2. Master generalized multivariate nonlinear (first order) error propagation formula
+
+## Sections
+
+```{tableofcontents}
+```
