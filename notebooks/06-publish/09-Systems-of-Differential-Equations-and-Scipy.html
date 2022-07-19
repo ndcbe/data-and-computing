@@ -153,7 +153,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/04c-Modules-and-Files.html">
-     Functions, Scoping, and Other Fun Stuff
+     Modules and Files
     </a>
    </li>
    <li class="toctree-l2">
@@ -204,13 +204,28 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../02-publish/02b-Invertible-Matrix-Theorem-and-Gauss-Example.html">
+     Invertible Matrix Theorem and Gaussian Elimination Example
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../02-publish/03-LU-Factorization.html">
      LU Decomposition and Condition Number
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../02-publish/03b-Condition-Number.html">
+     Errors in Linear Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../02-publish/04-Example-Atomic-Mass-Balances.html">
      Example: Mass Balances and Linear Algebra
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02-publish/05-Linear-Algebra-in-Numpy.html">
+     Linear Algebra Review and SciPy Basics
     </a>
    </li>
   </ul>
@@ -258,8 +273,8 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../04-publish/02-Newton-Method-Nonlinear-Equation-Solving.html">
-     Solving Systems of Nonlinear Equations with Newton’s Method
+    <a class="reference internal" href="../04-publish/02-Newton-Raphson-Method-in-One-Dimension.html">
+     Newton-Raphson Method in One Dimension
     </a>
    </li>
    <li class="toctree-l2">
@@ -268,13 +283,18 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../04-publish/04-Convergence-Analysis-Newton-Method.html">
-     Convergence Analysis for Newton’s Method
+    <a class="reference internal" href="../04-publish/04-Convergence-Analysis-for-Newton-Raphson-Methods.html">
+     Convergence Analysis for Newton-Raphson Methods
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../04-publish/05-System-of-Equations-Newton-Method.html">
-     Newton’s Method for Systems of Equations
+    <a class="reference internal" href="../04-publish/05-Newton-Raphson-Methods-for-Systems-of-Equations.html">
+     Newton-Raphson Methods for Systems of Equations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/06-Newton-Methods-in-Scipy.html">
+     Newton Methods in Scipy
     </a>
    </li>
   </ul>
@@ -433,11 +453,6 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../09-publish/05-Common-Probability-Distributions-Summary.html">
-     Common Probability Distributions Summary
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="../09-publish/01-Bernoulli-Probability-Distribution.html">
      Bernoulli Probability Distribution
     </a>
@@ -455,6 +470,11 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="../09-publish/04-Normal-Probability-Distribution.html">
      Normal Probability Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../09-publish/05-Common-Probability-Distributions-Summary.html">
+     Common Probability Distributions Summary
     </a>
    </li>
   </ul>
@@ -532,13 +552,13 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../11-publish/07-Flavors-of-Hypothesis-Testing.html">
-     Flavors of Hypothesis Testing
+    <a class="reference internal" href="../11-publish/06-Hypothesis-Testing-Review-and-Type-I-Type-II-Errors.html">
+     Hypothesis Testing Review and Type I/Type II Errors
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../11-publish/06-Hypothesis-Testing-Review-and-Type-I-Type-II-Errors.html">
-     Hypothesis Testing Review and Type I/Type II Errors
+    <a class="reference internal" href="../11-publish/07-Flavors-of-Hypothesis-Testing.html">
+     Flavors of Hypothesis Testing
     </a>
    </li>
    <li class="toctree-l2">
@@ -856,8 +876,6 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="systems-of-differential-equations-and-scipy">
 <h1>Systems of Differential Equations and Scipy<a class="headerlink" href="#systems-of-differential-equations-and-scipy" title="Permalink to this headline">¶</a></h1>
-<p>CBE 20258. Numerical and Statistical Analysis. Spring 2020.</p>
-<p>© University of Notre Dame</p>
 <p>Reference: Chapter 17 in McClarren.</p>
 <div class="section" id="learning-objectives">
 <h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">¶</a></h2>
@@ -879,24 +897,35 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="systems-of-differential-equations">
 <h2>Systems of Differential Equations<a class="headerlink" href="#systems-of-differential-equations" title="Permalink to this headline">¶</a></h2>
-<p>Often we will be concerned with solving a system of ODEs rather than a single ODE.  The explicit methods translate to this scenario directly. However, we will restrict ourselves to systems that can be written in the form
-$<span class="math notranslate nohighlight">\( \mathbf{y}'(t) = \mathbf{A}(t) \mathbf{y} + \mathbf{c}(t), \qquad \mathbf{y}(0) = \mathbf{y}_0.\)</span>$</p>
+<p>Often we will be concerned with solving a system of ODEs rather than a single ODE.  The explicit methods translate to this scenario directly. However, we will restrict ourselves to systems that can be written in the form</p>
+<div class="math notranslate nohighlight">
+\[ \mathbf{y}'(t) = \mathbf{A}(t) \mathbf{y} + \mathbf{c}(t), \qquad \mathbf{y}(0) = \mathbf{y}_0.\]</div>
 <p>In this equation <span class="math notranslate nohighlight">\(\mathbf{A}(t)\)</span> is a matrix that can change over time, and <span class="math notranslate nohighlight">\(\mathbf{c}(t)\)</span> is a function of <span class="math notranslate nohighlight">\(t\)</span> only. For systems of this type our methods are written as follows:</p>
-<p><b>Forward Euler</b> (Explicit)
-$<span class="math notranslate nohighlight">\( \mathbf{y}^{n+1} = \mathbf{y}^{n} + \Delta t \mathbf{A}(t^n) \mathbf{y}^n + \Delta t\mathbf{c}(t^n)\)</span>$</p>
-<p><b>Backward Euler</b> (Implicit)
-$<span class="math notranslate nohighlight">\( \mathbf{y}^{n+1} = \mathbf{y}^{n} + \Delta t \mathbf{A}(t^{n+1}) \mathbf{y}^{n+1} + \Delta t\mathbf{c}(t^{n+1}),\)</span><span class="math notranslate nohighlight">\(
-which rearranges to
-\)</span><span class="math notranslate nohighlight">\(\left( \mathbf{I} - \Delta t \mathbf{A}(t^{n+1})\right)\mathbf{y}^{n+1} = \mathbf{y}^{n} + \Delta t\mathbf{c}(t^{n+1}).\)</span>$ Therefore, for backward Euler we will have to solve a linear system of equations at each time step.</p>
-<p><b>Crank-Nicolson</b> (Implicit)
-$<span class="math notranslate nohighlight">\(\left( \mathbf{I} - \frac{\Delta t}{2} \mathbf{A}(t^{n+1})\right)\mathbf{y}^{n+1} = \left( \mathbf{I} + \frac{\Delta t}{2} \mathbf{A}(t^{n})\right)\mathbf{y}^{n} + \frac{\Delta t}{2}\left(\mathbf{c}(t^{n+1}) + \mathbf{c}(t^{n})\right).\)</span>$
-This will also involve a linear solve at each step.</p>
-<p><b>Fourth-order Runge-Kutta</b> (Implicit)
-$<span class="math notranslate nohighlight">\(\mathbf{y}^{n+1} = \mathbf{y}^n + \frac{1}{6}\left(\Delta \mathbf{y}_1 + 2 \Delta \mathbf{y}_2 + 2 \Delta \mathbf{y}_3 + \Delta \mathbf{y}_4\right),\)</span><span class="math notranslate nohighlight">\(
-\)</span><span class="math notranslate nohighlight">\(\Delta y_1 = \Delta t \mathbf{A}(t^n)y^n + \mathbf{c}(t^n),\)</span><span class="math notranslate nohighlight">\( 
-\)</span><span class="math notranslate nohighlight">\(\Delta y_2 = \Delta t \mathbf{A}\left(t^n+ \frac{\Delta t}{2}\right)\left(y^n + \frac{\Delta y_1}{2}\right) + \Delta t\mathbf{c}(t^n + \frac{\Delta t}{2}),\)</span><span class="math notranslate nohighlight">\(
-\)</span><span class="math notranslate nohighlight">\(\Delta y_3 =  \Delta t \mathbf{A}\left(t^n+ \frac{\Delta t}{2}\right)\left(y^n + \frac{\Delta y_2}{2}\right) + \Delta t\mathbf{c}(t^n + \frac{\Delta t}{2}),\)</span><span class="math notranslate nohighlight">\(
-\)</span><span class="math notranslate nohighlight">\(\Delta y_4 =  \Delta t \mathbf{A}\left(t^n+ {\Delta t}\right)\left(y^n + {\Delta y_3}\right) + \Delta t\mathbf{c}(t^n + \Delta t).\)</span>$</p>
+<p><b>Forward Euler</b> (Explicit)</p>
+<div class="math notranslate nohighlight">
+\[ \mathbf{y}^{n+1} = \mathbf{y}^{n} + \Delta t \mathbf{A}(t^n) \mathbf{y}^n + \Delta t\mathbf{c}(t^n)\]</div>
+<p><b>Backward Euler</b> (Implicit)</p>
+<div class="math notranslate nohighlight">
+\[ \mathbf{y}^{n+1} = \mathbf{y}^{n} + \Delta t \mathbf{A}(t^{n+1}) \mathbf{y}^{n+1} + \Delta t\mathbf{c}(t^{n+1}),\]</div>
+<p>which rearranges to</p>
+<div class="math notranslate nohighlight">
+\[\left( \mathbf{I} - \Delta t \mathbf{A}(t^{n+1})\right)\mathbf{y}^{n+1} = \mathbf{y}^{n} + \Delta t\mathbf{c}(t^{n+1}).\]</div>
+<p>Therefore, for backward Euler we will have to solve a linear system of equations at each time step.</p>
+<p><b>Crank-Nicolson</b> (Implicit)</p>
+<div class="math notranslate nohighlight">
+\[\left( \mathbf{I} - \frac{\Delta t}{2} \mathbf{A}(t^{n+1})\right)\mathbf{y}^{n+1} = \left( \mathbf{I} + \frac{\Delta t}{2} \mathbf{A}(t^{n})\right)\mathbf{y}^{n} + \frac{\Delta t}{2}\left(\mathbf{c}(t^{n+1}) + \mathbf{c}(t^{n})\right).\]</div>
+<p>This will also involve a linear solve at each step.</p>
+<p><b>Fourth-order Runge-Kutta</b> (Implicit)</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{y}^{n+1} = \mathbf{y}^n + \frac{1}{6}\left(\Delta \mathbf{y}_1 + 2 \Delta \mathbf{y}_2 + 2 \Delta \mathbf{y}_3 + \Delta \mathbf{y}_4\right),\]</div>
+<div class="math notranslate nohighlight">
+\[\Delta y_1 = \Delta t \mathbf{A}(t^n)y^n + \mathbf{c}(t^n),\]</div>
+<div class="math notranslate nohighlight">
+\[\Delta y_2 = \Delta t \mathbf{A}\left(t^n+ \frac{\Delta t}{2}\right)\left(y^n + \frac{\Delta y_1}{2}\right) + \Delta t\mathbf{c}(t^n + \frac{\Delta t}{2}),\]</div>
+<div class="math notranslate nohighlight">
+\[\Delta y_3 =  \Delta t \mathbf{A}\left(t^n+ \frac{\Delta t}{2}\right)\left(y^n + \frac{\Delta y_2}{2}\right) + \Delta t\mathbf{c}(t^n + \frac{\Delta t}{2}),\]</div>
+<div class="math notranslate nohighlight">
+\[\Delta y_4 =  \Delta t \mathbf{A}\left(t^n+ {\Delta t}\right)\left(y^n + {\Delta y_3}\right) + \Delta t\mathbf{c}(t^n + \Delta t).\]</div>
 </ul><p>As noted above, the implicit methods require the solution of the linear system at each timestep, while the explicit methods do not.</p>
 <p>We can define these ODE solvers for systems now.</p>
 <div class="admonition seealso">
@@ -952,8 +981,10 @@ $<span class="math notranslate nohighlight">\(\mathbf{y}^{n+1} = \mathbf{y}^n + 
 \[y''(t) = -y(t),\qquad y(0) = 1,\quad y'(0) = 0.\]</div>
 <p>Wait, that’s not a system, and we haven’t covered how to do ODEs of with derivatives other than first derivatives. We can write this as a system using the definition</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}u(t) = y'(t),$$ to get
-$$\frac{d}{dt}\begin{pmatrix} u\\y\end{pmatrix} = \begin{pmatrix} 0 &amp; -1\\ 1 &amp; 0\end{pmatrix}\begin{pmatrix} u\\y\end{pmatrix} .\end{split}\]</div>
+\[u(t) = y'(t),\]</div>
+<p>to get</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\frac{d}{dt}\begin{pmatrix} u\\y\end{pmatrix} = \begin{pmatrix} 0 &amp; -1\\ 1 &amp; 0\end{pmatrix}\begin{pmatrix} u\\y\end{pmatrix} .\end{split}\]</div>
 <div class="section" id="forward-explicit-euler">
 <h3>Forward (Explicit) Euler<a class="headerlink" href="#forward-explicit-euler" title="Permalink to this headline">¶</a></h3>
 <p>We’ll set this up in python and solve it with forward Euler.  The solution, by the way, is <span class="math notranslate nohighlight">\(y(t) = \cos(t).\)</span></p>

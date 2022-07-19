@@ -1,0 +1,2375 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Linear Algebra Review and SciPy Basics &#8212; Data and Computing for Chemical Engieers</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Algorithm Building Blocks" href="../03/algorithms.html" />
+    <link rel="prev" title="Example: Mass Balances and Linear Algebra" href="04-Example-Atomic-Mass-Balances.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/cbe_logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Data and Computing for Chemical Engieers</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../intro.html">
+   Data and Computing for Engineers
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../01/00-Python-Primer.html">
+   Python Primer
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/01-Jupyter-Notebooks.html">
+     Welcome to Jupyter Notebooks and Vocareum
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/02-Python-Basics-I-Variables-Strings-Bugs.html">
+     Python Basics I: Variables, Strings, and Bugs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/03-Flow-control.html">
+     Python Basics II: Loopy Logic
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/05-Python-Basics-III-Lists-Dictionaries-Enumeration.html">
+     Python Basics III: Lists, Dictionaries, and Enumeration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/04-Functions-and-Scope.html">
+     Functions and Scope
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/04b-Recursion.html">
+     Recursion
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/03b-Pseudocode.html">
+     Pseudocode
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/04d-Example-High-Low-Game.html">
+     High/Low Guess My Number Game
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/04c-Modules-and-Files.html">
+     Modules and Files
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/06-NumPy.html">
+     Linear Algebra with Numpy and Scipy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/07-Matplotlib.html">
+     Visualization with matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/08-Pandas.html">
+     Manipulating Data with Pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/09-Functions-as-Arguments.html">
+     Functions as Arguments
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01-publish/10-Testing-and-Debugging.html">
+     Testing and Debugging in Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../02/linear_algebra.html">
+   Linear Algebra
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="01-Modeling-Systems-of-Linear-Equations.html">
+     Modeling Systems of Linear Equations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02-Gauss-Elimination.html">
+     Gaussian Elimination
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02b-Invertible-Matrix-Theorem-and-Gauss-Example.html">
+     Invertible Matrix Theorem and Gaussian Elimination Example
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03-LU-Factorization.html">
+     LU Decomposition and Condition Number
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03b-Condition-Number.html">
+     Errors in Linear Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04-Example-Atomic-Mass-Balances.html">
+     Example: Mass Balances and Linear Algebra
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Linear Algebra Review and SciPy Basics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../03/algorithms.html">
+   Algorithm Building Blocks
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03-publish/01-Taylor-Series.html">
+     Taylor Series Approximations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03-publish/02-Finite-Difference.html">
+     Finite Difference Derivative Approximations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03-publish/03-Example-Heating-a-Metal-Slab.html">
+     Example: Heating a Metal Slab
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../04/nonlinear_systems.html">
+   Nonlinear Systems of Equations
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/01-Modeling-Systems-of-Nonlinear-Equations.html">
+     Modeling Systems of Nonlinear Equations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/02-Newton-Raphson-Method-in-One-Dimension.html">
+     Newton-Raphson Method in One Dimension
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/03-More-Newton-Type-Methods.html">
+     More Newton-Type Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/04-Convergence-Analysis-for-Newton-Raphson-Methods.html">
+     Convergence Analysis for Newton-Raphson Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/05-Newton-Raphson-Methods-for-Systems-of-Equations.html">
+     Newton-Raphson Methods for Systems of Equations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/06-Newton-Methods-in-Scipy.html">
+     Newton Methods in Scipy
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../05/optimization.html">
+   Continuous Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05-publish/01-Pyomo-Basics.html">
+     Pyomo Basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05-publish/02-Electricity-Market-Optimization.html">
+     Electricity Market Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05-publish/03-Flash-Calculations-in-Pyomo.html">
+     Flash Calculations in Pyomo
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../06/integration.html">
+   Numeric Integration
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/01-Intro-and-Newton-Cotes.html">
+     Introduction and Newton-Cotes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/02-Gauss-Quadrature.html">
+     Gauss Quadrature
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/03-Adaptive-Methods-and-Scipy.html">
+     Adaptive Methods for Newton-Cotes and Gauss Quadrature, Scipy Library
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/04-Application-Inertial-Navigation-Systems.html">
+     Application: Inertial Navigation Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/05-Forward-and-Backward-Euler.html">
+     Forward and Backward Euler Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/06-Trapezoid-Rule.html">
+     Crank-Nicolson (Trapezoid Rule)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/07-Stability-Analysis.html">
+     Stability Analysis of Forward/Backward Euler and Crank-Nicolson Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/08-Explicit-Runge-Kutta.html">
+     Explicit Range Kutta Method
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/09-Systems-of-Differential-Equations-and-Scipy.html">
+     Systems of Differential Equations and Scipy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06-publish/10-Example-Reaction-Rates.html">
+     Example: Reaction Rates
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../07/stats.html">
+   Descriptive Statistics and Visualization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07-publish/01-Sampling.html">
+     Sampling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07-publish/02-Summary-Statistics.html">
+     Summary Statistics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07-publish/03-Visualizing-Data.html">
+     Visualizing Data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../08/probability.html">
+   Probability Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../08-publish/01-Random-Variables.html">
+     Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../08-publish/02-Jointly-Distributed-Random-Variables.html">
+     Jointly Distributed Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../08-publish/03-Practice-Problems.html">
+     Practice Problems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../09/distributions.html">
+   Common Probability Distributions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../09-publish/01-Bernoulli-Probability-Distribution.html">
+     Bernoulli Probability Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../09-publish/02-Binomial-Probability-Distribtuion.html">
+     Binomial Probability Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../09-publish/03-Poisson-Probability-Distribution.html">
+     Poisson Probability Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../09-publish/04-Normal-Probability-Distribution.html">
+     Normal Probability Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../09-publish/05-Common-Probability-Distributions-Summary.html">
+     Common Probability Distributions Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../10/uncertainty.html">
+   Uncertainty and Error Propagation
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10-publish/01-Measurement-Error.html">
+     Measurement Error
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10-publish/02-Error-Propagation.html">
+     Error Propagation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10-publish/03-Measuring-Flowrate-Example.html">
+     Measuring Flowrate Example
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10-publish/04-Practice-Problems.html">
+     Practice Problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10-publish/05-Simulation.html">
+     Simulation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../11/inference.html">
+   Statistical Inference
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/01-Central-Limit-Theorem.html">
+     Central Limit Theorem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/02-Standard-Normal-Distribution.html">
+     Standard Normal Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/03-Confidence-Intervals.html">
+     Confidence Intervals
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/04-Students-t-Distribution.html">
+     Student’s t-Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/05-First-Hypothesis-Testing.html">
+     First Hypothesis Testing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/06-Hypothesis-Testing-Review-and-Type-I-Type-II-Errors.html">
+     Hypothesis Testing Review and Type I/Type II Errors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/07-Flavors-of-Hypothesis-Testing.html">
+     Flavors of Hypothesis Testing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/08-Statistical-Power-Basics.html">
+     Statistical Power Basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/09-Statistical-Power-in-Python.html">
+     Statistical Power in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11-publish/10-Statistical-Power-Practice-Problems.html">
+     Statistical Power Practice Problems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../12/regression.html">
+   Multivariate Linear Regression
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12-publish/01-Ordinary-Least-Squares-Linear-Regression.html">
+     Ordinary Least Squares Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12-publish/02-Uncertainty-Analysis-and-Statistical-Inference.html">
+     Uncertainty Analysis and Statistical Inference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12-publish/03-Linear-Regression-Practice-Problems.html">
+     Linear Regression Practice Problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12-publish/04-Multivariate-Linear-Regression.html">
+     Multivariate Linear Regression
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../13/advanced_regression.html">
+   Nonlinear Regression
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/01-Transformations-and-Linear-Regression.html">
+     Transformations and Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/02-Nonlinear-Regression.html">
+     Nonlinear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/03-Nonlinear-Regression-Practice-Problem.html">
+     Nonlinear Regression Practice Problem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/04-Weighted-Regression.html">
+     Weighted Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/05-Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression.html">
+     Monte Carlo Uncertainty Analysis for Nonlinear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/06-Bootstrap-Confidence-Intervals.html">
+     Bootstrap Confidence Intervals
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13-publish/07-Nonlinear-Case-Study-Adsorptive-Membranes.html">
+     Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../14/design_of_experiments.html">
+   Design of Experiments
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/02-publish/05-Linear-Algebra-in-Numpy.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/ndcbe/data-and-computing"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/02-publish/05-Linear-Algebra-in-Numpy.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/02-publish/05-Linear-Algebra-in-Numpy.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/02-publish/05-Linear-Algebra-in-Numpy.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-objectives">
+   Learning Objectives
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#notation-for-cbe-40499-60499-and-bielger-2010">
+   Notation for CBE 40499/60499 and Bielger (2010)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#matrix-operations">
+   Matrix Operations
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#property-1">
+     Property #1:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#property-2">
+     Property #2:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#property-3">
+     Property #3:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#property-4">
+     Property #4:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#property-5">
+     Property #5:
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#determinant">
+   Determinant
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Property #1:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Property #2:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     Property #3:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     Property #4:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#calculating-3-times-3-determinant-by-hand">
+     Calculating
+     <span class="math notranslate nohighlight">
+      \(3 \times 3\)
+     </span>
+     Determinant by Hand
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rank">
+   Rank
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#matrix-rank-definition">
+     Matrix Rank Definition
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#practice-activities">
+     Practice Activities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inverse">
+   Inverse
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#inverse-of-a-matrix-defnition">
+     Inverse of a Matrix Defnition
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     Practice Activities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solving-linear-systems">
+   Solving Linear Systems
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#explicit-inverse">
+     Explicit Inverse
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lu-decomposition">
+     LU Decomposition
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#is-p-orthogonal">
+       Is P orthogonal?
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#matlab">
+       MATLAB
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#scipy">
+       SciPy
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#verify-our-answer-with-linalg-solve">
+       Verify our answer with
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         linalg.solve
+        </span>
+       </code>
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#invertable-matrix-theorem">
+   Invertable Matrix Theorem
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#eigenvectors-and-eigenvalues">
+   Eigenvectors and Eigenvalues
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#eigenvalues-eigenvectors-definition">
+     Eigenvalues/Eigenvectors Definition
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     Practice Activities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#singular-value-decomposition">
+   Singular Value Decomposition
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#vector-and-matrix-norms">
+   Vector and Matrix Norms
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#vector-and-matrix-norms-definition">
+     Vector and Matrix Norms Definition
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#vector-norm-properties">
+       Vector Norm Properties
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#p-norm-properties">
+       <em>
+        P
+       </em>
+       -norm Properties
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#additional-matrix-norms">
+       Additional Matrix Norms
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#frobenius-norm">
+       Frobenius Norm
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#condition-number">
+       Condition Number
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Linear Algebra Review and SciPy Basics</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-objectives">
+   Learning Objectives
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#notation-for-cbe-40499-60499-and-bielger-2010">
+   Notation for CBE 40499/60499 and Bielger (2010)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#matrix-operations">
+   Matrix Operations
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#property-1">
+     Property #1:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#property-2">
+     Property #2:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#property-3">
+     Property #3:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#property-4">
+     Property #4:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#property-5">
+     Property #5:
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#determinant">
+   Determinant
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Property #1:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Property #2:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     Property #3:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     Property #4:
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#calculating-3-times-3-determinant-by-hand">
+     Calculating
+     <span class="math notranslate nohighlight">
+      \(3 \times 3\)
+     </span>
+     Determinant by Hand
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rank">
+   Rank
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#matrix-rank-definition">
+     Matrix Rank Definition
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#practice-activities">
+     Practice Activities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inverse">
+   Inverse
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#inverse-of-a-matrix-defnition">
+     Inverse of a Matrix Defnition
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     Practice Activities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solving-linear-systems">
+   Solving Linear Systems
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#explicit-inverse">
+     Explicit Inverse
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lu-decomposition">
+     LU Decomposition
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#is-p-orthogonal">
+       Is P orthogonal?
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#matlab">
+       MATLAB
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#scipy">
+       SciPy
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#verify-our-answer-with-linalg-solve">
+       Verify our answer with
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         linalg.solve
+        </span>
+       </code>
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#invertable-matrix-theorem">
+   Invertable Matrix Theorem
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#eigenvectors-and-eigenvalues">
+   Eigenvectors and Eigenvalues
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#eigenvalues-eigenvectors-definition">
+     Eigenvalues/Eigenvectors Definition
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     Practice Activities
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#singular-value-decomposition">
+   Singular Value Decomposition
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#vector-and-matrix-norms">
+   Vector and Matrix Norms
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#vector-and-matrix-norms-definition">
+     Vector and Matrix Norms Definition
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#vector-norm-properties">
+       Vector Norm Properties
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#p-norm-properties">
+       <em>
+        P
+       </em>
+       -norm Properties
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#additional-matrix-norms">
+       Additional Matrix Norms
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#frobenius-norm">
+       Frobenius Norm
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#condition-number">
+       Condition Number
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="linear-algebra-review-and-scipy-basics">
+<h1>Linear Algebra Review and SciPy Basics<a class="headerlink" href="#linear-algebra-review-and-scipy-basics" title="Permalink to this headline">¶</a></h1>
+<p><span class="xref myst">Reference: Section 2.2 Vectors and Matrices in Nonlinear Programming: Concepts, Algorithms, and Applications to Chemical Processes by L. T. Bielger (2010).</span></p>
+<p><strong>Recommended Links</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.scipy.org/doc/numpy-1.15.0/reference/">NumPy Documentation - Main Page</a></p></li>
+<li><p><a class="reference external" href="https://docs.scipy.org/doc/scipy-1.1.0/reference/">SciPy Documentation - Main Page</a></p></li>
+<li><p><a class="reference external" href="https://docs.scipy.org/doc/scipy-1.1.0/reference/tutorial/linalg.html">SciPy Linear Algebra - Tutorial</a></p></li>
+<li><p><a class="reference external" href="https://docs.scipy.org/doc/scipy-1.1.0/reference/linalg.html">SciPy Linear Algebra - API</a></p></li>
+<li><p><a class="reference external" href="http://www.scipy-lectures.org/">SciPy Lecture Notes</a> (Especially 1.1 - 1.6 for everyone and 2.1 - 2.2 for advanced users)</p></li>
+</ul>
+<p>Tip: We will mostly use SciPy for linear algebra. (It has more sophisticated capabilities than NumPy.) We will use NumPy if/when SciPy does not offer a specific command.</p>
+<div class="section" id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">¶</a></h2>
+<p>After studying this notebook, completing the activities, and asking questions in class, you should be able to:</p>
+<ul class="simple">
+<li><p>Understand matrix operations on paper and in python.</p></li>
+<li><p>Explain what a determinant is and how to calculate it; know its properties.</p></li>
+<li><p>Calculate the rank of a matrix by hand and in python.</p></li>
+<li><p>Know the conditions for a matrix to have an inverse, and how to calculate its inverse.</p></li>
+<li><p>Understand how to solve linear systems in various ways, including LU decompostion.</p></li>
+<li><p>Be familiar with the invertible matrix theorem.</p></li>
+<li><p>Calculate and interpret eigenvalues.</p></li>
+<li><p>Perform singular value decomposition and interpret the results.</p></li>
+<li><p>Calculate vector and matrix norms.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load required Python libraries.</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">linalg</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="notation-for-cbe-40499-60499-and-bielger-2010">
+<h2>Notation for CBE 40499/60499 and Bielger (2010)<a class="headerlink" href="#notation-for-cbe-40499-60499-and-bielger-2010" title="Permalink to this headline">¶</a></h2>
+<p>The following is somewhat standard notation in scientific computing and data science literature:</p>
+<ul class="simple">
+<li><p>Scalars (constants and variables): Lowercase Greek letters (more common), lowercase non-bold Roman letters (especially if dictated by science or engineering context/domain norms)</p></li>
+</ul>
+<p>CBE 40499/60499: We will sometimes use</p>
+<ul class="simple">
+<li><p>Vectors - Lower case bold Roman letter, lowercase bold Greek letters (if dictated by science or engineering domain norms)</p></li>
+<li><p>Matrices - Upper case bold Roman letters, uppercase bold Greek letters (if dictated by science and engineering domain norms)</p></li>
+</ul>
+<p>The notation for lectures will (hopefully) be obvious from context. I sometimes use Greek letters for constants and Roman letters for variables… unless the Greek letters have engineering or scientific meaning.</p>
+</div>
+<div class="section" id="matrix-operations">
+<h2>Matrix Operations<a class="headerlink" href="#matrix-operations" title="Permalink to this headline">¶</a></h2>
+<p><em>Section <strong>2.2 Vectors and Matrices</strong> in Biegler (2010)</em></p>
+<p>In this section we will introduce properties of matrices with code examples following each property.</p>
+<div class="section" id="property-1">
+<h3>Property #1:<a class="headerlink" href="#property-1" title="Permalink to this headline">¶</a></h3>
+<p>Multiplying two matrices <span class="math notranslate nohighlight">\(A\)</span> <span class="math notranslate nohighlight">\(\in\)</span> <span class="math notranslate nohighlight">\(\mathbb{R}^{n \times m}\)</span> and <span class="math notranslate nohighlight">\(B\)</span> <span class="math notranslate nohighlight">\(\in\)</span> <span class="math notranslate nohighlight">\(\mathbb{R}^{m \times p}\)</span> leads to the product <span class="math notranslate nohighlight">\(C \in\)</span> <span class="math notranslate nohighlight">\(\mathbb{R}^{n \times p}\)</span> with elements <span class="math notranslate nohighlight">\( \mathbf{\{C\}_{ij}}\)</span> = <span class="math notranslate nohighlight">\(\sum_{k=1}^m  \mathbf{\{A\}_{ik}}  \mathbf{\{B\}_{kj}}\)</span>. This operation is defined only if the number of columns in <span class="math notranslate nohighlight">\(A\)</span> and rows of <span class="math notranslate nohighlight">\(B\)</span> is the same.</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>The code below demonstrates matrix multiplication.  Before running the code below, what is the dimension of A*B?</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate random matrices</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">Ao</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">)</span>
+<span class="n">Bo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ao = &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Ao</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Bo = &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Bo</span><span class="p">)</span>
+
+<span class="c1"># Calculate Ao*Bo using Python</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Ao*Bo =&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Ao</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Bo</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Another way of multiplying matrices is by using the “&#64;” symbol.  See an example below with Ao and Bo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate Ao*Bo using @</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ao*Bo =&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Ao</span><span class="nd">@Bo</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ao*Bo =
+[[0.526524   0.84002501]
+ [0.87286582 1.33610749]]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="property-2">
+<h3>Property #2:<a class="headerlink" href="#property-2" title="Permalink to this headline">¶</a></h3>
+<p>The <em>transpose</em> of <span class="math notranslate nohighlight">\(A\)</span> <span class="math notranslate nohighlight">\(\in\)</span> <span class="math notranslate nohighlight">\(\mathbb{R}^{n \times m}\)</span> is <span class="math notranslate nohighlight">\(A^T\)</span> <span class="math notranslate nohighlight">\(\in\)</span> <span class="math notranslate nohighlight">\(\mathbb{R}^{m \times n}\)</span> with the rows and columns of A interchanged, i.e.<span class="math notranslate nohighlight">\( \mathbf{\{A^T\}_{ij}} =  \mathbf{\{A\}_{ji}}\)</span>.</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Calculate <span class="math notranslate nohighlight">\(A_o^{T}\)</span></p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Transpose</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="property-3">
+<h3>Property #3:<a class="headerlink" href="#property-3" title="Permalink to this headline">¶</a></h3>
+<p>A <em>symmetric</em> matrix <span class="math notranslate nohighlight">\(A\)</span> <span class="math notranslate nohighlight">\(\in\)</span> <span class="math notranslate nohighlight">\(\mathbb{R}^{n \times n}\)</span> satisfies <span class="math notranslate nohighlight">\(A = A^T\)</span>.</p>
+</div>
+<div class="section" id="property-4">
+<h3>Property #4:<a class="headerlink" href="#property-4" title="Permalink to this headline">¶</a></h3>
+<p>A <em>diagonal</em> matrix <span class="math notranslate nohighlight">\(A\)</span> <span class="math notranslate nohighlight">\(\in\)</span> <span class="math notranslate nohighlight">\(\mathbb{R}^{n \times n}\)</span> has nonzero elements only on the diagonal, i.e., <span class="math notranslate nohighlight">\( \mathbf{\{A\}_{ij}} = 0, i \neq j\)</span>.</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Create a random <span class="math notranslate nohighlight">\(3 \times 3\)</span> square matrix and check if it is symmetric by comparing it to its transpose.</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create square matrix and compare with transpose</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="property-5">
+<h3>Property #5:<a class="headerlink" href="#property-5" title="Permalink to this headline">¶</a></h3>
+<p>The <em>identity</em> matrix <span class="math notranslate nohighlight">\(I \in \mathbb{R}^{n \times n}\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}  \mathbf{\{I\}_{ij}}=   \left\{
+\begin{array}{ll}
+      1 \text{ if } i = j, \\
+      0 \text{ otherwise.} \\
+\end{array} 
+\right.  \end{split}\]</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Create a 3x3 identity matrix.</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Identity matrix</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="determinant">
+<h2>Determinant<a class="headerlink" href="#determinant" title="Permalink to this headline">¶</a></h2>
+<p><em>Section <strong>2.2 Vectors and Matrices</strong> in Biegler (2010)</em></p>
+<p>A <em>determinant</em> is a scalar associated to a square matrix, i.e., det(<span class="math notranslate nohighlight">\(A\)</span>) for <span class="math notranslate nohighlight">\(A\)</span> <span class="math notranslate nohighlight">\(\in\)</span> <span class="math notranslate nohighlight">\(\mathbb{R}^{n \times n}\)</span>, and can be defined recursively by det(<span class="math notranslate nohighlight">\(A\)</span>) = <span class="math notranslate nohighlight">\(\sum_i (-1)^{i+j} \mathbf{\{A\}_{ij}} \bar{A}_{ij}\)</span> for any column <span class="math notranslate nohighlight">\(j\)</span>, or det(<span class="math notranslate nohighlight">\(A\)</span>) = <span class="math notranslate nohighlight">\(\sum_j (-1)^{i+j} \mathbf{\{A\}_{ij}}\bar{A}_{ij}\)</span> for any row <span class="math notranslate nohighlight">\(i\)</span>, where <span class="math notranslate nohighlight">\(\bar{A}_{ij}\)</span> is the determinant of an (<span class="math notranslate nohighlight">\(n\)</span>-1)-order matrix with row <span class="math notranslate nohighlight">\(i\)</span> and column <span class="math notranslate nohighlight">\(j\)</span> removed.</p>
+<p>We will now manipulate the following matrices to demonstrate properties for the determinant.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate random matrices</span>
+<span class="n">nd</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">nd</span><span class="p">,</span><span class="n">nd</span><span class="p">)</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">nd</span><span class="p">,</span><span class="n">nd</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A = &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">B = &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A = 
+[[0.13785899 0.28113758]
+ [0.59708216 0.31166715]]
+
+B = 
+[[0.5493066  0.04429576]
+ [0.2740967  0.54012404]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following properties are taken from Section <strong>2.2 Vectors and Matrices</strong> in Biegler (2010).</p>
+<div class="section" id="id1">
+<h3>Property #1:<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>det(<span class="math notranslate nohighlight">\(AB\)</span>) = det(<span class="math notranslate nohighlight">\(A\)</span>)det(<span class="math notranslate nohighlight">\(B\)</span>)</p>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Calculate the determinante of <span class="math notranslate nohighlight">\(AB\)</span> and prove it is equal to the product of the determinants of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>.</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Property 1</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h3>Property #2:<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>det(<span class="math notranslate nohighlight">\(A\)</span>) = det(<span class="math notranslate nohighlight">\(A^T\)</span>)</p>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Calculate the determinant of <span class="math notranslate nohighlight">\(A\)</span> and of <span class="math notranslate nohighlight">\(A^T\)</span> and prove they are equal.</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Property 2</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>Property #3:<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>For an <span class="math notranslate nohighlight">\(n \times n\)</span> matrix with scalar <span class="math notranslate nohighlight">\(\alpha\)</span>, det(<span class="math notranslate nohighlight">\(\alpha A\)</span>) = <span class="math notranslate nohighlight">\(\alpha^n\)</span>det(<span class="math notranslate nohighlight">\(A\)</span>)</p>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Calculate the determinant of <span class="math notranslate nohighlight">\(\alpha A\)</span> and calculate <span class="math notranslate nohighlight">\(\alpha\)</span>det(<span class="math notranslate nohighlight">\(A\)</span>) and prove they are equal. Let <span class="math notranslate nohighlight">\(\alpha\)</span> = 4.</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Property 3</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id4">
+<h3>Property #4:<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>For an identity matrix <span class="math notranslate nohighlight">\(I\)</span>, det(<span class="math notranslate nohighlight">\(I\)</span>) = 1.</p>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Create a <span class="math notranslate nohighlight">\(3 \times 3\)</span> identity matrix and calculate the determinant.</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Property 4</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="calculating-3-times-3-determinant-by-hand">
+<h3>Calculating <span class="math notranslate nohighlight">\(3 \times 3\)</span> Determinant by Hand<a class="headerlink" href="#calculating-3-times-3-determinant-by-hand" title="Permalink to this headline">¶</a></h3>
+<p>Below is an example from <em>Linear Algebra and Its Applications</em> by David C. Lay, 3rd edition that shows how to calculate a determinant by hand.</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Walk through the following example that calculates a <span class="math notranslate nohighlight">\(3 \times 3\)</span> determinant by hand.</p>
+</div>
+<p>For <span class="math notranslate nohighlight">\( n \geq 2\)</span>, the <strong>determinant</strong> of an <span class="math notranslate nohighlight">\(n \times n\)</span> matrix <span class="math notranslate nohighlight">\(A\)</span> = [<span class="math notranslate nohighlight">\(a_{ij}\)</span>] is the sum of <span class="math notranslate nohighlight">\(n\)</span> terms of the form <span class="math notranslate nohighlight">\(\pm a_{1j}\)</span> det<span class="math notranslate nohighlight">\(A_{1j}\)</span>, with plus and minus signs alternating, where the entries <span class="math notranslate nohighlight">\(a_{11},a_{12},...,a_{1n}\)</span> are from the first row of <span class="math notranslate nohighlight">\(A\)</span>.  In symbols,</p>
+<p>det<span class="math notranslate nohighlight">\(A\)</span> = <span class="math notranslate nohighlight">\(a_{11}\)</span>det<span class="math notranslate nohighlight">\(A_{11}-a_{12}\)</span>det<span class="math notranslate nohighlight">\(A_{12}+...+(-1)^{1+n}a_{1n}\)</span>det<span class="math notranslate nohighlight">\(A_{1n}\)</span></p>
+<p>= <span class="math notranslate nohighlight">\(\sum_{j=1}^n (-1)^{1+j}a_{1j}\text{det}A_{1j}\)</span></p>
+<p><strong>Example:</strong> Compute the determinate of the matrix <span class="math notranslate nohighlight">\(A\)</span> =
+<span class="math notranslate nohighlight">\( \begin{bmatrix}
+1 &amp; 5 &amp; 0\\
+2 &amp; 4 &amp; -1\\
+0 &amp; -2 &amp; 0
+\end{bmatrix}\)</span></p>
+<p><strong>Solution:</strong> Compute det(<span class="math notranslate nohighlight">\(A\)</span>) = <span class="math notranslate nohighlight">\(a_{11}\)</span>det<span class="math notranslate nohighlight">\(A_{11}-a_{12}\)</span>det<span class="math notranslate nohighlight">\(A_{12}+a_{13}\)</span>det<span class="math notranslate nohighlight">\(A_{13}\)</span>:</p>
+<p>det<span class="math notranslate nohighlight">\(A\)</span> = <span class="math notranslate nohighlight">\(1\cdot\)</span>det<span class="math notranslate nohighlight">\(\begin{bmatrix} 4 &amp; -1\\ -2 &amp; 0 \end{bmatrix}\)</span> - <span class="math notranslate nohighlight">\(5\cdot\)</span>det<span class="math notranslate nohighlight">\(\begin{bmatrix} 2 &amp; -1\\ 0 &amp; 0 \end{bmatrix}\)</span> + <span class="math notranslate nohighlight">\(0\cdot\)</span>det<span class="math notranslate nohighlight">\(\begin{bmatrix} 2 &amp; 4\\ 0 &amp; -2 \end{bmatrix}\)</span></p>
+<p><span class="math notranslate nohighlight">\(= 1(0-2) - 5(0-0) + 0(-4-0)\)</span></p>
+<p><span class="math notranslate nohighlight">\(= -2\)</span></p>
+</div>
+</div>
+<div class="section" id="rank">
+<h2>Rank<a class="headerlink" href="#rank" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="matrix-rank-definition">
+<h3>Matrix Rank Definition<a class="headerlink" href="#matrix-rank-definition" title="Permalink to this headline">¶</a></h3>
+<p><em>Section <strong>2.2 Vectors and Matrices</strong> in Biegler (2010):</em></p>
+<ul class="simple">
+<li><p>The rank of a matrix <span class="math notranslate nohighlight">\(r(A)\)</span> is the order of the largest submatrix in <span class="math notranslate nohighlight">\(A\)</span> that has a nonzero determinant.</p></li>
+<li><p>A matrix <span class="math notranslate nohighlight">\(A\)</span> <span class="math notranslate nohighlight">\(\in\)</span> <span class="math notranslate nohighlight">\(\mathbb{R}^{n \times m}\)</span> has full row (column) rank if none of the row (column) vectors can be written as a linear combination of the other row (column) vectors.  The rank of such a matrix is <span class="math notranslate nohighlight">\(r(A)\)</span> = min(<span class="math notranslate nohighlight">\(n,m\)</span>).</p></li>
+<li><p>A matrix that does not have full rank is <em>rank deficient</em>.</p></li>
+</ul>
+</div>
+<div class="section" id="practice-activities">
+<h3>Practice Activities<a class="headerlink" href="#practice-activities" title="Permalink to this headline">¶</a></h3>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Predict the rank of <span class="math notranslate nohighlight">\(A_1^T\)</span>, <span class="math notranslate nohighlight">\(B_1^T\)</span>, <span class="math notranslate nohighlight">\(C_1\)</span>, and <span class="math notranslate nohighlight">\(D_1\)</span>.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate random matrices</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">A_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">)</span>
+<span class="n">B_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+<span class="n">C_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="n">D_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">]])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A_1 = &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A_1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">B_1 = &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">B_1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">C_1 = &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">C_1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">D_1 = &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">D_1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A_1 = 
+[[0.70268875 0.55298945 0.56890907]
+ [0.46535378 0.01446308 0.23871531]]
+
+B_1 = 
+[[0.04058466 0.17097646]
+ [0.81132754 0.88760492]
+ [0.75098347 0.33147803]]
+
+C_1 = 
+[[0 2 0]
+ [1 2 3]
+ [0 4 0]]
+
+D_1 = 
+[[3 2 4]
+ [1 2 4]
+ [0 6 5]]
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>My answers:</strong></p>
+<p>Rank of A_1T:</p>
+<p>Rank of B_1T:</p>
+<p>Rank of C_1:</p>
+<p>Rank of D_1:</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Check the rank of these four matrices by calculating each with np.linalg.matrix_rank( ).  Were you correct?</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate ranks</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="inverse">
+<h2>Inverse<a class="headerlink" href="#inverse" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="inverse-of-a-matrix-defnition">
+<h3>Inverse of a Matrix Defnition<a class="headerlink" href="#inverse-of-a-matrix-defnition" title="Permalink to this headline">¶</a></h3>
+<p><em>Section <strong>2.2 Vectors and Matrices</strong> in Biegler (2010)</em></p>
+<ul class="simple">
+<li><p>If the matrix <span class="math notranslate nohighlight">\(A\)</span> <span class="math notranslate nohighlight">\(\in\)</span> <span class="math notranslate nohighlight">\(\mathbb{R}^{n \times n}\)</span> is nonsingular, i.e., has full rank, then an <em>inverse</em> <span class="math notranslate nohighlight">\(A^{-1}\)</span> exists that satisfies <span class="math notranslate nohighlight">\(AA^{-1} = A^{-1}A = I\)</span>.</p></li>
+<li><p>The linear system <span class="math notranslate nohighlight">\(Ax = b\)</span> with nonsingular <span class="math notranslate nohighlight">\(A\)</span> <span class="math notranslate nohighlight">\(\in\)</span> <span class="math notranslate nohighlight">\(\mathbb{R}^{n \times m}\)</span>, <span class="math notranslate nohighlight">\(x \in \mathbb{R}^n\)</span>, and <span class="math notranslate nohighlight">\(b \in \mathbb{R}^n\)</span>, has a unique solution <span class="math notranslate nohighlight">\(x = A^{-1}b\)</span>.</p></li>
+<li><p>det(<span class="math notranslate nohighlight">\(A^{-1}\)</span>) = <span class="math notranslate nohighlight">\(\frac{1}{\text{det}(A)}\)</span>.</p></li>
+<li><p>A matrix <span class="math notranslate nohighlight">\(Q \in \mathbb{R}^{n \times n}\)</span> with the property <span class="math notranslate nohighlight">\(Q^{-1} = Q^T\)</span> is called an <em>orthogonal matrix</em>.</p></li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h3>Practice Activities<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Calculate the inverse of <span class="math notranslate nohighlight">\(A_o\)</span> and verity that <span class="math notranslate nohighlight">\(A_o^{-1} A_o = I\)</span>.</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate A_0</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">A_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A_0 = &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A_0</span><span class="p">)</span>
+
+<span class="c1"># Calculate inverse</span>
+<span class="c1"># Add your solution here</span>
+
+<span class="c1"># Verification</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>What do you notice about the matrix produced from <span class="math notranslate nohighlight">\(A_o^{-1} A_o\)</span>?  Why do you think this happens?</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Verify that det(<span class="math notranslate nohighlight">\(A_0^{-1}\)</span>) = <span class="math notranslate nohighlight">\(\frac{1}{\text{det}(A_0)}\)</span>.</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Verification</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Is <span class="math notranslate nohighlight">\(Q\)</span> an orthogonal matrix? Yes, no, or need more information?</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create Q</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)),(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">))])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Q = &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span>
+
+<span class="c1"># Verification</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="solving-linear-systems">
+<h2>Solving Linear Systems<a class="headerlink" href="#solving-linear-systems" title="Permalink to this headline">¶</a></h2>
+<p>Consider the linear system <span class="math notranslate nohighlight">\(A_1 x = b_1\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="p">)])</span>
+<span class="n">b1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A1 = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">A1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">b1 = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">b1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A1 = 
+ [[4 3]
+ [6 3]]
+
+b1 = 
+ [1 0]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="explicit-inverse">
+<h3>Explicit Inverse<a class="headerlink" href="#explicit-inverse" title="Permalink to this headline">¶</a></h3>
+<p>Calculate <span class="math notranslate nohighlight">\(x\)</span> by explicitly using <span class="math notranslate nohighlight">\(A_l^{-1}\)</span>. Hint: Use linalg.inv( ).</p>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate inverse</span>
+<span class="c1"># Add your solution here</span>
+
+<span class="c1"># Now calculate and print x</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="lu-decomposition">
+<h3>LU Decomposition<a class="headerlink" href="#lu-decomposition" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create test linear systems for the following examples</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;b = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A = 
+ [[0.19532048 0.80213917 0.0896026  0.7891849 ]
+ [0.51242877 0.60202691 0.04460208 0.99673738]
+ [0.66205227 0.74912751 0.64881305 0.5885614 ]
+ [0.65721088 0.25512709 0.60784324 0.00341296]] 
+
+b = 
+ [[0.81894293]
+ [0.61659727]
+ [0.35223602]
+ [0.82622819]] 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Follow along with the LU decomposition on <span class="math notranslate nohighlight">\(A\)</span>. What structures do the <span class="math notranslate nohighlight">\(P\)</span>, <span class="math notranslate nohighlight">\(L\)</span>, and <span class="math notranslate nohighlight">\(U\)</span> matrices have?</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Perform LU decomposition</span>
+<span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">U</span><span class="p">)</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">lu</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="c1"># Permutation matrix</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;P = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">P</span><span class="p">)</span>
+
+<span class="c1"># Lower diagonal matrix</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;L = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">L</span><span class="p">)</span>
+
+<span class="c1"># Upper diagonal matrix</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;U = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">U</span><span class="p">)</span>
+
+<span class="c1"># Verify result</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;P*L*U = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">P</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">L</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">U</span><span class="p">)),</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P = 
+ [[0. 1. 0. 0.]
+ [0. 0. 1. 0.]
+ [1. 0. 0. 0.]
+ [0. 0. 0. 1.]]
+L = 
+ [[ 1.          0.          0.          0.        ]
+ [ 0.29502275  1.          0.          0.        ]
+ [ 0.77400047  0.03820467  1.          0.        ]
+ [ 0.99268729 -0.84064268  0.26849349  1.        ]]
+U = 
+ [[ 0.66205227  0.74912751  0.64881305  0.5885614 ]
+ [ 0.          0.58112951 -0.10181202  0.6155459 ]
+ [ 0.          0.         -0.45368983  0.51767385]
+ [ 0.          0.          0.         -0.20238236]]
+P*L*U = 
+ [[0.19532048 0.80213917 0.0896026  0.7891849 ]
+ [0.51242877 0.60202691 0.04460208 0.99673738]
+ [0.66205227 0.74912751 0.64881305 0.5885614 ]
+ [0.65721088 0.25512709 0.60784324 0.00341296]] 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="is-p-orthogonal">
+<h4>Is P orthogonal?<a class="headerlink" href="#is-p-orthogonal" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;inv(P) = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">P</span><span class="p">),</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;transpose(P) = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">P</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;P.T*P = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">P</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">P</span><span class="p">),</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>inv(P) = 
+ [[-0.  0.  1. -0.]
+ [ 1.  0.  0. -0.]
+ [ 0.  1.  0. -0.]
+ [ 0.  0.  0.  1.]] 
+
+transpose(P) = 
+ [[0. 0. 1. 0.]
+ [1. 0. 0. 0.]
+ [0. 1. 0. 0.]
+ [0. 0. 0. 1.]] 
+
+P.T*P = 
+ [[1. 0. 0. 0.]
+ [0. 1. 0. 0.]
+ [0. 0. 1. 0.]
+ [0. 0. 0. 1.]] 
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Yes!</strong> We see that <span class="math notranslate nohighlight">\(P^T = P^{-1}\)</span> and <span class="math notranslate nohighlight">\(P^T \cdot P = I\)</span>.</p>
+</div>
+<div class="section" id="matlab">
+<h4>MATLAB<a class="headerlink" href="#matlab" title="Permalink to this headline">¶</a></h4>
+<p>Defines LU decomposition as follows:</p>
+<div class="math notranslate nohighlight">
+\[ P \cdot A = L \cdot U\]</div>
+<p>Consider $<span class="math notranslate nohighlight">\(A \cdot x=b\)</span>$</p>
+<p>Using MATLAB LU definition</p>
+<div class="math notranslate nohighlight">
+\[P\cdot A = L\cdot U\]</div>
+<div class="math notranslate nohighlight">
+\[P^T \cdot P \cdot A = P^T \cdot L \cdot U\]</div>
+<div class="math notranslate nohighlight">
+\[A = P^T \cdot L \cdot U\]</div>
+<p>Substitute into linear system:</p>
+<div class="math notranslate nohighlight">
+\[P^T \cdot L \cdot U \cdot x = b\]</div>
+<div class="math notranslate nohighlight">
+\[ L \cdot U \cdot x = P \cdot b\]</div>
+<p>Let <span class="math notranslate nohighlight">\(y = U \cdot x\)</span> and substitute.</p>
+<p>Step 1. Solve <span class="math notranslate nohighlight">\(L \cdot y = P \cdot b\)</span> for <span class="math notranslate nohighlight">\(y\)</span></p>
+<p>Step 2. Solve <span class="math notranslate nohighlight">\(U \cdot x = y\)</span> for <span class="math notranslate nohighlight">\(x\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate Pb</span>
+<span class="n">Pb</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;P*b = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">Pb</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Step 1</span>
+<span class="n">yLU</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">Pb</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;yLU = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">yLU</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Step 2</span>
+<span class="n">xLU</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">yLU</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;xLU = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">xLU</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P*b = 
+ [[0.61659727]
+ [0.35223602]
+ [0.81894293]
+ [0.82622819]] 
+
+yLU = 
+ [[0.61659727]
+ [0.1703258 ]
+ [0.33518912]
+ [0.26732696]] 
+
+xLU = 
+ [[ 2.83715187]
+ [ 1.29873196]
+ [-2.24599425]
+ [-1.32090047]] 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="scipy">
+<h4>SciPy<a class="headerlink" href="#scipy" title="Permalink to this headline">¶</a></h4>
+<p>Defines LU decomposition as:</p>
+<div class="math notranslate nohighlight">
+\[ A = P \cdot L \cdot U \]</div>
+<p>Consider $<span class="math notranslate nohighlight">\(A \cdot x=b\)</span>$</p>
+<p>SciPy LU definition</p>
+<div class="math notranslate nohighlight">
+\[A = P \cdot L\cdot U\]</div>
+<p>Substitute into linear system:</p>
+<div class="math notranslate nohighlight">
+\[P \cdot L \cdot U \cdot x = b\]</div>
+<div class="math notranslate nohighlight">
+\[P^T \cdot P \cdot L \cdot U \cdot x = P^T \cdot b\]</div>
+<div class="math notranslate nohighlight">
+\[L \cdot U \cdot x = P^T \cdot b\]</div>
+<p>Let <span class="math notranslate nohighlight">\(y = U \cdot x\)</span> and substitute.</p>
+<p>Step 1. Solve <span class="math notranslate nohighlight">\(L \cdot y = P^T \cdot b\)</span> for <span class="math notranslate nohighlight">\(y\)</span></p>
+<p>Step 2. Solve <span class="math notranslate nohighlight">\(U \cdot x = y\)</span> for <span class="math notranslate nohighlight">\(x\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## LU decomposition algorithm.</span>
+<span class="n">Pb</span> <span class="o">=</span> <span class="p">(</span><span class="n">P</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;P.T*b = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">Pb</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Step 1</span>
+<span class="n">yLU</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">Pb</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;yLU = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">yLU</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Step 2</span>
+<span class="n">xLU</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">yLU</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;xLU = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">xLU</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P.T*b = 
+ [[0.35223602]
+ [0.81894293]
+ [0.61659727]
+ [0.82622819]] 
+
+yLU = 
+ [[0.35223602]
+ [0.71502529]
+ [0.31664912]
+ [0.99263052]] 
+
+xLU = 
+ [[ 5.03790151]
+ [ 5.32285245]
+ [-6.29438561]
+ [-4.90472838]] 
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>What is the difference?</strong> A transpose.</p>
+</div>
+<div class="section" id="verify-our-answer-with-linalg-solve">
+<h4>Verify our answer with <code class="docutils literal notranslate"><span class="pre">linalg.solve</span></code><a class="headerlink" href="#verify-our-answer-with-linalg-solve" title="Permalink to this headline">¶</a></h4>
+<p>Solve the linear system using linalg.solve</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x = 
+ [[ 5.03790151]
+ [ 5.32285245]
+ [-6.29438561]
+ [-4.90472838]]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="invertable-matrix-theorem">
+<h2>Invertable Matrix Theorem<a class="headerlink" href="#invertable-matrix-theorem" title="Permalink to this headline">¶</a></h2>
+<p><em>Linear Algebra and Its Applications</em> by David C. Lay, 3rd edition</p>
+<p><em>Hold on to your hats folks!</em></p>
+<p>a. <span class="math notranslate nohighlight">\(A\)</span> is an invertible matrix.</p>
+<p>b. <span class="math notranslate nohighlight">\(A\)</span> is row equivalent to the <span class="math notranslate nohighlight">\(n \times n\)</span> identity matrix.</p>
+<p>c. <span class="math notranslate nohighlight">\(A\)</span> has <span class="math notranslate nohighlight">\(n\)</span> pivot positions.</p>
+<p>d. The equation <span class="math notranslate nohighlight">\(Ax = 0\)</span> has only the trivial solution.</p>
+<p>e. The columns of <span class="math notranslate nohighlight">\(A\)</span> form a linearly independent set.</p>
+<p>f. The linear transformation <span class="math notranslate nohighlight">\(x\longmapsto Ax\)</span> is one-to-one.</p>
+<p>g. The equation <span class="math notranslate nohighlight">\(Ax = b\)</span> has at least one solution for each <span class="math notranslate nohighlight">\(b\)</span> in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>.</p>
+<p>h. The columns of <span class="math notranslate nohighlight">\(A\)</span> span <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>.</p>
+<p>i. The linear transformation <span class="math notranslate nohighlight">\(x\longmapsto Ax\)</span> maps <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> onto <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>.</p>
+<p>j. There is an <span class="math notranslate nohighlight">\(n \times n\)</span> matrix <span class="math notranslate nohighlight">\(C\)</span> such that <span class="math notranslate nohighlight">\(CA = I\)</span>.</p>
+<p>k. There is an <span class="math notranslate nohighlight">\(n \times n\)</span> matrix <span class="math notranslate nohighlight">\(D\)</span> such that <span class="math notranslate nohighlight">\(AD = I\)</span>.</p>
+<p>l. <span class="math notranslate nohighlight">\(A^T\)</span> is an invertible matrix.</p>
+<p><strong>Let <span class="math notranslate nohighlight">\(A\)</span> be an <span class="math notranslate nohighlight">\(n \times n\)</span> matrix. Then the following statements are each equivalent to the statement that <span class="math notranslate nohighlight">\(A\)</span> is an invertible matrix.</strong></p>
+<p>m. The columns of <span class="math notranslate nohighlight">\(A\)</span> form a basis of <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>.</p>
+<p>n. Col<span class="math notranslate nohighlight">\(A\)</span> = <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span></p>
+<p>o. dim Col<span class="math notranslate nohighlight">\(A\)</span> = <span class="math notranslate nohighlight">\(N\)</span></p>
+<p>p. rank <span class="math notranslate nohighlight">\(A\)</span> = <span class="math notranslate nohighlight">\(N\)</span></p>
+<p>q. Nul<span class="math notranslate nohighlight">\(A\)</span> = <span class="math notranslate nohighlight">\(\{0\}\)</span></p>
+<p>r. dim Nul<span class="math notranslate nohighlight">\(A\)</span> = <span class="math notranslate nohighlight">\(0\)</span></p>
+<p><strong>Let <span class="math notranslate nohighlight">\(A\)</span> be an <span class="math notranslate nohighlight">\(n \times n\)</span> matrix. Then <span class="math notranslate nohighlight">\(A\)</span> is invertible if and only if:</strong></p>
+<p>s. The number 0 is <em>not</em> an eigenvalue of <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p>t. The determinant of <span class="math notranslate nohighlight">\(A\)</span> is <em>not</em> zero.</p>
+<p><strong>Let <span class="math notranslate nohighlight">\(A\)</span> be an <span class="math notranslate nohighlight">\(n \times n\)</span> matrix. Then the following statements are each equivalent to the statement that <span class="math notranslate nohighlight">\(A\)</span> is an invertible matrix.</strong></p>
+<p>u. (Col<span class="math notranslate nohighlight">\(A\)</span>)<span class="math notranslate nohighlight">\(^\perp\)</span> = <span class="math notranslate nohighlight">\(\{0\}\)</span>.</p>
+<p>v. (Nul<span class="math notranslate nohighlight">\(A\)</span>)<span class="math notranslate nohighlight">\(^\perp\)</span> = <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>.</p>
+<p>w. Row<span class="math notranslate nohighlight">\(A\)</span> = <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>.</p>
+<p>x. <span class="math notranslate nohighlight">\(A\)</span> has <span class="math notranslate nohighlight">\(n\)</span> nonzero singular values.</p>
+</div>
+<div class="section" id="eigenvectors-and-eigenvalues">
+<h2>Eigenvectors and Eigenvalues<a class="headerlink" href="#eigenvectors-and-eigenvalues" title="Permalink to this headline">¶</a></h2>
+<p>Section <strong>2.2 Vectors and Matrices</strong> in Biegler (2010)</p>
+<div class="section" id="eigenvalues-eigenvectors-definition">
+<h3>Eigenvalues/Eigenvectors Definition<a class="headerlink" href="#eigenvalues-eigenvectors-definition" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>For a square matrix <span class="math notranslate nohighlight">\(A \in \mathbb{R}^{n\times n}\)</span>, the <em>eigenvalue</em> <span class="math notranslate nohighlight">\(\lambda\)</span> and the corresponding <em>eigenvector</em> <span class="math notranslate nohighlight">\(v \neq 0\)</span> satisfy <span class="math notranslate nohighlight">\(Av = \lambda v\)</span>.</p></li>
+<li><p>Because <span class="math notranslate nohighlight">\((A-\lambda I)v = 0\)</span>, <span class="math notranslate nohighlight">\((A-\lambda I)\)</span> is singular, and we can define a characteristic <span class="math notranslate nohighlight">\(n\)</span>th degree polynomial given by det<span class="math notranslate nohighlight">\((A-\lambda I)\)</span> = <span class="math notranslate nohighlight">\(0\)</span> to find the <span class="math notranslate nohighlight">\(n\)</span> eigenvalues.</p></li>
+<li><p>det<span class="math notranslate nohighlight">\((A)\)</span> = <span class="math notranslate nohighlight">\(\prod_{i=1}^n\lambda_i\)</span>.</p></li>
+<li><p>Eigenvalues of symmetric matrices are always real. Moreover, by collecting eigenvectors and eigenvalues, a symmetric matrix <span class="math notranslate nohighlight">\(A \in \mathbb{R}^{n \times n}\)</span> can be represented by <span class="math notranslate nohighlight">\(A = V\wedge V^T\)</span>, where <span class="math notranslate nohighlight">\(V\)</span> is the orthogonal matrix of eigenvectors, <span class="math notranslate nohighlight">\(V = [v_1,v_2,...,v_n]\)</span>, and <span class="math notranslate nohighlight">\(\wedge\)</span> is a diagonal matrix of eigenvalues with <span class="math notranslate nohighlight">\( \mathbf{\{\wedge\}_{ii}} = \lambda_i\)</span>.</p></li>
+<li><p>Nonsymmetric matrices can have complex eigenvalues. Also, eigenvalues are not defined for nonsquare matrices. Instead, <em>singular values</em> <span class="math notranslate nohighlight">\(\sigma_i \geq 0\)</span>, <span class="math notranslate nohighlight">\(i = 1,...,m,\)</span> are often useful to characterize <span class="math notranslate nohighlight">\(A \in \mathbb{R}^{n \times m}\)</span> with <span class="math notranslate nohighlight">\(m \leq n\)</span>. These are derived from the eigenvalues of <span class="math notranslate nohighlight">\((A^TA)\)</span> with <span class="math notranslate nohighlight">\(\sigma_i = [\lambda_i(A^TA)]^{\frac{1}{2}}\)</span>.</p></li>
+<li><p>Consider the matrix <span class="math notranslate nohighlight">\(A \in \mathbb{R}^{n \times m}\)</span> with all real eigenvalues. Such matrices can be further classified as follows:</p>
+<ul>
+<li><p>Matrices with <span class="math notranslate nohighlight">\(\lambda_i &gt; 0, i = 1,n,\)</span> are said to be <em>positive definite</em>; i.e., <span class="math notranslate nohighlight">\(y^TAy &gt; 0\)</span> for all <span class="math notranslate nohighlight">\(y \neq 0\)</span>.</p></li>
+<li><p>Matrices with <span class="math notranslate nohighlight">\(\lambda_i &lt; 0, i = 1,n,\)</span> are said to be <em>negative definite</em>; i.e., <span class="math notranslate nohighlight">\(y^TAy &lt; 0\)</span> for all <span class="math notranslate nohighlight">\(y \neq 0\)</span>.</p></li>
+<li><p>Matrices with <span class="math notranslate nohighlight">\(\lambda_i \geq 0, i = 1,n,\)</span> are said to be <em>positive semidefinite</em>; i.e., <span class="math notranslate nohighlight">\(y^TAy \geq 0\)</span> for all <span class="math notranslate nohighlight">\(y \neq 0\)</span>.</p></li>
+<li><p>Matrices with <span class="math notranslate nohighlight">\(\lambda_i \leq 0, i = 1,n,\)</span> are said to be <em>negative semidefinite</em>; i.e., <span class="math notranslate nohighlight">\(y^TAy \leq 0\)</span> for all <span class="math notranslate nohighlight">\(y \neq 0\)</span>.</p></li>
+<li><p>Matrices with both positive and negative eigenvalues are <em>indefinite</em>.</p></li>
+<li><p>A matrix with <span class="math notranslate nohighlight">\(\lambda_i = 0\)</span>, for some <span class="math notranslate nohighlight">\(i\)</span>, is <em>singular</em>.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id6">
+<h3>Practice Activities<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create matrix for activities</span>
+<span class="n">Ae</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ae = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">Ae</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ae = 
+ [[ 0 -4 -6]
+ [-1  0 -3]
+ [ 1  2  5]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Do you expect the above matrix to have negative eigenvalues?</p>
+</div>
+<p><strong>Choose:</strong> Yes/No/Cannot tell from inspection.</p>
+<p><strong>Justification:</strong></p>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Calculate the eigenvalues and corresponding eigenvectors.</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculations</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Based on your calculations above, is this matrix i) positive definite, ii) positive semi definite, iii) negative definite, iv) negative semi definite, v) indefinite, or vi) cannot say without additional calculations? Write a sentence to justify your answer.</p>
+</div>
+<p><strong>Answer:</strong></p>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Calculate the determinate using only the eigenvalues.</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Determinate calculation</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id='SVD_cell'></a></p>
+</div>
+</div>
+<div class="section" id="singular-value-decomposition">
+<h2>Singular Value Decomposition<a class="headerlink" href="#singular-value-decomposition" title="Permalink to this headline">¶</a></h2>
+<p>Refer to <a class="reference internal" href="03-LU-Factorization.html"><span class="doc std std-doc">this notebook</span></a> for notes on singular value decomposition.</p>
+<p>Remember, SVD can be thought of as another type of matrix factorization.  We can represent an <span class="math notranslate nohighlight">\(m \times n\)</span> matrix as <span class="math notranslate nohighlight">\(A = U\cdot \sum \cdot V^T\)</span>.</p>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Calculate the singular value decomposition of <span class="math notranslate nohighlight">\(A_d\)</span> and <span class="math notranslate nohighlight">\(B_d\)</span>.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate matrices</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">A_d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">)</span>
+<span class="n">B_d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A_d = &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A_d</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">B_d = &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">B_d</span><span class="p">)</span>
+
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A_d = 
+[[0.4485645  0.94396271 0.90630531]
+ [0.65550619 0.17113477 0.79723747]]
+
+B_d = 
+[[0.70939505 0.75872279]
+ [0.68693568 0.29736702]
+ [0.9430575  0.19822265]]
+
+SVD for A_d... 
+
+U = 
+ [[-0.81497106 -0.57950166]
+ [-0.57950166  0.81497106]] 
+
+S = 
+ [1.65873224 0.50678934] 
+
+V = 
+ [[-0.44939984 -0.52357768 -0.72381365]
+ [ 0.54120061 -0.80419622  0.24570374]
+ [-0.7107332  -0.28130917  0.64476622]] 
+
+
+SVD for B_d... 
+
+U = 
+ [[-0.64065863  0.73692217  0.21564379]
+ [-0.48291242 -0.1683662  -0.85933021]
+ [-0.59695236 -0.65467438  0.46373413]] 
+
+S = 
+ [1.54265526 0.43367475] 
+
+V = 
+ [[-0.87457662 -0.48488734]
+ [-0.48488734  0.87457662]] 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>What is the rank of each matrix? (from inspecting singular values?)</p>
+</div>
+<p><strong>Answer:</strong></p>
+</div>
+<div class="section" id="vector-and-matrix-norms">
+<h2>Vector and Matrix Norms<a class="headerlink" href="#vector-and-matrix-norms" title="Permalink to this headline">¶</a></h2>
+<p>Section <strong>2.2 Vectors and Matrices</strong> in Biegler (2010)</p>
+<div class="section" id="vector-and-matrix-norms-definition">
+<h3>Vector and Matrix Norms Definition<a class="headerlink" href="#vector-and-matrix-norms-definition" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="vector-norm-properties">
+<h4>Vector Norm Properties<a class="headerlink" href="#vector-norm-properties" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>A <em>vector norm</em> <span class="math notranslate nohighlight">\(\parallel \cdot \parallel\)</span> is a measure of the length of a vector and it maps from <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> to a nonegative real that has the following properties:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\parallel x\parallel = 0 \Rightarrow x=0\)</span> for <span class="math notranslate nohighlight">\(x \in \mathbb{R}^n\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\parallel \alpha x\parallel = |\alpha | \parallel x\parallel\)</span> for all <span class="math notranslate nohighlight">\(x \in \mathbb{R}^n\)</span>, <span class="math notranslate nohighlight">\(\alpha \in \mathbb{R}^n\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\parallel x+y\parallel \; \leq \; \parallel x\parallel + \parallel y\parallel\)</span> for all <span class="math notranslate nohighlight">\(x,y \in \mathbb{R}^n\)</span>.</p></li>
+</ol>
+</li>
+</ul>
+</div>
+<div class="section" id="p-norm-properties">
+<h4><em>P</em>-norm Properties<a class="headerlink" href="#p-norm-properties" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>The <em>p</em>-norm is defined by <span class="math notranslate nohighlight">\(\parallel x\parallel _p = (\sum_{i=1}^n |x_i|^p)^{\frac{1}{p}}\)</span>, where <span class="math notranslate nohighlight">\(p \geq 1\)</span>. Examples and properties include:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(p=1, \parallel x\parallel_1 = \sum_{i=1}^n |x_i|\)</span>, the 1-norm,</p></li>
+<li><p><span class="math notranslate nohighlight">\(p=2, \parallel x\parallel_2 = (\sum_{i=1}^n x_i^2)^{\frac{1}{2}}\)</span>, the Euclidean norm,</p></li>
+<li><p><span class="math notranslate nohighlight">\(p=\infty , \parallel x\parallel_{\infty}\)</span> = max<span class="math notranslate nohighlight">\(_i |x_i|\)</span>, the max-norm,</p></li>
+<li><p><span class="math notranslate nohighlight">\(|x^Ty| \leq \; \parallel x\parallel_p \parallel y\parallel_q\)</span> for 1/<span class="math notranslate nohighlight">\(p\)</span> + 1/<span class="math notranslate nohighlight">\(q\)</span> = 1 and all <span class="math notranslate nohighlight">\(x, y \in \mathbb{R}^n\)</span>.</p></li>
+</ol>
+</li>
+</ul>
+<p>Also, for <span class="math notranslate nohighlight">\(x \in \mathbb{R}^n\)</span> each norm can be bounded above and below by a multiple of any of the other norms.</p>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Verify the vector norm properties hold for the p-2 norm using <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>. Hint: linalg.norm( )</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create vectors for following activites</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;y = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x = 
+ [[0.22147533]
+ [0.95260672]
+ [0.21153669]]
+y = 
+ [[0.75695275]
+ [0.33364788]
+ [0.28968871]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Verification of p-norm property #2</span>
+<span class="c1"># Add your solution here</span>
+
+<span class="c1"># Verification of p-norm property #4</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="additional-matrix-norms">
+<h4>Additional Matrix Norms<a class="headerlink" href="#additional-matrix-norms" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>For <span class="math notranslate nohighlight">\(A \in \mathbb{R}^{n \times m}\)</span>, the induced matrix norms are defined by vector norms: <span class="math notranslate nohighlight">\(\parallel A\parallel\)</span> = max<span class="math notranslate nohighlight">\(_{X \neq 0} \frac{\parallel Ax \parallel}{\parallel x \parallel}\)</span> for any <em>p</em>-norm. It is therefore consistent with vector norms and satisfies <span class="math notranslate nohighlight">\(\parallel A\parallel \; \parallel x\parallel \; \geq \; \parallel Ax\parallel\)</span>. Examples include:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\parallel A\parallel_1\)</span> = max<span class="math notranslate nohighlight">\(_j(\sum_{i=1}^n |\{A\}_{ij}|)\)</span> (max column sum of <span class="math notranslate nohighlight">\(A\)</span>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\parallel A\parallel_{\infty}\)</span> = max<span class="math notranslate nohighlight">\(_i(\sum_{j=1}^m |\{A\}_{ij}|)\)</span> (max row sum of <span class="math notranslate nohighlight">\(A\)</span>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\parallel A\parallel_2\)</span> = largest singular value of <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+</ol>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Calculate <span class="math notranslate nohighlight">\(||A_l||_1\)</span>, <span class="math notranslate nohighlight">\(||A_l||_{\infty}\)</span> and <span class="math notranslate nohighlight">\(||A_l||_2\)</span> using both the rules given above and SciPy</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create A_1 matrix for following activities</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">A_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A_1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.5969     0.26938739 0.14392162]
+ [0.90718853 0.3676809  0.00275836]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate ||A_l||_1</span>
+<span class="c1"># Add your solution here</span>
+
+<span class="c1"># Calculate ||A_l||_2</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="frobenius-norm">
+<h4>Frobenius Norm<a class="headerlink" href="#frobenius-norm" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>The Frobenius norm <span class="math notranslate nohighlight">\(\parallel A\parallel_F = (\sum_i \sum_j ( \mathbf{\{A\}_{ij})^2)^{\frac{1}{2}}}\)</span> is not consistent with a vector norm but has some useful properties. This norm as well as the induced norms satisfy <span class="math notranslate nohighlight">\(\parallel AB\parallel \; \leq \parallel A\parallel \; \parallel B\parallel\)</span> for any two compatible matrices <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>. In addition, the induced and Frobenius matrix norms can be bounded above and below by a multiple of any of the other matrix norms.</p></li>
+</ul>
+</div>
+<div class="section" id="condition-number">
+<h4>Condition Number<a class="headerlink" href="#condition-number" title="Permalink to this headline">¶</a></h4>
+<p>For more information on condition number, reference <a class="reference internal" href="03-LU-Factorization.html"><span class="doc std std-doc">this notebook</span></a>.</p>
+<ul class="simple">
+<li><p>The <em>condition number</em> is defined by <span class="math notranslate nohighlight">\(\kappa (A) = \parallel A\parallel \; \parallel A^{-1} \parallel\)</span>. Using the induced 2-norm the condition number is given by <span class="math notranslate nohighlight">\(\frac{\sigma_{\text{max}}}{\sigma_{\text{min}}}\)</span>. If <span class="math notranslate nohighlight">\(A\)</span> is a symmetric matrix, then this is equivalent to using the eigenvalues of <span class="math notranslate nohighlight">\(A\)</span> with <span class="math notranslate nohighlight">\(\frac{\lambda_{\text{max}}}{\lambda_{\text{min}}}\)</span>.</p></li>
+</ul>
+<p>Refernce the <a class="reference external" href="#SVD_cell">SVD cell from above</a> to answer the following two activities.</p>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Estimate the condition number of <span class="math notranslate nohighlight">\(A_d\)</span> using the above rule.</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Condition number using rule</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Calculate the condition number of <span class="math notranslate nohighlight">\(A_d\)</span> using np.linalg.cond( ).</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Condition number using numpy</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks/02-publish"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="04-Example-Atomic-Mass-Balances.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Example: Mass Balances and Linear Algebra</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../03/algorithms.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Algorithm Building Blocks</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

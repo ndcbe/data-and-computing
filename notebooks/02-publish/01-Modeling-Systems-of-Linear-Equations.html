@@ -153,7 +153,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/04c-Modules-and-Files.html">
-     Functions, Scoping, and Other Fun Stuff
+     Modules and Files
     </a>
    </li>
    <li class="toctree-l2">
@@ -204,13 +204,28 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="02b-Invertible-Matrix-Theorem-and-Gauss-Example.html">
+     Invertible Matrix Theorem and Gaussian Elimination Example
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="03-LU-Factorization.html">
      LU Decomposition and Condition Number
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="03b-Condition-Number.html">
+     Errors in Linear Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="04-Example-Atomic-Mass-Balances.html">
      Example: Mass Balances and Linear Algebra
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="05-Linear-Algebra-in-Numpy.html">
+     Linear Algebra Review and SciPy Basics
     </a>
    </li>
   </ul>
@@ -258,8 +273,8 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../04-publish/02-Newton-Method-Nonlinear-Equation-Solving.html">
-     Solving Systems of Nonlinear Equations with Newton’s Method
+    <a class="reference internal" href="../04-publish/02-Newton-Raphson-Method-in-One-Dimension.html">
+     Newton-Raphson Method in One Dimension
     </a>
    </li>
    <li class="toctree-l2">
@@ -268,13 +283,18 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../04-publish/04-Convergence-Analysis-Newton-Method.html">
-     Convergence Analysis for Newton’s Method
+    <a class="reference internal" href="../04-publish/04-Convergence-Analysis-for-Newton-Raphson-Methods.html">
+     Convergence Analysis for Newton-Raphson Methods
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../04-publish/05-System-of-Equations-Newton-Method.html">
-     Newton’s Method for Systems of Equations
+    <a class="reference internal" href="../04-publish/05-Newton-Raphson-Methods-for-Systems-of-Equations.html">
+     Newton-Raphson Methods for Systems of Equations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04-publish/06-Newton-Methods-in-Scipy.html">
+     Newton Methods in Scipy
     </a>
    </li>
   </ul>
@@ -433,11 +453,6 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../09-publish/05-Common-Probability-Distributions-Summary.html">
-     Common Probability Distributions Summary
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="../09-publish/01-Bernoulli-Probability-Distribution.html">
      Bernoulli Probability Distribution
     </a>
@@ -455,6 +470,11 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="../09-publish/04-Normal-Probability-Distribution.html">
      Normal Probability Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../09-publish/05-Common-Probability-Distributions-Summary.html">
+     Common Probability Distributions Summary
     </a>
    </li>
   </ul>
@@ -532,13 +552,13 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../11-publish/07-Flavors-of-Hypothesis-Testing.html">
-     Flavors of Hypothesis Testing
+    <a class="reference internal" href="../11-publish/06-Hypothesis-Testing-Review-and-Type-I-Type-II-Errors.html">
+     Hypothesis Testing Review and Type I/Type II Errors
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../11-publish/06-Hypothesis-Testing-Review-and-Type-I-Type-II-Errors.html">
-     Hypothesis Testing Review and Type I/Type II Errors
+    <a class="reference internal" href="../11-publish/07-Flavors-of-Hypothesis-Testing.html">
+     Flavors of Hypothesis Testing
     </a>
    </li>
    <li class="toctree-l2">
@@ -940,15 +960,6 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="modeling-systems-of-linear-equations">
 <h1>Modeling Systems of Linear Equations<a class="headerlink" href="#modeling-systems-of-linear-equations" title="Permalink to this headline">¶</a></h1>
-<p>CBE 20258. Numerical and Statistical Analysis. Spring 2020.</p>
-<p>© University of Notre Dame</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-</pre></div>
-</div>
-</div>
-</div>
 <div class="section" id="learning-objectives">
 <h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">¶</a></h2>
 <p>After studying this notebook, completing the activities, and asking questions in class, you should be able to:</p>
@@ -956,6 +967,13 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>Create a mathematical model on paper for a system of linear equations.</p></li>
 <li><p>Implement the model in python to solve for the solutions and interpret the results.</p></li>
 </ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
@@ -998,7 +1016,32 @@ const thebe_selector_output = ".output, .cell_output"
 <h3>Determine Additional Data and Analysis Goal<a class="headerlink" href="#determine-additional-data-and-analysis-goal" title="Permalink to this headline">¶</a></h3>
 <p>Let’s use <strong>your background from CBE 20255</strong> (Introduction to Chemical Engineering) to analyze this system.</p>
 <p><strong>Feed Specifications</strong></p>
-<p><img alt="inputs" src="https://ndcbe.github.io/data-and-computing/_images/wfgd-table.png" /></p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p>Species</p></th>
+<th class="text-align:center head"><p>Mass Flowrate</p></th>
+<th class="text-align:center head"><p>Mass Fraction</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(H_20\)</span></p></td>
+<td class="text-align:center"><p>240,000 lb/h</p></td>
+<td class="text-align:center"><p>4.3%</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(SO_2\)</span></p></td>
+<td class="text-align:center"><p>34,900 lb/h</p></td>
+<td class="text-align:center"><p>0.6 %</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(HCl\)</span></p></td>
+<td class="text-align:center"><p>458 lb/h</p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(8.0\)</span> x <span class="math notranslate nohighlight">\(10^{-3}\)</span> %</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>Air/other</p></td>
+<td class="text-align:center"><p>5,245,600 lb/h</p></td>
+<td class="text-align:center"><p>95.0 %</p></td>
+</tr>
+</tbody>
+</table>
 <p><em>Table 1</em>: Flue gas flow rate and compositions before treatment for a 500 MW coal-fired power plant (Babcock and Wilcox Company, <em>Steam: Its Generation and Uses</em>, 2005).</p>
 <p>For reference, the Notre Dame power plant has a maximum electricity output capacity of 28.6 MW. It also co-generates steam and chilled water, so direct comparison is difficult. It is about 20 times smaller. Notre Dame phased out coal use in the power plant in 2020.</p>
 <p><strong>Equilibrium Information</strong></p>
@@ -1008,8 +1051,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>Virtually no water evaporates from the slurry into the flue gas</p></li>
 </ol>
 <p>This means we only need to worry about the solubility of the SO<span class="math notranslate nohighlight">\(_x\)</span> that dissolves into the slurry. As another assumption, we will model the slurry as water. In CBE 20255, you may have learned about Henry’s Law, a simple correlation for solubility.</p>
-<p><img alt="henrys" src="https://ndcbe.github.io/data-and-computing/_images/henrys_law2.png" />
-<em>Figure 2</em>: Henry’s law for SO<span class="math notranslate nohighlight">\(_2\)</span> solubility in water (C. J. Geankoplis, <em>Transport Processes and Separation Process Principles: Includes Unit Operations</em>, 2003).</p>
+<p><img alt="henrys" src="https://ndcbe.github.io/data-and-computing/_images/henrys_law_2.png" /></p>
+<p><em>Figure 2</em>: Henry’s law for SO<span class="math notranslate nohighlight">\(_2\)</span> solubility in water (C. J. Geankoplis, <em>Transport Processes and Separation Process Principles: Includes Unit Operations</em>, 2003).</p>
 <p><strong>Design/Analysis Goal</strong></p>
 <p>We want to <strong>compute</strong> the required flow rate of water to achieve 98% removal of SO<span class="math notranslate nohighlight">\(_2\)</span> for a large (500 MW) power plant.</p>
 </div>
@@ -1159,16 +1202,11 @@ Relative difference:  0.29994838316161015 %
 <p class="admonition-title"><b>Home Activity</b></p>
 <p>Compute the mole fraction of SO<span class="math notranslate nohighlight">\(_2\)</span> in the vapor inlet. Store your answer in <tt>yin</tt></p>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SO2 in flue gas feed</span>
 <span class="c1"># Add your solution here</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;yin = &quot;</span><span class="p">,</span><span class="n">yin</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="s2">&quot;mol %&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>yin =  0.2999483831616149 mol %
 </pre></div>
 </div>
 </div>
@@ -1184,7 +1222,7 @@ Relative difference:  0.29994838316161015 %
 <p class="admonition-title"><b>Home Activity</b></p>
 <p>Compute the mole fraction of SO<span class="math notranslate nohighlight">\(_2\)</span> in the vapor outlet if the unit achieves with 98% SO<span class="math notranslate nohighlight">\(_2\)</span> removal. Store your answer in <tt>yout</tt>.</p>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Step 3. Compute vapor outlet composition</span>
 <span class="c1"># SO2 in vapor outlet in [mol frac]</span>
@@ -1192,11 +1230,6 @@ Relative difference:  0.29994838316161015 %
 <span class="c1"># Add your solution here</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;yout = &quot;</span><span class="p">,</span><span class="n">yout</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="s2">&quot;mol %&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>yout =  0.005998967663232302 mol %
 </pre></div>
 </div>
 </div>
@@ -1213,7 +1246,7 @@ Relative difference:  0.29994838316161015 %
 <p class="admonition-title"><b>Home Activity</b></p>
 <p>Compute the liquid flowrate. Store your answer in <tt>L</tt> with units lb-mol/hr and <tt>L_lb</tt> with units lb/hr.</p>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Step 4. Apply formulas we derived with direct substitution</span>
 <span class="c1"># Liquid outlet composition in [mol frac]</span>
@@ -1230,13 +1263,6 @@ Relative difference:  0.29994838316161015 %
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>xout =  0.00020266782646055073 mol %
-L =  263414139.5904491 lb-mol/hr
-L =  4745.479480681025 millon lb/hr of water
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1246,7 +1272,7 @@ L =  4745.479480681025 millon lb/hr of water
 </div>
 </div>
 <p>I, for one, do not have a good intuition for the size of 1 millions pounds of water. Let’s convert into Olympic swimming pools!</p>
-<div class="cell docutils container">
+<div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Step 5. Convert and interpret</span>
 
@@ -1256,11 +1282,6 @@ L =  4745.479480681025 millon lb/hr of water
 <span class="c1"># Convert to swimming pools</span>
 <span class="n">L_pool</span> <span class="o">=</span> <span class="n">L_lb</span> <span class="o">/</span> <span class="n">swimming_pool</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;L = &quot;</span><span class="p">,</span><span class="n">L_pool</span><span class="p">,</span><span class="s2">&quot;Olympic swimming pools per hour&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>L =  862.8144510329138 Olympic swimming pools per hour
 </pre></div>
 </div>
 </div>
@@ -1354,7 +1375,7 @@ z =
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
@@ -1385,9 +1406,6 @@ z =
 <span class="c1"># Add your solution here</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/01-Modeling-Systems-of-Linear-Equations_61_0.png" src="../../_images/01-Modeling-Systems-of-Linear-Equations_61_0.png" />
 </div>
 </div>
 </div>
