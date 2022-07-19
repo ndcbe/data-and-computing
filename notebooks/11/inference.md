@@ -1,15 +1,8 @@
 # Statistical Inference
 
-Topics to cover:
-* Central limit theorem
-* Sampling distribution
-* Hypothesis testing procedure
-* Flavors of hypothesis testing
-* Confidence intervals
-* Error Rates and Statistical Power
-* Bootstrap and Simulation
-
 ## Chapter Learning Objectives
+1. Draw inferences and each conclusions using data corrupted by (measurement) uncertainty
+2. Choose the statistical inference technique for common science and engineering applications
 
 ## Main Idea behind Statistical Inference
 
@@ -32,3 +25,8 @@ We will do this using **hypothesis testing**.
 </div>
 
 We will see throughout this lecture that **confidence intervals** and **hypothesis testing** have the same mathematical basis and are closely related.
+
+## Sections
+
+```{tableofcontents}
+```
