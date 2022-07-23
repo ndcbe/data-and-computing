@@ -1,15 +1,15 @@
 # Nonlinear Regression
 
-## Chapter Learning Objectives
+**Chapter Learning Objectives**
 1. Regress nonlinear models
 2. Quantify uncertainty in regressed parameters and model predictions
 
-## Sections
+**Sections**
 
 ```{tableofcontents}
 ```
 
-## Coming Soon:
+**Coming Soon:**
 * Nonlinear regression theory including derivation of covariance matrix
 * Identifiability and sloppiness
 * Confidence ellipses

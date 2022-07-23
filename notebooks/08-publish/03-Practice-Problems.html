@@ -5,10 +5,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Practice Problems &#8212; Data and Computing for Chemical Engieers</title>
+    <title>8.3. Practice Problems &#8212; Data and Computing for Chemical Engieers</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet">
-  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,20 +19,16 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -39,12 +36,13 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -55,8 +53,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Common Probability Distributions" href="../09/distributions.html" />
-    <link rel="prev" title="Jointly Distributed Random Variables" href="02-Jointly-Distributed-Random-Variables.html" />
+    <link rel="next" title="9. Common Probability Distributions" href="../09/distributions.html" />
+    <link rel="prev" title="8.2. Jointly Distributed Random Variables" href="02-Jointly-Distributed-Random-Variables.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -64,7 +62,21 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -73,9 +85,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -93,17 +106,23 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../intro.html">
-   Data and Computing for Engineers
-  </a>
- </li>
-</ul>
-<ul class="current nav bd-sidenav">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Data and Computing for Engineers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Python Programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../01/00-Python-Primer.html">
-   Python Primer
+   1. Python Primer
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -113,79 +132,86 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/01-Jupyter-Notebooks.html">
-     Welcome to Jupyter Notebooks and Vocareum
+     1.1. Welcome to Jupyter Notebooks and Vocareum
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/02-Python-Basics-I-Variables-Strings-Bugs.html">
-     Python Basics I: Variables, Strings, and Bugs
+     1.2. Python Basics I: Variables, Strings, and Bugs
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/03-Flow-control.html">
-     Python Basics II: Loopy Logic
+     1.3. Python Basics II: Loopy Logic
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/05-Python-Basics-III-Lists-Dictionaries-Enumeration.html">
-     Python Basics III: Lists, Dictionaries, and Enumeration
+     1.4. Python Basics III: Lists, Dictionaries, and Enumeration
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/04-Functions-and-Scope.html">
-     Functions and Scope
+     1.5. Functions and Scope
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/04b-Recursion.html">
-     Recursion
+     1.6. Recursion
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/03b-Pseudocode.html">
-     Pseudocode
+     1.7. Pseudocode
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/04d-Example-High-Low-Game.html">
-     High/Low Guess My Number Game
+     1.8. High/Low Guess My Number Game
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/04c-Modules-and-Files.html">
-     Modules and Files
+     1.9. Modules and Files
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/06-NumPy.html">
-     Linear Algebra with Numpy and Scipy
+     1.10. Linear Algebra with Numpy and Scipy
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/07-Matplotlib.html">
-     Visualization with matplotlib
+     1.11. Visualization with matplotlib
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/08-Pandas.html">
-     Manipulating Data with Pandas
+     1.12. Manipulating Data with Pandas
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/09-Functions-as-Arguments.html">
-     Functions as Arguments
+     1.13. Functions as Arguments
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/10-Testing-and-Debugging.html">
-     Testing and Debugging in Python
+     1.14. Testing and Debugging in Python
     </a>
    </li>
   </ul>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Numerical Methods
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../02/linear_algebra.html">
-   Linear Algebra
+   2. Linear Algebra
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
   <label for="toctree-checkbox-2">
@@ -195,44 +221,44 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../02-publish/01-Modeling-Systems-of-Linear-Equations.html">
-     Modeling Systems of Linear Equations
+     2.1. Modeling Systems of Linear Equations
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../02-publish/02-Gauss-Elimination.html">
-     Gaussian Elimination
+     2.2. Gaussian Elimination
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../02-publish/02b-Invertible-Matrix-Theorem-and-Gauss-Example.html">
-     Invertible Matrix Theorem and Gaussian Elimination Example
+     2.3. Invertible Matrix Theorem and Gaussian Elimination Example
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../02-publish/03-LU-Factorization.html">
-     LU Decomposition and Condition Number
+     2.4. LU Decomposition and Condition Number
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../02-publish/03b-Condition-Number.html">
-     Errors in Linear Systems
+     2.5. Errors in Linear Systems
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../02-publish/04-Example-Atomic-Mass-Balances.html">
-     Example: Mass Balances and Linear Algebra
+     2.6. Example: Mass Balances and Linear Algebra
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../02-publish/05-Linear-Algebra-in-Numpy.html">
-     Linear Algebra Review and SciPy Basics
+     2.7. Linear Algebra Review and SciPy Basics
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../03/algorithms.html">
-   Algorithm Building Blocks
+   3. Algorithm Building Blocks
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
   <label for="toctree-checkbox-3">
@@ -242,24 +268,24 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../03-publish/01-Taylor-Series.html">
-     Taylor Series Approximations
+     3.1. Taylor Series Approximations
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../03-publish/02-Finite-Difference.html">
-     Finite Difference Derivative Approximations
+     3.2. Finite Difference Derivative Approximations
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../03-publish/03-Example-Heating-a-Metal-Slab.html">
-     Example: Heating a Metal Slab
+     3.3. Example: Heating a Metal Slab
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../04/nonlinear_systems.html">
-   Nonlinear Systems of Equations
+   4. Nonlinear Systems of Equations
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
   <label for="toctree-checkbox-4">
@@ -269,39 +295,39 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../04-publish/01-Modeling-Systems-of-Nonlinear-Equations.html">
-     Modeling Systems of Nonlinear Equations
+     4.1. Modeling Systems of Nonlinear Equations
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../04-publish/02-Newton-Raphson-Method-in-One-Dimension.html">
-     Newton-Raphson Method in One Dimension
+     4.2. Newton-Raphson Method in One Dimension
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../04-publish/03-More-Newton-Type-Methods.html">
-     More Newton-Type Methods
+     4.3. More Newton-Type Methods
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../04-publish/04-Convergence-Analysis-for-Newton-Raphson-Methods.html">
-     Convergence Analysis for Newton-Raphson Methods
+     4.4. Convergence Analysis for Newton-Raphson Methods
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../04-publish/05-Newton-Raphson-Methods-for-Systems-of-Equations.html">
-     Newton-Raphson Methods for Systems of Equations
+     4.5. Newton-Raphson Methods for Systems of Equations
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../04-publish/06-Newton-Methods-in-Scipy.html">
-     Newton Methods in Scipy
+     4.6. Newton Methods in Scipy
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../05/optimization.html">
-   Continuous Optimization
+   5. Continuous Optimization
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
   <label for="toctree-checkbox-5">
@@ -311,24 +337,24 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../05-publish/01-Pyomo-Basics.html">
-     Pyomo Basics
+     5.1. Pyomo Basics
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../05-publish/02-Electricity-Market-Optimization.html">
-     Electricity Market Optimization
+     5.2. Electricity Market Optimization
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../05-publish/03-Flash-Calculations-in-Pyomo.html">
-     Flash Calculations in Pyomo
+     5.3. Flash Calculations in Pyomo
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../06/integration.html">
-   Numeric Integration
+   6. Numeric Integration
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
   <label for="toctree-checkbox-6">
@@ -338,59 +364,66 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../06-publish/01-Intro-and-Newton-Cotes.html">
-     Introduction and Newton-Cotes
+     6.1. Introduction and Newton-Cotes
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../06-publish/02-Gauss-Quadrature.html">
-     Gauss Quadrature
+     6.2. Gauss Quadrature
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../06-publish/03-Adaptive-Methods-and-Scipy.html">
-     Adaptive Methods for Newton-Cotes and Gauss Quadrature, Scipy Library
+     6.3. Adaptive Methods for Newton-Cotes and Gauss Quadrature, Scipy Library
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../06-publish/04-Application-Inertial-Navigation-Systems.html">
-     Application: Inertial Navigation Systems
+     6.4. Application: Inertial Navigation Systems
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../06-publish/05-Forward-and-Backward-Euler.html">
-     Forward and Backward Euler Methods
+     6.5. Forward and Backward Euler Methods
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../06-publish/06-Trapezoid-Rule.html">
-     Crank-Nicolson (Trapezoid Rule)
+     6.6. Crank-Nicolson (Trapezoid Rule)
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../06-publish/07-Stability-Analysis.html">
-     Stability Analysis of Forward/Backward Euler and Crank-Nicolson Methods
+     6.7. Stability Analysis of Forward/Backward Euler and Crank-Nicolson Methods
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../06-publish/08-Explicit-Runge-Kutta.html">
-     Explicit Range Kutta Method
+     6.8. Explicit Range Kutta Method
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../06-publish/09-Systems-of-Differential-Equations-and-Scipy.html">
-     Systems of Differential Equations and Scipy
+     6.9. Systems of Differential Equations and Scipy
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../06-publish/10-Example-Reaction-Rates.html">
-     Example: Reaction Rates
+     6.10. Example: Reaction Rates
     </a>
    </li>
   </ul>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Data Analysis
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../07/stats.html">
-   Descriptive Statistics and Visualization
+   7. Descriptive Statistics and Visualization
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
   <label for="toctree-checkbox-7">
@@ -400,24 +433,24 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../07-publish/01-Sampling.html">
-     Sampling
+     7.1. Sampling
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../07-publish/02-Summary-Statistics.html">
-     Summary Statistics
+     7.2. Summary Statistics
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../07-publish/03-Visualizing-Data.html">
-     Visualizing Data
+     7.3. Visualizing Data
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="../08/probability.html">
-   Probability Theory
+   8. Probability Theory
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
   <label for="toctree-checkbox-8">
@@ -427,24 +460,24 @@ const thebe_selector_output = ".output, .cell_output"
   <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="01-Random-Variables.html">
-     Random Variables
+     8.1. Random Variables
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="02-Jointly-Distributed-Random-Variables.html">
-     Jointly Distributed Random Variables
+     8.2. Jointly Distributed Random Variables
     </a>
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     Practice Problems
+     8.3. Practice Problems
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../09/distributions.html">
-   Common Probability Distributions
+   9. Common Probability Distributions
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
   <label for="toctree-checkbox-9">
@@ -454,34 +487,34 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../09-publish/01-Bernoulli-Probability-Distribution.html">
-     Bernoulli Probability Distribution
+     9.1. Bernoulli Probability Distribution
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../09-publish/02-Binomial-Probability-Distribtuion.html">
-     Binomial Probability Distributions
+     9.2. Binomial Probability Distributions
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../09-publish/03-Poisson-Probability-Distribution.html">
-     Poisson Probability Distributions
+     9.3. Poisson Probability Distributions
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../09-publish/04-Normal-Probability-Distribution.html">
-     Normal Probability Distributions
+     9.4. Normal Probability Distributions
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../09-publish/05-Common-Probability-Distributions-Summary.html">
-     Common Probability Distributions Summary
+     9.5. Common Probability Distributions Summary
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../10/uncertainty.html">
-   Uncertainty and Error Propagation
+   10. Uncertainty and Error Propagation
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
   <label for="toctree-checkbox-10">
@@ -491,34 +524,34 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../10-publish/01-Measurement-Error.html">
-     Measurement Error
+     10.1. Measurement Error
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../10-publish/02-Error-Propagation.html">
-     Error Propagation
+     10.2. Error Propagation
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../10-publish/03-Measuring-Flowrate-Example.html">
-     Measuring Flowrate Example
+     10.3. Measuring Flowrate Example
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../10-publish/04-Practice-Problems.html">
-     Practice Problems
+     10.4. Practice Problems
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../10-publish/05-Simulation.html">
-     Simulation
+     10.5. Simulation
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../11/inference.html">
-   Statistical Inference
+   11. Statistical Inference
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
   <label for="toctree-checkbox-11">
@@ -528,59 +561,59 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../11-publish/01-Central-Limit-Theorem.html">
-     Central Limit Theorem
+     11.1. Central Limit Theorem
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../11-publish/02-Standard-Normal-Distribution.html">
-     Standard Normal Distribution
+     11.2. Standard Normal Distribution
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../11-publish/03-Confidence-Intervals.html">
-     Confidence Intervals
+     11.3. Confidence Intervals
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../11-publish/04-Students-t-Distribution.html">
-     Student’s t-Distribution
+     11.4. Student’s t-Distribution
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../11-publish/05-First-Hypothesis-Testing.html">
-     First Hypothesis Testing
+     11.5. First Hypothesis Testing
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../11-publish/06-Hypothesis-Testing-Review-and-Type-I-Type-II-Errors.html">
-     Hypothesis Testing Review and Type I/Type II Errors
+     11.6. Hypothesis Testing Review and Type I/Type II Errors
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../11-publish/07-Flavors-of-Hypothesis-Testing.html">
-     Flavors of Hypothesis Testing
+     11.7. Flavors of Hypothesis Testing
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../11-publish/08-Statistical-Power-Basics.html">
-     Statistical Power Basics
+     11.8. Statistical Power Basics
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../11-publish/09-Statistical-Power-in-Python.html">
-     Statistical Power in Python
+     11.9. Statistical Power in Python
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../11-publish/10-Statistical-Power-Practice-Problems.html">
-     Statistical Power Practice Problems
+     11.10. Statistical Power Practice Problems
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../12/regression.html">
-   Multivariate Linear Regression
+   12. Multivariate Linear Regression
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
   <label for="toctree-checkbox-12">
@@ -590,29 +623,29 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../12-publish/01-Ordinary-Least-Squares-Linear-Regression.html">
-     Ordinary Least Squares Linear Regression
+     12.1. Ordinary Least Squares Linear Regression
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../12-publish/02-Uncertainty-Analysis-and-Statistical-Inference.html">
-     Uncertainty Analysis and Statistical Inference
+     12.2. Uncertainty Analysis and Statistical Inference
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../12-publish/03-Linear-Regression-Practice-Problems.html">
-     Linear Regression Practice Problems
+     12.3. Linear Regression Practice Problems
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../12-publish/04-Multivariate-Linear-Regression.html">
-     Multivariate Linear Regression
+     12.4. Multivariate Linear Regression
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../13/advanced_regression.html">
-   Nonlinear Regression
+   13. Nonlinear Regression
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
   <label for="toctree-checkbox-13">
@@ -622,288 +655,402 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../13-publish/01-Transformations-and-Linear-Regression.html">
-     Transformations and Linear Regression
+     13.1. Transformations and Linear Regression
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../13-publish/02-Nonlinear-Regression.html">
-     Nonlinear Regression
+     13.2. Nonlinear Regression
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../13-publish/03-Nonlinear-Regression-Practice-Problem.html">
-     Nonlinear Regression Practice Problem
+     13.3. Nonlinear Regression Practice Problem
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../13-publish/04-Weighted-Regression.html">
-     Weighted Linear Regression
+     13.4. Weighted Linear Regression
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../13-publish/05-Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression.html">
-     Monte Carlo Uncertainty Analysis for Nonlinear Regression
+     13.5. Monte Carlo Uncertainty Analysis for Nonlinear Regression
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../13-publish/06-Bootstrap-Confidence-Intervals.html">
-     Bootstrap Confidence Intervals
+     13.6. Bootstrap Confidence Intervals
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../13-publish/07-Nonlinear-Case-Study-Adsorptive-Membranes.html">
-     Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes
+     13.7. Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../14/design_of_experiments.html">
-   Design of Experiments
+   14. Design of Experiments
   </a>
  </li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/08-publish/03-Practice-Problems.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/ndcbe/data-and-computing"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/08-publish/03-Practice-Problems.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/08-publish/03-Practice-Problems.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/08-publish/03-Practice-Problems.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/08-publish/03-Practice-Problems.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/08-publish/03-Practice-Problems.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ndcbe/data-and-computing"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/08-publish/03-Practice-Problems.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/notebooks/08-publish/03-Practice-Problems.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#basic-ideas-of-probability">
-   Basic Ideas of Probability
+   8.3.1. Basic Ideas of Probability
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-1-a">
-     Practice Problem 2.1-A
+     8.3.1.1. Practice Problem 2.1-A
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-1-b">
-     Practice Problem 2.1-B
+     8.3.1.2. Practice Problem 2.1-B
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-1-c">
-     Practice Problem 2.1-C
+     8.3.1.3. Practice Problem 2.1-C
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#counting-methods">
-   Counting Methods
+   8.3.2. Counting Methods
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-2-a">
-     Practice Problem 2.2-A
+     8.3.2.1. Practice Problem 2.2-A
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-2-b">
-     Practice Problem 2.2-B
+     8.3.2.2. Practice Problem 2.2-B
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-2-c">
-     Practice Problem 2.2-C
+     8.3.2.3. Practice Problem 2.2-C
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-2-d">
-     Practice Problem 2.2-D
+     8.3.2.4. Practice Problem 2.2-D
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-2-e">
-     Practice Problem 2.2-E
+     8.3.2.5. Practice Problem 2.2-E
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#conditional-probability-and-independence">
-   Conditional Probability and Independence
+   8.3.3. Conditional Probability and Independence
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-3-a">
-     Practice Problem 2.3-A
+     8.3.3.1. Practice Problem 2.3-A
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-3-b">
-     Practice Problem 2.3-B
+     8.3.3.2. Practice Problem 2.3-B
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-3-c">
-     Practice Problem 2.3-C
+     8.3.3.3. Practice Problem 2.3-C
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-3-d">
-     Practice Problem 2.3-D
+     8.3.3.4. Practice Problem 2.3-D
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-3-e">
-     Practice Problem 2.3-E
+     8.3.3.5. Practice Problem 2.3-E
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-3-f">
-     Practice Problem 2.3-F
+     8.3.3.6. Practice Problem 2.3-F
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#random-variables">
-   Random Variables
+   8.3.4. Random Variables
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-4-a">
-     Practice Problem 2.4-A
+     8.3.4.1. Practice Problem 2.4-A
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-4-b">
-     Practice Problem 2.4-B
+     8.3.4.2. Practice Problem 2.4-B
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#jointly-distributed-random-variables">
-   Jointly Distributed Random Variables
+   8.3.5. Jointly Distributed Random Variables
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-6-a">
-     Practice Problem 2.6-A
+     8.3.5.1. Practice Problem 2.6-A
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-6-b">
-     Practice Problem 2.6-B
+     8.3.5.2. Practice Problem 2.6-B
     </a>
    </li>
   </ul>
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Practice Problems</h1>
@@ -918,125 +1065,125 @@ const thebe_selector_output = ".output, .cell_output"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#basic-ideas-of-probability">
-   Basic Ideas of Probability
+   8.3.1. Basic Ideas of Probability
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-1-a">
-     Practice Problem 2.1-A
+     8.3.1.1. Practice Problem 2.1-A
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-1-b">
-     Practice Problem 2.1-B
+     8.3.1.2. Practice Problem 2.1-B
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-1-c">
-     Practice Problem 2.1-C
+     8.3.1.3. Practice Problem 2.1-C
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#counting-methods">
-   Counting Methods
+   8.3.2. Counting Methods
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-2-a">
-     Practice Problem 2.2-A
+     8.3.2.1. Practice Problem 2.2-A
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-2-b">
-     Practice Problem 2.2-B
+     8.3.2.2. Practice Problem 2.2-B
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-2-c">
-     Practice Problem 2.2-C
+     8.3.2.3. Practice Problem 2.2-C
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-2-d">
-     Practice Problem 2.2-D
+     8.3.2.4. Practice Problem 2.2-D
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-2-e">
-     Practice Problem 2.2-E
+     8.3.2.5. Practice Problem 2.2-E
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#conditional-probability-and-independence">
-   Conditional Probability and Independence
+   8.3.3. Conditional Probability and Independence
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-3-a">
-     Practice Problem 2.3-A
+     8.3.3.1. Practice Problem 2.3-A
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-3-b">
-     Practice Problem 2.3-B
+     8.3.3.2. Practice Problem 2.3-B
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-3-c">
-     Practice Problem 2.3-C
+     8.3.3.3. Practice Problem 2.3-C
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-3-d">
-     Practice Problem 2.3-D
+     8.3.3.4. Practice Problem 2.3-D
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-3-e">
-     Practice Problem 2.3-E
+     8.3.3.5. Practice Problem 2.3-E
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-3-f">
-     Practice Problem 2.3-F
+     8.3.3.6. Practice Problem 2.3-F
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#random-variables">
-   Random Variables
+   8.3.4. Random Variables
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-4-a">
-     Practice Problem 2.4-A
+     8.3.4.1. Practice Problem 2.4-A
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-4-b">
-     Practice Problem 2.4-B
+     8.3.4.2. Practice Problem 2.4-B
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#jointly-distributed-random-variables">
-   Jointly Distributed Random Variables
+   8.3.5. Jointly Distributed Random Variables
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-6-a">
-     Practice Problem 2.6-A
+     8.3.5.1. Practice Problem 2.6-A
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-problem-2-6-b">
-     Practice Problem 2.6-B
+     8.3.5.2. Practice Problem 2.6-B
     </a>
    </li>
   </ul>
@@ -1047,11 +1194,12 @@ const thebe_selector_output = ".output, .cell_output"
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="practice-problems">
-<h1>Practice Problems<a class="headerlink" href="#practice-problems" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">8.3. </span>Practice Problems<a class="headerlink" href="#practice-problems" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
@@ -1060,10 +1208,10 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="section" id="basic-ideas-of-probability">
-<h2>Basic Ideas of Probability<a class="headerlink" href="#basic-ideas-of-probability" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.3.1. </span>Basic Ideas of Probability<a class="headerlink" href="#basic-ideas-of-probability" title="Permalink to this headline">#</a></h2>
 <p><strong>Further Reading</strong>: §2.1 in Navidi (2015)</p>
 <div class="section" id="practice-problem-2-1-a">
-<h3>Practice Problem 2.1-A<a class="headerlink" href="#practice-problem-2-1-a" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">8.3.1.1. </span>Practice Problem 2.1-A<a class="headerlink" href="#practice-problem-2-1-a" title="Permalink to this headline">#</a></h3>
 <p>Reference: §2.1, Problem 2 in Navidi.</p>
 <p>A die (six faces) has the number 1 painted on three of its faces, the number 2 painted on two of its faces, and the number 3 painted on one face. Assume that each number is equally likely to come up.</p>
 <ol class="simple">
@@ -1074,7 +1222,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ol>
 </div>
 <div class="section" id="practice-problem-2-1-b">
-<h3>Practice Problem 2.1-B<a class="headerlink" href="#practice-problem-2-1-b" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">8.3.1.2. </span>Practice Problem 2.1-B<a class="headerlink" href="#practice-problem-2-1-b" title="Permalink to this headline">#</a></h3>
 <p>Adapted from §2.1, Problem 12 in Navidi.</p>
 <p>Let <span class="math notranslate nohighlight">\(V\)</span> be the event that a computer contains a virus, and let <span class="math notranslate nohighlight">\(W\)</span> be the event that a computer contains a worm. Support <span class="math notranslate nohighlight">\(P(V) = 0.15\)</span>, <span class="math notranslate nohighlight">\(P(W) = 0.05\)</span>, and <span class="math notranslate nohighlight">\(P(V \cup W) = 0.17\)</span>. Do the following:</p>
 <ol class="simple">
@@ -1085,7 +1233,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ol>
 </div>
 <div class="section" id="practice-problem-2-1-c">
-<h3>Practice Problem 2.1-C<a class="headerlink" href="#practice-problem-2-1-c" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">8.3.1.3. </span>Practice Problem 2.1-C<a class="headerlink" href="#practice-problem-2-1-c" title="Permalink to this headline">#</a></h3>
 <p>Reference: §2.1, Problem 14 in Navidi.</p>
 <p>Six hundered paving stones were examined for cracks, and 15 were found to be cracked. The same 600 stones were then examined for discoloration, and 27 were found to be discolored. A total of 562 stones were neither cracked nor discolored. One of the 600 stones is selected from random.</p>
 <ol class="simple">
@@ -1096,15 +1244,15 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="section" id="counting-methods">
-<h2>Counting Methods<a class="headerlink" href="#counting-methods" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.3.2. </span>Counting Methods<a class="headerlink" href="#counting-methods" title="Permalink to this headline">#</a></h2>
 <p><strong>Further Reading</strong>: §2.2 in Navidi (2015)</p>
 <div class="section" id="practice-problem-2-2-a">
-<h3>Practice Problem 2.2-A<a class="headerlink" href="#practice-problem-2-2-a" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">8.3.2.1. </span>Practice Problem 2.2-A<a class="headerlink" href="#practice-problem-2-2-a" title="Permalink to this headline">#</a></h3>
 <p>Reference: §2.2, Problem 2 in Navidi.</p>
 <p>A metallurgist is designing an experiment to determine the effect of flux, base metal, and energy input on the hardness of a weld. She wants to study four different fluxes, two different base metals, and three different amounts of energy input. If each run of the experiment involves one flux, one base metal, and one amount of energy input, how many runs are possible?</p>
 </div>
 <div class="section" id="practice-problem-2-2-b">
-<h3>Practice Problem 2.2-B<a class="headerlink" href="#practice-problem-2-2-b" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">8.3.2.2. </span>Practice Problem 2.2-B<a class="headerlink" href="#practice-problem-2-2-b" title="Permalink to this headline">#</a></h3>
 <p>Reference: §2.2, Problem 4 in Navidi.</p>
 <p>A group of 18 people have gotten together to play baseball. They will divide into two teams of 9 players each, with one team wearing green uniforms and the other wearning yellow uniforms. In how many ways can the people be divided into team?</p>
 <div class="cell tag_remove-output docutils container">
@@ -1117,7 +1265,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Extension: How would your analysis change if there where 19 people, and we want to assign 9 people to the green team, 9 people to the yellow team, and one person to be the umpire?</p>
 </div>
 <div class="section" id="practice-problem-2-2-c">
-<h3>Practice Problem 2.2-C<a class="headerlink" href="#practice-problem-2-2-c" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">8.3.2.3. </span>Practice Problem 2.2-C<a class="headerlink" href="#practice-problem-2-2-c" title="Permalink to this headline">#</a></h3>
 <p>Reference: §2.2, Problem 8 in Navidi.</p>
 <p>In a certain state, license plates consist of three letters followed by three numbers.</p>
 <ol class="simple">
@@ -1148,7 +1296,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="section" id="practice-problem-2-2-d">
-<h3>Practice Problem 2.2-D<a class="headerlink" href="#practice-problem-2-2-d" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">8.3.2.4. </span>Practice Problem 2.2-D<a class="headerlink" href="#practice-problem-2-2-d" title="Permalink to this headline">#</a></h3>
 <p>Reference: §2.2, Problem 10 in Navidi.</p>
 <p>A company has hired 15 new employees, and must assign 6 to the day shift, 5 to the graveyard shift, and 4 to the night shift. In how many ways can the assignment be made?</p>
 <div class="cell tag_remove-output docutils container">
@@ -1160,26 +1308,26 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="section" id="practice-problem-2-2-e">
-<h3>Practice Problem 2.2-E<a class="headerlink" href="#practice-problem-2-2-e" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">8.3.2.5. </span>Practice Problem 2.2-E<a class="headerlink" href="#practice-problem-2-2-e" title="Permalink to this headline">#</a></h3>
 <p>Reference: §2.2, Problem 12 in Navidi.</p>
 <p>A drawer constains 6 red socks, 4 green socks, and 2 black socks. Two socks are chosen at random. What is the probability that they match?</p>
 </div>
 </div>
 <div class="section" id="conditional-probability-and-independence">
-<h2>Conditional Probability and Independence<a class="headerlink" href="#conditional-probability-and-independence" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.3.3. </span>Conditional Probability and Independence<a class="headerlink" href="#conditional-probability-and-independence" title="Permalink to this headline">#</a></h2>
 <p><strong>Further Reading</strong>: §2.3 in Navidi (2015)</p>
 <div class="section" id="practice-problem-2-3-a">
-<h3>Practice Problem 2.3-A<a class="headerlink" href="#practice-problem-2-3-a" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">8.3.3.1. </span>Practice Problem 2.3-A<a class="headerlink" href="#practice-problem-2-3-a" title="Permalink to this headline">#</a></h3>
 <p>Reference: §2.3, Problem 2 in Navidi</p>
 <p>Let <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> be events with <span class="math notranslate nohighlight">\(P(A) = 0.5\)</span> and <span class="math notranslate nohighlight">\(P(A \cap B^c) = 0.4\)</span>. For what values of <span class="math notranslate nohighlight">\(P(B)\)</span> will <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> be independent?</p>
 </div>
 <div class="section" id="practice-problem-2-3-b">
-<h3>Practice Problem 2.3-B<a class="headerlink" href="#practice-problem-2-3-b" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">8.3.3.2. </span>Practice Problem 2.3-B<a class="headerlink" href="#practice-problem-2-3-b" title="Permalink to this headline">#</a></h3>
 <p>Reference: §2.3, Problem 6 in Navidi</p>
 <p>The article “Integrating Risk…” estimates that 5.6% of a certain population has asthma, and that an asthmatic has probability 0.027 of suffering an asthma attack on a given day. A person is chosen at random from this populaton. What is the probability that this person has an asthma attack on that day?</p>
 </div>
 <div class="section" id="practice-problem-2-3-c">
-<h3>Practice Problem 2.3-C<a class="headerlink" href="#practice-problem-2-3-c" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">8.3.3.3. </span>Practice Problem 2.3-C<a class="headerlink" href="#practice-problem-2-3-c" title="Permalink to this headline">#</a></h3>
 <p>Reference: §2.3, Problem 8 in Navidi</p>
 <p>A drag racer has two parachutes, a main and a backup, that are designed to bring the vehicle to a stop after the end of a run. Suppose that the main chute deploys with probability 0.99, and that if the main fails to deploy, the backup deploys with probability 0.98.</p>
 <ol class="simple">
@@ -1188,7 +1336,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ol>
 </div>
 <div class="section" id="practice-problem-2-3-d">
-<h3>Practice Problem 2.3-D<a class="headerlink" href="#practice-problem-2-3-d" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">8.3.3.4. </span>Practice Problem 2.3-D<a class="headerlink" href="#practice-problem-2-3-d" title="Permalink to this headline">#</a></h3>
 <p>Reference: §2.3, Problem 12 in Navidi</p>
 <p>Sarah and Thomas are going bowling. The probability that Sarach scores more than 175 is 0.4, and the probability that Thomas scores more than 175 is 0.2. Their scores are independent.</p>
 <ol class="simple">
@@ -1197,7 +1345,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ol>
 </div>
 <div class="section" id="practice-problem-2-3-e">
-<h3>Practice Problem 2.3-E<a class="headerlink" href="#practice-problem-2-3-e" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">8.3.3.5. </span>Practice Problem 2.3-E<a class="headerlink" href="#practice-problem-2-3-e" title="Permalink to this headline">#</a></h3>
 <p>Reference: §2.3, Problem 14 in Navidi</p>
 <p>Laura and Philip each fire one shot at a target. Laura has probability 0.5 of hitting the target, and Philip has probability of 0.3. The shots are independent.</p>
 <ol class="simple">
@@ -1207,7 +1355,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ol>
 </div>
 <div class="section" id="practice-problem-2-3-f">
-<h3>Practice Problem 2.3-F<a class="headerlink" href="#practice-problem-2-3-f" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">8.3.3.6. </span>Practice Problem 2.3-F<a class="headerlink" href="#practice-problem-2-3-f" title="Permalink to this headline">#</a></h3>
 <p>Reference: §2.3, Problem 26 in Navidi</p>
 <p>A certain delivery service offers both express and standard delivery. Seventy-five percent of parcels are sent by standard delivery, and 25% are sent by express. Of those sent standard, 80% arrive the next day, and of those sent express, 95% arrive the next day. A record of parcel delivery is chosen at random from the company’s files.</p>
 <ol class="simple">
@@ -1218,10 +1366,10 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="section" id="random-variables">
-<h2>Random Variables<a class="headerlink" href="#random-variables" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.3.4. </span>Random Variables<a class="headerlink" href="#random-variables" title="Permalink to this headline">#</a></h2>
 <p><strong>Further Reading</strong>: §2.4 in Navidi (2015)</p>
 <div class="section" id="practice-problem-2-4-a">
-<h3>Practice Problem 2.4-A<a class="headerlink" href="#practice-problem-2-4-a" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">8.3.4.1. </span>Practice Problem 2.4-A<a class="headerlink" href="#practice-problem-2-4-a" title="Permalink to this headline">#</a></h3>
 <p>Reference: §2.4, Problem 10 in Navidi.</p>
 <p>Microprocessing chips are randomly sampled one by one from a large population, and tested to determine if they are acceptable for a certain application. Ninety percent of the chips in the population are acceptable.</p>
 <ol class="simple">
@@ -1232,7 +1380,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ol>
 </div>
 <div class="section" id="practice-problem-2-4-b">
-<h3>Practice Problem 2.4-B<a class="headerlink" href="#practice-problem-2-4-b" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">8.3.4.2. </span>Practice Problem 2.4-B<a class="headerlink" href="#practice-problem-2-4-b" title="Permalink to this headline">#</a></h3>
 <p>Reference: §2.4, Problem 20 in Navidi.</p>
 <p>The main bearing clearance (in mm) in a certain type of engine is a random variable with probability density function:</p>
 <div class="math notranslate nohighlight">
@@ -1254,10 +1402,10 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="section" id="jointly-distributed-random-variables">
-<h2>Jointly Distributed Random Variables<a class="headerlink" href="#jointly-distributed-random-variables" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">8.3.5. </span>Jointly Distributed Random Variables<a class="headerlink" href="#jointly-distributed-random-variables" title="Permalink to this headline">#</a></h2>
 <p>Reference: §2.6 in Navidi (2015)</p>
 <div class="section" id="practice-problem-2-6-a">
-<h3>Practice Problem 2.6-A<a class="headerlink" href="#practice-problem-2-6-a" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">8.3.5.1. </span>Practice Problem 2.6-A<a class="headerlink" href="#practice-problem-2-6-a" title="Permalink to this headline">#</a></h3>
 <p>Reference: §2.6, Problem 8 in Navidi.</p>
 <p>The number of customers in line at a supermarket express checkout counter is a random variable whose probability mass function is given in the following table:</p>
 <table class="colwidths-auto table">
@@ -1313,7 +1461,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ol>
 </div>
 <div class="section" id="practice-problem-2-6-b">
-<h3>Practice Problem 2.6-B<a class="headerlink" href="#practice-problem-2-6-b" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">8.3.5.2. </span>Practice Problem 2.6-B<a class="headerlink" href="#practice-problem-2-6-b" title="Permalink to this headline">#</a></h3>
 <p>Reference: §2.6, Problem 18 in Navidi.</p>
 <p>A production facility contains two machines that are used to rework items that are initially defective. Let <span class="math notranslate nohighlight">\(X\)</span> be the number of hours that the first machine is in use, and let <span class="math notranslate nohighlight">\(Y\)</span> be the number of hours that the second machine is in use, on a randomly chosen day. Assume that <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> have joint probability density function given by:</p>
 <div class="math notranslate nohighlight">
@@ -1354,42 +1502,48 @@ const thebe_selector_output = ".output, .cell_output"
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="02-Jointly-Distributed-Random-Variables.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Jointly Distributed Random Variables</p>
+            <p class="prev-next-title"><span class="section-number">8.2. </span>Jointly Distributed Random Variables</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="../09/distributions.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Common Probability Distributions</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>Common Probability Distributions</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
     
-      By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>

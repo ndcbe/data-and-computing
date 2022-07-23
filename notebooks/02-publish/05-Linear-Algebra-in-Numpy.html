@@ -5,10 +5,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Linear Algebra Review and SciPy Basics &#8212; Data and Computing for Chemical Engieers</title>
+    <title>2.7. Linear Algebra Review and SciPy Basics &#8212; Data and Computing for Chemical Engieers</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet">
-  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,20 +19,16 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -39,12 +36,13 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -55,8 +53,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Algorithm Building Blocks" href="../03/algorithms.html" />
-    <link rel="prev" title="Example: Mass Balances and Linear Algebra" href="04-Example-Atomic-Mass-Balances.html" />
+    <link rel="next" title="3. Algorithm Building Blocks" href="../03/algorithms.html" />
+    <link rel="prev" title="2.6. Example: Mass Balances and Linear Algebra" href="04-Example-Atomic-Mass-Balances.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -64,7 +62,21 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -73,9 +85,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -93,17 +106,23 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../intro.html">
-   Data and Computing for Engineers
-  </a>
- </li>
-</ul>
-<ul class="current nav bd-sidenav">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Data and Computing for Engineers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Python Programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../01/00-Python-Primer.html">
-   Python Primer
+   1. Python Primer
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -113,79 +132,86 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/01-Jupyter-Notebooks.html">
-     Welcome to Jupyter Notebooks and Vocareum
+     1.1. Welcome to Jupyter Notebooks and Vocareum
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/02-Python-Basics-I-Variables-Strings-Bugs.html">
-     Python Basics I: Variables, Strings, and Bugs
+     1.2. Python Basics I: Variables, Strings, and Bugs
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/03-Flow-control.html">
-     Python Basics II: Loopy Logic
+     1.3. Python Basics II: Loopy Logic
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/05-Python-Basics-III-Lists-Dictionaries-Enumeration.html">
-     Python Basics III: Lists, Dictionaries, and Enumeration
+     1.4. Python Basics III: Lists, Dictionaries, and Enumeration
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/04-Functions-and-Scope.html">
-     Functions and Scope
+     1.5. Functions and Scope
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/04b-Recursion.html">
-     Recursion
+     1.6. Recursion
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/03b-Pseudocode.html">
-     Pseudocode
+     1.7. Pseudocode
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/04d-Example-High-Low-Game.html">
-     High/Low Guess My Number Game
+     1.8. High/Low Guess My Number Game
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/04c-Modules-and-Files.html">
-     Modules and Files
+     1.9. Modules and Files
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/06-NumPy.html">
-     Linear Algebra with Numpy and Scipy
+     1.10. Linear Algebra with Numpy and Scipy
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/07-Matplotlib.html">
-     Visualization with matplotlib
+     1.11. Visualization with matplotlib
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/08-Pandas.html">
-     Manipulating Data with Pandas
+     1.12. Manipulating Data with Pandas
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/09-Functions-as-Arguments.html">
-     Functions as Arguments
+     1.13. Functions as Arguments
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/10-Testing-and-Debugging.html">
-     Testing and Debugging in Python
+     1.14. Testing and Debugging in Python
     </a>
    </li>
   </ul>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Numerical Methods
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="../02/linear_algebra.html">
-   Linear Algebra
+   2. Linear Algebra
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
   <label for="toctree-checkbox-2">
@@ -195,44 +221,44 @@ const thebe_selector_output = ".output, .cell_output"
   <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="01-Modeling-Systems-of-Linear-Equations.html">
-     Modeling Systems of Linear Equations
+     2.1. Modeling Systems of Linear Equations
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="02-Gauss-Elimination.html">
-     Gaussian Elimination
+     2.2. Gaussian Elimination
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="02b-Invertible-Matrix-Theorem-and-Gauss-Example.html">
-     Invertible Matrix Theorem and Gaussian Elimination Example
+     2.3. Invertible Matrix Theorem and Gaussian Elimination Example
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="03-LU-Factorization.html">
-     LU Decomposition and Condition Number
+     2.4. LU Decomposition and Condition Number
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="03b-Condition-Number.html">
-     Errors in Linear Systems
+     2.5. Errors in Linear Systems
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="04-Example-Atomic-Mass-Balances.html">
-     Example: Mass Balances and Linear Algebra
+     2.6. Example: Mass Balances and Linear Algebra
     </a>
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     Linear Algebra Review and SciPy Basics
+     2.7. Linear Algebra Review and SciPy Basics
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../03/algorithms.html">
-   Algorithm Building Blocks
+   3. Algorithm Building Blocks
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
   <label for="toctree-checkbox-3">
@@ -242,24 +268,24 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../03-publish/01-Taylor-Series.html">
-     Taylor Series Approximations
+     3.1. Taylor Series Approximations
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../03-publish/02-Finite-Difference.html">
-     Finite Difference Derivative Approximations
+     3.2. Finite Difference Derivative Approximations
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../03-publish/03-Example-Heating-a-Metal-Slab.html">
-     Example: Heating a Metal Slab
+     3.3. Example: Heating a Metal Slab
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../04/nonlinear_systems.html">
-   Nonlinear Systems of Equations
+   4. Nonlinear Systems of Equations
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
   <label for="toctree-checkbox-4">
@@ -269,39 +295,39 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../04-publish/01-Modeling-Systems-of-Nonlinear-Equations.html">
-     Modeling Systems of Nonlinear Equations
+     4.1. Modeling Systems of Nonlinear Equations
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../04-publish/02-Newton-Raphson-Method-in-One-Dimension.html">
-     Newton-Raphson Method in One Dimension
+     4.2. Newton-Raphson Method in One Dimension
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../04-publish/03-More-Newton-Type-Methods.html">
-     More Newton-Type Methods
+     4.3. More Newton-Type Methods
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../04-publish/04-Convergence-Analysis-for-Newton-Raphson-Methods.html">
-     Convergence Analysis for Newton-Raphson Methods
+     4.4. Convergence Analysis for Newton-Raphson Methods
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../04-publish/05-Newton-Raphson-Methods-for-Systems-of-Equations.html">
-     Newton-Raphson Methods for Systems of Equations
+     4.5. Newton-Raphson Methods for Systems of Equations
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../04-publish/06-Newton-Methods-in-Scipy.html">
-     Newton Methods in Scipy
+     4.6. Newton Methods in Scipy
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../05/optimization.html">
-   Continuous Optimization
+   5. Continuous Optimization
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
   <label for="toctree-checkbox-5">
@@ -311,24 +337,24 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../05-publish/01-Pyomo-Basics.html">
-     Pyomo Basics
+     5.1. Pyomo Basics
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../05-publish/02-Electricity-Market-Optimization.html">
-     Electricity Market Optimization
+     5.2. Electricity Market Optimization
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../05-publish/03-Flash-Calculations-in-Pyomo.html">
-     Flash Calculations in Pyomo
+     5.3. Flash Calculations in Pyomo
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../06/integration.html">
-   Numeric Integration
+   6. Numeric Integration
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
   <label for="toctree-checkbox-6">
@@ -338,59 +364,66 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../06-publish/01-Intro-and-Newton-Cotes.html">
-     Introduction and Newton-Cotes
+     6.1. Introduction and Newton-Cotes
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../06-publish/02-Gauss-Quadrature.html">
-     Gauss Quadrature
+     6.2. Gauss Quadrature
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../06-publish/03-Adaptive-Methods-and-Scipy.html">
-     Adaptive Methods for Newton-Cotes and Gauss Quadrature, Scipy Library
+     6.3. Adaptive Methods for Newton-Cotes and Gauss Quadrature, Scipy Library
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../06-publish/04-Application-Inertial-Navigation-Systems.html">
-     Application: Inertial Navigation Systems
+     6.4. Application: Inertial Navigation Systems
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../06-publish/05-Forward-and-Backward-Euler.html">
-     Forward and Backward Euler Methods
+     6.5. Forward and Backward Euler Methods
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../06-publish/06-Trapezoid-Rule.html">
-     Crank-Nicolson (Trapezoid Rule)
+     6.6. Crank-Nicolson (Trapezoid Rule)
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../06-publish/07-Stability-Analysis.html">
-     Stability Analysis of Forward/Backward Euler and Crank-Nicolson Methods
+     6.7. Stability Analysis of Forward/Backward Euler and Crank-Nicolson Methods
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../06-publish/08-Explicit-Runge-Kutta.html">
-     Explicit Range Kutta Method
+     6.8. Explicit Range Kutta Method
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../06-publish/09-Systems-of-Differential-Equations-and-Scipy.html">
-     Systems of Differential Equations and Scipy
+     6.9. Systems of Differential Equations and Scipy
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../06-publish/10-Example-Reaction-Rates.html">
-     Example: Reaction Rates
+     6.10. Example: Reaction Rates
     </a>
    </li>
   </ul>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Data Analysis
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../07/stats.html">
-   Descriptive Statistics and Visualization
+   7. Descriptive Statistics and Visualization
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
   <label for="toctree-checkbox-7">
@@ -400,24 +433,24 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../07-publish/01-Sampling.html">
-     Sampling
+     7.1. Sampling
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../07-publish/02-Summary-Statistics.html">
-     Summary Statistics
+     7.2. Summary Statistics
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../07-publish/03-Visualizing-Data.html">
-     Visualizing Data
+     7.3. Visualizing Data
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../08/probability.html">
-   Probability Theory
+   8. Probability Theory
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
   <label for="toctree-checkbox-8">
@@ -427,24 +460,24 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../08-publish/01-Random-Variables.html">
-     Random Variables
+     8.1. Random Variables
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../08-publish/02-Jointly-Distributed-Random-Variables.html">
-     Jointly Distributed Random Variables
+     8.2. Jointly Distributed Random Variables
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../08-publish/03-Practice-Problems.html">
-     Practice Problems
+     8.3. Practice Problems
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../09/distributions.html">
-   Common Probability Distributions
+   9. Common Probability Distributions
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
   <label for="toctree-checkbox-9">
@@ -454,34 +487,34 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../09-publish/01-Bernoulli-Probability-Distribution.html">
-     Bernoulli Probability Distribution
+     9.1. Bernoulli Probability Distribution
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../09-publish/02-Binomial-Probability-Distribtuion.html">
-     Binomial Probability Distributions
+     9.2. Binomial Probability Distributions
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../09-publish/03-Poisson-Probability-Distribution.html">
-     Poisson Probability Distributions
+     9.3. Poisson Probability Distributions
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../09-publish/04-Normal-Probability-Distribution.html">
-     Normal Probability Distributions
+     9.4. Normal Probability Distributions
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../09-publish/05-Common-Probability-Distributions-Summary.html">
-     Common Probability Distributions Summary
+     9.5. Common Probability Distributions Summary
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../10/uncertainty.html">
-   Uncertainty and Error Propagation
+   10. Uncertainty and Error Propagation
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
   <label for="toctree-checkbox-10">
@@ -491,34 +524,34 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../10-publish/01-Measurement-Error.html">
-     Measurement Error
+     10.1. Measurement Error
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../10-publish/02-Error-Propagation.html">
-     Error Propagation
+     10.2. Error Propagation
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../10-publish/03-Measuring-Flowrate-Example.html">
-     Measuring Flowrate Example
+     10.3. Measuring Flowrate Example
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../10-publish/04-Practice-Problems.html">
-     Practice Problems
+     10.4. Practice Problems
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../10-publish/05-Simulation.html">
-     Simulation
+     10.5. Simulation
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../11/inference.html">
-   Statistical Inference
+   11. Statistical Inference
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
   <label for="toctree-checkbox-11">
@@ -528,59 +561,59 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../11-publish/01-Central-Limit-Theorem.html">
-     Central Limit Theorem
+     11.1. Central Limit Theorem
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../11-publish/02-Standard-Normal-Distribution.html">
-     Standard Normal Distribution
+     11.2. Standard Normal Distribution
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../11-publish/03-Confidence-Intervals.html">
-     Confidence Intervals
+     11.3. Confidence Intervals
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../11-publish/04-Students-t-Distribution.html">
-     Student’s t-Distribution
+     11.4. Student’s t-Distribution
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../11-publish/05-First-Hypothesis-Testing.html">
-     First Hypothesis Testing
+     11.5. First Hypothesis Testing
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../11-publish/06-Hypothesis-Testing-Review-and-Type-I-Type-II-Errors.html">
-     Hypothesis Testing Review and Type I/Type II Errors
+     11.6. Hypothesis Testing Review and Type I/Type II Errors
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../11-publish/07-Flavors-of-Hypothesis-Testing.html">
-     Flavors of Hypothesis Testing
+     11.7. Flavors of Hypothesis Testing
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../11-publish/08-Statistical-Power-Basics.html">
-     Statistical Power Basics
+     11.8. Statistical Power Basics
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../11-publish/09-Statistical-Power-in-Python.html">
-     Statistical Power in Python
+     11.9. Statistical Power in Python
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../11-publish/10-Statistical-Power-Practice-Problems.html">
-     Statistical Power Practice Problems
+     11.10. Statistical Power Practice Problems
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../12/regression.html">
-   Multivariate Linear Regression
+   12. Multivariate Linear Regression
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
   <label for="toctree-checkbox-12">
@@ -590,29 +623,29 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../12-publish/01-Ordinary-Least-Squares-Linear-Regression.html">
-     Ordinary Least Squares Linear Regression
+     12.1. Ordinary Least Squares Linear Regression
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../12-publish/02-Uncertainty-Analysis-and-Statistical-Inference.html">
-     Uncertainty Analysis and Statistical Inference
+     12.2. Uncertainty Analysis and Statistical Inference
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../12-publish/03-Linear-Regression-Practice-Problems.html">
-     Linear Regression Practice Problems
+     12.3. Linear Regression Practice Problems
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../12-publish/04-Multivariate-Linear-Regression.html">
-     Multivariate Linear Regression
+     12.4. Multivariate Linear Regression
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../13/advanced_regression.html">
-   Nonlinear Regression
+   13. Nonlinear Regression
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
   <label for="toctree-checkbox-13">
@@ -622,225 +655,340 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../13-publish/01-Transformations-and-Linear-Regression.html">
-     Transformations and Linear Regression
+     13.1. Transformations and Linear Regression
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../13-publish/02-Nonlinear-Regression.html">
-     Nonlinear Regression
+     13.2. Nonlinear Regression
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../13-publish/03-Nonlinear-Regression-Practice-Problem.html">
-     Nonlinear Regression Practice Problem
+     13.3. Nonlinear Regression Practice Problem
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../13-publish/04-Weighted-Regression.html">
-     Weighted Linear Regression
+     13.4. Weighted Linear Regression
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../13-publish/05-Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression.html">
-     Monte Carlo Uncertainty Analysis for Nonlinear Regression
+     13.5. Monte Carlo Uncertainty Analysis for Nonlinear Regression
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../13-publish/06-Bootstrap-Confidence-Intervals.html">
-     Bootstrap Confidence Intervals
+     13.6. Bootstrap Confidence Intervals
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../13-publish/07-Nonlinear-Case-Study-Adsorptive-Membranes.html">
-     Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes
+     13.7. Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../14/design_of_experiments.html">
-   Design of Experiments
+   14. Design of Experiments
   </a>
  </li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/02-publish/05-Linear-Algebra-in-Numpy.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/ndcbe/data-and-computing"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/02-publish/05-Linear-Algebra-in-Numpy.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/02-publish/05-Linear-Algebra-in-Numpy.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/02-publish/05-Linear-Algebra-in-Numpy.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/02-publish/05-Linear-Algebra-in-Numpy.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/02-publish/05-Linear-Algebra-in-Numpy.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ndcbe/data-and-computing"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/02-publish/05-Linear-Algebra-in-Numpy.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/notebooks/02-publish/05-Linear-Algebra-in-Numpy.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#learning-objectives">
-   Learning Objectives
+   2.7.1. Learning Objectives
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#notation-for-cbe-40499-60499-and-bielger-2010">
-   Notation for CBE 40499/60499 and Bielger (2010)
+   2.7.2. Notation for CBE 40499/60499 and Bielger (2010)
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#matrix-operations">
-   Matrix Operations
+   2.7.3. Matrix Operations
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#property-1">
-     Property #1:
+     2.7.3.1. Property #1:
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#property-2">
-     Property #2:
+     2.7.3.2. Property #2:
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#property-3">
-     Property #3:
+     2.7.3.3. Property #3:
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#property-4">
-     Property #4:
+     2.7.3.4. Property #4:
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#property-5">
-     Property #5:
+     2.7.3.5. Property #5:
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#determinant">
-   Determinant
+   2.7.4. Determinant
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id1">
-     Property #1:
+     2.7.4.1. Property #1:
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id2">
-     Property #2:
+     2.7.4.2. Property #2:
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id3">
-     Property #3:
+     2.7.4.3. Property #3:
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id4">
-     Property #4:
+     2.7.4.4. Property #4:
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#calculating-3-times-3-determinant-by-hand">
-     Calculating
+     2.7.4.5. Calculating
      <span class="math notranslate nohighlight">
       \(3 \times 3\)
      </span>
@@ -851,71 +999,71 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#rank">
-   Rank
+   2.7.5. Rank
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#matrix-rank-definition">
-     Matrix Rank Definition
+     2.7.5.1. Matrix Rank Definition
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-activities">
-     Practice Activities
+     2.7.5.2. Practice Activities
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#inverse">
-   Inverse
+   2.7.6. Inverse
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#inverse-of-a-matrix-defnition">
-     Inverse of a Matrix Defnition
+     2.7.6.1. Inverse of a Matrix Defnition
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id5">
-     Practice Activities
+     2.7.6.2. Practice Activities
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#solving-linear-systems">
-   Solving Linear Systems
+   2.7.7. Solving Linear Systems
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#explicit-inverse">
-     Explicit Inverse
+     2.7.7.1. Explicit Inverse
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#lu-decomposition">
-     LU Decomposition
+     2.7.7.2. LU Decomposition
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#is-p-orthogonal">
-       Is P orthogonal?
+       2.7.7.2.1. Is P orthogonal?
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#matlab">
-       MATLAB
+       2.7.7.2.2. MATLAB
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#scipy">
-       SciPy
+       2.7.7.2.3. SciPy
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#verify-our-answer-with-linalg-solve">
-       Verify our answer with
+       2.7.7.2.4. Verify our answer with
        <code class="docutils literal notranslate">
         <span class="pre">
          linalg.solve
@@ -929,48 +1077,49 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#invertable-matrix-theorem">
-   Invertable Matrix Theorem
+   2.7.8. Invertable Matrix Theorem
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#eigenvectors-and-eigenvalues">
-   Eigenvectors and Eigenvalues
+   2.7.9. Eigenvectors and Eigenvalues
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#eigenvalues-eigenvectors-definition">
-     Eigenvalues/Eigenvectors Definition
+     2.7.9.1. Eigenvalues/Eigenvectors Definition
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id6">
-     Practice Activities
+     2.7.9.2. Practice Activities
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#singular-value-decomposition">
-   Singular Value Decomposition
+   2.7.10. Singular Value Decomposition
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#vector-and-matrix-norms">
-   Vector and Matrix Norms
+   2.7.11. Vector and Matrix Norms
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#vector-and-matrix-norms-definition">
-     Vector and Matrix Norms Definition
+     2.7.11.1. Vector and Matrix Norms Definition
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#vector-norm-properties">
-       Vector Norm Properties
+       2.7.11.1.1. Vector Norm Properties
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#p-norm-properties">
+       2.7.11.1.2.
        <em>
         P
        </em>
@@ -979,17 +1128,17 @@ const thebe_selector_output = ".output, .cell_output"
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#additional-matrix-norms">
-       Additional Matrix Norms
+       2.7.11.1.3. Additional Matrix Norms
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#frobenius-norm">
-       Frobenius Norm
+       2.7.11.1.4. Frobenius Norm
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#condition-number">
-       Condition Number
+       2.7.11.1.5. Condition Number
       </a>
      </li>
     </ul>
@@ -998,12 +1147,11 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Linear Algebra Review and SciPy Basics</h1>
@@ -1018,74 +1166,74 @@ const thebe_selector_output = ".output, .cell_output"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#learning-objectives">
-   Learning Objectives
+   2.7.1. Learning Objectives
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#notation-for-cbe-40499-60499-and-bielger-2010">
-   Notation for CBE 40499/60499 and Bielger (2010)
+   2.7.2. Notation for CBE 40499/60499 and Bielger (2010)
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#matrix-operations">
-   Matrix Operations
+   2.7.3. Matrix Operations
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#property-1">
-     Property #1:
+     2.7.3.1. Property #1:
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#property-2">
-     Property #2:
+     2.7.3.2. Property #2:
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#property-3">
-     Property #3:
+     2.7.3.3. Property #3:
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#property-4">
-     Property #4:
+     2.7.3.4. Property #4:
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#property-5">
-     Property #5:
+     2.7.3.5. Property #5:
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#determinant">
-   Determinant
+   2.7.4. Determinant
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id1">
-     Property #1:
+     2.7.4.1. Property #1:
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id2">
-     Property #2:
+     2.7.4.2. Property #2:
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id3">
-     Property #3:
+     2.7.4.3. Property #3:
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id4">
-     Property #4:
+     2.7.4.4. Property #4:
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#calculating-3-times-3-determinant-by-hand">
-     Calculating
+     2.7.4.5. Calculating
      <span class="math notranslate nohighlight">
       \(3 \times 3\)
      </span>
@@ -1096,71 +1244,71 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#rank">
-   Rank
+   2.7.5. Rank
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#matrix-rank-definition">
-     Matrix Rank Definition
+     2.7.5.1. Matrix Rank Definition
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#practice-activities">
-     Practice Activities
+     2.7.5.2. Practice Activities
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#inverse">
-   Inverse
+   2.7.6. Inverse
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#inverse-of-a-matrix-defnition">
-     Inverse of a Matrix Defnition
+     2.7.6.1. Inverse of a Matrix Defnition
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id5">
-     Practice Activities
+     2.7.6.2. Practice Activities
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#solving-linear-systems">
-   Solving Linear Systems
+   2.7.7. Solving Linear Systems
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#explicit-inverse">
-     Explicit Inverse
+     2.7.7.1. Explicit Inverse
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#lu-decomposition">
-     LU Decomposition
+     2.7.7.2. LU Decomposition
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#is-p-orthogonal">
-       Is P orthogonal?
+       2.7.7.2.1. Is P orthogonal?
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#matlab">
-       MATLAB
+       2.7.7.2.2. MATLAB
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#scipy">
-       SciPy
+       2.7.7.2.3. SciPy
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#verify-our-answer-with-linalg-solve">
-       Verify our answer with
+       2.7.7.2.4. Verify our answer with
        <code class="docutils literal notranslate">
         <span class="pre">
          linalg.solve
@@ -1174,48 +1322,49 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#invertable-matrix-theorem">
-   Invertable Matrix Theorem
+   2.7.8. Invertable Matrix Theorem
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#eigenvectors-and-eigenvalues">
-   Eigenvectors and Eigenvalues
+   2.7.9. Eigenvectors and Eigenvalues
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#eigenvalues-eigenvectors-definition">
-     Eigenvalues/Eigenvectors Definition
+     2.7.9.1. Eigenvalues/Eigenvectors Definition
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id6">
-     Practice Activities
+     2.7.9.2. Practice Activities
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#singular-value-decomposition">
-   Singular Value Decomposition
+   2.7.10. Singular Value Decomposition
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#vector-and-matrix-norms">
-   Vector and Matrix Norms
+   2.7.11. Vector and Matrix Norms
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#vector-and-matrix-norms-definition">
-     Vector and Matrix Norms Definition
+     2.7.11.1. Vector and Matrix Norms Definition
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#vector-norm-properties">
-       Vector Norm Properties
+       2.7.11.1.1. Vector Norm Properties
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#p-norm-properties">
+       2.7.11.1.2.
        <em>
         P
        </em>
@@ -1224,17 +1373,17 @@ const thebe_selector_output = ".output, .cell_output"
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#additional-matrix-norms">
-       Additional Matrix Norms
+       2.7.11.1.3. Additional Matrix Norms
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#frobenius-norm">
-       Frobenius Norm
+       2.7.11.1.4. Frobenius Norm
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#condition-number">
-       Condition Number
+       2.7.11.1.5. Condition Number
       </a>
      </li>
     </ul>
@@ -1247,11 +1396,12 @@ const thebe_selector_output = ".output, .cell_output"
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="linear-algebra-review-and-scipy-basics">
-<h1>Linear Algebra Review and SciPy Basics<a class="headerlink" href="#linear-algebra-review-and-scipy-basics" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">2.7. </span>Linear Algebra Review and SciPy Basics<a class="headerlink" href="#linear-algebra-review-and-scipy-basics" title="Permalink to this headline">#</a></h1>
 <p><span class="xref myst">Reference: Section 2.2 Vectors and Matrices in Nonlinear Programming: Concepts, Algorithms, and Applications to Chemical Processes by L. T. Bielger (2010).</span></p>
 <p><strong>Recommended Links</strong></p>
 <ul class="simple">
@@ -1263,7 +1413,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p>Tip: We will mostly use SciPy for linear algebra. (It has more sophisticated capabilities than NumPy.) We will use NumPy if/when SciPy does not offer a specific command.</p>
 <div class="section" id="learning-objectives">
-<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.7.1. </span>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">#</a></h2>
 <p>After studying this notebook, completing the activities, and asking questions in class, you should be able to:</p>
 <ul class="simple">
 <li><p>Understand matrix operations on paper and in python.</p></li>
@@ -1288,7 +1438,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="section" id="notation-for-cbe-40499-60499-and-bielger-2010">
-<h2>Notation for CBE 40499/60499 and Bielger (2010)<a class="headerlink" href="#notation-for-cbe-40499-60499-and-bielger-2010" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.7.2. </span>Notation for CBE 40499/60499 and Bielger (2010)<a class="headerlink" href="#notation-for-cbe-40499-60499-and-bielger-2010" title="Permalink to this headline">#</a></h2>
 <p>The following is somewhat standard notation in scientific computing and data science literature:</p>
 <ul class="simple">
 <li><p>Scalars (constants and variables): Lowercase Greek letters (more common), lowercase non-bold Roman letters (especially if dictated by science or engineering context/domain norms)</p></li>
@@ -1301,11 +1451,11 @@ const thebe_selector_output = ".output, .cell_output"
 <p>The notation for lectures will (hopefully) be obvious from context. I sometimes use Greek letters for constants and Roman letters for variables… unless the Greek letters have engineering or scientific meaning.</p>
 </div>
 <div class="section" id="matrix-operations">
-<h2>Matrix Operations<a class="headerlink" href="#matrix-operations" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.7.3. </span>Matrix Operations<a class="headerlink" href="#matrix-operations" title="Permalink to this headline">#</a></h2>
 <p><em>Section <strong>2.2 Vectors and Matrices</strong> in Biegler (2010)</em></p>
 <p>In this section we will introduce properties of matrices with code examples following each property.</p>
 <div class="section" id="property-1">
-<h3>Property #1:<a class="headerlink" href="#property-1" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.7.3.1. </span>Property #1:<a class="headerlink" href="#property-1" title="Permalink to this headline">#</a></h3>
 <p>Multiplying two matrices <span class="math notranslate nohighlight">\(A\)</span> <span class="math notranslate nohighlight">\(\in\)</span> <span class="math notranslate nohighlight">\(\mathbb{R}^{n \times m}\)</span> and <span class="math notranslate nohighlight">\(B\)</span> <span class="math notranslate nohighlight">\(\in\)</span> <span class="math notranslate nohighlight">\(\mathbb{R}^{m \times p}\)</span> leads to the product <span class="math notranslate nohighlight">\(C \in\)</span> <span class="math notranslate nohighlight">\(\mathbb{R}^{n \times p}\)</span> with elements <span class="math notranslate nohighlight">\( \mathbf{\{C\}_{ij}}\)</span> = <span class="math notranslate nohighlight">\(\sum_{k=1}^m  \mathbf{\{A\}_{ik}}  \mathbf{\{B\}_{kj}}\)</span>. This operation is defined only if the number of columns in <span class="math notranslate nohighlight">\(A\)</span> and rows of <span class="math notranslate nohighlight">\(B\)</span> is the same.</p>
 <div class="admonition seealso">
 <p class="admonition-title"><b>Home Activity</b></p>
@@ -1351,7 +1501,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="section" id="property-2">
-<h3>Property #2:<a class="headerlink" href="#property-2" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.7.3.2. </span>Property #2:<a class="headerlink" href="#property-2" title="Permalink to this headline">#</a></h3>
 <p>The <em>transpose</em> of <span class="math notranslate nohighlight">\(A\)</span> <span class="math notranslate nohighlight">\(\in\)</span> <span class="math notranslate nohighlight">\(\mathbb{R}^{n \times m}\)</span> is <span class="math notranslate nohighlight">\(A^T\)</span> <span class="math notranslate nohighlight">\(\in\)</span> <span class="math notranslate nohighlight">\(\mathbb{R}^{m \times n}\)</span> with the rows and columns of A interchanged, i.e.<span class="math notranslate nohighlight">\( \mathbf{\{A^T\}_{ij}} =  \mathbf{\{A\}_{ji}}\)</span>.</p>
 <div class="admonition seealso">
 <p class="admonition-title"><b>Home Activity</b></p>
@@ -1367,11 +1517,11 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="section" id="property-3">
-<h3>Property #3:<a class="headerlink" href="#property-3" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.7.3.3. </span>Property #3:<a class="headerlink" href="#property-3" title="Permalink to this headline">#</a></h3>
 <p>A <em>symmetric</em> matrix <span class="math notranslate nohighlight">\(A\)</span> <span class="math notranslate nohighlight">\(\in\)</span> <span class="math notranslate nohighlight">\(\mathbb{R}^{n \times n}\)</span> satisfies <span class="math notranslate nohighlight">\(A = A^T\)</span>.</p>
 </div>
 <div class="section" id="property-4">
-<h3>Property #4:<a class="headerlink" href="#property-4" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.7.3.4. </span>Property #4:<a class="headerlink" href="#property-4" title="Permalink to this headline">#</a></h3>
 <p>A <em>diagonal</em> matrix <span class="math notranslate nohighlight">\(A\)</span> <span class="math notranslate nohighlight">\(\in\)</span> <span class="math notranslate nohighlight">\(\mathbb{R}^{n \times n}\)</span> has nonzero elements only on the diagonal, i.e., <span class="math notranslate nohighlight">\( \mathbf{\{A\}_{ij}} = 0, i \neq j\)</span>.</p>
 <div class="admonition seealso">
 <p class="admonition-title"><b>Home Activity</b></p>
@@ -1387,7 +1537,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="section" id="property-5">
-<h3>Property #5:<a class="headerlink" href="#property-5" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.7.3.5. </span>Property #5:<a class="headerlink" href="#property-5" title="Permalink to this headline">#</a></h3>
 <p>The <em>identity</em> matrix <span class="math notranslate nohighlight">\(I \in \mathbb{R}^{n \times n}\)</span> is defined as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}  \mathbf{\{I\}_{ij}}=   \left\{
@@ -1411,7 +1561,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="section" id="determinant">
-<h2>Determinant<a class="headerlink" href="#determinant" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.7.4. </span>Determinant<a class="headerlink" href="#determinant" title="Permalink to this headline">#</a></h2>
 <p><em>Section <strong>2.2 Vectors and Matrices</strong> in Biegler (2010)</em></p>
 <p>A <em>determinant</em> is a scalar associated to a square matrix, i.e., det(<span class="math notranslate nohighlight">\(A\)</span>) for <span class="math notranslate nohighlight">\(A\)</span> <span class="math notranslate nohighlight">\(\in\)</span> <span class="math notranslate nohighlight">\(\mathbb{R}^{n \times n}\)</span>, and can be defined recursively by det(<span class="math notranslate nohighlight">\(A\)</span>) = <span class="math notranslate nohighlight">\(\sum_i (-1)^{i+j} \mathbf{\{A\}_{ij}} \bar{A}_{ij}\)</span> for any column <span class="math notranslate nohighlight">\(j\)</span>, or det(<span class="math notranslate nohighlight">\(A\)</span>) = <span class="math notranslate nohighlight">\(\sum_j (-1)^{i+j} \mathbf{\{A\}_{ij}}\bar{A}_{ij}\)</span> for any row <span class="math notranslate nohighlight">\(i\)</span>, where <span class="math notranslate nohighlight">\(\bar{A}_{ij}\)</span> is the determinant of an (<span class="math notranslate nohighlight">\(n\)</span>-1)-order matrix with row <span class="math notranslate nohighlight">\(i\)</span> and column <span class="math notranslate nohighlight">\(j\)</span> removed.</p>
 <p>We will now manipulate the following matrices to demonstrate properties for the determinant.</p>
@@ -1444,7 +1594,7 @@ B =
 </div>
 <p>The following properties are taken from Section <strong>2.2 Vectors and Matrices</strong> in Biegler (2010).</p>
 <div class="section" id="id1">
-<h3>Property #1:<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.7.4.1. </span>Property #1:<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
 <p>det(<span class="math notranslate nohighlight">\(AB\)</span>) = det(<span class="math notranslate nohighlight">\(A\)</span>)det(<span class="math notranslate nohighlight">\(B\)</span>)</p>
 <div class="admonition note">
 <p class="admonition-title"><b>Class Activity</b></p>
@@ -1460,7 +1610,7 @@ B =
 </div>
 </div>
 <div class="section" id="id2">
-<h3>Property #2:<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.7.4.2. </span>Property #2:<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
 <p>det(<span class="math notranslate nohighlight">\(A\)</span>) = det(<span class="math notranslate nohighlight">\(A^T\)</span>)</p>
 <div class="admonition note">
 <p class="admonition-title"><b>Class Activity</b></p>
@@ -1476,7 +1626,7 @@ B =
 </div>
 </div>
 <div class="section" id="id3">
-<h3>Property #3:<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.7.4.3. </span>Property #3:<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
 <p>For an <span class="math notranslate nohighlight">\(n \times n\)</span> matrix with scalar <span class="math notranslate nohighlight">\(\alpha\)</span>, det(<span class="math notranslate nohighlight">\(\alpha A\)</span>) = <span class="math notranslate nohighlight">\(\alpha^n\)</span>det(<span class="math notranslate nohighlight">\(A\)</span>)</p>
 <div class="admonition note">
 <p class="admonition-title"><b>Class Activity</b></p>
@@ -1492,7 +1642,7 @@ B =
 </div>
 </div>
 <div class="section" id="id4">
-<h3>Property #4:<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.7.4.4. </span>Property #4:<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
 <p>For an identity matrix <span class="math notranslate nohighlight">\(I\)</span>, det(<span class="math notranslate nohighlight">\(I\)</span>) = 1.</p>
 <div class="admonition note">
 <p class="admonition-title"><b>Class Activity</b></p>
@@ -1508,7 +1658,7 @@ B =
 </div>
 </div>
 <div class="section" id="calculating-3-times-3-determinant-by-hand">
-<h3>Calculating <span class="math notranslate nohighlight">\(3 \times 3\)</span> Determinant by Hand<a class="headerlink" href="#calculating-3-times-3-determinant-by-hand" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.7.4.5. </span>Calculating <span class="math notranslate nohighlight">\(3 \times 3\)</span> Determinant by Hand<a class="headerlink" href="#calculating-3-times-3-determinant-by-hand" title="Permalink to this headline">#</a></h3>
 <p>Below is an example from <em>Linear Algebra and Its Applications</em> by David C. Lay, 3rd edition that shows how to calculate a determinant by hand.</p>
 <div class="admonition seealso">
 <p class="admonition-title"><b>Home Activity</b></p>
@@ -1530,9 +1680,9 @@ B =
 </div>
 </div>
 <div class="section" id="rank">
-<h2>Rank<a class="headerlink" href="#rank" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.7.5. </span>Rank<a class="headerlink" href="#rank" title="Permalink to this headline">#</a></h2>
 <div class="section" id="matrix-rank-definition">
-<h3>Matrix Rank Definition<a class="headerlink" href="#matrix-rank-definition" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.7.5.1. </span>Matrix Rank Definition<a class="headerlink" href="#matrix-rank-definition" title="Permalink to this headline">#</a></h3>
 <p><em>Section <strong>2.2 Vectors and Matrices</strong> in Biegler (2010):</em></p>
 <ul class="simple">
 <li><p>The rank of a matrix <span class="math notranslate nohighlight">\(r(A)\)</span> is the order of the largest submatrix in <span class="math notranslate nohighlight">\(A\)</span> that has a nonzero determinant.</p></li>
@@ -1541,7 +1691,7 @@ B =
 </ul>
 </div>
 <div class="section" id="practice-activities">
-<h3>Practice Activities<a class="headerlink" href="#practice-activities" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.7.5.2. </span>Practice Activities<a class="headerlink" href="#practice-activities" title="Permalink to this headline">#</a></h3>
 <div class="admonition seealso">
 <p class="admonition-title"><b>Home Activity</b></p>
 <p>Predict the rank of <span class="math notranslate nohighlight">\(A_1^T\)</span>, <span class="math notranslate nohighlight">\(B_1^T\)</span>, <span class="math notranslate nohighlight">\(C_1\)</span>, and <span class="math notranslate nohighlight">\(D_1\)</span>.</p>
@@ -1611,9 +1761,9 @@ D_1 =
 </div>
 </div>
 <div class="section" id="inverse">
-<h2>Inverse<a class="headerlink" href="#inverse" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.7.6. </span>Inverse<a class="headerlink" href="#inverse" title="Permalink to this headline">#</a></h2>
 <div class="section" id="inverse-of-a-matrix-defnition">
-<h3>Inverse of a Matrix Defnition<a class="headerlink" href="#inverse-of-a-matrix-defnition" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.7.6.1. </span>Inverse of a Matrix Defnition<a class="headerlink" href="#inverse-of-a-matrix-defnition" title="Permalink to this headline">#</a></h3>
 <p><em>Section <strong>2.2 Vectors and Matrices</strong> in Biegler (2010)</em></p>
 <ul class="simple">
 <li><p>If the matrix <span class="math notranslate nohighlight">\(A\)</span> <span class="math notranslate nohighlight">\(\in\)</span> <span class="math notranslate nohighlight">\(\mathbb{R}^{n \times n}\)</span> is nonsingular, i.e., has full rank, then an <em>inverse</em> <span class="math notranslate nohighlight">\(A^{-1}\)</span> exists that satisfies <span class="math notranslate nohighlight">\(AA^{-1} = A^{-1}A = I\)</span>.</p></li>
@@ -1623,7 +1773,7 @@ D_1 =
 </ul>
 </div>
 <div class="section" id="id5">
-<h3>Practice Activities<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.7.6.2. </span>Practice Activities<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
 <div class="admonition seealso">
 <p class="admonition-title"><b>Home Activity</b></p>
 <p>Calculate the inverse of <span class="math notranslate nohighlight">\(A_o\)</span> and verity that <span class="math notranslate nohighlight">\(A_o^{-1} A_o = I\)</span>.</p>
@@ -1680,7 +1830,7 @@ D_1 =
 </div>
 </div>
 <div class="section" id="solving-linear-systems">
-<h2>Solving Linear Systems<a class="headerlink" href="#solving-linear-systems" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.7.7. </span>Solving Linear Systems<a class="headerlink" href="#solving-linear-systems" title="Permalink to this headline">#</a></h2>
 <p>Consider the linear system <span class="math notranslate nohighlight">\(A_1 x = b_1\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1703,7 +1853,7 @@ b1 =
 </div>
 </div>
 <div class="section" id="explicit-inverse">
-<h3>Explicit Inverse<a class="headerlink" href="#explicit-inverse" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.7.7.1. </span>Explicit Inverse<a class="headerlink" href="#explicit-inverse" title="Permalink to this headline">#</a></h3>
 <p>Calculate <span class="math notranslate nohighlight">\(x\)</span> by explicitly using <span class="math notranslate nohighlight">\(A_l^{-1}\)</span>. Hint: Use linalg.inv( ).</p>
 <div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
@@ -1718,7 +1868,7 @@ b1 =
 </div>
 </div>
 <div class="section" id="lu-decomposition">
-<h3>LU Decomposition<a class="headerlink" href="#lu-decomposition" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.7.7.2. </span>LU Decomposition<a class="headerlink" href="#lu-decomposition" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create test linear systems for the following examples</span>
@@ -1795,7 +1945,7 @@ P*L*U =
 </div>
 </div>
 <div class="section" id="is-p-orthogonal">
-<h4>Is P orthogonal?<a class="headerlink" href="#is-p-orthogonal" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">2.7.7.2.1. </span>Is P orthogonal?<a class="headerlink" href="#is-p-orthogonal" title="Permalink to this headline">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;inv(P) = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">P</span><span class="p">),</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -1831,7 +1981,7 @@ P.T*P =
 <p><strong>Yes!</strong> We see that <span class="math notranslate nohighlight">\(P^T = P^{-1}\)</span> and <span class="math notranslate nohighlight">\(P^T \cdot P = I\)</span>.</p>
 </div>
 <div class="section" id="matlab">
-<h4>MATLAB<a class="headerlink" href="#matlab" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">2.7.7.2.2. </span>MATLAB<a class="headerlink" href="#matlab" title="Permalink to this headline">#</a></h4>
 <p>Defines LU decomposition as follows:</p>
 <div class="math notranslate nohighlight">
 \[ P \cdot A = L \cdot U\]</div>
@@ -1891,7 +2041,7 @@ xLU =
 </div>
 </div>
 <div class="section" id="scipy">
-<h4>SciPy<a class="headerlink" href="#scipy" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">2.7.7.2.3. </span>SciPy<a class="headerlink" href="#scipy" title="Permalink to this headline">#</a></h4>
 <p>Defines LU decomposition as:</p>
 <div class="math notranslate nohighlight">
 \[ A = P \cdot L \cdot U \]</div>
@@ -1950,7 +2100,7 @@ xLU =
 <p><strong>What is the difference?</strong> A transpose.</p>
 </div>
 <div class="section" id="verify-our-answer-with-linalg-solve">
-<h4>Verify our answer with <code class="docutils literal notranslate"><span class="pre">linalg.solve</span></code><a class="headerlink" href="#verify-our-answer-with-linalg-solve" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">2.7.7.2.4. </span>Verify our answer with <code class="docutils literal notranslate"><span class="pre">linalg.solve</span></code><a class="headerlink" href="#verify-our-answer-with-linalg-solve" title="Permalink to this headline">#</a></h4>
 <p>Solve the linear system using linalg.solve</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1973,7 +2123,7 @@ xLU =
 </div>
 </div>
 <div class="section" id="invertable-matrix-theorem">
-<h2>Invertable Matrix Theorem<a class="headerlink" href="#invertable-matrix-theorem" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.7.8. </span>Invertable Matrix Theorem<a class="headerlink" href="#invertable-matrix-theorem" title="Permalink to this headline">#</a></h2>
 <p><em>Linear Algebra and Its Applications</em> by David C. Lay, 3rd edition</p>
 <p><em>Hold on to your hats folks!</em></p>
 <p>a. <span class="math notranslate nohighlight">\(A\)</span> is an invertible matrix.</p>
@@ -2005,10 +2155,10 @@ xLU =
 <p>x. <span class="math notranslate nohighlight">\(A\)</span> has <span class="math notranslate nohighlight">\(n\)</span> nonzero singular values.</p>
 </div>
 <div class="section" id="eigenvectors-and-eigenvalues">
-<h2>Eigenvectors and Eigenvalues<a class="headerlink" href="#eigenvectors-and-eigenvalues" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.7.9. </span>Eigenvectors and Eigenvalues<a class="headerlink" href="#eigenvectors-and-eigenvalues" title="Permalink to this headline">#</a></h2>
 <p>Section <strong>2.2 Vectors and Matrices</strong> in Biegler (2010)</p>
 <div class="section" id="eigenvalues-eigenvectors-definition">
-<h3>Eigenvalues/Eigenvectors Definition<a class="headerlink" href="#eigenvalues-eigenvectors-definition" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.7.9.1. </span>Eigenvalues/Eigenvectors Definition<a class="headerlink" href="#eigenvalues-eigenvectors-definition" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>For a square matrix <span class="math notranslate nohighlight">\(A \in \mathbb{R}^{n\times n}\)</span>, the <em>eigenvalue</em> <span class="math notranslate nohighlight">\(\lambda\)</span> and the corresponding <em>eigenvector</em> <span class="math notranslate nohighlight">\(v \neq 0\)</span> satisfy <span class="math notranslate nohighlight">\(Av = \lambda v\)</span>.</p></li>
 <li><p>Because <span class="math notranslate nohighlight">\((A-\lambda I)v = 0\)</span>, <span class="math notranslate nohighlight">\((A-\lambda I)\)</span> is singular, and we can define a characteristic <span class="math notranslate nohighlight">\(n\)</span>th degree polynomial given by det<span class="math notranslate nohighlight">\((A-\lambda I)\)</span> = <span class="math notranslate nohighlight">\(0\)</span> to find the <span class="math notranslate nohighlight">\(n\)</span> eigenvalues.</p></li>
@@ -2028,7 +2178,7 @@ xLU =
 </ul>
 </div>
 <div class="section" id="id6">
-<h3>Practice Activities<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.7.9.2. </span>Practice Activities<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create matrix for activities</span>
@@ -2085,7 +2235,7 @@ xLU =
 </div>
 </div>
 <div class="section" id="singular-value-decomposition">
-<h2>Singular Value Decomposition<a class="headerlink" href="#singular-value-decomposition" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.7.10. </span>Singular Value Decomposition<a class="headerlink" href="#singular-value-decomposition" title="Permalink to this headline">#</a></h2>
 <p>Refer to <a class="reference internal" href="03-LU-Factorization.html"><span class="doc std std-doc">this notebook</span></a> for notes on singular value decomposition.</p>
 <p>Remember, SVD can be thought of as another type of matrix factorization.  We can represent an <span class="math notranslate nohighlight">\(m \times n\)</span> matrix as <span class="math notranslate nohighlight">\(A = U\cdot \sum \cdot V^T\)</span>.</p>
 <div class="admonition note">
@@ -2157,12 +2307,12 @@ V =
 <p><strong>Answer:</strong></p>
 </div>
 <div class="section" id="vector-and-matrix-norms">
-<h2>Vector and Matrix Norms<a class="headerlink" href="#vector-and-matrix-norms" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.7.11. </span>Vector and Matrix Norms<a class="headerlink" href="#vector-and-matrix-norms" title="Permalink to this headline">#</a></h2>
 <p>Section <strong>2.2 Vectors and Matrices</strong> in Biegler (2010)</p>
 <div class="section" id="vector-and-matrix-norms-definition">
-<h3>Vector and Matrix Norms Definition<a class="headerlink" href="#vector-and-matrix-norms-definition" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.7.11.1. </span>Vector and Matrix Norms Definition<a class="headerlink" href="#vector-and-matrix-norms-definition" title="Permalink to this headline">#</a></h3>
 <div class="section" id="vector-norm-properties">
-<h4>Vector Norm Properties<a class="headerlink" href="#vector-norm-properties" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">2.7.11.1.1. </span>Vector Norm Properties<a class="headerlink" href="#vector-norm-properties" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><p>A <em>vector norm</em> <span class="math notranslate nohighlight">\(\parallel \cdot \parallel\)</span> is a measure of the length of a vector and it maps from <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> to a nonegative real that has the following properties:</p>
 <ol class="simple">
@@ -2174,7 +2324,7 @@ V =
 </ul>
 </div>
 <div class="section" id="p-norm-properties">
-<h4><em>P</em>-norm Properties<a class="headerlink" href="#p-norm-properties" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">2.7.11.1.2. </span><em>P</em>-norm Properties<a class="headerlink" href="#p-norm-properties" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><p>The <em>p</em>-norm is defined by <span class="math notranslate nohighlight">\(\parallel x\parallel _p = (\sum_{i=1}^n |x_i|^p)^{\frac{1}{p}}\)</span>, where <span class="math notranslate nohighlight">\(p \geq 1\)</span>. Examples and properties include:</p>
 <ol class="simple">
@@ -2227,7 +2377,7 @@ y =
 </div>
 </div>
 <div class="section" id="additional-matrix-norms">
-<h4>Additional Matrix Norms<a class="headerlink" href="#additional-matrix-norms" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">2.7.11.1.3. </span>Additional Matrix Norms<a class="headerlink" href="#additional-matrix-norms" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><p>For <span class="math notranslate nohighlight">\(A \in \mathbb{R}^{n \times m}\)</span>, the induced matrix norms are defined by vector norms: <span class="math notranslate nohighlight">\(\parallel A\parallel\)</span> = max<span class="math notranslate nohighlight">\(_{X \neq 0} \frac{\parallel Ax \parallel}{\parallel x \parallel}\)</span> for any <em>p</em>-norm. It is therefore consistent with vector norms and satisfies <span class="math notranslate nohighlight">\(\parallel A\parallel \; \parallel x\parallel \; \geq \; \parallel Ax\parallel\)</span>. Examples include:</p>
 <ol class="simple">
@@ -2271,13 +2421,13 @@ y =
 </div>
 </div>
 <div class="section" id="frobenius-norm">
-<h4>Frobenius Norm<a class="headerlink" href="#frobenius-norm" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">2.7.11.1.4. </span>Frobenius Norm<a class="headerlink" href="#frobenius-norm" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><p>The Frobenius norm <span class="math notranslate nohighlight">\(\parallel A\parallel_F = (\sum_i \sum_j ( \mathbf{\{A\}_{ij})^2)^{\frac{1}{2}}}\)</span> is not consistent with a vector norm but has some useful properties. This norm as well as the induced norms satisfy <span class="math notranslate nohighlight">\(\parallel AB\parallel \; \leq \parallel A\parallel \; \parallel B\parallel\)</span> for any two compatible matrices <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>. In addition, the induced and Frobenius matrix norms can be bounded above and below by a multiple of any of the other matrix norms.</p></li>
 </ul>
 </div>
 <div class="section" id="condition-number">
-<h4>Condition Number<a class="headerlink" href="#condition-number" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">2.7.11.1.5. </span>Condition Number<a class="headerlink" href="#condition-number" title="Permalink to this headline">#</a></h4>
 <p>For more information on condition number, reference <a class="reference internal" href="03-LU-Factorization.html"><span class="doc std std-doc">this notebook</span></a>.</p>
 <ul class="simple">
 <li><p>The <em>condition number</em> is defined by <span class="math notranslate nohighlight">\(\kappa (A) = \parallel A\parallel \; \parallel A^{-1} \parallel\)</span>. Using the induced 2-norm the condition number is given by <span class="math notranslate nohighlight">\(\frac{\sigma_{\text{max}}}{\sigma_{\text{min}}}\)</span>. If <span class="math notranslate nohighlight">\(A\)</span> is a symmetric matrix, then this is equivalent to using the eigenvalues of <span class="math notranslate nohighlight">\(A\)</span> with <span class="math notranslate nohighlight">\(\frac{\lambda_{\text{max}}}{\lambda_{\text{min}}}\)</span>.</p></li>
@@ -2334,42 +2484,48 @@ y =
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="04-Example-Atomic-Mass-Balances.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Example: Mass Balances and Linear Algebra</p>
+            <p class="prev-next-title"><span class="section-number">2.6. </span>Example: Mass Balances and Linear Algebra</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="../03/algorithms.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Algorithm Building Blocks</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Algorithm Building Blocks</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
     
-      By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>

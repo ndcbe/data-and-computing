@@ -1,15 +1,15 @@
 # Numeric Integration
 
-## Chapter Learning Objectives
+**Chapter Learning Objectives**
 1. Numerically approximate definite integrals and solve initial value problems
 2. Choose the most appropriate numeric integration method based on problem characteristics
 
-## Sections
+**Sections**
 
 ```{tableofcontents}
 ```
 
-## Coming Soon
+**Coming Soon**
 * Boundary value problems: shooting
 * Boundary value problems: finite difference
 * Partial differential equations: method of lines

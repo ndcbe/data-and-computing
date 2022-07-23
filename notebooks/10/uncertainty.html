@@ -5,10 +5,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Uncertainty and Error Propagation &#8212; Data and Computing for Chemical Engieers</title>
+    <title>10. Uncertainty and Error Propagation &#8212; Data and Computing for Chemical Engieers</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet">
-  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,20 +19,16 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -39,12 +36,13 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -53,8 +51,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Measurement Error" href="../10-publish/01-Measurement-Error.html" />
-    <link rel="prev" title="Common Probability Distributions Summary" href="../09-publish/05-Common-Probability-Distributions-Summary.html" />
+    <link rel="next" title="10.1. Measurement Error" href="../10-publish/01-Measurement-Error.html" />
+    <link rel="prev" title="9.5. Common Probability Distributions Summary" href="../09-publish/05-Common-Probability-Distributions-Summary.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -62,7 +60,21 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -71,9 +83,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -91,17 +104,23 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../intro.html">
-   Data and Computing for Engineers
-  </a>
- </li>
-</ul>
-<ul class="current nav bd-sidenav">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Data and Computing for Engineers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Python Programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../01/00-Python-Primer.html">
-   Python Primer
+   1. Python Primer
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -111,79 +130,86 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/01-Jupyter-Notebooks.html">
-     Welcome to Jupyter Notebooks and Vocareum
+     1.1. Welcome to Jupyter Notebooks and Vocareum
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/02-Python-Basics-I-Variables-Strings-Bugs.html">
-     Python Basics I: Variables, Strings, and Bugs
+     1.2. Python Basics I: Variables, Strings, and Bugs
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/03-Flow-control.html">
-     Python Basics II: Loopy Logic
+     1.3. Python Basics II: Loopy Logic
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/05-Python-Basics-III-Lists-Dictionaries-Enumeration.html">
-     Python Basics III: Lists, Dictionaries, and Enumeration
+     1.4. Python Basics III: Lists, Dictionaries, and Enumeration
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/04-Functions-and-Scope.html">
-     Functions and Scope
+     1.5. Functions and Scope
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/04b-Recursion.html">
-     Recursion
+     1.6. Recursion
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/03b-Pseudocode.html">
-     Pseudocode
+     1.7. Pseudocode
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/04d-Example-High-Low-Game.html">
-     High/Low Guess My Number Game
+     1.8. High/Low Guess My Number Game
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/04c-Modules-and-Files.html">
-     Modules and Files
+     1.9. Modules and Files
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/06-NumPy.html">
-     Linear Algebra with Numpy and Scipy
+     1.10. Linear Algebra with Numpy and Scipy
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/07-Matplotlib.html">
-     Visualization with matplotlib
+     1.11. Visualization with matplotlib
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/08-Pandas.html">
-     Manipulating Data with Pandas
+     1.12. Manipulating Data with Pandas
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/09-Functions-as-Arguments.html">
-     Functions as Arguments
+     1.13. Functions as Arguments
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../01-publish/10-Testing-and-Debugging.html">
-     Testing and Debugging in Python
+     1.14. Testing and Debugging in Python
     </a>
    </li>
   </ul>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Numerical Methods
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../02/linear_algebra.html">
-   Linear Algebra
+   2. Linear Algebra
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
   <label for="toctree-checkbox-2">
@@ -193,44 +219,44 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../02-publish/01-Modeling-Systems-of-Linear-Equations.html">
-     Modeling Systems of Linear Equations
+     2.1. Modeling Systems of Linear Equations
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../02-publish/02-Gauss-Elimination.html">
-     Gaussian Elimination
+     2.2. Gaussian Elimination
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../02-publish/02b-Invertible-Matrix-Theorem-and-Gauss-Example.html">
-     Invertible Matrix Theorem and Gaussian Elimination Example
+     2.3. Invertible Matrix Theorem and Gaussian Elimination Example
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../02-publish/03-LU-Factorization.html">
-     LU Decomposition and Condition Number
+     2.4. LU Decomposition and Condition Number
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../02-publish/03b-Condition-Number.html">
-     Errors in Linear Systems
+     2.5. Errors in Linear Systems
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../02-publish/04-Example-Atomic-Mass-Balances.html">
-     Example: Mass Balances and Linear Algebra
+     2.6. Example: Mass Balances and Linear Algebra
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../02-publish/05-Linear-Algebra-in-Numpy.html">
-     Linear Algebra Review and SciPy Basics
+     2.7. Linear Algebra Review and SciPy Basics
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../03/algorithms.html">
-   Algorithm Building Blocks
+   3. Algorithm Building Blocks
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
   <label for="toctree-checkbox-3">
@@ -240,24 +266,24 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../03-publish/01-Taylor-Series.html">
-     Taylor Series Approximations
+     3.1. Taylor Series Approximations
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../03-publish/02-Finite-Difference.html">
-     Finite Difference Derivative Approximations
+     3.2. Finite Difference Derivative Approximations
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../03-publish/03-Example-Heating-a-Metal-Slab.html">
-     Example: Heating a Metal Slab
+     3.3. Example: Heating a Metal Slab
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../04/nonlinear_systems.html">
-   Nonlinear Systems of Equations
+   4. Nonlinear Systems of Equations
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
   <label for="toctree-checkbox-4">
@@ -267,39 +293,39 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../04-publish/01-Modeling-Systems-of-Nonlinear-Equations.html">
-     Modeling Systems of Nonlinear Equations
+     4.1. Modeling Systems of Nonlinear Equations
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../04-publish/02-Newton-Raphson-Method-in-One-Dimension.html">
-     Newton-Raphson Method in One Dimension
+     4.2. Newton-Raphson Method in One Dimension
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../04-publish/03-More-Newton-Type-Methods.html">
-     More Newton-Type Methods
+     4.3. More Newton-Type Methods
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../04-publish/04-Convergence-Analysis-for-Newton-Raphson-Methods.html">
-     Convergence Analysis for Newton-Raphson Methods
+     4.4. Convergence Analysis for Newton-Raphson Methods
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../04-publish/05-Newton-Raphson-Methods-for-Systems-of-Equations.html">
-     Newton-Raphson Methods for Systems of Equations
+     4.5. Newton-Raphson Methods for Systems of Equations
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../04-publish/06-Newton-Methods-in-Scipy.html">
-     Newton Methods in Scipy
+     4.6. Newton Methods in Scipy
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../05/optimization.html">
-   Continuous Optimization
+   5. Continuous Optimization
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
   <label for="toctree-checkbox-5">
@@ -309,24 +335,24 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../05-publish/01-Pyomo-Basics.html">
-     Pyomo Basics
+     5.1. Pyomo Basics
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../05-publish/02-Electricity-Market-Optimization.html">
-     Electricity Market Optimization
+     5.2. Electricity Market Optimization
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../05-publish/03-Flash-Calculations-in-Pyomo.html">
-     Flash Calculations in Pyomo
+     5.3. Flash Calculations in Pyomo
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../06/integration.html">
-   Numeric Integration
+   6. Numeric Integration
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
   <label for="toctree-checkbox-6">
@@ -336,59 +362,66 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../06-publish/01-Intro-and-Newton-Cotes.html">
-     Introduction and Newton-Cotes
+     6.1. Introduction and Newton-Cotes
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../06-publish/02-Gauss-Quadrature.html">
-     Gauss Quadrature
+     6.2. Gauss Quadrature
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../06-publish/03-Adaptive-Methods-and-Scipy.html">
-     Adaptive Methods for Newton-Cotes and Gauss Quadrature, Scipy Library
+     6.3. Adaptive Methods for Newton-Cotes and Gauss Quadrature, Scipy Library
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../06-publish/04-Application-Inertial-Navigation-Systems.html">
-     Application: Inertial Navigation Systems
+     6.4. Application: Inertial Navigation Systems
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../06-publish/05-Forward-and-Backward-Euler.html">
-     Forward and Backward Euler Methods
+     6.5. Forward and Backward Euler Methods
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../06-publish/06-Trapezoid-Rule.html">
-     Crank-Nicolson (Trapezoid Rule)
+     6.6. Crank-Nicolson (Trapezoid Rule)
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../06-publish/07-Stability-Analysis.html">
-     Stability Analysis of Forward/Backward Euler and Crank-Nicolson Methods
+     6.7. Stability Analysis of Forward/Backward Euler and Crank-Nicolson Methods
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../06-publish/08-Explicit-Runge-Kutta.html">
-     Explicit Range Kutta Method
+     6.8. Explicit Range Kutta Method
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../06-publish/09-Systems-of-Differential-Equations-and-Scipy.html">
-     Systems of Differential Equations and Scipy
+     6.9. Systems of Differential Equations and Scipy
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../06-publish/10-Example-Reaction-Rates.html">
-     Example: Reaction Rates
+     6.10. Example: Reaction Rates
     </a>
    </li>
   </ul>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Data Analysis
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../07/stats.html">
-   Descriptive Statistics and Visualization
+   7. Descriptive Statistics and Visualization
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
   <label for="toctree-checkbox-7">
@@ -398,24 +431,24 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../07-publish/01-Sampling.html">
-     Sampling
+     7.1. Sampling
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../07-publish/02-Summary-Statistics.html">
-     Summary Statistics
+     7.2. Summary Statistics
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../07-publish/03-Visualizing-Data.html">
-     Visualizing Data
+     7.3. Visualizing Data
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../08/probability.html">
-   Probability Theory
+   8. Probability Theory
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
   <label for="toctree-checkbox-8">
@@ -425,24 +458,24 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../08-publish/01-Random-Variables.html">
-     Random Variables
+     8.1. Random Variables
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../08-publish/02-Jointly-Distributed-Random-Variables.html">
-     Jointly Distributed Random Variables
+     8.2. Jointly Distributed Random Variables
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../08-publish/03-Practice-Problems.html">
-     Practice Problems
+     8.3. Practice Problems
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../09/distributions.html">
-   Common Probability Distributions
+   9. Common Probability Distributions
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
   <label for="toctree-checkbox-9">
@@ -452,34 +485,34 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../09-publish/01-Bernoulli-Probability-Distribution.html">
-     Bernoulli Probability Distribution
+     9.1. Bernoulli Probability Distribution
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../09-publish/02-Binomial-Probability-Distribtuion.html">
-     Binomial Probability Distributions
+     9.2. Binomial Probability Distributions
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../09-publish/03-Poisson-Probability-Distribution.html">
-     Poisson Probability Distributions
+     9.3. Poisson Probability Distributions
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../09-publish/04-Normal-Probability-Distribution.html">
-     Normal Probability Distributions
+     9.4. Normal Probability Distributions
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../09-publish/05-Common-Probability-Distributions-Summary.html">
-     Common Probability Distributions Summary
+     9.5. Common Probability Distributions Summary
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 current active has-children">
   <a class="current reference internal" href="#">
-   Uncertainty and Error Propagation
+   10. Uncertainty and Error Propagation
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
   <label for="toctree-checkbox-10">
@@ -489,34 +522,34 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../10-publish/01-Measurement-Error.html">
-     Measurement Error
+     10.1. Measurement Error
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../10-publish/02-Error-Propagation.html">
-     Error Propagation
+     10.2. Error Propagation
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../10-publish/03-Measuring-Flowrate-Example.html">
-     Measuring Flowrate Example
+     10.3. Measuring Flowrate Example
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../10-publish/04-Practice-Problems.html">
-     Practice Problems
+     10.4. Practice Problems
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../10-publish/05-Simulation.html">
-     Simulation
+     10.5. Simulation
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../11/inference.html">
-   Statistical Inference
+   11. Statistical Inference
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
   <label for="toctree-checkbox-11">
@@ -526,59 +559,59 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../11-publish/01-Central-Limit-Theorem.html">
-     Central Limit Theorem
+     11.1. Central Limit Theorem
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../11-publish/02-Standard-Normal-Distribution.html">
-     Standard Normal Distribution
+     11.2. Standard Normal Distribution
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../11-publish/03-Confidence-Intervals.html">
-     Confidence Intervals
+     11.3. Confidence Intervals
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../11-publish/04-Students-t-Distribution.html">
-     Student’s t-Distribution
+     11.4. Student’s t-Distribution
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../11-publish/05-First-Hypothesis-Testing.html">
-     First Hypothesis Testing
+     11.5. First Hypothesis Testing
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../11-publish/06-Hypothesis-Testing-Review-and-Type-I-Type-II-Errors.html">
-     Hypothesis Testing Review and Type I/Type II Errors
+     11.6. Hypothesis Testing Review and Type I/Type II Errors
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../11-publish/07-Flavors-of-Hypothesis-Testing.html">
-     Flavors of Hypothesis Testing
+     11.7. Flavors of Hypothesis Testing
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../11-publish/08-Statistical-Power-Basics.html">
-     Statistical Power Basics
+     11.8. Statistical Power Basics
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../11-publish/09-Statistical-Power-in-Python.html">
-     Statistical Power in Python
+     11.9. Statistical Power in Python
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../11-publish/10-Statistical-Power-Practice-Problems.html">
-     Statistical Power Practice Problems
+     11.10. Statistical Power Practice Problems
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../12/regression.html">
-   Multivariate Linear Regression
+   12. Multivariate Linear Regression
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
   <label for="toctree-checkbox-12">
@@ -588,29 +621,29 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../12-publish/01-Ordinary-Least-Squares-Linear-Regression.html">
-     Ordinary Least Squares Linear Regression
+     12.1. Ordinary Least Squares Linear Regression
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../12-publish/02-Uncertainty-Analysis-and-Statistical-Inference.html">
-     Uncertainty Analysis and Statistical Inference
+     12.2. Uncertainty Analysis and Statistical Inference
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../12-publish/03-Linear-Regression-Practice-Problems.html">
-     Linear Regression Practice Problems
+     12.3. Linear Regression Practice Problems
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../12-publish/04-Multivariate-Linear-Regression.html">
-     Multivariate Linear Regression
+     12.4. Multivariate Linear Regression
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../13/advanced_regression.html">
-   Nonlinear Regression
+   13. Nonlinear Regression
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
   <label for="toctree-checkbox-13">
@@ -620,151 +653,211 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../13-publish/01-Transformations-and-Linear-Regression.html">
-     Transformations and Linear Regression
+     13.1. Transformations and Linear Regression
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../13-publish/02-Nonlinear-Regression.html">
-     Nonlinear Regression
+     13.2. Nonlinear Regression
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../13-publish/03-Nonlinear-Regression-Practice-Problem.html">
-     Nonlinear Regression Practice Problem
+     13.3. Nonlinear Regression Practice Problem
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../13-publish/04-Weighted-Regression.html">
-     Weighted Linear Regression
+     13.4. Weighted Linear Regression
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../13-publish/05-Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression.html">
-     Monte Carlo Uncertainty Analysis for Nonlinear Regression
+     13.5. Monte Carlo Uncertainty Analysis for Nonlinear Regression
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../13-publish/06-Bootstrap-Confidence-Intervals.html">
-     Bootstrap Confidence Intervals
+     13.6. Bootstrap Confidence Intervals
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../13-publish/07-Nonlinear-Case-Study-Adsorptive-Membranes.html">
-     Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes
+     13.7. Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../14/design_of_experiments.html">
-   Design of Experiments
+   14. Design of Experiments
   </a>
  </li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/10/uncertainty.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/ndcbe/data-and-computing"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/10/uncertainty.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#chapter-learning-objectives">
-   Chapter Learning Objectives
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#sections">
-   Sections
-  </a>
- </li>
-</ul>
-
-            </nav>
+            
         </div>
     </div>
+    <div id="rtd-footer-container"></div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ndcbe/data-and-computing"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/10/uncertainty.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/notebooks/10/uncertainty.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Uncertainty and Error Propagation</h1>
@@ -772,50 +865,29 @@ const thebe_selector_output = ".output, .cell_output"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#chapter-learning-objectives">
-   Chapter Learning Objectives
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#sections">
-   Sections
-  </a>
- </li>
-</ul>
-
-                        </nav>
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="uncertainty-and-error-propagation">
-<h1>Uncertainty and Error Propagation<a class="headerlink" href="#uncertainty-and-error-propagation" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="chapter-learning-objectives">
-<h2>Chapter Learning Objectives<a class="headerlink" href="#chapter-learning-objectives" title="Permalink to this headline">¶</a></h2>
+<h1><span class="section-number">10. </span>Uncertainty and Error Propagation<a class="headerlink" href="#uncertainty-and-error-propagation" title="Permalink to this headline">#</a></h1>
+<p><strong>Chapter Learning Objectives</strong></p>
 <ol class="simple">
 <li><p>Estimate and propagate uncertainty, especially for engineering experiments and models</p></li>
 <li><p>Master generalized multivariate nonlinear (first order) error propagation formula</p></li>
 </ol>
-</div>
-<div class="section" id="sections">
-<h2>Sections<a class="headerlink" href="#sections" title="Permalink to this headline">¶</a></h2>
+<p><strong>Sections</strong></p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../10-publish/01-Measurement-Error.html">Measurement Error</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../10-publish/02-Error-Propagation.html">Error Propagation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../10-publish/03-Measuring-Flowrate-Example.html">Measuring Flowrate Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../10-publish/04-Practice-Problems.html">Practice Problems</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../10-publish/05-Simulation.html">Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-publish/01-Measurement-Error.html">10.1. Measurement Error</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-publish/02-Error-Propagation.html">10.2. Error Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-publish/03-Measuring-Flowrate-Example.html">10.3. Measuring Flowrate Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-publish/04-Practice-Problems.html">10.4. Practice Problems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-publish/05-Simulation.html">10.5. Simulation</a></li>
 </ul>
-</div>
 </div>
 </div>
 
@@ -841,42 +913,48 @@ const thebe_selector_output = ".output, .cell_output"
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="../09-publish/05-Common-Probability-Distributions-Summary.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Common Probability Distributions Summary</p>
+            <p class="prev-next-title"><span class="section-number">9.5. </span>Common Probability Distributions Summary</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="../10-publish/01-Measurement-Error.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Measurement Error</p>
+        <p class="prev-next-title"><span class="section-number">10.1. </span>Measurement Error</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
     
-      By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>
