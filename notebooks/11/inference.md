@@ -20,8 +20,9 @@ Example: We receive a shipment of 1000 widgets and select only 10 of them to wei
 
 We will do this using **hypothesis testing**.
 
-<div style="background-color: rgba(0,0,255,0.05) ; padding: 10px; border: 1px solid darkblue;"> 
-<b>Class Activity</b>: Which partner can generate the longest list of statistic inference examples? Consider inference problem you would encounter as a student, a citizen, and a practicing chemical engineer.
+<div class="admonition note"> 
+<p class="title"><b>Class Activity</b></p>
+Which partner can generate the longest list of statistic inference examples? Consider inference problem you would encounter as a student, a citizen, and a practicing chemical engineer.
 </div>
 
 We will see throughout this lecture that **confidence intervals** and **hypothesis testing** have the same mathematical basis and are closely related.

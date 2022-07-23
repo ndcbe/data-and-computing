@@ -57,7 +57,7 @@ We will come back to this activity in tutorial.
 During each lecture, we will walk through the notebook. A majority of class time will be dedicated to completing **class activities** with partners and discussing as a class. It is critical you attempt the home activties before coming to class, otherwise you may not be ready for the class activities.
 
 <div class="admonition note"> 
-<p class="title"><b>Note</b></p>
+<p class="title"><b>Class Activity</b></p>
 We will work on these activities with partners and then compile solutions together.
 </div>
 
