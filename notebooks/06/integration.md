@@ -1,7 +1,15 @@
 # Numeric Integration
-Topics to cover:
-* Definite integrals: quadrature
-* Initial value problems: single-step methods
+
+**Chapter Learning Objectives**
+1. Numerically approximate definite integrals and solve initial value problems
+2. Choose the most appropriate numeric integration method based on problem characteristics
+
+**Sections**
+
+```{tableofcontents}
+```
+
+**Coming Soon**
 * Boundary value problems: shooting
 * Boundary value problems: finite difference
 * Partial differential equations: method of lines
@@ -9,4 +17,3 @@ Topics to cover:
 * Reaction engineering examples
 * Transport examples
 
-## Chapter Learning Objectives

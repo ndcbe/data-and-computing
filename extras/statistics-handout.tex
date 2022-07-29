@@ -1,0 +1,251 @@
+\documentclass[12pt,twoside]{article}
+
+\addtolength{\textwidth}{0.5in}
+\usepackage{epsfig,amsfonts,color}
+%\usepackage[leqno]{amsmath}
+\usepackage{amsmath}
+%\usepackage{showlabels}
+\newcommand{\norm}[1]{\left| \left| #1 \right| \right|}
+\newcommand{\mods}[1]{\left|  #1 \right|}
+\newcommand{\cm}[1]{{\color{black} #1}}
+\newcommand{\cv}[1]{{\color{black} #1}}
+\bibliographystyle{plain}
+\usepackage{amssymb, palatino, geometry,url}
+\usepackage{algorithmic}
+\usepackage[noresetcount,lined,boxed]{algorithm2e} % ... for algorithms
+\newcommand{\mynote}[1]{{ \color{black}{#1}}}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+\usepackage{multirow}
+
+\geometry{letterpaper,
+          left       = 0.9in,
+          right      = 0.9in,
+          top        = 0.9in,
+          bottom     = 0.9in}
+\linespread{1.2}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+%\usepackage{lineno}
+%\linenumbers
+
+% Customize spacing in lists
+\usepackage{enumitem}
+
+% Globally set noindent
+\setlength{\parindent}{0pt}
+
+% Use to white out portion students will fill in
+
+\newcommand{\fillin}[1]{{\color{red} \large #1}}
+
+% For subfigures
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% For floatbarrier
+\usepackage{placeins}
+
+% Check list
+\newlist{todolist}{itemize}{2}
+\setlist[todolist]{label=$\square$}
+
+% Comments
+\usepackage{verbatim}
+
+\usepackage{tcolorbox}
+
+\usepackage{mhchem}
+
+% With subsections to alphabetical labeling
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+
+\newcommand{\assignmentname}{Probability, Statistics, \& Error Propagation Summary}
+
+\lhead{\assignmentname}
+\rhead{A.~Dowling, U.~Notre Dame}
+
+%\renewcommand\contentsname{Outline for Lecture X}
+
+\title{\assignmentname}
+\author{CBE 20258: Numerical and Statistical Analysis}
+
+
+% define notation for vectors and matrix
+% https://tex.stackexchange.com/questions/229543/double-tilde-symbol-under-letter
+\usepackage{stackengine}
+\stackMath
+\newcommand\tenq[2][1]{%
+ \def\useanchorwidth{T}%
+  \ifnum#1>1%
+    \stackunder[0pt]{\tenq[\numexpr#1-1\relax]{#2}}{\scriptscriptstyle\sim}%
+  \else%
+    \stackunder[1pt]{#2}{\scriptscriptstyle\sim}%
+  \fi%
+}
+
+% Vector
+\newcommand{\vc}[1]{\tenq{#1}}
+
+% Matrix
+\newcommand{\mt}[1]{\tenq[2]{#1}}
+
+
+% Enable solutions
+\usepackage{comment}
+\specialcomment{sln}{\begingroup\color{red} \vspace{6pt} \textbf{Solution}: \vspace{6pt} \\}{\endgroup%\vfill\pagebreak
+}
+
+\newcommand{\ad}{\vspace{6pt}\textbf{Additional Discussion}:\vspace{6pt}}
+
+% Number equations within subsection
+% \numberwithin{equation}{section}
+
+% Hide solutions
+\excludecomment{sln}
+
+% Expected value
+\DeclareRobustCommand{\bbone}{\text{\usefont{U}{bbold}{m}{n}1}}
+
+\DeclareMathOperator{\EX}{\mathbb{E}}% expected value
+\DeclareMathOperator{\PR}{\mathbb{P}}% probability
+\DeclareMathOperator{\VR}{\mathbb{V}}% variance
+
+\begin{document}
+
+%\tableofcontents
+
+\date{February 12 - 14, 2018}
+
+% \maketitle
+
+%%%%%%%%%%%%%%%%%%
+
+\section{Probability Distributions}
+
+Probability Density Function (PDF):
+
+\begin{equation}
+	\PR{}[a \leq X \leq b] = \int_a^{b} f_X(x) dx
+\end{equation}
+
+Important properties include $\int_{-\infty}^{\infty} f_X(x) dx = 1$ and $f_{X}(x) \geq 0$. \\
+
+\textbf{Example}: \emph{Uniform Distribution}. $f_X(x) = \frac{1}{b-a}$ for $x \in [a,b]$, $0$ otherwise. \\
+
+Cumulative distribution function (CDF):
+
+\begin{equation}
+	\PR{}[X \leq a] = \int_{-\infty}^{a} f_X(x) dx = F_X(a)
+\end{equation}
+
+
+\section{Population Statistics}
+
+Expected Value and Mean (1st moment):
+
+\begin{equation}
+\mu_X = \EX[X] = \int_{-\infty}^{\infty} x f_{X}(x) dx
+\end{equation}
+
+\textbf{Example}. What is $\EX[X]$ if $X$ is \emph{uniformly distributed} over $[a, b]$?
+
+\vspace{0.15\textheight}
+
+Variance (2nd moment):
+
+\begin{equation}
+	\sigma^2_{X} = \VR{}[X] = \EX[(X - \mu_X)^2] = \int_{-\infty}^{\infty} (x - \mu_X)^2 f_X(x) dx
+\end{equation}
+
+\textbf{Example}. What is $\VR[X]$ if $X$ is \emph{uniformly distributed} over $[a, b]$?
+
+\vfill
+
+\textbf{Exam Practice}: Using the above definitions, show that $\VR[X] = \EX[X^2] - (\EX[X])^2$.
+
+\pagebreak
+
+\section{Sample Statistics}
+
+We cannot directly measure population distributions; instead we gather samples and \emph{infer} distribution properties. \\
+
+\begin{minipage}{0.48\textwidth}
+Sample Mean:
+\begin{equation}
+	\bar{x} = \frac{1}{N} \sum_{i=1}^{N} x_i
+\end{equation}
+\end{minipage} \quad
+\begin{minipage}{0.48\textwidth}
+Sample Variance:
+\begin{equation}
+	s^2_x = \frac{1}{N-1}\sum_{i=1}^{N}(x_i - \bar{x})^2
+\end{equation}
+\end{minipage}
+
+\vspace{12pt}
+
+\begin{minipage}{0.48\textwidth}
+Sample Standard Deviation:
+\begin{equation}
+	s_x = \sqrt{s_x^2}
+\end{equation}
+\end{minipage} \quad
+\begin{minipage}{0.48\textwidth}
+Sample Covariance:
+\begin{equation}
+	s_{x,y} = \frac{1}{N-1}\sum_{i=1}^{N}(x_i - \bar{x})(y_i - \bar{y})
+\end{equation}
+\end{minipage}
+
+\section{Error Propagation}
+
+\emph{Note}: The following formulas are written for random variables and population statistics. The sample formulas also apply for sample statistics. \\
+
+\begin{minipage}{0.45\textwidth}
+\textbf{Addition}. Consider $Z = c_1 X + c_2 Y$,
+\begin{equation}
+	\sigma_Z^2 = c_1^2 \sigma_X^2 + c_2^2 \sigma_Y^2 + 2 c_1 c_2 \sigma_{X,Y}
+\end{equation}
+\end{minipage} \quad
+\begin{minipage}{0.55\textwidth}
+\textbf{Subtraction}. Consider $Z = c_1 X - c_2 Y$,
+
+\begin{equation}
+	\sigma_Z^2 = c_1^2 \sigma_X^2 + c_2^2 \sigma_Y^2 - 2 c_1 c_2 \sigma_{X,Y}
+\end{equation}
+\end{minipage}
+
+\vspace{18pt}
+
+\textbf{Multiplication}. Consider $Z = X \cdot Y$,
+\begin{equation}
+	\sigma_Z^2\approx \left(\EX[Z]\right)^2 \left[ 
+	\left(\frac{\sigma_{X}}{\EX[X]} \right)^2 + \left(\frac{\sigma_{Y}}{\EX[Y]} \right)^2 + \frac{2 \sigma_{X,Y}}{\EX[X] \EX[Y]}
+	\right]
+\end{equation}
+
+
+\textbf{Division}. Consider $Z = X / Y$,
+\begin{equation}
+	\sigma_Z^2\approx \left(\EX[Z]\right)^2  \left[ 
+	\left(\frac{\sigma_{X}}{\EX[X]} \right)^2 + \left(\frac{\sigma_{Y}}{\EX[Y]} \right)^2 - \frac{2 \sigma_{X,Y}}{\EX[X] \EX[Y]}
+	\right]
+\end{equation}
+
+\vspace{6pt}
+
+\textbf{Differentiable Function}. Consider $Z = g(X,Y)$, 
+
+\begin{equation}
+	\sigma_Z^2 \approx \left| \frac{\partial g}{\partial X} \right|^2 \sigma_X^2 + \left| \frac{\partial g}{\partial Y} \right|^2 \sigma_Y^2 + 2 \frac{\partial g}{\partial X} \frac{\partial g}{\partial Y} \sigma_{X,Y}
+\end{equation}
+
+\vspace{12pt}
+
+\textbf{Exam Practice.} Use the definition of mean and variance to prove the addition and subtraction rules, e.g., $\VR[c_1 X+ c_2 Y] = c_1^2 \VR[X] + c_2^2 \VR[Y] + 2 c_1 c_2 \mathrm{cov}(X,Y)$. For simplicity, assume $X$ and $Y$ are linearly independent, i.e., $f_Z(x,y) = f_X(x) f_Y(y)$ and $\mathrm{cov}(X,Y) = 0$.
+
+\end{document}

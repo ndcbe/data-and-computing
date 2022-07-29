@@ -1,13 +1,14 @@
 # Nonlinear Systems of Equations
 
-Topics to cover:
-* Motivating examples and notation
-* Modeling with nonlinear systems of equations
-* Newton-Rhapson method
-* Quasi-newton methods
-* Limitations of Newton-type methods
+**Chapter Learning Objectives**
+1. Apply Newton methods to solve nonlinear system of equations
+2. Derive and explain limitations of Newton methods using Taylor series analysis
+
+**Sections**
+
+```{tableofcontents}
+```
+
+**Coming Soon**
 * Globalization: line search
 * Globalization: trust regions
-* Examples from thermodynamics
-
-## Chapter Learning Objectives

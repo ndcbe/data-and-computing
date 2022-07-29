@@ -1,14 +1,17 @@
-# Advanced Nonlinear Regression
+# Nonlinear Regression
 
-Topics to cover:
-* Nonlinear regression theory
-* Confidence ellipses
+**Chapter Learning Objectives**
+1. Regress nonlinear models
+2. Quantify uncertainty in regressed parameters and model predictions
+
+**Sections**
+
+```{tableofcontents}
+```
+
+**Coming Soon:**
+* Nonlinear regression theory including derivation of covariance matrix
 * Identifiability and sloppiness
+* Confidence ellipses
 * Nonlinear confidence regions
 * Maximum likelihood estimation
-
-## Chapter Learning Objectives
-
-## Notes (development)
-* Errors in predictors (variables). Simulate the effect, correct for bias.
-* Correlation in errors
