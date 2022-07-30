@@ -1,0 +1,3314 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "EFnithZEjWAA"
+   },
+   "source": [
+    "# Gaussian Elimination\n",
+    "CBE 20258. Numerical and Statistical Analysis. Spring 2020.\n",
+    "\n",
+    "&#169; University of Notre Dame\n",
+    "\n",
+    "Note: Gaussian Elimination is also known as **row reduction**."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "cwS1zdP3jWAB"
+   },
+   "source": [
+    "## Learning Objectives\n",
+    "After studying this notebook, completing the activities, and asking questions in class, you should be able to:\n",
+    "* Explain the Invertible Matrix Theorem to a classmate.\n",
+    "* Perform Gaussian elimination and backward substitution (a.k.a., row reduction) calculations in Python.\n",
+    "* For Gaussian elimination with partial pivoting, explain the following:\n",
+    "  * Why is it important? What are the benefits?\n",
+    "  * How does the algorithm work? What are the basic steps?\n",
+    "  * What are the limitations? In what cases will partial pivoting not work?\n",
+    "* Solve mass balance problems with linear algebra and Gaussian elimination."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "import numpy as np\n",
+    "import matplotlib.pyplot as plt\n",
+    "#this line is only needed in Jupyter notebooks\n",
+    "%matplotlib inline"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "v7Fr3KLpqA1Y"
+   },
+   "source": [
+    "## Linear Algebra: Invertible Matrix Theorem\n",
+    "\n",
+    "Please review **The Invertible Matrix Theorem** in your linear algebra textbook (by Lay et al).\n",
+    "\n",
+    "To paraphrase, $ A $ is a square $n \\times n$ matrix. The following statements are equivalent (all true or all false):\n",
+    "* $A$ is invertible\n",
+    "* $A$ is row equivalent to the $n \\times n$ identify matrix\n",
+    "* $A$ has $n$ pivot positions\n",
+    "* $A x = 0$ has only the trivial solution\n",
+    "* The columns of $A$ form a linearly independent set\n",
+    "* The system $A x = b$ has at least one solution\n",
+    "* Columns of $A$ span $\\mathbb{R}^n$\n",
+    "* $A^T$ is invertible\n",
+    "* The rank of $A$ is $n$\n",
+    "* The determinant of $A$ is not zero\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "KEMPNG_IjWAC",
+    "tags": []
+   },
+   "source": [
+    "## Motivating Example and Gaussian Elimination"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "zAAw5EbZjWAC"
+   },
+   "source": [
+    "We want to solve the following system:\n",
+    "\n",
+    "$$3 x_1 + 2 x_2 + x_3 = 6$$\n",
+    "$$-x_1 + 4 x_2 + 5x_3 = 8$$\n",
+    "$$2x_1 -8 x_2 + 10 x_3 = 4$$\n",
+    "\n",
+    "In matrix form this looks like\n",
+    "\n",
+    "$$\\underbrace{\\begin{pmatrix} 3 & 2 & 1\\\\ -1 & 4 & 5\\\\ 2& -8 & 10\\end{pmatrix}}_{\\mathbf{A}} ~\n",
+    "\\underbrace{\\begin{pmatrix} x_1\\\\x_2\\\\x_3\\end{pmatrix}}_{\\mathbf{x}} = \\underbrace{\\begin{pmatrix}6\\\\8\\\\4\\end{pmatrix}}_{\\mathbf{b}}\n",
+    "$$\n",
+    "\n",
+    "Another way to write this is a notational shorthand called an **augmented matrix**, where we put the righthand side into the matrix:\n",
+    "\n",
+    "$$\n",
+    "\\left(\\begin{array}{ccc|c}   3 & 2 & 1 &6\\\\ -1 & 4 & 5&8\\\\ 2& -8 & 10&4\\end{array}\\right)\n",
+    "$$"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "WBycB5tdjWAD"
+   },
+   "source": [
+    "How would you solve this? **Gaussian elimination** (a.k.a. row reduction), covered in linear algebra, is the way to go."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"admonition seealso\"> \n",
+    "<p class=\"title\"><b>Home Activity</b></p>\n",
+    " Perform Gaussian elimination with pencil and paper to convert the above matrix into row echelon form (e.g., all zeros below the diagonal).\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Now that you have solved the system of equations \"by hand\", we will walk through the step in Python. First, let's assemble to augmented matrix."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/",
+     "height": 69
+    },
+    "colab_type": "code",
+    "executionInfo": {
+     "elapsed": 539,
+     "status": "ok",
+     "timestamp": 1549550488595,
+     "user": {
+      "displayName": "Alexander Dowling",
+      "photoUrl": "https://lh3.googleusercontent.com/-LChdQ2m5OQE/AAAAAAAAAAI/AAAAAAAAAA0/JeXJe4vQJ7M/s64/photo.jpg",
+      "userId": "00988067626794866502"
+     },
+     "user_tz": 300
+    },
+    "id": "d76Maac-jWAE",
+    "outputId": "7c3707c0-a1dc-40b1-fdc1-72c2223f84fe"
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[[ 3.  2.  1.  6.]\n",
+      " [-1.  4.  5.  8.]\n",
+      " [ 2. -8. 10.  4.]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Declare matrix\n",
+    "A33 = np.matrix([(3,2,1),(-1,4,5),(2,-8,10)])\n",
+    "b3 = np.matrix([6,8,4])\n",
+    "\n",
+    "# Assemble augmented matrix\n",
+    "# Study question: Why is it important to use .copy() here?\n",
+    "aug_matrix = np.zeros((3,4))\n",
+    "aug_matrix[0:3,0:3] = A33.copy() \n",
+    "aug_matrix[:,3] = b3.copy() # Why do we access column 4 with index 3?\n",
+    "\n",
+    "print(aug_matrix)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"admonition seealso\">  <p class=\"title\"><b>Home Activity</b></p>\n",
+    " Why it is important to use <tt>.copy()</tt> in the above code? Record your multiple choice answer (1, 2, or 3) in <tt>ans_6b</tt> below.\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Multiple choice options:\n",
+    "1. Nice try with the trick question! We actually do not need to use `.copy()`\n",
+    "2. By default, `=` without `.copy()` creates a \"pointer\" to the original numpy matrix. Thus when we change `aug_matrix`, we would also change `A33` and/or `b3`.\n",
+    "3. Neither of these answers are correct."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "# Add your solution here"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {
+    "nbgrader": {
+     "grade": true,
+     "grade_id": "6b_copy",
+     "locked": true,
+     "points": "0.1",
+     "solution": false
+    },
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "# Removed autograder test. You may delete this cell."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "RkC60_ZIjWAJ",
+    "tags": []
+   },
+   "source": [
+    "### Gaussian Elimination: Take Care of First Column\n",
+    "\n",
+    "We will now walk through the Guassian elimination steps in Python. These steps should match your paper and pencil work from a previous home activity.\n",
+    "\n",
+    "**Step 1**: Eliminate the **-1** in the first column, second row.\n",
+    "\n",
+    "Multiply first row by (1/3) and add to second row:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/",
+     "height": 87
+    },
+    "colab_type": "code",
+    "executionInfo": {
+     "elapsed": 238,
+     "status": "ok",
+     "timestamp": 1549550623220,
+     "user": {
+      "displayName": "Alexander Dowling",
+      "photoUrl": "https://lh3.googleusercontent.com/-LChdQ2m5OQE/AAAAAAAAAAI/AAAAAAAAAA0/JeXJe4vQJ7M/s64/photo.jpg",
+      "userId": "00988067626794866502"
+     },
+     "user_tz": 300
+    },
+    "id": "9iorzMZUjWAJ",
+    "outputId": "c519b4e6-91a3-442a-b705-832aa0c73ee6"
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "New matrix =\n",
+      " [[ 3.          2.          1.          6.        ]\n",
+      " [ 0.          4.66666667  5.33333333 10.        ]\n",
+      " [ 2.         -8.         10.          4.        ]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "#add row 2 to 1/3 times row 1\n",
+    "row13 = aug_matrix[0]/3 #row1 * 1/3\n",
+    "new_row2 = aug_matrix[1] + row13 #add 1/3 row 1 to row 2\n",
+    "#replace row 2\n",
+    "aug_matrix[1,:] = new_row2\n",
+    "print(\"New matrix =\\n\",aug_matrix)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "nMHLkUGVjWAM"
+   },
+   "source": [
+    "**Step 2**: Eliminate **2** in first column.\n",
+    "\n",
+    "Multiply first row by (-2/3) and add to third row:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/",
+     "height": 87
+    },
+    "colab_type": "code",
+    "executionInfo": {
+     "elapsed": 246,
+     "status": "ok",
+     "timestamp": 1549550698622,
+     "user": {
+      "displayName": "Alexander Dowling",
+      "photoUrl": "https://lh3.googleusercontent.com/-LChdQ2m5OQE/AAAAAAAAAAI/AAAAAAAAAA0/JeXJe4vQJ7M/s64/photo.jpg",
+      "userId": "00988067626794866502"
+     },
+     "user_tz": 300
+    },
+    "id": "yXgefJRyjWAM",
+    "outputId": "26c6879b-0b4c-4a97-8fbe-1fe352f7dcaf"
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "New matrix =\n",
+      " [[ 3.          2.          1.          6.        ]\n",
+      " [ 0.          4.66666667  5.33333333 10.        ]\n",
+      " [ 0.         -9.33333333  9.33333333  0.        ]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "#add row 3 to -2/3 times row 1\n",
+    "row23 = -2*aug_matrix[0]/3 #row1 * -2/3\n",
+    "new_row3 = aug_matrix[2] + row23 #add -2/3 row 1 to row 3\n",
+    "#replace row 3\n",
+    "aug_matrix[2] = new_row3\n",
+    "print(\"New matrix =\\n\",aug_matrix)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "h5TlqFkejWAP"
+   },
+   "source": [
+    "### Gaussian Elimination: Take Care of Second Column\n",
+    "\n",
+    "**Step 3**: Eliminate **-9$\\frac{1}{3}$** from the last row.\n",
+    "\n",
+    "Multiply row 2 by 9$\\frac{1}{3}$/4$\\frac{2}{3}$ and add to last row:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/",
+     "height": 87
+    },
+    "colab_type": "code",
+    "executionInfo": {
+     "elapsed": 235,
+     "status": "ok",
+     "timestamp": 1549550729440,
+     "user": {
+      "displayName": "Alexander Dowling",
+      "photoUrl": "https://lh3.googleusercontent.com/-LChdQ2m5OQE/AAAAAAAAAAI/AAAAAAAAAA0/JeXJe4vQJ7M/s64/photo.jpg",
+      "userId": "00988067626794866502"
+     },
+     "user_tz": 300
+    },
+    "id": "SZo_Kjr2jWAP",
+    "outputId": "8cad3e6e-8886-4135-e383-5d152b2dc6b9"
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "New matrix =\n",
+      " [[ 3.          2.          1.          6.        ]\n",
+      " [ 0.          4.66666667  5.33333333 10.        ]\n",
+      " [ 0.          0.         20.         20.        ]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "#add row 3 to 9.33333/4.66666 times row 2\n",
+    "modrow = (9+1./3)/(4+2./3)*aug_matrix[1] #row2 * (-9+1./3)/(4+2.0/3)\n",
+    "new_row3 = aug_matrix[2] + modrow #add -2/3 row 1 to row 3\n",
+    "#replace row 3\n",
+    "aug_matrix[2] = new_row3.copy()\n",
+    "print(\"New matrix =\\n\",aug_matrix)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "2BE2e7_zjWAS"
+   },
+   "source": [
+    "Notice that we have manipulated our original system into the equivalent system \n",
+    "$$\n",
+    "\\left(\\begin{array}{ccc|c}   3 & 2 & 1 &6\\\\ 0 & 4\\frac{2}{3} & 5\\frac{1}{3}& 10\\\\ 0& 0 & 20&20\\end{array}\\right)\n",
+    "$$\n",
+    "or\n",
+    "$$\n",
+    "\\left(\\begin{array}{ccc}   3 & 2 & 1 \\\\ 0 & 4\\frac{2}{3} & 5\\frac{1}{3}\\\\ 0& 0 & 20\\end{array}\\right) \\begin{pmatrix}x_1\\\\x_2\\\\x_3\\end{pmatrix} = \n",
+    "\\begin{pmatrix} 6\\\\10\\\\20\\end{pmatrix}\n",
+    "$$"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "jgQWKbaNjWAS"
+   },
+   "source": [
+    "## Motivating Example and Back Substitution\n",
+    "\n",
+    "We can easily solve this via **back substitution**:\n",
+    "1. Take the last equation and solve for $x_3$.\n",
+    "2. Plug the value for $x_3$ into the second equation, solve for $x_2$.\n",
+    "3. Plug both into the first equation and solve for $x_1$.\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"admonition seealso\"> \n",
+    "<p class=\"title\"><b>Home Activity</b></p>\n",
+    " Using the steps above, solve for $x_1$, $x_2$, and $x_3$ with pencil and paper.\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We will now perform backward substitution in Python."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/",
+     "height": 69
+    },
+    "colab_type": "code",
+    "executionInfo": {
+     "elapsed": 249,
+     "status": "ok",
+     "timestamp": 1549550838609,
+     "user": {
+      "displayName": "Alexander Dowling",
+      "photoUrl": "https://lh3.googleusercontent.com/-LChdQ2m5OQE/AAAAAAAAAAI/AAAAAAAAAA0/JeXJe4vQJ7M/s64/photo.jpg",
+      "userId": "00988067626794866502"
+     },
+     "user_tz": 300
+    },
+    "id": "m0en677vjWAT",
+    "outputId": "21b4c731-59df-4e7c-da51-5c46fdcd8421"
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "x3 = 1.0\n",
+      "x2 = 1.0\n",
+      "x1 = 1.0\n"
+     ]
+    }
+   ],
+   "source": [
+    "#backsubstitution\n",
+    "x3 = aug_matrix[2,3]/aug_matrix[2,2] #solve for x3\n",
+    "print(\"x3 =\",x3)\n",
+    "#now solve for x2\n",
+    "x2 = (aug_matrix[1,3] - x3*aug_matrix[1,2])/aug_matrix[1,1] \n",
+    "print(\"x2 =\",x2)\n",
+    "#now solve for x1\n",
+    "x1 = (aug_matrix[0,3] - x3*aug_matrix[0,2]- x2*aug_matrix[0,1])/aug_matrix[0,0] \n",
+    "print(\"x1 =\",x1)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "32Xf87IdjWAW"
+   },
+   "source": [
+    "The solution we get is $$x_1 = 1,$$ $$x_2 = 1,$$ $$x_3 = 1.$$ We can check this by plugging it in."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "5mIWpz-TjWAX"
+   },
+   "source": [
+    "### Verify Solution\n",
+    "\n",
+    "We can verify our solution is correct by computing $\\mathbf{A} \\cdot \\mathbf{x}$ and comparing to $\\mathbf{b}$."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"admonition seealso\"> \n",
+    "<p class=\"title\"><b>Home Activity</b></p>\n",
+    " Perform this matrix multiplication with pencil and paper. (This is good practice, especially if you took linear algebra a few semesters ago.) Verify your pencil and paper solution for $x$ is correct.\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We can easily perform this matrix multiplication by Python too."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/",
+     "height": 35
+    },
+    "colab_type": "code",
+    "executionInfo": {
+     "elapsed": 226,
+     "status": "ok",
+     "timestamp": 1549550875401,
+     "user": {
+      "displayName": "Alexander Dowling",
+      "photoUrl": "https://lh3.googleusercontent.com/-LChdQ2m5OQE/AAAAAAAAAAI/AAAAAAAAAA0/JeXJe4vQJ7M/s64/photo.jpg",
+      "userId": "00988067626794866502"
+     },
+     "user_tz": 300
+    },
+    "id": "PkzDYPWcjWAX",
+    "outputId": "5fa5260d-8ff8-4d77-cd79-f00d33f93c12"
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[[6 8 4]] - [[6 8 4]] = [[0 0 0]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "x = np.array([1,1,1])\n",
+    "print(np.dot(A33,x),\"-\",b3,\"=\",np.dot(A33,x)-b3)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "ByoypUDPjWAa"
+   },
+   "source": [
+    "Perfect."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"admonition seealso\"> \n",
+    "<p class=\"title\"><b>Home Activity</b></p>\n",
+    " Compute $\\mathbf{A} \\cdot \\mathbf{x}$ in Python using alternate syntax, i.e., not <tt>.dot</tt>, for matrix multiplication.\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[[6 8 4]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Add your solution here"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "BuQD_VEGjWAb"
+   },
+   "source": [
+    "## Generalized Gaussian Elimination\n",
+    "\n",
+    "Now we will generalize our strategy to any $N \\times N$ linear system.\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "d5fdFIXYjWAb"
+   },
+   "source": [
+    "### Pseudocode"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"admonition seealso\"> \n",
+    "<p class=\"title\"><b>Home Activity</b></p>\n",
+    " Write pseudocode for a function that performs Gaussian elimination on two inputs: matrix $\\mathbf{A}$ and vector $\\mathbf{b}$.\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "q3urRD0AjWAc"
+   },
+   "source": [
+    "### Python Implementation"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"admonition note\"> \n",
+    "<p class=\"title\"><b>Class Activity</b></p>\n",
+    " Working with a partner, compare your pseudocode to the function below. Write down one observation or question to share with the class.</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Question or observation to share:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "metadata": {
+    "colab": {},
+    "colab_type": "code",
+    "id": "guqGs9nNjWAd",
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "'''Warning: If you add print statements to the code below (optional), \n",
+    "be sure to place them inside \"if LOUD:\" blocks. Otherwise,\n",
+    "the timing analysis later in this notebook may crash.'''\n",
+    "\n",
+    "def GaussElim(A,b,LOUD=False):\n",
+    "    \"\"\"create a Gaussian elimination matrix for a system\n",
+    "\n",
+    "    Args:\n",
+    "        A: N by N array\n",
+    "        b: array of length N\n",
+    "    Returns:\n",
+    "        augmented matrix ready for back substitution\n",
+    "    \"\"\"\n",
+    "    # Extract dimensions of A\n",
+    "    [Nrow, Ncol] = A.shape\n",
+    "    \n",
+    "    # Check that A is square\n",
+    "    assert Nrow == Ncol\n",
+    "    \n",
+    "    # Check dimensions of b\n",
+    "    N = Nrow\n",
+    "    assert b.size == N\n",
+    "    \n",
+    "    # create augmented matrix, just like\n",
+    "    # code at the start of motivating example\n",
+    "    aug_matrix = np.zeros((N,N+1))\n",
+    "    aug_matrix[0:N,0:N] = A.copy()\n",
+    "    aug_matrix[:,N] = b.copy()\n",
+    "    #augmented matrix is created\n",
+    "    \n",
+    "    if LOUD:\n",
+    "        print(\"Augmented Matrix = \",aug_matrix)\n",
+    "\n",
+    "    # loop over columns\n",
+    "    for column in range(0,N):\n",
+    "        \n",
+    "        # loop over rows\n",
+    "        for row in range(column+1,N):\n",
+    "            \n",
+    "            # select row to modify\n",
+    "            mod_row = aug_matrix[row,:]\n",
+    "            \n",
+    "            # modify entire row\n",
+    "            mod_row -= (mod_row[column]/aug_matrix[column,column]*\n",
+    "                        aug_matrix[column,:])\n",
+    "\n",
+    "            # overwrite row. Is this needed? Why or why not?\n",
+    "            aug_matrix[row] = mod_row\n",
+    "\n",
+    "            \n",
+    "        # end loop over rows\n",
+    "        \n",
+    "    # end loop over columns\n",
+    "    \n",
+    "    # return augmented matrix\n",
+    "    return aug_matrix"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "N8RC6_1gjWAe"
+   },
+   "source": [
+    "### Unit Test: Motivating Example\n",
+    "\n",
+    "Immediately after creating our function, we should test it. Let's use the 3x3 motivating example."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/",
+     "height": 69
+    },
+    "colab_type": "code",
+    "executionInfo": {
+     "elapsed": 212,
+     "status": "ok",
+     "timestamp": 1549551728444,
+     "user": {
+      "displayName": "Alexander Dowling",
+      "photoUrl": "https://lh3.googleusercontent.com/-LChdQ2m5OQE/AAAAAAAAAAI/AAAAAAAAAA0/JeXJe4vQJ7M/s64/photo.jpg",
+      "userId": "00988067626794866502"
+     },
+     "user_tz": 300
+    },
+    "id": "XsOmcNNCjWAf",
+    "outputId": "3949c166-b510-46d6-a73b-676ef884f575"
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[[ 3.          2.          1.          6.        ]\n",
+      " [ 0.          4.66666667  5.33333333 10.        ]\n",
+      " [ 0.          0.         20.         20.        ]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "aug33 = GaussElim(A33,b3)\n",
+    "print(aug33)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "v_3R8u9tjWAh"
+   },
+   "source": [
+    "Success (after completing the in class activity). We reproduced the same answer as above. Our function passes the unit test!"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "GqZhNYy6jWAj"
+   },
+   "source": [
+    "## Generalized Back Substitution"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "z84eLl_njWAj"
+   },
+   "source": [
+    "### Pseudocode"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"admonition seealso\"> \n",
+    "<p class=\"title\"><b>Home Activity</b></p>\n",
+    " Write pseudocode for a function that takes an augmented matrix as an input, performs back substitution, and returns the solution vector.\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "v62VKwONjWAj"
+   },
+   "source": [
+    "### Python Implementation"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Now let's program our back substitution function in Python."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"admonition note\"> \n",
+    "<p class=\"title\"><b>Class Activity</b></p>\n",
+    " Working with a partner, compare your pseudocode to the function below. Write down one observation or question to share with the class.</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Question or observation to share:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "metadata": {
+    "colab": {},
+    "colab_type": "code",
+    "id": "asbHwWJijWAk",
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "def BackSub(aug_matrix,z_tol=1E-8):\n",
+    "    \"\"\"back substitute a N by N system after Gauss elimination\n",
+    "\n",
+    "    Args:\n",
+    "        aug_matrix: augmented matrix with zeros below the diagonal [numpy 2D array]\n",
+    "        z_tol: tolerance for checking for zeros below the diagonal [float]\n",
+    "    Returns:\n",
+    "        x: length N vector, solution to linear system [numpy 1D array]\n",
+    "    \"\"\"\n",
+    "    [Nrow, Ncol] = aug_matrix.shape\n",
+    "    try:\n",
+    "        # check the dimensions\n",
+    "        assert Nrow + 1 == Ncol\n",
+    "    except AssertionError:\n",
+    "        print(\"Dimension checks failed.\")\n",
+    "        print(\"Nrow = \",Nrow)\n",
+    "        print(\"Ncol = \",Ncol)\n",
+    "        raise\n",
+    "\n",
+    "    assert type(z_tol) is float, \"z_tol must be a float\"\n",
+    "        \n",
+    "    # check augmented matrix is all zeros below the diagonal\n",
+    "    for r in range(Nrow):\n",
+    "        for c in range(0,r):\n",
+    "            assert np.abs(aug_matrix[r,c]) < z_tol, \"\\nWarning! Nonzero in position \"+str(r)+\",\"+str(c)\n",
+    "\n",
+    "    # create vector of zeros to store solution\n",
+    "    x = np.zeros(Nrow)\n",
+    "    \n",
+    "    # loop over the rows starting at the bottom\n",
+    "    for row in range(Nrow-1,-1,-1):\n",
+    "        RHS = aug_matrix[row,Nrow] # far column\n",
+    "\n",
+    "        # loop over the columns to the right of the diagonal\n",
+    "        for column in range(row+1,Nrow):\n",
+    "            \n",
+    "            # subtract, i.e., substitute the already known values\n",
+    "            RHS -= x[column]*aug_matrix[row,column]\n",
+    "\n",
+    "        # compute the element of x corresponding to the current row\n",
+    "        x[row] = RHS/aug_matrix[row,row]\n",
+    "        \n",
+    "    return x"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Before we finish the function, let's verify the code properly detects nonzeros elements below the diagonal."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[[0.4579225  0.00069821 0.50337161 0.60786384]\n",
+      " [0.50481008 0.08546548 0.04532981 0.48119286]\n",
+      " [0.6937803  0.33541273 0.50272986 0.09051413]]\n"
+     ]
+    },
+    {
+     "ename": "AssertionError",
+     "evalue": "\nWarning! Nonzero in position 1,0",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[0;31mAssertionError\u001b[0m                            Traceback (most recent call last)",
+      "Input \u001b[0;32mIn [15]\u001b[0m, in \u001b[0;36m<cell line: 5>\u001b[0;34m()\u001b[0m\n\u001b[1;32m      2\u001b[0m not_an_augmented_matrix \u001b[38;5;241m=\u001b[39m np\u001b[38;5;241m.\u001b[39mrandom\u001b[38;5;241m.\u001b[39mrand(\u001b[38;5;241m3\u001b[39m,\u001b[38;5;241m4\u001b[39m)\n\u001b[1;32m      3\u001b[0m \u001b[38;5;28mprint\u001b[39m(not_an_augmented_matrix)\n\u001b[0;32m----> 5\u001b[0m x \u001b[38;5;241m=\u001b[39m \u001b[43mBackSub\u001b[49m\u001b[43m(\u001b[49m\u001b[43mnot_an_augmented_matrix\u001b[49m\u001b[43m)\u001b[49m\n",
+      "Input \u001b[0;32mIn [14]\u001b[0m, in \u001b[0;36mBackSub\u001b[0;34m(aug_matrix, z_tol)\u001b[0m\n\u001b[1;32m     23\u001b[0m \u001b[38;5;28;01mfor\u001b[39;00m r \u001b[38;5;129;01min\u001b[39;00m \u001b[38;5;28mrange\u001b[39m(Nrow):\n\u001b[1;32m     24\u001b[0m     \u001b[38;5;28;01mfor\u001b[39;00m c \u001b[38;5;129;01min\u001b[39;00m \u001b[38;5;28mrange\u001b[39m(\u001b[38;5;241m0\u001b[39m,r):\n\u001b[0;32m---> 25\u001b[0m         \u001b[38;5;28;01massert\u001b[39;00m np\u001b[38;5;241m.\u001b[39mabs(aug_matrix[r,c]) \u001b[38;5;241m<\u001b[39m z_tol, \u001b[38;5;124m\"\u001b[39m\u001b[38;5;130;01m\\n\u001b[39;00m\u001b[38;5;124mWarning! Nonzero in position \u001b[39m\u001b[38;5;124m\"\u001b[39m\u001b[38;5;241m+\u001b[39m\u001b[38;5;28mstr\u001b[39m(r)\u001b[38;5;241m+\u001b[39m\u001b[38;5;124m\"\u001b[39m\u001b[38;5;124m,\u001b[39m\u001b[38;5;124m\"\u001b[39m\u001b[38;5;241m+\u001b[39m\u001b[38;5;28mstr\u001b[39m(c)\n\u001b[1;32m     27\u001b[0m \u001b[38;5;66;03m# create vector of zeros to store solution\u001b[39;00m\n\u001b[1;32m     28\u001b[0m x \u001b[38;5;241m=\u001b[39m np\u001b[38;5;241m.\u001b[39mzeros(Nrow)\n",
+      "\u001b[0;31mAssertionError\u001b[0m: \nWarning! Nonzero in position 1,0"
+     ]
+    }
+   ],
+   "source": [
+    "# make a 3x4 matrix filled with random numbers\n",
+    "not_an_augmented_matrix = np.random.rand(3,4)\n",
+    "print(not_an_augmented_matrix)\n",
+    "\n",
+    "x = BackSub(not_an_augmented_matrix)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We should verify our function gives the same answer as above."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/",
+     "height": 35
+    },
+    "colab_type": "code",
+    "executionInfo": {
+     "elapsed": 219,
+     "status": "ok",
+     "timestamp": 1549552532317,
+     "user": {
+      "displayName": "Alexander Dowling",
+      "photoUrl": "https://lh3.googleusercontent.com/-LChdQ2m5OQE/AAAAAAAAAAI/AAAAAAAAAA0/JeXJe4vQJ7M/s64/photo.jpg",
+      "userId": "00988067626794866502"
+     },
+     "user_tz": 300
+    },
+    "id": "qLig4enUjWAo",
+    "outputId": "10afa1df-b9ee-4cf0-a005-2e7d54699054"
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "The solution is  [1. 1. 1.]\n"
+     ]
+    }
+   ],
+   "source": [
+    "x33 = BackSub(aug33)\n",
+    "print(\"The solution is \", x33)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "gQmZxn6vjWAs"
+   },
+   "source": [
+    "Success. We reproduced the same answer as above. Our function passes the unit test!"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/",
+     "height": 69
+    },
+    "colab_type": "code",
+    "executionInfo": {
+     "elapsed": 249,
+     "status": "ok",
+     "timestamp": 1549552571118,
+     "user": {
+      "displayName": "Alexander Dowling",
+      "photoUrl": "https://lh3.googleusercontent.com/-LChdQ2m5OQE/AAAAAAAAAAI/AAAAAAAAAA0/JeXJe4vQJ7M/s64/photo.jpg",
+      "userId": "00988067626794866502"
+     },
+     "user_tz": 300
+    },
+    "id": "oxNWVmiOh2AX",
+    "outputId": "653a975e-fba7-4215-eb7a-f37bc3df3211"
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[[ 3.          2.          1.          6.        ]\n",
+      " [ 0.          4.66666667  5.33333333 10.        ]\n",
+      " [ 0.          0.         20.         20.        ]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(aug33)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Let's take a moment to review how to access elements of a matrix. Predict the output of the three cells below before you execute them."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/",
+     "height": 35
+    },
+    "colab_type": "code",
+    "executionInfo": {
+     "elapsed": 250,
+     "status": "ok",
+     "timestamp": 1549552587353,
+     "user": {
+      "displayName": "Alexander Dowling",
+      "photoUrl": "https://lh3.googleusercontent.com/-LChdQ2m5OQE/AAAAAAAAAAI/AAAAAAAAAA0/JeXJe4vQJ7M/s64/photo.jpg",
+      "userId": "00988067626794866502"
+     },
+     "user_tz": 300
+    },
+    "id": "0ZTFPRiAh99r",
+    "outputId": "f49fb986-a75c-4413-9eb4-0756ef25883f"
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([ 0.        ,  4.66666667,  5.33333333, 10.        ])"
+      ]
+     },
+     "execution_count": 18,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "aug33[1] # return the 2nd row"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/",
+     "height": 35
+    },
+    "colab_type": "code",
+    "executionInfo": {
+     "elapsed": 364,
+     "status": "ok",
+     "timestamp": 1549552638921,
+     "user": {
+      "displayName": "Alexander Dowling",
+      "photoUrl": "https://lh3.googleusercontent.com/-LChdQ2m5OQE/AAAAAAAAAAI/AAAAAAAAAA0/JeXJe4vQJ7M/s64/photo.jpg",
+      "userId": "00988067626794866502"
+     },
+     "user_tz": 300
+    },
+    "id": "CUTSUVT-iG-_",
+    "outputId": "8b0b52d2-5154-4c1c-bcb0-4292c0e1a116"
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "5.333333333333333"
+      ]
+     },
+     "execution_count": 19,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "aug33[1][2] # return the element from the 2nd row and 3rd column"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/",
+     "height": 35
+    },
+    "colab_type": "code",
+    "executionInfo": {
+     "elapsed": 290,
+     "status": "ok",
+     "timestamp": 1549552702442,
+     "user": {
+      "displayName": "Alexander Dowling",
+      "photoUrl": "https://lh3.googleusercontent.com/-LChdQ2m5OQE/AAAAAAAAAAI/AAAAAAAAAA0/JeXJe4vQJ7M/s64/photo.jpg",
+      "userId": "00988067626794866502"
+     },
+     "user_tz": 300
+    },
+    "id": "71XAoGPRiaof",
+    "outputId": "2e6db8f7-6214-4048-c868-bc1271277216"
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "5.333333333333333"
+      ]
+     },
+     "execution_count": 20,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "aug33[1,2] # return the element from the 2nd row and 3rd column"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "s4wfFTzqjWAt"
+   },
+   "source": [
+    "## Additional Testing: Random Linear Systems\n",
+    "\n",
+    "Both our functions gave the expected results for the motivating example, but we want to ensure the functions work for a general NxN linear system.\n",
+    "\n",
+    "Here is an idea. Let's randomly generate many $N x N$ linear systems and solve them with our Gaussian elimination code."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 28,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/",
+     "height": 35
+    },
+    "colab_type": "code",
+    "executionInfo": {
+     "elapsed": 267,
+     "status": "ok",
+     "timestamp": 1549552874822,
+     "user": {
+      "displayName": "Alexander Dowling",
+      "photoUrl": "https://lh3.googleusercontent.com/-LChdQ2m5OQE/AAAAAAAAAAI/AAAAAAAAAA0/JeXJe4vQJ7M/s64/photo.jpg",
+      "userId": "00988067626794866502"
+     },
+     "user_tz": 300
+    },
+    "id": "-ALEtculjWAu",
+    "outputId": "1b6f2a2b-b404-41f1-c338-b4430eb5bb9d"
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Test failed with\n",
+      "A =  [[0.00959307 0.3392051  0.96879446 0.69157906]\n",
+      " [0.19365752 0.31843008 0.89968348 0.67470871]\n",
+      " [0.04750303 0.84723071 0.39717755 0.07492806]\n",
+      " [0.50945428 0.16695421 0.22603947 0.23132371]]\n",
+      "x =  [0.38272853 0.78728864 0.96274648 0.12156148]\n",
+      "diff =  [4.38982184e-13 7.44293516e-13 1.99340544e-12 2.43344234e-12]\n"
+     ]
+    },
+    {
+     "ename": "AssertionError",
+     "evalue": "",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[0;31mAssertionError\u001b[0m                            Traceback (most recent call last)",
+      "Input \u001b[0;32mIn [28]\u001b[0m, in \u001b[0;36m<cell line: 8>\u001b[0;34m()\u001b[0m\n\u001b[1;32m     25\u001b[0m \u001b[38;5;66;03m# Check if solutions match within tolerance\u001b[39;00m\n\u001b[1;32m     26\u001b[0m \u001b[38;5;28;01mtry\u001b[39;00m:\n\u001b[0;32m---> 27\u001b[0m     \u001b[38;5;28;01massert\u001b[39;00m(np\u001b[38;5;241m.\u001b[39mmax(diff) \u001b[38;5;241m<\u001b[39m \u001b[38;5;241m1.0e-12\u001b[39m)\n\u001b[1;32m     28\u001b[0m \u001b[38;5;28;01mexcept\u001b[39;00m \u001b[38;5;167;01mAssertionError\u001b[39;00m:\n\u001b[1;32m     29\u001b[0m     \u001b[38;5;28mprint\u001b[39m(\u001b[38;5;124m\"\u001b[39m\u001b[38;5;124mTest failed with\u001b[39m\u001b[38;5;124m\"\u001b[39m)\n",
+      "\u001b[0;31mAssertionError\u001b[0m: "
+     ]
+    }
+   ],
+   "source": [
+    "# Number of tests\n",
+    "tests = 10000\n",
+    "\n",
+    "# System size\n",
+    "N = 4\n",
+    "\n",
+    "# loop over all tests\n",
+    "for i in range(tests):\n",
+    "    # generate x and A\n",
+    "    x = np.random.rand(N)\n",
+    "    A = np.random.rand(N,N)\n",
+    "    \n",
+    "    # Calculate b\n",
+    "    b = np.dot(A,x)\n",
+    "    \n",
+    "    # Perform Gaussian Elimination (aka row reduction)\n",
+    "    aug = GaussElim(A,b)\n",
+    "    \n",
+    "    # Perform back substitition\n",
+    "    sol = BackSub(aug)\n",
+    "    \n",
+    "    # Calculate difference\n",
+    "    diff = np.abs(sol-x)\n",
+    "    \n",
+    "    # Check if solutions match within tolerance\n",
+    "    try:\n",
+    "        assert(np.max(diff) < 1.0e-12)\n",
+    "    except AssertionError:\n",
+    "        print(\"Test failed with\")\n",
+    "        print(\"A = \",A)\n",
+    "        print(\"x = \",x)\n",
+    "        print(\"diff = \",diff)\n",
+    "        raise\n",
+    "print(\"All Tests Passed\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"admonition note\"> \n",
+    "<p class=\"title\"><b>Class Activity</b></p>\n",
+    " Run the code above a few times. Does anyone observe it only fails some of the time? Any ideas as to why this happens?\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "GfHX5_eXjWAx"
+   },
+   "source": [
+    "## Round off and Pivoting"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "xKjRLDgjjWAy"
+   },
+   "source": [
+    "For matrices with a large discrepancy in the magnitude of the elements, we'll see that Gauss elimination doesn't perform quite as well."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 29,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/",
+     "height": 69
+    },
+    "colab_type": "code",
+    "executionInfo": {
+     "elapsed": 285,
+     "status": "ok",
+     "timestamp": 1549552891925,
+     "user": {
+      "displayName": "Alexander Dowling",
+      "photoUrl": "https://lh3.googleusercontent.com/-LChdQ2m5OQE/AAAAAAAAAAI/AAAAAAAAAA0/JeXJe4vQJ7M/s64/photo.jpg",
+      "userId": "00988067626794866502"
+     },
+     "user_tz": 300
+    },
+    "id": "L0yuLiPSjWAz",
+    "outputId": "b1d3d73d-ad6a-45ce-c1c2-5b263e4caaf2"
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[[ 1.e-14 -1.e+00  1.e+00]\n",
+      " [-1.e+00  2.e+00 -1.e+00]\n",
+      " [ 2.e+00 -1.e+00  0.e+00]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "epsilon = 1e-14\n",
+    "A_eps = np.array([(epsilon,-1,1),(-1,2,-1),(2,-1,0)])\n",
+    "print(A_eps)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "RUW-17wsjWA0"
+   },
+   "source": [
+    "Now we will compute the RHS of our system by multiplying the matrix by a simple vector:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 30,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/",
+     "height": 35
+    },
+    "colab_type": "code",
+    "executionInfo": {
+     "elapsed": 255,
+     "status": "ok",
+     "timestamp": 1549552913967,
+     "user": {
+      "displayName": "Alexander Dowling",
+      "photoUrl": "https://lh3.googleusercontent.com/-LChdQ2m5OQE/AAAAAAAAAAI/AAAAAAAAAA0/JeXJe4vQJ7M/s64/photo.jpg",
+      "userId": "00988067626794866502"
+     },
+     "user_tz": 300
+    },
+    "id": "ToPY2FyqjWA1",
+    "outputId": "8a1bb05a-3b48-49ac-b715-95248b2e3cf3"
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[0. 0. 1.]\n"
+     ]
+    }
+   ],
+   "source": [
+    "b_eps = np.array([0,0,1.0])\n",
+    "print(b_eps)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "WFrz3SUTjWA3"
+   },
+   "source": [
+    "Now we can solve this system:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 31,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/",
+     "height": 52
+    },
+    "colab_type": "code",
+    "executionInfo": {
+     "elapsed": 354,
+     "status": "ok",
+     "timestamp": 1549552928023,
+     "user": {
+      "displayName": "Alexander Dowling",
+      "photoUrl": "https://lh3.googleusercontent.com/-LChdQ2m5OQE/AAAAAAAAAAI/AAAAAAAAAA0/JeXJe4vQJ7M/s64/photo.jpg",
+      "userId": "00988067626794866502"
+     },
+     "user_tz": 300
+    },
+    "id": "WAUpjM_VjWA4",
+    "outputId": "a82cd09e-0843-434f-f665-13ad09ef0194"
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "The solution is [0.96589403 0.96969697 0.96969697]\n",
+      "The residual is [ 0.         -0.00380294  0.03790891]\n"
+     ]
+    }
+   ],
+   "source": [
+    "aug_mat_eps = GaussElim(A_eps,b_eps)\n",
+    "x_eps = BackSub(aug_mat_eps,z_tol=10.)\n",
+    "print(\"The solution is\",x_eps)\n",
+    "print(\"The residual is\",b_eps - A_eps @ x_eps)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "12lMPaQzjWA6"
+   },
+   "source": [
+    "There is a noticeable difference between the calculated solution and the actual solution (as measured by the residual). This is because we are dividing by a small number, which adds numeric error. We should use the largest row element as the **pivot element**, or the element we divide by when doing the elimination.\n",
+    "\n",
+    "To further demonstrate the need for pivoting, consider the system:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 32,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/",
+     "height": 87
+    },
+    "colab_type": "code",
+    "executionInfo": {
+     "elapsed": 350,
+     "status": "ok",
+     "timestamp": 1549552985176,
+     "user": {
+      "displayName": "Alexander Dowling",
+      "photoUrl": "https://lh3.googleusercontent.com/-LChdQ2m5OQE/AAAAAAAAAAI/AAAAAAAAAA0/JeXJe4vQJ7M/s64/photo.jpg",
+      "userId": "00988067626794866502"
+     },
+     "user_tz": 300
+    },
+    "id": "46_MaRjxjWA7",
+    "outputId": "5e9c81ed-db2b-4e3f-8b3a-63cd80a1f4fd"
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "A=\n",
+      " [[1. 0.]\n",
+      " [0. 1.]]\n",
+      "b= [2. 6.]\n"
+     ]
+    }
+   ],
+   "source": [
+    "A = np.array([(1.0,0),(0,1.0)])\n",
+    "b = np.array([2,6.0])\n",
+    "print(\"A=\\n\",A)\n",
+    "print(\"b=\",b)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "tItLZe54jWA9"
+   },
+   "source": [
+    "With solution"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 33,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/",
+     "height": 35
+    },
+    "colab_type": "code",
+    "executionInfo": {
+     "elapsed": 297,
+     "status": "ok",
+     "timestamp": 1549553002869,
+     "user": {
+      "displayName": "Alexander Dowling",
+      "photoUrl": "https://lh3.googleusercontent.com/-LChdQ2m5OQE/AAAAAAAAAAI/AAAAAAAAAA0/JeXJe4vQJ7M/s64/photo.jpg",
+      "userId": "00988067626794866502"
+     },
+     "user_tz": 300
+    },
+    "id": "JhYoVTnojWA-",
+    "outputId": "1feb4c88-e6a1-423d-d7d2-d981f376b51e"
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[2. 6.]\n"
+     ]
+    }
+   ],
+   "source": [
+    "aug_mat = GaussElim(A,b)\n",
+    "x = BackSub(aug_mat)\n",
+    "print(x)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "hq4L5whtjWA_"
+   },
+   "source": [
+    "This is as expected because $\\mathbf{A}$ is an identity matrix. Now what if we switch the rows in $\\mathbf{A}$ and try the same thing:\n",
+    "\n",
+    "$$\\underbrace{\\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}}_{\\mathbf{A}} ~\n",
+    "\\underbrace{\\begin{pmatrix} x_1\\\\x_2 \\end{pmatrix}}_{\\mathbf{x}} = \\underbrace{\\begin{pmatrix}6\\\\2\\end{pmatrix}}_{\\mathbf{b}}\n",
+    "$$\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"admonition seealso\"> \n",
+    "<p class=\"title\"><b>Home Activity</b></p>\n",
+    " Write a 1 or 2 sentence explaining what will happen when we apply Gaussian elimination to the above system. You should be able to answer this question without running any Python code.\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"admonition seealso\"> \n",
+    "<p class=\"title\"><b>Home Activity</b></p>\n",
+    " Run the code below.\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 34,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/",
+     "height": 178
+    },
+    "colab_type": "code",
+    "executionInfo": {
+     "elapsed": 336,
+     "status": "ok",
+     "timestamp": 1549553028973,
+     "user": {
+      "displayName": "Alexander Dowling",
+      "photoUrl": "https://lh3.googleusercontent.com/-LChdQ2m5OQE/AAAAAAAAAAI/AAAAAAAAAA0/JeXJe4vQJ7M/s64/photo.jpg",
+      "userId": "00988067626794866502"
+     },
+     "user_tz": 300
+    },
+    "id": "moPnEJlEjWBA",
+    "outputId": "579d1f70-2e62-4be9-bce1-318f8f32a195"
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "A =\n",
+      " [[0. 1.]\n",
+      " [1. 0.]]\n",
+      "b = [6. 2.]\n",
+      "\n",
+      "aug_mat = \n",
+      " [[  0.   1.   6.]\n",
+      " [ nan -inf -inf]]\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "/var/folders/bh/nnfwy9qn4810lwynr80nqg1m0000gn/T/ipykernel_3380/3212638941.py:44: RuntimeWarning: divide by zero encountered in double_scalars\n",
+      "  mod_row -= (mod_row[column]/aug_matrix[column,column]*\n",
+      "/var/folders/bh/nnfwy9qn4810lwynr80nqg1m0000gn/T/ipykernel_3380/3212638941.py:44: RuntimeWarning: invalid value encountered in multiply\n",
+      "  mod_row -= (mod_row[column]/aug_matrix[column,column]*\n"
+     ]
+    },
+    {
+     "ename": "AssertionError",
+     "evalue": "\nWarning! Nonzero in position 1,0",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[0;31mAssertionError\u001b[0m                            Traceback (most recent call last)",
+      "Input \u001b[0;32mIn [34]\u001b[0m, in \u001b[0;36m<cell line: 9>\u001b[0;34m()\u001b[0m\n\u001b[1;32m      6\u001b[0m \u001b[38;5;28mprint\u001b[39m(\u001b[38;5;124m\"\u001b[39m\u001b[38;5;130;01m\\n\u001b[39;00m\u001b[38;5;124maug_mat = \u001b[39m\u001b[38;5;130;01m\\n\u001b[39;00m\u001b[38;5;124m\"\u001b[39m,aug_mat)\n\u001b[1;32m      8\u001b[0m \u001b[38;5;66;03m# With a large zero tolerance, we effectively skip the check below the diagonal\u001b[39;00m\n\u001b[0;32m----> 9\u001b[0m x \u001b[38;5;241m=\u001b[39m \u001b[43mBackSub\u001b[49m\u001b[43m(\u001b[49m\u001b[43maug_mat\u001b[49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[43mz_tol\u001b[49m\u001b[43m \u001b[49m\u001b[38;5;241;43m=\u001b[39;49m\u001b[43m \u001b[49m\u001b[38;5;241;43m1E3\u001b[39;49m\u001b[43m)\u001b[49m\n\u001b[1;32m     10\u001b[0m \u001b[38;5;28mprint\u001b[39m(\u001b[38;5;124m\"\u001b[39m\u001b[38;5;130;01m\\n\u001b[39;00m\u001b[38;5;124mx =\u001b[39m\u001b[38;5;124m\"\u001b[39m,x)\n",
+      "Input \u001b[0;32mIn [14]\u001b[0m, in \u001b[0;36mBackSub\u001b[0;34m(aug_matrix, z_tol)\u001b[0m\n\u001b[1;32m     23\u001b[0m \u001b[38;5;28;01mfor\u001b[39;00m r \u001b[38;5;129;01min\u001b[39;00m \u001b[38;5;28mrange\u001b[39m(Nrow):\n\u001b[1;32m     24\u001b[0m     \u001b[38;5;28;01mfor\u001b[39;00m c \u001b[38;5;129;01min\u001b[39;00m \u001b[38;5;28mrange\u001b[39m(\u001b[38;5;241m0\u001b[39m,r):\n\u001b[0;32m---> 25\u001b[0m         \u001b[38;5;28;01massert\u001b[39;00m np\u001b[38;5;241m.\u001b[39mabs(aug_matrix[r,c]) \u001b[38;5;241m<\u001b[39m z_tol, \u001b[38;5;124m\"\u001b[39m\u001b[38;5;130;01m\\n\u001b[39;00m\u001b[38;5;124mWarning! Nonzero in position \u001b[39m\u001b[38;5;124m\"\u001b[39m\u001b[38;5;241m+\u001b[39m\u001b[38;5;28mstr\u001b[39m(r)\u001b[38;5;241m+\u001b[39m\u001b[38;5;124m\"\u001b[39m\u001b[38;5;124m,\u001b[39m\u001b[38;5;124m\"\u001b[39m\u001b[38;5;241m+\u001b[39m\u001b[38;5;28mstr\u001b[39m(c)\n\u001b[1;32m     27\u001b[0m \u001b[38;5;66;03m# create vector of zeros to store solution\u001b[39;00m\n\u001b[1;32m     28\u001b[0m x \u001b[38;5;241m=\u001b[39m np\u001b[38;5;241m.\u001b[39mzeros(Nrow)\n",
+      "\u001b[0;31mAssertionError\u001b[0m: \nWarning! Nonzero in position 1,0"
+     ]
+    }
+   ],
+   "source": [
+    "A = np.array([(0,1.0),(1.0,0)])\n",
+    "b = np.array([6.,2.0])\n",
+    "print(\"A =\\n\",A)\n",
+    "print(\"b =\",b)\n",
+    "aug_mat = GaussElim(A,b)\n",
+    "print(\"\\naug_mat = \\n\",aug_mat)\n",
+    "\n",
+    "# With a large zero tolerance, we effectively skip the check below the diagonal\n",
+    "x = BackSub(aug_mat, z_tol = 1E3)\n",
+    "print(\"\\nx =\",x)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "1EEhmIlEjWBC"
+   },
+   "source": [
+    "What happened?!?\n",
+    "\n",
+    "Well, the **pivot element** in the first row was **zero**. We divided by zero.\n",
+    "\n",
+    "We can correct this by checking before we pivot, and **rearranging the equations** to pivot with the largest possible entry.\n",
+    "\n",
+    "It is worth mentioning that **largest is relative** to the size of the other entries in the row. Consider two rows: $(11,10,10)$ and $(2,1,1)$. The 2 is actually a better pivot because it is large relative to the other elements of a row."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "KglEHk_2jWBE"
+   },
+   "source": [
+    "### Swapping Rows\n",
+    "\n",
+    "**Linear Algebra Check** Why is it valid to swap rows? What does swapping two rows mean for the system of linear equations we are solving?\n",
+    "\n",
+    "To do pivoting we will need a means to swap rows in our augmented matrix."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"admonition seealso\"> \n",
+    "<p class=\"title\"><b>Home Activity</b></p>\n",
+    " Run the code below.\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 35,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/",
+     "height": 123
+    },
+    "colab_type": "code",
+    "executionInfo": {
+     "elapsed": 295,
+     "status": "ok",
+     "timestamp": 1549553303625,
+     "user": {
+      "displayName": "Alexander Dowling",
+      "photoUrl": "https://lh3.googleusercontent.com/-LChdQ2m5OQE/AAAAAAAAAAI/AAAAAAAAAA0/JeXJe4vQJ7M/s64/photo.jpg",
+      "userId": "00988067626794866502"
+     },
+     "user_tz": 300
+    },
+    "id": "aHRRVoDljWBE",
+    "outputId": "3961c2c9-ddc7-4dab-af1d-da819b90f2d5"
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Before swap, A =\n",
+      " [[0. 1.]\n",
+      " [1. 0.]]\n",
+      "After swapping 0 and 1, A =\n",
+      " [[1. 0.]\n",
+      " [0. 1.]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "def swap_rows(A, a, b):\n",
+    "    \"\"\"Rows two rows in a matrix, switch row a with row b\n",
+    "    \n",
+    "    args: \n",
+    "    A: matrix to perform row swaps on\n",
+    "    a: row index of matrix\n",
+    "    b: row index of matrix\n",
+    "    \n",
+    "    returns: nothing\n",
+    "    \n",
+    "    side effects:\n",
+    "    changes A to rows a and b swapped\n",
+    "    \"\"\"\n",
+    "    \n",
+    "    # A negative index will give unexpected behavior\n",
+    "    assert (a>=0) and (b>=0)\n",
+    "    N = A.shape[0] #number of rows\n",
+    "    assert (a<N) and (b<N) #less than because 0-based indexing\n",
+    "    \n",
+    "    # create a temporary variable to store row a\n",
+    "    temp = A[a,:].copy()\n",
+    "    \n",
+    "    # move row b values into the location of row a\n",
+    "    A[a,:] = A[b,:].copy()\n",
+    "    \n",
+    "    # move row a values (stored in temp) into the location of row a\n",
+    "    A[b,:] = temp.copy()\n",
+    "\n",
+    "# And now we test our function\n",
+    "print(\"Before swap, A =\\n\",A)\n",
+    "swap_rows(A,0,1)\n",
+    "print(\"After swapping 0 and 1, A =\\n\",A)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "NA2fS6hajWBF"
+   },
+   "source": [
+    "### Selecting Pivot"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "6mL-kVvTjWBG"
+   },
+   "source": [
+    "The next step is figuring out how to swap during each step. At the beginning of the solve we want to find the **maximum row element size** using a piece of code like this: "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"admonition seealso\"> \n",
+    "<p class=\"title\"><b>Home Activity</b></p>\n",
+    " Run the code below.\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 36,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/",
+     "height": 140
+    },
+    "colab_type": "code",
+    "executionInfo": {
+     "elapsed": 295,
+     "status": "ok",
+     "timestamp": 1549553343618,
+     "user": {
+      "displayName": "Alexander Dowling",
+      "photoUrl": "https://lh3.googleusercontent.com/-LChdQ2m5OQE/AAAAAAAAAAI/AAAAAAAAAA0/JeXJe4vQJ7M/s64/photo.jpg",
+      "userId": "00988067626794866502"
+     },
+     "user_tz": 300
+    },
+    "id": "llmSL8_XjWBM",
+    "outputId": "836a603d-5c80-4fab-bd9e-98d3875d27d5"
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "A =\n",
+      " [[0.87548315 0.10945475 0.86974469 0.90123699 0.23926333]\n",
+      " [0.50952342 0.51540257 0.30429032 0.83313949 0.5737057 ]\n",
+      " [0.45924228 0.63216061 0.8796963  0.47564423 0.92054677]\n",
+      " [0.53980803 0.17410584 0.69255244 0.01825512 0.43212181]\n",
+      " [0.80762404 0.40282862 0.97876058 0.93062028 0.62889049]]\n",
+      "s = [0.90123699 0.83313949 0.92054677 0.69255244 0.97876058]\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Create a random matrix\n",
+    "N = 5\n",
+    "A = np.random.rand(N,N)\n",
+    "print(\"A =\\n\",A)\n",
+    "\n",
+    "# Create a vector of zeros\n",
+    "s = np.zeros(N)\n",
+    "\n",
+    "# loop over rows\n",
+    "count = 0\n",
+    "for row in A:\n",
+    "    # record the largest element of current row into s\n",
+    "    s[count] = np.max(np.fabs(row))\n",
+    "    \n",
+    "    # increment counter\n",
+    "    count += 1\n",
+    "print(\"s =\",s)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "NpzJ000TjWBO"
+   },
+   "source": [
+    "Then we'll have to figure out **which row** has the **largest scaled pivot element**. "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 37,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/",
+     "height": 35
+    },
+    "colab_type": "code",
+    "executionInfo": {
+     "elapsed": 439,
+     "status": "ok",
+     "timestamp": 1549553480732,
+     "user": {
+      "displayName": "Alexander Dowling",
+      "photoUrl": "https://lh3.googleusercontent.com/-LChdQ2m5OQE/AAAAAAAAAAI/AAAAAAAAAA0/JeXJe4vQJ7M/s64/photo.jpg",
+      "userId": "00988067626794866502"
+     },
+     "user_tz": 300
+    },
+    "id": "XefT2OLqjWBO",
+    "outputId": "0089116a-bc2a-46e7-eb06-eccc3ac00dcc"
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Largest scaled element in column 2 is in row 4\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Specify the column we want to analyze\n",
+    "pivot_column = 2\n",
+    "\n",
+    "# Find the position of the largest scaled element in said column\n",
+    "largest_pos = np.argmax(np.fabs(A[:,pivot_column]/s[pivot_column]))\n",
+    "print(\"Largest scaled element in column\",pivot_column,\n",
+    "      \"is in row\",largest_pos)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "Y-t0VMzsjsA0"
+   },
+   "source": [
+    "Side tanget. What does ``np.argmax`` do?"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 38,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/",
+     "height": 1091
+    },
+    "colab_type": "code",
+    "executionInfo": {
+     "elapsed": 248,
+     "status": "ok",
+     "timestamp": 1549553542048,
+     "user": {
+      "displayName": "Alexander Dowling",
+      "photoUrl": "https://lh3.googleusercontent.com/-LChdQ2m5OQE/AAAAAAAAAAI/AAAAAAAAAA0/JeXJe4vQJ7M/s64/photo.jpg",
+      "userId": "00988067626794866502"
+     },
+     "user_tz": 300
+    },
+    "id": "i6xgp4lsjwfE",
+    "outputId": "0e689259-b087-4b97-bd54-c0e0e37f6299"
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Help on function argmax in module numpy:\n",
+      "\n",
+      "argmax(a, axis=None, out=None)\n",
+      "    Returns the indices of the maximum values along an axis.\n",
+      "    \n",
+      "    Parameters\n",
+      "    ----------\n",
+      "    a : array_like\n",
+      "        Input array.\n",
+      "    axis : int, optional\n",
+      "        By default, the index is into the flattened array, otherwise\n",
+      "        along the specified axis.\n",
+      "    out : array, optional\n",
+      "        If provided, the result will be inserted into this array. It should\n",
+      "        be of the appropriate shape and dtype.\n",
+      "    \n",
+      "    Returns\n",
+      "    -------\n",
+      "    index_array : ndarray of ints\n",
+      "        Array of indices into the array. It has the same shape as `a.shape`\n",
+      "        with the dimension along `axis` removed.\n",
+      "    \n",
+      "    See Also\n",
+      "    --------\n",
+      "    ndarray.argmax, argmin\n",
+      "    amax : The maximum value along a given axis.\n",
+      "    unravel_index : Convert a flat index into an index tuple.\n",
+      "    take_along_axis : Apply ``np.expand_dims(index_array, axis)``\n",
+      "                      from argmax to an array as if by calling max.\n",
+      "    \n",
+      "    Notes\n",
+      "    -----\n",
+      "    In case of multiple occurrences of the maximum values, the indices\n",
+      "    corresponding to the first occurrence are returned.\n",
+      "    \n",
+      "    Examples\n",
+      "    --------\n",
+      "    >>> a = np.arange(6).reshape(2,3) + 10\n",
+      "    >>> a\n",
+      "    array([[10, 11, 12],\n",
+      "           [13, 14, 15]])\n",
+      "    >>> np.argmax(a)\n",
+      "    5\n",
+      "    >>> np.argmax(a, axis=0)\n",
+      "    array([1, 1, 1])\n",
+      "    >>> np.argmax(a, axis=1)\n",
+      "    array([2, 2])\n",
+      "    \n",
+      "    Indexes of the maximal elements of a N-dimensional array:\n",
+      "    \n",
+      "    >>> ind = np.unravel_index(np.argmax(a, axis=None), a.shape)\n",
+      "    >>> ind\n",
+      "    (1, 2)\n",
+      "    >>> a[ind]\n",
+      "    15\n",
+      "    \n",
+      "    >>> b = np.arange(6)\n",
+      "    >>> b[1] = 5\n",
+      "    >>> b\n",
+      "    array([0, 5, 2, 3, 4, 5])\n",
+      "    >>> np.argmax(b)  # Only the first occurrence is returned.\n",
+      "    1\n",
+      "    \n",
+      "    >>> x = np.array([[4,2,3], [1,0,3]])\n",
+      "    >>> index_array = np.argmax(x, axis=-1)\n",
+      "    >>> # Same as np.max(x, axis=-1, keepdims=True)\n",
+      "    >>> np.take_along_axis(x, np.expand_dims(index_array, axis=-1), axis=-1)\n",
+      "    array([[4],\n",
+      "           [3]])\n",
+      "    >>> # Same as np.max(x, axis=-1)\n",
+      "    >>> np.take_along_axis(x, np.expand_dims(index_array, axis=-1), axis=-1).squeeze(axis=-1)\n",
+      "    array([4, 3])\n",
+      "\n"
+     ]
+    }
+   ],
+   "source": [
+    "help(np.argmax)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 39,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/",
+     "height": 52
+    },
+    "colab_type": "code",
+    "executionInfo": {
+     "elapsed": 386,
+     "status": "ok",
+     "timestamp": 1549553557215,
+     "user": {
+      "displayName": "Alexander Dowling",
+      "photoUrl": "https://lh3.googleusercontent.com/-LChdQ2m5OQE/AAAAAAAAAAI/AAAAAAAAAA0/JeXJe4vQJ7M/s64/photo.jpg",
+      "userId": "00988067626794866502"
+     },
+     "user_tz": 300
+    },
+    "id": "Ev_5ICuij6C9",
+    "outputId": "1b42ef63-c921-4527-853f-2449c2997443"
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "a =  [1, 4, 2, 3]\n",
+      "argmax =  1\n"
+     ]
+    }
+   ],
+   "source": [
+    "# let's test argmax\n",
+    "a = [1, 4, 2, 3]\n",
+    "print(\"a = \",a)\n",
+    "print(\"argmax = \",np.argmax(a)) # remember, base-0 counting"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "-SLqj-8bjWBQ"
+   },
+   "source": [
+    "### Put it All Together"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "qPpNAy8pjWBQ"
+   },
+   "source": [
+    "Now it's time to put this all together in a new version of Gauss elimination. Here are the main steps:\n",
+    "* Assembles augmented matrix\n",
+    "* Identifies scale factors\n",
+    "* Performs Gaussian elimination (row reduction):\n",
+    "  * Swaps rows if needed\n",
+    "  * Performs elimination\n",
+    "* Calls backsolve\n",
+    "\n",
+    "We will use this in place of pseudocode this time. We already have code that does each step.\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"admonition note\"> \n",
+    "<p class=\"title\"><b>Class Activity</b></p>\n",
+    " Spend 5 minutes discussing the code below with a partner. Write down at least 1 question to ask the class.\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 40,
+   "metadata": {
+    "colab": {},
+    "colab_type": "code",
+    "id": "w_EYcPuzjWBR",
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "def GaussElimPivotSolve(A,b,LOUD=False):\n",
+    "    \"\"\"create a Gaussian elimination with pivoting matrix for a system\n",
+    "\n",
+    "    Args:\n",
+    "        A: N by N array\n",
+    "        b: array of length N\n",
+    "    Returns:\n",
+    "        solution vector in the original order\n",
+    "    \"\"\"\n",
+    "    \n",
+    "    # checks dimensions\n",
+    "    [Nrow, Ncol] = A.shape\n",
+    "    assert Nrow == Ncol\n",
+    "    N = Nrow\n",
+    "    \n",
+    "    \n",
+    "    #create augmented matrix\n",
+    "    aug_matrix = np.zeros((N,N+1))\n",
+    "    aug_matrix[0:N,0:N] = A\n",
+    "    aug_matrix[:,N] = b\n",
+    "    #augmented matrix is created\n",
+    "    \n",
+    "    #create scale factors \n",
+    "    s = np.zeros(N)\n",
+    "    count = 0\n",
+    "    for row in aug_matrix[:,0:N]: #don't include b\n",
+    "        s[count] = np.max(np.fabs(row))\n",
+    "        count += 1\n",
+    "  \n",
+    "    # print diagnostics if requested\n",
+    "    if LOUD:\n",
+    "        print(\"s =\",s)\n",
+    "        print(\"Original Augmented Matrix is\\n\",aug_matrix)\n",
+    "    \n",
+    "    #perform elimination\n",
+    "    for column in range(0,N):\n",
+    "        \n",
+    "        ## swap rows if needed\n",
+    "        # find largest position\n",
+    "        largest_pos = (np.argmax(np.fabs(aug_matrix[column:N,column]/\n",
+    "                                         s[column:N])) + column)\n",
+    "        \n",
+    "        # check if current column is largest position\n",
+    "        if (largest_pos != column):\n",
+    "            # if not, swap rows\n",
+    "            if (LOUD):\n",
+    "                print(\"Swapping row\",column,\"with row\",largest_pos)\n",
+    "                print(\"Pre swap\\n\",aug_matrix)\n",
+    "            swap_rows(aug_matrix,column,largest_pos)\n",
+    "            \n",
+    "            #re-order s\n",
+    "            tmp = s[column]\n",
+    "            s[column] = s[largest_pos]\n",
+    "            s[largest_pos] = tmp\n",
+    "            if (LOUD):\n",
+    "                print(\"A =\\n\",aug_matrix)\n",
+    "                print(\"new_s =\\n\", s)\n",
+    "        \n",
+    "        #finish off the row\n",
+    "        for row in range(column+1,N):\n",
+    "            mod_row = aug_matrix[row,:]\n",
+    "            mod_row = mod_row - mod_row[column]/aug_matrix[column,column]*aug_matrix[column,:]\n",
+    "            aug_matrix[row] = mod_row\n",
+    "    \n",
+    "    #now back solve\n",
+    "    if LOUD:\n",
+    "        print(\"Final aug_matrix is\\n\",aug_matrix)\n",
+    "    x = BackSub(aug_matrix)\n",
+    "    return x"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "2ovsCIgjjWBT"
+   },
+   "source": [
+    "### Unit Test: Motivating Example"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 41,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/",
+     "height": 316
+    },
+    "colab_type": "code",
+    "executionInfo": {
+     "elapsed": 435,
+     "status": "ok",
+     "timestamp": 1549553849501,
+     "user": {
+      "displayName": "Alexander Dowling",
+      "photoUrl": "https://lh3.googleusercontent.com/-LChdQ2m5OQE/AAAAAAAAAAI/AAAAAAAAAA0/JeXJe4vQJ7M/s64/photo.jpg",
+      "userId": "00988067626794866502"
+     },
+     "user_tz": 300
+    },
+    "id": "-EcwxwkNjWBT",
+    "outputId": "a20296b4-ac19-4774-ea03-e4042a58440f"
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "A = \n",
+      " [[ 3  2  1]\n",
+      " [-1  4  5]\n",
+      " [ 2 -8 10]]\n",
+      "b = \n",
+      " [[6 8 4]]\n",
+      "s = [ 3.  5. 10.]\n",
+      "Original Augmented Matrix is\n",
+      " [[ 3.  2.  1.  6.]\n",
+      " [-1.  4.  5.  8.]\n",
+      " [ 2. -8. 10.  4.]]\n",
+      "Final aug_matrix is\n",
+      " [[ 3.          2.          1.          6.        ]\n",
+      " [ 0.          4.66666667  5.33333333 10.        ]\n",
+      " [ 0.          0.         20.         20.        ]]\n",
+      "The solution is [1. 1. 1.]\n",
+      "The residual (errors) are [[0. 0. 0.]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(\"A = \\n\",A33)\n",
+    "print(\"b = \\n\",b3)\n",
+    "\n",
+    "x = GaussElimPivotSolve(A33,b3,LOUD=True)\n",
+    "print(\"The solution is\",x)\n",
+    "print(\"The residual (errors) are\",np.dot(A33,x)-b3)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "pIKkokazjWBW"
+   },
+   "source": [
+    "Success, but not that impressive. Vanilla Gauss elimination also worked here. Pivoting was never used."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "0xWrxvPajWBZ"
+   },
+   "source": [
+    "### Unit Test: Troublesome System"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "ipTMaFHXjWBa"
+   },
+   "source": [
+    "Now we can try this on the systems that didn't work so well before:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 42,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/",
+     "height": 615
+    },
+    "colab_type": "code",
+    "executionInfo": {
+     "elapsed": 376,
+     "status": "ok",
+     "timestamp": 1549553909427,
+     "user": {
+      "displayName": "Alexander Dowling",
+      "photoUrl": "https://lh3.googleusercontent.com/-LChdQ2m5OQE/AAAAAAAAAAI/AAAAAAAAAA0/JeXJe4vQJ7M/s64/photo.jpg",
+      "userId": "00988067626794866502"
+     },
+     "user_tz": 300
+    },
+    "id": "gPRpPVK1jWBa",
+    "outputId": "57019c88-6b6d-40fc-8d2e-c914451a1aa1"
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "A =\n",
+      " [[ 1.e-14 -1.e+00  1.e+00]\n",
+      " [-1.e+00  2.e+00 -1.e+00]\n",
+      " [ 2.e+00 -1.e+00  0.e+00]]\n",
+      "b = [0. 0. 1.]\n",
+      "s = [1. 2. 2.]\n",
+      "Original Augmented Matrix is\n",
+      " [[ 1.e-14 -1.e+00  1.e+00  0.e+00]\n",
+      " [-1.e+00  2.e+00 -1.e+00  0.e+00]\n",
+      " [ 2.e+00 -1.e+00  0.e+00  1.e+00]]\n",
+      "Swapping row 0 with row 2\n",
+      "Pre swap\n",
+      " [[ 1.e-14 -1.e+00  1.e+00  0.e+00]\n",
+      " [-1.e+00  2.e+00 -1.e+00  0.e+00]\n",
+      " [ 2.e+00 -1.e+00  0.e+00  1.e+00]]\n",
+      "A =\n",
+      " [[ 2.e+00 -1.e+00  0.e+00  1.e+00]\n",
+      " [-1.e+00  2.e+00 -1.e+00  0.e+00]\n",
+      " [ 1.e-14 -1.e+00  1.e+00  0.e+00]]\n",
+      "new_s =\n",
+      " [2. 2. 1.]\n",
+      "Swapping row 1 with row 2\n",
+      "Pre swap\n",
+      " [[ 2.0e+00 -1.0e+00  0.0e+00  1.0e+00]\n",
+      " [ 0.0e+00  1.5e+00 -1.0e+00  5.0e-01]\n",
+      " [ 0.0e+00 -1.0e+00  1.0e+00 -5.0e-15]]\n",
+      "A =\n",
+      " [[ 2.0e+00 -1.0e+00  0.0e+00  1.0e+00]\n",
+      " [ 0.0e+00 -1.0e+00  1.0e+00 -5.0e-15]\n",
+      " [ 0.0e+00  1.5e+00 -1.0e+00  5.0e-01]]\n",
+      "new_s =\n",
+      " [2. 1. 2.]\n",
+      "Final aug_matrix is\n",
+      " [[ 2.e+00 -1.e+00  0.e+00  1.e+00]\n",
+      " [ 0.e+00 -1.e+00  1.e+00 -5.e-15]\n",
+      " [ 0.e+00  0.e+00  5.e-01  5.e-01]]\n",
+      "x = [1. 1. 1.]\n",
+      "The residual (errors) are [ 0.00000000e+00 -1.11022302e-16  0.00000000e+00]\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(\"A =\\n\",A_eps)\n",
+    "print(\"b =\",b_eps)\n",
+    "x = GaussElimPivotSolve(A_eps,b_eps,LOUD=True)\n",
+    "print(\"x =\",x)\n",
+    "print(\"The residual (errors) are\",np.dot(A_eps,x)-b_eps)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "TH-KccUGjWBd"
+   },
+   "source": [
+    "Huzzah, we arrived at the correct answer. Also, notice how the final augmented matrix is diagonally dominant.  That makes the back-substitution more stable as well."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "xjqC3XcdjWBd"
+   },
+   "source": [
+    "## Timing"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "LescpCjRjWBe"
+   },
+   "source": [
+    "If you look in any textbook, you'll see that Gaussian elimination takes $O(n^3)$ operations where $n\\times n$ is the size of the matrix.  The notation $O(n^3)$ means that as the matrix grows, the asymptotic (i.e., $n$ large) growth rate of the number of floating point operations (add, subtract, multiply, and divide are all floating point operations) grows as $n^3$.  Therefore, if we double the size of the matrix, the number of operations goes up by a factor of $2^3=8$.\n",
+    "\n",
+    "Let's use the time module that python provides to time how long it takes to run our Gaussian elimination code as we increase $n$."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"admonition note\"> \n",
+    "<p class=\"title\"><b>Class Activity</b></p>\n",
+    " Run the code below.\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 43,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/",
+     "height": 283
+    },
+    "colab_type": "code",
+    "executionInfo": {
+     "elapsed": 2286,
+     "status": "ok",
+     "timestamp": 1549554096778,
+     "user": {
+      "displayName": "Alexander Dowling",
+      "photoUrl": "https://lh3.googleusercontent.com/-LChdQ2m5OQE/AAAAAAAAAAI/AAAAAAAAAA0/JeXJe4vQJ7M/s64/photo.jpg",
+      "userId": "00988067626794866502"
+     },
+     "user_tz": 300
+    },
+    "id": "0I3Y-SrBjWBf",
+    "outputId": "6b417afc-dd28-4280-9315-362415a97707"
+   },
+   "outputs": [
+    {
+     "data": {
+      "image/png": "iVBORw0KGgoAAAANSUhEUgAAAYoAAAEKCAYAAAAMzhLIAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjUuMSwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/YYfK9AAAACXBIWXMAAAsTAAALEwEAmpwYAABEc0lEQVR4nO3dd3iUVfbA8e9JSEhoCUKkhd4D0osIAkpHBUQsqLuiKGLdH64ooCvqoiAgrhUEBdZVUUQELAiCdHDpSK9SAqyBYEJLz/398U5iymQySWYyJefzPDwy951535OMzJn73nvPFWMMSimlVF4CPB2AUkop76aJQimllEOaKJRSSjmkiUIppZRDmiiUUko5pIlCKaWUQ6U8HYA7VK5c2dSpU8fTYSillE/Ztm3beWNMRM52v0wUderUYevWrZ4OQymlfIqInLDX7le3nkTkNhGZGR8f7+lQlFLKb/hVojDGfGuMGREWFubpUJRSym/4VaJQSinlen45RmFPSkoK0dHRJCYmejqUEiEkJITIyEiCgoI8HYpSqoj8KlGIyG3AbQ0aNMh1LDo6mvLly1OnTh1EpPiDK0GMMcTGxhIdHU3dunU9HY5Sqoj86taTozGKxMREKlWqpEmiGIgIlSpV0t6bUsXo/NXzbju3XyWK/GiSKD76u1aqeJyKP8XgLwfTflZ7rqZcdcs1SlSiKEleeuklVqxY4dZrzJ07lzNnzrj1Gkop+1LSUpi6cSpN32/KNwe+4XjccSasneCWa/nVGIUrLdpxminLDnImLoHq4aGM7tOYQa1reDosp6SlpfHqq6+6/Tpz586lefPmVK9e3e3XUkr9aeOpjYz8biS7Y3Zna5+ycQr3t7ifqIgol15PexR2LNpxmrELd3M6LgEDnI5LYOzC3SzacbpI5/3000/p0KEDrVq14tFHH+W///0vLVq0IDExkStXrtCsWTP27NnD6tWr6dq1K7fffjtRUVGMHDmS9PR0AJYvX06nTp1o06YNd955J5cvXwas1eivvvoqXbp04auvvmLYsGEsWLAg89i4cePo1KkT7dq1Y/v27fTp04f69eszY8aMzPimTJlC+/btadGiBePHjwfg+PHjNG3alEceeYRmzZrRu3dvEhISWLBgAVu3buW+++6jVatWJCQkFOl3o5TKX1JqEo8seYTOszvnShIAbau1dct1/apH4WjWU1avfLuXfWcu5nl8x8k4ktPSs7UlpKTx3IJfmbf5pN3XRFWvwPjbmuV5zv379/Pll1+yYcMGgoKCePzxxzl48CADBgzgxRdfJCEhgfvvv5/mzZuzevVqNm/ezL59+6hduzZ9+/Zl4cKFdO/enQkTJrBixQrKli3LG2+8wbRp03jppZcAa0rq+vXrAfjxxx+zXb9mzZps2rSJUaNGMWzYMDZs2EBiYiLNmjVj5MiRLF++nMOHD7N582aMMQwYMIC1a9dSq1YtDh8+zLx585g1axZ33XUXX3/9Nffffz/vvfceU6dOpV27dg5/30op1wgODOb0pdxfWMNDwpnUYxKPtH2EAHH993+/ShTGmG+Bb9u1a/dIUc6TM0nk1+6MlStXsm3bNtq3bw9AQkIC1157LS+99BLt27cnJCSEd955J/P5HTp0oF69egAMHTqU9evXExISwr59++jcubMVT3IynTp1ynzN3Xffnef1BwwYAMB1113H5cuXKV++POXLlyckJIS4uDiWL1/O8uXLad26NQCXL1/m8OHD1KpVi7p169KqVSsA2rZty/Hjxwv9e1BKFZ6I8F7/92j2QTMSU61ZhX9p8Rem9p7KtWWvddt1/SpROMvRN3+AzpN+5nRc7lspNcJD+fLRTnZekT9jDA888AATJ07M1v6///2Py5cvk5KSQmJiImXLlgVyzxoSEYwx9OrVi3nz5tm9RsZr7SldujQAAQEBmX/PeJyamooxhrFjx/Loo49me93x48ezPT8wMFBvMynlQfUq1uPFG1/k092fMv2W6XSv093t19QxCjtG92lMaFBgtrbQoEBG92lc6HP26NGDBQsWEBMTA8CFCxc4ceIEI0aM4J///Cf33Xcfzz//fObzN2/ezG+//UZ6ejpffvklXbp04frrr2fDhg0cOXIEgKtXr3Lo0KFCx5RVnz59mD17duaYx+nTpzNjzUv58uW5dOmSS66vlPrTd4e+44WVL+R5fHTn0ewauatYkgSU0B5FfjJmN7ly1lNUVBQTJkygd+/epKenExQUxMCBAylVqhT33nsvaWlp3HDDDfz8888EBATQqVMnxowZw+7duzMHtgMCApg7dy5Dhw4lKSkJgAkTJtCoUaMi/8y9e/dm//79mbeyypUrx6effkpgYGCerxk2bBgjR44kNDSUTZs2ERoaWuQ4lCrJTsaf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\n",
+      "text/plain": [
+       "<Figure size 432x288 with 1 Axes>"
+      ]
+     },
+     "metadata": {
+      "needs_background": "light"
+     },
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "import time\n",
+    "\n",
+    "# Number of times to repeat the test for each size\n",
+    "num_tests = 10\n",
+    "\n",
+    "# Values of N to test\n",
+    "N = 2**np.arange(num_tests)\n",
+    "\n",
+    "# Store timing results\n",
+    "times = np.zeros(num_tests)\n",
+    "\n",
+    "# Loop over tests\n",
+    "for test in range(1,num_tests):\n",
+    "    # generate random linear system\n",
+    "    A = np.random.rand(N[test],N[test])\n",
+    "    b = np.dot(A,np.ones(N[test]))\n",
+    "    x = np.zeros(N[test])\n",
+    "    \n",
+    "    # start timer\n",
+    "    start = time.perf_counter()\n",
+    "    \n",
+    "    # run Gaussian elimination\n",
+    "    aug = GaussElim(A,b)\n",
+    "    x = BackSub(aug)\n",
+    "    \n",
+    "    # end time\n",
+    "    end = time.perf_counter()\n",
+    "    \n",
+    "    # store time result\n",
+    "    times[test] = end-start\n",
+    "    \n",
+    "# create log-log plot\n",
+    "plt.loglog(N,times,'o-',label=\"experiment\")\n",
+    "\n",
+    "#make a comparison line with slope 2^3\n",
+    "y_comp = times.copy()/4\n",
+    "for comp_place in range(num_tests-1,0,-1):\n",
+    "    #because x goes up by factor 2 each time, time should go up by 8 \n",
+    "    y_comp[comp_place -1] = np.exp(np.log(y_comp[test])-3*(np.log(N[test])-np.log(N[comp_place-1])))\n",
+    "plt.loglog(N[4:num_tests],y_comp[4:num_tests],'r',linewidth=4,label=\"$O(n^3)$\")\n",
+    "\n",
+    "#make a comparison line with slope 2^2\n",
+    "y_comp = times.copy()*4\n",
+    "for comp_place in range(num_tests-1,0,-1):\n",
+    "    y_comp[comp_place -1] = np.exp(np.log(y_comp[test])-2*(np.log(N[test])-np.log(N[comp_place-1])))\n",
+    "plt.loglog(N[4:num_tests],y_comp[4:num_tests],'g--',linewidth=4,label=\"$O(n^2)$\")\n",
+    "\n",
+    "# add labels and legend\n",
+    "plt.xlabel(\"Number of Equations\")\n",
+    "plt.ylabel(\"Seconds to complete solve\")\n",
+    "plt.legend()\n",
+    "plt.show()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "colab_type": "text",
+    "id": "wgpyCuKYjWBh"
+   },
+   "source": [
+    "In this figure the red line is a slope of 3 on a log-log scale (which corresponds time growing as the number of equations to the third power).  If the time to solve a system was consistent with the theory, then these dots would be parallel to the red line.  That assumes that the time it takes to execute the code is linearly related to the number of floating point operations. \n",
+    "The actual slope is closer to 2, the slope of the green dashed line.  This implies that the time to solution is not growing as fast as the theory.  The reason for this is that python (probably numpy) is helping us out and grouping operations together and executing some of them in parallel so that the number of floating point operations is not linearly related to the time."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Mass Balance Example (Adapted from an Old Exam Problem)\n",
+    "\n",
+    "Let's see how Gaussian elimination can be applied to mass balance problems.\n",
+    "\n",
+    "We want to convert A into valuable product B using a process with a mixer, reactor, and separator.\n",
+    "\n",
+    "![flowsheet](../../media/1b_fig.png)\n",
+    "\n",
+    "A feed enters at a rate of 100 moles per hour and is composed 99 mole % A and the remainder B. Unfortunately, the reactor only has a 10% per pass conversion efficiency. This means that only 10% of A that enters the reactor undergoes the reaction $A \\rightarrow B$. The separator splits the reactor effluent into two streams: the product and the recycle. The separator operates such that for every 1 mole of A in the product streams, there are 4 moles of A in the recycle stream. Likewise, for every 8 moles of B in the product stream, there is 1 mole of B in the recycle stream.\n",
+    "\n",
+    "As shown in the figure above, we can model the process using component molar flowrates as variables. The first subscript is the stream ($m$, $e$, $r$, or $p$) and the second subscript is the component ($A$ or $B$)."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Mathematical Model (Old Exam Question)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Your classmate proposes the following mathematical model\n",
+    "\n",
+    "Equation A:   $n_{f,A} + n_{r,A} = n_{m,A}$\n",
+    "\n",
+    "Equation B:   $n_{f,B} + n_{r,B} = n_{m,B}$\n",
+    "\n",
+    "Equation C:   $0.9 ~ n_{m,A} = n_{e,A}$\n",
+    "\n",
+    "Equation D:   $n_{m,A} + n_{m,B} = n_{e,A} + n_{e,B}$\n",
+    "\n",
+    "Equation E:   $n_{e,A} = n_{p,A} + n_{r,A}$\n",
+    "\n",
+    "Equation F:   $n_{e,B} = n_{p,B} + n_{r,B}$\n",
+    "\n",
+    "Equation G:   $4 ~ n_{p,A} = n_{r,A}$\n",
+    "\n",
+    "Equation H:   $n_{p,B} = 8 ~ n_{r,B}$\n",
+    "\n",
+    "Multiple choice description options:\n",
+    "1. Entire Process: Overall mole balance\n",
+    "2. Entire Process: Component A mole balance\n",
+    "3. Process: Component B mole balance\n",
+    "4. Mixer: Overall mole balance\n",
+    "5. Mixer: Component A mole balance\n",
+    "6. Mixer: Component mole balance\n",
+    "7. Mixer: Summation equation\n",
+    "8. Reactor: Overall mole balance\n",
+    "9. Reactor: Component A mole balance\n",
+    "10. Reactor: Component B mole balance\n",
+    "11. Reactor: 90% of A fed into reactor is converted to B\n",
+    "12. Reactor: 10% of A fed into reactor is converted to B\n",
+    "13. Separator: Overall mole balance\n",
+    "14. Separator: Component A mole balance\n",
+    "15. Separator: Component B mole balance\n",
+    "16. Separator: For every 4 moles of A in recycle, there are 1 moles of A in product\n",
+    "17. Seperator: For every 1 mole of A in recycle, there are 4 moles of A in product\n",
+    "18. Seperator: For every 8 moles of B in recycle, there are 1 moles of B in product\n",
+    "19. Seperator: For every 1 mole of B in recycle, there are 1 moles of B in product\n",
+    "20. None of the above\n",
+    "\n",
+    "Hint: Choice 19 does not include a typo. It is meant to be 1 and 1."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"admonition seealso\"> \n",
+    "<p class=\"title\"><b>Home Activity</b></p>\n",
+    " Match each equation to a description above. Record your answer in the dictionary <tt>eqn_names</tt> using the keys A,...,F and the values 1,...,20.\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 44,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "eqn_names = {'A':0, 'B':0, 'C':0, 'D':0, 'E':0, 'F':0, 'G':0, 'H':0}\n",
+    "\n",
+    "# Add your solution here"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 45,
+   "metadata": {
+    "nbgrader": {
+     "grade": true,
+     "grade_id": "eqn-names",
+     "locked": true,
+     "points": "0.1",
+     "solution": false
+    },
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "# Removed autograder test. You may delete this cell."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Matrix Form (Old Exam Question)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "$$\\mathbf{x} = \t\\begin{bmatrix}n_{m,A} \\\\\n",
+    "\t\tn_{m,B} \\\\\n",
+    "\t\tn_{e,A} \\\\\n",
+    "\t\tn_{e,B} \\\\\n",
+    "\t\tn_{p,A} \\\\\n",
+    "\t\tn_{p,B} \\\\\n",
+    "\t\tn_{r,A} \\\\\n",
+    "\t\tn_{r,B} \\end{bmatrix}$$"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"admonition note\"> \n",
+    "<p class=\"title\"><b>Class Activity</b></p>\n",
+    " Convert the model to matrix form.\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Solve with Gaussian Elimination"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 46,
+   "metadata": {
+    "tags": []
+   },
+   "outputs": [],
+   "source": [
+    "def print_solution(x):\n",
+    "    '''Print solution for this specific mole balance problem\n",
+    "    \n",
+    "    Argument:\n",
+    "        x: solution vector\n",
+    "        \n",
+    "    Returns:\n",
+    "        Nothing\n",
+    "    \n",
+    "    '''\n",
+    "    \n",
+    "    print(\"Stream description : Component = flowrate\")\n",
+    "    print(\"mixer outlet: A = \",x[0])\n",
+    "    print(\"mixer effluent: B = \",x[1])\n",
+    "    print(\"reactor effluent: A = \",x[2])\n",
+    "    print(\"reactor effluent: B = \",x[3])\n",
+    "    print(\"product: A = \",x[4])\n",
+    "    print(\"product: B = \",x[5])\n",
+    "    print(\"recycle: A = \",x[6])\n",
+    "    print(\"recycle: B = \",x[7])\n",
+    "    "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"admonition note\"> \n",
+    "<p class=\"title\"><b>Class Activity</b></p>\n",
+    " Finish populating <tt>A_ex</tt> and <tt>b_ex</tt> below.\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 47,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "A=\n",
+      " [[ 1.   0.   0.   0.   0.   0.  -1.   0. ]\n",
+      " [ 0.   1.   0.   0.   0.   0.   0.  -1. ]\n",
+      " [ 0.9  0.  -1.   0.   0.   0.   0.   0. ]\n",
+      " [ 1.   1.  -1.  -1.   0.   0.   0.   0. ]\n",
+      " [ 0.   0.   1.   0.  -1.   0.  -1.   0. ]\n",
+      " [ 0.   0.   0.   1.   0.  -1.   0.  -1. ]\n",
+      " [ 0.   0.   0.   0.   4.   0.  -1.   0. ]\n",
+      " [ 0.   0.   0.   0.   0.   1.   0.  -8. ]]\n",
+      "\n",
+      "b=\n",
+      " [99.  1.  0.  0.  0.  0.  0.  0.]\n"
+     ]
+    }
+   ],
+   "source": [
+    "## Assemble A matrix\n",
+    "A_ex = np.zeros((8,8))\n",
+    "\n",
+    "A_ex[0,0] = 1\n",
+    "A_ex[0,6] = -1\n",
+    "A_ex[1,1] = 1\n",
+    "A_ex[1,7] = -1\n",
+    "# Add your solution here\n",
+    "A_ex[6,4] = 4\n",
+    "A_ex[6,6] = -1\n",
+    "A_ex[7,5] = 1\n",
+    "A_ex[7,7] = -8\n",
+    "\n",
+    "print(\"A=\\n\",A_ex)\n",
+    "\n",
+    "## Assemble b vector\n",
+    "\n",
+    "b_ex = np.zeros(8)\n",
+    "b_ex[0] = 99\n",
+    "# Add your solution here\n",
+    "print(\"\\nb=\\n\",b_ex)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 48,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "s = [1. 1. 1. 1. 1. 1. 4. 8.]\n",
+      "Original Augmented Matrix is\n",
+      " [[ 1.   0.   0.   0.   0.   0.  -1.   0.  99. ]\n",
+      " [ 0.   1.   0.   0.   0.   0.   0.  -1.   1. ]\n",
+      " [ 0.9  0.  -1.   0.   0.   0.   0.   0.   0. ]\n",
+      " [ 1.   1.  -1.  -1.   0.   0.   0.   0.   0. ]\n",
+      " [ 0.   0.   1.   0.  -1.   0.  -1.   0.   0. ]\n",
+      " [ 0.   0.   0.   1.   0.  -1.   0.  -1.   0. ]\n",
+      " [ 0.   0.   0.   0.   4.   0.  -1.   0.   0. ]\n",
+      " [ 0.   0.   0.   0.   0.   1.   0.  -8.   0. ]]\n",
+      "Final aug_matrix is\n",
+      " [[ 1.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00\n",
+      "   0.00000000e+00  0.00000000e+00 -1.00000000e+00  0.00000000e+00\n",
+      "   9.90000000e+01]\n",
+      " [ 0.00000000e+00  1.00000000e+00  0.00000000e+00  0.00000000e+00\n",
+      "   0.00000000e+00  0.00000000e+00  0.00000000e+00 -1.00000000e+00\n",
+      "   1.00000000e+00]\n",
+      " [ 0.00000000e+00  0.00000000e+00 -1.00000000e+00  0.00000000e+00\n",
+      "   0.00000000e+00  0.00000000e+00  9.00000000e-01  0.00000000e+00\n",
+      "  -8.91000000e+01]\n",
+      " [ 0.00000000e+00  0.00000000e+00  0.00000000e+00 -1.00000000e+00\n",
+      "   0.00000000e+00  0.00000000e+00  1.00000000e-01  1.00000000e+00\n",
+      "  -1.09000000e+01]\n",
+      " [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00\n",
+      "  -1.00000000e+00  0.00000000e+00 -1.00000000e-01  0.00000000e+00\n",
+      "  -8.91000000e+01]\n",
+      " [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00\n",
+      "   0.00000000e+00 -1.00000000e+00  1.00000000e-01  0.00000000e+00\n",
+      "  -1.09000000e+01]\n",
+      " [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00\n",
+      "   0.00000000e+00  0.00000000e+00 -1.40000000e+00  0.00000000e+00\n",
+      "  -3.56400000e+02]\n",
+      " [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00\n",
+      "   0.00000000e+00  0.00000000e+00  1.38777878e-17 -8.00000000e+00\n",
+      "  -3.63571429e+01]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "## Solve\n",
+    "x = GaussElimPivotSolve(A_ex, b_ex, LOUD=True)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 49,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Stream description : Component = flowrate\n",
+      "mixer outlet: A =  353.5714285714286\n",
+      "mixer effluent: B =  5.544642857142856\n",
+      "reactor effluent: A =  318.2142857142858\n",
+      "reactor effluent: B =  40.9017857142857\n",
+      "product: A =  63.64285714285715\n",
+      "product: B =  36.35714285714285\n",
+      "recycle: A =  254.5714285714286\n",
+      "recycle: B =  4.544642857142856\n"
+     ]
+    }
+   ],
+   "source": [
+    "print_solution(x)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Flip the order of the row"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "What happens if we write the equations in reserve order?"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 50,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "A=\n",
+      " [[ 0.   0.   0.   0.   0.   1.   0.  -8. ]\n",
+      " [ 0.   0.   0.   0.   4.   0.  -1.   0. ]\n",
+      " [ 0.   0.   0.   1.   0.  -1.   0.  -1. ]\n",
+      " [ 0.   0.   1.   0.  -1.   0.  -1.   0. ]\n",
+      " [ 1.   1.  -1.  -1.   0.   0.   0.   0. ]\n",
+      " [ 0.9  0.  -1.   0.   0.   0.   0.   0. ]\n",
+      " [ 0.   1.   0.   0.   0.   0.   0.  -1. ]\n",
+      " [ 1.   0.   0.   0.   0.   0.  -1.   0. ]]\n",
+      "\n",
+      "b=\n",
+      " [ 0.  0.  0.  0.  0.  0.  1. 99.]\n"
+     ]
+    }
+   ],
+   "source": [
+    "A_flip = np.flipud(A_ex.copy())\n",
+    "b_flip = np.flipud(b_ex.copy())\n",
+    "print(\"A=\\n\",A_flip)\n",
+    "print(\"\\nb=\\n\",b_flip)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 51,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "s = [8. 4. 1. 1. 1. 1. 1. 1.]\n",
+      "Original Augmented Matrix is\n",
+      " [[ 0.   0.   0.   0.   0.   1.   0.  -8.   0. ]\n",
+      " [ 0.   0.   0.   0.   4.   0.  -1.   0.   0. ]\n",
+      " [ 0.   0.   0.   1.   0.  -1.   0.  -1.   0. ]\n",
+      " [ 0.   0.   1.   0.  -1.   0.  -1.   0.   0. ]\n",
+      " [ 1.   1.  -1.  -1.   0.   0.   0.   0.   0. ]\n",
+      " [ 0.9  0.  -1.   0.   0.   0.   0.   0.   0. ]\n",
+      " [ 0.   1.   0.   0.   0.   0.   0.  -1.   1. ]\n",
+      " [ 1.   0.   0.   0.   0.   0.  -1.   0.  99. ]]\n",
+      "Swapping row 0 with row 4\n",
+      "Pre swap\n",
+      " [[ 0.   0.   0.   0.   0.   1.   0.  -8.   0. ]\n",
+      " [ 0.   0.   0.   0.   4.   0.  -1.   0.   0. ]\n",
+      " [ 0.   0.   0.   1.   0.  -1.   0.  -1.   0. ]\n",
+      " [ 0.   0.   1.   0.  -1.   0.  -1.   0.   0. ]\n",
+      " [ 1.   1.  -1.  -1.   0.   0.   0.   0.   0. ]\n",
+      " [ 0.9  0.  -1.   0.   0.   0.   0.   0.   0. ]\n",
+      " [ 0.   1.   0.   0.   0.   0.   0.  -1.   1. ]\n",
+      " [ 1.   0.   0.   0.   0.   0.  -1.   0.  99. ]]\n",
+      "A =\n",
+      " [[ 1.   1.  -1.  -1.   0.   0.   0.   0.   0. ]\n",
+      " [ 0.   0.   0.   0.   4.   0.  -1.   0.   0. ]\n",
+      " [ 0.   0.   0.   1.   0.  -1.   0.  -1.   0. ]\n",
+      " [ 0.   0.   1.   0.  -1.   0.  -1.   0.   0. ]\n",
+      " [ 0.   0.   0.   0.   0.   1.   0.  -8.   0. ]\n",
+      " [ 0.9  0.  -1.   0.   0.   0.   0.   0.   0. ]\n",
+      " [ 0.   1.   0.   0.   0.   0.   0.  -1.   1. ]\n",
+      " [ 1.   0.   0.   0.   0.   0.  -1.   0.  99. ]]\n",
+      "new_s =\n",
+      " [1. 4. 1. 1. 8. 1. 1. 1.]\n",
+      "Swapping row 1 with row 6\n",
+      "Pre swap\n",
+      " [[ 1.   1.  -1.  -1.   0.   0.   0.   0.   0. ]\n",
+      " [ 0.   0.   0.   0.   4.   0.  -1.   0.   0. ]\n",
+      " [ 0.   0.   0.   1.   0.  -1.   0.  -1.   0. ]\n",
+      " [ 0.   0.   1.   0.  -1.   0.  -1.   0.   0. ]\n",
+      " [ 0.   0.   0.   0.   0.   1.   0.  -8.   0. ]\n",
+      " [ 0.  -0.9 -0.1  0.9  0.   0.   0.   0.   0. ]\n",
+      " [ 0.   1.   0.   0.   0.   0.   0.  -1.   1. ]\n",
+      " [ 0.  -1.   1.   1.   0.   0.  -1.   0.  99. ]]\n",
+      "A =\n",
+      " [[ 1.   1.  -1.  -1.   0.   0.   0.   0.   0. ]\n",
+      " [ 0.   1.   0.   0.   0.   0.   0.  -1.   1. ]\n",
+      " [ 0.   0.   0.   1.   0.  -1.   0.  -1.   0. ]\n",
+      " [ 0.   0.   1.   0.  -1.   0.  -1.   0.   0. ]\n",
+      " [ 0.   0.   0.   0.   0.   1.   0.  -8.   0. ]\n",
+      " [ 0.  -0.9 -0.1  0.9  0.   0.   0.   0.   0. ]\n",
+      " [ 0.   0.   0.   0.   4.   0.  -1.   0.   0. ]\n",
+      " [ 0.  -1.   1.   1.   0.   0.  -1.   0.  99. ]]\n",
+      "new_s =\n",
+      " [1. 1. 1. 1. 8. 1. 4. 1.]\n",
+      "Swapping row 2 with row 3\n",
+      "Pre swap\n",
+      " [[ 1.e+00  1.e+00 -1.e+00 -1.e+00  0.e+00  0.e+00  0.e+00  0.e+00  0.e+00]\n",
+      " [ 0.e+00  1.e+00  0.e+00  0.e+00  0.e+00  0.e+00  0.e+00 -1.e+00  1.e+00]\n",
+      " [ 0.e+00  0.e+00  0.e+00  1.e+00  0.e+00 -1.e+00  0.e+00 -1.e+00  0.e+00]\n",
+      " [ 0.e+00  0.e+00  1.e+00  0.e+00 -1.e+00  0.e+00 -1.e+00  0.e+00  0.e+00]\n",
+      " [ 0.e+00  0.e+00  0.e+00  0.e+00  0.e+00  1.e+00  0.e+00 -8.e+00  0.e+00]\n",
+      " [ 0.e+00  0.e+00 -1.e-01  9.e-01  0.e+00  0.e+00  0.e+00 -9.e-01  9.e-01]\n",
+      " [ 0.e+00  0.e+00  0.e+00  0.e+00  4.e+00  0.e+00 -1.e+00  0.e+00  0.e+00]\n",
+      " [ 0.e+00  0.e+00  1.e+00  1.e+00  0.e+00  0.e+00 -1.e+00 -1.e+00  1.e+02]]\n",
+      "A =\n",
+      " [[ 1.e+00  1.e+00 -1.e+00 -1.e+00  0.e+00  0.e+00  0.e+00  0.e+00  0.e+00]\n",
+      " [ 0.e+00  1.e+00  0.e+00  0.e+00  0.e+00  0.e+00  0.e+00 -1.e+00  1.e+00]\n",
+      " [ 0.e+00  0.e+00  1.e+00  0.e+00 -1.e+00  0.e+00 -1.e+00  0.e+00  0.e+00]\n",
+      " [ 0.e+00  0.e+00  0.e+00  1.e+00  0.e+00 -1.e+00  0.e+00 -1.e+00  0.e+00]\n",
+      " [ 0.e+00  0.e+00  0.e+00  0.e+00  0.e+00  1.e+00  0.e+00 -8.e+00  0.e+00]\n",
+      " [ 0.e+00  0.e+00 -1.e-01  9.e-01  0.e+00  0.e+00  0.e+00 -9.e-01  9.e-01]\n",
+      " [ 0.e+00  0.e+00  0.e+00  0.e+00  4.e+00  0.e+00 -1.e+00  0.e+00  0.e+00]\n",
+      " [ 0.e+00  0.e+00  1.e+00  1.e+00  0.e+00  0.e+00 -1.e+00 -1.e+00  1.e+02]]\n",
+      "new_s =\n",
+      " [1. 1. 1. 1. 8. 1. 4. 1.]\n",
+      "Swapping row 4 with row 6\n",
+      "Pre swap\n",
+      " [[ 1.e+00  1.e+00 -1.e+00 -1.e+00  0.e+00  0.e+00  0.e+00  0.e+00  0.e+00]\n",
+      " [ 0.e+00  1.e+00  0.e+00  0.e+00  0.e+00  0.e+00  0.e+00 -1.e+00  1.e+00]\n",
+      " [ 0.e+00  0.e+00  1.e+00  0.e+00 -1.e+00  0.e+00 -1.e+00  0.e+00  0.e+00]\n",
+      " [ 0.e+00  0.e+00  0.e+00  1.e+00  0.e+00 -1.e+00  0.e+00 -1.e+00  0.e+00]\n",
+      " [ 0.e+00  0.e+00  0.e+00  0.e+00  0.e+00  1.e+00  0.e+00 -8.e+00  0.e+00]\n",
+      " [ 0.e+00  0.e+00  0.e+00  0.e+00 -1.e-01  9.e-01 -1.e-01  0.e+00  9.e-01]\n",
+      " [ 0.e+00  0.e+00  0.e+00  0.e+00  4.e+00  0.e+00 -1.e+00  0.e+00  0.e+00]\n",
+      " [ 0.e+00  0.e+00  0.e+00  0.e+00  1.e+00  1.e+00  0.e+00  0.e+00  1.e+02]]\n",
+      "A =\n",
+      " [[ 1.e+00  1.e+00 -1.e+00 -1.e+00  0.e+00  0.e+00  0.e+00  0.e+00  0.e+00]\n",
+      " [ 0.e+00  1.e+00  0.e+00  0.e+00  0.e+00  0.e+00  0.e+00 -1.e+00  1.e+00]\n",
+      " [ 0.e+00  0.e+00  1.e+00  0.e+00 -1.e+00  0.e+00 -1.e+00  0.e+00  0.e+00]\n",
+      " [ 0.e+00  0.e+00  0.e+00  1.e+00  0.e+00 -1.e+00  0.e+00 -1.e+00  0.e+00]\n",
+      " [ 0.e+00  0.e+00  0.e+00  0.e+00  4.e+00  0.e+00 -1.e+00  0.e+00  0.e+00]\n",
+      " [ 0.e+00  0.e+00  0.e+00  0.e+00 -1.e-01  9.e-01 -1.e-01  0.e+00  9.e-01]\n",
+      " [ 0.e+00  0.e+00  0.e+00  0.e+00  0.e+00  1.e+00  0.e+00 -8.e+00  0.e+00]\n",
+      " [ 0.e+00  0.e+00  0.e+00  0.e+00  1.e+00  1.e+00  0.e+00  0.e+00  1.e+02]]\n",
+      "new_s =\n",
+      " [1. 1. 1. 1. 4. 1. 8. 1.]\n",
+      "Swapping row 5 with row 7\n",
+      "Pre swap\n",
+      " [[  1.      1.     -1.     -1.      0.      0.      0.      0.      0.   ]\n",
+      " [  0.      1.      0.      0.      0.      0.      0.     -1.      1.   ]\n",
+      " [  0.      0.      1.      0.     -1.      0.     -1.      0.      0.   ]\n",
+      " [  0.      0.      0.      1.      0.     -1.      0.     -1.      0.   ]\n",
+      " [  0.      0.      0.      0.      4.      0.     -1.      0.      0.   ]\n",
+      " [  0.      0.      0.      0.      0.      0.9    -0.125   0.      0.9  ]\n",
+      " [  0.      0.      0.      0.      0.      1.      0.     -8.      0.   ]\n",
+      " [  0.      0.      0.      0.      0.      1.      0.25    0.    100.   ]]\n",
+      "A =\n",
+      " [[  1.      1.     -1.     -1.      0.      0.      0.      0.      0.   ]\n",
+      " [  0.      1.      0.      0.      0.      0.      0.     -1.      1.   ]\n",
+      " [  0.      0.      1.      0.     -1.      0.     -1.      0.      0.   ]\n",
+      " [  0.      0.      0.      1.      0.     -1.      0.     -1.      0.   ]\n",
+      " [  0.      0.      0.      0.      4.      0.     -1.      0.      0.   ]\n",
+      " [  0.      0.      0.      0.      0.      1.      0.25    0.    100.   ]\n",
+      " [  0.      0.      0.      0.      0.      1.      0.     -8.      0.   ]\n",
+      " [  0.      0.      0.      0.      0.      0.9    -0.125   0.      0.9  ]]\n",
+      "new_s =\n",
+      " [1. 1. 1. 1. 4. 1. 8. 1.]\n",
+      "Swapping row 6 with row 7\n",
+      "Pre swap\n",
+      " [[   1.      1.     -1.     -1.      0.      0.      0.      0.      0.  ]\n",
+      " [   0.      1.      0.      0.      0.      0.      0.     -1.      1.  ]\n",
+      " [   0.      0.      1.      0.     -1.      0.     -1.      0.      0.  ]\n",
+      " [   0.      0.      0.      1.      0.     -1.      0.     -1.      0.  ]\n",
+      " [   0.      0.      0.      0.      4.      0.     -1.      0.      0.  ]\n",
+      " [   0.      0.      0.      0.      0.      1.      0.25    0.    100.  ]\n",
+      " [   0.      0.      0.      0.      0.      0.     -0.25   -8.   -100.  ]\n",
+      " [   0.      0.      0.      0.      0.      0.     -0.35    0.    -89.1 ]]\n",
+      "A =\n",
+      " [[   1.      1.     -1.     -1.      0.      0.      0.      0.      0.  ]\n",
+      " [   0.      1.      0.      0.      0.      0.      0.     -1.      1.  ]\n",
+      " [   0.      0.      1.      0.     -1.      0.     -1.      0.      0.  ]\n",
+      " [   0.      0.      0.      1.      0.     -1.      0.     -1.      0.  ]\n",
+      " [   0.      0.      0.      0.      4.      0.     -1.      0.      0.  ]\n",
+      " [   0.      0.      0.      0.      0.      1.      0.25    0.    100.  ]\n",
+      " [   0.      0.      0.      0.      0.      0.     -0.35    0.    -89.1 ]\n",
+      " [   0.      0.      0.      0.      0.      0.     -0.25   -8.   -100.  ]]\n",
+      "new_s =\n",
+      " [1. 1. 1. 1. 4. 1. 1. 8.]\n",
+      "Final aug_matrix is\n",
+      " [[  1.           1.          -1.          -1.           0.\n",
+      "    0.           0.           0.           0.        ]\n",
+      " [  0.           1.           0.           0.           0.\n",
+      "    0.           0.          -1.           1.        ]\n",
+      " [  0.           0.           1.           0.          -1.\n",
+      "    0.          -1.           0.           0.        ]\n",
+      " [  0.           0.           0.           1.           0.\n",
+      "   -1.           0.          -1.           0.        ]\n",
+      " [  0.           0.           0.           0.           4.\n",
+      "    0.          -1.           0.           0.        ]\n",
+      " [  0.           0.           0.           0.           0.\n",
+      "    1.           0.25         0.         100.        ]\n",
+      " [  0.           0.           0.           0.           0.\n",
+      "    0.          -0.35         0.         -89.1       ]\n",
+      " [  0.           0.           0.           0.           0.\n",
+      "    0.           0.          -8.         -36.35714286]]\n"
+     ]
+    }
+   ],
+   "source": [
+    "x_flip = GaussElimPivotSolve(A_flip, b_flip, LOUD=True)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 52,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Stream description : Component = flowrate\n",
+      "mixer outlet: A =  353.5714285714286\n",
+      "mixer effluent: B =  5.544642857142858\n",
+      "reactor effluent: A =  318.2142857142857\n",
+      "reactor effluent: B =  40.90178571428571\n",
+      "product: A =  63.642857142857146\n",
+      "product: B =  36.357142857142854\n",
+      "recycle: A =  254.57142857142858\n",
+      "recycle: B =  4.544642857142858\n"
+     ]
+    }
+   ],
+   "source": [
+    "print_solution(x_flip)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We see that we get the same order but need to pivot! Let's try without pivoting."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 53,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\n",
+      "aug_mat = \n",
+      " [[ 0.  0.  0.  0.  0.  1.  0. -8.  0.]\n",
+      " [nan nan nan nan nan nan nan nan nan]\n",
+      " [nan nan nan nan nan nan nan nan nan]\n",
+      " [nan nan nan nan nan nan nan nan nan]\n",
+      " [nan nan nan nan nan nan nan nan nan]\n",
+      " [nan nan nan nan nan nan nan nan nan]\n",
+      " [nan nan nan nan nan nan nan nan nan]\n",
+      " [nan nan nan nan nan nan nan nan nan]]\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "/var/folders/bh/nnfwy9qn4810lwynr80nqg1m0000gn/T/ipykernel_3380/3212638941.py:44: RuntimeWarning: invalid value encountered in double_scalars\n",
+      "  mod_row -= (mod_row[column]/aug_matrix[column,column]*\n",
+      "/var/folders/bh/nnfwy9qn4810lwynr80nqg1m0000gn/T/ipykernel_3380/3212638941.py:44: RuntimeWarning: divide by zero encountered in double_scalars\n",
+      "  mod_row -= (mod_row[column]/aug_matrix[column,column]*\n",
+      "/var/folders/bh/nnfwy9qn4810lwynr80nqg1m0000gn/T/ipykernel_3380/3212638941.py:44: RuntimeWarning: invalid value encountered in multiply\n",
+      "  mod_row -= (mod_row[column]/aug_matrix[column,column]*\n"
+     ]
+    }
+   ],
+   "source": [
+    "aug_mat = GaussElim(A_flip,b_flip)\n",
+    "print(\"\\naug_mat = \\n\",aug_mat)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "For this problem, we must use pivoting if we start with the equations in a certain order."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Replace the 8th equation with an overall mole balance"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "$$n_{p,A} + n_{p_B} = n_{f,A} + n_{f,B} = 100$$"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 54,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "A=\n",
+      " [[ 1.   0.   0.   0.   0.   0.  -1.   0. ]\n",
+      " [ 0.   1.   0.   0.   0.   0.   0.  -1. ]\n",
+      " [ 0.9  0.  -1.   0.   0.   0.   0.   0. ]\n",
+      " [ 1.   1.  -1.  -1.   0.   0.   0.   0. ]\n",
+      " [ 0.   0.   1.   0.  -1.   0.  -1.   0. ]\n",
+      " [ 0.   0.   0.   1.   0.  -1.   0.  -1. ]\n",
+      " [ 0.   0.   0.   0.   4.   0.  -1.   0. ]\n",
+      " [ 0.   0.   0.   0.   1.   1.   0.   0. ]]\n",
+      "\n",
+      "b=\n",
+      " [ 99.   1.   0.   0.   0.   0.   0. 100.]\n"
+     ]
+    }
+   ],
+   "source": [
+    "A_new = A_ex.copy()\n",
+    "b_new = b_ex.copy()\n",
+    "\n",
+    "A_new[7,:] = np.zeros(8)\n",
+    "A_new[7,4] = 1\n",
+    "A_new[7,5] = 1\n",
+    "b_new[7] = 100\n",
+    "\n",
+    "print(\"A=\\n\",A_new)\n",
+    "print(\"\\nb=\\n\",b_new)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 55,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "s = [1. 1. 1. 1. 1. 1. 4. 1.]\n",
+      "Original Augmented Matrix is\n",
+      " [[  1.    0.    0.    0.    0.    0.   -1.    0.   99. ]\n",
+      " [  0.    1.    0.    0.    0.    0.    0.   -1.    1. ]\n",
+      " [  0.9   0.   -1.    0.    0.    0.    0.    0.    0. ]\n",
+      " [  1.    1.   -1.   -1.    0.    0.    0.    0.    0. ]\n",
+      " [  0.    0.    1.    0.   -1.    0.   -1.    0.    0. ]\n",
+      " [  0.    0.    0.    1.    0.   -1.    0.   -1.    0. ]\n",
+      " [  0.    0.    0.    0.    4.    0.   -1.    0.    0. ]\n",
+      " [  0.    0.    0.    0.    1.    1.    0.    0.  100. ]]\n",
+      "Final aug_matrix is\n",
+      " [[ 1.000e+00  0.000e+00  0.000e+00  0.000e+00  0.000e+00  0.000e+00\n",
+      "  -1.000e+00  0.000e+00  9.900e+01]\n",
+      " [ 0.000e+00  1.000e+00  0.000e+00  0.000e+00  0.000e+00  0.000e+00\n",
+      "   0.000e+00 -1.000e+00  1.000e+00]\n",
+      " [ 0.000e+00  0.000e+00 -1.000e+00  0.000e+00  0.000e+00  0.000e+00\n",
+      "   9.000e-01  0.000e+00 -8.910e+01]\n",
+      " [ 0.000e+00  0.000e+00  0.000e+00 -1.000e+00  0.000e+00  0.000e+00\n",
+      "   1.000e-01  1.000e+00 -1.090e+01]\n",
+      " [ 0.000e+00  0.000e+00  0.000e+00  0.000e+00 -1.000e+00  0.000e+00\n",
+      "  -1.000e-01  0.000e+00 -8.910e+01]\n",
+      " [ 0.000e+00  0.000e+00  0.000e+00  0.000e+00  0.000e+00 -1.000e+00\n",
+      "   1.000e-01  0.000e+00 -1.090e+01]\n",
+      " [ 0.000e+00  0.000e+00  0.000e+00  0.000e+00  0.000e+00  0.000e+00\n",
+      "  -1.400e+00  0.000e+00 -3.564e+02]\n",
+      " [ 0.000e+00  0.000e+00  0.000e+00  0.000e+00  0.000e+00  0.000e+00\n",
+      "   0.000e+00  0.000e+00  0.000e+00]]\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "/var/folders/bh/nnfwy9qn4810lwynr80nqg1m0000gn/T/ipykernel_3380/1177368814.py:41: RuntimeWarning: invalid value encountered in double_scalars\n",
+      "  x[row] = RHS/aug_matrix[row,row]\n"
+     ]
+    }
+   ],
+   "source": [
+    "x_new = GaussElimPivotSolve(A_new, b_new, LOUD=True)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Why did this fail? Because 1 mole of A converts to 1 mole of B, the overall mole balance is a valid equation!"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"admonition note\"> \n",
+    "<p class=\"title\"><b>Class Activity</b></p>\n",
+    " Discuss with a partner. Hint: How is the invertible matrix theorem helpful?\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 56,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "8"
+      ]
+     },
+     "execution_count": 56,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# hint: find the rank of A_ex\n",
+    "# Add your solution here"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 57,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "7"
+      ]
+     },
+     "execution_count": 57,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# hint: find the rank of A_new\n",
+    "# Add your solution here"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "colab": {
+   "name": "L8-Gauss-Elimination.ipynb",
+   "provenance": [],
+   "version": "0.3.2"
+  },
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.9.12"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}

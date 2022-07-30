@@ -1,8 +1,9 @@
 # Continuous Optimization
 
-Topics to cover:
-* Theory for continuous optimization
-* Welcome to Pyomo
-* Practice with Pyomo
+**Chapter Learning Objectives**
+1. Model and solve optimization problems using Pyomo
 
-## Chapter Learning Objectives
+**Sections**
+
+```{tableofcontents}
+```
