@@ -11,9 +11,8 @@ We are devoting the rest of the notebooks to **data analysis**. Throughout the r
 The following textbook will be referenced from here on out:
 
 ![textbook](https://images-na.ssl-images-amazon.com/images/I/41l-yqYXQRL._SX378_BO1,204,203,200_.jpg)
-=======
+
 **Sections**
 
 ```{tableofcontents}
 ```
->>>>>>> main
