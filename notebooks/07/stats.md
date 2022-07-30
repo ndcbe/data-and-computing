@@ -1,9 +1,10 @@
 # Descriptive Statistics and Visualization
 
-Topics to cover:
-* Descriptive statistics
-* Scatter plots
-* Histograms
-* Boxplots
+**Chapter Learning Objectives**
+1. Calculate and interpret descriptive statistics
+2. Visualize and graphically summarize data
 
-## Chapter Learning Objectives
+**Sections**
+
+```{tableofcontents}
+```
