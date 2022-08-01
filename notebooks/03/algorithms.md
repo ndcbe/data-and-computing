@@ -1,8 +1,10 @@
 # Algorithm Building Blocks
 
-Topics to cover:
-* Taylor series review
-* Finite difference approximation
-* Error analysis: balancing floating point (random) and truncation error
+**Chapter Learning Objectives**
+1. Estimate derivatives with finite different approximations
+2. Balance random and truncation errors using Taylor series analysis
 
-## Chapter Learning Objectives
+**Sections**
+
+```{tableofcontents}
+```
