@@ -1,13 +1,13 @@
 # Common Probability Distributions
 
-Topics to cover:
-* Uniform (continous or discrete)
-* Normal (continous)
-* Possion (discrete)
-* Binomial (discrete)
-* Student's t-distribution
-* Gamma distribution
-* Simulation
-* Chemical engineering examples
+**Chapter Learning Objectives**
+1. Model science and engineering phenomena with common probability distributions
 
-## Chapter Learning Objectives
+**Sections**
+
+```{tableofcontents}
+```
+
+**Coming Soon**
+* Gamma distribution
+* More chemical engineering examples
