@@ -1,6 +1,6 @@
 # Python Primer
 
-## Why Python?
+**Why Python?**
 
 * Python is extremely popular for **scientific computing** and **data science**
 * Python is a *high-level* language. Its syntax is more flexible and forgiving.
@@ -20,7 +20,7 @@ More info: https://github.blog/2019-01-24-the-state-of-the-octoverse-machine-lea
 ![image2](https://i0.wp.com/user-images.githubusercontent.com/2695116/51644291-87d9ea80-1f24-11e9-8182-2c261d0eb17a.png)
 
 
-## Chapter Learning Objectives
+**Chapter Learning Objectives**
 
 After studying this notebook, completing the activities, and asking questions in class, you should be able to:
 * Write pseudocode and comments pursuant to class standards.
@@ -31,7 +31,7 @@ After studying this notebook, completing the activities, and asking questions in
 * Explain scope to a classmate. Predict the output of Python code that involves scope rules (similar to activity).
 * Read text files into Python.
 
-## Activities
+**Activities**
 
 <div class="admonition tip"> 
 <p class="title"><b>Note</b></p>
@@ -57,12 +57,12 @@ We will come back to this activity in tutorial.
 During each lecture, we will walk through the notebook. A majority of class time will be dedicated to completing **class activities** with partners and discussing as a class. It is critical you attempt the home activties before coming to class, otherwise you may not be ready for the class activities.
 
 <div class="admonition note"> 
-<p class="title"><b>Note</b></p>
+<p class="title"><b>Class Activity</b></p>
 We will work on these activities with partners and then compile solutions together.
 </div>
 
 For *CBE 20258, We will use Vocareum to collect and grade almost all Python assignments this semester. We are providing most of the same activities here on this website as a resource for you in future semesters, e.g., in junior/senior lab when you need to do error propagation.
 
-## Sections
+**Sections**
 
 ```{tableofcontents}
