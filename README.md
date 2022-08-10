@@ -5,8 +5,10 @@ CBE 20258 and CBE 60258 at U. Notre Dame
 https://ndcbe.github.io/data-and-computing/
 
 
-## Configuring local environment
-* Install anaconda: `conda create -n jbook python=3.9`
+## Configuring local environment to contribute
+* Install anaconda: https://www.anaconda.com/
+* Create new conda environment: `conda create -n jbook python=3.9`
+* Activate new environemnt: `conda activate jbook`
 * Install Jupyter Book: `conda install -c conda-forge jupyter-book`
 * Install Jupyter Lab: `conda install -c conda-forge jupyterlab`
 * Install Pandas: `conda install -c anaconda pandas`
