@@ -13,6 +13,7 @@ https://ndcbe.github.io/data-and-computing/
 * Install Jupyter Lab: `conda install -c conda-forge jupyterlab`
 * Install Pandas: `conda install -c anaconda pandas`
 * Install Numpy: `conda install -c anaconda numpy`
+* Install matplotlib: `conda install -c anaconda matplotlib`
 
 ## Building notebook
 To build, run `jb build ../data-and-computing/` when inside the `data-and-computing` folder.
