@@ -28,11 +28,11 @@
 | | [](../02-publish/03b-Condition-Number.ipynb)
 | Thursday, September 8, 2022 | [](../02-publish/01-Modeling-Systems-of-Linear-Equations.ipynb) |
 | | [](../02-publish/04-Example-Atomic-Mass-Balances.ipynb) |
-| Tuesday, September 13, 2022 | [](../notebooks/03/algorithms.md) |
+| Tuesday, September 13, 2022 | [](../03/algorithms.md) |
 | | [](../03-publish/01-Taylor-Series.ipynb) |
 | | [](../03-publish/02-Finite-Difference.ipynb) |
 | | [](../03-publish/03-Example-Heating-a-Metal-Slab.ipynb)
-| Thursday, September 15, 2022 | [](notebooks/04/nonlinear_systems.md) |
+| Thursday, September 15, 2022 | [](../04/nonlinear_systems.md) |
 | | [](../04-publish/01-Modeling-Systems-of-Nonlinear-Equations.ipynb) |
 | | [](../04-publish/02-Newton-Raphson-Method-in-One-Dimension.ipynb) |
 | | [](../04-publish/03-More-Newton-Type-Methods.ipynb) |
