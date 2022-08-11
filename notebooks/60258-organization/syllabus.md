@@ -35,7 +35,7 @@ Another 40% of the class sessions draw from material in *Statistics for Engineer
 
 ## Classroom Meetings
 
-Classroom meetings are a mix of i) traditional chalk board instruction, ii) computer demonstrations, and iii) in-class activities. Please bring an internet connected laptop computer. You are expected to have completed the assigned reading and optionally home activities for each topic before each class session as indicated on the semester schedule. 
+Classroom meetings are a mix of i) traditional chalk board instruction, ii) computer demonstrations, and iii) in-class activities. Please bring an internet connected laptop computer. You are expected to have completed the assigned reading and at home activities for each topic (posted on Canvas/Vocareum) before each class session. 
 
 ## Assessments and Final Grades
 * Homework: 25\% (4 to 6 planned)
