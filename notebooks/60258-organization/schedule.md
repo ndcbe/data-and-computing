@@ -15,7 +15,7 @@
 | Friday, November 18, 2022 | Project 2: Proposal |
 | Friday, December 2, 2022 | Problem Set 6: Linear Regression, Nonlinear Regression, Uncertainty Analysis, Error Propagation |
 | Thursday, December 8, 2022 | Project 2: Jupyter Notebook |
-| Final Exam Timeslot | Project 2: Presentations |
+| Monday, December 12, 2022, 10:30 AM - 12:30 PM (Final Exam Timeslot) | Project 2: Presentations |
 
 ## Class Meetings
 
