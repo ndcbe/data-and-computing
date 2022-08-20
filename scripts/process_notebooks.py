@@ -4,7 +4,7 @@ import re
 import os
 import shutil
 
-def process_notebook(folder, filename, verbose=1):
+def process_notebook(folder_original, folder_new, filename, verbose=1):
 
     ''' Remove nbgrader content from notebooks and save updated version
     
@@ -13,7 +13,7 @@ def process_notebook(folder, filename, verbose=1):
     ## Setup
 
     # read notebook file
-    input_notebook = os.path.join(folder, file)
+    input_notebook = os.path.join(folder_original, file)
     with open(input_notebook, "r") as fp:
         if verbose >= 1:
             print("\nOpening ",input_notebook)
@@ -114,7 +114,7 @@ def process_notebook(folder, filename, verbose=1):
             cell.source = re.sub(MEDIA_LINK, IMAGE_LINK, cell.source)
 
     ## Save new notebook
-    output_notebook = os.path.join(folder + "-publish", filename)
+    output_notebook = os.path.join(folder_new, filename)
     
     with open(output_notebook, "w") as fp:
         if verbose >= 1:
@@ -125,20 +125,25 @@ def process_notebook(folder, filename, verbose=1):
 # Testing
 #process_notebook("./notebooks/01", "03-Flow-control.ipynb")
 
-folders = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14"]
+"""
+IMPORTANT. We assume the source files are in XX-dev and the new files go into XX.
+The list below is just values for XX.
+"""
+folders = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15"]
 
 for fld in folders:
     
     # Loop over filenames
-    full_folder_name = "./notebooks/" + fld
+    full_folder_name_original = "./notebooks/" + fld + "-dev"
+    full_folder_name_new = "./notebooks/" + fld
     
-    print("Processing files in ", full_folder_name)
+    print("Processing files in ", full_folder_name_original)
     
-    for file in sorted(os.listdir(full_folder_name)):
+    for file in sorted(os.listdir(full_folder_name_original)):
         
         # Check if file is a notebook using ending
         if re.match("(.*?)\.ipynb$", file):
             
             # process the notebook!
-            process_notebook(full_folder_name, file, verbose=1)
+            process_notebook(full_folder_name_original, full_folder_name_new, file, verbose=1)
             
