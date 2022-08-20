@@ -1,0 +1,1902 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>9.2. Random Variables &#8212; Data and Computing for Chemical Engieers</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="9.3. Jointly Distributed Random Variables" href="Jointly-Distributed-Random-Variables.html" />
+    <link rel="prev" title="9.1. Basic Ideas of Probability" href="Probability-Basics.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/cbe_logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Data and Computing for Chemical Engieers</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Data and Computing for Engineers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Python Programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../01/Python-Primer.html">
+   1. Python Primer
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Jupyter-Notebooks.html">
+     1.1. Welcome to Jupyter Notebooks and Vocareum
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Python-Basics-I-Variables-Strings-Bugs.html">
+     1.2. Python Basics I: Variables, Strings, and Bugs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Flow-control.html">
+     1.3. Python Basics II: Loopy Logic
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Python-Basics-III-Lists-Dictionaries-Enumeration.html">
+     1.4. Python Basics III: Lists, Dictionaries, and Enumeration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Functions-and-Scope.html">
+     1.5. Functions and Scope
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Recursion.html">
+     1.6. Recursion
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Pseudocode.html">
+     1.7. Pseudocode
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Example-High-Low-Game.html">
+     1.8. High/Low Guess My Number Game
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Modules-and-Files.html">
+     1.9. Modules and Files
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/NumPy.html">
+     1.10. Linear Algebra with Numpy and Scipy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Matplotlib.html">
+     1.11. Visualization with matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Pandas.html">
+     1.12. Manipulating Data with Pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Functions-as-Arguments.html">
+     1.13. Functions as Arguments
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Testing-and-Debugging.html">
+     1.14. Testing and Debugging in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Publication-Quality-Figures.html">
+     1.15. Preparing Publication Quality Figures in Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../02/advanced_python.html">
+   2. Advanced Python
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Numerical Methods
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../03/linear_algebra.html">
+   3. Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03/Modeling-Systems-of-Linear-Equations.html">
+     3.1. Modeling Systems of Linear Equations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03/Gauss-Elimination.html">
+     3.2. Gaussian Elimination
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03/Invertible-Matrix-Theorem-and-Gauss-Example.html">
+     3.3. Invertible Matrix Theorem and Gaussian Elimination Example
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03/LU-Decomposition.html">
+     3.4. LU Decomposition
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03/Condition-Number.html">
+     3.5. Errors in Linear Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03/Example-Atomic-Mass-Balances.html">
+     3.6. Example: Mass Balances and Linear Algebra
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03/Linear-Algebra-in-Numpy.html">
+     3.7. Linear Algebra Review and SciPy Basics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../04/algorithms.html">
+   4. Algorithm Building Blocks
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04/Taylor-Series.html">
+     4.1. Taylor Series Approximations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04/Finite-Difference.html">
+     4.2. Finite Difference Derivative Approximations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04/Example-Heating-a-Metal-Slab.html">
+     4.3. Example: Heating a Metal Slab
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../05/nonlinear_systems.html">
+   5. Nonlinear Systems of Equations
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05/Modeling-Systems-of-Nonlinear-Equations.html">
+     5.1. Modeling Systems of Nonlinear Equations: Flash Calculation Example
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05/Newton-Raphson-Method-in-One-Dimension.html">
+     5.2. Newton-Raphson Method in One Dimension
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05/More-Newton-Type-Methods.html">
+     5.3. More Newton-Type Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05/Convergence-Analysis-for-Newton-Raphson-Methods.html">
+     5.4. Convergence Analysis for Newton-Raphson Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05/Newton-Raphson-Methods-for-Systems-of-Equations.html">
+     5.5. Newton-Raphson Methods for Systems of Equations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05/Newton-Methods-in-Scipy.html">
+     5.6. Newton Methods in Scipy
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../06/integration.html">
+   6. Numeric Integration
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06/Intro-and-Newton-Cotes.html">
+     6.1. Introduction and Newton-Cotes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06/Gauss-Quadrature.html">
+     6.2. Gauss Quadrature
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06/Scipy-Library-Adaptive-Methods-for-Newton-Cotes-and-Gauss-Quadrature.html">
+     6.3. Scipy Library: Adaptive Methods for Newton-Cotes and Gauss Quadrature
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06/Application-Inertial-Navigation-Systems.html">
+     6.4. Application: Inertial Navigation Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06/Forward-and-Backward-Euler.html">
+     6.5. Forward and Backward Euler Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06/Trapezoid-Rule.html">
+     6.6. Crank-Nicolson (Trapezoid Rule)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06/Stability-Analysis.html">
+     6.7. Stability Analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06/Explicit-Runge-Kutta.html">
+     6.8. Explicit Range Kutta Method
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06/Systems-of-Differential-Equations-and-Scipy.html">
+     6.9. Systems of Differential Equations and Scipy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06/Example-Reaction-Rates.html">
+     6.10. Example: Reaction Rates
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../07/optimization.html">
+   7. Continuous Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07/Pyomo-Basics.html">
+     7.1. Pyomo Basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07/Electricity-Market-Optimization.html">
+     7.2. Electricity Market Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07/Flash-Calculations-in-Pyomo.html">
+     7.3. Flash Calculations in Pyomo
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Data Analysis
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../08/stats.html">
+   8. Descriptive Statistics and Visualization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../08/Sampling.html">
+     8.1. Sampling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../08/Summary-Statistics.html">
+     8.2. Summary Statistics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../08/Visualizing-Data.html">
+     8.3. Visualizing Data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="probability.html">
+   9. Probability Theory
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="Probability-Basics.html">
+     9.1. Basic Ideas of Probability
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     9.2. Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Jointly-Distributed-Random-Variables.html">
+     9.3. Jointly Distributed Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Jointly-Continuous-Random-Variables.html">
+     9.4. Jointly Continuous Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Practice-Problems.html">
+     9.5. Practice Problems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../10/distributions.html">
+   10. Common Probability Distributions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10/Bernoulli-Probability-Distribution.html">
+     10.1. Bernoulli Probability Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10/Binomial-Probability-Distribtuion.html">
+     10.2. Binomial Probability Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10/Poisson-Probability-Distribution.html">
+     10.3. Poisson Probability Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10/Normal-Probability-Distribution.html">
+     10.4. Normal Probability Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10/Common-Probability-Distributions-Summary.html">
+     10.5. Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../11/uncertainty.html">
+   11. Uncertainty and Error Propagation
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11/Measurement-Error.html">
+     11.1. Measurement Error
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11/Error-Propagation.html">
+     11.2. Error Propagation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11/Measuring-Flowrate-Example.html">
+     11.3. Measuring Flowrate Example
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11/Car-and-Incline-Example.html">
+     11.4. Car and Incline Example
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11/Simulation-Motivating-Example.html">
+     11.5. Simulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11/Monte-Carlo-Error-Propogation.html">
+     11.6. Monte Carlo Error Propagation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11/Practice-Problems.html">
+     11.7. Practice Problems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../12/inference.html">
+   12. Statistical Inference
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12/Central-Limit-Theorem.html">
+     12.1. Central Limit Theorem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12/Standard-Normal-Distribution.html">
+     12.2. Standard Normal Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12/Confidence-Intervals.html">
+     12.3. Confidence Intervals
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12/Students-t-Distribution.html">
+     12.4. Student’s t-Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12/Hypothesis-Testing-Basics.html">
+     12.5. Hypothesis Testing Basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12/Flavors-of-Hypothesis-Testing.html">
+     12.6. Flavors of Hypothesis Testing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12/Type-I-and-Type-II-Errors.html">
+     12.7. Type I and Type II Errors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12/Statistical-Power-Basics.html">
+     12.8. Statistical Power Basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12/Statistical-Power-in-Python.html">
+     12.9. Statistical Power in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12/Statistical-Power-Practice-Problems.html">
+     12.10. Statistical Power Practice Problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12/Bootstrap-Confidence-Intervals.html">
+     12.11. Bootstrap Confidence Intervals
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../13/regression.html">
+   13. Multivariate Linear Regression
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13/Correlation-Covariance-and-Independence.html">
+     13.1. Correlation, Covariance, and Independence
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13/Least-Squares-Line.html">
+     13.2. Simple Least Squares
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13/Ordinary-Least-Squares-Linear-Regression.html">
+     13.3. Ordinary Least Squares Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13/Residual-Analysis.html">
+     13.4. Residual Analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13/Regression-Assumption-Examples.html">
+     13.5. Regression Assumption Examples
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13/Uncertainty-Analysis-and-Statistical-Inference.html">
+     13.6. Uncertainty Analysis and Statistical Inference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13/Multivariate-Linear-Regression.html">
+     13.7. Multivariate Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13/Linear-Regression-Practice-Problems.html">
+     13.8. Linear Regression Practice Problems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../14/advanced_regression.html">
+   14. Nonlinear Regression
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../14/Transformations-and-Linear-Regression.html">
+     14.1. Transformations and Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../14/Weighted-Regression.html">
+     14.2. Weighted Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../14/Nonlinear-Regression.html">
+     14.3. Nonlinear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../14/Nonlinear-Regression-Practice-Problem.html">
+     14.4. Nonlinear Regression Practice Problem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../14/Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression.html">
+     14.5. Monte Carlo Uncertainty Analysis for Nonlinear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../14/Nonlinear-Case-Study-Adsorptive-Membranes.html">
+     14.6. Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../15/design_of_experiments.html">
+   15. Design of Experiments
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Extra Information
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../60258-organization/home.html">
+   CBE 60258 Information
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../60258-organization/syllabus.html">
+     Syllabus
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../60258-organization/schedule.html">
+     Fall 2022 Schedule
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/09/Random-Variables.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/09/Random-Variables.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ndcbe/data-and-computing"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/09/Random-Variables.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/notebooks/09/Random-Variables.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-objectives">
+   9.2.1. Learning Objectives
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#statistics-using-data-to">
+   9.2.2. Statistics: Using Data to …
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#describe-the-world">
+   9.2.3. 1. Describe the World
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#draw-conclusions-inferences">
+   9.2.4. 2. Draw Conclusions (Inferences)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#make-decisions-under-uncertainty">
+   9.2.5. 3. Make Decisions Under Uncertainty
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#independent-random-variables">
+   9.2.6. Independent Random Variables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#discrete-random-variables">
+   9.2.7. Discrete Random Variables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-for-discrete-random-variables-flipping-two-independent-coins">
+   9.2.8. Example for Discrete Random Variables: Flipping Two Independent Coins
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#continuous-random-variables">
+   9.2.9. Continuous Random Variables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#another-example-continous-random-variables">
+   9.2.10. Another Example: Continous Random Variables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linear-combination-of-random-variables">
+   9.2.11. Linear Combination of Random Variables
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Random Variables</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-objectives">
+   9.2.1. Learning Objectives
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#statistics-using-data-to">
+   9.2.2. Statistics: Using Data to …
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#describe-the-world">
+   9.2.3. 1. Describe the World
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#draw-conclusions-inferences">
+   9.2.4. 2. Draw Conclusions (Inferences)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#make-decisions-under-uncertainty">
+   9.2.5. 3. Make Decisions Under Uncertainty
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#independent-random-variables">
+   9.2.6. Independent Random Variables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#discrete-random-variables">
+   9.2.7. Discrete Random Variables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-for-discrete-random-variables-flipping-two-independent-coins">
+   9.2.8. Example for Discrete Random Variables: Flipping Two Independent Coins
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#continuous-random-variables">
+   9.2.9. Continuous Random Variables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#another-example-continous-random-variables">
+   9.2.10. Another Example: Continous Random Variables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linear-combination-of-random-variables">
+   9.2.11. Linear Combination of Random Variables
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="random-variables">
+<h1><span class="section-number">9.2. </span>Random Variables<a class="headerlink" href="#random-variables" title="Permalink to this headline">#</a></h1>
+<p><strong>Further Reading</strong>: §2.4 in Navidi (2015)</p>
+<div class="section" id="learning-objectives">
+<h2><span class="section-number">9.2.1. </span>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">#</a></h2>
+<p>After attending class, completing these activities, asking questions, and studying notes, you should be able to:</p>
+<ul class="simple">
+<li><p>Give at least three examples of how an engineer would use statistics</p></li>
+<li><p>Explain the difference between a random variable (upper case) and realization (lower case)</p></li>
+<li><p>Convert a probability density/mass function into a cumulative distribution function</p></li>
+<li><p>Derive mean and variance for a function of random variables from a density/mass function using the definition of expected value</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="statistics-using-data-to">
+<h2><span class="section-number">9.2.2. </span>Statistics: Using Data to …<a class="headerlink" href="#statistics-using-data-to" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="describe-the-world">
+<h2><span class="section-number">9.2.3. </span>1. Describe the World<a class="headerlink" href="#describe-the-world" title="Permalink to this headline">#</a></h2>
+<p><a class="reference external" href="https://istats.shinyapps.io/EDA_quantitative/">https://istats.shinyapps.io/EDA_quantitative/</a></p>
+</div>
+<div class="section" id="draw-conclusions-inferences">
+<h2><span class="section-number">9.2.4. </span>2. Draw Conclusions (Inferences)<a class="headerlink" href="#draw-conclusions-inferences" title="Permalink to this headline">#</a></h2>
+<p><a class="reference external" href="https://istats.shinyapps.io/Inference_prop/">https://istats.shinyapps.io/Inference_prop/</a></p>
+<p><a class="reference external" href="https://istats.shinyapps.io/Association_Categorical/">https://istats.shinyapps.io/Association_Categorical/</a></p>
+</div>
+<div class="section" id="make-decisions-under-uncertainty">
+<h2><span class="section-number">9.2.5. </span>3. Make Decisions Under Uncertainty<a class="headerlink" href="#make-decisions-under-uncertainty" title="Permalink to this headline">#</a></h2>
+<p><strong>Example: Chemical Reactor Design</strong></p>
+<p>Recall the phenolphthalein reaction from an earlier notebook:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{d[P]}{dt} = -k_{1}[P][OH^-]+k_{2}[POH] ~,
+\]</div>
+<p>with the analytic solution:</p>
+<div class="math notranslate nohighlight">
+\[
+[P] = [P]_{0}\Big(\frac{k_{2}}{k_{1}'+k_{2}}+\frac{k_{1}'}{k_{1}'+k_{2}}e^{-(k_{1}'+k_{2})t}\Big) ~.
+\]</div>
+<p>We can use use nonlinear regression to estimate the reaction kinetic parameters <span class="math notranslate nohighlight">\(k'_1\)</span> and <span class="math notranslate nohighlight">\(k_2\)</span>.</p>
+<p>This example illustrates a common workflow in chemical engineering:</p>
+<ol class="simple">
+<li><p>Run several experiments at different temperatures, pressures, and feed compositions. Measure compositions at several times as chemical reactions occur.</p></li>
+<li><p>Use nonlinear regression to estimate kinetic model parameters.</p></li>
+<li><p>Use statistical inference to quantify uncertainty in fitted parameters.</p></li>
+<li><p>How much should we oversize/overdesign the reactor to account for the uncertainty in the fitted reaction kinetic parameters?</p></li>
+</ol>
+</div>
+<div class="section" id="independent-random-variables">
+<h2><span class="section-number">9.2.6. </span>Independent Random Variables<a class="headerlink" href="#independent-random-variables" title="Permalink to this headline">#</a></h2>
+<p><strong>Random variable:</strong> assigns numeric value to each outcome in sample</p>
+<p><strong>Realization:</strong> outcome of an experiment</p>
+<p>Observing a random variable (e.g. measuring realization) is analogous to taking a sample from a population.</p>
+<div class="math notranslate nohighlight">
+\[P(X = x)\]</div>
+<p><span class="math notranslate nohighlight">\(P\)</span> = probability; <span class="math notranslate nohighlight">\(X\)</span> = random variable; <span class="math notranslate nohighlight">\(x\)</span> = realization</p>
+<p>Random variables X and Y are independent, provided that</p>
+<p><strong>Jointly Discrete:</strong></p>
+<div class="math notranslate nohighlight">
+\[\rho(x,y) = \rho_X(x) \cdot \rho_Y(y)\]</div>
+<p><strong>Jointly Continuous:</strong></p>
+<div class="math notranslate nohighlight">
+\[f(x,y) = f_X(x) \cdot f_Y(y)\]</div>
+<p>In other words, knowledge about ane variable does not affect the probability distribution of the other.</p>
+<p>If X and Y are independent, then</p>
+<p><strong>Jointly Discrete,</strong></p>
+<div class="math notranslate nohighlight">
+\[\rho_X(x) &gt; 0 : \rho_{Y | X}(y | x) = \rho_Y(y)\]</div>
+<p><strong>Jointly Continuous,</strong></p>
+<div class="math notranslate nohighlight">
+\[f_X(x) &gt; 0 : f_{Y | X}(y | x) = f_Y(y)\]</div>
+<p><strong>Example:</strong> Are X (length) and Y (width) indpendent for the following CD cover data?</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p>length (x)</p></th>
+<th class="text-align:center head"><p>width (y)</p></th>
+<th class="text-align:center head"><p><span class="math notranslate nohighlight">\(\rho\)</span>(X=x and Y=y)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p>129</p></td>
+<td class="text-align:center"><p>15</p></td>
+<td class="text-align:center"><p>0.12</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>129</p></td>
+<td class="text-align:center"><p>16</p></td>
+<td class="text-align:center"><p>0.08</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>130</p></td>
+<td class="text-align:center"><p>15</p></td>
+<td class="text-align:center"><p>0.42</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>130</p></td>
+<td class="text-align:center"><p>16</p></td>
+<td class="text-align:center"><p>0.28</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>131</p></td>
+<td class="text-align:center"><p>15</p></td>
+<td class="text-align:center"><p>0.06</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>131</p></td>
+<td class="text-align:center"><p>16</p></td>
+<td class="text-align:center"><p>0.04</p></td>
+</tr>
+</tbody>
+</table>
+<p><em>Approach:</em>
+Check if <span class="math notranslate nohighlight">\(\rho(X=x \textrm{ and } Y=y) = P(X=x) P(Y=y)\)</span></p>
+<p><em>Solution:</em></p>
+<div class="math notranslate nohighlight">
+\[P(X=129 \textrm{ and } Y=15) = 0.12\]</div>
+<div class="math notranslate nohighlight">
+\[P(X=129) = 0.2\]</div>
+<div class="math notranslate nohighlight">
+\[P(Y=15) = 0.6\]</div>
+<div class="math notranslate nohighlight">
+\[0.2 \times 0.6 = 0.12\]</div>
+<p>Yes, it turns out these data are independent.</p>
+</div>
+<div class="section" id="discrete-random-variables">
+<h2><span class="section-number">9.2.7. </span>Discrete Random Variables<a class="headerlink" href="#discrete-random-variables" title="Permalink to this headline">#</a></h2>
+<p>For discrete random variables: possible values are discrete, may be infinite</p>
+<p><strong>Probability Mass Function (PMF):</strong></p>
+<div class="math notranslate nohighlight">
+\[\rho(x) = P(X=x)\]</div>
+<p>The PMF defines the probability of observing each possible outcome.</p>
+<p><em>Ex: flipping two fair coins</em></p>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">],</span> <span class="n">tick_label</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">ticks</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x (# heads)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;p(X=x)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;PMF&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Random-Variables_12_0.png" src="../../_images/Random-Variables_12_0.png" />
+</div>
+</div>
+<p><strong>Cumulative Distribution Function (CDF):</strong></p>
+<div class="math notranslate nohighlight">
+\[F(X) = P(X \leq x)\]</div>
+<p>Notice that</p>
+<div class="math notranslate nohighlight">
+\[F(x) = \sum_{t \leq X} \rho(t) = \sum_{t \leq X} P(X=t)\]</div>
+<p>and that the probabilities over all possible outcomes sum to 1.</p>
+<div class="math notranslate nohighlight">
+\[\sum_x \rho(x) = \sum_x P(X=x) = 1\]</div>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">tick_label</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">ticks</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x (# heads)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;p(X $\leq$ x)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Random-Variables_14_0.png" src="../../_images/Random-Variables_14_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="example-for-discrete-random-variables-flipping-two-independent-coins">
+<h2><span class="section-number">9.2.8. </span>Example for Discrete Random Variables: Flipping Two Independent Coins<a class="headerlink" href="#example-for-discrete-random-variables-flipping-two-independent-coins" title="Permalink to this headline">#</a></h2>
+<p>Imagine we have two coins: A and B.</p>
+<div class="math notranslate nohighlight">
+\[P(A=\mathrm{Head}) = 0.6\]</div>
+<div class="math notranslate nohighlight">
+\[P(B=\mathrm{Head}) = 0.5\]</div>
+<p>Further assume the outcome of these two coins is independent. Let’s simulate 1000 coin flips, record the results, and practice some skills from last class.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># number of flips</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="c1"># store results</span>
+<span class="n">coin_A</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">coin_B</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">def</span> <span class="nf">flip_simple_coin</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Flip a simple coin.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        p : probability of a head</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        outcome: &#39;H&#39; or &#39;T&#39;</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="c1"># Generate uniformly distributed random number on [0,1)</span>
+    <span class="c1"># then check if is in less than 1-p</span>
+    <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;H&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;T&#39;</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="c1"># flip coin A. Generate uniformly distributed random number on [0,1)</span>
+    <span class="c1"># then check if is in less than 0.4</span>
+    <span class="n">coin_A</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">flip_simple_coin</span><span class="p">(</span><span class="mf">0.6</span><span class="p">))</span>
+    
+    <span class="c1"># flip coin B</span>
+    <span class="n">coin_B</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">flip_simple_coin</span><span class="p">(</span><span class="mf">0.4</span><span class="p">))</span>
+    
+<span class="c1"># assemble into pandas dataframe</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;A&quot;</span><span class="p">:</span><span class="n">coin_A</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">:</span><span class="n">coin_B</span><span class="p">}</span>
+<span class="n">ind_coins</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">d</span><span class="p">)</span>
+
+<span class="c1"># print first few experiments</span>
+<span class="n">ind_coins</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>T</td>
+      <td>H</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>H</td>
+      <td>T</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>T</td>
+      <td>T</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>T</td>
+      <td>H</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>H</td>
+      <td>T</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Let’s use pandas to explore the number of outcomes for each coin.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Coin A</span>
+<span class="n">ind_coins</span><span class="o">.</span><span class="n">A</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T    594
+H    406
+Name: A, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Coin B</span>
+<span class="n">ind_coins</span><span class="o">.</span><span class="n">B</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>H    571
+T    429
+Name: B, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also use pandas to calculate the number of coin flips for each possible outcome.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ind_coins</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">)[</span><span class="s1">&#39;B&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A  B
+H  H    250
+   T    156
+T  H    321
+   T    273
+Name: B, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>And we can convert to frequencies by dividing by the total number of coins:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ind_coins</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">)[</span><span class="s1">&#39;B&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">ind_coins</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A  B
+H  H    0.250
+   T    0.156
+T  H    0.321
+   T    0.273
+Name: B, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Rerun your code. Why do you expect the results to change?</p>
+</div>
+<p>I ran the simulation on my computer and saved the results to a csv file with the following command:</p>
+<p><code class="docutils literal notranslate"><span class="pre">ind_coins.to_csv(r'two_simple_coins.csv',index</span> <span class="pre">=</span> <span class="pre">None)</span></code></p>
+<p>Let’s read in the data file.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ind_coins_saved</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/two_simple_coins.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># print first few experiments</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ind_coins_saved</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+<span class="c1"># determine number of coin flips</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ind_coins_saved</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   A  B
+0  H  H
+1  T  H
+2  T  H
+3  T  H
+4  T  H
+</pre></div>
+</div>
+</div>
+</div>
+<p>And now we’ll repeat the analysis from above. Notice I divided everything by the number of coin flips to compute frequencies.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Coin A</span>
+<span class="n">pA</span> <span class="o">=</span> <span class="n">ind_coins_saved</span><span class="o">.</span><span class="n">A</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span> <span class="o">/</span> <span class="n">n</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pA</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T    0.592
+H    0.408
+Name: A, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Coin B</span>
+<span class="n">pB</span> <span class="o">=</span> <span class="n">ind_coins_saved</span><span class="o">.</span><span class="n">B</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span> <span class="o">/</span> <span class="n">n</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pB</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>H    0.629
+T    0.371
+Name: B, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pAB</span> <span class="o">=</span> <span class="n">ind_coins_saved</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">)[</span><span class="s1">&#39;B&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span> <span class="o">/</span> <span class="n">n</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pAB</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A  B
+H  H    0.244
+   T    0.164
+T  H    0.385
+   T    0.207
+Name: B, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Calculate the following probabilities from the data stored in <tt>ind_coins_saved</tt>. You may use either Python or pencil and paper. Store your answer in the Python dictionary <tt>ans_simple_coin</tt>.</p>
+</div>
+<p><strong>Probability</strong></p>
+<p><span class="math notranslate nohighlight">\(P(A = H) = \)</span></p>
+<p><span class="math notranslate nohighlight">\(P(A = T) = \)</span></p>
+<p><span class="math notranslate nohighlight">\(P(B = H) = \)</span></p>
+<p><span class="math notranslate nohighlight">\(P(B = T) = \)</span></p>
+<p><strong>Joint Probability</strong></p>
+<p>We’ll introduce some shorthand. Assume the first argument is coin A and the second argument is coin B.</p>
+<p><span class="math notranslate nohighlight">\(P(A=H,B=H) = P(H,H) = \)</span></p>
+<p><span class="math notranslate nohighlight">\(P(H,T) = \)</span></p>
+<p><span class="math notranslate nohighlight">\(P(T,H) = \)</span></p>
+<p><span class="math notranslate nohighlight">\(P(H,T) = \)</span></p>
+<p><strong>Conditional Probability</strong></p>
+<p><span class="math notranslate nohighlight">\(P(A = H | B = T) = \)</span></p>
+<p><span class="math notranslate nohighlight">\(P(A = H | B = H) = \)</span></p>
+<p><span class="math notranslate nohighlight">\(P(A = T | B = T) = \)</span></p>
+<p><span class="math notranslate nohighlight">\(P(A = T | B = H) = \)</span></p>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Store your answers in this dictionary</span>
+
+<span class="n">ans_simple_coin</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="n">ans_simple_coin</span><span class="p">[</span><span class="s1">&#39;P(A=H)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">ans_simple_coin</span><span class="p">[</span><span class="s1">&#39;P(A=T)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">ans_simple_coin</span><span class="p">[</span><span class="s1">&#39;P(B=H)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">ans_simple_coin</span><span class="p">[</span><span class="s1">&#39;P(B=T)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">ans_simple_coin</span><span class="p">[</span><span class="s1">&#39;P(H,H)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">ans_simple_coin</span><span class="p">[</span><span class="s1">&#39;P(H,T)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">ans_simple_coin</span><span class="p">[</span><span class="s1">&#39;P(T,H)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">ans_simple_coin</span><span class="p">[</span><span class="s1">&#39;P(T,T)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">ans_simple_coin</span><span class="p">[</span><span class="s1">&#39;P(A=H|B=T)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">ans_simple_coin</span><span class="p">[</span><span class="s1">&#39;P(A=H|B=H)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">ans_simple_coin</span><span class="p">[</span><span class="s1">&#39;P(A=T|B=T)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">ans_simple_coin</span><span class="p">[</span><span class="s1">&#39;P(A=T|B=H)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Imagine we were just given the data. We do not know exactly how the data were collected. We want to determine if coins A and B are independent.</p>
+<p>Recall, if A and B are dependent, we expect:</p>
+<div class="math notranslate nohighlight">
+\[P(B | A) = P(B)\]</div>
+<p>and equivalently</p>
+<div class="math notranslate nohighlight">
+\[P(A | B) = P(A)\]</div>
+<p>for <span class="math notranslate nohighlight">\(P(A) &gt; 0\)</span> and <span class="math notranslate nohighlight">\(P(B) &gt; 0\)</span>.</p>
+<p>Let’s print out your previous answer:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">ans_simple_coin</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="s2">&quot; = &quot;</span><span class="p">,</span><span class="n">ans_simple_coin</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P(A=H)  =  0.408
+P(A=T)  =  0.592
+P(B=H)  =  0.629
+P(B=T)  =  0.371
+P(H,H)  =  0.244
+P(H,T)  =  0.164
+P(T,H)  =  0.385
+P(T,T)  =  0.207
+P(A=H|B=T)  =  0.4420485175202157
+P(A=H|B=H)  =  0.38791732909379967
+P(A=T|B=T)  =  0.5579514824797843
+P(A=T|B=H)  =  0.6120826709062003
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Inspect these values and determine if coins A and B are independent. Select from the multiple choice options below and store your answer as an integer in the Python variable <tt>ans_simple_coin_ind</tt>.</p>
+</div>
+<p><strong>Multiple Choice Options</strong>:</p>
+<ol class="simple">
+<li><p>Coins A and B are independent. The probabilities match exactly.</p></li>
+<li><p>Coins A and B are likely independent. The probabilities are close, but do not match exactly. But we expect this, as the data were generated from a random process.</p></li>
+<li><p>Coins A and B are clearly NOT independent. Nice try, but I saw through your trick.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="continuous-random-variables">
+<h2><span class="section-number">9.2.9. </span>Continuous Random Variables<a class="headerlink" href="#continuous-random-variables" title="Permalink to this headline">#</a></h2>
+<p>For continuous random variables: outcomes are continuous and even if outcomes are bounded, the space is infinite.</p>
+<p><strong>Probability Density Function:</strong></p>
+<div class="math notranslate nohighlight">
+\[\rho(X=x) = f(x)\]</div>
+<p>We need to integrate to interpret:</p>
+<div class="math notranslate nohighlight">
+\[\rho(a \leq X \leq b) = \rho(a \leq X \leq b) = \rho(a &lt; X \leq b)\]</div>
+<div class="math notranslate nohighlight">
+\[ = \rho(a &lt; X &lt; b) = \int_a^b f(x)dx\]</div>
+<p>Likewise,</p>
+<div class="math notranslate nohighlight">
+\[\rho(X \leq b) = \rho(X &lt; b) = \int_{-\infty}^b f(x)dx\]</div>
+<div class="math notranslate nohighlight">
+\[\rho(X \geq a) = \rho(X &gt; a) = \int_a^{\infty} f(x)dx\]</div>
+<p>It’s important to note that</p>
+<div class="math notranslate nohighlight">
+\[\int_{-\infty}^{\infty} f(x)dx = 1\]</div>
+</div>
+<div class="section" id="another-example-continous-random-variables">
+<h2><span class="section-number">9.2.10. </span>Another Example: Continous Random Variables<a class="headerlink" href="#another-example-continous-random-variables" title="Permalink to this headline">#</a></h2>
+<p>In class, we will derive the mean and standard deviation for a random variable that follows the <strong>uniform distribution</strong> (all outcomes equally probable). Let’s explore these properties with simulation first.</p>
+<p>Let’s generate 1000 random numbers between 0 and 1 with equal probability.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_nums</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1"># Let&#39;s look at the first 5 elements</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_nums</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.78230074 0.39672722 0.51206773 0.10962664 0.95134558]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s create a pandas data frame from your numpy array.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;U&#39;</span><span class="p">:</span><span class="n">my_nums</span><span class="p">})</span>
+<span class="n">u</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>U</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.782301</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.396727</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.512068</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.109627</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.951346</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Create a histogram to visualize the simulated data.</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Compute the mean and variance of the 1000 random numbers. Store your results in the Python floats <tt>u_mean</tt> and <tt>u_var</tt>.</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="linear-combination-of-random-variables">
+<h2><span class="section-number">9.2.11. </span>Linear Combination of Random Variables<a class="headerlink" href="#linear-combination-of-random-variables" title="Permalink to this headline">#</a></h2>
+<p>Consider</p>
+<div class="math notranslate nohighlight">
+\[c_1x_1 + ... + c_2x_2 = z\]</div>
+<p><strong>What is <span class="math notranslate nohighlight">\(E[z]\)</span>?</strong></p>
+<p><em>Observation:</em> <span class="math notranslate nohighlight">\(E[\cdot]\)</span> operator involves summation (discrete) or integration (continuous). Both of these are separable over addition.</p>
+<div class="math notranslate nohighlight">
+\[E[z] = E[c_1x_1] + E[c_2x_2] + ... + E[c_nx_n]\]</div>
+<p>Move <span class="math notranslate nohighlight">\(c_1\)</span> outside <span class="math notranslate nohighlight">\(E[\cdot]\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[ E[z] = c_1E[x_1] + E[c_2x_2] + ... + E[c_nx_n]\]</div>
+<div class="math notranslate nohighlight">
+\[ E[z] = c_1\mu_{x_1} + c_2\mu_{x_2} + ... + c_n\mu_{x_n}\]</div>
+<p><strong>What about <span class="math notranslate nohighlight">\(var[z]\)</span>?</strong></p>
+<div class="math notranslate nohighlight">
+\[var[z] = E[(z-\mu_z)^2] = E[z^2] - \mu_z^2\]</div>
+<p>Let’s consider <span class="math notranslate nohighlight">\(z = c_1X + c_2Y\)</span> with <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> continuous:</p>
+<div class="math notranslate nohighlight">
+\[E[z^2] = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} (c_1X + c_2Y)^2 f_{X,Y}(x,y)dxdy\]</div>
+<div class="math notranslate nohighlight">
+\[E[z^2] = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} (c_1^2x^2 + 2c_1c_2xy + c_2^2y) f_{X,Y}(x,y)dxdy\]</div>
+<p>Split over addition.</p>
+<div class="math notranslate nohighlight">
+\[E[z^2] = c_1^2 \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} (x^2 f_{X,Y}(x,y)dxdy + 2c_1c_2 \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} xy f_{X,Y}(x,y)dxdy + c_2^2 \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} y^2 f_{X,Y}(x,y)dxdy\]</div>
+<div class="math notranslate nohighlight">
+\[E[z^2] = c_1^2 var[X] + 2c_1c_2 cov[X,Y] + c_2^2 var[Y]\]</div>
+<p>See the textbook for more detailed steps. We will use this with error propogation.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks/09"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="Probability-Basics.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">9.1. </span>Basic Ideas of Probability</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Jointly-Distributed-Random-Variables.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">9.3. </span>Jointly Distributed Random Variables</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
