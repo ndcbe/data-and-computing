@@ -78,7 +78,7 @@ Be sure to answer the questions that are asked. When discussing results, only re
 
 **Pseudocode:** Most assignments require you to write brief pseudocode. We will learn how to do this during the first week of the semester. Your pseudocode needs to reflect all the main steps and logic of your solution. You do not need to rewrite your pseudocode if your final solution has different main steps or logic. Instead, you should update your pseudocode with a few notes showing the change. In our experience, rewriting the pseudocode is very helpful if you find a mistake in your logic but get stuck making modifications. Prof. Dowling has been programming in Python for 20 years. He writes pseudocode and so do other professional software developers.
 
-Please see the “Pseudocode Guidelines” and “Python and Commenting Guidelines” sections in ![](../01/Pseudocode.ipynb) for additional details.
+Please see the “Pseudocode Guidelines” and “Python and Commenting Guidelines” sections in [](../01/Pseudocode.ipynb) for additional details.
 
 ### Assignment Submission
 
