@@ -10,22 +10,20 @@ In this class, you will learn the fundamentals of i) computing in Python, ii) ma
 
 ## Instructor and Teaching Assistants
 
-| | Prof. Alexander Dowling | TA 1 | TA 2|
+| | Prof. Alexander (Alex) Dowling | Ms. Kyla Jones | Ms. Maddie Watson|
 | ----------- | ----------- | ----------- | ----------- |
-| | ![](https://dowlinglab.nd.edu/assets/320333/200x200/dowling_alex_sq.jpg) | | | |
-| Office Hours | TBD | TBD | TBD |
+| | ![](https://dowlinglab.nd.edu/assets/320333/200x200/dowling_alex_sq.jpg) | ![](https://dowlinglab.nd.edu/assets/477436/200x200/student_id_resized_less_shiny.jpg) | ![](https://dowlinglab.nd.edu/assets/477606/200x200/senior_composite.png) |
+| Office Hours | 9-10am on Fridays in 366 or 369 Nieuwland Hall | 1:30-2:30pm on Wednesdays in 366 Nieuwland Hall | 1:30-2:30pm on Wednesdays in 366 Nieuwland Hall  |
 
-## Slack and Email Correspondance
-* Post your questions to Slack in **public channel**, no private messages to TA and instructor
+## Discussuion Board (Canvas) and Email Correspondance
+* Post your questions to the **discussion board in Canvas**
 * Instructor only: adowling@nd.edu, “CBE 60258” in subject, private official matters (e.g., excused absence, testing accommodations)
 
-We encourage you to post all your questions including your mathematical models, pseudocode, and code screenshots to the **public channels**. We are doing this for a few reasons:
+We encourage you to post all your questions including your mathematical models, pseudocode, and code screenshots to the public **discussion board in Canvas**. We are doing this for a few reasons:
 1. As professionals, you'll need to be comfortable asking questions in front of a team. We would like to cultivate a positive and friendly learning environment where everyone can practice this skill during the semester.
-2. By answering questions in the public Slack channels, everyone in the class will have access to the same information.
+2. By answering questions in the public discussion board, everyone in the class will have access to the same information.
 3. We would like to cultivate a learning community with peer instruction; as professionals, you'll need to answer your peers' questions.
-
-For the above-mentioned reasons, please do not send private messages in Slack.
-To contact Prof. Dowling about truly private and official matters (e.g., excused absence, schedule meeting to discuss class progress), please write to adowling@nd.edu with "CBE 60258" in the email subject.
+4. Many scientific software have online discussion boards to ask technical questions and report bugs. Using the **discussion board in Canvas** will help you develop comfort asking questions in this way.
 
 ## Textbook and Reference Materials
 
@@ -38,16 +36,16 @@ Another 40% of the class sessions draw from material in *Statistics for Engineer
 Classroom meetings are a mix of i) traditional chalk board instruction, ii) computer demonstrations, and iii) in-class activities. Please bring an internet connected laptop computer. You are expected to have completed the assigned reading and at home activities for each topic (posted on Canvas/Vocareum) before each class session. 
 
 ## Assessments and Final Grades
-* Homework: 25\% (4 to 6 planned)
+* Homework: 25\% (6 planned)
 * Midterm Exam: 25\%
 * Project 1: 25\%
-* Project 2: 25\% (replaces written final exam)
+* Project 2: 25\% (instead of written final exam)
 
 ### Homework
 
 Problem set homework assignments are a collection of 2 to 5 problems designed to reinforce specific concepts and skills from class. Most problems include “pencil and paper” analysis (i.e., derive a model, determine degrees of freedom, write pseudocode), computer programming aspects, and interpretation of calculated results. These problems, especially the analysis and interpretation parts, are good practice for the exams. Many students receive near full credit on the problem sets.
 
-You are permitted (and encouraged) to discuss solution approaches to the weekly homework assignments with classmates, however there is to be no wholesale copying or paraphrasing of code, solutions, or written discussions. You are encouraged to ask questions, including posting pseudocode or code screenshots, on Slack. Likewise, you may use any material posted by the instructors or your classmates in the public Slack channels. This policy is meant to facilitate collaboration while ensuring everyone in the class has the same access. Students MAY NOT use old HW files and solutions for the algorithm assignments: If you cannot do the problems for homework, you will not be able to do them on the exams either.
+You are permitted (and encouraged) to discuss solution approaches to the weekly homework assignments with classmates, however there is to be no wholesale copying or paraphrasing of code, solutions, or written discussions. You are encouraged to ask questions, including posting pseudocode or code screenshots, on the disccsion board on Canvas. Likewise, you may use any material posted by the instructors or your classmates in the discussion board on Canvas. This policy is meant to facilitate collaboration while ensuring everyone in the class has the same access. Students MAY NOT use old HW files and solutions for the algorithm assignments: If you cannot do the problems for homework, you will not be able to do them on the exams either.
 
 *As a rule of thumb, if you are not comfortable explaining your solution strategy to an instructor or TA, you should not turn in the work as your own.*
 
@@ -80,7 +78,7 @@ Be sure to answer the questions that are asked. When discussing results, only re
 
 **Pseudocode:** Most assignments require you to write brief pseudocode. We will learn how to do this during the first week of the semester. Your pseudocode needs to reflect all the main steps and logic of your solution. You do not need to rewrite your pseudocode if your final solution has different main steps or logic. Instead, you should update your pseudocode with a few notes showing the change. In our experience, rewriting the pseudocode is very helpful if you find a mistake in your logic but get stuck making modifications. Prof. Dowling has been programming in Python for 20 years. He writes pseudocode and so do other professional software developers.
 
-Please see the handouts “Pseudocode Guidelines” and “Python and Commenting Guidelines” for additional information. (TODO: Translate these into .md pages.)
+Please see the “Pseudocode Guidelines” and “Python and Commenting Guidelines” sections in [](../01/Pseudocode.ipynb) for additional details.
 
 ### Assignment Submission
 

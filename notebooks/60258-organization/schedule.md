@@ -77,8 +77,11 @@
 | | [](../08/Summary-Statistics.ipynb) |
 | | [](../08/Visualizing-Data.ipynb) |
 | | [](../09/probability.md) |
-| | [](../09/Random-Variables.ipynb) |
-| Thursday, October 6, 2022 | Finish Probability Notebooks |
+| | [](../09/Probability-Basics.ipynb) |
+| Thursday, October 6, 2022 | [](../09/Random-Variables.ipynb) |
+| | [](../09/Jointly-Distributed-Random-Variables.ipynb) |
+| | [](../09/Jointly-Continuous-Random-Variables.ipynb) |
+| | [](../09/Practice-Problems.ipynb) |
 | Tuesday, October 11, 2022 | [](../10/distributions.md) |
 | | [](../10/Bernoulli-Probability-Distribution.ipynb) |
 | | [](../10/Binomial-Probability-Distribtuion.ipynb) |
