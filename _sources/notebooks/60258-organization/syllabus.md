@@ -10,10 +10,10 @@ In this class, you will learn the fundamentals of i) computing in Python, ii) ma
 
 ## Instructor and Teaching Assistants
 
-| | Prof. Alexander Dowling | Ms. Kyla Jones | Ms. Maddie Watson|
+| | Prof. Alexander (Alex) Dowling | Ms. Kyla Jones | Ms. Maddie Watson|
 | ----------- | ----------- | ----------- | ----------- |
 | | ![](https://dowlinglab.nd.edu/assets/320333/200x200/dowling_alex_sq.jpg) | ![](https://dowlinglab.nd.edu/assets/477436/200x200/student_id_resized_less_shiny.jpg) | ![](https://dowlinglab.nd.edu/assets/477606/200x200/senior_composite.png) |
-| Office Hours | 9-10am on Fridays | TBD | TBD |
+| Office Hours | 9-10am on Fridays in 366 or 369 Nieuwland Hall | 1:30-2:30pm on Wednesdays in 366 Nieuwland Hall | 1:30-2:30pm on Wednesdays in 366 Nieuwland Hall  |
 
 ## Discussuion Board (Canvas) and Email Correspondance
 * Post your questions to the **discussion board in Canvas**
