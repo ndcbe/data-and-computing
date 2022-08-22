@@ -36,10 +36,10 @@ Another 40% of the class sessions draw from material in *Statistics for Engineer
 Classroom meetings are a mix of i) traditional chalk board instruction, ii) computer demonstrations, and iii) in-class activities. Please bring an internet connected laptop computer. You are expected to have completed the assigned reading and at home activities for each topic (posted on Canvas/Vocareum) before each class session. 
 
 ## Assessments and Final Grades
-* Homework: 25\% (4 to 6 planned)
+* Homework: 25\% (6 planned)
 * Midterm Exam: 25\%
 * Project 1: 25\%
-* Project 2: 25\% (replaces written final exam)
+* Project 2: 25\% (instead of written final exam)
 
 ### Homework
 
