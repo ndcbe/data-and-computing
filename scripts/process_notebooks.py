@@ -51,6 +51,10 @@ def process_notebook(folder_original, folder_new, filename, verbose=1):
     replace_code(SOLUTION_CODE, "# Add your solution here")
     replace_code(HIDDEN_TESTS, "# Removed autograder test. You may delete this cell.")
     
+    OLD_DATA_PATH = "../data/"
+    NEW_DATA_PATH = "https://raw.githubusercontent.com/ndcbe/data-and-computing/main/notebooks/data/"    
+    replace_code(OLD_DATA_PATH, NEW_DATA_PATH)
+    
     ## Replace elements in markdown cells
     def replace_markdown(pattern, replacement):
         ''' Replace content in markdown by applying regular expression
