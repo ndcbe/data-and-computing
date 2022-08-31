@@ -13,7 +13,7 @@ In this class, you will learn the fundamentals of i) computing in Python, ii) ma
 | | Prof. Alexander (Alex) Dowling | Ms. Kyla Jones | Ms. Maddie Watson|
 | ----------- | ----------- | ----------- | ----------- |
 | | ![](https://dowlinglab.nd.edu/assets/320333/200x200/dowling_alex_sq.jpg) | ![](https://dowlinglab.nd.edu/assets/477436/200x200/student_id_resized_less_shiny.jpg) | ![](https://dowlinglab.nd.edu/assets/477606/200x200/senior_composite.png) |
-| Office Hours | 9-10am on Fridays in 366 or 369 Nieuwland Hall | 1:30-2:30pm on Wednesdays in 366 Nieuwland Hall | 1:30-2:30pm on Wednesdays in 366 Nieuwland Hall  |
+| Office Hours | 9-10am on Fridays in 366 or 369 Nieuwland Hall | 3-4pm on Wednesdays in 366 Nieuwland Hall | 3-4pm on Wednesdays in 366 Nieuwland Hall  |
 
 ## Discussuion Board (Canvas) and Email Correspondance
 * Post your questions to the **discussion board in Canvas**
@@ -36,7 +36,7 @@ Another 40% of the class sessions draw from material in *Statistics for Engineer
 Classroom meetings are a mix of i) traditional chalk board instruction, ii) computer demonstrations, and iii) in-class activities. Please bring an internet connected laptop computer. You are expected to have completed the assigned reading and at home activities for each topic (posted on Canvas/Vocareum) before each class session. 
 
 ## Assessments and Final Grades
-* Homework: 25\% (7 planned, drop 1)
+* Homework: 25\% (6 planned)
 * Midterm Exam: 25\%
 * Project 1: 25\%
 * Project 2: 25\% (instead of written final exam)

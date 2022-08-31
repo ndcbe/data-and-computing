@@ -5,7 +5,6 @@
 | Deadline     | Description |
 | ----------- | ----------- |
 | Friday, September 2, 2022 | Problem Set 1: Python Programming |
-| Friday, September 9, 2022 | Homework Mini-Project: Simulating Games of Chance |
 | Friday, September 16, 2022 | Problem Set 2: Systems of Equations, Taylor Series |
 | Friday, September 30, 2022 | Problem Set 3: Numeric Integration, Optimization |
 | Friday, October 7, 2022 | Project 1: Proposal |
