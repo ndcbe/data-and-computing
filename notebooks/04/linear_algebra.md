@@ -1,4 +1,4 @@
-# Linear Algebra
+# Applied Linear Algebra
 
 **Chapter Learning Objectives**
 1. Apply linear algebra methods to model and solve (chemical) engineering problems
