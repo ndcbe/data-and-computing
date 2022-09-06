@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>15.4. Nonlinear Regression Practice Problem &#8212; Data and Computing for Chemical Engieers</title>
     
   <!-- Loaded before other Sphinx assets -->
@@ -21,7 +20,7 @@
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -37,7 +36,7 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -1103,9 +1102,9 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="nonlinear-regression-practice-problem">
+  <div class="tex2jax_ignore mathjax_ignore section" id="nonlinear-regression-practice-problem">
 <h1><span class="section-number">15.4. </span>Nonlinear Regression Practice Problem<a class="headerlink" href="#nonlinear-regression-practice-problem" title="Permalink to this headline">#</a></h1>
-<section id="learning-objectives">
+<div class="section" id="learning-objectives">
 <h2><span class="section-number">15.4.1. </span>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">#</a></h2>
 <p>After studying this notebook, attending class, asking questions, and reviewing your notes, you should be able to:</p>
 <ul class="simple">
@@ -1128,38 +1127,38 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</section>
-<section id="background">
+</div>
+<div class="section" id="background">
 <h2><span class="section-number">15.4.2. </span>Background<a class="headerlink" href="#background" title="Permalink to this headline">#</a></h2>
 <p>For this question, originally developed by <a class="reference external" href="https://engineering.nd.edu/faculty/david-leighton/">Prof. David T. Leighton</a>, you will use nonlinear regression to analyze the kinetics of an indicator in a strong base.</p>
 <p>Phenolphthalein is a base indicator (it turns a pretty purple), but in the presence of a strong base, it will fade over time.  This is a reversible reaction: pseudo first order in the forward (fading) direction (it is actually second order, but there is so much <span class="math notranslate nohighlight">\([OH^-]\)</span> that it can be simplified as pseudo first order) and first order in the reverse direction. The rate expression is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ca5c48cc-9d79-4876-b064-74d8fd671d46">
-<span class="eqno">(15.1)<a class="headerlink" href="#equation-ca5c48cc-9d79-4876-b064-74d8fd671d46" title="Permalink to this equation">#</a></span>\[\begin{equation} 
+<div class="amsmath math notranslate nohighlight" id="equation-c657be35-3db5-4a0d-84dd-e3c835c4cdae">
+<span class="eqno">(15.1)<a class="headerlink" href="#equation-c657be35-3db5-4a0d-84dd-e3c835c4cdae" title="Permalink to this equation">#</a></span>\[\begin{equation} 
 \frac{d[P]}{dt} = -k_{1}[P][OH^-]+k_{2}[POH] ~,
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(k_{1}' = k_{1}  \cdot [OH^-]\)</span> is the pseudo first order rate. <span class="math notranslate nohighlight">\([POH]\)</span> is only produced from this reaction, thus we have the mass balance:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-df71dd20-a98d-487a-8ebf-7cd6dc5cde85">
-<span class="eqno">(15.2)<a class="headerlink" href="#equation-df71dd20-a98d-487a-8ebf-7cd6dc5cde85" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1555cbe4-205a-403b-8fc9-67cdcd059d0d">
+<span class="eqno">(15.2)<a class="headerlink" href="#equation-1555cbe4-205a-403b-8fc9-67cdcd059d0d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 [POH] = [POH]\Big|_{t=0}+([P]_{0}-[P]) ~.
 \end{equation}\]</div>
 <p>With the initial conditions:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-60aa4257-98d7-4ab2-b9f1-431f9c8f829d">
-<span class="eqno">(15.3)<a class="headerlink" href="#equation-60aa4257-98d7-4ab2-b9f1-431f9c8f829d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-89d9a99c-83d6-4823-a315-9da12d86639f">
+<span class="eqno">(15.3)<a class="headerlink" href="#equation-89d9a99c-83d6-4823-a315-9da12d86639f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 [P]\Big|_{t=0}=[P]_{0}\qquad; \qquad [POH]\Big|_{t=0}=0 ~.
 \end{equation}\]</div>
 <p>We can solve these equations to get the solution:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ccc8df28-24e8-4a8e-91ce-99115b23d766">
-<span class="eqno">(15.4)<a class="headerlink" href="#equation-ccc8df28-24e8-4a8e-91ce-99115b23d766" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-537b31a4-4c35-4b43-b9c4-4c9afc9c2dc1">
+<span class="eqno">(15.4)<a class="headerlink" href="#equation-537b31a4-4c35-4b43-b9c4-4c9afc9c2dc1" title="Permalink to this equation">#</a></span>\[\begin{equation}
 [P] = [P]_{0}\Big(\frac{k_{2}}{k_{1}'+k_{2}}+\frac{k_{1}'}{k_{1}'+k_{2}}e^{-(k_{1}'+k_{2})t}\Big) ~.
 \end{equation}\]</div>
 <p>We seek best fit values for parameters</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a7cc3659-cf69-4bbe-8a66-05d516fdcd64">
-<span class="eqno">(15.5)<a class="headerlink" href="#equation-a7cc3659-cf69-4bbe-8a66-05d516fdcd64" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1e7d9342-aeed-4781-b9a0-333d0ac71de3">
+<span class="eqno">(15.5)<a class="headerlink" href="#equation-1e7d9342-aeed-4781-b9a0-333d0ac71de3" title="Permalink to this equation">#</a></span>\[\begin{equation}
 k=\begin{bmatrix}k_{1}' &amp; k_{2} &amp; k_{eq}\end{bmatrix}^T ~.
 \end{equation}\]</div>
 <p>However, this problem is poorly scaled with respect to <span class="math notranslate nohighlight">\(k\)</span>. Instead, we will transform it to obtain:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-342233a2-2f86-46bb-a807-9258f09e495b">
-<span class="eqno">(15.6)<a class="headerlink" href="#equation-342233a2-2f86-46bb-a807-9258f09e495b" title="Permalink to this equation">#</a></span>\[\begin{equation} 
+<div class="amsmath math notranslate nohighlight" id="equation-50bec10f-18e5-432e-99d6-f54f7e0d0044">
+<span class="eqno">(15.6)<a class="headerlink" href="#equation-50bec10f-18e5-432e-99d6-f54f7e0d0044" title="Permalink to this equation">#</a></span>\[\begin{equation} 
 [P] = [P]_{eq}+([P]_{0}-[P]_{eq})e^{-\lambda t}
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\lambda=k_{1}'+k_{2}\)</span>. These two rate constants can be calculated from the ratio of the initial and equilibrium concentrations and the exponential decay rate.</p>
@@ -1213,8 +1212,8 @@ k=\begin{bmatrix}k_{1}' &amp; k_{2} &amp; k_{eq}\end{bmatrix}^T ~.
 </tbody>
 </table>
 <p>Because the solution is so dilute, the absorbance obeys Beer’s Law; thus the absorbance is proportional to the concentration.</p>
-</section>
-<section id="transform-model-parameters">
+</div>
+<div class="section" id="transform-model-parameters">
 <h2><span class="section-number">15.4.3. </span>Transform Model Parameters<a class="headerlink" href="#transform-model-parameters" title="Permalink to this headline">#</a></h2>
 <p>On paper, derive expressions for:</p>
 <ol class="simple">
@@ -1224,8 +1223,8 @@ k=\begin{bmatrix}k_{1}' &amp; k_{2} &amp; k_{eq}\end{bmatrix}^T ~.
 </ol>
 <p>in terms of <span class="math notranslate nohighlight">\(P_0, P_{eq}, \lambda\)</span>.</p>
 <p>Show your work. <em>Hint</em>: <span class="math notranslate nohighlight">\(k_{eq} = k'_1 / k_2\)</span>.</p>
-</section>
-<section id="perform-nonlinear-regression">
+</div>
+<div class="section" id="perform-nonlinear-regression">
 <h2><span class="section-number">15.4.4. </span>Perform Nonlinear Regression<a class="headerlink" href="#perform-nonlinear-regression" title="Permalink to this headline">#</a></h2>
 <p>Compute the best fit values for parameters <span class="math notranslate nohighlight">\(x = [~ [P]_0, [P]_{eq}, \lambda ~]^T\)</span> using the experimental data. Call your solution vector <code class="docutils literal notranslate"><span class="pre">x_sol</span></code> and store your answers in variables <code class="docutils literal notranslate"><span class="pre">P0</span></code>, <code class="docutils literal notranslate"><span class="pre">Peq</span></code>, and <code class="docutils literal notranslate"><span class="pre">l</span></code>.</p>
 <div class="cell docutils container">
@@ -1300,8 +1299,8 @@ k=\begin{bmatrix}k_{1}' &amp; k_{2} &amp; k_{eq}\end{bmatrix}^T ~.
 </div>
 </div>
 </div>
-</section>
-<section id="plot-residuals-and-fitted-model">
+</div>
+<div class="section" id="plot-residuals-and-fitted-model">
 <h2><span class="section-number">15.4.5. </span>Plot Residuals and Fitted Model<a class="headerlink" href="#plot-residuals-and-fitted-model" title="Permalink to this headline">#</a></h2>
 <p>A critical assumption in regression analysis is that the model errors are independent and identically distributed. Do the following to check this assumption:</p>
 <ol class="simple">
@@ -1321,12 +1320,12 @@ k=\begin{bmatrix}k_{1}' &amp; k_{2} &amp; k_{eq}\end{bmatrix}^T ~.
 <img alt="../../_images/Nonlinear-Regression-Practice-Problem_10_1.png" src="../../_images/Nonlinear-Regression-Practice-Problem_10_1.png" />
 </div>
 </div>
-</section>
-<section id="covariance-matrix">
+</div>
+<div class="section" id="covariance-matrix">
 <h2><span class="section-number">15.4.6. </span>Covariance Matrix<a class="headerlink" href="#covariance-matrix" title="Permalink to this headline">#</a></h2>
 <p>We can quickly estimate the covariance matrix:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6e8cb8b8-1e13-410c-a706-9846d34b5bb7">
-<span class="eqno">(15.7)<a class="headerlink" href="#equation-6e8cb8b8-1e13-410c-a706-9846d34b5bb7" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-38904036-ef69-4438-88e4-4827dca80373">
+<span class="eqno">(15.7)<a class="headerlink" href="#equation-38904036-ef69-4438-88e4-4827dca80373" title="Permalink to this equation">#</a></span>\[\begin{equation}
 	\Sigma_x \approx {\hat{\sigma}}^2_r \left( J^T J \right)^{-1}
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\hat{\sigma}^2_r\)</span> is the variance of the residuals and <span class="math notranslate nohighlight">\(J\)</span> is the Jacobian of the residuals with respect to the model parameters <span class="math notranslate nohighlight">\(x\)</span>.</p>
@@ -1369,16 +1368,16 @@ t =  [-2.22813885  2.22813885]
 </div>
 </div>
 </div>
-</section>
-<section id="final-thoughts">
+</div>
+<div class="section" id="final-thoughts">
 <h2><span class="section-number">15.4.7. </span>Final Thoughts<a class="headerlink" href="#final-thoughts" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>Residuals look much better with nonlinear regression</p></li>
 <li><p>Covariance matrix is much more reasonable</p></li>
 <li><p>Nonlinear regression is not that expensive or difficult, especially with Python and modern optimization algorithms</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
