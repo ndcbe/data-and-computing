@@ -5,6 +5,7 @@
 | Deadline     | Description |
 | ----------- | ----------- |
 | Friday, September 2, 2022 | Problem Set 1: Python Programming |
+| Friday, September 9, 2022 | Mini-Project: Simulating Games of Chance |
 | Friday, September 16, 2022 | Problem Set 2: Systems of Equations, Taylor Series |
 | Friday, September 30, 2022 | Problem Set 3: Numeric Integration, Optimization |
 | Friday, October 7, 2022 | Project 1: Proposal |
@@ -107,7 +108,7 @@
 | | [](../13/Students-t-Distribution.ipynb) |
 | | [](../13/Hypothesis-Testing-Basics.ipynb) |
 | Thursday, November 3, 2022 | [](../13/Flavors-of-Hypothesis-Testing.ipynb) |
-| | [](../13/Type-I-Type-II-Errors.ipynb)
+| | [](../13/Type-I-and-Type-II-Errors.ipynb)
 | Tuesday, November 8, 2022 | [](../13/Statistical-Power-Basics.ipynb) |
 | | [](../13/Statistical-Power-in-Python.ipynb) |
 | | [](../13/Statistical-Power-Practice-Problems.ipynb) |
