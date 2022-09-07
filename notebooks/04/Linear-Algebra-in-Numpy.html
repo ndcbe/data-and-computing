@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>4.7. Linear Algebra Review and SciPy Basics &#8212; Data and Computing for Chemical Engieers</title>
     
   <!-- Loaded before other Sphinx assets -->
@@ -20,7 +21,7 @@
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -36,7 +37,7 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -1438,7 +1439,7 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="linear-algebra-review-and-scipy-basics">
+  <section class="tex2jax_ignore mathjax_ignore" id="linear-algebra-review-and-scipy-basics">
 <h1><span class="section-number">4.7. </span>Linear Algebra Review and SciPy Basics<a class="headerlink" href="#linear-algebra-review-and-scipy-basics" title="Permalink to this headline">#</a></h1>
 <p><strong>Reference:</strong> Section 2.2 Vectors and Matrices in <em>Nonlinear Programming: Concepts, Algorithms, and Applications to Chemical Processes</em> by L. T. Bielger (2010).</p>
 <p><strong>Recommended Links</strong></p>
@@ -1450,7 +1451,7 @@ title="Print to PDF"
 <li><p><a class="reference external" href="http://www.scipy-lectures.org/">SciPy Lecture Notes</a> (Especially 1.1 - 1.6 for everyone and 2.1 - 2.2 for advanced users)</p></li>
 </ul>
 <p>Tip: We will mostly use SciPy for linear algebra. (It has more sophisticated capabilities than NumPy.) We will use NumPy if/when SciPy does not offer a specific command.</p>
-<div class="section" id="learning-objectives">
+<section id="learning-objectives">
 <h2><span class="section-number">4.7.1. </span>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">#</a></h2>
 <p>After studying this notebook, completing the activities, and asking questions in class, you should be able to:</p>
 <ul class="simple">
@@ -1474,8 +1475,8 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="notation-for-cbe-40499-60499-and-bielger-2010">
+</section>
+<section id="notation-for-cbe-40499-60499-and-bielger-2010">
 <h2><span class="section-number">4.7.2. </span>Notation for CBE 40499/60499 and Bielger (2010)<a class="headerlink" href="#notation-for-cbe-40499-60499-and-bielger-2010" title="Permalink to this headline">#</a></h2>
 <p>The following is somewhat standard notation in scientific computing and data science literature:</p>
 <ul class="simple">
@@ -1487,12 +1488,12 @@ title="Print to PDF"
 <li><p>Matrices - Upper case bold Roman letters, uppercase bold Greek letters (if dictated by science and engineering domain norms)</p></li>
 </ul>
 <p>The notation for lectures will (hopefully) be obvious from context. I sometimes use Greek letters for constants and Roman letters for variables… unless the Greek letters have engineering or scientific meaning.</p>
-</div>
-<div class="section" id="matrix-operations">
+</section>
+<section id="matrix-operations">
 <h2><span class="section-number">4.7.3. </span>Matrix Operations<a class="headerlink" href="#matrix-operations" title="Permalink to this headline">#</a></h2>
 <p>In this section we will introduce properties of matrices with code examples following each property.</p>
-</div>
-<div class="section" id="property-1">
+</section>
+<section id="property-1">
 <h2><span class="section-number">4.7.4. </span>Property #1<a class="headerlink" href="#property-1" title="Permalink to this headline">#</a></h2>
 <p>Multiplying two matrices <span class="math notranslate nohighlight">\(A\)</span> <span class="math notranslate nohighlight">\(\in\)</span> <span class="math notranslate nohighlight">\(\mathbb{R}^{n \times m}\)</span> and <span class="math notranslate nohighlight">\(B\)</span> <span class="math notranslate nohighlight">\(\in\)</span> <span class="math notranslate nohighlight">\(\mathbb{R}^{m \times p}\)</span> leads to the product <span class="math notranslate nohighlight">\(C \in\)</span> <span class="math notranslate nohighlight">\(\mathbb{R}^{n \times p}\)</span> with elements <span class="math notranslate nohighlight">\( \mathbf{\{C\}_{ij}}\)</span> = <span class="math notranslate nohighlight">\(\sum_{k=1}^m  \mathbf{\{A\}_{ik}}  \mathbf{\{B\}_{kj}}\)</span>. This operation is defined only if the number of columns in <span class="math notranslate nohighlight">\(A\)</span> and rows of <span class="math notranslate nohighlight">\(B\)</span> is the same.</p>
 <div class="admonition seealso">
@@ -1537,8 +1538,8 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="property-2">
+</section>
+<section id="property-2">
 <h2><span class="section-number">4.7.5. </span>Property #2<a class="headerlink" href="#property-2" title="Permalink to this headline">#</a></h2>
 <p>The <em>transpose</em> of <span class="math notranslate nohighlight">\(A\)</span> <span class="math notranslate nohighlight">\(\in\)</span> <span class="math notranslate nohighlight">\(\mathbb{R}^{n \times m}\)</span> is <span class="math notranslate nohighlight">\(A^T\)</span> <span class="math notranslate nohighlight">\(\in\)</span> <span class="math notranslate nohighlight">\(\mathbb{R}^{m \times n}\)</span> with the rows and columns of A interchanged, i.e.<span class="math notranslate nohighlight">\( \mathbf{\{A^T\}_{ij}} =  \mathbf{\{A\}_{ji}}\)</span>.</p>
 <div class="admonition seealso">
@@ -1553,12 +1554,12 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="property-3">
+</section>
+<section id="property-3">
 <h2><span class="section-number">4.7.6. </span>Property #3<a class="headerlink" href="#property-3" title="Permalink to this headline">#</a></h2>
 <p>A <em>symmetric</em> matrix <span class="math notranslate nohighlight">\(A\)</span> <span class="math notranslate nohighlight">\(\in\)</span> <span class="math notranslate nohighlight">\(\mathbb{R}^{n \times n}\)</span> satisfies <span class="math notranslate nohighlight">\(A = A^T\)</span>.</p>
-</div>
-<div class="section" id="property-4">
+</section>
+<section id="property-4">
 <h2><span class="section-number">4.7.7. </span>Property #4<a class="headerlink" href="#property-4" title="Permalink to this headline">#</a></h2>
 <p>A <em>diagonal</em> matrix <span class="math notranslate nohighlight">\(A\)</span> <span class="math notranslate nohighlight">\(\in\)</span> <span class="math notranslate nohighlight">\(\mathbb{R}^{n \times n}\)</span> has nonzero elements only on the diagonal, i.e., <span class="math notranslate nohighlight">\( \mathbf{\{A\}_{ij}} = 0, i \neq j\)</span>.</p>
 <div class="admonition seealso">
@@ -1573,8 +1574,8 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="property-5">
+</section>
+<section id="property-5">
 <h2><span class="section-number">4.7.8. </span>Property #5<a class="headerlink" href="#property-5" title="Permalink to this headline">#</a></h2>
 <p>The <em>identity</em> matrix <span class="math notranslate nohighlight">\(I \in \mathbb{R}^{n \times n}\)</span> is defined as</p>
 <div class="math notranslate nohighlight">
@@ -1596,8 +1597,8 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="determinant">
+</section>
+<section id="determinant">
 <h2><span class="section-number">4.7.9. </span>Determinant<a class="headerlink" href="#determinant" title="Permalink to this headline">#</a></h2>
 <p>A <em>determinant</em> is a scalar associated to a square matrix, i.e., det(<span class="math notranslate nohighlight">\(A\)</span>) for <span class="math notranslate nohighlight">\(A\)</span> <span class="math notranslate nohighlight">\(\in\)</span> <span class="math notranslate nohighlight">\(\mathbb{R}^{n \times n}\)</span>, and can be defined recursively by det(<span class="math notranslate nohighlight">\(A\)</span>) = <span class="math notranslate nohighlight">\(\sum_i (-1)^{i+j} \mathbf{\{A\}_{ij}} \bar{A}_{ij}\)</span> for any column <span class="math notranslate nohighlight">\(j\)</span>, or det(<span class="math notranslate nohighlight">\(A\)</span>) = <span class="math notranslate nohighlight">\(\sum_j (-1)^{i+j} \mathbf{\{A\}_{ij}}\bar{A}_{ij}\)</span> for any row <span class="math notranslate nohighlight">\(i\)</span>, where <span class="math notranslate nohighlight">\(\bar{A}_{ij}\)</span> is the determinant of an (<span class="math notranslate nohighlight">\(n\)</span>-1)-order matrix with row <span class="math notranslate nohighlight">\(i\)</span> and column <span class="math notranslate nohighlight">\(j\)</span> removed.</p>
 <p>We will now manipulate the following matrices to demonstrate properties for the determinant.</p>
@@ -1628,8 +1629,8 @@ B =
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="id1">
+</section>
+<section id="id1">
 <h2><span class="section-number">4.7.10. </span>Property #1<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
 <p>det(<span class="math notranslate nohighlight">\(AB\)</span>) = det(<span class="math notranslate nohighlight">\(A\)</span>)det(<span class="math notranslate nohighlight">\(B\)</span>)</p>
 <div class="admonition note">
@@ -1644,8 +1645,8 @@ B =
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="id2">
+</section>
+<section id="id2">
 <h2><span class="section-number">4.7.11. </span>Property #2<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
 <p>det(<span class="math notranslate nohighlight">\(A\)</span>) = det(<span class="math notranslate nohighlight">\(A^T\)</span>)</p>
 <div class="admonition note">
@@ -1660,8 +1661,8 @@ B =
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="id3">
+</section>
+<section id="id3">
 <h2><span class="section-number">4.7.12. </span>Property #3<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
 <p>For an <span class="math notranslate nohighlight">\(n \times n\)</span> matrix with scalar <span class="math notranslate nohighlight">\(\alpha\)</span>, det(<span class="math notranslate nohighlight">\(\alpha A\)</span>) = <span class="math notranslate nohighlight">\(\alpha^n\)</span>det(<span class="math notranslate nohighlight">\(A\)</span>)</p>
 <div class="admonition note">
@@ -1676,8 +1677,8 @@ B =
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="id4">
+</section>
+<section id="id4">
 <h2><span class="section-number">4.7.13. </span>Property #4<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
 <p>For an identity matrix <span class="math notranslate nohighlight">\(I\)</span>, det(<span class="math notranslate nohighlight">\(I\)</span>) = 1.</p>
 <div class="admonition note">
@@ -1692,8 +1693,8 @@ B =
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="calculating-3-times-3-determinant-by-hand">
+</section>
+<section id="calculating-3-times-3-determinant-by-hand">
 <h2><span class="section-number">4.7.14. </span>Calculating <span class="math notranslate nohighlight">\(3 \times 3\)</span> Determinant by Hand<a class="headerlink" href="#calculating-3-times-3-determinant-by-hand" title="Permalink to this headline">#</a></h2>
 <p>Below is an example from <em>Linear Algebra and Its Applications</em> by David C. Lay, 3rd edition that shows how to calculate a determinant by hand.</p>
 <div class="admonition seealso">
@@ -1713,11 +1714,11 @@ B =
 <p>det<span class="math notranslate nohighlight">\(A\)</span> = <span class="math notranslate nohighlight">\(1\cdot\)</span>det<span class="math notranslate nohighlight">\(\begin{bmatrix} 4 &amp; -1\\ -2 &amp; 0 \end{bmatrix}\)</span> - <span class="math notranslate nohighlight">\(5\cdot\)</span>det<span class="math notranslate nohighlight">\(\begin{bmatrix} 2 &amp; -1\\ 0 &amp; 0 \end{bmatrix}\)</span> + <span class="math notranslate nohighlight">\(0\cdot\)</span>det<span class="math notranslate nohighlight">\(\begin{bmatrix} 2 &amp; 4\\ 0 &amp; -2 \end{bmatrix}\)</span></p>
 <p><span class="math notranslate nohighlight">\(= 1(0-2) - 5(0-0) + 0(-4-0)\)</span></p>
 <p><span class="math notranslate nohighlight">\(= -2\)</span></p>
-</div>
-<div class="section" id="rank">
+</section>
+<section id="rank">
 <h2><span class="section-number">4.7.15. </span>Rank<a class="headerlink" href="#rank" title="Permalink to this headline">#</a></h2>
-</div>
-<div class="section" id="matrix-rank-definition">
+</section>
+<section id="matrix-rank-definition">
 <h2><span class="section-number">4.7.16. </span>Matrix Rank Definition<a class="headerlink" href="#matrix-rank-definition" title="Permalink to this headline">#</a></h2>
 <p><strong>Rerference:</strong> Section 2.2 of <em>Nonlinear Programming: Concepts, Algorithms, and Applications to Chemical Processes</em>, L. Biegler (2010)</p>
 <ul class="simple">
@@ -1725,8 +1726,8 @@ B =
 <li><p>A matrix <span class="math notranslate nohighlight">\(A\)</span> <span class="math notranslate nohighlight">\(\in\)</span> <span class="math notranslate nohighlight">\(\mathbb{R}^{n \times m}\)</span> has full row (column) rank if none of the row (column) vectors can be written as a linear combination of the other row (column) vectors.  The rank of such a matrix is <span class="math notranslate nohighlight">\(r(A)\)</span> = min(<span class="math notranslate nohighlight">\(n,m\)</span>).</p></li>
 <li><p>A matrix that does not have full rank is <em>rank deficient</em>.</p></li>
 </ul>
-</div>
-<div class="section" id="practice-activities">
+</section>
+<section id="practice-activities">
 <h2><span class="section-number">4.7.17. </span>Practice Activities<a class="headerlink" href="#practice-activities" title="Permalink to this headline">#</a></h2>
 <div class="admonition seealso">
 <p class="admonition-title"><b>Home Activity</b></p>
@@ -1794,11 +1795,11 @@ D_1 =
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="inverse">
+</section>
+<section id="inverse">
 <h2><span class="section-number">4.7.18. </span>Inverse<a class="headerlink" href="#inverse" title="Permalink to this headline">#</a></h2>
-</div>
-<div class="section" id="inverse-of-a-matrix-defnition">
+</section>
+<section id="inverse-of-a-matrix-defnition">
 <h2><span class="section-number">4.7.19. </span>Inverse of a Matrix Defnition<a class="headerlink" href="#inverse-of-a-matrix-defnition" title="Permalink to this headline">#</a></h2>
 <p><strong>Rerference:</strong> Section 2.2 of <em>Nonlinear Programming: Concepts, Algorithms, and Applications to Chemical Processes</em>, L. Biegler (2010)</p>
 <ul class="simple">
@@ -1807,8 +1808,8 @@ D_1 =
 <li><p>det(<span class="math notranslate nohighlight">\(A^{-1}\)</span>) = <span class="math notranslate nohighlight">\(\frac{1}{\text{det}(A)}\)</span>.</p></li>
 <li><p>A matrix <span class="math notranslate nohighlight">\(Q \in \mathbb{R}^{n \times n}\)</span> with the property <span class="math notranslate nohighlight">\(Q^{-1} = Q^T\)</span> is called an <em>orthogonal matrix</em>.</p></li>
 </ul>
-</div>
-<div class="section" id="id5">
+</section>
+<section id="id5">
 <h2><span class="section-number">4.7.20. </span>Practice Activities<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
 <div class="admonition seealso">
 <p class="admonition-title"><b>Home Activity</b></p>
@@ -1863,8 +1864,8 @@ D_1 =
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="solving-linear-systems">
+</section>
+<section id="solving-linear-systems">
 <h2><span class="section-number">4.7.21. </span>Solving Linear Systems<a class="headerlink" href="#solving-linear-systems" title="Permalink to this headline">#</a></h2>
 <p>Consider the linear system <span class="math notranslate nohighlight">\(A_1 x = b_1\)</span></p>
 <div class="cell docutils container">
@@ -1887,8 +1888,8 @@ b1 =
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="explicit-inverse">
+</section>
+<section id="explicit-inverse">
 <h2><span class="section-number">4.7.22. </span>Explicit Inverse<a class="headerlink" href="#explicit-inverse" title="Permalink to this headline">#</a></h2>
 <p>Calculate <span class="math notranslate nohighlight">\(x\)</span> by explicitly using <span class="math notranslate nohighlight">\(A_l^{-1}\)</span>. Hint: Use linalg.inv( ).</p>
 <div class="cell tag_remove-output docutils container">
@@ -1902,8 +1903,8 @@ b1 =
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="lu-decomposition">
+</section>
+<section id="lu-decomposition">
 <h2><span class="section-number">4.7.23. </span>LU Decomposition<a class="headerlink" href="#lu-decomposition" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1980,8 +1981,8 @@ P*L*U =
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="is-p-orthogonal">
+</section>
+<section id="is-p-orthogonal">
 <h2><span class="section-number">4.7.24. </span>Is P orthogonal?<a class="headerlink" href="#is-p-orthogonal" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2016,8 +2017,8 @@ P.T*P =
 </div>
 </div>
 <p><strong>Yes!</strong> We see that <span class="math notranslate nohighlight">\(P^T = P^{-1}\)</span> and <span class="math notranslate nohighlight">\(P^T \cdot P = I\)</span>.</p>
-</div>
-<div class="section" id="matlab">
+</section>
+<section id="matlab">
 <h2><span class="section-number">4.7.25. </span>MATLAB<a class="headerlink" href="#matlab" title="Permalink to this headline">#</a></h2>
 <p>Defines LU decomposition as follows:</p>
 <div class="math notranslate nohighlight">
@@ -2078,8 +2079,8 @@ xLU =
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="scipy">
+</section>
+<section id="scipy">
 <h2><span class="section-number">4.7.26. </span>SciPy<a class="headerlink" href="#scipy" title="Permalink to this headline">#</a></h2>
 <p>Defines LU decomposition as:</p>
 <div class="math notranslate nohighlight">
@@ -2139,8 +2140,8 @@ xLU =
 </div>
 </div>
 <p><strong>What is the difference?</strong> A transpose.</p>
-</div>
-<div class="section" id="verify-our-answer-with-linalg-solve">
+</section>
+<section id="verify-our-answer-with-linalg-solve">
 <h2><span class="section-number">4.7.27. </span>Verify our answer with <code class="docutils literal notranslate"><span class="pre">linalg.solve</span></code><a class="headerlink" href="#verify-our-answer-with-linalg-solve" title="Permalink to this headline">#</a></h2>
 <p>Solve the linear system using linalg.solve</p>
 <div class="cell docutils container">
@@ -2160,8 +2161,8 @@ xLU =
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="invertable-matrix-theorem">
+</section>
+<section id="invertable-matrix-theorem">
 <h2><span class="section-number">4.7.28. </span>Invertable Matrix Theorem<a class="headerlink" href="#invertable-matrix-theorem" title="Permalink to this headline">#</a></h2>
 <p><strong>Refernce:</strong> <em>Linear Algebra and Its Applications</em> by David C. Lay, 3rd edition</p>
 <p><em>Hold on to your hats folks!</em></p>
@@ -2193,11 +2194,11 @@ xLU =
 <p>v. (Nul<span class="math notranslate nohighlight">\(A\)</span>)<span class="math notranslate nohighlight">\(^\perp\)</span> = <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>.</p>
 <p>w. Row<span class="math notranslate nohighlight">\(A\)</span> = <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>.</p>
 <p>x. <span class="math notranslate nohighlight">\(A\)</span> has <span class="math notranslate nohighlight">\(n\)</span> nonzero singular values.</p>
-</div>
-<div class="section" id="eigenvectors-and-eigenvalues">
+</section>
+<section id="eigenvectors-and-eigenvalues">
 <h2><span class="section-number">4.7.29. </span>Eigenvectors and Eigenvalues<a class="headerlink" href="#eigenvectors-and-eigenvalues" title="Permalink to this headline">#</a></h2>
-</div>
-<div class="section" id="eigenvalues-eigenvectors-definition">
+</section>
+<section id="eigenvalues-eigenvectors-definition">
 <h2><span class="section-number">4.7.30. </span>Eigenvalues/Eigenvectors Definition<a class="headerlink" href="#eigenvalues-eigenvectors-definition" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>For a square matrix <span class="math notranslate nohighlight">\(A \in \mathbb{R}^{n\times n}\)</span>, the <em>eigenvalue</em> <span class="math notranslate nohighlight">\(\lambda\)</span> and the corresponding <em>eigenvector</em> <span class="math notranslate nohighlight">\(v \neq 0\)</span> satisfy <span class="math notranslate nohighlight">\(Av = \lambda v\)</span>.</p></li>
@@ -2216,8 +2217,8 @@ xLU =
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="id6">
+</section>
+<section id="id6">
 <h2><span class="section-number">4.7.31. </span>Practice Activities<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2272,8 +2273,8 @@ xLU =
 </div>
 </div>
 <p><a id='SVD_cell'></a></p>
-</div>
-<div class="section" id="singular-value-decomposition">
+</section>
+<section id="singular-value-decomposition">
 <h2><span class="section-number">4.7.32. </span>Singular Value Decomposition<a class="headerlink" href="#singular-value-decomposition" title="Permalink to this headline">#</a></h2>
 <p>Refer to <span class="xref myst">this notebook</span> for notes on singular value decomposition.</p>
 <p>Remember, SVD can be thought of as another type of matrix factorization.  We can represent an <span class="math notranslate nohighlight">\(m \times n\)</span> matrix as <span class="math notranslate nohighlight">\(A = U\cdot \sum \cdot V^T\)</span>.</p>
@@ -2344,12 +2345,12 @@ V =
 <p>What is the rank of each matrix? (from inspecting singular values?)</p>
 </div>
 <p><strong>Answer:</strong></p>
-</div>
-<div class="section" id="vector-and-matrix-norms">
+</section>
+<section id="vector-and-matrix-norms">
 <h2><span class="section-number">4.7.33. </span>Vector and Matrix Norms<a class="headerlink" href="#vector-and-matrix-norms" title="Permalink to this headline">#</a></h2>
 <p><strong>Rerference:</strong> Section 2.2 of <em>Nonlinear Programming: Concepts, Algorithms, and Applications to Chemical Processes</em>, L. Biegler (2010)</p>
-</div>
-<div class="section" id="vector-norm-properties">
+</section>
+<section id="vector-norm-properties">
 <h2><span class="section-number">4.7.34. </span>Vector Norm Properties<a class="headerlink" href="#vector-norm-properties" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>A <em>vector norm</em> <span class="math notranslate nohighlight">\(\parallel \cdot \parallel\)</span> is a measure of the length of a vector and it maps from <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> to a nonegative real that has the following properties:</p>
@@ -2360,8 +2361,8 @@ V =
 </ol>
 </li>
 </ul>
-</div>
-<div class="section" id="p-norm-properties">
+</section>
+<section id="p-norm-properties">
 <h2><span class="section-number">4.7.35. </span><em>P</em>-norm Properties<a class="headerlink" href="#p-norm-properties" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>The <em>p</em>-norm is defined by <span class="math notranslate nohighlight">\(\parallel x\parallel _p = (\sum_{i=1}^n |x_i|^p)^{\frac{1}{p}}\)</span>, where <span class="math notranslate nohighlight">\(p \geq 1\)</span>. Examples and properties include:</p>
@@ -2413,8 +2414,8 @@ y =
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="additional-matrix-norms">
+</section>
+<section id="additional-matrix-norms">
 <h2><span class="section-number">4.7.36. </span>Additional Matrix Norms<a class="headerlink" href="#additional-matrix-norms" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>For <span class="math notranslate nohighlight">\(A \in \mathbb{R}^{n \times m}\)</span>, the induced matrix norms are defined by vector norms: <span class="math notranslate nohighlight">\(\parallel A\parallel\)</span> = max<span class="math notranslate nohighlight">\(_{X \neq 0} \frac{\parallel Ax \parallel}{\parallel x \parallel}\)</span> for any <em>p</em>-norm. It is therefore consistent with vector norms and satisfies <span class="math notranslate nohighlight">\(\parallel A\parallel \; \parallel x\parallel \; \geq \; \parallel Ax\parallel\)</span>. Examples include:</p>
@@ -2457,14 +2458,14 @@ y =
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="frobenius-norm">
+</section>
+<section id="frobenius-norm">
 <h2><span class="section-number">4.7.37. </span>Frobenius Norm<a class="headerlink" href="#frobenius-norm" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>The Frobenius norm <span class="math notranslate nohighlight">\(\parallel A\parallel_F = (\sum_i \sum_j ( \mathbf{\{A\}_{ij})^2)^{\frac{1}{2}}}\)</span> is not consistent with a vector norm but has some useful properties. This norm as well as the induced norms satisfy <span class="math notranslate nohighlight">\(\parallel AB\parallel \; \leq \parallel A\parallel \; \parallel B\parallel\)</span> for any two compatible matrices <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>. In addition, the induced and Frobenius matrix norms can be bounded above and below by a multiple of any of the other matrix norms.</p></li>
 </ul>
-</div>
-<div class="section" id="condition-number">
+</section>
+<section id="condition-number">
 <h2><span class="section-number">4.7.38. </span>Condition Number<a class="headerlink" href="#condition-number" title="Permalink to this headline">#</a></h2>
 <p>For more information on condition number, reference <span class="xref myst">this notebook</span>.</p>
 <ul class="simple">
@@ -2495,8 +2496,8 @@ y =
 </div>
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

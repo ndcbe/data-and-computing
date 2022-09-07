@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>15.6. Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes &#8212; Data and Computing for Chemical Engieers</title>
     
   <!-- Loaded before other Sphinx assets -->
@@ -20,7 +21,7 @@
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -36,7 +37,7 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -1266,10 +1267,10 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="nonlinear-regression-case-study-adsorptive-nanoporous-membranes">
+  <section class="tex2jax_ignore mathjax_ignore" id="nonlinear-regression-case-study-adsorptive-nanoporous-membranes">
 <h1><span class="section-number">15.6. </span>Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes<a class="headerlink" href="#nonlinear-regression-case-study-adsorptive-nanoporous-membranes" title="Permalink to this headline">#</a></h1>
 <p><em>Contributors:</em> <a class="reference external" href="https://github.com/elvis1090">Elvis A. Eugene</a> and <a class="reference external" href="https://github.com/adowling2">Alexander W. Dowling</a></p>
-<div class="section" id="background">
+<section id="background">
 <h2><span class="section-number">15.6.1. </span>Background<a class="headerlink" href="#background" title="Permalink to this headline">#</a></h2>
 <p>Prof. William Phillip has been developing novel adsorptive nanoporous membranes to remove heavy metals from water. He has asked for your help designing a water treatment system. Specifically, <strong>given laboratory data for these membrane systems, how much Pb (lead) can be removed per batch?</strong></p>
 <p>As seniors, you will learn about <strong>adsorption-based systems in Separation Processes</strong>. For this project, you only need to know some basics: adsorptive systems preferentially adsorb a contaminant from a bulk fluid, similar to how dust sticks to a Swiffer cleaning cloth. The amount of contaminant, Pb in this project, that adsorbs (i.e. sticks) to the water treatment membranes can be modeled with the <strong>Langmuir isotherm</strong>:</p>
@@ -1337,8 +1338,8 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="regression-analysis">
+</section>
+<section id="regression-analysis">
 <h2><span class="section-number">15.6.2. </span>Regression Analysis<a class="headerlink" href="#regression-analysis" title="Permalink to this headline">#</a></h2>
 <p>We will now compare three different regression strategies for the Langmuir isotherm problem:</p>
 <ol class="simple">
@@ -1355,10 +1356,10 @@ title="Print to PDF"
 <li><p>Graphically inspect the residuals</p></li>
 <li><p>Compute the covariance matrix for the fitted parameters, transform to the original parameters (if applicable)</p></li>
 </ul>
-</div>
-<div class="section" id="paramter-estimation-using-a-transformation-and-linear-regression">
+</section>
+<section id="paramter-estimation-using-a-transformation-and-linear-regression">
 <h2><span class="section-number">15.6.3. </span>Paramter estimation using a transformation and linear regression<a class="headerlink" href="#paramter-estimation-using-a-transformation-and-linear-regression" title="Permalink to this headline">#</a></h2>
-<div class="section" id="setup-and-best-fit">
+<section id="setup-and-best-fit">
 <h3><span class="section-number">15.6.3.1. </span>Setup and Best Fit<a class="headerlink" href="#setup-and-best-fit" title="Permalink to this headline">#</a></h3>
 <p>We will start our analysis by performing a transformation; this is neccessary to apply linear regression. We start with the Languir isotherm:</p>
 <div class="math notranslate nohighlight">
@@ -1416,8 +1417,8 @@ Q (linear regression) = 1.5 mmol/g_membrane
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="setup-best-fit-plot-for-best-fit-model-and-residuals">
+</section>
+<section id="setup-best-fit-plot-for-best-fit-model-and-residuals">
 <h3><span class="section-number">15.6.3.2. </span>Setup Best Fit Plot for Best Fit Model and Residuals<a class="headerlink" href="#setup-best-fit-plot-for-best-fit-model-and-residuals" title="Permalink to this headline">#</a></h3>
 <p>Now we want to visualize the quality of the fit. Because we plan to repeat the regression analysis two more times, we invested in writing functions for the visualization. This means we just need to declare the plotting procedures once and we can reuse them. This is a good programming practice; use functions to maximize code reuse.</p>
 <p>We’ll start by defining the first function which <strong>plots the linearized isotherm</strong> and <strong>plots the transformed residuals</strong>.</p>
@@ -1576,8 +1577,8 @@ Q (linear regression) = 1.5 mmol/g_membrane
 </div>
 <p><strong>Interpretation (Regression Plot)</strong>: By plotting in the original variables, we see the fit is not great. There is a significant residual for the <span class="math notranslate nohighlight">\(c=10\)</span> mM experiment.</p>
 <p><strong>Interpretation (Residuals)</strong>: This residual plot has a very similar pattern to the transformed residual plot. (Notice the vertical axis is different). The interpreation from above also applies to this plot.</p>
-</div>
-<div class="section" id="compute-covariance-matricies">
+</section>
+<section id="compute-covariance-matricies">
 <h3><span class="section-number">15.6.3.3. </span>Compute Covariance Matricies<a class="headerlink" href="#compute-covariance-matricies" title="Permalink to this headline">#</a></h3>
 <p>Next, we will compute the <strong>covariance matrix for the fitted parameters <span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span></strong>.</p>
 <p>We will start by computing the variance of the residuals. Recall the formula is:</p>
@@ -1739,9 +1740,9 @@ Jacobian Matrix:
 <li></li>
 <li></li>
 </ol>
-</div>
-</div>
-<div class="section" id="paramter-estimation-using-an-alternate-transformation-and-linear-regression">
+</section>
+</section>
+<section id="paramter-estimation-using-an-alternate-transformation-and-linear-regression">
 <h2><span class="section-number">15.6.4. </span>Paramter estimation using an alternate transformation and linear regression<a class="headerlink" href="#paramter-estimation-using-an-alternate-transformation-and-linear-regression" title="Permalink to this headline">#</a></h2>
 <p>We start with the Languir isotherm:</p>
 <div class="math notranslate nohighlight">
@@ -1986,8 +1987,8 @@ Gradient of Q: [-2.21811442  0.        ]
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="parameter-estimation-using-nonlinear-regression">
+</section>
+<section id="parameter-estimation-using-nonlinear-regression">
 <h2><span class="section-number">15.6.5. </span>Parameter estimation using nonlinear regression<a class="headerlink" href="#parameter-estimation-using-nonlinear-regression" title="Permalink to this headline">#</a></h2>
 <p>We will now apply nonlinear regression to our problem. First, we need to define a function to evaluate the model.</p>
 <div class="admonition note">
@@ -2182,8 +2183,8 @@ J_{i,j} = \frac{\partial(y_i - \hat{y}_i)}{\partial \theta_j}
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="comparison-of-three-regression-approaches">
+</section>
+<section id="comparison-of-three-regression-approaches">
 <h2><span class="section-number">15.6.6. </span>Comparison of Three Regression Approaches<a class="headerlink" href="#comparison-of-three-regression-approaches" title="Permalink to this headline">#</a></h2>
 <p><strong>First Transformation + Linear Regression</strong></p>
 <div class="cell docutils container">
@@ -2261,8 +2262,8 @@ Covariance Matrix of Original Model Parameters (K,Q):
 <li><p><em>Do the three regression strategies give the same estimate for uncertainty (covariance)?</em></p></li>
 <li><p><em>Which regression technique is best suited for this problem?</em> <strong>Answer:</strong> Fill in here…</p></li>
 </ol>
-</div>
-<div class="section" id="estimate-batch-processing-time-with-numeric-integration">
+</section>
+<section id="estimate-batch-processing-time-with-numeric-integration">
 <h2><span class="section-number">15.6.7. </span>Estimate Batch Processing Time with Numeric Integration<a class="headerlink" href="#estimate-batch-processing-time-with-numeric-integration" title="Permalink to this headline">#</a></h2>
 <p>Our ultimate goal is to design a point-of-use semi-batch adsorptive membrane system to remove Pb from water. Water with contaminant concentration <span class="math notranslate nohighlight">\(c_{in} =\)</span> 150 parts per billion (ppb) enters the system. Some of the contaminant adsorbs such that the outlet concentration, <span class="math notranslate nohighlight">\(c(t)\)</span>, is in equilibrium and can be related to the sorbent loading, <span class="math notranslate nohighlight">\(q(t)\)</span>, using the Langmuir isotherm <span class="math notranslate nohighlight">\(q=f(K,Q)\)</span>. Using a differential mass balance (you will learn more about this in Transport I and II as Juniors), one can derive:</p>
 <div class="math notranslate nohighlight">
@@ -2270,8 +2271,8 @@ Covariance Matrix of Original Model Parameters (K,Q):
 \frac{d}{dt} q(t) = \frac{F}{m}(c_{in} - c(t))
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(m = \)</span> 1 kg is the total mass of the membrane and <span class="math notranslate nohighlight">\(F = \)</span> 2 ml/s is the flow rate of water. We will operate the membrane until time <span class="math notranslate nohighlight">\(t_f\)</span> where <span class="math notranslate nohighlight">\(c(t_f) = c_{max} = \)</span> 15 ppb, which corresponds to maximum contaminant limit from the US EPA. At time <span class="math notranslate nohighlight">\(t_f\)</span> the membrane is regenerated (e.g., washed with a low pH solution to remove the Pb contaminant) and the operating cycle repeats. For simplicity, we will assume the membrane is completely regenerated such that <span class="math notranslate nohighlight">\(q(0) = 0\)</span>.</p>
-</div>
-<div class="section" id="model-manipulation-and-setup">
+</section>
+<section id="model-manipulation-and-setup">
 <h2><span class="section-number">15.6.8. </span>Model Manipulation and Setup<a class="headerlink" href="#model-manipulation-and-setup" title="Permalink to this headline">#</a></h2>
 <p>We want to integrate the differential equation above to find the final time <span class="math notranslate nohighlight">\(t_f\)</span> where <span class="math notranslate nohighlight">\(c(t_f) = c_{max} = \)</span> 15 ppb. This is a boundary value problem. We have three choices for a solution approach:</p>
 <ol class="simple">
@@ -2316,8 +2317,8 @@ t_f = \int_{q_0}^{q_f}  \frac{m}{F} \frac{1}{\left( c_{in} - \frac{q(t)}{Q \cdot
 t_f = \frac{m}{F}  \int_{q_0}^{q_f} \frac{1}{\left( c_{in} - \frac{q(t)}{Q \cdot K - q(t) \cdot K} \right)} dq(t)
 \]</div>
 <p>We can approximate this integral with a quadrature rule.</p>
-</div>
-<div class="section" id="numeric-integration">
+</section>
+<section id="numeric-integration">
 <h2><span class="section-number">15.6.9. </span>Numeric Integration<a class="headerlink" href="#numeric-integration" title="Permalink to this headline">#</a></h2>
 <div class="admonition note">
 <p class="admonition-title"><b>Class Activity</b></p>
@@ -2405,8 +2406,8 @@ tf = 13.17 hours
 </div>
 </div>
 <p>Success. We have calculated the regeneration time of the membrane system.</p>
-</div>
-<div class="section" id="uncertainty-propagation-nonlinear-formula">
+</section>
+<section id="uncertainty-propagation-nonlinear-formula">
 <h2><span class="section-number">15.6.10. </span>Uncertainty Propagation (Nonlinear Formula)<a class="headerlink" href="#uncertainty-propagation-nonlinear-formula" title="Permalink to this headline">#</a></h2>
 <p>We now want to propagate the covariance of our fitted parameters <span class="math notranslate nohighlight">\(\mathbf{\Sigma_{\vec{\theta}}}\)</span> to estimate the uncertainty in the calculated batch time <span class="math notranslate nohighlight">\(\sigma_{t_f}\)</span>. To do this, we will apply the general nonlinear error propagation formula:</p>
 <div class="math notranslate nohighlight">
@@ -2418,8 +2419,8 @@ tf = 13.17 hours
 \nabla_{\vec{\theta}} t_f = \begin{bmatrix} \frac{\partial t_f}{\partial K},~ \frac{\partial t_f}{\partial Q} \end{bmatrix}
 \]</div>
 <p>Note: During some class notes we define the gradiant vector with a transpose, which requires the transpose to move in the error propagation formula. Either way is common in textbooks. Our apologies for the inconsistency and any confusion. Here is a good rule: just make sure the matrix dimensions work for multiplication and add a transpose if needed!</p>
-</div>
-<div class="section" id="define-functions">
+</section>
+<section id="define-functions">
 <h2><span class="section-number">15.6.11. </span>Define Functions<a class="headerlink" href="#define-functions" title="Permalink to this headline">#</a></h2>
 <div class="admonition note">
 <p class="admonition-title"><b>Class Activity</b></p>
@@ -2550,8 +2551,8 @@ Uncertainty (standard deviation) of tf: 2.25 hours
 </div>
 <p>Note we used <code class="docutils literal notranslate"><span class="pre">tf_test</span></code> for this unit test which does not correspond to our regression results. Do not attempt to interpret the above results.</p>
 <p>Now we can apply these two functions to our three regression strategies.</p>
-</div>
-<div class="section" id="first-transformation-linear-regression">
+</section>
+<section id="first-transformation-linear-regression">
 <h2><span class="section-number">15.6.12. </span>First Transformation + Linear Regression<a class="headerlink" href="#first-transformation-linear-regression" title="Permalink to this headline">#</a></h2>
 <div class="admonition note">
 <p class="admonition-title"><b>Class Activity</b></p>
@@ -2573,8 +2574,8 @@ Uncertainty (standard deviation) of tf: 2.25 hours
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="second-alternate-transformation-linear-regression">
+</section>
+<section id="second-alternate-transformation-linear-regression">
 <h2><span class="section-number">15.6.13. </span>Second (Alternate) Transformation + Linear Regression<a class="headerlink" href="#second-alternate-transformation-linear-regression" title="Permalink to this headline">#</a></h2>
 <div class="admonition note">
 <p class="admonition-title"><b>Class Activity</b></p>
@@ -2596,8 +2597,8 @@ Uncertainty (standard deviation) of tf: 0.65 hours
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="nonlinear-regression">
+</section>
+<section id="nonlinear-regression">
 <h2><span class="section-number">15.6.14. </span>Nonlinear Regression<a class="headerlink" href="#nonlinear-regression" title="Permalink to this headline">#</a></h2>
 <div class="admonition note">
 <p class="admonition-title"><b>Class Activity</b></p>
@@ -2619,8 +2620,8 @@ Uncertainty (standard deviation) of tf: 1.70 hours
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="discussion">
+</section>
+<section id="discussion">
 <h2><span class="section-number">15.6.15. </span>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">#</a></h2>
 <div class="admonition note">
 <p class="admonition-title"><b>Class Activity</b></p>
@@ -2632,13 +2633,13 @@ Uncertainty (standard deviation) of tf: 1.70 hours
 <li><p><em>Which one regression result do you trust more than the other two?</em> <strong>Answer:</strong> Fill in here…</p></li>
 <li><p><em>Waiting too long to regenerate the membrane can result in accidental lead exposure. Based on our analysis, what is the maximum batch time you recommend before regenerating the membrane?</em> <strong>Answer:</strong> Fill in here…</p></li>
 </ol>
-</div>
-<div class="section" id="monte-carlo-uncertainty-propogation">
+</section>
+<section id="monte-carlo-uncertainty-propogation">
 <h2><span class="section-number">15.6.16. </span>Monte Carlo Uncertainty Propogation<a class="headerlink" href="#monte-carlo-uncertainty-propogation" title="Permalink to this headline">#</a></h2>
 <p>We will revisit this notebook <strong>in a later chapter</strong>.</p>
 <p>To keep this example concise, we will only apply MC uncertainty propogation to the nonlinear regression method. We recommend nonlinear regression for most engineering examples.</p>
-</div>
-<div class="section" id="inspect-residuals">
+</section>
+<section id="inspect-residuals">
 <h2><span class="section-number">15.6.17. </span>Inspect Residuals<a class="headerlink" href="#inspect-residuals" title="Permalink to this headline">#</a></h2>
 <p>We will start by characterizing the residuals for the nonlinear regression case. Let’s start by plotting a histogram:</p>
 <div class="cell docutils container">
@@ -2669,8 +2670,8 @@ Uncertainty (standard deviation) of tf: 1.70 hours
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="monte-carlo-python-code">
+</section>
+<section id="monte-carlo-python-code">
 <h2><span class="section-number">15.6.18. </span>Monte Carlo Python Code<a class="headerlink" href="#monte-carlo-python-code" title="Permalink to this headline">#</a></h2>
 <div class="admonition note">
 <p class="admonition-title"><b>Class Activity</b></p>
@@ -2708,8 +2709,8 @@ Uncertainty (standard deviation) of tf: 1.70 hours
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="visualize-and-interpret-mc-results-fitted-parameters">
+</section>
+<section id="visualize-and-interpret-mc-results-fitted-parameters">
 <h2><span class="section-number">15.6.19. </span>Visualize and Interpret MC Results: Fitted Parameters<a class="headerlink" href="#visualize-and-interpret-mc-results-fitted-parameters" title="Permalink to this headline">#</a></h2>
 <p>We will start by inspecting historgrams of the fitted parameters:</p>
 <div class="cell docutils container">
@@ -2920,8 +2921,8 @@ Uncertainty (standard deviation) of tf: 1.70 hours
 </div>
 </div>
 <p>These results are similar! Why do we not expect them to match exactly?</p>
-</div>
-<div class="section" id="visualize-and-interpret-mc-results-batch-time">
+</section>
+<section id="visualize-and-interpret-mc-results-batch-time">
 <h2><span class="section-number">15.6.20. </span>Visualize and Interpret MC Results: Batch Time<a class="headerlink" href="#visualize-and-interpret-mc-results-batch-time" title="Permalink to this headline">#</a></h2>
 <div class="admonition note">
 <p class="admonition-title"><b>Class Activity</b></p>
@@ -3009,8 +3010,8 @@ Uncertainty (standard deviation) of tf: 1.70 hours
 <p class="admonition-title"><b>Class Activity</b></p>
 <p>Compare the uncertainty estimates in batch time and the standard deviation.</p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
