@@ -45,11 +45,17 @@ Classroom meetings are a mix of i) traditional chalk board instruction, ii) comp
 
 Problem set homework assignments are a collection of 2 to 5 problems designed to reinforce specific concepts and skills from class. Most problems include “pencil and paper” analysis (i.e., derive a model, determine degrees of freedom, write pseudocode), computer programming aspects, and interpretation of calculated results. These problems, especially the analysis and interpretation parts, are good practice for the exams. Many students receive near full credit on the problem sets.
 
+### Collaboration Policy and Honor Code
+
 You are permitted (and encouraged) to discuss solution approaches to the weekly homework assignments with classmates, however there is to be no wholesale copying or paraphrasing of code, solutions, or written discussions. You are encouraged to ask questions, including posting pseudocode or code screenshots, on the disccsion board on Canvas. Likewise, you may use any material posted by the instructors or your classmates in the discussion board on Canvas. This policy is meant to facilitate collaboration while ensuring everyone in the class has the same access. Students MAY NOT use old HW files and solutions for the algorithm assignments: If you cannot do the problems for homework, you will not be able to do them on the exams either.
 
 *As a rule of thumb, if you are not comfortable explaining your solution strategy to an instructor or TA, you should not turn in the work as your own.*
 
 Your work may be electronically tested for plagiarized content. For example, Vocareum and Gradescope have sophisticated capabilities to detect highly similar code (i.e., plagiarism for computer code) while distinguishing from provided templates. Plagiarism is a serious offense and will result in severe consequences per University, College, and Department procedures.
+
+The remove ambiguity, the following is a non-exhaustive list of collaborative scenarios that are PERMITTED under the above policies:
+* You work with a group of classmate to write pseudocode together. Each person in the group participates at least once (e.g., asks a question). One person in the group takes a picture and emails it to everyone. Then each person rewrites the pseudocode on their own for the homework submission. You rewrite the comments in your own words (to be more clear). You also decide to replace a `while` loop with a `for` loop.
+* You are working  
 
 ### Midterm Exam
 
