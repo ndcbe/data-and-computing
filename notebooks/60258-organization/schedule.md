@@ -94,7 +94,7 @@
 | Thursday, October 13, 2022 | [](../12/Error-Propagation.ipynb) |
 | | [](../12/Measuring-Flowrate-Example.ipynb) |
 | | [](../12/Car-and-Incline-Example.ipynb) |
-| | [](../12/Simulation-Motivating-Example.ipynb) |
+| | [](../12/Simulation.ipynb) |
 | | [](../12/Monte-Carlo-Error-Propogation.ipynb) |
 | | [](../12/Practice-Problems.ipynb) |
 | October 18, 2022 | Fall Break |
