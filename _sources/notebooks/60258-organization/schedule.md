@@ -72,13 +72,13 @@
 | | [](../08/Pyomo-Basics.ipynb) |
 | | [](../08/Flash-Calculations-in-Pyomo.ipynb) |
 | | Numeric Integration with Pyomo |
-| Thursday, September 29, 2022 | [](../09/stats.md) |
+| Thursday, September 29, 2022 | Project 1 Kick-off, Review |
+| Tuesday, October 4, 2022 | [](../09/stats.md) |
 | | [](../09/Sampling.ipynb) |
 | | [](../09/Summary-Statistics.ipynb) |
 | | [](../09/Visualizing-Data.ipynb) |
 | | [](../10/probability.md) |
 | | [](../10/Probability-Basics.ipynb) |
-| Tuesday, October 4, 2022 | Project 1 Kick-off | 
 | Thursday, October 6, 2022 | [](../10/Random-Variables.ipynb) |
 | | [](../10/Jointly-Distributed-Random-Variables.ipynb) |
 | | [](../10/Jointly-Continuous-Random-Variables.ipynb) |
@@ -94,7 +94,7 @@
 | Thursday, October 13, 2022 | [](../12/Error-Propagation.ipynb) |
 | | [](../12/Measuring-Flowrate-Example.ipynb) |
 | | [](../12/Car-and-Incline-Example.ipynb) |
-| | [](../12/Simulation-Motivating-Example.ipynb) |
+| | [](../12/Simulation.ipynb) |
 | | [](../12/Monte-Carlo-Error-Propogation.ipynb) |
 | | [](../12/Practice-Problems.ipynb) |
 | October 18, 2022 | Fall Break |
