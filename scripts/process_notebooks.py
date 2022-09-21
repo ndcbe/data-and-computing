@@ -99,8 +99,10 @@ def process_notebook(folder_original, folder_new, filename, verbose=1):
     replace_markdown('<b>Note</b>:', '<p class=\"title\"><b>Note</b></p>\n')
     
     # replace links to media with urls
-    MEDIA_LINK = '!\[(.*)\]\(\.\./\.\./media/(.*\..*)\)'
-    IMAGE_LINK = r'![\1](https://ndcbe.github.io/data-and-computing/_images/\2)'
+    # 2022-09-21: removed "!" from the beginning both of these expressions to also work on handouts (pdf) in media folder
+    # 2022-09-21: the use case is the error propagation handout
+    MEDIA_LINK = '\[(.*)\]\(\.\./\.\./media/(.*\..*)\)'
+    IMAGE_LINK = r'[\1](https://ndcbe.github.io/data-and-computing/_images/\2)'
     
     for cell in nb.cells:
         if cell.cell_type == "markdown":
