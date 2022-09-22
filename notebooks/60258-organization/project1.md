@@ -6,8 +6,6 @@ In teams of two (or three if there is an odd number of students in the class), y
 
 The expectation is that all notebooks will be contributed to this website, thereby creating a repository of examples. Students are encouraged to use these examples as reference material, especially during their duties as graduate teaching assistants.
 
-Here are some example notebooks:
-
 ## Learning Objectives
 
 By completing this assignment, you will:
@@ -29,6 +27,21 @@ Tips:
 * Use headers or bold font to make it easy to find the requested information.
 
 ## Project Notebook
+
+This is the main deliverable for the project.
+
+### Examples and Length
+
+Here are some example notebooks which are former Mini-Project Homeworks for CBE 20258:
+* Inertia navigation
+* Adsorptive membrane case study
+
+Your example notebook should be suitable for a 20 to 30-minute class activity or 20 to 120-minute homework problem for an undergraduate or first-year graduate student. For context, the above examples are approximately 1.5 to 3 times longer than needed for this project.
+
+### Required Content
+
+### Formatting Guidlines
+
 
 ## Peer Review
 
