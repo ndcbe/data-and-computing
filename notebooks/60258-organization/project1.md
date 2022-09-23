@@ -22,11 +22,6 @@ Each team should submit a project proposal 1 to 3 pages in length that contains 
 4. Briefly describe "pencil and paper" analysis readers will need to perform such as deriving a model, check degrees of freedom, or writing pseudocode. Each notebook should include at least one "pencil and paper" step or section.
 5. Provide a short outline for the notebook, e.g., section and subsection titles.
 
-Tips:
-* Shorter is better.
-* Use headers and subheaders to break the notebook into sections (similar to mini-project 1 and other homework projects).
-* Do not use more than level three headers. `#` is the title, `##` are sections, and `###` are subheaders in markdown (text boxes in a notebook).
-
 ## Project Notebook
 
 This is the main deliverable for the project.
@@ -57,6 +52,9 @@ Please do the following:
 1. Use all best practices for formatting code outlined here. For example, all functions need complete document strings. You should write clear comments throughout the code. (Aim for one line of comments for every 5 lines of code.) 
 2. Proof read all of the written text. You might find [this Chrome extension](https://chrome.google.com/webstore/detail/colab-spellcheck/ibnfomklkmoocmbmjlddagkippmndioc) helpful.
 3. Write concise and clear discussion prompts. Ask direct questions. Give suggested lengths for the responses.
+4. Shorter is better.
+5. Use headers and subheaders to break the notebook into sections (similar to mini-project 1 and other homework projects).
+6. Do not use more than level three headers. `#` is the title, `##` are sections, and `###` are subheaders in markdown (text boxes in a notebook).
 
 ## Peer Review
 
