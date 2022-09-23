@@ -4,7 +4,7 @@
 
 In teams of two, you will develop a Python/Jupyter notebook that applies one more computing skills from CBE 60258 to solve a science or engineering example. Most teams will find it easiest to choose an example or problem from their favoriate undergraduate or graduate textbook. Alternately, teams, in consultation with the instructor, may develop a notebook targetted at younger learns (e.g., K-12), for use in STEM ourreach activities. Likewise, teams may solve an example or homework problem from another CBE graduate class with the written permission of that instructor. (Some faculty may not want examples or homework problems disseminated outside their class.)
 
-The expectation is that all notebooks will be contributed to this website, thereby creating a repository of examples. Students are encouraged to use these examples as reference material, especially during their duties as graduate teaching assistants. Mini-project 1 (simulating games of chance) is a good example format. Each notebook should build up the solution in parts with discussion questions. Solutions should be marked starting with the comment `### BEGIN SOLUTIONS` and ending with the comment `### END SOLUTIONS`.
+The expectation is that all notebooks will be contributed to this website, thereby creating a repository of examples. Students are encouraged to use these examples as reference material, especially during their duties as graduate teaching assistants. Mini-project 1 (simulating games of chance) is a good example format. Each notebook should build up the solution in multiple parts parts with discussion questions.
 
 ## Learning Objectives
 
@@ -25,6 +25,7 @@ Each team should submit a project proposal 1 to 3 pages in length that contains 
 Tips:
 * Shorter is better.
 * Use headers and subheaders to break the notebook into sections (similar to mini-project 1 and other homework projects).
+* Do not use more than level three headers. `#` is the title, `##` are sections, and `###` are subheaders in markdown (text boxes in a notebook).
 
 ## Project Notebook
 
@@ -40,6 +41,14 @@ Here are some example notebooks which are former Mini-Project Homeworks for CBE 
 Your example notebook should be suitable for a 20 to 30-minute class activity or 20 to 120-minute homework problem for an undergraduate or first-year graduate student. For context, the above examples are approximately 1.5 to 3 times longer than needed for this project. Similarly, you should target 20% to 60% of the length of mini-project 1 (simulating games of change).
 
 ### Required Content
+
+Each notebook must include the following:
+1. Introduction or problem statement
+2. At least 3 subparts (similar to mini-project 1)
+3. “Pencil and paper” analysis in at least one section
+4. Discussion questions that require critical analysis in at least one section
+5. Python solutions should be marked starting with the comment `### BEGIN SOLUTIONS` and ending with the comment `### END SOLUTIONS`.
+6. Written solutions for “pencil and paper” should be typeset using Microsoft Word or LaTeX. Submit solutions both as a PDF and the source files (`.docx`, `.text).
 
 ### Formatting Guidlines
 
