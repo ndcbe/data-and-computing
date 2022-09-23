@@ -49,11 +49,19 @@ Each notebook must include the following:
 4. Discussion questions that require critical analysis in at least one section
 5. Python solutions should be marked starting with the comment `### BEGIN SOLUTIONS` and ending with the comment `### END SOLUTIONS`.
 6. Written solutions for “pencil and paper” should be typeset using Microsoft Word or LaTeX. Submit solutions both as a PDF and the source files (`.docx`, `.text).
+7. Include full citations for any data, problem statements (if from a paper, book, or homework assignment), or figures.
 
 ### Formatting Guidlines
 
+Please do the following:
+1. Use all best practices for formatting code outlined here. For example, all functions need complete document strings. You should write clear comments throughout the code. (Aim for one line of comments for every 5 lines of code.) 
+2. Proof read all of the written text. You might find [this Chrome extension](https://chrome.google.com/webstore/detail/colab-spellcheck/ibnfomklkmoocmbmjlddagkippmndioc) helpful.
+3. Write concise and clear discussion prompts. Ask direct questions. Give suggested lengths for the responses.
 
 ## Peer Review
 
+Peer review is an essential part of the scientific process. To prepare you for academic writing, we will use a modified simplified peer review process for this assignment. Each person will be assigned two projects to review. This review will involve preparing 1 page of comments and completing a short rubric for each project. Each team will then be encouraged to refine their notebooks using this feedback.
 
 ## Contributing to This Website
+
+Each notebook will be published on this website. Our goal here is to create a library of (chemical engineering) examples for our department to use for various educational activities. If you have a GitHub account, one person should upload the `.ipynb` notebook to this repo in `notebooks/computing-examples/`. Please ensure there are no spaces in the filename. Any figures should be added to `media` and all data files should be added to `notebooks/data`. Alternately, these files can be submitted via Canvas and uploaded by the instructor and TAs. The advantage of uploading yourself is getting credit on your GitHub account. (You will be listed as a contributor for the repo.)
