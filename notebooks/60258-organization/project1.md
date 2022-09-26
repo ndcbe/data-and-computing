@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In teams of two, you will develop a Python/Jupyter notebook that applies one more computing skills from CBE 60258 to solve a science or engineering example. Most teams will find it easiest to choose an example or problem from their favoriate undergraduate or graduate textbook. Alternately, teams, in consultation with the instructor, may develop a notebook targetted at younger learns (e.g., K-12), for use in STEM ourreach activities. Likewise, teams may solve an example or homework problem from another CBE graduate class with the written permission of that instructor. (Some faculty may not want examples or homework problems disseminated outside their class.)
+In teams of two, you will develop a Python/Jupyter notebook that applies one or more computing skills from CBE 60258 to solve a science or engineering example. Most teams will find it easiest to choose an example or problem from their favoriate undergraduate or graduate textbook. Alternately, teams, in consultation with the instructor, may develop a notebook targetted at younger learners (e.g., K-12), for use in STEM ourreach activities. Likewise, teams may solve an example or homework problem from another CBE graduate class with the written permission of that instructor. (Some faculty may not want examples or homework problems disseminated outside their class.)
 
 The expectation is that all notebooks will be contributed to this website, thereby creating a repository of examples. Students are encouraged to use these examples as reference material, especially during their duties as graduate teaching assistants. Mini-project 1 (simulating games of chance) is a good example format. Each notebook should build up the solution in multiple parts parts with discussion questions.
 
@@ -11,7 +11,7 @@ The expectation is that all notebooks will be contributed to this website, there
 By completing this assignment, you will:
 1. Master computing skills for (chemical) engineering problem solving
 2. Develop educational materials including writing learning objectives, discussion questions, and solutions
-3. Practice modified version of the peer review process
+3. Practice a modified version of the peer review process
 
 ## Project Proposal
 
@@ -19,7 +19,7 @@ Each team should submit a project proposal 1 to 3 pages in length that contains 
 1. States the problem to be solved. For example, typeset the textbook example or problem and incldue the appropriate reference.
 2. Identifies the computing skills from CBE 60258 that will be incorporated into the notebook.
 3. Briefly desribes possible discussion/critical thinking questions to pose during the notebook. All projects should not end at making a plot or computing an answer; they must include discussion questions to prompt critical thinking about the results.
-4. Briefly describe "pencil and paper" analysis readers will need to perform such as deriving a model, check degrees of freedom, or writing pseudocode. Each notebook should include at least one "pencil and paper" step or section.
+4. Briefly describe "pencil and paper" analysis the readers will need to perform such as deriving a model, check degrees of freedom, or writing pseudocode. Each notebook should include at least one "pencil and paper" step or section.
 5. Provide a short outline for the notebook, e.g., section and subsection titles.
 
 ## Project Notebook
@@ -43,7 +43,7 @@ Each notebook must include the following:
 3. “Pencil and paper” analysis in at least one section
 4. Discussion questions that require critical analysis in at least one section
 5. Python solutions should be marked starting with the comment `### BEGIN SOLUTIONS` and ending with the comment `### END SOLUTIONS`.
-6. Written solutions for “pencil and paper” should be typeset using Microsoft Word or LaTeX. Submit solutions both as a PDF and the source files (`.docx`, `.text).
+6. Written solutions for “pencil and paper” should be typeset using Microsoft Word or LaTeX. Submit solutions both as a PDF and the source files (`.docx`, `.text`).
 7. Include full citations for any data, problem statements (if from a paper, book, or homework assignment), or figures.
 
 ### Formatting Guidlines
