@@ -30,10 +30,10 @@ This is the main deliverable for the project.
 
 Here are some example notebooks which are former Mini-Project Homeworks for CBE 20258:
 * Mini-Project 1 (simulating games of chance)
-* Inertia navigation
-* Adsorptive membrane case study
+* [](../07/Application-Inertial-Navigation-Systems.ipynb)
+* [](../15/Nonlinear-Case-Study-Adsorptive-Membranes.ipynb)
 
-Your example notebook should be suitable for a 20 to 30-minute class activity or 20 to 120-minute homework problem for an undergraduate or first-year graduate student. For context, the above examples are approximately 1.5 to 3 times longer than needed for this project. Similarly, you should target 20% to 60% of the length of mini-project 1 (simulating games of change).
+Your example notebook should be suitable for use as a 20 to 30-minute class activity or a 20 to 120-minute homework problem for an undergraduate or first-year graduate student. For context, the above examples are approximately 1.5 to 3 times longer than needed for this project. Similarly, you should target 30% to 60% of the length of mini-project 1 (simulating games of change).
 
 ### Required Content
 
