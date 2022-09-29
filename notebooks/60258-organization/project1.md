@@ -2,9 +2,9 @@
 
 ## Introduction
 
-In teams of two, you will develop a Python/Jupyter notebook that applies one or more computing skills from CBE 60258 to solve a science or engineering example. Most teams will find it easiest to choose an example or problem from their favoriate undergraduate or graduate textbook. Alternately, teams, in consultation with the instructor, may develop a notebook targetted at younger learners (e.g., K-12), for use in STEM ourreach activities. Likewise, teams may solve an example or homework problem from another CBE graduate class with the written permission of that instructor. (Some faculty may not want examples or homework problems disseminated outside their class.)
+In teams of two, you will develop a Python/Jupyter notebook that applies one or more computing skills from CBE 60258 to solve a science or engineering example. Most teams will find it easiest to choose an example or problem from their favoriate undergraduate or graduate textbook. Alternately, teams, in consultation with the instructor, may develop a notebook targeted at younger learners (e.g., K-12), for use in STEM outreach activities. Likewise, teams may solve an example or homework problem from another CBE graduate class with the written permission of that instructor. (Some faculty may not want examples or homework problems disseminated outside their class.)
 
-The expectation is that all notebooks will be contributed to this website, thereby creating a repository of examples. Students are encouraged to use these examples as reference material, especially during their duties as graduate teaching assistants. Mini-project 1 (simulating games of chance) is a good example format. Each notebook should build up the solution in multiple parts parts with discussion questions.
+The expectation is that all notebooks will be contributed to this website, thereby creating a repository of examples. Students are encouraged to use these examples as reference material, especially during their duties as graduate teaching assistants. Mini-project 1 (simulating games of chance) is a good example format. Each notebook should build up the solution in multiple parts with discussion questions.
 
 ## Learning Objectives
 
@@ -16,9 +16,9 @@ By completing this assignment, you will:
 ## Project Proposal
 
 Each team should submit a project proposal 1 to 3 pages in length that contains the following elements:
-1. States the problem to be solved. For example, typeset the textbook example or problem and incldue the appropriate reference.
+1. States the problem to be solved. For example, typeset the textbook example or problem and include the appropriate reference.
 2. Identifies the computing skills from CBE 60258 that will be incorporated into the notebook.
-3. Briefly desribes possible discussion/critical thinking questions to pose during the notebook. All projects should not end at making a plot or computing an answer; they must include discussion questions to prompt critical thinking about the results.
+3. Briefly desribe possible discussion/critical thinking questions to pose during the notebook. All projects should not end at making a plot or computing an answer; they must include discussion questions to prompt critical thinking about the results.
 4. Briefly describe "pencil and paper" analysis the readers will need to perform such as deriving a model, check degrees of freedom, or writing pseudocode. Each notebook should include at least one "pencil and paper" step or section.
 5. Provide a short outline for the notebook, e.g., section and subsection titles.
 
