@@ -104,6 +104,17 @@ Regrade requests must be submitted in writing via Gradescope. Please include a 1
 
 All regrade requests will result in a reevaluation of the entire assignment. For rubric selection mistakes in Gradescope, this means we will recheck all rubric selections. For more substantial requests, the grader may choose to reexamine the entire problem (including all subparts) and possibly the entire assignment.
 
+### Late Policy
+
+The following policy will apply to all assignments (homework, projects, etc.):
+* Up to 1 hour late: grace period with no penalty
+* 1 hour to 24 hours late: 10% penalty of total available points
+* 24 to 48 hours late: 20% penalty of total available points
+* 48 to 72 hours: 30% penalty of total available points
+* Beyond 72 hours: assignment not accepted
+
+If there is an extenuating circumstance, please email the instructor with CBE 60258 in the subject. Please send your requests for extensions at least 24 hours in advance of the deadline (unless your specific circumstance prevents this). When requesting an extension, please briefly explain the extenuating circumstance and propose an alternate deadline.
+
 ## Software
 
 We will use Python 3 in this class. You have three options to use Python:
