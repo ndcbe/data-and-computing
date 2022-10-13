@@ -10,9 +10,9 @@
 | Friday, September 30, 2022 | Problem Set 3: Numeric Integration, Optimization |
 | Friday, October 7, 2022 | Project 1: Proposal |
 | Friday, October 14, 2022 | Problem Set 4: Probability, Error Propagation |
-| Tuesday, October 25, 2022 | Project 1: Draft Jupyter Notebook (11:59pm, upload to [Google Drive](https://drive.google.com/drive/folders/1FqUhcjPBlGvZfySmWetv2b_QpS3SMAjD?usp=sharing)) |
-| Thursday, October 26, 2022 | Project 1: Peer Review (noon) |
-| Monday, October 31, 2022 | Project 1: Revised Jupyter Notebook (noon) |
+| Tuesday, October 25, 2022 | Project 1: Draft Jupyter Notebook (11:59pm, upload `.ipynb` and `.pdf` files to [Google Drive](https://drive.google.com/drive/folders/1FqUhcjPBlGvZfySmWetv2b_QpS3SMAjD?usp=sharing)) |
+| Thursday, October 27, 2022 | Project 1: Peer Review (noon, upload `.pdf` to [Google Drive](https://drive.google.com/drive/folders/1FqUhcjPBlGvZfySmWetv2b_QpS3SMAjD?usp=sharing)) |
+| Monday, October 31, 2022 | Project 1: Revised Jupyter Notebook (noon, submit via Gradescope) |
 | Friday, November 11, 2022 | Problem Set 5: Error Propagation, Simulation, Probability Modeling, Confidence Intervals, Hypothesis Testing, Statistical Power |
 | Friday, November 18, 2022 | Project 2: Proposal |
 | Friday, December 2, 2022 | Problem Set 6: Linear Regression, Nonlinear Regression, Uncertainty Analysis, Error Propagation |
