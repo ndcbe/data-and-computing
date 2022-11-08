@@ -10,6 +10,8 @@ Specific deliverables include:
 
 The hope is for each person to give their presentation and demonstrate their notebook in their research group meetings during the following semester.
 
+You must have a different partner for Projects 1 and 2.
+
 ## Learning Objectives
 
 By completing this assignment, you will:

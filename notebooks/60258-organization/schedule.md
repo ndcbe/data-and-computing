@@ -14,7 +14,7 @@
 | Thursday, October 27, 2022 | Project 1: Peer Review (noon, upload `.pdf` to [Google Drive](https://drive.google.com/drive/folders/1FqUhcjPBlGvZfySmWetv2b_QpS3SMAjD?usp=sharing)) |
 | Monday, October 31, 2022 | Project 1: Revised Jupyter Notebook (noon, submit via Gradescope) |
 | Friday, November 11, 2022 | Problem Set 5: Error Propagation, Simulation, Probability Modeling, Confidence Intervals, Hypothesis Testing, Statistical Power |
-| Friday, November 18, 2022 | Project 2: Proposal |
+| Wednesday, November 23, 2022 | Project 2: Proposal |
 | Friday, December 2, 2022 | Problem Set 6: Linear Regression, Nonlinear Regression, Uncertainty Analysis, Error Propagation |
 | Thursday, December 8, 2022 | Project 2: Jupyter Notebook |
 | Monday, December 12, 2022, 10:30 AM - 12:30 PM (Final Exam Timeslot) | Project 2: Presentations |
@@ -132,5 +132,5 @@
 | | [](../15/Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression.ipynb ) |
 | | [](../15/Nonlinear-Case-Study-Adsorptive-Membranes.ipynb )|
 | Thursday, December 1, 2022 | [](../16/design_of_experiments.md) |
-| Tuesday, December 6, 2022 | Semester Review |
-| Thursday, December 8, 2022 | Final Project Workshop |
+| Tuesday, December 6, 2022 | Final Project Workshop |
+| Thursday, December 8, 2022 | Semester Review |
