@@ -72,7 +72,7 @@ Here is [supporting information](https://github.com/dowlinglab/multiscale-adsorp
 
 Here is an analysis of the [heat exchanger experiment from our undergraduate laboratory](https://jckantor.github.io/cbe31358-book/notebooks/01/00_hx.html):
 * Good: detailed background, easy to follow code, excellent presentation
-* Missing: discussion and conclusions, longer than expected for our project
+* Missing: discussion and conclusions, not quite publication quality plots, longer than expected for our project
 
 ## Presentation
 
