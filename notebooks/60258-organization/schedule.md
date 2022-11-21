@@ -15,7 +15,7 @@
 | Monday, October 31, 2022 | Project 1: Revised Jupyter Notebook (noon, submit via Gradescope) |
 | Friday, November 11, 2022 | Problem Set 5: Error Propagation, Simulation, Probability Modeling, Confidence Intervals, Hypothesis Testing, Statistical Power |
 | Wednesday, November 23, 2022 | Project 2: Proposal |
-| Friday, December 2, 2022 | Problem Set 6: Linear Regression, Nonlinear Regression, Uncertainty Analysis, Error Propagation |
+| Friday, December 2, 2022 | Problem Set 6: [](../15/Nonlinear-Case-Study-Adsorptive-Membranes.ipynb) (beginning through *Comparison of Three Regression Approaches* inclussive) |
 | Thursday, December 8, 2022 | Project 2: Jupyter Notebook |
 | Monday, December 12, 2022, 10:30 AM - 12:30 PM (Final Exam Timeslot) | Project 2: Presentations |
 
