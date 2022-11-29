@@ -18,6 +18,7 @@
 | Friday, December 2, 2022 | Problem Set 6: [](../15/Nonlinear-Case-Study-Adsorptive-Membranes.ipynb) (beginning through *Comparison of Three Regression Approaches* inclussive) |
 | Thursday, December 8, 2022 | Project 2: Jupyter Notebook |
 | Monday, December 12, 2022, 10:30 AM - 12:30 PM (Final Exam Timeslot) | Project 2: Presentations |
+| Tuesday, December 13, 2022, 5pm | Project 1: Revisions Due |
 
 ## Class Meetings
 

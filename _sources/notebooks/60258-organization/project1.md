@@ -62,4 +62,16 @@ Peer review is an essential part of the scientific process. To prepare you for a
 
 ## Contributing to This Website
 
-Each notebook will be published on this website. Our goal here is to create a library of (chemical engineering) examples for our department to use for various educational activities. If you have a GitHub account, one person should upload the `.ipynb` notebook to this repo in `notebooks/computing-examples/`. Please ensure there are no spaces in the filename. Any figures should be added to `media` and all data files should be added to `notebooks/data`. Alternately, these files can be submitted via Canvas and uploaded by the instructor and TAs. The advantage of uploading yourself is getting credit on your GitHub account. (You will be listed as a contributor for the repo.)
+Each notebook will be published on this website. Our goal here is to create a library of (chemical engineering) examples for our department to use for various educational activities.
+
+Here are the [instructions on how to contribute your notebook](../contrib/contribute.md).
+
+Each team who submits a constributed notebook by the deadline posted [on the class schedule](../60258-organization/schedule.md) will have their notebook quickly evaluated holistically on the following scale:
+* 5/5 = 1.0, meets or exceeds all expectations
+* 4/5 = 0.8, meets most expectations with a few minor deficiencies
+* 3/5 = 0.6, meets many expectations but with many minor deficiencies
+* 2/5 = 0.4, meets some expectations but with one or more major deficiences
+* 1/5 = 0.2, meets a few expectations with many minor and major deficiencies
+* 0/5 = 0.0, did not submit a revision
+
+Each team will earn back 40% of the points they lost on the first Project 1 Notebook submission times the score they receive on the revised notebook (0.0 to 1.0). For example, if a group lost 10 points on the original submission and earn 4/5 on the revision, they would receive 0.4 x 10 x 0.8 = 3.2 points back.
