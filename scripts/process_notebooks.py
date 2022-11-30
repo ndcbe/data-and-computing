@@ -135,7 +135,7 @@ def process_notebook(folder_original, folder_new, filename, verbose=1):
 IMPORTANT. We assume the source files are in XX-dev and the new files go into XX.
 The list below is just values for XX.
 """
-folders = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15"]
+folders = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16"]
 
 for fld in folders:
     
