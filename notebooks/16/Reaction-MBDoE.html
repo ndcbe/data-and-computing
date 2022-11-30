@@ -1,0 +1,2520 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>16.1. Model-Based Design of Experiments &#8212; Data and Computing for Chemical Engieers</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="CBE 60258 Information" href="../60258-organization/home.html" />
+    <link rel="prev" title="16. Design of Experiments" href="design_of_experiments.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/cbe_logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Data and Computing for Chemical Engieers</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Data and Computing for Engineers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Python Programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../01/Python-Primer.html">
+   1. Python Primer
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Jupyter-Notebooks.html">
+     1.1. Welcome to Jupyter Notebooks and Vocareum
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Python-Basics-I-Variables-Strings-Bugs.html">
+     1.2. Python Basics I: Variables, Strings, and Bugs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Flow-control.html">
+     1.3. Python Basics II: Loopy Logic
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Python-Basics-III-Lists-Dictionaries-Enumeration.html">
+     1.4. Python Basics III: Lists, Dictionaries, and Enumeration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Functions-and-Scope.html">
+     1.5. Functions and Scope
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Recursion.html">
+     1.6. Recursion
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Pseudocode.html">
+     1.7. Pseudocode
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Example-High-Low-Game.html">
+     1.8. High/Low Guess My Number Game
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Modules-and-Files.html">
+     1.9. Modules and Files
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/NumPy.html">
+     1.10. Linear Algebra with Numpy and Scipy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Matplotlib.html">
+     1.11. Visualization with matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Pandas.html">
+     1.12. Manipulating Data with Pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Functions-as-Arguments.html">
+     1.13. Functions as Arguments
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Testing-and-Debugging.html">
+     1.14. Testing and Debugging in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Publication-Quality-Figures.html">
+     1.15. Preparing Publication Quality Figures in Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../02/advanced_python.html">
+   2. Advanced Python
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Numerical Methods
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03/linear_algebra.html">
+   3. Linear Algebra Primer
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../04/linear_algebra.html">
+   4. Applied Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04/Modeling-Systems-of-Linear-Equations.html">
+     4.1. Modeling Systems of Linear Equations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04/Gauss-Elimination.html">
+     4.2. Gaussian Elimination
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04/Invertible-Matrix-Theorem-and-Gauss-Example.html">
+     4.3. Invertible Matrix Theorem and Gaussian Elimination Example
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04/LU-Decomposition.html">
+     4.4. LU Decomposition
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04/Condition-Number.html">
+     4.5. Errors in Linear Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04/Example-Atomic-Mass-Balances.html">
+     4.6. Example: Mass Balances and Linear Algebra
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04/Linear-Algebra-in-Numpy.html">
+     4.7. Linear Algebra Review and SciPy Basics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../05/algorithms.html">
+   5. Algorithm Building Blocks
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05/Taylor-Series.html">
+     5.1. Taylor Series Approximations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05/Finite-Difference.html">
+     5.2. Finite Difference Derivative Approximations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05/Example-Heating-a-Metal-Slab.html">
+     5.3. Example: Heating a Metal Slab
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../06/nonlinear_systems.html">
+   6. Nonlinear Systems of Equations
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06/Modeling-Systems-of-Nonlinear-Equations.html">
+     6.1. Modeling Systems of Nonlinear Equations: Flash Calculation Example
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06/Newton-Raphson-Method-in-One-Dimension.html">
+     6.2. Newton-Raphson Method in One Dimension
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06/More-Newton-Type-Methods.html">
+     6.3. More Newton-Type Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06/Convergence-Analysis-for-Newton-Raphson-Methods.html">
+     6.4. Convergence Analysis for Newton-Raphson Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06/Newton-Raphson-Methods-for-Systems-of-Equations.html">
+     6.5. Newton-Raphson Methods for Systems of Equations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06/Newton-Methods-in-Scipy.html">
+     6.6. Newton Methods in Scipy
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../07/integration.html">
+   7. Numeric Integration
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07/Intro-and-Newton-Cotes.html">
+     7.1. Introduction and Newton-Cotes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07/Gauss-Quadrature.html">
+     7.2. Gauss Quadrature
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07/Scipy-Library-Adaptive-Methods-for-Newton-Cotes-and-Gauss-Quadrature.html">
+     7.3. Scipy Library: Adaptive Methods for Newton-Cotes and Gauss Quadrature
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07/Application-Inertial-Navigation-Systems.html">
+     7.4. Application: Inertial Navigation Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07/Forward-and-Backward-Euler.html">
+     7.5. Forward and Backward Euler Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07/Trapezoid-Rule.html">
+     7.6. Crank-Nicolson (Trapezoid Rule)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07/Stability-Analysis.html">
+     7.7. Stability Analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07/Explicit-Runge-Kutta.html">
+     7.8. Explicit Range Kutta Method
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07/Systems-of-Differential-Equations-and-Scipy.html">
+     7.9. Systems of Differential Equations and Scipy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07/Example-Reaction-Rates.html">
+     7.10. Example: Reaction Rates
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../08/optimization.html">
+   8. Continuous Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../08/Pyomo-Basics.html">
+     8.1. Pyomo Basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../08/Electricity-Market-Optimization.html">
+     8.2. Electricity Market Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../08/Flash-Calculations-in-Pyomo.html">
+     8.3. Flash Calculations in Pyomo
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Data Analysis
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../09/stats.html">
+   9. Descriptive Statistics and Visualization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../09/Sampling.html">
+     9.1. Sampling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../09/Summary-Statistics.html">
+     9.2. Summary Statistics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../09/Visualizing-Data.html">
+     9.3. Visualizing Data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../10/probability.html">
+   10. Probability Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10/Probability-Basics.html">
+     10.1. Basic Ideas of Probability
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10/Random-Variables.html">
+     10.2. Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10/Jointly-Distributed-Random-Variables.html">
+     10.3. Jointly Distributed Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10/Jointly-Continuous-Random-Variables.html">
+     10.4. Jointly Continuous Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10/Practice-Problems.html">
+     10.5. Practice Problems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../11/distributions.html">
+   11. Common Probability Distributions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11/Bernoulli-Probability-Distribution.html">
+     11.1. Bernoulli Probability Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11/Binomial-Probability-Distribtuion.html">
+     11.2. Binomial Probability Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11/Poisson-Probability-Distribution.html">
+     11.3. Poisson Probability Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11/Normal-Probability-Distribution.html">
+     11.4. Normal Probability Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11/Common-Probability-Distributions-Summary.html">
+     11.5. Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../12/uncertainty.html">
+   12. Uncertainty and Error Propagation
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12/Measurement-Error.html">
+     12.1. Measurement Error
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12/Error-Propagation.html">
+     12.2. Error Propagation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12/Measuring-Flowrate-Example.html">
+     12.3. Measuring Flowrate Example
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12/Car-and-Incline-Example.html">
+     12.4. Car and Incline Example
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12/Simulation.html">
+     12.5. Simulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12/Monte-Carlo-Error-Propogation.html">
+     12.6. Monte Carlo Error Propagation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12/Practice-Problems.html">
+     12.7. Practice Problems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../13/inference.html">
+   13. Statistical Inference
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13/Central-Limit-Theorem.html">
+     13.1. Central Limit Theorem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13/Standard-Normal-Distribution.html">
+     13.2. Standard Normal Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13/Confidence-Intervals.html">
+     13.3. Confidence Intervals
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13/Students-t-Distribution.html">
+     13.4. Student’s t-Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13/Hypothesis-Testing-Basics.html">
+     13.5. Hypothesis Testing Basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13/Flavors-of-Hypothesis-Testing.html">
+     13.6. Flavors of Hypothesis Testing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13/Type-I-and-Type-II-Errors.html">
+     13.7. Type I and Type II Errors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13/Statistical-Power-Basics.html">
+     13.8. Statistical Power Basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13/Statistical-Power-in-Python.html">
+     13.9. Statistical Power in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13/Statistical-Power-Practice-Problems.html">
+     13.10. Statistical Power Practice Problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13/Bootstrap-Confidence-Intervals.html">
+     13.11. Bootstrap Confidence Intervals
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../14/regression.html">
+   14. Multivariate Linear Regression
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../14/Correlation-Covariance-and-Independence.html">
+     14.1. Correlation, Covariance, and Independence
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../14/Least-Squares-Line.html">
+     14.2. Simple Least Squares
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../14/Ordinary-Least-Squares-Linear-Regression.html">
+     14.3. Ordinary Least Squares Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../14/Residual-Analysis.html">
+     14.4. Residual Analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../14/Regression-Assumption-Examples.html">
+     14.5. Regression Assumption Examples
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../14/Uncertainty-Analysis-and-Statistical-Inference.html">
+     14.6. Uncertainty Analysis and Statistical Inference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../14/Multivariate-Linear-Regression.html">
+     14.7. Multivariate Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../14/Linear-Regression-Practice-Problems.html">
+     14.8. Linear Regression Practice Problems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../15/advanced_regression.html">
+   15. Nonlinear Regression
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../15/Transformations-and-Linear-Regression.html">
+     15.1. Transformations and Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../15/Weighted-Regression.html">
+     15.2. Weighted Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../15/Nonlinear-Regression.html">
+     15.3. Nonlinear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../15/Nonlinear-Regression-Practice-Problem.html">
+     15.4. Nonlinear Regression Practice Problem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../15/Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression.html">
+     15.5. Monte Carlo Uncertainty Analysis for Nonlinear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../15/Nonlinear-Case-Study-Adsorptive-Membranes.html">
+     15.6. Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="design_of_experiments.html">
+   16. Design of Experiments
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     16.1. Model-Based Design of Experiments
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Extra Information
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../60258-organization/home.html">
+   CBE 60258 Information
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../60258-organization/syllabus.html">
+     Syllabus
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../60258-organization/schedule.html">
+     Fall 2022 Schedule
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../60258-organization/project1.html">
+     Project 1: Computating for Problem Solving
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../60258-organization/project2.html">
+     Project 2: Data Analysis
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/16/Reaction-MBDoE.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/16/Reaction-MBDoE.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ndcbe/data-and-computing"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/16/Reaction-MBDoE.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/notebooks/16/Reaction-MBDoE.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-objectives">
+   16.1.1. Learning Objectives
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-modules">
+   16.1.2. Import Modules
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mathematical-model-for-reaction-kinetics-example">
+   16.1.3. Mathematical Model for Reaction Kinetics Example
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generate-synthetic-experimental-dataset">
+   16.1.4. Generate Synthetic Experimental Dataset
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#perform-nonlinear-regression">
+   16.1.5. Perform Nonlinear Regression
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solve-nonlinear-least-squares-problem">
+     16.1.5.1. Solve Nonlinear Least Squares Problem
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#visualize-results">
+     16.1.5.2. Visualize Results
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#estimate-uncertainty">
+     16.1.5.3. Estimate Uncertainty
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fisher-information-matrix">
+   16.1.6. Fisher Information Matrix
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-sensitivity">
+     16.1.6.1. Model Sensitivity
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fim-by-measurement-type">
+     16.1.6.2. FIM By Measurement Type
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#eigendecomposition">
+     16.1.6.3. Eigendecomposition
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#optimality-metrics">
+     16.1.6.4. Optimality metrics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-the-next-best-experiment">
+   16.1.7. What is the next best experiment?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#take-away-messages">
+   16.1.8. Take Away Messages
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Model-Based Design of Experiments</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-objectives">
+   16.1.1. Learning Objectives
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-modules">
+   16.1.2. Import Modules
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mathematical-model-for-reaction-kinetics-example">
+   16.1.3. Mathematical Model for Reaction Kinetics Example
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generate-synthetic-experimental-dataset">
+   16.1.4. Generate Synthetic Experimental Dataset
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#perform-nonlinear-regression">
+   16.1.5. Perform Nonlinear Regression
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solve-nonlinear-least-squares-problem">
+     16.1.5.1. Solve Nonlinear Least Squares Problem
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#visualize-results">
+     16.1.5.2. Visualize Results
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#estimate-uncertainty">
+     16.1.5.3. Estimate Uncertainty
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fisher-information-matrix">
+   16.1.6. Fisher Information Matrix
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-sensitivity">
+     16.1.6.1. Model Sensitivity
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fim-by-measurement-type">
+     16.1.6.2. FIM By Measurement Type
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#eigendecomposition">
+     16.1.6.3. Eigendecomposition
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#optimality-metrics">
+     16.1.6.4. Optimality metrics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-the-next-best-experiment">
+   16.1.7. What is the next best experiment?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#take-away-messages">
+   16.1.8. Take Away Messages
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="model-based-design-of-experiments">
+<h1><span class="section-number">16.1. </span>Model-Based Design of Experiments<a class="headerlink" href="#model-based-design-of-experiments" title="Permalink to this headline">#</a></h1>
+<p>This notebook is based on an example from:</p>
+<p><a class="reference external" href="https://github.com/jialuw96">Jialu Wang</a> and <a class="reference external" href="https://github.com/adowling2">Alexander Dowling</a> (2022), <a class="reference external" href="https://aiche.onlinelibrary.wiley.com/doi/full/10.1002/aic.17813">Pyomo.DoE: An Open-Source Package for Model-Based Design of Experiments in Python</a> . <em>AIChE Journal</em>, 68(12), e17813.</p>
+<section id="learning-objectives">
+<h2><span class="section-number">16.1.1. </span>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Practice nonlinear regression basics on a reaction kinetics example</p></li>
+<li><p>Interpret eigendecomposition of Fisher information matrix to determine which paramters (if any) are not identifiable</p></li>
+<li><p>Use A-, D-, and E-optimality to recommend the next experiment that maximizes information gain</p></li>
+</ul>
+</section>
+<section id="import-modules">
+<h2><span class="section-number">16.1.2. </span>Import Modules<a class="headerlink" href="#import-modules" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">scipy.optimize</span> <span class="k">as</span> <span class="nn">optimize</span>
+<span class="kn">import</span> <span class="nn">scipy.linalg</span> <span class="k">as</span> <span class="nn">linalg</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">cm</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="mathematical-model-for-reaction-kinetics-example">
+<h2><span class="section-number">16.1.3. </span>Mathematical Model for Reaction Kinetics Example<a class="headerlink" href="#mathematical-model-for-reaction-kinetics-example" title="Permalink to this headline">#</a></h2>
+<p>Consider two chemical reactions that convert molecule <span class="math notranslate nohighlight">\(A\)</span> to desired product <span class="math notranslate nohighlight">\(B\)</span> and a less valuable side-product <span class="math notranslate nohighlight">\(C\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(A \overset{k_1}{\rightarrow} B \overset{k_2}{\rightarrow} C\)</span></p>
+<p>Our ultimate goal is to design a large-scale continous reactor that maximizes the production of <span class="math notranslate nohighlight">\(B\)</span>. This general sequential reactions problem is widely applicable to CO<span class="math notranslate nohighlight">\(_2\)</span> capture and industry more broadly (petrochemicals, pharmasuticals, etc.).</p>
+<p>The rate laws for these two chemical reactions are:</p>
+<p><span class="math notranslate nohighlight">\(r_A = -k_1 C_A\)</span></p>
+<p><span class="math notranslate nohighlight">\(r_B = k_1 C_A - k_2 C_B\)</span></p>
+<p><span class="math notranslate nohighlight">\(r_C = k_2 C_B\)</span></p>
+<p>Here, <span class="math notranslate nohighlight">\(C_A\)</span>, <span class="math notranslate nohighlight">\(C_B\)</span>, and <span class="math notranslate nohighlight">\(C_C\)</span> are the concentrations of each species. The rate constants <span class="math notranslate nohighlight">\(k_1\)</span> and <span class="math notranslate nohighlight">\(k_2\)</span> depend on temperature as follows:</p>
+<p><span class="math notranslate nohighlight">\(k_1 = A_1 \exp{\frac{-E_1}{R T}}\)</span></p>
+<p><span class="math notranslate nohighlight">\(k_2 = A_2 \exp{\frac{-E_2}{R T}}\)</span></p>
+<p><span class="math notranslate nohighlight">\(A_1, A_2, E_1\)</span>, and <span class="math notranslate nohighlight">\(E_2\)</span> are fitted model parameters. <span class="math notranslate nohighlight">\(R\)</span> is the ideal-gas constant and <span class="math notranslate nohighlight">\(T\)</span> is absolute temperature.</p>
+<p>The concenration in a <strong>batch reactor</strong> evolve with time per the following differential equations:</p>
+<div class="math notranslate nohighlight">
+\[ \frac{d C_A}{dt} = r_A = -k_1 C_A \]</div>
+<div class="math notranslate nohighlight">
+\[ \frac{d C_B}{dt} = r_B = k_1 C_A - k_2 C_B \]</div>
+<div class="math notranslate nohighlight">
+\[ \frac{d C_C}{dt} = r_C = k_2 C_B \]</div>
+<p>This is a linear system of differential equations. Assuming the feed is only species <span class="math notranslate nohighlight">\(A\)</span>, i.e.,</p>
+<div class="math notranslate nohighlight">
+\[C_A(t=0) = C_{A0} \quad C_B(t=0) = 0 \quad C_C(t=0) = 0\]</div>
+<p>When the temperature is constant, it leads to the following analytic solution:</p>
+<div class="math notranslate nohighlight">
+\[C_A(t) = C_{A,0} \exp(-k_1 t)\]</div>
+<div class="math notranslate nohighlight">
+\[C_B(t) = \frac{k_1}{k_2 - k_1} C_{A,0} \left[\exp(-k_1 t) - \exp(-k_2 t) \right]\]</div>
+<div class="math notranslate nohighlight">
+\[C_C(t) = C_{A,0} - \frac{k_2}{k_2 - k_1} C_{A,0} \exp(-k_1 t) + \frac{k_1}{k_2 - k_1} \exp(-k_2 t) C_{A,0} = C_{A,0} - C_{A}(t) - C_{B}(t)\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">batch_rxn_model</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">CA0</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    </span>
+<span class="sd">    Predict batch reaction performance</span>
+<span class="sd">    </span>
+<span class="sd">    Arugments:</span>
+<span class="sd">        t: time, [hour], scalar or Numpy array</span>
+<span class="sd">        theta: fitted parameters: A1, A2, E1, E2</span>
+<span class="sd">        CA0: initial concentration, [mol/L], scalar or numpy array</span>
+<span class="sd">        T: temperature, [K], scalar or Numpy array</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        CA, CB, CC: Concentrations at times t, [mol/L], three scalars or numpy arrays</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="k">def</span> <span class="nf">kinetics</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Computes kinetics from Arrhenius equation</span>
+<span class="sd">        Arguments:</span>
+<span class="sd">            A: pre-exponential factor, [1 / hr]</span>
+<span class="sd">            E: activation energy, [kJ / mol]</span>
+<span class="sd">            T: temperature, [K]</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            k: reaction rate coefficient, [1/hr] or [1/hr*L/mol]</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="mf">8.31446261815324</span> <span class="c1"># J / K / mole</span>
+
+        <span class="k">return</span> <span class="n">A</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">E</span><span class="o">*</span><span class="mi">1000</span><span class="o">/</span><span class="p">(</span><span class="n">R</span><span class="o">*</span><span class="n">T</span><span class="p">))</span>
+
+    <span class="c1"># units: [1/hr]</span>
+    <span class="n">k1</span> <span class="o">=</span> <span class="n">kinetics</span><span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">theta</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">T</span><span class="p">)</span>
+
+    <span class="c1"># units: [1/hr]</span>
+    <span class="n">k2</span> <span class="o">=</span> <span class="n">kinetics</span><span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">theta</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">T</span><span class="p">)</span>
+
+    <span class="c1"># units: [mol / L]</span>
+    <span class="n">CA</span> <span class="o">=</span> <span class="n">CA0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k1</span><span class="o">*</span><span class="n">t</span><span class="p">);</span>
+    <span class="n">CB</span> <span class="o">=</span> <span class="n">k1</span><span class="o">*</span><span class="n">CA0</span><span class="o">/</span><span class="p">(</span><span class="n">k2</span><span class="o">-</span><span class="n">k1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k1</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k2</span><span class="o">*</span><span class="n">t</span><span class="p">));</span>
+    <span class="n">CC</span> <span class="o">=</span> <span class="n">CA0</span> <span class="o">-</span> <span class="n">CA</span> <span class="o">-</span> <span class="n">CB</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="n">CA</span><span class="p">,</span> <span class="n">CB</span><span class="p">,</span> <span class="n">CC</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s test the code by running it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">theta_true</span> <span class="o">=</span> <span class="p">[</span><span class="mf">85.</span><span class="p">,</span> <span class="mf">370.</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
+<span class="n">time_exp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">)</span> <span class="c1"># hr</span>
+<span class="n">CA0_exp1</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="c1"># mol/L</span>
+<span class="n">T_exp1</span> <span class="o">=</span> <span class="mi">400</span> <span class="c1"># K</span>
+<span class="n">CA_exp1</span><span class="p">,</span> <span class="n">CB_exp1</span><span class="p">,</span> <span class="n">CC_exp1</span> <span class="o">=</span> <span class="n">batch_rxn_model</span><span class="p">(</span><span class="n">theta_true</span><span class="p">,</span> <span class="n">time_exp</span><span class="p">,</span> <span class="n">CA0_exp1</span><span class="p">,</span> <span class="n">T_exp1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="generate-synthetic-experimental-dataset">
+<h2><span class="section-number">16.1.4. </span>Generate Synthetic Experimental Dataset<a class="headerlink" href="#generate-synthetic-experimental-dataset" title="Permalink to this headline">#</a></h2>
+<p>Let’s construct a dataset containing:</p>
+<ul class="simple">
+<li><p>Batch experiment at <span class="math notranslate nohighlight">\(T=400\)</span> K and <span class="math notranslate nohighlight">\(C_{AO}=1.0\)</span> mol/L</p></li>
+<li><p>Batch experiment at <span class="math notranslate nohighlight">\(T=300\)</span> K and <span class="math notranslate nohighlight">\(C_{AO}=3.0\)</span> mol/L</p></li>
+</ul>
+<p>We also simulated the first experiment. Let’s simulate the second.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">theta_true</span> <span class="o">=</span> <span class="p">[</span><span class="mf">85.</span><span class="p">,</span> <span class="mf">370.</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
+<span class="n">CA0_exp2</span> <span class="o">=</span> <span class="mf">3.0</span> <span class="c1"># mol/L</span>
+<span class="n">T_exp2</span> <span class="o">=</span> <span class="mi">300</span> <span class="c1"># K</span>
+<span class="n">CA_exp2</span><span class="p">,</span> <span class="n">CB_exp2</span><span class="p">,</span> <span class="n">CC_exp2</span> <span class="o">=</span> <span class="n">batch_rxn_model</span><span class="p">(</span><span class="n">theta_true</span><span class="p">,</span> <span class="n">time_exp</span><span class="p">,</span> <span class="n">CA0_exp2</span><span class="p">,</span> <span class="n">T_exp2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next let’s add random normally distributed noise.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_time</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">time_exp</span><span class="p">)</span>
+
+<span class="n">noise_std_dev</span> <span class="o">=</span> <span class="mf">0.05</span>
+
+<span class="n">CA_exp1</span> <span class="o">+=</span> <span class="n">noise_std_dev</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n_time</span><span class="p">)</span>
+<span class="n">CA_exp2</span> <span class="o">+=</span> <span class="n">noise_std_dev</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n_time</span><span class="p">)</span>
+<span class="n">CB_exp1</span> <span class="o">+=</span> <span class="n">noise_std_dev</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n_time</span><span class="p">)</span>
+<span class="n">CB_exp2</span> <span class="o">+=</span> <span class="n">noise_std_dev</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n_time</span><span class="p">)</span>
+<span class="n">CC_exp1</span> <span class="o">+=</span> <span class="n">noise_std_dev</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n_time</span><span class="p">)</span>
+<span class="n">CC_exp2</span> <span class="o">+=</span> <span class="n">noise_std_dev</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n_time</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we’ll package these into a numpy array:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create empty array for experiment 1</span>
+<span class="n">exp1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_time</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+
+<span class="c1"># Assign 1 to column 0. This is the experiment number.</span>
+<span class="n">exp1</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># Copy CA0 into column 1</span>
+<span class="n">exp1</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">CA0_exp1</span>
+
+<span class="c1"># Copy T into column 2 </span>
+<span class="n">exp1</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">T_exp1</span>
+
+<span class="c1"># Copy time data into column 3</span>
+<span class="n">exp1</span><span class="p">[:,</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">time_exp</span>
+
+<span class="c1"># Copy concentration data into remaining columns</span>
+<span class="n">exp1</span><span class="p">[:,</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">CA_exp1</span>
+<span class="n">exp1</span><span class="p">[:,</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="n">CB_exp1</span>
+<span class="n">exp1</span><span class="p">[:,</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="n">CC_exp1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">exp1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 1.00000000e+00  1.00000000e+00  4.00000000e+02  0.00000000e+00
+   9.75731747e-01 -1.79404622e-02 -4.99898372e-02]
+ [ 1.00000000e+00  1.00000000e+00  4.00000000e+02  1.00000000e-01
+   4.23531853e-01  4.25008014e-01  8.28784789e-02]
+ [ 1.00000000e+00  1.00000000e+00  4.00000000e+02  2.00000000e-01
+   1.18111238e-01  4.58135931e-01  3.16979286e-01]
+ [ 1.00000000e+00  1.00000000e+00  4.00000000e+02  3.00000000e-01
+   5.56110960e-02  4.40172370e-01  5.76083550e-01]
+ [ 1.00000000e+00  1.00000000e+00  4.00000000e+02  4.00000000e-01
+   7.46239431e-02  2.83477512e-01  6.18007356e-01]
+ [ 1.00000000e+00  1.00000000e+00  4.00000000e+02  5.00000000e-01
+   6.35556229e-03  1.75563584e-01  7.24593739e-01]
+ [ 1.00000000e+00  1.00000000e+00  4.00000000e+02  6.00000000e-01
+   7.82081342e-03  1.55223143e-01  7.89222670e-01]
+ [ 1.00000000e+00  1.00000000e+00  4.00000000e+02  7.00000000e-01
+  -5.88665979e-02  1.25935755e-01  8.81828373e-01]
+ [ 1.00000000e+00  1.00000000e+00  4.00000000e+02  8.00000000e-01
+   1.47285689e-02  7.31571636e-02  9.53390325e-01]
+ [ 1.00000000e+00  1.00000000e+00  4.00000000e+02  9.00000000e-01
+   2.08766215e-02 -1.93457487e-02  1.00185774e+00]
+ [ 1.00000000e+00  1.00000000e+00  4.00000000e+02  1.00000000e+00
+  -3.78834080e-02 -3.29933389e-02  1.05338532e+00]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create empty array for experiment 2</span>
+<span class="n">exp2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_time</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+
+<span class="c1"># Assign 2 to column 0. This is the experiment number.</span>
+<span class="n">exp2</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># Copy CA0 into column 1</span>
+<span class="n">exp2</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">CA0_exp2</span>
+
+<span class="c1"># Copy T into column 2 </span>
+<span class="n">exp2</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">T_exp2</span>
+
+<span class="c1"># Copy time data into column 3</span>
+<span class="n">exp2</span><span class="p">[:,</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">time_exp</span>
+
+<span class="c1"># Copy concentration data into remaining columns</span>
+<span class="n">exp2</span><span class="p">[:,</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">CA_exp2</span>
+<span class="n">exp2</span><span class="p">[:,</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="n">CB_exp2</span>
+<span class="n">exp2</span><span class="p">[:,</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="n">CC_exp2</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">exp2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 2.00000000e+00  3.00000000e+00  3.00000000e+02  0.00000000e+00
+   2.92333853e+00  6.28769233e-03  8.42187005e-02]
+ [ 2.00000000e+00  3.00000000e+00  3.00000000e+02  1.00000000e-01
+   1.92278961e+00  1.02189701e+00  3.17941285e-02]
+ [ 2.00000000e+00  3.00000000e+00  3.00000000e+02  2.00000000e-01
+   1.22887648e+00  1.55901637e+00  8.33284299e-02]
+ [ 2.00000000e+00  3.00000000e+00  3.00000000e+02  3.00000000e-01
+   8.50371080e-01  1.81403683e+00  2.90077548e-01]
+ [ 2.00000000e+00  3.00000000e+00  3.00000000e+02  4.00000000e-01
+   5.57301711e-01  1.94556780e+00  4.93798482e-01]
+ [ 2.00000000e+00  3.00000000e+00  3.00000000e+02  5.00000000e-01
+   4.32423845e-01  1.91306180e+00  6.26196775e-01]
+ [ 2.00000000e+00  3.00000000e+00  3.00000000e+02  6.00000000e-01
+   2.11675963e-01  1.94792233e+00  8.21655674e-01]
+ [ 2.00000000e+00  3.00000000e+00  3.00000000e+02  7.00000000e-01
+   1.18850613e-01  1.82019304e+00  9.51982568e-01]
+ [ 2.00000000e+00  3.00000000e+00  3.00000000e+02  8.00000000e-01
+   8.54413564e-02  1.66941406e+00  1.15649999e+00]
+ [ 2.00000000e+00  3.00000000e+00  3.00000000e+02  9.00000000e-01
+   3.71253473e-02  1.59706998e+00  1.31362389e+00]
+ [ 2.00000000e+00  3.00000000e+00  3.00000000e+02  1.00000000e+00
+  -2.18635483e-02  1.41887209e+00  1.47131594e+00]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Vertically stack data</span>
+<span class="n">exps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">exp1</span><span class="p">,</span><span class="n">exp2</span><span class="p">))</span>
+
+<span class="c1"># Create a dataframe with specific columns</span>
+<span class="c1"># Pro Tip: Use &#39;temp&#39; for temeprature instead of &#39;T&#39;.</span>
+<span class="c1">#   &#39;T&#39; can be confused with transpose.</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">exps</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;exp&#39;</span><span class="p">,</span> <span class="s1">&#39;CA0&#39;</span><span class="p">,</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;CA&#39;</span><span class="p">,</span><span class="s1">&#39;CB&#39;</span><span class="p">,</span><span class="s1">&#39;CC&#39;</span><span class="p">])</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>exp</th>
+      <th>CA0</th>
+      <th>temp</th>
+      <th>time</th>
+      <th>CA</th>
+      <th>CB</th>
+      <th>CC</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>400.0</td>
+      <td>0.0</td>
+      <td>0.975732</td>
+      <td>-0.017940</td>
+      <td>-0.049990</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>400.0</td>
+      <td>0.1</td>
+      <td>0.423532</td>
+      <td>0.425008</td>
+      <td>0.082878</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>400.0</td>
+      <td>0.2</td>
+      <td>0.118111</td>
+      <td>0.458136</td>
+      <td>0.316979</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>400.0</td>
+      <td>0.3</td>
+      <td>0.055611</td>
+      <td>0.440172</td>
+      <td>0.576084</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>400.0</td>
+      <td>0.4</td>
+      <td>0.074624</td>
+      <td>0.283478</td>
+      <td>0.618007</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Finally, let’s plot the data and the true model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_data_and_model</span><span class="p">(</span><span class="n">theta_</span><span class="p">,</span> <span class="n">data1</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Plot regression results</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        theta: model parameters</span>
+<span class="sd">        data: Pandas data frame</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Nothing</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="c1"># Set axed font size</span>
+    <span class="n">fs</span> <span class="o">=</span> <span class="mi">20</span>
+
+    <span class="c1"># loop over experiments</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">data1</span><span class="o">.</span><span class="n">exp</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
+
+        <span class="c1">## Plot 1: Data Versus Prediction</span>
+        
+        <span class="c1"># delcare figure object</span>
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+        <span class="c1"># select the rows that correspond to the specific experiment number</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="p">(</span><span class="n">data1</span><span class="o">.</span><span class="n">exp</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span>
+
+        <span class="c1"># determine experiment conditions</span>
+        <span class="n">CA0_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data1</span><span class="o">.</span><span class="n">CA0</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">())</span>
+        <span class="n">T_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data1</span><span class="o">.</span><span class="n">temp</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">())</span>
+        
+        <span class="c1"># Plot dataset 1</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data1</span><span class="o">.</span><span class="n">time</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">data1</span><span class="o">.</span><span class="n">CA</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;$C_</span><span class="si">{A}</span><span class="s2">$ Data&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data1</span><span class="o">.</span><span class="n">time</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">data1</span><span class="o">.</span><span class="n">CB</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;$C_</span><span class="si">{B}</span><span class="s2">$ Data&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data1</span><span class="o">.</span><span class="n">time</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">data1</span><span class="o">.</span><span class="n">CC</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;^&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;$C_</span><span class="si">{C}</span><span class="s2">$ Data&quot;</span><span class="p">)</span>
+
+        
+        <span class="c1"># determine time set</span>
+        <span class="n">t_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">data1</span><span class="o">.</span><span class="n">time</span><span class="p">[</span><span class="n">j</span><span class="p">]),</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">data1</span><span class="o">.</span><span class="n">time</span><span class="p">[</span><span class="n">j</span><span class="p">]),</span><span class="mi">21</span><span class="p">)</span>
+        
+        <span class="c1"># Evaluate model</span>
+        <span class="n">CA_</span><span class="p">,</span> <span class="n">CB_</span><span class="p">,</span> <span class="n">CC_</span> <span class="o">=</span> <span class="n">batch_rxn_model</span><span class="p">(</span><span class="n">theta_</span><span class="p">,</span><span class="n">t_plot</span><span class="p">,</span><span class="n">CA0_</span><span class="p">,</span><span class="n">T_</span><span class="p">)</span>
+        
+        <span class="c1"># Plot model predictions</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_plot</span><span class="p">,</span> <span class="n">CA_</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;$C_</span><span class="si">{A}</span><span class="s2">$ Model&quot;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_plot</span><span class="p">,</span> <span class="n">CB_</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;$C_</span><span class="si">{B}</span><span class="s2">$ Model&quot;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_plot</span><span class="p">,</span> <span class="n">CC_</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;$C_</span><span class="si">{C}</span><span class="s2">$ Model&quot;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+        <span class="c1"># Add &quot;extras&quot; to the plot</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time [hours]&quot;</span><span class="p">,</span><span class="n">fontsize</span> <span class="o">=</span> <span class="n">fs</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span> <span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Concentration [mol L$^{-1}$]&quot;</span><span class="p">,</span><span class="n">fontsize</span> <span class="o">=</span> <span class="n">fs</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span> <span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Experiment &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot;:  T=&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">T_</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot; K,  CA$_0$=&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">CA0_</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot; mol L$^{-1}$&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="n">fs</span><span class="p">,</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="n">fs</span><span class="p">,</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center left&#39;</span><span class="p">,</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+        
+        <span class="c1"># define tick size</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="n">fs</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="n">fs</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s2">&quot;in&quot;</span><span class="p">,</span><span class="n">top</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        
+        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_data_and_model</span><span class="p">(</span><span class="n">theta_true</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Reaction-MBDoE_21_0.png" src="../../_images/Reaction-MBDoE_21_0.png" />
+<img alt="../../_images/Reaction-MBDoE_21_1.png" src="../../_images/Reaction-MBDoE_21_1.png" />
+</div>
+</div>
+</section>
+<section id="perform-nonlinear-regression">
+<h2><span class="section-number">16.1.5. </span>Perform Nonlinear Regression<a class="headerlink" href="#perform-nonlinear-regression" title="Permalink to this headline">#</a></h2>
+<section id="solve-nonlinear-least-squares-problem">
+<h3><span class="section-number">16.1.5.1. </span>Solve Nonlinear Least Squares Problem<a class="headerlink" href="#solve-nonlinear-least-squares-problem" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># nonlinear parameter estimation with full physics model</span>
+<span class="k">def</span> <span class="nf">regression_func</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Function to define regression function for least-squares fitting</span>
+<span class="sd">    </span>
+<span class="sd">    Note: This only uses CB measurements</span>
+<span class="sd">    </span>
+<span class="sd">    Arguments:</span>
+<span class="sd">        theta: parameter vector</span>
+<span class="sd">        data: Pandas data frame</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        e: residual vector</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1"># determine number of entries in data frame</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="c1"># initialize matrix of residuals</span>
+    <span class="c1"># rows: each row of Pandas data frame</span>
+    <span class="c1"># columns: species CA, CB, CC</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+    <span class="c1"># loop over experiments</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">exp</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
+
+        <span class="c1"># select the rows that correspond to the specific experiment number</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">exp</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span>
+
+        <span class="c1"># determine experiment conditions</span>
+        <span class="n">CA0_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">CA0</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">())</span>
+        <span class="n">T_</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">temp</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">())</span>
+
+        <span class="c1"># determine experiment time</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">time</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+        <span class="n">CA</span><span class="p">,</span> <span class="n">CB</span><span class="p">,</span> <span class="n">CC</span> <span class="o">=</span> <span class="n">batch_rxn_model</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">CA0_</span><span class="p">,</span><span class="n">T_</span><span class="p">)</span>
+
+        <span class="c1"># Only use CB measurements</span>
+        <span class="n">e</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">CB</span> <span class="o">-</span> <span class="n">data</span><span class="o">.</span><span class="n">CB</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">e</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s test our function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">e_test</span> <span class="o">=</span> <span class="n">regression_func</span><span class="p">(</span><span class="n">theta_true</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">e_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 0.01794046  0.04529744  0.0478421  -0.02422186  0.02587734  0.04369025
+ -0.00380103 -0.02289042 -0.00363811  0.0660037   0.06420974 -0.00628769
+ -0.04071488 -0.01823045  0.01678605  0.00493699  0.05135578 -0.03346857
+  0.00745277  0.05189338  0.00933698  0.07090766]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, we can compute the best fit estimate.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initial guess</span>
+<span class="n">theta0</span> <span class="o">=</span> <span class="p">[</span><span class="mf">85.</span><span class="p">,</span> <span class="mf">370.</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
+
+<span class="c1"># Bounds</span>
+<span class="n">bnds</span> <span class="o">=</span> <span class="p">([</span><span class="mi">50</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,],</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">])</span>
+
+<span class="c1"># Define function that includes data</span>
+<span class="n">my_func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">theta_</span> <span class="p">:</span> <span class="n">regression_func</span><span class="p">(</span><span class="n">theta_</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+
+<span class="c1"># Perform nonlinear least squares</span>
+<span class="n">nl_results</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">least_squares</span><span class="p">(</span><span class="n">my_func</span><span class="p">,</span> <span class="n">theta0</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bnds</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;trf&#39;</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   Iteration     Total nfev        Cost      Cost reduction    Step norm     Optimality   
+       0              1         1.5408e-02                                    3.36e-01    
+       1              2         1.1625e-02      3.78e-03       6.16e+00       4.15e-02    
+       2              3         1.1053e-02      5.72e-04       2.98e+01       3.48e-02    
+       3              4         1.0856e-02      1.97e-04       3.36e+00       1.64e-02    
+       4              5         1.0769e-02      8.67e-05       8.08e+00       8.07e-02    
+       5              6         1.0757e-02      1.22e-05       6.72e-03       5.09e-02    
+       6              7         1.0653e-02      1.04e-04       7.65e-01       3.77e-03    
+       7              8         1.0641e-02      1.24e-05       5.41e+00       5.15e-02    
+       8              9         1.0607e-02      3.41e-05       6.53e-02       5.43e-04    
+       9             10         1.0606e-02      7.86e-07       6.76e-01       8.76e-04    
+      10             11         1.0606e-02      2.08e-08       8.89e-03       1.42e-05    
+      11             12         1.0606e-02      6.18e-11       6.83e-04       5.94e-08    
+`ftol` termination condition is satisfied.
+Function evaluations 12, initial cost 1.5408e-02, final cost 1.0606e-02, first-order optimality 5.94e-08.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">theta_hat</span> <span class="o">=</span> <span class="n">nl_results</span><span class="o">.</span><span class="n">x</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;theta_hat =&quot;</span><span class="p">,</span><span class="n">theta_hat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>theta_hat = [ 52.02384387 400.           6.21977848  15.09739218]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualize-results">
+<h3><span class="section-number">16.1.5.2. </span>Visualize Results<a class="headerlink" href="#visualize-results" title="Permalink to this headline">#</a></h3>
+<p>First let’s plot the data and model predictions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_data_and_model</span><span class="p">(</span><span class="n">theta_hat</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Reaction-MBDoE_32_0.png" src="../../_images/Reaction-MBDoE_32_0.png" />
+<img alt="../../_images/Reaction-MBDoE_32_1.png" src="../../_images/Reaction-MBDoE_32_1.png" />
+</div>
+</div>
+<p>Next, let’s look at the residuals. Recall, we only used <span class="math notranslate nohighlight">\(C_{B}\)</span> in our regression formulation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">CB_residuals</span> <span class="o">=</span> <span class="n">regression_func</span><span class="p">(</span><span class="n">theta_hat</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+
+<span class="c1"># define font size</span>
+<span class="n">fs</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">CB_residuals</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$C_</span><span class="si">{B}</span><span class="s2">$ residuals [mol L$^{-1}$]&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="n">fs</span><span class="p">,</span><span class="n">fontweight</span> <span class="o">=</span> <span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Count&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="n">fs</span><span class="p">,</span><span class="n">fontweight</span> <span class="o">=</span> <span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="c1"># define tick size</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">((</span><span class="o">-</span><span class="mf">0.07</span><span class="p">,</span><span class="mf">0.07</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="n">fs</span><span class="p">,</span><span class="n">ticks</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">0.06</span><span class="p">,</span><span class="mf">0.07</span><span class="p">,</span><span class="mf">0.03</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="n">fs</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s2">&quot;in&quot;</span><span class="p">,</span><span class="n">top</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># finish plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Reaction-MBDoE_34_0.png" src="../../_images/Reaction-MBDoE_34_0.png" />
+</div>
+</div>
+</section>
+<section id="estimate-uncertainty">
+<h3><span class="section-number">16.1.5.3. </span>Estimate Uncertainty<a class="headerlink" href="#estimate-uncertainty" title="Permalink to this headline">#</a></h3>
+<p>First let’s estimate the variance of the residuals.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sigre</span> <span class="o">=</span> <span class="p">(</span><span class="n">CB_residuals</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">CB_residuals</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">CB_residuals</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">theta_hat</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>How does the standard deviation of the residuals compare to the standard deviation of the measurement noise?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Estimated Standard Deviation of Residuals =&quot;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sigre</span><span class="p">),</span><span class="s2">&quot;mol/L&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Standard Deviation of Measurement Error in Synthetic Data =&quot;</span><span class="p">,</span><span class="n">noise_std_dev</span><span class="p">,</span><span class="s2">&quot;mol/L&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimated Standard Deviation of Residuals = 0.03432842941885925 mol/L
+Standard Deviation of Measurement Error in Synthetic Data = 0.05 mol/L
+</pre></div>
+</div>
+</div>
+</div>
+<p>Estimating the covariance matrix using a linearization approximation is easy!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Sigma_theta</span> <span class="o">=</span> <span class="n">sigre</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">nl_results</span><span class="o">.</span><span class="n">jac</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">nl_results</span><span class="o">.</span><span class="n">jac</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Covariance matrix:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">Sigma_theta</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Covariance matrix:
+ [[ 4.31710287e+02 -2.24632027e+02  2.08623925e+01 -1.37034026e+00]
+ [-2.24632027e+02  6.51269456e+03 -1.05362493e+01  4.14373475e+01]
+ [ 2.08623925e+01 -1.05362493e+01  1.01072715e+00 -6.37570643e-02]
+ [-1.37034026e+00  4.14373475e+01 -6.37570643e-02  2.65257890e-01]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Recall the rows/colums are <span class="math notranslate nohighlight">\(A_1\)</span>, <span class="math notranslate nohighlight">\(A_2\)</span>, <span class="math notranslate nohighlight">\(E_1\)</span>, and <span class="math notranslate nohighlight">\(E_2\)</span>.</p>
+<p>We can easily convert this to a correlation matrix.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corr_theta</span> <span class="o">=</span> <span class="n">Sigma_theta</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">theta_hat</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">theta_hat</span><span class="p">)):</span>
+        <span class="n">corr_theta</span><span class="p">[</span><span class="n">r</span><span class="p">,</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">corr_theta</span><span class="p">[</span><span class="n">r</span><span class="p">,</span><span class="n">c</span><span class="p">]</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Sigma_theta</span><span class="p">[</span><span class="n">r</span><span class="p">,</span><span class="n">r</span><span class="p">])</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Sigma_theta</span><span class="p">[</span><span class="n">c</span><span class="p">,</span><span class="n">c</span><span class="p">])</span>
+        
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Correlation matrix:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">corr_theta</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Correlation matrix:
+ [[ 1.         -0.13396616  0.99873656 -0.12805545]
+ [-0.13396616  1.         -0.12986398  0.99695932]
+ [ 0.99873656 -0.12986398  1.         -0.12313377]
+ [-0.12805545  0.99695932 -0.12313377  1.        ]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Discussion: Why are the pairs <span class="math notranslate nohighlight">\(A_1\)</span>, <span class="math notranslate nohighlight">\(E_2\)</span> and <span class="math notranslate nohighlight">\(A_2\)</span>, <span class="math notranslate nohighlight">\(E_2\)</span> highly correlated when measuring only <span class="math notranslate nohighlight">\(C_B\)</span>?</p>
+</section>
+</section>
+<section id="fisher-information-matrix">
+<h2><span class="section-number">16.1.6. </span>Fisher Information Matrix<a class="headerlink" href="#fisher-information-matrix" title="Permalink to this headline">#</a></h2>
+<section id="model-sensitivity">
+<h3><span class="section-number">16.1.6.1. </span>Model Sensitivity<a class="headerlink" href="#model-sensitivity" title="Permalink to this headline">#</a></h3>
+<p>The first step of calculating the Fisher Information Matrix (FIM) is computing the sensitivity of all model outputs to each model parameter.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calc_model_output</span><span class="p">(</span><span class="n">theta_</span><span class="p">,</span><span class="n">data</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Assembles matrix out model outputs (columns) by experimental conditions (rows)</span>
+<span class="sd">    </span>
+<span class="sd">    Arguments:</span>
+<span class="sd">        theta_: values of theta parameters, numpy array</span>
+<span class="sd">        data: data frame of experimental conditions</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        model_output: matrix</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="c1"># Allocate matrix of model outputs</span>
+    <span class="n">model_output</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span><span class="mi">3</span><span class="p">))</span>
+    
+    <span class="c1"># Iterate over rows in pandas dataframe (each row is an experiment)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">r</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+        <span class="c1"># Evaluate model and store results</span>
+        <span class="n">model_output</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">batch_rxn_model</span><span class="p">(</span><span class="n">theta_</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">CA0</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">temp</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">model_output</span>
+
+<span class="c1"># Test function at nominal values</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">calc_model_output</span><span class="p">(</span><span class="n">theta_hat</span><span class="p">,</span><span class="n">df</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 1.00000000e+00 -0.00000000e+00  0.00000000e+00]
+ [ 4.48576777e-01  4.36211991e-01  1.15211232e-01]
+ [ 2.01221125e-01  4.80244036e-01  3.18534839e-01]
+ [ 9.02631236e-02  4.01069503e-01  5.08667373e-01]
+ [ 4.04899411e-02  3.01017593e-01  6.58492466e-01]
+ [ 1.81628473e-02  2.14035562e-01  7.67801591e-01]
+ [ 8.14743149e-03  1.47552177e-01  8.44300392e-01]
+ [ 3.65474856e-03  9.98118939e-02  8.96533358e-01]
+ [ 1.63943533e-03  6.67080386e-02  9.31652526e-01]
+ [ 7.35412616e-04  4.42331359e-02  9.55031452e-01]
+ [ 3.29889021e-04  2.91769487e-02  9.70493162e-01]
+ [ 3.00000000e+00 -0.00000000e+00  0.00000000e+00]
+ [ 1.95192238e+00  9.96937565e-01  5.11400501e-02]
+ [ 1.27000033e+00  1.55608557e+00  1.73914099e-01]
+ [ 8.26314025e-01  1.83842473e+00  3.35261249e-01]
+ [ 5.37633614e-01  1.94797432e+00  5.14392066e-01]
+ [ 3.49806362e-01  1.95175696e+00  6.98436675e-01]
+ [ 2.27598290e-01  1.89278267e+00  8.79619039e-01]
+ [ 1.48084732e-01  1.79849154e+00  1.05342373e+00]
+ [ 9.63499678e-02  1.68624205e+00  1.21740798e+00]
+ [ 6.26892196e-02  1.56687767e+00  1.37043311e+00]
+ [ 4.07881637e-02  1.44704337e+00  1.51216847e+00]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’ll use finite difference to estimate the sensitivities.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calc_model_sensitivity</span><span class="p">(</span><span class="n">theta_</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Estimate the model sensitivity matrix using forward finite difference</span>
+<span class="sd">    </span>
+<span class="sd">    Arguments:</span>
+<span class="sd">        model_function: Python function that computes model outputs</span>
+<span class="sd">        theta_: nominal value of theta</span>
+<span class="sd">        exp_design_df: data frame containing experimental data</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="c1"># Evaluate model at nominal point</span>
+    <span class="n">nominal_output</span> <span class="o">=</span> <span class="n">calc_model_output</span><span class="p">(</span><span class="n">theta_</span><span class="p">,</span><span class="n">data</span><span class="p">)</span>
+    
+    <span class="c1"># Extract number of experiments and number of measured/output variables</span>
+    <span class="p">(</span><span class="n">n_exp</span><span class="p">,</span> <span class="n">n_output</span><span class="p">)</span> <span class="o">=</span> <span class="n">nominal_output</span><span class="o">.</span><span class="n">shape</span>
+    
+    <span class="c1"># Set finite difference step size</span>
+    <span class="n">eps</span> <span class="o">=</span> <span class="mf">1E-5</span>
+    
+    <span class="c1"># Extract number of parameters</span>
+    <span class="n">n_param</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">theta_</span><span class="p">)</span>
+    
+    <span class="c1"># Create list to store model sensitity matrices</span>
+    <span class="n">model_sensitivity</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="c1"># Loop over number of outputs</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_output</span><span class="p">):</span>
+        
+        <span class="c1"># Allocate empty sensitivty matrix</span>
+        <span class="n">model_sensitivity</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_exp</span><span class="p">,</span><span class="n">n_param</span><span class="p">)))</span>
+    
+    <span class="c1"># Loop over parameters</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_param</span><span class="p">):</span>
+        
+        <span class="c1"># Create perturbation vector</span>
+        <span class="n">perturb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_param</span><span class="p">)</span>
+        <span class="n">perturb</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="n">eps</span>
+        
+        <span class="c1"># Forward and backward perturbation simulations</span>
+        <span class="n">output_forward</span> <span class="o">=</span> <span class="n">calc_model_output</span><span class="p">(</span><span class="n">theta_</span> <span class="o">+</span> <span class="n">perturb</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="n">output_backward</span> <span class="o">=</span> <span class="n">calc_model_output</span><span class="p">(</span><span class="n">theta_</span> <span class="o">-</span> <span class="n">perturb</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        
+        <span class="n">sensitivity</span> <span class="o">=</span> <span class="p">(</span><span class="n">output_forward</span> <span class="o">-</span> <span class="n">output_backward</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">eps</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">param &quot;</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;sens:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">sensitivity</span><span class="p">)</span>
+        
+        <span class="c1"># Loop over outputs</span>
+        <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_output</span><span class="p">):</span>
+            <span class="c1"># Copy sensitivity results</span>
+            <span class="n">model_sensitivity</span><span class="p">[</span><span class="n">o</span><span class="p">][:,</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="n">sensitivity</span><span class="p">[:,</span><span class="n">o</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="n">model_sensitivity</span>
+
+<span class="n">model_sensitivity</span> <span class="o">=</span> <span class="n">calc_model_sensitivity</span><span class="p">(</span><span class="n">theta_hat</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CA sensitivity:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">model_sensitivity</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CB sensitivity:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">model_sensitivity</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CC sensitivity:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">model_sensitivity</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CA sensitivity:
+ [[ 0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-6.91246460e-03  0.00000000e+00  1.08128750e-01  0.00000000e+00]
+ [-6.20154218e-03  0.00000000e+00  9.70080920e-02  0.00000000e+00]
+ [-4.17280170e-03  0.00000000e+00  6.52733659e-02  0.00000000e+00]
+ [-2.49576259e-03  0.00000000e+00  3.90401548e-02  0.00000000e+00]
+ [-1.39942642e-03  0.00000000e+00  2.18906335e-02  0.00000000e+00]
+ [-7.53300232e-04  0.00000000e+00  1.17835558e-02  0.00000000e+00]
+ [-3.94231822e-04  0.00000000e+00  6.16680106e-03  0.00000000e+00]
+ [-2.02106560e-04  0.00000000e+00  3.16146714e-03  0.00000000e+00]
+ [-1.01992848e-04  0.00000000e+00  1.59543083e-03  0.00000000e+00]
+ [-5.08351367e-05  0.00000000e+00  7.95192467e-04  0.00000000e+00]
+ [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.61259035e-02  0.00000000e+00  3.36334218e-01  0.00000000e+00]
+ [-2.09843413e-02  0.00000000e+00  4.37665526e-01  0.00000000e+00]
+ [-2.04799028e-02  0.00000000e+00  4.27144569e-01  0.00000000e+00]
+ [-1.77667470e-02  0.00000000e+00  3.70556909e-01  0.00000000e+00]
+ [-1.44497130e-02  0.00000000e+00  3.01374302e-01  0.00000000e+00]
+ [-1.12818873e-02  0.00000000e+00  2.35303699e-01  0.00000000e+00]
+ [-8.56386545e-03  0.00000000e+00  1.78614550e-01  0.00000000e+00]
+ [-6.36800026e-03  0.00000000e+00  1.32815900e-01  0.00000000e+00]
+ [-4.66119084e-03  0.00000000e+00  9.72173732e-02  0.00000000e+00]
+ [-3.36973435e-03  0.00000000e+00  7.02817655e-02  0.00000000e+00]]
+CB sensitivity:
+ [[ 0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [ 5.23318933e-03 -2.47415016e-04 -8.18605594e-02  2.97571877e-02]
+ [ 2.74613720e-03 -5.76274842e-04 -4.29566586e-02  6.93099331e-02]
+ [ 1.39325179e-04 -7.60286739e-04 -2.17940465e-03  9.14414778e-02]
+ [-1.25697124e-03 -7.97720390e-04  1.96622676e-02  9.59437108e-02]
+ [-1.69679418e-03 -7.40125411e-04  2.65422311e-02  8.90166267e-02]
+ [-1.62232622e-03 -6.36432722e-04  2.53773605e-02  7.65452629e-02]
+ [-1.34431051e-03 -5.19993897e-04  2.10284787e-02  6.25408907e-02]
+ [-1.02982388e-03 -4.09663641e-04  1.61090978e-02  4.92712111e-02]
+ [-7.51402960e-04 -3.14127754e-04  1.17538776e-02  3.77808848e-02]
+ [-5.30830997e-04 -2.35922760e-04  8.30356397e-03  2.83749860e-02]
+ [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [ 1.52749654e-02 -1.23766281e-04 -3.18586399e-01  1.98475505e-02]
+ [ 1.84833286e-02 -4.06574707e-04 -3.85502485e-01  6.51995974e-02]
+ [ 1.63170288e-02 -7.55545293e-04 -3.40320475e-01  1.21161617e-01]
+ [ 1.22537426e-02 -1.11531655e-03 -2.55573459e-01  1.78855667e-01]
+ [ 7.98699313e-03 -1.45432850e-03 -1.66582858e-01  2.33220686e-01]
+ [ 4.24923221e-03 -1.75596635e-03 -8.86252481e-02  2.81592280e-01]
+ [ 1.27749624e-03 -2.01285956e-03 -2.66444419e-02  3.22788481e-01]
+ [-9.29074562e-04 -2.22322698e-03  1.93774918e-02  3.56523659e-01]
+ [-2.47125215e-03 -2.38854753e-03  5.15423310e-02  3.83034983e-01]
+ [-3.47917525e-03 -2.51208805e-03  7.25643487e-02  4.02846328e-01]]
+CC sensitivity:
+ [[ 0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [ 1.67927526e-03  2.47415016e-04 -2.62681902e-02 -2.97571877e-02]
+ [ 3.45540498e-03  5.76274842e-04 -5.40514334e-02 -6.93099331e-02]
+ [ 4.03347653e-03  7.60286745e-04 -6.30939612e-02 -9.14414778e-02]
+ [ 3.75273383e-03  7.97720390e-04 -5.87024224e-02 -9.59437108e-02]
+ [ 3.09622059e-03  7.40125411e-04 -4.84328646e-02 -8.90166267e-02]
+ [ 2.37562646e-03  6.36432723e-04 -3.71609163e-02 -7.65452629e-02]
+ [ 1.73854233e-03  5.19993898e-04 -2.71952797e-02 -6.25408907e-02]
+ [ 1.23193045e-03  4.09663642e-04 -1.92705650e-02 -4.92712111e-02]
+ [ 8.53395804e-04  3.14127752e-04 -1.33493084e-02 -3.77808848e-02]
+ [ 5.81666137e-04  2.35922759e-04 -9.09875644e-03 -2.83749860e-02]
+ [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [ 8.50938131e-04  1.23766281e-04 -1.77478186e-02 -1.98475505e-02]
+ [ 2.50101273e-03  4.06574707e-04 -5.21630406e-02 -6.51995974e-02]
+ [ 4.16287398e-03  7.55545293e-04 -8.68240938e-02 -1.21161617e-01]
+ [ 5.51300438e-03  1.11531655e-03 -1.14983450e-01 -1.78855667e-01]
+ [ 6.46271983e-03  1.45432850e-03 -1.34791444e-01 -2.33220686e-01]
+ [ 7.03265506e-03  1.75596635e-03 -1.46678450e-01 -2.81592280e-01]
+ [ 7.28636920e-03  2.01285956e-03 -1.51970108e-01 -3.22788481e-01]
+ [ 7.29707482e-03  2.22322698e-03 -1.52193392e-01 -3.56523659e-01]
+ [ 7.13244298e-03  2.38854753e-03 -1.48759704e-01 -3.83034983e-01]
+ [ 6.84890958e-03  2.51208805e-03 -1.42846114e-01 -4.02846328e-01]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We are now ready to compute the FIM for each of the three measurements:</p>
+<div class="math notranslate nohighlight">
+\[
+M_{i} = (\sigma^{-2}_{i}) \mathbf{Q}_{i}^{T} \mathbf{Q}_{i} \quad \forall i \in \{C_A, C_B, C_C \}
+\]</div>
+</section>
+<section id="fim-by-measurement-type">
+<h3><span class="section-number">16.1.6.2. </span>FIM By Measurement Type<a class="headerlink" href="#fim-by-measurement-type" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Allocate list of FIM</span>
+<span class="n">FIM</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">measurements</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;CA&#39;</span><span class="p">,</span><span class="s1">&#39;CB&#39;</span><span class="p">,</span><span class="s1">&#39;CC&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">measurements</span><span class="p">)):</span>
+    <span class="n">FIM</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="mi">1</span><span class="o">/</span><span class="n">noise_std_dev</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">model_sensitivity</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">model_sensitivity</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;FIM for&quot;</span><span class="p">,</span><span class="n">measurements</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="s2">&quot;measurements:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">FIM</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FIM for CA measurements:
+ [[  0.81245471   0.         -16.71029522   0.        ]
+ [  0.           0.           0.           0.        ]
+ [-16.71029522   0.         344.84855429   0.        ]
+ [  0.           0.           0.           0.        ]] 
+
+FIM for CB measurements:
+ [[ 4.55865870e-01 -1.54203288e-02 -9.41246436e+00  2.50155761e+00]
+ [-1.54203288e-02  1.25428256e-02  3.25351602e-01 -1.96084302e+00]
+ [-9.41246436e+00  3.25351602e-01  1.94820902e+02 -5.26234289e+01]
+ [ 2.50155761e+00 -1.96084302e+00 -5.26234289e+01  3.08365508e+02]] 
+
+FIM for CC measurements:
+ [[ 1.66397353e-01  4.45517642e-02 -3.33296318e+00 -6.91859734e+00]
+ [ 4.45517642e-02  1.25428256e-02 -8.99830065e-01 -1.96084302e+00]
+ [-3.33296318e+00 -8.99830065e-01  6.73632373e+01  1.40766489e+02]
+ [-6.91859734e+00 -1.96084302e+00  1.40766489e+02  3.08365508e+02]] 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Discussion:</p>
+<ul class="simple">
+<li><p>What would measuring only <span class="math notranslate nohighlight">\(C_{A}\)</span> only provide information about <span class="math notranslate nohighlight">\(A_1\)</span> and <span class="math notranslate nohighlight">\(E_1\)</span>?</p></li>
+<li><p>If you could only choose to measure ONE species (<span class="math notranslate nohighlight">\(C_A\)</span>, <span class="math notranslate nohighlight">\(C_B\)</span>, or <span class="math notranslate nohighlight">\(C_C\)</span>), which would you choose and why?</p></li>
+</ul>
+</section>
+<section id="eigendecomposition">
+<h3><span class="section-number">16.1.6.3. </span>Eigendecomposition<a class="headerlink" href="#eigendecomposition" title="Permalink to this headline">#</a></h3>
+<p>Next let’s interpret the eigendecomposition of each FIM.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">measurements</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;CA&#39;</span><span class="p">,</span><span class="s1">&#39;CB&#39;</span><span class="p">,</span><span class="s1">&#39;CC&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">measurements</span><span class="p">)):</span>
+    
+    <span class="c1"># Compute eigendecomposition</span>
+    <span class="n">w</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">FIM</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;**********</span><span class="se">\n</span><span class="s2">Considering measurement&quot;</span><span class="p">,</span><span class="n">measurements</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">eigenvalue =&quot;</span><span class="p">,</span><span class="n">w</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;eigenvector:&quot;</span><span class="p">,</span><span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;**********</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>**********
+Considering measurement CA 
+
+eigenvalue = 0.0
+eigenvector: [ 0.          0.          0.99882801 -0.0484005 ]
+
+eigenvalue = 0.0
+eigenvector: [1. 0. 0. 0.]
+
+eigenvalue = 0.002719061857021643
+eigenvector: [0.         0.         0.0484005  0.99882801]
+
+eigenvalue = 345.6582899345057
+eigenvector: [0. 1. 0. 0.]
+**********
+
+**********
+Considering measurement CB 
+
+eigenvalue = 7.228299488409542e-05
+eigenvector: [-0.03686964  0.9981524   0.04498939 -0.01756027]
+
+eigenvalue = 0.0011106566849333093
+eigenvector: [0.99929836 0.03690867 0.00237854 0.00590648]
+
+eigenvalue = 174.53761093541377
+eigenvector: [-0.00173283  0.04826374 -0.92941769  0.36585567]
+
+eigenvalue = 329.1160247860763
+eigenvector: [ 6.35775363e-03  3.73713186e-04 -3.66269113e-01 -9.30487171e-01]
+**********
+
+**********
+Considering measurement CC 
+
+eigenvalue = 3.2347774822037514e-06
+eigenvector: [-0.21328461  0.97536678  0.05240337 -0.02057222]
+
+eigenvalue = 0.0014001732097170428
+eigenvector: [ 0.97691367  0.21355395 -0.00098646 -0.00578021]
+
+eigenvalue = 2.5724156365059887
+eigenvector: [-0.01051553  0.05523113 -0.90667874  0.41805815]
+
+eigenvalue = 373.3338663613088
+eigenvector: [ 0.00622696 -0.00197097  0.41855296  0.9081689 ]
+**********
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="optimality-metrics">
+<h3><span class="section-number">16.1.6.4. </span>Optimality metrics<a class="headerlink" href="#optimality-metrics" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">optimality_metrics</span><span class="p">(</span><span class="n">FIM</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Compute optimality metrics using eigenvalues</span>
+<span class="sd">    </span>
+<span class="sd">    Arguments:</span>
+<span class="sd">        FIM: numpy array</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        dopt, aopt, eopt (float)</span>
+<span class="sd">    </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="c1"># Compute eigendecomposition</span>
+    <span class="c1"># Compute eigendecomposition</span>
+    <span class="n">eigenvalues</span><span class="p">,</span> <span class="n">eigenvectors</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">FIM</span><span class="p">)</span>
+    
+    <span class="c1"># Determinant </span>
+    <span class="n">dopt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">eigenvalues</span><span class="p">)</span>
+    
+    <span class="c1"># Trace</span>
+    <span class="n">aopt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">eigenvalues</span><span class="p">)</span>
+    
+    <span class="c1"># Min eigenvalue</span>
+    <span class="n">eopt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">eigenvalues</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;D-optimality =&quot;</span><span class="p">,</span><span class="n">dopt</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A-optimality =&quot;</span><span class="p">,</span><span class="n">aopt</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;E-optimality =&quot;</span><span class="p">,</span><span class="n">eopt</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">dopt</span><span class="p">,</span> <span class="n">aopt</span><span class="p">,</span> <span class="n">eopt</span>
+
+<span class="n">measurements</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;CA&#39;</span><span class="p">,</span><span class="s1">&#39;CB&#39;</span><span class="p">,</span><span class="s1">&#39;CC&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">measurements</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;**********</span><span class="se">\n</span><span class="s2">Considering measurement&quot;</span><span class="p">,</span><span class="n">measurements</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">optimality_metrics</span><span class="p">(</span><span class="n">FIM</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="kc">True</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;**********</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>**********
+Considering measurement CA 
+D-optimality = 0.0
+A-optimality = 345.66100899636274
+E-optimality = 0.0
+**********
+
+**********
+Considering measurement CB 
+D-optimality = 0.004611625469148111
+A-optimality = 503.6548186611699
+E-optimality = 7.228299488409542e-05
+**********
+
+**********
+Considering measurement CC 
+D-optimality = 4.34975407717374e-06
+A-optimality = 375.907685405802
+E-optimality = 3.2347774822037514e-06
+**********
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="what-is-the-next-best-experiment">
+<h2><span class="section-number">16.1.7. </span>What is the next best experiment?<a class="headerlink" href="#what-is-the-next-best-experiment" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temperatures</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">550</span><span class="p">,</span> <span class="mi">26</span><span class="p">)</span>
+<span class="n">intial_concentrations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">11</span><span class="p">)</span>
+
+<span class="c1"># Allocate lists and empty arrays</span>
+<span class="n">Dopt</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">Aopt</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">Eopt</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">measurements</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;$C_</span><span class="si">{A}</span><span class="s1">$&#39;</span><span class="p">,</span><span class="s1">&#39;$C_</span><span class="si">{B}</span><span class="s1">$&#39;</span><span class="p">,</span><span class="s1">&#39;$C_</span><span class="si">{C}</span><span class="s1">$&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">measurements</span><span class="p">)):</span>
+    <span class="n">empty_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">temperatures</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">intial_concentrations</span><span class="p">)))</span>
+    <span class="n">Dopt</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">empty_matrix</span><span class="p">)</span>
+    <span class="n">Aopt</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">empty_matrix</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+    <span class="n">Eopt</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">empty_matrix</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+
+<span class="c1"># Loop over proposed temperatures</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">T</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">temperatures</span><span class="p">):</span>
+    <span class="c1"># Loop over proposed concentrations</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">C</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">intial_concentrations</span><span class="p">):</span>
+        
+        <span class="c1"># Create df for new experiment</span>
+        <span class="n">exp3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_time</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+
+        <span class="c1"># Assign 3 to column 0. This is the experiment number.</span>
+        <span class="n">exp3</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+
+        <span class="c1"># Copy C into column 1</span>
+        <span class="n">exp3</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="c1"># Copy T into column 2 </span>
+        <span class="n">exp3</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="c1"># Copy time data into column 3</span>
+        <span class="n">exp3</span><span class="p">[:,</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">time_exp</span>
+           
+        <span class="c1"># Create dataframe for new experiments</span>
+        <span class="n">new_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">exp3</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;exp&#39;</span><span class="p">,</span> <span class="s1">&#39;CA0&#39;</span><span class="p">,</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span><span class="s1">&#39;time&#39;</span><span class="p">])</span>
+             
+        <span class="c1"># Calculate model sensitivities</span>
+        <span class="n">model_sensitivity</span> <span class="o">=</span> <span class="n">calc_model_sensitivity</span><span class="p">(</span><span class="n">theta_hat</span><span class="p">,</span> <span class="n">new_df</span><span class="p">)</span>
+        
+        <span class="c1"># Loop over measurements</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">measurements</span><span class="p">)):</span>
+            
+            <span class="c1"># Compute FIM of proposed experiment</span>
+            <span class="n">FIM_new</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">noise_std_dev</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">model_sensitivity</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">model_sensitivity</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+            
+            
+            <span class="c1"># Compute total FIM (prior + new)</span>
+            <span class="n">FIM_total</span> <span class="o">=</span> <span class="n">FIM</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="n">FIM_new</span>
+            
+            <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            print(&quot;\ni =&quot;,i)</span>
+<span class="sd">            print(&quot;j =&quot;,j)</span>
+<span class="sd">            print(FIM_total)</span>
+<span class="sd">            &#39;&#39;&#39;</span>
+            
+            <span class="c1"># Compute A and D-optimality</span>
+            <span class="n">Dopt</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">FIM_total</span><span class="p">)</span>
+            <span class="n">Aopt</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">FIM_total</span><span class="p">)</span>
+            
+            <span class="c1"># Compute E-optimality</span>
+            <span class="n">smallest_eigenvalue</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">FIM_total</span><span class="p">,</span> <span class="n">eigvals_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">subset_by_index</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+            <span class="n">Eopt</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">smallest_eigenvalue</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s make a function that visualizes the MBDoE metrics as a heatmap.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_contour_plot</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">zlabelstring</span><span class="p">,</span> <span class="n">clabel_fmt</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%2.2f</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="n">temperatures</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">intial_concentrations</span><span class="p">):</span>
+    <span class="c1"># draw figure, using (6,6) because the plot is small otherwise</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+    
+    <span class="c1"># define font size</span>
+    <span class="n">fs</span> <span class="o">=</span> <span class="mi">20</span>
+
+    <span class="c1"># plot heatmap</span>
+    <span class="c1">#   cmap defines the overall color within the heatmap </span>
+    <span class="c1">#   levels: determines the number and positions of the contour lines / regions.</span>
+    <span class="n">cs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">matrix</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">coolwarm</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+    <span class="c1"># plot color bar</span>
+    <span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cs</span><span class="p">)</span>
+
+    <span class="c1"># plot title in color bar</span>
+    <span class="n">cbar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">zlabelstring</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">fs</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+    <span class="c1"># set font size in color bar</span>
+    <span class="n">cbar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="n">fs</span><span class="p">)</span>
+
+    <span class="c1"># plot equipotential line</span>
+    <span class="c1">#  [::10] means sampling 1 in every 10 samples</span>
+    <span class="c1">#  colors define the color want to use, &#39;k&#39; for black</span>
+    <span class="c1">#  alpha is blending value, between 0 (transparent) and 1 (opaque).</span>
+    <span class="c1">#  linestyle defines the linestyle.</span>
+    <span class="c1">#  linewidth defines the width of line</span>
+    <span class="n">cs2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">cs</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">cs</span><span class="o">.</span><span class="n">levels</span><span class="p">[::</span><span class="mi">15</span><span class="p">],</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">linestyles</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="c1"># plot the heatmap label</span>
+    <span class="c1">#  %2.2f means keep to 2 digit</span>
+    <span class="c1">#  fontsize defines the size of the text in figure</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">clabel</span><span class="p">(</span><span class="n">cs2</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="n">clabel_fmt</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">fs</span><span class="p">)</span>
+
+    <span class="c1"># define tick size</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="n">fs</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="n">fs</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s2">&quot;in&quot;</span><span class="p">,</span><span class="n">top</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># set squared figure</span>
+    <span class="c1"># plt.axis(&#39;square&#39;)</span>
+    
+    <span class="c1"># Plot data from previous two experiments</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">T_exp1</span><span class="p">,</span> <span class="n">T_exp2</span><span class="p">],</span> <span class="p">[</span><span class="n">CA0_exp1</span><span class="p">,</span> <span class="n">CA0_exp2</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="c1"># plot titile and x,y label</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Temperature [K]&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">fs</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Initial Concentration [mol L$^{-1}$]&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">fs</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’ll start by plotting D-optimality seperately for each of the three measurement types. The stars mark the prior two experiments. The colored contours show metrics of the FIM depending <span class="math notranslate nohighlight">\(T\)</span> and <span class="math notranslate nohighlight">\(C_{A0}\)</span> for the third experiment.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">m</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">measurements</span><span class="p">):</span>
+    <span class="n">create_contour_plot</span><span class="p">(</span><span class="n">Aopt</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">transpose</span><span class="p">(),</span> <span class="s2">&quot;A-optimality for &quot;</span><span class="o">+</span><span class="n">m</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%2.0f</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Reaction-MBDoE_65_0.png" src="../../_images/Reaction-MBDoE_65_0.png" />
+<img alt="../../_images/Reaction-MBDoE_65_1.png" src="../../_images/Reaction-MBDoE_65_1.png" />
+<img alt="../../_images/Reaction-MBDoE_65_2.png" src="../../_images/Reaction-MBDoE_65_2.png" />
+</div>
+</div>
+<p>Likewise, let’s make plots for D-optimality.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">m</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">measurements</span><span class="p">):</span>
+    <span class="n">create_contour_plot</span><span class="p">(</span><span class="n">Dopt</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">transpose</span><span class="p">(),</span> <span class="s2">&quot;D-optimality for &quot;</span><span class="o">+</span><span class="n">m</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%2.4f</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Reaction-MBDoE_67_0.png" src="../../_images/Reaction-MBDoE_67_0.png" />
+<img alt="../../_images/Reaction-MBDoE_67_1.png" src="../../_images/Reaction-MBDoE_67_1.png" />
+<img alt="../../_images/Reaction-MBDoE_67_2.png" src="../../_images/Reaction-MBDoE_67_2.png" />
+</div>
+</div>
+<p>And finally E-optimality.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">m</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">measurements</span><span class="p">):</span>
+    <span class="n">create_contour_plot</span><span class="p">(</span><span class="n">Eopt</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">transpose</span><span class="p">(),</span> <span class="s2">&quot;E-optimality for &quot;</span><span class="o">+</span><span class="n">m</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%2.4f</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Reaction-MBDoE_69_0.png" src="../../_images/Reaction-MBDoE_69_0.png" />
+<img alt="../../_images/Reaction-MBDoE_69_1.png" src="../../_images/Reaction-MBDoE_69_1.png" />
+<img alt="../../_images/Reaction-MBDoE_69_2.png" src="../../_images/Reaction-MBDoE_69_2.png" />
+</div>
+</div>
+<p><strong>Discussion:</strong></p>
+<ul class="simple">
+<li><p>Based on the plots for D-, A-, and E-optimality, why is it a bad idea to only measure <span class="math notranslate nohighlight">\(C_{A}\)</span>? Using the mathematical model for the experiment, explain why this makes sense.</p></li>
+<li><p>Why is D- and E-optimality approximately an order of magnitude larger for measuring <span class="math notranslate nohighlight">\(C_{B}\)</span> instead of <span class="math notranslate nohighlight">\(C_{C}\)</span>?</p></li>
+<li><p>Why do D- and E-optimality both recommend a third experiment at the maximum value for <span class="math notranslate nohighlight">\(C_{A0}\)</span>? Using the mathematical model and assumed measurement error structure, explain why this makes sense.</p></li>
+</ul>
+</section>
+<section id="take-away-messages">
+<h2><span class="section-number">16.1.8. </span>Take Away Messages<a class="headerlink" href="#take-away-messages" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Fisher information matrix quantifies the value of data in the context of a mathematical model</p></li>
+<li><p>An eigendecomposition of the Fisher information matrix reveals which parameters are (locally) not identiafiable</p></li>
+<li><p>A-, D-, and E-optimality help inform which experimental conditions and measurements are most informative</p></li>
+<li><p>Heatmaps of these optimality matrics help build intuition about the model</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks/16"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="design_of_experiments.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">16. </span>Design of Experiments</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../60258-organization/home.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">CBE 60258 Information</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
