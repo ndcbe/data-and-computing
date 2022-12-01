@@ -23,7 +23,7 @@ On GitHub for the [class repository](https://github.com/ndcbe/data-and-computing
 
 Then create a fork under your username. It is best to keep the default settings:
 
-![](/media/contrib_instructions/fork1.png)
+![](/media/contrib_instructions/fork2.png)
 
 
 ### Step 3: Create a Branch in GitHub

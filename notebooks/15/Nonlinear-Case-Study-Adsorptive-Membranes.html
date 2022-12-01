@@ -1286,13 +1286,6 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope = 0.6861090472380716
-intercept = 1.23217641968572
-R-squared: 0.9987035006310445
-</pre></div>
-</div>
-</div>
 </div>
 <p>Alright, we now have estimates for <span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span>. But we really care about <span class="math notranslate nohighlight">\(K\)</span> and <span class="math notranslate nohighlight">\(Q\)</span>. Let’s reverse the transformation.</p>
 <div class="math notranslate nohighlight">
@@ -1304,12 +1297,6 @@ R-squared: 0.9987035006310445
 <span class="n">Klin1</span> <span class="o">=</span> <span class="n">slope</span><span class="o">/</span><span class="n">intercept</span><span class="p">;</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">K (linear regression) = </span><span class="si">{0:0.1f}</span><span class="s2"> l/mmol&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Klin1</span><span class="p">));</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Q (linear regression) = </span><span class="si">{0:0.1f}</span><span class="s2"> mmol/g_membrane&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Qlin1</span><span class="p">));</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>K (linear regression) = 0.6 l/mmol
-Q (linear regression) = 1.5 mmol/g_membrane
 </pre></div>
 </div>
 </div>
@@ -1394,10 +1381,6 @@ Q (linear regression) = 1.5 mmol/g_membrane
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/Nonlinear-Case-Study-Adsorptive-Membranes_14_0.png" src="../../_images/Nonlinear-Case-Study-Adsorptive-Membranes_14_0.png" />
-<img alt="../../_images/Nonlinear-Case-Study-Adsorptive-Membranes_14_1.png" src="../../_images/Nonlinear-Case-Study-Adsorptive-Membranes_14_1.png" />
-</div>
 </div>
 <p><strong>Interpretation (Regression Plot)</strong>: We see an excellent fit with the transformed data. Or so it seems…</p>
 <p><strong>Interpretation (Transformed Residuals)</strong>: We start with a disclaimer; it is very difficult to interpret residuals for 6 data points. Recall, our regression analysis assumes the experimental observation errors are normally distributed. It is nearly impossible to determine if 6 points are normally distributed.</p>
@@ -1467,10 +1450,6 @@ Q (linear regression) = 1.5 mmol/g_membrane
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/Nonlinear-Case-Study-Adsorptive-Membranes_18_0.png" src="../../_images/Nonlinear-Case-Study-Adsorptive-Membranes_18_0.png" />
-<img alt="../../_images/Nonlinear-Case-Study-Adsorptive-Membranes_18_1.png" src="../../_images/Nonlinear-Case-Study-Adsorptive-Membranes_18_1.png" />
-</div>
 </div>
 <p><strong>Interpretation (Regression Plot)</strong>: By plotting in the original variables, we see the fit is not great. There is a significant residual for the <span class="math notranslate nohighlight">\(c=10\)</span> mM experiment.</p>
 <p><strong>Interpretation (Residuals)</strong>: This residual plot has a very similar pattern to the transformed residual plot. (Notice the vertical axis is different). The interpreation from above also applies to this plot.</p>
@@ -1480,7 +1459,7 @@ Q (linear regression) = 1.5 mmol/g_membrane
 <p>Next, we will compute the <strong>covariance matrix for the fitted parameters <span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span></strong>.</p>
 <p>We will start by computing the variance of the residuals. Recall the formula is:</p>
 <div class="math notranslate nohighlight">
-\[\hat{\sigma}_r = \frac{1}{n-p} \sum_{i=1}^{n} (r_i - 0)^2\]</div>
+\[\hat{\sigma}_r^2 = \frac{1}{n-p} \sum_{i=1}^{n} (r_i - 0)^2\]</div>
 <p>Here <span class="math notranslate nohighlight">\(n\)</span> is the number of observations, <span class="math notranslate nohighlight">\(p\)</span> is the number of fitted parameters, and <span class="math notranslate nohighlight">\(r_i\)</span> is the residual for observation <span class="math notranslate nohighlight">\(i\)</span>. An interesting property of linear regression is that the mean of the residuals is always zero.</p>
 <p>We can write the above formula with linear algebra in one line of code:</p>
 <div class="cell docutils container">
@@ -1491,11 +1470,6 @@ Q (linear regression) = 1.5 mmol/g_membrane
 <span class="c1"># variance of residuals</span>
 <span class="n">var_r</span> <span class="o">=</span> <span class="n">r</span> <span class="o">@</span> <span class="n">r</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">p</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Variance of residuals =&quot;</span><span class="p">,</span><span class="n">var_r</span><span class="p">,</span><span class="s2">&quot; (g / L)^2&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variance of residuals = 0.16885199230665526  (g / L)^2
 </pre></div>
 </div>
 </div>
@@ -1531,17 +1505,6 @@ Q (linear regression) = 1.5 mmol/g_membrane
 <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
 <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;X=</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">X</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>X=
- [[ 1.   1. ]
- [ 1.   2.5]
- [ 1.   5. ]
- [ 1.  10. ]
- [ 1.  20. ]
- [ 1.  40. ]]
 </pre></div>
 </div>
 </div>
@@ -1594,16 +1557,6 @@ Q (linear regression) = 1.5 mmol/g_membrane
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gradient of K: [-0.45190522  0.8115721 ]
-Gradient of Q: [ 0.         -2.12428953]
-
-Jacobian Matrix:
- [[-0.45190522  0.8115721 ]
- [ 0.         -2.12428953]]
-</pre></div>
-</div>
-</div>
 </div>
 <p>For this problem, calculating the partial derivates was very straightforward; but for more complex expression, we can use a finite difference approximation. We’ll see this later in the case study.</p>
 <p>We can now apply the <strong>general nonlinear error propagation formula</strong>:</p>
@@ -1616,13 +1569,6 @@ Jacobian Matrix:
 <span class="n">cov_theta_lin1</span> <span class="o">=</span> <span class="n">jac</span> <span class="o">@</span> <span class="n">cov_b</span> <span class="o">@</span> <span class="n">jac</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Covariance of Original Model Parameters (K,Q):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">cov_theta_lin1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Covariance of Original Model Parameters (K,Q):
- [[ 0.01265455 -0.00218224]
- [-0.00218224  0.00068943]]
 </pre></div>
 </div>
 </div>
@@ -1661,12 +1607,6 @@ Jacobian Matrix:
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope = 1.3058364578345456
-intercept = 0.6714412635365661
-</pre></div>
-</div>
-</div>
 </div>
 <div class="admonition note">
 <p class="admonition-title"><b>Class Activity</b></p>
@@ -1687,12 +1627,6 @@ intercept = 0.6714412635365661
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>K (alternate linear regression) = 0.5 L/mmol
-Q (alternate linear regression) = 1.5 mmol/g_membrane
-</pre></div>
-</div>
-</div>
 </div>
 <div class="admonition note">
 <p class="admonition-title"><b>Class Activity</b></p>
@@ -1703,10 +1637,6 @@ Q (alternate linear regression) = 1.5 mmol/g_membrane
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/Nonlinear-Case-Study-Adsorptive-Membranes_44_0.png" src="../../_images/Nonlinear-Case-Study-Adsorptive-Membranes_44_0.png" />
-<img alt="../../_images/Nonlinear-Case-Study-Adsorptive-Membranes_44_1.png" src="../../_images/Nonlinear-Case-Study-Adsorptive-Membranes_44_1.png" />
 </div>
 </div>
 <div class="admonition note">
@@ -1729,10 +1659,6 @@ Q (alternate linear regression) = 1.5 mmol/g_membrane
 <span class="c1"># Add your solution here</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/Nonlinear-Case-Study-Adsorptive-Membranes_48_0.png" src="../../_images/Nonlinear-Case-Study-Adsorptive-Membranes_48_0.png" />
-<img alt="../../_images/Nonlinear-Case-Study-Adsorptive-Membranes_48_1.png" src="../../_images/Nonlinear-Case-Study-Adsorptive-Membranes_48_1.png" />
 </div>
 </div>
 <div class="admonition note">
@@ -1770,11 +1696,6 @@ Q (alternate linear regression) = 1.5 mmol/g_membrane
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variance of residuals = 0.0038915047452551866  (g / mmol)^2
-</pre></div>
-</div>
-</div>
 </div>
 <div class="admonition note">
 <p class="admonition-title"><b>Class Activity</b></p>
@@ -1789,17 +1710,6 @@ Q (alternate linear regression) = 1.5 mmol/g_membrane
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>X2 =
- [[1.    1.   ]
- [1.    0.4  ]
- [1.    0.2  ]
- [1.    0.1  ]
- [1.    0.05 ]
- [1.    0.025]]
-</pre></div>
-</div>
-</div>
 </div>
 <div class="admonition note">
 <p class="admonition-title"><b>Class Activity</b></p>
@@ -1811,13 +1721,6 @@ Q (alternate linear regression) = 1.5 mmol/g_membrane
 <span class="c1"># Add your solution here</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Covariance of Transformed (Linearized) Regression Parameters (1/KQ, 1/Q):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">cov_b2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Covariance of Transformed (Linearized) Regression Parameters (1/KQ, 1/Q):
- [[ 0.00114359 -0.00167326]
- [-0.00167326  0.00565609]]
 </pre></div>
 </div>
 </div>
@@ -1836,12 +1739,6 @@ Q (alternate linear regression) = 1.5 mmol/g_membrane
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Gradient of K: [ 0.76579268 -0.39375896]
-Gradient of Q: [-2.21811442  0.        ]
-</pre></div>
-</div>
-</div>
 </div>
 <div class="admonition note">
 <p class="admonition-title"><b>Class Activity</b></p>
@@ -1852,13 +1749,6 @@ Gradient of Q: [-2.21811442  0.        ]
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Jacobian Matrix:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">jac2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jacobian Matrix:
- [[ 0.76579268 -0.39375896]
- [-2.21811442  0.        ]]
 </pre></div>
 </div>
 </div>
@@ -1873,13 +1763,6 @@ Gradient of Q: [-2.21811442  0.        ]
 <span class="c1"># Add your solution here</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Covariance of Original Model Parameters (K,Q):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">cov_theta_lin2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Covariance of Original Model Parameters (K,Q):
- [[ 0.0025567  -0.00340395]
- [-0.00340395  0.0056265 ]]
 </pre></div>
 </div>
 </div>
@@ -1963,15 +1846,6 @@ Gradient of Q: [-2.21811442  0.        ]
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>`ftol` termination condition is satisfied.
-Function evaluations 20, initial cost 2.7019e-01, final cost 9.2968e-03, first-order optimality 1.04e-08.
-
-K (nonlinear regression) = 0.6 l/mmol
-Q (nonlinear regression) = 1.5 mmol/g_membrane
-</pre></div>
-</div>
-</div>
 </div>
 <div class="admonition note">
 <p class="admonition-title"><b>Class Activity</b></p>
@@ -1982,10 +1856,6 @@ Q (nonlinear regression) = 1.5 mmol/g_membrane
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/Nonlinear-Case-Study-Adsorptive-Membranes_76_0.png" src="../../_images/Nonlinear-Case-Study-Adsorptive-Membranes_76_0.png" />
-<img alt="../../_images/Nonlinear-Case-Study-Adsorptive-Membranes_76_1.png" src="../../_images/Nonlinear-Case-Study-Adsorptive-Membranes_76_1.png" />
 </div>
 </div>
 <div class="admonition note">
@@ -2023,11 +1893,6 @@ Q (nonlinear regression) = 1.5 mmol/g_membrane
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variance of the residuals:  0.00464837687548031 (mmol/g)^2
-</pre></div>
-</div>
-</div>
 </div>
 <p>Recall from the previous class the covariance matrix for nonlinear regression has a similar formula to the linear regression case:</p>
 <div class="math notranslate nohighlight">
@@ -2052,17 +1917,6 @@ J_{i,j} = \frac{\partial(y_i - \hat{y}_i)}{\partial \theta_j}
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>J =
- [[-0.60433286 -0.3573991 ]
- [-0.6402919  -0.5816669 ]
- [-0.51189154 -0.73551125]
- [-0.3399015  -0.84760183]
- [-0.19914358 -0.91751568]
- [-0.10832244 -0.95698376]]
-</pre></div>
-</div>
-</div>
 </div>
 <div class="admonition note">
 <p class="admonition-title"><b>Class Activity</b></p>
@@ -2074,13 +1928,6 @@ J_{i,j} = \frac{\partial(y_i - \hat{y}_i)}{\partial \theta_j}
 <span class="c1"># Add your solution here</span>
 <span class="c1"># plot Langmuir isotherm</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Covariance Matrix of Original Model Parameters (K,Q):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">cov_theta_nl</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Covariance Matrix of Original Model Parameters (K,Q):
- [[ 0.00887448 -0.00392218]
- [-0.00392218  0.00306799]]
 </pre></div>
 </div>
 </div>
@@ -2098,16 +1945,6 @@ J_{i,j} = \frac{\partial(y_i - \hat{y}_i)}{\partial \theta_j}
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>K (linear regression) = 0.557 l/mmol
-Q (linear regression) = 1.457 mmol/g_membrane
-
-Covariance of Original Model Parameters (K,Q):
- [[ 0.01265455 -0.00218224]
- [-0.00218224  0.00068943]]
-</pre></div>
-</div>
-</div>
 </div>
 <p><strong>Second (Alternative) Transformation + Linear Regression</strong></p>
 <div class="cell docutils container">
@@ -2120,16 +1957,6 @@ Covariance of Original Model Parameters (K,Q):
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>K (alternate linear regression) = 0.557 L/mmol
-Q (alternate linear regression) = 1.489 mmol/g_membrane
-
-Covariance of Original Model Parameters (K,Q):
- [[ 0.0025567  -0.00340395]
- [-0.00340395  0.0056265 ]]
-</pre></div>
-</div>
-</div>
 </div>
 <p><strong>Nonlinear Regression</strong></p>
 <div class="cell docutils container">
@@ -2138,16 +1965,6 @@ Covariance of Original Model Parameters (K,Q):
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Q (nonlinear regression) = </span><span class="si">{0:0.3f}</span><span class="s2"> mmol/g_membrane&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Qnl</span><span class="p">));</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Covariance Matrix of Original Model Parameters (K,Q):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">cov_theta_nl</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>K (nonlinear regression) = 0.556 l/mmol
-Q (nonlinear regression) = 1.464 mmol/g_membrane
-
-Covariance Matrix of Original Model Parameters (K,Q):
- [[ 0.00887448 -0.00392218]
- [-0.00392218  0.00306799]]
 </pre></div>
 </div>
 </div>
@@ -2297,15 +2114,6 @@ t_f = \frac{m}{F}  \int_{q_0}^{q_f} \frac{1}{\left( c_{in} - \frac{q(t)}{Q \cdot
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Unit Test:
-K = 0.6 L/mmol
-Q = 1.5 mmol/g_membrane
-qf = 6.515161020998122e-05 mmol/g
-tf = 13.17 hours
-</pre></div>
-</div>
-</div>
 </div>
 <p>Success. We have calculated the regeneration time of the membrane system.</p>
 </div>
@@ -2398,13 +2206,6 @@ tf = 13.17 hours
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>grad= [21.32635417  8.14794014]
-
-Uncertainty (standard deviation) of tf: 2.25 hours
-</pre></div>
-</div>
-</div>
 </div>
 <p>Great, our function works. We can also calculate a 95% confidence interval for the estimated batch time.</p>
 <div class="admonition note">
@@ -2445,11 +2246,6 @@ Uncertainty (standard deviation) of tf: 2.25 hours
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>95% confidence interval for tf: [6.93 hr, 19.40 hr]
-</pre></div>
-</div>
-</div>
 </div>
 <p>Note we used <code class="docutils literal notranslate"><span class="pre">tf_test</span></code> for this unit test which does not correspond to our regression results. Do not attempt to interpret the above results.</p>
 <p>Now we can apply these two functions to our three regression strategies.</p>
@@ -2463,15 +2259,6 @@ Uncertainty (standard deviation) of tf: 2.25 hours
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>grad= [21.32635417  8.14794014]
-
-Uncertainty (standard deviation) of tf: 2.25 hours
-
-95% confidence interval for tf: [5.64 hr, 18.11 hr]
 </pre></div>
 </div>
 </div>
@@ -2489,15 +2276,6 @@ Uncertainty (standard deviation) of tf: 2.25 hours
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>grad= [21.79237003  7.52398947]
-
-Uncertainty (standard deviation) of tf: 0.65 hours
-
-95% confidence interval for tf: [9.41 hr, 13.00 hr]
-</pre></div>
-</div>
-</div>
 </div>
 </div>
 <div class="section" id="nonlinear-regression">
@@ -2509,15 +2287,6 @@ Uncertainty (standard deviation) of tf: 0.65 hours
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>grad= [21.41427393  8.13841288]
-
-Uncertainty (standard deviation) of tf: 1.70 hours
-
-95% confidence interval for tf: [7.18 hr, 16.64 hr]
 </pre></div>
 </div>
 </div>
@@ -2554,20 +2323,12 @@ Uncertainty (standard deviation) of tf: 1.70 hours
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/Nonlinear-Case-Study-Adsorptive-Membranes_132_0.png" src="../../_images/Nonlinear-Case-Study-Adsorptive-Membranes_132_0.png" />
-</div>
 </div>
 <p>Becase there are only 6 data points, this plot is not very revealing. We do not see any extreme outliers, which is pretty much all we can check. If we had more than 10 or 20 samples, we could expect the histogram of residuals to be approximately normally distributed.</p>
 <p>Finally, recall that the variance of the residuals is stored in <code class="docutils literal notranslate"><span class="pre">var_r3</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Variance of the residuals: &quot;</span><span class="p">,</span><span class="n">var_r3</span><span class="p">,</span><span class="s2">&quot;(mmol/g)^2&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variance of the residuals:  0.00464837687548031 (mmol/g)^2
 </pre></div>
 </div>
 </div>
@@ -2624,9 +2385,6 @@ Uncertainty (standard deviation) of tf: 1.70 hours
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/Nonlinear-Case-Study-Adsorptive-Membranes_140_0.png" src="../../_images/Nonlinear-Case-Study-Adsorptive-Membranes_140_0.png" />
-</div>
 </div>
 <div class="admonition note">
 <p class="admonition-title"><b>Class Activity</b></p>
@@ -2637,9 +2395,6 @@ Uncertainty (standard deviation) of tf: 1.70 hours
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/Nonlinear-Case-Study-Adsorptive-Membranes_142_0.png" src="../../_images/Nonlinear-Case-Study-Adsorptive-Membranes_142_0.png" />
 </div>
 </div>
 <p>We can also make a scatter plot to see the relationship between uncertainty in <span class="math notranslate nohighlight">\(K\)</span> and <span class="math notranslate nohighlight">\(Q\)</span>:</p>
@@ -2653,9 +2408,6 @@ Uncertainty (standard deviation) of tf: 1.70 hours
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/Nonlinear-Case-Study-Adsorptive-Membranes_144_0.png" src="../../_images/Nonlinear-Case-Study-Adsorptive-Membranes_144_0.png" />
-</div>
 </div>
 <p>We can also compute the covariance between <span class="math notranslate nohighlight">\(K\)</span> and <span class="math notranslate nohighlight">\(Q\)</span>. We’ll start by loading our MC results into a Pandas DataFrame:</p>
 <div class="cell docutils container">
@@ -2665,58 +2417,6 @@ Uncertainty (standard deviation) of tf: 1.70 hours
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Q</th>
-      <th>K</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0.768834</td>
-      <td>1.405754</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>0.475275</td>
-      <td>1.500126</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>0.529898</td>
-      <td>1.518566</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>0.513674</td>
-      <td>1.492465</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>0.547383</td>
-      <td>1.485379</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <p>Then we can compute covariance and correlation:</p>
 <div class="cell docutils container">
@@ -2725,43 +2425,6 @@ Uncertainty (standard deviation) of tf: 1.70 hours
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Q</th>
-      <th>K</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Q</th>
-      <td>0.010492</td>
-      <td>-0.004237</td>
-    </tr>
-    <tr>
-      <th>K</th>
-      <td>-0.004237</td>
-      <td>0.003124</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2769,55 +2432,11 @@ Uncertainty (standard deviation) of tf: 1.70 hours
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Q</th>
-      <th>K</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Q</th>
-      <td>1.000000</td>
-      <td>-0.740166</td>
-    </tr>
-    <tr>
-      <th>K</th>
-      <td>-0.740166</td>
-      <td>1.000000</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <p>Let’s compare against our covariance matrix from Section 1C:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Covariance Matrix of Original Model Parameters (K,Q):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">cov_theta_nl</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Covariance Matrix of Original Model Parameters (K,Q):
- [[ 0.00887448 -0.00392218]
- [-0.00392218  0.00306799]]
 </pre></div>
 </div>
 </div>
@@ -2836,21 +2455,12 @@ Uncertainty (standard deviation) of tf: 1.70 hours
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../../_images/Nonlinear-Case-Study-Adsorptive-Membranes_155_0.png" src="../../_images/Nonlinear-Case-Study-Adsorptive-Membranes_155_0.png" />
-</div>
 </div>
 <p>We can also calculate the mean and median batch time:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mean batch time =&quot;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">tf_mc</span><span class="p">),</span><span class="s2">&quot; hours&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;median batch time =&quot;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">tf_mc</span><span class="p">),</span><span class="s2">&quot; hours&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mean batch time = 12.058477216563075  hours
-median batch time = 11.87286169225531  hours
 </pre></div>
 </div>
 </div>
@@ -2863,23 +2473,12 @@ median batch time = 11.87286169225531  hours
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>standard deviation of batch time = 1.8603389487321982 hours
-</pre></div>
-</div>
-</div>
 </div>
 <p>We can also calculate the 2.5%-ile and 97.5%-ile of batch time from the MC simulations.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2.5</span><span class="si">%-i</span><span class="s2">le batch time =&quot;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">tf_mc</span><span class="p">,</span><span class="mf">2.5</span><span class="p">),</span><span class="s2">&quot; hours&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;97.5</span><span class="si">%-i</span><span class="s2">le batch time =&quot;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">tf_mc</span><span class="p">,</span><span class="mf">97.5</span><span class="p">),</span><span class="s2">&quot; hours&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.5%-ile batch time = 8.945223320519633  hours
-97.5%-ile batch time = 16.260173647213012  hours
 </pre></div>
 </div>
 </div>
@@ -2895,15 +2494,6 @@ median batch time = 11.87286169225531  hours
 
 <span class="c1"># 95% confidence interval for nonlinear regression</span>
 <span class="n">cint_tf_nl</span> <span class="o">=</span> <span class="n">conf_int</span><span class="p">(</span><span class="n">tf_nl</span><span class="p">,</span> <span class="n">sigma_tf_nl</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="n">p</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>grad= [21.41427393  8.13841288]
-
-Uncertainty (standard deviation) of tf: 1.70 hours
-
-95% confidence interval for tf: [7.18 hr, 16.64 hr]
 </pre></div>
 </div>
 </div>
