@@ -54,6 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Spaghettification of the Magic School Bus" href="Spaghettification.html" />
     <link rel="prev" title="Solving Fick’s second law using numerical integration" href="numeric-integration-casestudy-ficks-law.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -833,6 +834,11 @@ const thebe_selector_output = ".output, .cell_output"
      Stochastic Simulation of Chemical Reactions
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Spaghettification.html">
+     Spaghettification of the Magic School Bus
+    </a>
+   </li>
   </ul>
  </li>
 </ul>
@@ -1253,22 +1259,22 @@ title="Print to PDF"
 In a random simulation, one can directly capture the random nature of molecules by using random molecular motion and probability of collision as the basis of reaction rates.</p>
 <p>Through this exercise, we will highlight similarities and differences between a random simulation model and a deterministic model.</p>
 <p>We will use the following two reaction constant volume batch system for the purpose of this excercise.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-eb45aa17-a4b4-40ec-bc7d-e104b40e52ac">
-<span class="eqno">(42)<a class="headerlink" href="#equation-eb45aa17-a4b4-40ec-bc7d-e104b40e52ac" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9e6aa224-e976-4881-96ae-d9964eab1c4d">
+<span class="eqno">(42)<a class="headerlink" href="#equation-9e6aa224-e976-4881-96ae-d9964eab1c4d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 A \xrightarrow{k_1} B
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-500046fb-1bab-4c78-af81-239c0712918a">
-<span class="eqno">(43)<a class="headerlink" href="#equation-500046fb-1bab-4c78-af81-239c0712918a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-759b9e30-75f8-4054-bda3-db25ee9ece0b">
+<span class="eqno">(43)<a class="headerlink" href="#equation-759b9e30-75f8-4054-bda3-db25ee9ece0b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 B \xrightarrow{k_2} C
 \end{equation}\]</div>
 <p>For stochastic (random) modeling, the systems are generally small and consist of about a few hundred molecules. Thus, we will model the system using the exact number of molecules instead of using concentrations. We will assume that these reactions are actual molecular events, i.e., a molecule of A converts to B in the first reaction, and a molecule of B converts to C in the second reaction.</p>
 <p>Which reaction takes place is governed by their probabilities; this is proportional to the rate constant and the number of molecules as shown below:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cf05faab-df24-4674-9eab-fe250c40ef54">
-<span class="eqno">(44)<a class="headerlink" href="#equation-cf05faab-df24-4674-9eab-fe250c40ef54" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9fb47291-97a6-46ec-b0b0-e7814dc5f5e7">
+<span class="eqno">(44)<a class="headerlink" href="#equation-9fb47291-97a6-46ec-b0b0-e7814dc5f5e7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 r1 = k_1x_a
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-ab16687f-2370-4171-b033-d0fa10e0529a">
-<span class="eqno">(45)<a class="headerlink" href="#equation-ab16687f-2370-4171-b033-d0fa10e0529a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-600653b9-dc88-4b7b-a78e-36013e21e688">
+<span class="eqno">(45)<a class="headerlink" href="#equation-600653b9-dc88-4b7b-a78e-36013e21e688" title="Permalink to this equation">#</a></span>\[\begin{equation}
 r2 = k_2x_b
 \end{equation}\]</div>
 <p>These reaction probabilities look very similar to rate equations from the deterministic models. However, <strong>x<span class="math notranslate nohighlight">\(_i\)</span></strong> is the number of component <strong><span class="math notranslate nohighlight">\(i\)</span></strong> molecules in the reactor volume, not concentration <strong>C<span class="math notranslate nohighlight">\(_i\)</span></strong>.</p>
@@ -1286,12 +1292,12 @@ r2 = k_2x_b
 <section id="random-simulation-model-gillespie-algorithm">
 <h2>2. Random Simulation Model - Gillespie Algorithm<a class="headerlink" href="#random-simulation-model-gillespie-algorithm" title="Permalink to this headline">#</a></h2>
 <p>Complete the function “gillespie” to perform stochastic simulation of the two reaction batch system.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4bff6d63-bfbf-441c-bef8-25a4f5509efa">
-<span class="eqno">(46)<a class="headerlink" href="#equation-4bff6d63-bfbf-441c-bef8-25a4f5509efa" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-25269bac-6b46-47ef-9e5d-5d4700999005">
+<span class="eqno">(46)<a class="headerlink" href="#equation-25269bac-6b46-47ef-9e5d-5d4700999005" title="Permalink to this equation">#</a></span>\[\begin{equation}
 A \xrightarrow{k_1} B
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-7684b142-4e54-4735-9ddf-2f8cbadbcab6">
-<span class="eqno">(47)<a class="headerlink" href="#equation-7684b142-4e54-4735-9ddf-2f8cbadbcab6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9f0b3401-15d2-47d3-bfe0-0d77e21d5c8a">
+<span class="eqno">(47)<a class="headerlink" href="#equation-9f0b3401-15d2-47d3-bfe0-0d77e21d5c8a" title="Permalink to this equation">#</a></span>\[\begin{equation}
 B \xrightarrow{k_2} C
 \end{equation}\]</div>
 <p><strong>Write a pseudocode for the while loop to complete the code.</strong>  Submit this answer on an attached pdf file.</p>
@@ -1376,27 +1382,27 @@ B \xrightarrow{k_2} C
 </div>
 <p>#3a. Deterministic Equations
 Deterministic rate model for the same reaction network would result in the following rate expressions:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3e8d81ba-27f3-4248-af04-14ef9c2e44a5">
-<span class="eqno">(48)<a class="headerlink" href="#equation-3e8d81ba-27f3-4248-af04-14ef9c2e44a5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-22af7ffd-8da3-4d5f-a788-09cb8bebe8c1">
+<span class="eqno">(48)<a class="headerlink" href="#equation-22af7ffd-8da3-4d5f-a788-09cb8bebe8c1" title="Permalink to this equation">#</a></span>\[\begin{equation}
 r1 = k_1C_a
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-08417e9a-7924-4aec-9af1-5c6be50bdf2a">
-<span class="eqno">(49)<a class="headerlink" href="#equation-08417e9a-7924-4aec-9af1-5c6be50bdf2a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d15d70cb-dcb9-48f5-a5b8-c9e0332ca4f4">
+<span class="eqno">(49)<a class="headerlink" href="#equation-d15d70cb-dcb9-48f5-a5b8-c9e0332ca4f4" title="Permalink to this equation">#</a></span>\[\begin{equation}
 r2 = k_2C_b
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(C_i\)</span> is the concentration of species <span class="math notranslate nohighlight">\(i\)</span>, unlike number of molecules of stochastic model.</p>
 <p><strong>Using these rate laws, write down the differential equations for the concentration of each species?</strong> Submit this answer on an attached pdf file.</p>
 <p><strong>Answer:</strong></p>
-<div class="amsmath math notranslate nohighlight" id="equation-1f0d44c4-bfb4-4c87-b2c9-182c18c4a1d9">
-<span class="eqno">(50)<a class="headerlink" href="#equation-1f0d44c4-bfb4-4c87-b2c9-182c18c4a1d9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f499e7a5-760f-45ab-a76c-c339868238a7">
+<span class="eqno">(50)<a class="headerlink" href="#equation-f499e7a5-760f-45ab-a76c-c339868238a7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \frac{dC_a}{dt} = -k_1C_a
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-1a7c032e-8be6-4998-b743-efcd5311602a">
-<span class="eqno">(51)<a class="headerlink" href="#equation-1a7c032e-8be6-4998-b743-efcd5311602a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ef1a939a-ac09-4892-ad81-f14a8ba9d32a">
+<span class="eqno">(51)<a class="headerlink" href="#equation-ef1a939a-ac09-4892-ad81-f14a8ba9d32a" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \frac{dC_b}{dt} = k_1C_a - k_2C_b
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-5713ac01-eddc-4985-a2bf-7c030055a3b8">
-<span class="eqno">(52)<a class="headerlink" href="#equation-5713ac01-eddc-4985-a2bf-7c030055a3b8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d36ec710-95f0-4f32-bc80-8165b92ee64e">
+<span class="eqno">(52)<a class="headerlink" href="#equation-d36ec710-95f0-4f32-bc80-8165b92ee64e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \frac{dC_c}{dt} = k_2C_b
 \end{equation}\]</div>
 <p>Note: These equations would be exactly same for number of molecules, i.e, one can replace <span class="math notranslate nohighlight">\(C_i\)</span> with <span class="math notranslate nohighlight">\(x_i\)</span> in the differential equations above. Concentrations can be converetd to number of molecules using avogadros number <span class="math notranslate nohighlight">\(N_A\)</span> and volume V of the reactor and these constants will cancel out in the equations.</p>
@@ -1571,6 +1577,13 @@ r2 = k_2C_b
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title"><strong>Solving Fick’s second law using numerical integration</strong></p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="Spaghettification.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Spaghettification of the Magic School Bus</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>

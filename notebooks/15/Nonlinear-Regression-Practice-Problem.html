@@ -834,6 +834,11 @@ const thebe_selector_output = ".output, .cell_output"
      Stochastic Simulation of Chemical Reactions
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../contrib/Spaghettification.html">
+     Spaghettification of the Magic School Bus
+    </a>
+   </li>
   </ul>
  </li>
 </ul>
@@ -1189,33 +1194,33 @@ title="Print to PDF"
 <h2><span class="section-number">15.4.2. </span>Background<a class="headerlink" href="#background" title="Permalink to this headline">#</a></h2>
 <p>For this question, originally developed by <a class="reference external" href="https://engineering.nd.edu/faculty/david-leighton/">Prof. David T. Leighton</a>, you will use nonlinear regression to analyze the kinetics of an indicator in a strong base.</p>
 <p>Phenolphthalein is a base indicator (it turns a pretty purple), but in the presence of a strong base, it will fade over time.  This is a reversible reaction: pseudo first order in the forward (fading) direction (it is actually second order, but there is so much <span class="math notranslate nohighlight">\([OH^-]\)</span> that it can be simplified as pseudo first order) and first order in the reverse direction. The rate expression is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d57aba80-0751-4a76-a8a9-dd601075bb6a">
-<span class="eqno">(15.1)<a class="headerlink" href="#equation-d57aba80-0751-4a76-a8a9-dd601075bb6a" title="Permalink to this equation">#</a></span>\[\begin{equation} 
+<div class="amsmath math notranslate nohighlight" id="equation-c5c8a0db-6bc0-4a90-bb19-174357a20638">
+<span class="eqno">(15.1)<a class="headerlink" href="#equation-c5c8a0db-6bc0-4a90-bb19-174357a20638" title="Permalink to this equation">#</a></span>\[\begin{equation} 
 \frac{d[P]}{dt} = -k_{1}[P][OH^-]+k_{2}[POH] ~,
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(k_{1}' = k_{1}  \cdot [OH^-]\)</span> is the pseudo first order rate. <span class="math notranslate nohighlight">\([POH]\)</span> is only produced from this reaction, thus we have the mass balance:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1ae9bbdc-999f-4797-a4b9-d67be07449b9">
-<span class="eqno">(15.2)<a class="headerlink" href="#equation-1ae9bbdc-999f-4797-a4b9-d67be07449b9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d9e550a5-812b-4481-9887-91e4ba1305da">
+<span class="eqno">(15.2)<a class="headerlink" href="#equation-d9e550a5-812b-4481-9887-91e4ba1305da" title="Permalink to this equation">#</a></span>\[\begin{equation}
 [POH] = [POH]\Big|_{t=0}+([P]_{0}-[P]) ~.
 \end{equation}\]</div>
 <p>With the initial conditions:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0b58ab48-0bc1-4eb2-8c1a-ed68942d6a0a">
-<span class="eqno">(15.3)<a class="headerlink" href="#equation-0b58ab48-0bc1-4eb2-8c1a-ed68942d6a0a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2791926d-4545-4917-a307-3f53c73e8f98">
+<span class="eqno">(15.3)<a class="headerlink" href="#equation-2791926d-4545-4917-a307-3f53c73e8f98" title="Permalink to this equation">#</a></span>\[\begin{equation}
 [P]\Big|_{t=0}=[P]_{0}\qquad; \qquad [POH]\Big|_{t=0}=0 ~.
 \end{equation}\]</div>
 <p>We can solve these equations to get the solution:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4736ea99-b64c-422f-935d-2b677c516f7f">
-<span class="eqno">(15.4)<a class="headerlink" href="#equation-4736ea99-b64c-422f-935d-2b677c516f7f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-57e3ca0f-67c9-426d-a0eb-a2813e7f9a10">
+<span class="eqno">(15.4)<a class="headerlink" href="#equation-57e3ca0f-67c9-426d-a0eb-a2813e7f9a10" title="Permalink to this equation">#</a></span>\[\begin{equation}
 [P] = [P]_{0}\Big(\frac{k_{2}}{k_{1}'+k_{2}}+\frac{k_{1}'}{k_{1}'+k_{2}}e^{-(k_{1}'+k_{2})t}\Big) ~.
 \end{equation}\]</div>
 <p>We seek best fit values for parameters</p>
-<div class="amsmath math notranslate nohighlight" id="equation-741cabf0-cb14-46e2-a15b-ca8e37ab9096">
-<span class="eqno">(15.5)<a class="headerlink" href="#equation-741cabf0-cb14-46e2-a15b-ca8e37ab9096" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5935638c-1f2e-4733-9f27-6b36d3be0a26">
+<span class="eqno">(15.5)<a class="headerlink" href="#equation-5935638c-1f2e-4733-9f27-6b36d3be0a26" title="Permalink to this equation">#</a></span>\[\begin{equation}
 k=\begin{bmatrix}k_{1}' &amp; k_{2} &amp; k_{eq}\end{bmatrix}^T~,
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(k_{eq} = k'_1 / k_2\)</span>. However, this problem is poorly scaled with respect to <span class="math notranslate nohighlight">\(k\)</span>. Instead, we will transform it to obtain:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b737d7a8-8126-42e6-ae25-79e29d4eb4a4">
-<span class="eqno">(15.6)<a class="headerlink" href="#equation-b737d7a8-8126-42e6-ae25-79e29d4eb4a4" title="Permalink to this equation">#</a></span>\[\begin{equation} 
+<div class="amsmath math notranslate nohighlight" id="equation-c6fddae5-c487-42f7-aeb1-d4ff264a039a">
+<span class="eqno">(15.6)<a class="headerlink" href="#equation-c6fddae5-c487-42f7-aeb1-d4ff264a039a" title="Permalink to this equation">#</a></span>\[\begin{equation} 
 [P] = [P]_{eq}+([P]_{0}-[P]_{eq})e^{-\lambda t}
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\lambda=k_{1}'+k_{2}\)</span>. These two rate constants can be calculated from the ratio of the initial and equilibrium concentrations and the exponential decay rate.</p>
@@ -1274,16 +1279,16 @@ k=\begin{bmatrix}k_{1}' &amp; k_{2} &amp; k_{eq}\end{bmatrix}^T~,
 <section id="transform-model-parameters">
 <h2><span class="section-number">15.4.3. </span>Transform Model Parameters<a class="headerlink" href="#transform-model-parameters" title="Permalink to this headline">#</a></h2>
 <p>On paper, show the following transformations are valid:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bc5a45c7-a3a1-4e91-8e6a-0a2ba504d545">
-<span class="eqno">(15.7)<a class="headerlink" href="#equation-bc5a45c7-a3a1-4e91-8e6a-0a2ba504d545" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-dcedbdb5-1f5a-4f7a-8a5a-fe37ad4988f5">
+<span class="eqno">(15.7)<a class="headerlink" href="#equation-dcedbdb5-1f5a-4f7a-8a5a-fe37ad4988f5" title="Permalink to this equation">#</a></span>\[\begin{equation}
 k_{2}=\frac{[P]_{eq} \times \lambda}{[P]_{0}}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-d899870c-b920-4f52-aa15-9feb2f9a8773">
-<span class="eqno">(15.8)<a class="headerlink" href="#equation-d899870c-b920-4f52-aa15-9feb2f9a8773" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-bd11dbc6-44e6-41cf-9796-1f56e22c202a">
+<span class="eqno">(15.8)<a class="headerlink" href="#equation-bd11dbc6-44e6-41cf-9796-1f56e22c202a" title="Permalink to this equation">#</a></span>\[\begin{equation}
 k_{1}'=\lambda-k_{2}=\lambda - \frac{[P]_{eq} \times \lambda}{[P]_{0}} = \lambda \left(1 - \frac{[P]_{eq}}{[P]_{0}} \right)
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-70eed0e6-9df4-4c16-b517-2ed6c217d6ae">
-<span class="eqno">(15.9)<a class="headerlink" href="#equation-70eed0e6-9df4-4c16-b517-2ed6c217d6ae" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b266edf1-bb7c-4b20-8d85-6df97a6077e0">
+<span class="eqno">(15.9)<a class="headerlink" href="#equation-b266edf1-bb7c-4b20-8d85-6df97a6077e0" title="Permalink to this equation">#</a></span>\[\begin{equation}
 k_{eq}=\frac{k_{1}'}{k_{2}}=\frac{[P]_{0}}{[P]_{eq}} - 1
 \end{equation}\]</div>
 <p>Hint: Compare the two models when <span class="math notranslate nohighlight">\(t \rightarrow 0\)</span> and <span class="math notranslate nohighlight">\(t \rightarrow \infty\)</span>.</p>
@@ -1407,8 +1412,8 @@ lambda = 0.020845030823048914 add units
 <section id="covariance-matrix">
 <h2><span class="section-number">15.4.6. </span>Covariance Matrix<a class="headerlink" href="#covariance-matrix" title="Permalink to this headline">#</a></h2>
 <p>We can quickly estimate the covariance matrix:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c454867b-f1d7-4502-b55f-d6b3e0dec07c">
-<span class="eqno">(15.10)<a class="headerlink" href="#equation-c454867b-f1d7-4502-b55f-d6b3e0dec07c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ac5de61e-78ed-498b-8bcd-1db5a4f0a39e">
+<span class="eqno">(15.10)<a class="headerlink" href="#equation-ac5de61e-78ed-498b-8bcd-1db5a4f0a39e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 	\Sigma_x \approx {\hat{\sigma}}^2_r \left( J^T J \right)^{-1}
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\hat{\sigma}^2_r\)</span> is the variance of the residuals and <span class="math notranslate nohighlight">\(J\)</span> is the Jacobian of the residuals with respect to the model parameters <span class="math notranslate nohighlight">\(x\)</span>.</p>
