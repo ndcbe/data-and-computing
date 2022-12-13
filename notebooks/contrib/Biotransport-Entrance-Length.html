@@ -1,0 +1,1598 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Estimating the Entrance Length of Channel Flow &#8212; Data and Computing for Chemical Engieers</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Non-Isothermal Packed Bed Reactor" href="Non-Isothermal-PBR.html" />
+    <link rel="prev" title="Contributed Examples" href="contribute.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/cbe_logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Data and Computing for Chemical Engieers</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Data and Computing for Engineers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Python Programming
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../01/Python-Primer.html">
+   1. Python Primer
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Jupyter-Notebooks.html">
+     1.1. Welcome to Jupyter Notebooks and Vocareum
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Python-Basics-I-Variables-Strings-Bugs.html">
+     1.2. Python Basics I: Variables, Strings, and Bugs
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Flow-control.html">
+     1.3. Python Basics II: Loopy Logic
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Python-Basics-III-Lists-Dictionaries-Enumeration.html">
+     1.4. Python Basics III: Lists, Dictionaries, and Enumeration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Functions-and-Scope.html">
+     1.5. Functions and Scope
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Recursion.html">
+     1.6. Recursion
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Pseudocode.html">
+     1.7. Pseudocode
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Example-High-Low-Game.html">
+     1.8. High/Low Guess My Number Game
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Modules-and-Files.html">
+     1.9. Modules and Files
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/NumPy.html">
+     1.10. Linear Algebra with Numpy and Scipy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Matplotlib.html">
+     1.11. Visualization with matplotlib
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Pandas.html">
+     1.12. Manipulating Data with Pandas
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Functions-as-Arguments.html">
+     1.13. Functions as Arguments
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Testing-and-Debugging.html">
+     1.14. Testing and Debugging in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01/Publication-Quality-Figures.html">
+     1.15. Preparing Publication Quality Figures in Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../02/advanced_python.html">
+   2. Advanced Python
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Numerical Methods
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03/linear_algebra.html">
+   3. Linear Algebra Primer
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../04/linear_algebra.html">
+   4. Applied Linear Algebra
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04/Modeling-Systems-of-Linear-Equations.html">
+     4.1. Modeling Systems of Linear Equations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04/Gauss-Elimination.html">
+     4.2. Gaussian Elimination
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04/Invertible-Matrix-Theorem-and-Gauss-Example.html">
+     4.3. Invertible Matrix Theorem and Gaussian Elimination Example
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04/LU-Decomposition.html">
+     4.4. LU Decomposition
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04/Condition-Number.html">
+     4.5. Errors in Linear Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04/Example-Atomic-Mass-Balances.html">
+     4.6. Example: Mass Balances and Linear Algebra
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04/Linear-Algebra-in-Numpy.html">
+     4.7. Linear Algebra Review and SciPy Basics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../05/algorithms.html">
+   5. Algorithm Building Blocks
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05/Taylor-Series.html">
+     5.1. Taylor Series Approximations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05/Finite-Difference.html">
+     5.2. Finite Difference Derivative Approximations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05/Example-Heating-a-Metal-Slab.html">
+     5.3. Example: Heating a Metal Slab
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../06/nonlinear_systems.html">
+   6. Nonlinear Systems of Equations
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06/Modeling-Systems-of-Nonlinear-Equations.html">
+     6.1. Modeling Systems of Nonlinear Equations: Flash Calculation Example
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06/Newton-Raphson-Method-in-One-Dimension.html">
+     6.2. Newton-Raphson Method in One Dimension
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06/More-Newton-Type-Methods.html">
+     6.3. More Newton-Type Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06/Convergence-Analysis-for-Newton-Raphson-Methods.html">
+     6.4. Convergence Analysis for Newton-Raphson Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06/Newton-Raphson-Methods-for-Systems-of-Equations.html">
+     6.5. Newton-Raphson Methods for Systems of Equations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../06/Newton-Methods-in-Scipy.html">
+     6.6. Newton Methods in Scipy
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../07/integration.html">
+   7. Numeric Integration
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07/Intro-and-Newton-Cotes.html">
+     7.1. Introduction and Newton-Cotes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07/Gauss-Quadrature.html">
+     7.2. Gauss Quadrature
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07/Scipy-Library-Adaptive-Methods-for-Newton-Cotes-and-Gauss-Quadrature.html">
+     7.3. Scipy Library: Adaptive Methods for Newton-Cotes and Gauss Quadrature
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07/Application-Inertial-Navigation-Systems.html">
+     7.4. Application: Inertial Navigation Systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07/Forward-and-Backward-Euler.html">
+     7.5. Forward and Backward Euler Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07/Trapezoid-Rule.html">
+     7.6. Crank-Nicolson (Trapezoid Rule)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07/Stability-Analysis.html">
+     7.7. Stability Analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07/Explicit-Runge-Kutta.html">
+     7.8. Explicit Range Kutta Method
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07/Systems-of-Differential-Equations-and-Scipy.html">
+     7.9. Systems of Differential Equations and Scipy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../07/Example-Reaction-Rates.html">
+     7.10. Example: Reaction Rates
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../08/optimization.html">
+   8. Continuous Optimization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../08/Pyomo-Basics.html">
+     8.1. Pyomo Basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../08/Electricity-Market-Optimization.html">
+     8.2. Electricity Market Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../08/Flash-Calculations-in-Pyomo.html">
+     8.3. Flash Calculations in Pyomo
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Data Analysis
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../09/stats.html">
+   9. Descriptive Statistics and Visualization
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../09/Sampling.html">
+     9.1. Sampling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../09/Summary-Statistics.html">
+     9.2. Summary Statistics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../09/Visualizing-Data.html">
+     9.3. Visualizing Data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../10/probability.html">
+   10. Probability Theory
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10/Probability-Basics.html">
+     10.1. Basic Ideas of Probability
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10/Random-Variables.html">
+     10.2. Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10/Jointly-Distributed-Random-Variables.html">
+     10.3. Jointly Distributed Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10/Jointly-Continuous-Random-Variables.html">
+     10.4. Jointly Continuous Random Variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../10/Practice-Problems.html">
+     10.5. Practice Problems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../11/distributions.html">
+   11. Common Probability Distributions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11/Bernoulli-Probability-Distribution.html">
+     11.1. Bernoulli Probability Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11/Binomial-Probability-Distribtuion.html">
+     11.2. Binomial Probability Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11/Poisson-Probability-Distribution.html">
+     11.3. Poisson Probability Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11/Normal-Probability-Distribution.html">
+     11.4. Normal Probability Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../11/Common-Probability-Distributions-Summary.html">
+     11.5. Summary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../12/uncertainty.html">
+   12. Uncertainty and Error Propagation
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12/Measurement-Error.html">
+     12.1. Measurement Error
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12/Error-Propagation.html">
+     12.2. Error Propagation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12/Measuring-Flowrate-Example.html">
+     12.3. Measuring Flowrate Example
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12/Car-and-Incline-Example.html">
+     12.4. Car and Incline Example
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12/Simulation.html">
+     12.5. Simulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12/Monte-Carlo-Error-Propogation.html">
+     12.6. Monte Carlo Error Propagation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../12/Practice-Problems.html">
+     12.7. Practice Problems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../13/inference.html">
+   13. Statistical Inference
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13/Central-Limit-Theorem.html">
+     13.1. Central Limit Theorem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13/Standard-Normal-Distribution.html">
+     13.2. Standard Normal Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13/Confidence-Intervals.html">
+     13.3. Confidence Intervals
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13/Students-t-Distribution.html">
+     13.4. Student’s t-Distribution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13/Hypothesis-Testing-Basics.html">
+     13.5. Hypothesis Testing Basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13/Flavors-of-Hypothesis-Testing.html">
+     13.6. Flavors of Hypothesis Testing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13/Type-I-and-Type-II-Errors.html">
+     13.7. Type I and Type II Errors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13/Statistical-Power-Basics.html">
+     13.8. Statistical Power Basics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13/Statistical-Power-in-Python.html">
+     13.9. Statistical Power in Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13/Statistical-Power-Practice-Problems.html">
+     13.10. Statistical Power Practice Problems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../13/Bootstrap-Confidence-Intervals.html">
+     13.11. Bootstrap Confidence Intervals
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../14/regression.html">
+   14. Multivariate Linear Regression
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../14/Correlation-Covariance-and-Independence.html">
+     14.1. Correlation, Covariance, and Independence
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../14/Least-Squares-Line.html">
+     14.2. Simple Least Squares
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../14/Ordinary-Least-Squares-Linear-Regression.html">
+     14.3. Ordinary Least Squares Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../14/Residual-Analysis.html">
+     14.4. Residual Analysis
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../14/Regression-Assumption-Examples.html">
+     14.5. Regression Assumption Examples
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../14/Uncertainty-Analysis-and-Statistical-Inference.html">
+     14.6. Uncertainty Analysis and Statistical Inference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../14/Multivariate-Linear-Regression.html">
+     14.7. Multivariate Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../14/Linear-Regression-Practice-Problems.html">
+     14.8. Linear Regression Practice Problems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../15/advanced_regression.html">
+   15. Nonlinear Regression
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../15/Transformations-and-Linear-Regression.html">
+     15.1. Transformations and Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../15/Weighted-Regression.html">
+     15.2. Weighted Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../15/Nonlinear-Regression.html">
+     15.3. Nonlinear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../15/Nonlinear-Regression-Practice-Problem.html">
+     15.4. Nonlinear Regression Practice Problem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../15/Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression.html">
+     15.5. Monte Carlo Uncertainty Analysis for Nonlinear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../15/Nonlinear-Case-Study-Adsorptive-Membranes.html">
+     15.6. Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../16/design_of_experiments.html">
+   16. Design of Experiments
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+  <label for="toctree-checkbox-14">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../16/Reaction-MBDoE.html">
+     16.1. Model-Based Design of Experiments
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Extra Information
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../60258-organization/home.html">
+   CBE 60258 Information
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+  <label for="toctree-checkbox-15">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../60258-organization/syllabus.html">
+     Syllabus
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../60258-organization/schedule.html">
+     Fall 2022 Schedule
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../60258-organization/project1.html">
+     Project 1: Computating for Problem Solving
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../60258-organization/project2.html">
+     Project 2: Data Analysis
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="contribute.html">
+   Contributed Examples
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Estimating the Entrance Length of Channel Flow
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Non-Isothermal-PBR.html">
+     Non-Isothermal Packed Bed Reactor
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="numeric-integration-casestudy-ficks-law.html">
+     <strong>
+      Solving Fick’s second law using numerical integration
+     </strong>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="stochastic-simulation.html">
+     Stochastic Simulation of Chemical Reactions
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/contrib/Biotransport-Entrance-Length.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/contrib/Biotransport-Entrance-Length.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ndcbe/data-and-computing"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/contrib/Biotransport-Entrance-Length.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/notebooks/contrib/Biotransport-Entrance-Length.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-objectives">
+   Learning Objectives
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#coding-resources">
+   Coding Resources
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#problem-statement">
+   Problem Statement:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#estimating-entrance-length">
+   1. Estimating Entrance Length
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#more-accurate-rigorous-method">
+   2. More Accurate/Rigorous Method
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-normalize-the-expression-on-paper">
+     2a. Normalize the expression on paper
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#b-numerically-integrate-the-normalized-expression">
+     2b. Numerically integrate the normalized expression
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#c-plot-the-results">
+     2c. Plot the results
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#d-define-the-entrance-length">
+     2d. Define the entrance length
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#e-define-an-equation-for-le-using-new-value">
+     2e. Define an equation for Le using new value
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#f-comparing-integration-methods">
+     2f. Comparing integration methods
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#discuss-your-results-and-analyze-the-data">
+   3. Discuss your results and analyze the data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-explain-why-the-equation-derived-in-question-2e-differs-from-the-one-obtained-in-question-1">
+     3a.  Explain why the equation derived in Question 2e differs from the one obtained in Question 1.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#b-describe-the-integration-methods-used-in-2f-and-how-they-differ-in-performance-was-the-best-method-used-originally-in-2b-why-or-why-not">
+     3b.  Describe the integration methods used in 2f and how they differ in performance. Was the best method used originally in 2b? Why or why not?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#c-a-reynolds-number-of-1-was-used-as-a-starting-point-to-simulate-laminar-flow-if-the-reynolds-number-were-increased-what-would-happen-to-the-entrance-length-does-it-get-larger-or-smaller-why-does-this-occur">
+     3c. 	A Reynolds number of 1 was used as a starting point to simulate laminar flow. If the Reynolds number were increased, what would happen to the entrance length? Does it get larger or smaller? Why does this occur?
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Estimating the Entrance Length of Channel Flow</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-objectives">
+   Learning Objectives
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#coding-resources">
+   Coding Resources
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#problem-statement">
+   Problem Statement:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#estimating-entrance-length">
+   1. Estimating Entrance Length
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#more-accurate-rigorous-method">
+   2. More Accurate/Rigorous Method
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-normalize-the-expression-on-paper">
+     2a. Normalize the expression on paper
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#b-numerically-integrate-the-normalized-expression">
+     2b. Numerically integrate the normalized expression
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#c-plot-the-results">
+     2c. Plot the results
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#d-define-the-entrance-length">
+     2d. Define the entrance length
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#e-define-an-equation-for-le-using-new-value">
+     2e. Define an equation for Le using new value
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#f-comparing-integration-methods">
+     2f. Comparing integration methods
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#discuss-your-results-and-analyze-the-data">
+   3. Discuss your results and analyze the data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-explain-why-the-equation-derived-in-question-2e-differs-from-the-one-obtained-in-question-1">
+     3a.  Explain why the equation derived in Question 2e differs from the one obtained in Question 1.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#b-describe-the-integration-methods-used-in-2f-and-how-they-differ-in-performance-was-the-best-method-used-originally-in-2b-why-or-why-not">
+     3b.  Describe the integration methods used in 2f and how they differ in performance. Was the best method used originally in 2b? Why or why not?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#c-a-reynolds-number-of-1-was-used-as-a-starting-point-to-simulate-laminar-flow-if-the-reynolds-number-were-increased-what-would-happen-to-the-entrance-length-does-it-get-larger-or-smaller-why-does-this-occur">
+     3c. 	A Reynolds number of 1 was used as a starting point to simulate laminar flow. If the Reynolds number were increased, what would happen to the entrance length? Does it get larger or smaller? Why does this occur?
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="estimating-the-entrance-length-of-channel-flow">
+<h1>Estimating the Entrance Length of Channel Flow<a class="headerlink" href="#estimating-the-entrance-length-of-channel-flow" title="Permalink to this headline">#</a></h1>
+<p><strong>Prepared by</strong>: Stephen Cini (<a class="reference external" href="mailto:scini&#37;&#52;&#48;nd&#46;edu">scini<span>&#64;</span>nd<span>&#46;</span>edu</a>) and David Gazzo (<a class="reference external" href="mailto:dgazzo&#37;&#52;&#48;nd&#46;edu">dgazzo<span>&#64;</span>nd<span>&#46;</span>edu</a>)</p>
+<p><strong>Reference</strong>: Problem 4.5, pg. 210, Transport Phenomena in Biological Systems by Truskey et al. (ISBN 978-0-13-156988-1)</p>
+<p><strong>Intended Audience</strong>: This problem is intended for Chemical and Biomolecular Engineering juniors and seniors from the University of Notre Dame who are either enrolled in or have taken Transport.</p>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">#</a></h2>
+<p>After studying this notebook, completing the activities, and asking questions in class, you should be able to:</p>
+<ul class="simple">
+<li><p>Apply integration techniques to ordinary differential equations using Python.</p></li>
+<li><p>Properly graph and visualize data using <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>.</p></li>
+<li><p>Apply integration techniques to realistic scenarios using Python tools such as <code class="docutils literal notranslate"><span class="pre">scipy.integrate</span></code>.</p></li>
+</ul>
+</section>
+<section id="coding-resources">
+<h2>Coding Resources<a class="headerlink" href="#coding-resources" title="Permalink to this headline">#</a></h2>
+<p>Relevant Modules in Class Website:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/01/Functions-and-Scope.html">Functions and Scope</a></p></li>
+<li><p><a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/01/Matplotlib.html">Visualization with matplotlib</a></p></li>
+<li><p><a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/01/Functions-as-Arguments.html#lambda-functions">Lambda Functions</a></p></li>
+<li><p><a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/01/Publication-Quality-Figures.html">Preparing Publication Quality Figures in Python</a></p></li>
+<li><p><a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/07/Systems-of-Differential-Equations-and-Scipy.html#scipy">Scipy</a></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load libraries</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">integrate</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="problem-statement">
+<h2>Problem Statement:<a class="headerlink" href="#problem-statement" title="Permalink to this headline">#</a></h2>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Homework Problem</b></p>
+<p>Complete the following problem outside of class to practice the concepts discussed.</p>
+</div>
+<p>Developing flow within a channel can be examined with boundary layer theory. Consider a rectangular channel of height H and width w such that w &gt;&gt; H (Figure below). The velocity field in the entrance depends upon the x and y directions. As shown in the figure below, a boundary layer develops as flow enters the channel: Once the boundary layer has grown to equal H/2, the flow is fully developed.
+![image.png](data:image/png;base64,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)</p>
+</section>
+<section id="estimating-entrance-length">
+<h2>1. Estimating Entrance Length<a class="headerlink" href="#estimating-entrance-length" title="Permalink to this headline">#</a></h2>
+<p>As a first approximation, assume that the boundary layer is described by the results for flow over a flat plate. That is, the development of the boundary layer <span class="math notranslate nohighlight">\(δ\)</span> is given by</p>
+<div class="amsmath math notranslate nohighlight" id="equation-13ae54d1-c551-4612-a959-87237eb5ec84">
+<span class="eqno">(1)<a class="headerlink" href="#equation-13ae54d1-c551-4612-a959-87237eb5ec84" title="Permalink to this equation">#</a></span>\[\begin{equation}
+δ(x)=5.00xRe_x^{-1/2}
+\end{equation}\]</div>
+<p>where,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a1140ad4-f2e8-473c-98eb-1c4f48a409f7">
+<span class="eqno">(2)<a class="headerlink" href="#equation-a1140ad4-f2e8-473c-98eb-1c4f48a409f7" title="Permalink to this equation">#</a></span>\[\begin{equation}
+ Re_x=ρUx/μ
+\end{equation}\]</div>
+<p>Develop an expression for the entrance length in terms of the channels Reynolds number, <span class="math notranslate nohighlight">\(Re_x=2ρUH/μ = 2ρQ/wμ\)</span>, where <span class="math notranslate nohighlight">\(〈v〉\)</span> is the average velocity in the channel.</p>
+<p>Show that the entrance length <span class="math notranslate nohighlight">\(Le\)</span> is equal to <span class="math notranslate nohighlight">\(0.005ReH\)</span>.</p>
+<p>Submit your answer and written work via <strong>Gradescope</strong>.</p>
+</section>
+<section id="more-accurate-rigorous-method">
+<h2>2. More Accurate/Rigorous Method<a class="headerlink" href="#more-accurate-rigorous-method" title="Permalink to this headline">#</a></h2>
+<section id="a-normalize-the-expression-on-paper">
+<h3>2a. Normalize the expression on paper<a class="headerlink" href="#a-normalize-the-expression-on-paper" title="Permalink to this headline">#</a></h3>
+<p>The analysis in Question 1 assumes that <span class="math notranslate nohighlight">\(U(x) = U_o = 〈v〉\)</span>. But in fact, the free-stream velocity changes as the boundary layer grows in the channel. Therefore, assuming a linear velocity profile, <span class="math notranslate nohighlight">\(v_x=\frac{U_xy}{δ}\)</span>, in the boundary layer, and utilizing the von Karman momentum integral equation,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-23173b9f-848c-4f6c-9a7a-266e974e860e">
+<span class="eqno">(3)<a class="headerlink" href="#equation-23173b9f-848c-4f6c-9a7a-266e974e860e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+τ_w=ρ \frac{∂}{∂x} ∫_0^∞v_x (U-v_x )dy+ρ\frac{∂U}{∂x} ∫_0^∞(U-v_x )dy
+\end{equation}\]</div>
+<p>and the fact that the flow rate <span class="math notranslate nohighlight">\(Q\)</span> is constant, the following expression for the growth of the boundary layer can be derived:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c4a95711-a9f9-479c-a641-678fc3201c63">
+<span class="eqno">(4)<a class="headerlink" href="#equation-c4a95711-a9f9-479c-a641-678fc3201c63" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\frac{dδ_{(x)}}{dx}=\frac{6μW}{ρδ_{(x)}Q}\frac{[H-δ_{(x)}]^2}{H+4δ_{(x)}}
+\end{equation}\]</div>
+<p>Manipulate this expression so that it can be integrated numerically. Hint: normalize it and keep symmetry in mind.</p>
+<p>Submit your answer and written work via <strong>Gradescope</strong>.</p>
+</section>
+<section id="b-numerically-integrate-the-normalized-expression">
+<h3>2b. Numerically integrate the normalized expression<a class="headerlink" href="#b-numerically-integrate-the-normalized-expression" title="Permalink to this headline">#</a></h3>
+<p>Using the normalized form of the differential equation, use <code class="docutils literal notranslate"><span class="pre">scipy.integrate.solve_ivp</span></code> to numerically integrate the expression and find the value of x where <span class="math notranslate nohighlight">\(δ\)</span> is fully developed.</p>
+<p>For more information on how to use <code class="docutils literal notranslate"><span class="pre">scipy.integrate</span></code>, click <a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/07/Systems-of-Differential-Equations-and-Scipy.html#scipy">here</a> to go to the relevant section of the class website.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">entrance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">Re</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span> 
+    <span class="sd">&#39;&#39;&#39;Solving for the entrance length of the tube with non constant velocity</span>
+<span class="sd">    Args:</span>
+<span class="sd">        d: δ_star; Normalized δ; partial derivative wrt x or y (numpy array)</span>
+<span class="sd">        x: x_star; Normalized x; position along channel (numpy array)</span>
+<span class="sd">        Re: Reynolds number, constant dimensionless quantity used to show </span>
+<span class="sd">        turbulence or roughness of flow. Set to unity as default value (float)</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        dxdy: Normalized expression for the entrance length</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+    
+    <span class="c1"># assume Re is at unity for the example</span>
+  
+<span class="c1"># Add your solution hereS</span>
+
+    <span class="k">return</span> <span class="n">dxdy</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Integrate the solution in scipy using defined function</span>
+
+<span class="c1"># Add your solution hereS</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="c-plot-the-results">
+<h3>2c. Plot the results<a class="headerlink" href="#c-plot-the-results" title="Permalink to this headline">#</a></h3>
+<p>Plot the resulting data to show the behavior of the integrated expression.</p>
+<p>For more information on how to use <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> to make publication quality plots, click <a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/01/Publication-Quality-Figures.html#preparing-publication-quality-figures-in-python">here</a> to go to the relevant section of the class website.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the integrated expression</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span> <span class="c1"># formats the plotted figure</span>
+
+<span class="c1"># Add your solution hereS</span>
+
+<span class="c1"># Format for publication quality</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x*/Re [dimensionless]&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span><span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\u03B4</span><span class="s1">*/(H/2) [dimensionless]&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span><span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/Biotransport-Entrance-Length_18_0.png" src="../../_images/Biotransport-Entrance-Length_18_0.png" />
+</div>
+</div>
+</section>
+<section id="d-define-the-entrance-length">
+<h3>2d. Define the entrance length<a class="headerlink" href="#d-define-the-entrance-length" title="Permalink to this headline">#</a></h3>
+<p>At what value of x does the boundary layer become fully developed?</p>
+<p>Hint: What is the coordinate where <span class="math notranslate nohighlight">\(δ\)</span> = 1?</p>
+<p>Store your solution as a numpy array labelled <code class="docutils literal notranslate"><span class="pre">Le</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution hereS</span>
+
+<span class="c1"># Print Value</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Le (x @ δ*=1) =&quot;</span><span class="p">,</span> <span class="n">Le</span><span class="p">)</span> <span class="c1"># we want to know the dimensionless</span>
+  <span class="c1"># length at which del is 1 since this will give us our entrance length where</span>
+  <span class="c1"># flow is stil developing    </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Le (x @ δ*=1) = 0.12694690354738747
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="e-define-an-equation-for-le-using-new-value">
+<h3>2e. Define an equation for Le using new value<a class="headerlink" href="#e-define-an-equation-for-le-using-new-value" title="Permalink to this headline">#</a></h3>
+<p>Using the obtained value of <code class="docutils literal notranslate"><span class="pre">Le</span></code>, make a general expression for the entrance length similar to the expression derived in part 1.</p>
+<p><em>Hint</em>: The value obtained for Le is dimensionless.</p>
+<p>Submit your answer and written work via <strong>Gradescope</strong>.</p>
+</section>
+<section id="f-comparing-integration-methods">
+<h3>2f. Comparing integration methods<a class="headerlink" href="#f-comparing-integration-methods" title="Permalink to this headline">#</a></h3>
+<p>Compair your previous results using the <code class="docutils literal notranslate"><span class="pre">RK45</span></code> integration method with alternative methods.</p>
+<p>Define your equation as <code class="docutils literal notranslate"><span class="pre">methods</span></code>.</p>
+<p>For more information on other integration methods for <code class="docutils literal notranslate"><span class="pre">scipy.integrate</span></code>, click <a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/07/Systems-of-Differential-Equations-and-Scipy.html">here</a> to go to the relevant section of the class website. Further detail into integration methods for <code class="docutils literal notranslate"><span class="pre">scipy.integrate</span></code>, is also provided in the documentation <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/integrate.html">here</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a list of methods</span>
+<span class="n">methods</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;RK23&quot;</span><span class="p">,</span> <span class="s2">&quot;RK45&quot;</span><span class="p">,</span> <span class="s2">&quot;DOP853&quot;</span><span class="p">]</span>
+
+<span class="c1"># loop through methods for best  </span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">methods</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Using method&quot;</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+    
+<span class="c1"># Add your solution hereS</span>
+
+<span class="c1"># print values for each method within loop</span>
+<span class="c1"># some solver statistics</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of RHS function evaluations:&quot;</span><span class="p">,</span><span class="n">other_methods</span><span class="o">.</span><span class="n">nfev</span><span class="p">)</span>
+<span class="c1"># calculated length from each method</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Le (x @ δ*=1) =&quot;</span><span class="p">,</span> <span class="n">Le</span><span class="p">)</span> <span class="c1"># dimensionless</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using method RK23
+Number of RHS function evaluations: 53
+Le (x @ δ*=1) = 0.12693195882302588
+
+
+Using method RK45
+Number of RHS function evaluations: 38
+Le (x @ δ*=1) = 0.12694690354738747
+
+
+Using method DOP853
+Number of RHS function evaluations: 89
+Le (x @ δ*=1) = 0.12694710642481696
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="discuss-your-results-and-analyze-the-data">
+<h2>3. Discuss your results and analyze the data<a class="headerlink" href="#discuss-your-results-and-analyze-the-data" title="Permalink to this headline">#</a></h2>
+<section id="a-explain-why-the-equation-derived-in-question-2e-differs-from-the-one-obtained-in-question-1">
+<h3>3a.  Explain why the equation derived in Question 2e differs from the one obtained in Question 1.<a class="headerlink" href="#a-explain-why-the-equation-derived-in-question-2e-differs-from-the-one-obtained-in-question-1" title="Permalink to this headline">#</a></h3>
+<p><strong>Discuss</strong> in 1-3 sentences.</p>
+<p><strong>Answer</strong>:</p>
+</section>
+<section id="b-describe-the-integration-methods-used-in-2f-and-how-they-differ-in-performance-was-the-best-method-used-originally-in-2b-why-or-why-not">
+<h3>3b.  Describe the integration methods used in 2f and how they differ in performance. Was the best method used originally in 2b? Why or why not?<a class="headerlink" href="#b-describe-the-integration-methods-used-in-2f-and-how-they-differ-in-performance-was-the-best-method-used-originally-in-2b-why-or-why-not" title="Permalink to this headline">#</a></h3>
+<p><strong>Discuss</strong> in 3-5 sentences.</p>
+<p><strong>Answer</strong>:</p>
+</section>
+<section id="c-a-reynolds-number-of-1-was-used-as-a-starting-point-to-simulate-laminar-flow-if-the-reynolds-number-were-increased-what-would-happen-to-the-entrance-length-does-it-get-larger-or-smaller-why-does-this-occur">
+<h3>3c. 	A Reynolds number of 1 was used as a starting point to simulate laminar flow. If the Reynolds number were increased, what would happen to the entrance length? Does it get larger or smaller? Why does this occur?<a class="headerlink" href="#c-a-reynolds-number-of-1-was-used-as-a-starting-point-to-simulate-laminar-flow-if-the-reynolds-number-were-increased-what-would-happen-to-the-entrance-length-does-it-get-larger-or-smaller-why-does-this-occur" title="Permalink to this headline">#</a></h3>
+<p><strong>Explain</strong> your reasoning using the derived equations for <code class="docutils literal notranslate"><span class="pre">Le</span></code> and the nature of turbulence.
+<strong>Discuss</strong> in 3-5 sentences.</p>
+<p><strong>Answer</strong>:</p>
+<p>To visualize, plot the curve above with the following values of Re:</p>
+<p>1, 10, 100, 500, 1000, 5000.</p>
+<p><em>Hints</em>:</p>
+<ol class="simple">
+<li><p>Use a <a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/01/Functions-as-Arguments.html#lambda-functions">lambda function</a> to allow redefinition of Re.</p></li>
+<li><p>Make a semi-log plot for easier viewing of trend in results.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Redefine Re in same function from before within a for loop.</span>
+
+<span class="c1"># Add your solution hereS</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span> <span class="c1"># formats the plotted figure to be larger and clearer</span>
+
+<span class="c1"># loop the integration for different values of Re</span>
+<span class="c1"># plot each iteration inside loop</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Mult_Re</span><span class="p">)):</span>
+
+<span class="c1"># Add your solution hereS</span>
+
+    <span class="c1">#print values for Le</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Le (x @ δ*=1) for Re =&quot;</span><span class="p">,</span> <span class="n">Mult_Re</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="s2">&quot;=&quot;</span><span class="p">,</span> <span class="n">Le</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># labels and publication quality details</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x*/Re [dimensionless]&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span><span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\u03B4</span><span class="s1">*/(H/2) [dimensionless]&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span><span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Le (x @ δ*=1) for Re = 1 = 0.12694690354738747
+Le (x @ δ*=1) for Re = 10 = 1.2695003130784555
+Le (x @ δ*=1) for Re = 100 = 12.695115409153276
+Le (x @ δ*=1) for Re = 500 = 63.47563865495485
+Le (x @ δ*=1) for Re = 1000 = 126.95129304465897
+Le (x @ δ*=1) for Re = 5000 = 634.7565284345559
+</pre></div>
+</div>
+<img alt="../../_images/Biotransport-Entrance-Length_30_1.png" src="../../_images/Biotransport-Entrance-Length_30_1.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks/contrib"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="contribute.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Contributed Examples</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Non-Isothermal-PBR.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Non-Isothermal Packed Bed Reactor</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
