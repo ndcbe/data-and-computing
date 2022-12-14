@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Stochastic Simulation of Chemical Reactions" href="stochastic-simulation.html" />
+    <link rel="next" title="Stochastic Simulation of Chemical Reactions" href="Stochastic-Kinetics.html" />
     <link rel="prev" title="Non-Isothermal Packed Bed Reactor" href="Non-Isothermal-PBR.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -830,13 +830,35 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="stochastic-simulation.html">
+    <a class="reference internal" href="Stochastic-Kinetics.html">
      Stochastic Simulation of Chemical Reactions
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="Spaghettification.html">
      Spaghettification of the Magic School Bus
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Alcohol-Pharmacokinetics.html">
+     Alcohol Pharmacokinetics and  Blood Alcohol Content % Modeling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="McCabe-Thiele.html">
+     <strong>
+      Plotting McCabe-Thiele diagram through computational methods
+     </strong>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Wastewater-Treatment-Mass-Balance.html">
+     Example of Mass Balance Problem in Wastewater Treatment Units
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Filtration-Nonlinear-System.html">
+     Filtration of a Yeast Suspension
     </a>
    </li>
   </ul>
@@ -900,7 +922,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/contrib/numeric-integration-casestudy-ficks-law.ipynb"
+        <a href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/contrib/Ficks-Law.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -918,7 +940,7 @@ title="Launch on Binder"
       </li>
       
       <li>
-        <a href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/contrib/numeric-integration-casestudy-ficks-law.ipynb"
+        <a href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/contrib/Ficks-Law.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -978,7 +1000,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/contrib/numeric-integration-casestudy-ficks-law.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/contrib/Ficks-Law.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -1006,7 +1028,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../../_sources/notebooks/contrib/numeric-integration-casestudy-ficks-law.ipynb"
+        <a href="../../_sources/notebooks/contrib/Ficks-Law.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -1242,23 +1264,23 @@ title="Print to PDF"
 <h2><strong>1.3 Fick’s Second Law</strong><a class="headerlink" href="#fick-s-second-law" title="Permalink to this headline">#</a></h2>
 <p>An analytical solution can be developed for the concentration, in this case, for steady-state diffusion in two dimensions. We can start off with equation (1). This expression relates the radius of the conical flask to its height. This equation could help guide through three fundamental expressions: one for the concentration profile, one for the flux of the salt, and one for the total flow of the salt(i.e., the flux times the cross-sectional area of the flask). In this notebook we shall focus on the concentration profile. <span class="math notranslate nohighlight">\(R_{0}\)</span> is the radius at <span class="math notranslate nohighlight">\(z\)</span> = 0, <span class="math notranslate nohighlight">\(R_{l}\)</span> is the radius at <span class="math notranslate nohighlight">\(z = l\)</span> and <span class="math notranslate nohighlight">\(l\)</span> is the height of the flask.</p>
 <p><span class="math notranslate nohighlight">\(c(z,t)\)</span> is the concentration of the salt at the position <span class="math notranslate nohighlight">\(z\)</span> at time <span class="math notranslate nohighlight">\(t\)</span>, in <span class="math notranslate nohighlight">\([mol-cm^{-3}]\)</span>, <span class="math notranslate nohighlight">\(A(z)\)</span> is the cross-sectional area in <span class="math notranslate nohighlight">\([cm^{2}]\)</span> that varies through which diffusion takes place and <span class="math notranslate nohighlight">\(D\)</span> is the diffusion coefficient for salt and water in <span class="math notranslate nohighlight">\([cm^{2}-s^{-1}]\)</span>. As time tends to infinity, the change in concentration with respect to time disappears. This leads to equation (4) and a linear ordinary differential equation is obtained. In Figure 1, we can observe a cross section of Fick’s funnel-shaped vessel with a variable, <span class="math notranslate nohighlight">\(z\)</span>.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-78d1ba5f-74f4-42a7-b6d8-b374c13a8a7c">
-<span class="eqno">(38)<a class="headerlink" href="#equation-78d1ba5f-74f4-42a7-b6d8-b374c13a8a7c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fee4cfca-9696-414c-9766-bb8545323d33">
+<span class="eqno">(38)<a class="headerlink" href="#equation-fee4cfca-9696-414c-9766-bb8545323d33" title="Permalink to this equation">#</a></span>\[\begin{equation}
  R = R_{0} + (R_{l} - R_{0}) \frac{z}{l}
  \tag{1}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-fe5a134d-4ea9-4564-ba14-006901d47a52">
-<span class="eqno">(39)<a class="headerlink" href="#equation-fe5a134d-4ea9-4564-ba14-006901d47a52" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-212a3349-02b2-4919-8187-f1d22c31f58f">
+<span class="eqno">(39)<a class="headerlink" href="#equation-212a3349-02b2-4919-8187-f1d22c31f58f" title="Permalink to this equation">#</a></span>\[\begin{equation}
  A = \pi \big(R_{0} + (R_{l} - R_{0}) \frac{z}{l}\big)^{2}
  \tag{2}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-ef719a17-617e-40d2-81c9-2f3e677c9a0b">
-<span class="eqno">(40)<a class="headerlink" href="#equation-ef719a17-617e-40d2-81c9-2f3e677c9a0b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3f55bce1-84f4-4e9b-ac29-fdaf4d8c29c0">
+<span class="eqno">(40)<a class="headerlink" href="#equation-3f55bce1-84f4-4e9b-ac29-fdaf4d8c29c0" title="Permalink to this equation">#</a></span>\[\begin{equation}
  D\bigg[\frac{\partial^2 c}{\partial z^2} + \frac{\partial c}{\partial z}\frac{1}{A(z)}\frac{dA}{dz}\bigg] = \frac{\partial c}{\partial t}
  \tag{3}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-aa135a0a-f5f4-416a-b9d0-381715328678">
-<span class="eqno">(41)<a class="headerlink" href="#equation-aa135a0a-f5f4-416a-b9d0-381715328678" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-89fa2452-4ef5-469f-9f16-4839ac2dc648">
+<span class="eqno">(41)<a class="headerlink" href="#equation-89fa2452-4ef5-469f-9f16-4839ac2dc648" title="Permalink to this equation">#</a></span>\[\begin{equation}
  \bigg[\frac{d^2 c}{d z^2} + \frac{dc}{dz}\frac{1}{A(z)}\frac{dA}{dz}\bigg] = 0
  \tag{4}
 \end{equation}\]</div>
@@ -1486,7 +1508,7 @@ Solution:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/numeric-integration-casestudy-ficks-law_22_0.png" src="../../_images/numeric-integration-casestudy-ficks-law_22_0.png" />
+<img alt="../../_images/Ficks-Law_22_0.png" src="../../_images/Ficks-Law_22_0.png" />
 </div>
 </div>
 </section>
@@ -1516,7 +1538,7 @@ Solution:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>51 [1.0, 0.9932432432432431, 0.9863013698630136, 0.9791666666666665, 0.971830985915493, 0.9642857142857142, 0.9565217391304347, 0.9485294117647058, 0.9402985074626866, 0.9318181818181819, 0.9230769230769231, 0.9140625, 0.9047619047619047, 0.8951612903225805, 0.8852459016393442, 0.8749999999999999, 0.864406779661017, 0.8534482758620688, 0.8421052631578947, 0.8303571428571428, 0.8181818181818181, 0.8055555555555555, 0.7924528301886791, 0.7788461538461537, 0.7647058823529411, 0.75, 0.7346938775510203, 0.71875, 0.7021276595744681, 0.6847826086956521, 0.6666666666666666, 0.6477272727272727, 0.627906976744186, 0.607142857142857, 0.5853658536585364, 0.5625, 0.5384615384615383, 0.513157894736842, 0.48648648648648635, 0.4583333333333332, 0.4285714285714284, 0.39705882352941185, 0.36363636363636365, 0.328125, 0.2903225806451612, 0.24999999999999994, 0.20689655172413784, 0.1607142857142858, 0.11111111111111127, 0.05769230769230782, -0.0]
 </pre></div>
 </div>
-<img alt="../../_images/numeric-integration-casestudy-ficks-law_26_1.png" src="../../_images/numeric-integration-casestudy-ficks-law_26_1.png" />
+<img alt="../../_images/Ficks-Law_26_1.png" src="../../_images/Ficks-Law_26_1.png" />
 </div>
 </div>
 <p><strong>Discussion:</strong></p>
@@ -1617,7 +1639,7 @@ Solution:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/numeric-integration-casestudy-ficks-law_32_0.png" src="../../_images/numeric-integration-casestudy-ficks-law_32_0.png" />
+<img alt="../../_images/Ficks-Law_32_0.png" src="../../_images/Ficks-Law_32_0.png" />
 </div>
 </div>
 <p><strong>Class Activity 6</strong></p>
@@ -1648,7 +1670,7 @@ Solution:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/numeric-integration-casestudy-ficks-law_34_0.png" src="../../_images/numeric-integration-casestudy-ficks-law_34_0.png" />
+<img alt="../../_images/Ficks-Law_34_0.png" src="../../_images/Ficks-Law_34_0.png" />
 </div>
 </div>
 <p><strong>Discussion:</strong></p>
@@ -1678,7 +1700,7 @@ Solution:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/numeric-integration-casestudy-ficks-law_37_0.png" src="../../_images/numeric-integration-casestudy-ficks-law_37_0.png" />
+<img alt="../../_images/Ficks-Law_37_0.png" src="../../_images/Ficks-Law_37_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1756,7 +1778,7 @@ Solution:
             <p class="prev-next-title">Non-Isothermal Packed Bed Reactor</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="stochastic-simulation.html" title="next page">
+    <a class='right-next' id="next-link" href="Stochastic-Kinetics.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Stochastic Simulation of Chemical Reactions</p>
