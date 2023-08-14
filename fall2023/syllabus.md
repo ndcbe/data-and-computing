@@ -1,6 +1,6 @@
-# Syllabus
+# Syllabus (Fall 2023)
 
-CBE 60258, Advanced Data and Computing for Chemical Engineers, University of Notre Dame, Fall 2022
+CBE 60258, Advanced Data and Computing for Chemical Engineers, University of Notre Dame, Fall 2023
 
 ## Course Description
 
@@ -69,11 +69,11 @@ The midterm exam will take place during class as indicated on the [semester sche
 
 ### Project 1: Numerical Methods for Problem Solving
 
-More details will be shared soon.
+See (./project1.md)
 
 ### Project 2: Data Analysis
 
-More details will be shared soon.
+See (./project2.md)
 
 
 ### Grading Standards

@@ -1,4 +1,4 @@
-# Project 1: Computating for Problem Solving
+# Project 1: Computating for Problem Solving (Fall 2022)
 
 ## Introduction
 
