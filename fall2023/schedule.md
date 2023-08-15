@@ -24,7 +24,7 @@ TODO: Need to Update
 
 ## Class Meetings
 
-| Topics | Supplemental Material |
+| Main Topic(s) | Supplemental Material |
 | ----------- | ----------- |
 | **Tuesday, August 22, 2023** |
 | [](../notebooks/01/Jupyter-Notebooks.ipynb) | [](../notebooks/01/Python-Basics-I-Variables-Strings-Bugs.ipynb) |
@@ -37,24 +37,18 @@ TODO: Need to Update
 | | [](../notebooks/01/Matplotlib.ipynb) |
 | | [](../notebooks/01/Functions-as-Arguments.ipynb) |
 | | [](../notebooks/01/Testing-and-Debugging.ipynb) |
-| ----------- | ----------- |
 | **Thursday, August 24, 2023** |
 | [](../notebooks/03/chapter2.ipynb) | [](../notebooks/04/Modeling-Systems-of-Linear-Equations.ipynb) |
 | | [](../notebooks/04/Linear-Algebra-in-Numpy.ipynb) |
-| ----------- | ----------- |
 | **Tuesday, August 29, 2023** |
 | [](../notebooks/03/chapter3.ipynb) | [](../notebooks/04/Gauss-Elimination.ipynb) |
-| ----------- | ----------- |
 | **Thursday, August 31, 2023** |
 | [](../notebooks/03/chapter4.ipynb) | [](../notebooks/04/Condition-Number.ipynb) |
-| ----------- | ----------- |
 | **Tuesday, September 5, 2023** |
 | [](../notebooks/03/chapter5.ipynb) | [](../notebooks/04/Invertible-Matrix-Theorem-and-Gauss-Example.ipynb) |
 | | [](../notebooks/04/LU-Decomposition.ipynb) |
-| ----------- | ----------- |
 | **Thursday, September 7, 2023** |
 | Mini-Project Hackathon | |
-| ----------- | ----------- |
 | **Tuesday, September 12, 2023** |
 | [](../notebooks/03/chapter6.ipynb) | [](../notebooks/04/Condition-Number.ipynb) |
 
