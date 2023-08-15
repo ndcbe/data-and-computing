@@ -26,7 +26,7 @@ TODO: Need to Update
 
 | Main Topic(s) | Supplemental Material |
 | ----------- | ----------- |
-| **Tuesday, August 22, 2023** |
+| **Tuesday, August 22, 2023** | Python and Math Quickstart |
 | [](../notebooks/01/Jupyter-Notebooks.ipynb) | [](../notebooks/01/Python-Basics-I-Variables-Strings-Bugs.ipynb) |
 | [](../notebooks/01/Pseudocode.ipynb) | [](../notebooks/01/Flow-control.ipynb) |
 | [](../notebooks/01/Example-High-Low-Game.ipynb) | [](../notebooks/01/Python-Basics-III-Lists-Dictionaries-Enumeration.ipynb) |
@@ -51,6 +51,53 @@ TODO: Need to Update
 | Mini-Project Hackathon | |
 | **Tuesday, September 12, 2023** |
 | [](../notebooks/03/chapter6.ipynb) | [](../notebooks/04/Condition-Number.ipynb) |
+| **Thursday, September 14, 2023** | Approximating Functions and Derivatives |
+| [](../notebooks/05/Taylor-Series.ipynb) | [](../notebooks/05/algorithms.md) |
+| [](../notebooks/05/Finite-Difference.ipynb) | [](../notebooks/05/Example-Heating-a-Metal-Slab.ipynb) |
+| [](../notebooks/05/Example-Heating-a-Metal-Slab.ipynb) |
+| **Tuesday, September 19, 2023** |
+| Linear Algebra and Python Quiz | Mini-Project Hackathon |
+| **Thursday, September 21, 2023** | Solving Nonlinear System of Equations |
+| [](../notebooks/06/Newton-Raphson-Method-in-One-Dimension.ipynb) | [](../notebooks/06/nonlinear_systems.md) |
+| [](../notebooks/06/More-Newton-Type-Methods.ipynb) | [](../notebooks/06/Convergence-Analysis-for-Newton-Raphson-Methods.ipynb) |
+| [](../notebooks/06/Newton-Raphson-Methods-for-Systems-of-Equations.ipynb) | [](../notebooks/06/Newton-Methods-in-Scipy.ipynb) |
+| **Tuesday, September 26** | Numeric Integration for Integrals
+| [](../notebooks/07/Intro-and-Newton-Cotes.ipynb) | [](../notebooks/07/integration.md) |
+| [](../notebooks/07/Gauss-Quadrature.ipynb) | [](../notebooks/07/Scipy-Library-Adaptive-Methods-for-Newton-Cotes-and-Gauss-Quadrature.ipynb) |
+| | [](../notebooks/07/Application-Inertial-Navigation-Systems.ipynb) |
+| **Thursday, September 28** | Numeric Integration for Differential Equations |
+| [](../notebooks/07/Forward-and-Backward-Euler.ipynb) | [](../notebooks/07/Explicit-Runge-Kutta.ipynb) |
+| [](../notebooks/07/Trapezoid-Rule.ipynb) | [](../notebooks/07/Example-Reaction-Rates.ipynb) |
+| [](../notebooks/07/Stability-Analysis.ipynb) | 
+| [](../notebooks/07/Systems-of-Differential-Equations-and-Scipy.ipynb) | 
+| **Tuesday, October 3** | Pyomo and Pandas |
+| [](../notebooks/08/Pyomo-Basics.ipynb) | [](../notebooks/08/optimization.md) |
+| [Simulating Heat Conduction with Pyomo.dae](https://jckantor.github.io/ND-Pyomo-Cookbook/notebooks/05.03-Heat_Conduction_in_Various_Geometries.html) | [](../notebooks/08/Flash-Calculations-in-Pyomo.ipynb) |
+| [](../notebooks/01/Pandas.ipynb) | [Simulating Diffusion with Adsorption in Polymers with Pyomo.dae](https://jckantor.github.io/ND-Pyomo-Cookbook/notebooks/05.04-Diffusion_Adsorption_in_Polymers.html) |
+| [](../notebooks/09/Sampling.ipynb) | [](../notebooks/09/stats.md) |
+| [](../notebooks/09/Summary-Statistics.ipynb) | [Tiny Data](https://jckantor.github.io/cbe31358-book/notebooks/methods/05-Tidy-Data-and-Pandas.html)
+| [](../notebooks/09/Visualizing-Data.ipynb) |
+| **Thursday, October 5** | Basic Ideas of Probability |
+| **Tuesday, October 10** | Random Variables | 
+| **Thursday, October 12** | Probability Distributions |
+| **Tuesday, October 17** | Fall Break | 
+| **Thursday, October 19** | Fall Break |
+| **Tuesday, October 24** | Numerical Methods Quiz, Uncertainty Propagation | 
+| **Thursday, October 26** | Uncertainty Propagation |
+| **Tuesday, October 31** | Statistical Inference |
+| **Thursday, November 2** | Hypothesis Testing | 
+| **Tuesday, November 7** | Project Workshop | 
+| **Thursday, November 9** | Project Workshop | 
+| **Tuesday, November 14** | Statistical Power | 
+| **Thursday, November 16** | Multivariate Linear Regression | 
+| **Tuesday, November 21** | Nonlinear Regression | 
+| **Thursday, November 23** | Thanksgiving | 
+| **Tuesday, November 28** | Probability and Statistics Quiz, Nonlinear Regression Example | 
+| **Thursday, November 30** | Design of Experiments |
+| **Tuesday, December 5** | Project Workshop | 
+| **Thursday, December 7 30** | Semester Wrap-up | 
+
+
 
 <!---
 | Tuesday, August 30, 2022 | [](../notebooks/01/Pandas.ipynb) |
