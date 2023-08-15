@@ -73,29 +73,31 @@ TODO: Need to Update
 | **Tuesday, October 3** | Pyomo and Pandas |
 | [](../notebooks/08/Pyomo-Basics.ipynb) | [](../notebooks/08/optimization.md) |
 | [Simulating Heat Conduction with Pyomo.dae](https://jckantor.github.io/ND-Pyomo-Cookbook/notebooks/05.03-Heat_Conduction_in_Various_Geometries.html) | [](../notebooks/08/Flash-Calculations-in-Pyomo.ipynb) |
-| [](../notebooks/01/Pandas.ipynb) | [Simulating Diffusion with Adsorption in Polymers with Pyomo.dae](https://jckantor.github.io/ND-Pyomo-Cookbook/notebooks/05.04-Diffusion_Adsorption_in_Polymers.html) |
-| [](../notebooks/09/Sampling.ipynb) | [](../notebooks/09/stats.md) |
-| [](../notebooks/09/Summary-Statistics.ipynb) | [Tiny Data](https://jckantor.github.io/cbe31358-book/notebooks/methods/05-Tidy-Data-and-Pandas.html)
+| [Simulating Diffusion with Adsorption in Polymers with Pyomo.dae](https://jckantor.github.io/ND-Pyomo-Cookbook/notebooks/05.04-Diffusion_Adsorption_in_Polymers.html) |
+| **Thursday, October 5** | Pandas and Data |
+| [](../notebooks/01/Pandas.ipynb) | [](../notebooks/09/stats.md) |
+| [Tiny Data](https://jckantor.github.io/cbe31358-book/notebooks/methods/05-Tidy-Data-and-Pandas.html) |
+| [](../notebooks/09/Sampling.ipynb) | 
+| [](../notebooks/09/Summary-Statistics.ipynb) | 
 | [](../notebooks/09/Visualizing-Data.ipynb) |
-| **Thursday, October 5** | Basic Ideas of Probability |
-| **Tuesday, October 10** | Random Variables | 
-| **Thursday, October 12** | Probability Distributions |
+| **Tuesday, October 10** | Basic Ideas of Probability | 
+| **Thursday, October 12** | Random Variables |
 | **Tuesday, October 17** | Fall Break | 
 | **Thursday, October 19** | Fall Break |
-| **Tuesday, October 24** | Numerical Methods Quiz, Uncertainty Propagation | 
-| **Thursday, October 26** | Uncertainty Propagation |
-| **Tuesday, October 31** | Statistical Inference |
-| **Thursday, November 2** | Hypothesis Testing | 
+| **Tuesday, October 24** | Probability Distributions | 
+| **Thursday, October 26** | Numerical Methods Quiz, Uncertainty Propagation |
+| **Tuesday, October 31** | Uncertainty Propagation, Statistical Inference |
+| **Thursday, November 2** | Statistical Inference, Hypothesis Testing | 
 | **Tuesday, November 7** | Project Workshop | 
 | **Thursday, November 9** | Project Workshop | 
 | **Tuesday, November 14** | Statistical Power | 
 | **Thursday, November 16** | Multivariate Linear Regression | 
-| **Tuesday, November 21** | Nonlinear Regression | 
+| **Tuesday, November 21** | Multivariate Linear Regression Continued | 
 | **Thursday, November 23** | Thanksgiving | 
-| **Tuesday, November 28** | Probability and Statistics Quiz, Nonlinear Regression Example | 
-| **Thursday, November 30** | Design of Experiments |
-| **Tuesday, December 5** | Project Workshop | 
-| **Thursday, December 7 30** | Semester Wrap-up | 
+| **Tuesday, November 28** | Probability and Statistics Quiz, Nonlinear Regression  | 
+| **Thursday, November 30** | Nonlinear Regression Continued |
+| **Tuesday, December 5** | Design of Experiments | 
+| **Thursday, December 7 30** | Semester Wrap-up, Project Workshop | 
 
 
 
