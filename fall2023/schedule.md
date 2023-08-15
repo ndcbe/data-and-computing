@@ -1,6 +1,8 @@
-# Fall 2023 Schedule
+# Schedule
 
 ## Assignments
+
+TODO: Need to Update
 
 | Deadline     | Description |
 | ----------- | ----------- |
@@ -22,19 +24,41 @@
 
 ## Class Meetings
 
-| Day     | Topic | Supplemental |
+| Topics | Supplemental Material |
 | ----------- | ----------- |
-| Tuesday, August 22, 2023 | [](../notebooks/01/Jupyter-Notebooks.ipynb) | [](../notebooks/01/Python-Basics-I-Variables-Strings-Bugs.ipynb) |
+| **Tuesday, August 22, 2023** |
+| [](../notebooks/01/Jupyter-Notebooks.ipynb) | [](../notebooks/01/Python-Basics-I-Variables-Strings-Bugs.ipynb) |
 | [](../notebooks/01/Pseudocode.ipynb) | [](../notebooks/01/Flow-control.ipynb) |
 | [](../notebooks/01/Example-High-Low-Game.ipynb) | [](../notebooks/01/Python-Basics-III-Lists-Dictionaries-Enumeration.ipynb) |
 | [](../notebooks/01/Publication-Quality-Figures.ipynb) | [](../notebooks/01/Functions-and-Scope.ipynb) |
-| | [](../notebooks/01/Recursion.ipynb) |
+| [](../notebooks/03/chapter1.ipynb) | [](../notebooks/01/Recursion.ipynb) |
 | | [](../notebooks/01/Modules-and-Files.ipynb) |
 | | [](../notebooks/01/NumPy.ipynb) |
 | | [](../notebooks/01/Matplotlib.ipynb) |
 | | [](../notebooks/01/Functions-as-Arguments.ipynb) |
 | | [](../notebooks/01/Testing-and-Debugging.ipynb) |
+| ----------- | ----------- |
+| **Thursday, August 24, 2023** |
+| [](../notebooks/03/chapter2.ipynb) | [](../notebooks/04/Modeling-Systems-of-Linear-Equations.ipynb) |
+| | [](../notebooks/04/Linear-Algebra-in-Numpy.ipynb) |
+| ----------- | ----------- |
+| **Tuesday, August 29, 2023** |
+| [](../notebooks/03/chapter3.ipynb) | [](../notebooks/04/Gauss-Elimination.ipynb) |
+| ----------- | ----------- |
+| **Thursday, August 31, 2023** |
+| [](../notebooks/03/chapter4.ipynb) | [](../notebooks/04/Condition-Number.ipynb) |
+| ----------- | ----------- |
+| **Tuesday, September 5, 2023** |
+| [](../notebooks/03/chapter5.ipynb) | [](../notebooks/04/Invertible-Matrix-Theorem-and-Gauss-Example.ipynb) |
+| | [](../notebooks/04/LU-Decomposition.ipynb) |
+| ----------- | ----------- |
+| **Thursday, September 7, 2023** |
+| Mini-Project Hackathon | |
+| ----------- | ----------- |
+| **Tuesday, September 12, 2023** |
+| [](../notebooks/03/chapter6.ipynb) | [](../notebooks/04/Condition-Number.ipynb) |
 
+<!---
 | Tuesday, August 30, 2022 | [](../notebooks/01/Pandas.ipynb) |
 | Thursday, August 25, 2022 | [](../notebooks/01/Pseudocode.ipynb) |
 | Thursday, September 1, 2022 | [](../notebooks/04/linear_algebra.md) |
@@ -132,3 +156,4 @@
 | Thursday, December 1, 2022 | [](../notebooks/16/design_of_experiments.md) |
 | Tuesday, December 6, 2022 | Final Project Workshop |
 | Thursday, December 8, 2022 | Semester Review |
+--->
