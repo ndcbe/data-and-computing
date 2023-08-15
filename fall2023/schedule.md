@@ -2,25 +2,22 @@
 
 ## Assignments
 
-TODO: Need to Update
-
 | Deadline     | Description |
 | ----------- | ----------- |
-| Friday, September 2, 2022 | Problem Set 1: Python Programming |
-| Friday, September 9, 2022 | Mini-Project: Simulating Games of Chance |
-| Friday, September 16, 2022 | Problem Set 2: Systems of Equations, Taylor Series |
-| Friday, September 30, 2022 | Problem Set 3: Numeric Integration, Optimization |
-| Friday, October 7, 2022 | Project 1: Proposal |
-| Friday, October 14, 2022 | Problem Set 4: Probability, Error Propagation |
-| Tuesday, October 25, 2022 | Project 1: Draft Jupyter Notebook (11:59pm, upload `.ipynb` and `.pdf` files to [Google Drive](https://drive.google.com/drive/folders/1FqUhcjPBlGvZfySmWetv2b_QpS3SMAjD?usp=sharing)) |
-| Thursday, October 27, 2022 | Project 1: Peer Review (noon, upload `.pdf` to [Google Drive](https://drive.google.com/drive/folders/1FqUhcjPBlGvZfySmWetv2b_QpS3SMAjD?usp=sharing)) |
-| Monday, October 31, 2022 | Project 1: Revised Jupyter Notebook (noon, submit via Gradescope) |
-| Friday, November 11, 2022 | Problem Set 5: Error Propagation, Simulation, Probability Modeling, Confidence Intervals, Hypothesis Testing, Statistical Power |
-| Wednesday, November 23, 2022 | Project 2: Proposal |
-| Friday, December 2, 2022 | Problem Set 6: [](../notebooks/15/Nonlinear-Case-Study-Adsorptive-Membranes.ipynb) (beginning through *Comparison of Three Regression Approaches* inclussive) |
-| Thursday, December 8, 2022 | Project 2: Jupyter Notebook |
-| Monday, December 12, 2022, 10:30 AM - 12:30 PM (Final Exam Timeslot) | Project 2: Presentations |
-| Tuesday, December 13, 2022, 5pm | Project 1: Revisions Due |
+| Friday, August 25, 2023 | [](../notebooks/03/chapter1.ipynb), finish Python intro on Udemy |
+| Friday, September 1, 2023 | [](../notebooks/03/chapter2.ipynb) and [](../notebooks/03/chapter3.ipynb) |
+| Friday, September 8, 2023 | [](../notebooks/03/chapter4.ipynb) and [](../notebooks/03/chapter5.ipynb)  |
+| Friday, September 15, 2023 | [](../notebooks/03/chapter6.ipynb) and mini-project pseudocode |
+| Friday, September 22, 2023 | Mini-Project: Simulating Games of Chance |
+| Friday, September 29, 2023 | Problem Set 1: Systems of Equations and Taylor Series |
+| Friday, October 6, 2023 | Problem Set 2: Numeric Integration; Project Proposals |
+| Friday, October 27, 2023 | Problem Set 3: Pandas and Probability |
+| Friday, November 3, 2023 | Problem Set 4: Error Propagation |
+| Friday, November 10, 2023 | Project Update Due |
+| Friday, November 17, 2023 | Problem Set 5: Hypothesis Testing and Statistical Power |
+| Friday, December 1, 2023| Problem Set 6: Linear and Nonlinear Regression |
+| Thursday, December 7, 2023 | Project Notebook(s) Due |
+| Friday, December 15, 2023, 10:30 AM - 12:30 PM (Final Exam Timeslot) | Project Presentations |
 
 ## Class Meetings
 
