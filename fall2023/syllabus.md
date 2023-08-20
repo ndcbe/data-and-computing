@@ -1,19 +1,19 @@
-# Syllabus (Fall 2023)
+# Syllabus
 
 CBE 60258, Advanced Data and Computing for Chemical Engineers, University of Notre Dame, Fall 2023
 
 ## Course Description
 
-Computing and data science skills are without doubt extremely valuable for modern engineers. *Big data*, *machine learning*, *predictive modeling*, *decision science* and similar terms are ever-present in job posting, scientific literature, and popular news. Yet, many chemical engineers lack a background in the fundamentals of computer programming, applied statistics, and mathematical modeling for problem solving. Your excitement for data-centric topics may lead you to self-study with tutorials, extracurricular projects, and online classes to assemble a *toolbox of skills* or *cookbook of recipes* without understanding the fundamentals that govern and transcend methods. 
+Computing and data science skills are without doubt extremely valuable for modern scientists and engineers. *Big data*, *machine learning*, *predictive modeling*, *decision science* and similar terms are ever-present in job posting, scientific literature, and popular news. Yet, many (chemical) engineers lack a background in the fundamentals of computer programming, applied statistics, and mathematical modeling for problem solving. Your excitement for data-centric topics may lead you to self-study with tutorials, extracurricular projects, and online classes to assemble a *toolbox of skills* or *cookbook of recipes* without understanding the fundamentals that govern and transcend methods. 
 
-In this class, you will learn the fundamentals of i) computing in Python, ii) mathematical modeling, iii) numerical methods, and iv) probability and statistics. In a single-semester, graduate-level class, it is impossible to master all of the skills in numerical and statistical techniques you will encounter during your careers. Instead, the overall goal of this class is to provide a solid technical foundation and nurture conceptual understanding. This is to both equip you with basic skills to use in future chemical engineering classes and enable you to learn advanced topics via technical electives, internships, online tutorials, books, and on-the-job training throughout your professional careers.
+In this class, you will learn the fundamentals of i) computing in Python, ii) linear algebra, iii) mathematical modeling, iv) numerical methods, and v) probability and statistics. In a single-semester, graduate-level class, it is impossible to master all of the skills in numerical and statistical techniques you will encounter during your careers. Instead, the overall goal of this class is to provide a solid technical foundation and nurture conceptual understanding. This is to both equip you with basic skills to use in future (chemical) engineering classes and enable you to learn advanced topics via technical electives, internships, online tutorials, books, and on-the-job training throughout your professional careers.
 
 ## Instructor and Teaching Assistants
 
-| | Prof. Alexander (Alex) Dowling | Ms. Kyla Jones | Ms. Maddie Watson|
+| | Prof. Alexander (Alex) Dowling | Ms. Kyla Jones | Mr. Wilson Riley|
 | ----------- | ----------- | ----------- | ----------- |
-| | ![](https://dowlinglab.nd.edu/assets/320333/200x200/dowling_alex_sq.jpg) | ![](https://dowlinglab.nd.edu/assets/477436/200x200/student_id_resized_less_shiny.jpg) | ![](https://dowlinglab.nd.edu/assets/477606/200x200/senior_composite.png) |
-| Office Hours | 9-10am on Fridays in 366 or 369 Nieuwland Hall | 3-4pm on Wednesdays in 366 Nieuwland Hall | 3-4pm on Wednesdays in 366 Nieuwland Hall  |
+| | ![](https://dowlinglab.nd.edu/assets/320333/200x200/dowling_alex_sq.jpg) | ![](https://dowlinglab.nd.edu/assets/516355/200x200/resized_portrait_grey_background.png) | ![](https://dowlinglab.nd.edu/assets/527717/200x200/wilson_raney.jpg) |
+| Office Hours | 8:45-9:15am, Tuesdays \& Thursdays in 369 Nieuwland Hall | TBA in 366 Nieuwland Hall | TBA in 366 Nieuwland Hall |
 
 ## Discussuion Board (Canvas) and Email Correspondance
 * Post your questions to the **discussion board in Canvas**
@@ -25,29 +25,39 @@ We encourage you to post all your questions including your mathematical models, 
 3. We would like to cultivate a learning community with peer instruction; as professionals, you'll need to answer your peers' questions.
 4. Many scientific software have online discussion boards to ask technical questions and report bugs. Using the **discussion board in Canvas** will help you develop comfort asking questions in this way.
 
+## Semester Organization
+
+Weeks 1 - 4 focus on linear algebra and basic Python.
+
+Weeks 4 - 8 focus on numerical methods (and more Python).
+
+Weeks 8 - 16 focus on probability, statistis, and data analysis (with more Python).
+
 ## Textbook and Reference Materials
 
-About 40% of the class sessions map reference chapters from *Computational Nuclear Engineering and Radiological Science Using Python* by [Prof. Ryan McClarren in Aerospace and Mechanical Engineering](https://engineering.nd.edu/faculty/ryan-mcclarren/) (2019). As we will see throughout the class, many mathematical and computational techniques are widely applicable across engineering disciplines. This is only a recommended text. There are two copies on reserve in the library. We strongly recommend looking at the library copies before purchasing.
+We will start by studying the first six chapters of the *No Bullshit Guide to Linear Algebra* by [Dr. Ivan Savov](https://minireference.com/). Why this textbook? My research group read through it during Summer 2023 to learn linear algebra... and the book is really good. In concisely explains concepts and includes a lot of great visualizations to build intuition. This is my favor linear algebra textbook. It is also very afforadable. You should **buy a copy** (either PDF or paper) and write in it!
 
-Another 40% of the class sessions draw from material in *Statistics for Engineers and Scientists* by Prof. William Navidi (2014). This is one of our favorite introductory textbooks on statistics because every concept is introduced with science and engineering examples. These worked out examples show you how to apply data analysis concepts to problems you will use as practicing engineers. The book is both mathematically rigorous and accessible. We **strongly recommend you purchase a copy to keep**. We are using the 4th edition this semester so you can purchase used books.
+Most of the class sessions for numerical methods on map reference chapters from *Computational Nuclear Engineering and Radiological Science Using Python* by [Prof. Ryan McClarren in Aerospace and Mechanical Engineering](https://engineering.nd.edu/faculty/ryan-mcclarren/) (2019). As we will see throughout the class, many mathematical and computational techniques are widely applicable across engineering disciplines. This is an optional. There are two copies on reserve in the library. We strongly recommend looking at the library copies before purchasing.
+
+Another 40% of the class sessions draw from *Statistics for Engineers and Scientists* by Prof. William Navidi (2014). This is one of our favorite introductory textbooks on statistics because every concept is introduced with science and engineering examples. These worked out examples show you how to apply data analysis concepts to problems you will use as practicing engineers. The book is both mathematically rigorous and accessible. We **strongly recommend you purchase a copy to keep**. We are using the 4th edition this semester so you can purchase used books.
 
 ## Classroom Meetings
 
 Classroom meetings are a mix of i) traditional chalk board instruction, ii) computer demonstrations, and iii) in-class activities. Please bring an internet connected laptop computer. You are expected to have completed the assigned reading and at home activities for each topic (posted on Canvas/Vocareum) before each class session. 
 
 ## Assessments and Final Grades
-* Homework: 25\% (6 planned)
-* Midterm Exam: 25\%
-* Project 1: 25\%
-* Project 2: 25\% (instead of written final exam)
+* Homework: 5\%
+* Python Mini-Project: 5\%
+* Quizzes (3 planned): 60\%
+* Semester Project: 30\%
 
 ### Homework
 
-Problem set homework assignments are a collection of 2 to 5 problems designed to reinforce specific concepts and skills from class. Most problems include “pencil and paper” analysis (i.e., derive a model, determine degrees of freedom, write pseudocode), computer programming aspects, and interpretation of calculated results. These problems, especially the analysis and interpretation parts, are good practice for the exams. Many students receive near full credit on the problem sets.
+Homework assignments are a collection of 2 to 5 problems designed to reinforce specific concepts and skills from class. Most problems include “pencil and paper” analysis (i.e., derive a model, determine degrees of freedom, write pseudocode), computer programming aspects, and interpretation of calculated results. These problems, especially the analysis and interpretation parts, are good practice for the exams. Many students receive near full credit on the problem sets.
 
 ### Collaboration Policy and Honor Code
 
-You are permitted (and encouraged) to discuss solution approaches to the weekly homework assignments with classmates, however there is to be no wholesale copying or paraphrasing of code, solutions, or written discussions. You are encouraged to ask questions, including posting pseudocode or code screenshots, on the disccsion board on Canvas. Likewise, you may use any material posted by the instructors or your classmates in the discussion board on Canvas that you understand. Copying of code from classmates or the discussion board that you do not understand is not permitted. This policy is meant to facilitate collaboration while ensuring everyone in the class has the same access. Students MAY NOT use old HW files and solutions for the homework assignments: if you cannot do the problems for homework, you will not be able to do them on the exams either.
+You are permitted (and encouraged) to discuss solution approaches to the weekly homework assignments with classmates, however there is to be no wholesale copying or paraphrasing of code, solutions, or written discussions. You are strongly encouraged to ask questions, including posting pseudocode or code screenshots, on the disccsion board on Canvas. Likewise, you may use any material posted by the instructors or your classmates in the discussion board on Canvas that you understand. Copying of code from classmates or the discussion board that you do not understand is not permitted. This policy is meant to facilitate collaboration while ensuring everyone in the class has the same access. Students MAY NOT use old files and solutions for the homework assignments: if you cannot do the problems for homework, you will not be able to do them on the exams either.
 
 *As a guiding principle, if you are not comfortable explaining your solution strategy to an instructor or TA, you should not turn in the work as your own.*
 
@@ -63,18 +73,16 @@ The following is a non-exhaustive list of collaborative scenarios that are PROHI
 * It is late at night, you are frustrated with syntax errors, and you just cannot get one of the homework problems to work. You find a screenshot on Canvas of code from a classmate and an associated discussion. Desperate to finish the assignment, you start adapting your code to follow the screenshot. To keep it simple, you copy line-by-line, do not change variable names, and copy some comments but skip others. You end up submitted code that looks almost identical to your classmate. You remember the instructor keeps emphasizing the comments should be in our own words to show that you understand the solution. We decide to go to bed and add those comments in the morning. You oversleep and submit code without any comments or acknowledgments of your classmates. This is prohibited by the collaboration policy because you submitted work that is not your own. You did not acknowledge sources, and you can not explain with confidence the solution procedure to the instructor or TA.
 * You have no prior programming experience and feel like you are falling behind. You feel like the homework takes you three times as long as your classmates. You conclude the only way you can keep up is to do the homework with a partner. They do half the assignment and you do the other half. You then exchange solutions. The person who completed each problem then explains the solution to the partner. Each person changes the comments, adds some extra white spaces, and changes a few variable names to ensure the solutions are not identical. This is prohibited by the collaboration policy because each person did not make an honest effort to solve every problem on their own. Although each person either explained or had the solutions explained to them, they likely cannot defend all of their solutions on their own to the TA or instructor. 
 
-### Midterm Exam
+### Quizzes
 
-The midterm exam will take place during class as indicated on the [semester schedule](./schedule.md). The exam will be closed book with no access to a computer. Students will be permitted to bring 2 sheets of letter size paper filled with handwritten notes.
+We will have three 45-minute quizzes during class as indicated on the [semester schedule](./schedule.md). The quizzes will be closed book with no access to a computer. Students will be permitted to bring  letter size paper filled with handwritten notes as follows:
+* Quiz 1, 1 sheet of notes
+* Quiz 2, 2 sheets of notes
+* Quiz 3, 3 sheets of notes
 
-### Project 1: Numerical Methods for Problem Solving
+### Semester Project
 
-See (./project1.md)
-
-### Project 2: Data Analysis
-
-See (./project2.md)
-
+See (./project.md)
 
 ### Grading Standards
 
@@ -84,13 +92,18 @@ All graphs must have labeled axes with UNITS. Likewise, all final answers need U
 
 Be sure to answer the questions that are asked. When discussing results, only report the appropriate number of significant figures.
 
-**Problem Sets:** Not all (sub)questions on problem sets will be graded in detail. You may lose points for missing comments, missing units, unlabeled graphs, and non-sensible significant figures (digits) for final answers, even for problems only graded for completion.
+**Homework:** Homework assignments will be spot checked for completeness using the follow grading scale:
+* Full credit: At least 90\% complete. Work must be well-organized and conform with all coding and plotting standards.
+* Most credit: At least 75\% complete. Work may not conform with all coding and plotting standards.
+* Some credit: Credit given depending on completeness. Expect to get this grade if your work is sloppy or difficult to follow.
+
+**Mini-Project:** This will be graded in-depth (in contrast to the homework). Be sure to tripple check the Python code and plotting formatting standards. We expect publication quality plots of this project.
 
 **Formatting**: The expectation is that your submission includes neatly written code with extensive comments, well-labeled graphs, and answers to any discussion questions. Your project submissions should be professionally formatted, like a laboratory report. Your response to discussion questions and code comments MUST be written in your own words.
 
 **Pseudocode:** Most assignments require you to write brief pseudocode. We will learn how to do this during the first week of the semester. Your pseudocode needs to reflect all the main steps and logic of your solution. You do not need to rewrite your pseudocode if your final solution has different main steps or logic. Instead, you should update your pseudocode with a few notes showing the change. In our experience, rewriting the pseudocode is very helpful if you find a mistake in your logic but get stuck making modifications. Prof. Dowling has been programming in Python for 20 years. He writes pseudocode and so do other professional software developers.
 
-Please see the “Pseudocode Guidelines” and “Python and Commenting Guidelines” sections in [](../01/Pseudocode.ipynb) for additional details.
+Please see the “Pseudocode Guidelines” and “Python and Commenting Guidelines” sections in [](../notebooks/01/Pseudocode.ipynb) for additional details.
 
 ### Assignment Submission
 

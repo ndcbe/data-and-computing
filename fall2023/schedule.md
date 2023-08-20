@@ -67,7 +67,7 @@
 | [](../notebooks/07/Trapezoid-Rule.ipynb) | [](../notebooks/07/Example-Reaction-Rates.ipynb) |
 | [](../notebooks/07/Stability-Analysis.ipynb) | 
 | [](../notebooks/07/Systems-of-Differential-Equations-and-Scipy.ipynb) | 
-| **Tuesday, October 3** | Pyomo and Pandas |
+| **Tuesday, October 3** | Pyomo|
 | [](../notebooks/08/Pyomo-Basics.ipynb) | [](../notebooks/08/optimization.md) |
 | [Simulating Heat Conduction with Pyomo.dae](https://jckantor.github.io/ND-Pyomo-Cookbook/notebooks/05.03-Heat_Conduction_in_Various_Geometries.html) | [](../notebooks/08/Flash-Calculations-in-Pyomo.ipynb) |
 | [Simulating Diffusion with Adsorption in Polymers with Pyomo.dae](https://jckantor.github.io/ND-Pyomo-Cookbook/notebooks/05.04-Diffusion_Adsorption_in_Polymers.html) |
@@ -128,4 +128,4 @@
 | [](../notebooks/15/Nonlinear-Regression-Practice-Problem.ipynb) |
 | **Tuesday, December 5** | Design of Experiments | 
 | [](../notebooks/16/Reaction-MBDoE.ipynb) | [](../notebooks/16/design_of_experiments.md) |
-| **Thursday, December 7 30** | Semester Wrap-up, Project Workshop | 
+| **Thursday, December 7** | Semester Wrap-up, Project Workshop | 
