@@ -1,4 +1,4 @@
-# Project 2: Data Analysis
+# Project 2: Data Analysis (Fall 2022)
 
 ## Introduction
 
