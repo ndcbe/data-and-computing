@@ -51,6 +51,10 @@ Classroom meetings are a mix of i) traditional chalk board instruction, ii) comp
 * Quizzes (3 planned): 60\%
 * Semester Project: 30\%
 
+Senior graduate students may audit this course with the permission of the instruction. The expectations for auditing are:
+1. Attend and participate in at least 75% of the class sessions. 
+2. Attempt each homework assignment (2 hours) and the Python mini-project (4 hours). You should turn these in via Gradescope with the rest of the class. 
+
 ### Homework
 
 Homework assignments are a collection of 2 to 5 problems designed to reinforce specific concepts and skills from class. Most problems include “pencil and paper” analysis (i.e., derive a model, determine degrees of freedom, write pseudocode), computer programming aspects, and interpretation of calculated results. These problems, especially the analysis and interpretation parts, are good practice for the exams. Many students receive near full credit on the problem sets.
