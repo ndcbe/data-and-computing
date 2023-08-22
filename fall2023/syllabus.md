@@ -10,7 +10,7 @@ In this class, you will learn the fundamentals of i) computing in Python, ii) li
 
 ## Instructor and Teaching Assistants
 
-| | Prof. Alexander (Alex) Dowling | Ms. Kyla Jones | Mr. Wilson Riley|
+| | Prof. Alexander (Alex) Dowling | Ms. Kyla Jones | Mr. Wilson Raney|
 | ----------- | ----------- | ----------- | ----------- |
 | | ![](https://dowlinglab.nd.edu/assets/320333/200x200/dowling_alex_sq.jpg) | ![](https://dowlinglab.nd.edu/assets/516355/200x200/resized_portrait_grey_background.png) | ![](https://dowlinglab.nd.edu/assets/527717/200x200/wilson_raney.jpg) |
 | Office Hours | 8:45-9:15am, Tuesdays \& Thursdays in 369 Nieuwland Hall | TBA in 366 Nieuwland Hall | TBA in 366 Nieuwland Hall |
@@ -106,7 +106,7 @@ Be sure to answer the questions asked in the assignment. When discussing results
 * Most credit: At least 75\% complete. Work may not conform with all coding and plotting standards.
 * Some credit: Credit given depending on completeness. Expect to get this grade if your work is sloppy or difficult to follow.
 
-**Mini-Project:** This will be graded in-depth (unlike the homework). Be sure to triple check the Python code and plotting formatting standards. We expect publication-quality plots for this project.
+**Mini-Project:** This will be graded in-depth (unlike the homework). Be sure to triple check the Python code and plotting formatting standards. We expect [publication-quality plots](../notebooks/01/Publication-Quality-Figures.ipynb) for this project.
 
 **Formatting**: Your submission should include neatly written code with extensive comments, well-labeled graphs, and answers to any discussion questions. Your project submissions should be professionally formatted, like a laboratory report. Your response to discussion questions and code comments MUST be written in your own words.
 
