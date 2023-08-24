@@ -4,7 +4,7 @@
 
 | Deadline     | Description |
 | ----------- | ----------- |
-| Friday, August 25, 2023 | [](../notebooks/03/chapter1.ipynb), finish Python intro on Udemy |
+| Monday, August 28, 2023 | [](../notebooks/03/chapter1.ipynb), finish Python intro on Udemy |
 | Friday, September 1, 2023 | [](../notebooks/03/chapter2.ipynb) and [](../notebooks/03/chapter3.ipynb) |
 | Friday, September 8, 2023 | [](../notebooks/03/chapter4.ipynb) and [](../notebooks/03/chapter5.ipynb)  |
 | Friday, September 15, 2023 | [](../notebooks/03/chapter6.ipynb) and mini-project pseudocode |
