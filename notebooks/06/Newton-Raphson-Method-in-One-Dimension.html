@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>6.2. Newton-Raphson Method in One Dimension &#8212; Data and Computing for Chemical Engineers</title>
     
   <!-- Loaded before other Sphinx assets -->
@@ -21,7 +20,7 @@
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -37,7 +36,7 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -1335,25 +1334,25 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="newton-raphson-method-in-one-dimension">
+  <div class="tex2jax_ignore mathjax_ignore section" id="newton-raphson-method-in-one-dimension">
 <h1><span class="section-number">6.2. </span>Newton-Raphson Method in One Dimension<a class="headerlink" href="#newton-raphson-method-in-one-dimension" title="Permalink to this headline">#</a></h1>
-<section id="learning-objectives">
+<div class="section" id="learning-objectives">
 <h2><span class="section-number">6.2.1. </span>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">#</a></h2>
 <p>After studying this notebook, completing the activities, and asking questions in class, you should be able to:</p>
 <ul class="simple">
 <li><p>Understand how Newton’s Method iterates through a function to approximate a root solution.</p></li>
 <li><p>Generalize Newton’s Method in code.</p></li>
 </ul>
-</section>
-<section id="motivation">
+</div>
+<div class="section" id="motivation">
 <h2><span class="section-number">6.2.2. </span>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
 <p>In this class, we will learn about a family of algorithms that quickly and reliably converges to a numeric value for <span class="math notranslate nohighlight">\(x\)</span> that satisfies <span class="math notranslate nohighlight">\(c(x) = 0\)</span> from an initial guess <span class="math notranslate nohighlight">\(x_0\)</span>.</p>
 <p>a.k.a. Newton-type methods produce good approximations for roots of real-valued functions using an iterative process.</p>
-</section>
-<section id="newton-s-method-for-a-polynomial-example">
+</div>
+<div class="section" id="newton-s-method-for-a-polynomial-example">
 <h2><span class="section-number">6.2.3. </span>Newton’s Method for a Polynomial Example<a class="headerlink" href="#newton-s-method-for-a-polynomial-example" title="Permalink to this headline">#</a></h2>
-</section>
-<section id="review-canonical-form">
+</div>
+<div class="section" id="review-canonical-form">
 <h2><span class="section-number">6.2.4. </span>Review Canonical Form<a class="headerlink" href="#review-canonical-form" title="Permalink to this headline">#</a></h2>
 <p>In a <a class="reference internal" href="Modeling-Systems-of-Nonlinear-Equations.html"><span class="doc std std-doc">previous notebook</span></a>, we discussed <strong>canonical form</strong>, <span class="math notranslate nohighlight">\(c(x) = 0\)</span>, for a system of linear equations. Here, <span class="math notranslate nohighlight">\(c(x)\)</span> is a mathematical function that depends on variable <span class="math notranslate nohighlight">\(x\)</span>. <span class="math notranslate nohighlight">\(c(\cdot)\)</span> can be linear or nonlinear. <span class="math notranslate nohighlight">\(x\)</span> can be a scalar or vector.</p>
 <p>We say <span class="math notranslate nohighlight">\(c(x) = 0\)</span> is a <strong>square system</strong> if the number of variables equals the number of equations, i.e., there are zero degrees of freedom. In this notebook, we will focus on square systems. In a future notebook, we will talk about optimization problems which have extra degrees of freedom (more variables than equations).</p>
@@ -1406,8 +1405,8 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</section>
-<section id="main-idea-through-an-example">
+</div>
+<div class="section" id="main-idea-through-an-example">
 <h2><span class="section-number">6.2.5. </span>Main Idea Through an Example<a class="headerlink" href="#main-idea-through-an-example" title="Permalink to this headline">#</a></h2>
 <p>An example is the easiest way to understand Newton’s method. Let’s find a root, i.e., values for <span class="math notranslate nohighlight">\(x\)</span> that satisfy <span class="math notranslate nohighlight">\(c(x)=0\)</span>, for the following equation:</p>
 <div class="math notranslate nohighlight">
@@ -1487,8 +1486,8 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</section>
-<section id="algorithm-steps-and-iteration-1">
+</div>
+<div class="section" id="algorithm-steps-and-iteration-1">
 <h2><span class="section-number">6.2.6. </span>Algorithm Steps and Iteration 1<a class="headerlink" href="#algorithm-steps-and-iteration-1" title="Permalink to this headline">#</a></h2>
 <p>We will start Newton’s method at the initial guess <span class="math notranslate nohighlight">\(x_0 = 1.25\)</span>.</p>
 <p>For each iteration of the algorithm, we will do the following steps:</p>
@@ -1572,8 +1571,8 @@ Guess 1 = 2.4778934700108186
 <p>Write one question or observation to share during class about the code above.</p>
 </div>
 <p><strong>Your question/observation:</strong></p>
-</section>
-<section id="convergence">
+</div>
+<div class="section" id="convergence">
 <h2><span class="section-number">6.2.7. </span>Convergence<a class="headerlink" href="#convergence" title="Permalink to this headline">#</a></h2>
 <p><em>Are we there yet?</em> There are two popular stopping criteria for Newton’s method:</p>
 <ol class="simple">
@@ -1616,8 +1615,8 @@ Guess 1 = 2.4778934700108186
 </div>
 </div>
 </div>
-</section>
-<section id="iteration-2">
+</div>
+<div class="section" id="iteration-2">
 <h2><span class="section-number">6.2.8. </span>Iteration 2<a class="headerlink" href="#iteration-2" title="Permalink to this headline">#</a></h2>
 <p>Based on the large residual and large step size, we decide to continue with Newton’s method. We proceed to i) fit the tangent line around <span class="math notranslate nohighlight">\(x_1\)</span>, and then use the tangent line to calculate <span class="math notranslate nohighlight">\(x_2\)</span>. Please take a few minutes to read through the Python code below.</p>
 <div class="cell docutils container">
@@ -1679,8 +1678,8 @@ Guess 2 = 2.0535383605864483
 <img alt="../../_images/Newton-Raphson-Method-in-One-Dimension_38_1.png" src="../../_images/Newton-Raphson-Method-in-One-Dimension_38_1.png" />
 </div>
 </div>
-</section>
-<section id="newton-s-method-generalized">
+</div>
+<div class="section" id="newton-s-method-generalized">
 <h2><span class="section-number">6.2.9. </span>Newton’s Method Generalized<a class="headerlink" href="#newton-s-method-generalized" title="Permalink to this headline">#</a></h2>
 <p>As you can see, we get closer to the root each iteration.  This is due to the fact that close enough to a point, the tangent line is a reasonable approximation–just as the linear Taylor series can be a good approximation.  Of course, this is not always a good approximation as we will see later.</p>
 <p>The basic idea is to compute where the tangent line crosses the <span class="math notranslate nohighlight">\(x\)</span> axis. We do this by solving</p>
@@ -1691,8 +1690,8 @@ Guess 2 = 2.0535383605864483
 \[ x_{i+1} = x_i - \frac{f(x_i)}{f'(x_i)}.\]</div>
 <p>It’s that simple.</p>
 <p><strong>Notice</strong>: We switch from <span class="math notranslate nohighlight">\(c(x) = 0\)</span> to <span class="math notranslate nohighlight">\(f(x) = 0\)</span>. People use them <strong>interchangeably for canonical form</strong>.</p>
-</section>
-<section id="algorithm-and-implementation">
+</div>
+<div class="section" id="algorithm-and-implementation">
 <h2><span class="section-number">6.2.10. </span>Algorithm and Implementation<a class="headerlink" href="#algorithm-and-implementation" title="Permalink to this headline">#</a></h2>
 <p>We can now implement a general purpose version of Newton’s method in Python.</p>
 <div class="admonition seealso">
@@ -1758,8 +1757,8 @@ Guess 2 = 2.0535383605864483
 </div>
 </div>
 </div>
-</section>
-<section id="unit-test-and-example">
+</div>
+<div class="section" id="unit-test-and-example">
 <h2><span class="section-number">6.2.11. </span>Unit Test and Example<a class="headerlink" href="#unit-test-and-example" title="Permalink to this headline">#</a></h2>
 <p>We created a function. We should immediately test it. Recall our test problem:</p>
 <div class="math notranslate nohighlight">
@@ -1858,8 +1857,8 @@ Guess 2 = 2.0535383605864483
 </pre></div>
 </div>
 <p>The next bit of code demonstrates graphically what happened in the Newton solve.</p>
-</section>
-<section id="looking-deeper-into-the-unit-test">
+</div>
+<div class="section" id="looking-deeper-into-the-unit-test">
 <h2><span class="section-number">6.2.12. </span>Looking Deeper into the Unit Test<a class="headerlink" href="#looking-deeper-into-the-unit-test" title="Permalink to this headline">#</a></h2>
 <p><strong>Warning 1:</strong> You must rerun the following three cells in order and only once. If you want to rerun a cell (say Iteration 3), you must start with Iteration 1 and rerun them in order.</p>
 <p><strong>Warning 2:</strong> Make sure your modification to <code class="docutils literal notranslate"><span class="pre">newton</span></code> is correct. Otherwise, the code below will not work correctly.</p>
@@ -1867,8 +1866,8 @@ Guess 2 = 2.0535383605864483
 <p class="admonition-title"><b>Home Activity</b></p>
 <p>Run the code below.</p>
 </div>
-</section>
-<section id="iteration-1">
+</div>
+<div class="section" id="iteration-1">
 <h2><span class="section-number">6.2.13. </span>Iteration 1<a class="headerlink" href="#iteration-1" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1900,8 +1899,8 @@ Guess 2 = 2.0535383605864483
 <img alt="../../_images/Newton-Raphson-Method-in-One-Dimension_62_1.png" src="../../_images/Newton-Raphson-Method-in-One-Dimension_62_1.png" />
 </div>
 </div>
-</section>
-<section id="id1">
+</div>
+<div class="section" id="id1">
 <h2><span class="section-number">6.2.14. </span>Iteration 2<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1936,8 +1935,8 @@ Guess 2 = -16.591800422397238
 <img alt="../../_images/Newton-Raphson-Method-in-One-Dimension_64_1.png" src="../../_images/Newton-Raphson-Method-in-One-Dimension_64_1.png" />
 </div>
 </div>
-</section>
-<section id="iteration-3">
+</div>
+<div class="section" id="iteration-3">
 <h2><span class="section-number">6.2.15. </span>Iteration 3<a class="headerlink" href="#iteration-3" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1987,8 +1986,8 @@ Guess 3 = -11.152177441789688
 <p class="admonition-title"><b>Class Activity</b></p>
 <p>Share your observations with a partner. Then we’ll regroup and discuss as a class.</p>
 </div>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {

@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calculating Fraction of Molecular Collisions &#8212; Data and Computing for Chemical Engineers</title>
     
   <!-- Loaded before other Sphinx assets -->
@@ -21,7 +20,7 @@
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -37,7 +36,7 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -1458,22 +1457,22 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="calculating-fraction-of-molecular-collisions">
+  <div class="tex2jax_ignore mathjax_ignore section" id="calculating-fraction-of-molecular-collisions">
 <h1>Calculating Fraction of Molecular Collisions<a class="headerlink" href="#calculating-fraction-of-molecular-collisions" title="Permalink to this headline">#</a></h1>
 <p>CBE 60535, University of Notre Dame</p>
 <p>Problem 3.4 ( pg. 99 ) from Elements of Chemical Reaction Engineering by H. Scott Fogler, Fifth edition, 2016, ISBN: 978-0-13-388751-8.</p>
 <p>Prepared by:</p>
 <p>Yun Young Choi <a class="reference external" href="mailto:ychoi3&#37;&#52;&#48;nd&#46;edu">ychoi3<span>&#64;</span>nd<span>&#46;</span>edu</a></p>
 <p>Bingxin Yang <a class="reference external" href="mailto:byang3&#37;&#52;&#48;nd&#46;edu">byang3<span>&#64;</span>nd<span>&#46;</span>edu</a></p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="learning-objectives">
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="learning-objectives">
 <h1>Learning Objectives:<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">#</a></h1>
 <p>After completing this assignment, you should be able to:</p>
 <ul class="simple">
 <li><p>Apply integration techniques to Ordinary Differential Equations using Python</p></li>
 <li><p>Plot multiple data on a single graph</p></li>
 </ul>
-<section id="intended-audiences">
+<div class="section" id="intended-audiences">
 <h2>Intended Audiences:<a class="headerlink" href="#intended-audiences" title="Permalink to this headline">#</a></h2>
 <p>This problem is intended for undergraduate students in Chemical and Biomolecular Engineering students from the University of Notre Dame who have taken Chemical Reaction Engineering.</p>
 <p><strong>Useful link to review library:</strong></p>
@@ -1494,13 +1493,13 @@ title="Print to PDF"
 <p><a class="reference external" href="https://scipy-lectures.org/packages/sympy.html">https://scipy-lectures.org/packages/sympy.html</a></p>
 </li>
 </ol>
-</section>
-<section id="problem-statement">
+</div>
+<div class="section" id="problem-statement">
 <h2>Problem Statement:<a class="headerlink" href="#problem-statement" title="Permalink to this headline">#</a></h2>
 <p>Atoms and molecules have their own unique specific activation energy when undergoing reaction, and have specific minimum energy barriers that it must overcome, also known as barrier height. Now, we must know what fraction of molecular collisions have sufficient energy to cross over the barrier and react.</p>
 <p>For reactions in the gas phase, the reacting molecules will not have only one velocity, <span class="math notranslate nohighlight">\(U\)</span>, but it will also have a distribution of velocities, <span class="math notranslate nohighlight">\(f(U,T)\)</span>. Some will have high velocities and some will have low velocities as they move around and collide. These velocities are not defined with respect to a fixed coordinate system; these velocities are defined with respect to the other reactant molecules. The Maxwell-Boltzmann distribution of relative velocities is given by the probability function, <span class="math notranslate nohighlight">\(f(U,T)\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b8f4eedc-7697-4b0c-a7e0-985fe9c02acf">
-<span class="eqno">(68)<a class="headerlink" href="#equation-b8f4eedc-7697-4b0c-a7e0-985fe9c02acf" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-48aa4be4-eb26-4b0c-9a4c-439ee701da2b">
+<span class="eqno">(68)<a class="headerlink" href="#equation-48aa4be4-eb26-4b0c-9a4c-439ee701da2b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 f(U,T) = 4π(\frac{m}{2πk_BT})^{3/2}exp(\frac{-mU^2}{2k_BT})U^2....(Eq.1)
 \end{equation}\]</div>
 <p><span class="math notranslate nohighlight">\(K_B\)</span> = Boltzmann’s constnat = 3.29 E-24 (cal/molecule/<span class="math notranslate nohighlight">\(K\)</span>)</p>
@@ -1510,31 +1509,31 @@ f(U,T) = 4π(\frac{m}{2πk_BT})^{3/2}exp(\frac{-mU^2}{2k_BT})U^2....(Eq.1)
 <p><span class="math notranslate nohighlight">\(e\)</span> = Energy (kcal/molecule)</p>
 <p><span class="math notranslate nohighlight">\(E\)</span> = Kinetic energy (kcal/mol)</p>
 <p>Rather than using velocities to discuss the fraction of molecules with sufficient energy to cross the barrier, we convert these velocities to energies using the equation for kinetic energy in making this conversion:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c6c06d13-b8eb-41b5-996d-ca2c9acb8353">
-<span class="eqno">(69)<a class="headerlink" href="#equation-c6c06d13-b8eb-41b5-996d-ca2c9acb8353" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e13c4baa-e301-40f7-9f66-3da450c3f6bb">
+<span class="eqno">(69)<a class="headerlink" href="#equation-e13c4baa-e301-40f7-9f66-3da450c3f6bb" title="Permalink to this equation">#</a></span>\[\begin{equation}
 e = \frac{1}{2}mU^{2}....(Eq.2)
 \end{equation}\]</div>
 <p>Using this substitute, the Maxwell Boltzmann probability distribution of collision with energy <span class="math notranslate nohighlight">\(e\)</span> <span class="math notranslate nohighlight">\((cal/molecule)\)</span> at temperature <span class="math notranslate nohighlight">\(T\)</span> is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8dfb0106-7790-4c2b-bee3-10de1fa7d78e">
-<span class="eqno">(70)<a class="headerlink" href="#equation-8dfb0106-7790-4c2b-bee3-10de1fa7d78e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fcd214c8-a1ab-45f2-a12b-50a29e127051">
+<span class="eqno">(70)<a class="headerlink" href="#equation-fcd214c8-a1ab-45f2-a12b-50a29e127051" title="Permalink to this equation">#</a></span>\[\begin{equation}
 f(e,T) = 2π(\frac{1}{πk_BT})^{3/2}e^{1/2}exp(\frac{-e}{k_BT})....(Eq. 3)
 \end{equation}\]</div>
 <p>In terms of energy per mole, <span class="math notranslate nohighlight">\(E\)</span>, instead of energy per molecule, <span class="math notranslate nohighlight">\(e\)</span> ,we have:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d575f03c-2481-42c8-92ee-16e185fb71c0">
-<span class="eqno">(71)<a class="headerlink" href="#equation-d575f03c-2481-42c8-92ee-16e185fb71c0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8f80e871-e372-4c64-b3bb-fbb6f8c3c6d6">
+<span class="eqno">(71)<a class="headerlink" href="#equation-8f80e871-e372-4c64-b3bb-fbb6f8c3c6d6" title="Permalink to this equation">#</a></span>\[\begin{equation}
 f(E,T) = 2π(\frac{1}{πRT})^{3/2}E^{1/2}exp(\frac{-E}{RT})....(Eq.4)
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(E\)</span> is in <span class="math notranslate nohighlight">\((cal/mol)\)</span>, <span class="math notranslate nohighlight">\(R\)</span> is in <span class="math notranslate nohighlight">\((cal/mol/K)\)</span>, and <span class="math notranslate nohighlight">\(f(E,T)\)</span> is in <span class="math notranslate nohighlight">\((mol/cal)\)</span>.</p>
 <p>The distribution function <span class="math notranslate nohighlight">\(f(E,T)\)</span> is most easily interpreted by recognizing that <span class="math notranslate nohighlight">\([f(E,T),dE]\)</span> is the <strong>Fraction of Collision</strong> with enerfies between <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(E + dE\)</span></p>
-<div class="amsmath math notranslate nohighlight" id="equation-21c11a66-8a9d-4993-87b9-47800b13d31b">
-<span class="eqno">(72)<a class="headerlink" href="#equation-21c11a66-8a9d-4993-87b9-47800b13d31b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5dc7573c-be2c-42e4-8b84-c5754d255e60">
+<span class="eqno">(72)<a class="headerlink" href="#equation-5dc7573c-be2c-42e4-8b84-c5754d255e60" title="Permalink to this equation">#</a></span>\[\begin{equation}
 f(E,T)dE = 2π(\frac{1}{πk_BT})^{3/2}E^{1/2}exp(\frac{-E}{k_BT})dE....(Eq.5)
 \end{equation}\]</div>
 <p>For example, the fraction of collisions with energies between 0.25 and 0.35 kcal/mol would be:</p>
 <div class="math notranslate nohighlight">
 \[\int_{0.25}^{0.35} f(E,T)dE\]</div>
-</section>
-<section id="import-libraries">
+</div>
+<div class="section" id="import-libraries">
 <h2>Import Libraries:<a class="headerlink" href="#import-libraries" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1550,7 +1549,7 @@ f(E,T)dE = 2π(\frac{1}{πk_BT})^{3/2}E^{1/2}exp(\frac{-E}{k_BT})dE....(Eq.5)
 </div>
 </div>
 </div>
-<section id="visualizing-fraction-of-collisions">
+<div class="section" id="visualizing-fraction-of-collisions">
 <h3>1. Visualizing Fraction of Collisions<a class="headerlink" href="#visualizing-fraction-of-collisions" title="Permalink to this headline">#</a></h3>
 <p>Plot the fraction of collision with energy per mole from 0 to 30 <span class="math notranslate nohighlight">\(kcal/mol\)</span> for different given temperatures (T = 300, 500, 800 and 1200K).</p>
 <p>Hint: Fraction of collision as function of energy per mole, uses equation 4.</p>
@@ -1590,8 +1589,8 @@ f(E,T)dE = 2π(\frac{1}{πk_BT})^{3/2}E^{1/2}exp(\frac{-E}{k_BT})dE....(Eq.5)
 </div>
 <p>Discussion: Explain how the fraction of collisions change as a function of given temperatures as you see on the graph.</p>
 <p><strong>Answer</strong>: When you look at the graph, you can see that fraction of collision increase with increasing temperature at <span class="math notranslate nohighlight">\(E\)</span> = 5 kcal/mol. For kinetic energy lower than 5 kcal/mol, lower the temperature, the probability of collision is lower, therefore it will require more energy to get over the activation energy barrier. For higher temperature below <span class="math notranslate nohighlight">\(E\)</span> = 5 kcal/mol, it will have more movement within itself that it require less energy.</p>
-</section>
-<section id="determining-the-fraction-of-molecules">
+</div>
+<div class="section" id="determining-the-fraction-of-molecules">
 <h3>2. Determining the Fraction of Molecules<a class="headerlink" href="#determining-the-fraction-of-molecules" title="Permalink to this headline">#</a></h3>
 <p>What is the fraction of molecules that have sufficient energy to pass over an energy barrier of 25 kcal at 300,500, 800 and 1200K.</p>
 <p>Hint: Perform integration of <span class="math notranslate nohighlight">\(f(E,T)\)</span> from 0 to 25 kcal?</p>
@@ -1670,8 +1669,8 @@ Store answers as a list in <code class="docutils literal notranslate"><span clas
 </div>
 </div>
 </div>
-</section>
-<section id="calculating-the-ratio-of-the-fraction-of-energies">
+</div>
+<div class="section" id="calculating-the-ratio-of-the-fraction-of-energies">
 <h3>3. Calculating the Ratio of the Fraction of Energies<a class="headerlink" href="#calculating-the-ratio-of-the-fraction-of-energies" title="Permalink to this headline">#</a></h3>
 <p>Create a list that shows fraction of energies between 0 and 25 kcal for 300 K and 1200 K. Store answer in <code class="docutils literal notranslate"><span class="pre">I2</span></code></p>
 <div class="cell docutils container">
@@ -1717,35 +1716,35 @@ Store answers as a list in <code class="docutils literal notranslate"><span clas
 </div>
 </div>
 </div>
-</section>
-<section id="as-mentioned-above-the-distribution-function-f-e-t-is-most-easily-interpreted-by-recognizing-that-f-e-t-de-is-the-fraction-of-collision-with-energies-between-e-and-e-de">
+</div>
+<div class="section" id="as-mentioned-above-the-distribution-function-f-e-t-is-most-easily-interpreted-by-recognizing-that-f-e-t-de-is-the-fraction-of-collision-with-energies-between-e-and-e-de">
 <h3>As mentioned above, The distribution function <span class="math notranslate nohighlight">\(f(E,T)\)</span> is most easily interpreted by recognizing that <span class="math notranslate nohighlight">\([f(E,T)dE]\)</span> is the <strong>Fraction of Collision</strong> with energies between <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(E + dE\)</span><a class="headerlink" href="#as-mentioned-above-the-distribution-function-f-e-t-is-most-easily-interpreted-by-recognizing-that-f-e-t-de-is-the-fraction-of-collision-with-energies-between-e-and-e-de" title="Permalink to this headline">#</a></h3>
-<div class="amsmath math notranslate nohighlight" id="equation-dceac2dc-05df-4afc-ab43-19562a35a377">
-<span class="eqno">(73)<a class="headerlink" href="#equation-dceac2dc-05df-4afc-ab43-19562a35a377" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2e06061d-cd6b-4b10-bc16-c13d3d4c5f63">
+<span class="eqno">(73)<a class="headerlink" href="#equation-2e06061d-cd6b-4b10-bc16-c13d3d4c5f63" title="Permalink to this equation">#</a></span>\[\begin{equation}
 f(E,T)dE = 2π(\frac{1}{πk_BT})^{3/2}E^{1/2}exp(\frac{-E}{k_BT})dE....(Eq.5)
 \end{equation}\]</div>
 <p>The <strong>Reaction of Collision</strong> that have energies greater than a certain value, <span class="math notranslate nohighlight">\(E_{A}\)</span> can be expressed as below:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-66d11bb6-eb48-4598-895e-1155b12341aa">
-<span class="eqno">(74)<a class="headerlink" href="#equation-66d11bb6-eb48-4598-895e-1155b12341aa" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a88e781b-2fb5-42f4-a891-6472b87d6ad2">
+<span class="eqno">(74)<a class="headerlink" href="#equation-a88e781b-2fb5-42f4-a891-6472b87d6ad2" title="Permalink to this equation">#</a></span>\[\begin{equation}
 F(E&gt;E_A,T) = \int_{E_A}^{∞} f(E,T)dE....(Eq.6)
 \end{equation}\]</div>
 <p>For <span class="math notranslate nohighlight">\(E_{A}\)</span> &gt; 3<span class="math notranslate nohighlight">\(RT\)</span>, analytical approximation for the fraction of molecules of collision with energies greater than <span class="math notranslate nohighlight">\(E_{A}\)</span> as below can be obtained from equation 5 and 6 and integration:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4fd4ec68-b714-49f4-bd03-3301bb204f0c">
-<span class="eqno">(75)<a class="headerlink" href="#equation-4fd4ec68-b714-49f4-bd03-3301bb204f0c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c2e797e5-56ec-410c-b262-edb234de0bd2">
+<span class="eqno">(75)<a class="headerlink" href="#equation-c2e797e5-56ec-410c-b262-edb234de0bd2" title="Permalink to this equation">#</a></span>\[\begin{equation}
 F(E&gt;E_A,T) = (\frac{2}{{π}^{0.5}})(\frac{E_A}{RT})^{1/2}exp(\frac{-E_A}{RT})....(Eq.7)
 \end{equation}\]</div>
-</section>
-<section id="fraction-of-collisions-that-have-energies-greater-than-a-certain-value-e-a">
+</div>
+<div class="section" id="fraction-of-collisions-that-have-energies-greater-than-a-certain-value-e-a">
 <h3>4. Fraction of Collisions that have Energies Greater Than a Certain Value, <span class="math notranslate nohighlight">\(E_A\)</span>.<a class="headerlink" href="#fraction-of-collisions-that-have-energies-greater-than-a-certain-value-e-a" title="Permalink to this headline">#</a></h3>
-</section>
-<section id="a-manually-integrate-equation-5-to-obtain-the-equation-for-fraction-of-collision-from-e-a-to-infinite-on-your-paper-to-get-to-equation-7">
+</div>
+<div class="section" id="a-manually-integrate-equation-5-to-obtain-the-equation-for-fraction-of-collision-from-e-a-to-infinite-on-your-paper-to-get-to-equation-7">
 <h3>4a. Manually integrate equation 5 to obtain the equation for fraction of collision from <span class="math notranslate nohighlight">\(E_A\)</span> to infinite on your paper to get to equation 7.<a class="headerlink" href="#a-manually-integrate-equation-5-to-obtain-the-equation-for-fraction-of-collision-from-e-a-to-infinite-on-your-paper-to-get-to-equation-7" title="Permalink to this headline">#</a></h3>
 <p>Hint: Starting with equation 5, integrate from <span class="math notranslate nohighlight">\(E_A\)</span> to infinity (shown as equation 6) and solve to get equation 7.</p>
 <p>Hint 2: The constants in the equation can be grouped and substituted with constnat such as A and/or B.</p>
 <p>Hint 3: Use u-substition.</p>
 <p>Submit the written work via <em><strong>Gradescope</strong></em>.</p>
-</section>
-<section id="b-numeric-integration">
+</div>
+<div class="section" id="b-numeric-integration">
 <h3>4b. Numeric Integration<a class="headerlink" href="#b-numeric-integration" title="Permalink to this headline">#</a></h3>
 <p>Design a code that will integrate equation 5 to equation 7 for you and compare the equation you have obtained from 4a (written part).</p>
 <div class="cell docutils container">
@@ -1795,8 +1794,8 @@ F(E&gt;E_A,T) = (\frac{2}{{π}^{0.5}})(\frac{E_A}{RT})^{1/2}exp(\frac{-E_A}{RT})
 </div>
 </div>
 </div>
-</section>
-<section id="c-visualization">
+</div>
+<div class="section" id="c-visualization">
 <h3>4c. Visualization:<a class="headerlink" href="#c-visualization" title="Permalink to this headline">#</a></h3>
 <p>Graph using the equation you have obtained from 4b for 700K.</p>
 <div class="cell docutils container">
@@ -1809,8 +1808,8 @@ F(E&gt;E_A,T) = (\frac{2}{{π}^{0.5}})(\frac{E_A}{RT})^{1/2}exp(\frac{-E_A}{RT})
 <img alt="../../_images/Fraction_of_Molecular_Collisions_32_0.png" src="../../_images/Fraction_of_Molecular_Collisions_32_0.png" />
 </div>
 </div>
-</section>
-<section id="d-what-fraction-of-collisions-have-energies-greater-than-e-25-kcal-mol">
+</div>
+<div class="section" id="d-what-fraction-of-collisions-have-energies-greater-than-e-25-kcal-mol">
 <h3>4d. What fraction of collisions have energies greater than <span class="math notranslate nohighlight">\(E\)</span> = 25 kcal/mol?<a class="headerlink" href="#d-what-fraction-of-collisions-have-energies-greater-than-e-25-kcal-mol" title="Permalink to this headline">#</a></h3>
 <p>Hint: What is the y axis value when x = 25 kcal?</p>
 <div class="cell docutils container">
@@ -1831,8 +1830,8 @@ F(E&gt;E_A,T) = (\frac{2}{{π}^{0.5}})(\frac{E_A}{RT})^{1/2}exp(\frac{-E_A}{RT})
 </div>
 </div>
 </div>
-</section>
-<section id="e-visualization-at-different-temperature">
+</div>
+<div class="section" id="e-visualization-at-different-temperature">
 <h3>4e. Visualization at different temperature:<a class="headerlink" href="#e-visualization-at-different-temperature" title="Permalink to this headline">#</a></h3>
 <p>Graph using the code you have obtained from 4b for 500K.</p>
 <div class="cell docutils container">
@@ -1852,8 +1851,8 @@ F(E&gt;E_A,T) = (\frac{2}{{π}^{0.5}})(\frac{E_A}{RT})^{1/2}exp(\frac{-E_A}{RT})
 <img alt="../../_images/Fraction_of_Molecular_Collisions_36_0.png" src="../../_images/Fraction_of_Molecular_Collisions_36_0.png" />
 </div>
 </div>
-</section>
-<section id="f-what-fraction-of-molecules-have-energies-greater-than-15-kcal-mol-at-500k">
+</div>
+<div class="section" id="f-what-fraction-of-molecules-have-energies-greater-than-15-kcal-mol-at-500k">
 <h3>4f. What fraction of molecules have energies greater than 15 kcal/mol at 500K?<a class="headerlink" href="#f-what-fraction-of-molecules-have-energies-greater-than-15-kcal-mol-at-500k" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1889,11 +1888,11 @@ F(E&gt;E_A,T) = (\frac{2}{{π}^{0.5}})(\frac{E_A}{RT})^{1/2}exp(\frac{-E_A}{RT})
 Compare fraction of collision(of molecules) with energies greater than 25 kcal/mol at 500K and 700K. Explain the results below.</p>
 <p><strong>Answer</strong>:
 The fraction increases at 700K of 3 order of magnitude. The rate increases with the increasing fraction of collisions that have sufficient energy to cross over the barrier and form products.</p>
-</section>
-<section id="fraction-of-collisions-at-various-temperatures">
+</div>
+<div class="section" id="fraction-of-collisions-at-various-temperatures">
 <h3>5. Fraction of Collisions at Various Temperatures<a class="headerlink" href="#fraction-of-collisions-at-various-temperatures" title="Permalink to this headline">#</a></h3>
-</section>
-<section id="a-graph-f-e-e-a-t-versus-t-for-e-a-3-10-25-and-40-kcal-mol">
+</div>
+<div class="section" id="a-graph-f-e-e-a-t-versus-t-for-e-a-3-10-25-and-40-kcal-mol">
 <h3>5a. Graph <span class="math notranslate nohighlight">\(f(E &gt; E_A,T)\)</span> versus <span class="math notranslate nohighlight">\(T\)</span> for <span class="math notranslate nohighlight">\(E_A\)</span> = 3, 10, 25 and 40 kcal/mol.<a class="headerlink" href="#a-graph-f-e-e-a-t-versus-t-for-e-a-3-10-25-and-40-kcal-mol" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1938,9 +1937,9 @@ The fraction increases at 700K of 3 order of magnitude. The rate increases with 
 What do you find from the plot from above?</p>
 <p><strong>Answer</strong>:</p>
 <p>From the graph, it can be seen that any temperature the fraction of collisions with  energies greater than certain activation energy <span class="math notranslate nohighlight">\((E_A)\)</span> is inversely proportional to that activation  energy. In other words, when activation energy is low, the molecule will need less energy to get over  the activation energy barrier. At a higher temperature, the temperature will be the governing rule  for <span class="math notranslate nohighlight">\(f\)</span>.</p>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {

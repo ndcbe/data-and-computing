@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>3.3. Chapter 3: Computational linear algebra &#8212; Data and Computing for Chemical Engineers</title>
     
   <!-- Loaded before other Sphinx assets -->
@@ -21,7 +20,7 @@
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -37,7 +36,7 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -1225,7 +1224,7 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="chapter-3-computational-linear-algebra">
+  <div class="tex2jax_ignore mathjax_ignore section" id="chapter-3-computational-linear-algebra">
 <h1><span class="section-number">3.3. </span>Chapter 3: Computational linear algebra<a class="headerlink" href="#chapter-3-computational-linear-algebra" title="Permalink to this headline">#</a></h1>
 <p><strong>Before Class</strong>:</p>
 <ul class="simple">
@@ -1257,7 +1256,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<section id="throwback-solving-a-linear-system-by-hand">
+<div class="section" id="throwback-solving-a-linear-system-by-hand">
 <h2><span class="section-number">3.3.1. </span>Throwback: Solving a Linear System by Hand<a class="headerlink" href="#throwback-solving-a-linear-system-by-hand" title="Permalink to this headline">#</a></h2>
 <p>We want to solve the following system:</p>
 <div class="math notranslate nohighlight">
@@ -1276,9 +1275,9 @@ title="Print to PDF"
 \[\begin{split}
 \left(\begin{array}{ccc|c}   3 &amp; 2 &amp; 1 &amp;6\\ -1 &amp; 4 &amp; 5&amp;8\\ 2&amp; -8 &amp; 10&amp;4\end{array}\right)
 \end{split}\]</div>
-<p>Now let’s apply Gaussian elimination to solve this system of equations with pencil and paper.</p>
-</section>
-<section id="solving-a-linear-system-with-python">
+<p>Now let’s apply Gaussian elimination to solve this system of equations with pencil and paper. If you get stuck, look at <a class="reference internal" href="../04/Gauss-Elimination.html"><span class="doc std std-doc">Gaussian Elimination</span></a></p>
+</div>
+<div class="section" id="solving-a-linear-system-with-python">
 <h2><span class="section-number">3.3.2. </span>Solving a Linear System with Python<a class="headerlink" href="#solving-a-linear-system-with-python" title="Permalink to this headline">#</a></h2>
 <p>Now let’s solve this system of equations with Python. Tip: <code class="docutils literal notranslate"><span class="pre">scipy</span></code> is a little more sophisticated than <code class="docutils literal notranslate"><span class="pre">numpy</span></code>. Read more <a class="reference external" href="https://docs.scipy.org/doc/scipy/tutorial/linalg.html">here</a>.</p>
 <div class="cell docutils container">
@@ -1322,8 +1321,8 @@ title="Print to PDF"
 </div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">Sympy</span></code> performs symbolic computations which are great for teaching but often too slow for numerically solving large problems (e.g., compuational fluid dynamics simulation). We’ll focus on using <code class="docutils literal notranslate"><span class="pre">scipy</span></code> for most of this class, although you should be comfortable converting the reduced row echelon form of the augmented matrix back into the solution of the linear system.</p>
-</section>
-<section id="extending-gaussian-elimination-to-invert-a-matrix">
+</div>
+<div class="section" id="extending-gaussian-elimination-to-invert-a-matrix">
 <h2><span class="section-number">3.3.3. </span>Extending Gaussian Elimination to Invert a Matrix<a class="headerlink" href="#extending-gaussian-elimination-to-invert-a-matrix" title="Permalink to this headline">#</a></h2>
 <p>Now let’s “open the black box” to see how <code class="docutils literal notranslate"><span class="pre">scipy</span></code>/<code class="docutils literal notranslate"><span class="pre">numpy</span></code> numerically calculates the inverse. Start by studying <a class="reference internal" href="../04/Gauss-Elimination.html"><span class="doc std std-doc">Gaussian Elimination</span></a> which converts our by-hand Gaussian elimination calculation into pseudocode and then Python code.</p>
 <p>As discussed on pg. 199 of Savov, we can calculate the inverse of a matrix <span class="math notranslate nohighlight">\(\bf A\)</span> by assembling the augemented matrix</p>
@@ -1341,12 +1340,14 @@ title="Print to PDF"
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reduced_row_eschelon_form</span><span class="p">(</span><span class="n">aug</span><span class="p">,</span><span class="n">LOUD</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reduced_row_eschelon_form</span><span class="p">(</span><span class="n">aug</span><span class="p">,</span><span class="n">print_level</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Perform Gauss-Jordan elimination to convert</span>
 <span class="sd">    an input augmented matrix into reduced row eschelon form</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        aug: augmented matrix with dimensions N x M, M &gt;= N</span>
+<span class="sd">        print_level: 0 = none, 1 = minimal, 2 = every operation</span>
+
 <span class="sd">    Returns:</span>
 <span class="sd">        augmented matrix in reduced row eschelon form</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1356,9 +1357,16 @@ title="Print to PDF"
     <span class="c1"># Check the dimensions</span>
     <span class="k">assert</span> <span class="n">Nrow</span> <span class="o">&lt;=</span> <span class="n">Ncol</span><span class="p">,</span> <span class="s2">&quot;Augmented matrix has too few columns&quot;</span>
 
+    <span class="c1"># Check the data type</span>
+    <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">aug</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="s2">&quot;This function only supports numpy.array, do not use numpy.matrix&quot;</span>
+
     <span class="c1"># Create a copy of the augemented matrix</span>
     <span class="n">aug_matrix</span> <span class="o">=</span> <span class="n">aug</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     
+    <span class="k">if</span> <span class="n">print_level</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Let&#39;s get started&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;aug=</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">aug</span><span class="p">)</span>
+
     <span class="c1"># loop over the first Nrow columns</span>
     <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">Nrow</span><span class="p">):</span>
         
@@ -1367,10 +1375,16 @@ title="Print to PDF"
 
             <span class="c1"># Add your solution here</span>
 
+            <span class="k">if</span> <span class="n">print_level</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Multiply row&quot;</span><span class="p">,</span><span class="n">column</span><span class="p">,</span><span class="s2">&quot;by&quot;</span><span class="p">,</span><span class="n">scale</span><span class="p">,</span><span class="s2">&quot;and subtract from row&quot;</span><span class="p">,</span><span class="n">row</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;aug =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">aug_matrix</span><span class="p">)</span>
+
+            
+
         <span class="c1"># end loop over rows</span>
     <span class="c1"># end loop over columns</span>
 
-    <span class="k">if</span> <span class="n">LOUD</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">print_level</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Eliminated below the diagonal:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">aug_matrix</span><span class="p">)</span>
 
     <span class="c1"># check augmented matrix is all zeros below the diagonal</span>
@@ -1387,17 +1401,21 @@ title="Print to PDF"
 
             <span class="c1"># Add your solution here</span>
 
+            <span class="k">if</span> <span class="n">print_level</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Multiply row&quot;</span><span class="p">,</span><span class="n">column</span><span class="p">,</span><span class="s2">&quot;by&quot;</span><span class="p">,</span><span class="n">scale</span><span class="p">,</span><span class="s2">&quot;and subtract from row&quot;</span><span class="p">,</span><span class="n">row</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;aug =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">aug_matrix</span><span class="p">)</span>
+
         <span class="c1"># end loop over rows</span>
     <span class="c1"># end loop over columns</span>
 
-    <span class="k">if</span> <span class="n">LOUD</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">print_level</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Eliminated above the diagonal:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">aug_matrix</span><span class="p">)</span>
 
     <span class="c1"># rescale each row</span>
     <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">Nrow</span><span class="p">):</span>
         <span class="n">aug_matrix</span><span class="p">[</span><span class="n">row</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">aug_matrix</span><span class="p">[</span><span class="n">row</span><span class="p">,:]</span> <span class="o">/</span> <span class="n">aug_matrix</span><span class="p">[</span><span class="n">row</span><span class="p">,</span><span class="n">row</span><span class="p">]</span>
 
-    <span class="k">if</span> <span class="n">LOUD</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">print_level</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Reduced row eschelon form:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">aug_matrix</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">aug_matrix</span>
@@ -1408,13 +1426,69 @@ title="Print to PDF"
 <span class="n">aug</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">))</span> <span class="o">*</span> <span class="mf">1.0</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Augmented Matrix:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">aug</span><span class="p">)</span>
 
-<span class="n">rref</span> <span class="o">=</span> <span class="n">reduced_row_eschelon_form</span><span class="p">(</span><span class="n">aug</span><span class="p">,</span><span class="n">LOUD</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">rref</span> <span class="o">=</span> <span class="n">reduced_row_eschelon_form</span><span class="p">(</span><span class="n">aug</span><span class="p">,</span><span class="n">print_level</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section id="understanding-the-determinant">
+<p>Let’s also try our example system from the beginning of class:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\left(\begin{array}{ccc|c}   1 &amp; 0 &amp; 1 &amp; 1\\ 2 &amp; 3 &amp; 0 &amp; 3 \\ 0 &amp; 0 &amp; 4 &amp; 4\end{array}\right)
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+
+<span class="n">rref</span> <span class="o">=</span> <span class="n">reduced_row_eschelon_form</span><span class="p">(</span><span class="n">A2</span><span class="p">,</span><span class="n">print_level</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, calculate the inverse of</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+{\bf A} = \left(\begin{array}{ccc}   1 &amp; 0 &amp; 1 \\  2 &amp; 3 &amp; 0 \\ 0 &amp; 0 &amp; 4 \end{array}\right)
+\end{split}\]</div>
+<p>using your reduced row echelon code.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A3 =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">A3</span><span class="p">)</span>
+
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And let’s verify our answer with <code class="docutils literal notranslate"><span class="pre">scipy</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A3_inv=</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">la</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">A3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s try to invert:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+{\bf A}_4 = \begin{bmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{bmatrix},
+\end{split}\]</div>
+<p>A4 = np.array([[0, 1.0], [1, 0]])</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A4</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="n">aug</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">A4</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span>
+<span class="n">rref</span> <span class="o">=</span> <span class="n">reduced_row_eschelon_form</span><span class="p">(</span><span class="n">aug</span><span class="p">,</span><span class="n">print_level</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>What happened? How to fix it? Hint: Look at <a class="reference internal" href="../04/Gauss-Elimination.html"><span class="doc std std-doc">Gaussian Elimination</span></a> for ideas.</p>
+<p><em>Note:</em> You do not need to modify your code to implement the fix, just write a sentence about what feature is missing from our function <code class="docutils literal notranslate"><span class="pre">reduced_row_eschelon_form</span></code> and why this will fix the problem.</p>
+<p><strong>Your Answer:</strong></p>
+</div>
+<div class="section" id="understanding-the-determinant">
 <h2><span class="section-number">3.3.4. </span>Understanding the Determinant<a class="headerlink" href="#understanding-the-determinant" title="Permalink to this headline">#</a></h2>
 <p>Consider the matrices</p>
 <div class="math notranslate nohighlight">
@@ -1483,8 +1557,8 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {

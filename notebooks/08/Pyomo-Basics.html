@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>8.1. Pyomo Basics &#8212; Data and Computing for Chemical Engineers</title>
     
   <!-- Loaded before other Sphinx assets -->
@@ -21,7 +20,7 @@
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -37,7 +36,7 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -1295,9 +1294,9 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="pyomo-basics">
+  <div class="tex2jax_ignore mathjax_ignore section" id="pyomo-basics">
 <h1><span class="section-number">8.1. </span>Pyomo Basics<a class="headerlink" href="#pyomo-basics" title="Permalink to this headline">#</a></h1>
-<section id="learning-objectives">
+<div class="section" id="learning-objectives">
 <h2><span class="section-number">8.1.1. </span>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">#</a></h2>
 <p>After studying this notebook, completing the activities, and asking questions in class, you should be able to:</p>
 <ul class="simple">
@@ -1332,8 +1331,8 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</section>
-<section id="overview">
+</div>
+<div class="section" id="overview">
 <h2><span class="section-number">8.1.2. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">#</a></h2>
 <p>So far, we have learned to numerically solve square systems of equations, i.e., systems with zero degrees of freedom. But as engineers, we often want to use extra degrees of freedom to improve one or more objective functions. For example, we may want to change the recycle flowrate in a chemical process to balance energy usage (operating cost) and equipment size (capital cost).</p>
 <p>Here are two articles that give more examples of optimization problems.</p>
@@ -1342,8 +1341,8 @@ title="Print to PDF"
 <li><p><a class="reference external" href="https://aiche.onlinelibrary.wiley.com/doi/abs/10.1002/prs.12103">Training Machine Learning Models</a></p></li>
 </ol>
 <p>Consider joining AIChE (American Institute of Chemical Engineers) for free as an undergraduate student:  <a class="reference external" href="https://www.aiche.org/community/students/student-membership">https://www.aiche.org/community/students/student-membership</a></p>
-</section>
-<section id="constrained-nonlinear-optimization-canonical-form">
+</div>
+<div class="section" id="constrained-nonlinear-optimization-canonical-form">
 <h2><span class="section-number">8.1.3. </span>Constrained Nonlinear Optimization: Canonical Form<a class="headerlink" href="#constrained-nonlinear-optimization-canonical-form" title="Permalink to this headline">#</a></h2>
 <p>Below is a nonlinear optimization problem in canonical form.</p>
 <div class="math notranslate nohighlight">
@@ -1359,8 +1358,8 @@ title="Print to PDF"
 <li><p><span class="math notranslate nohighlight">\(g(x)\)</span> is a vector-valued function, known as the <strong>inequality constraint</strong>. The most common inequality constraints in chemical engineering problems are <strong>bounds</strong> such as mole fractions being between 0 and 1, temperature must not exceed 1000K for safety reasons, etc. Sometimes we use inequality constraints to model process equipment (e.g., cannot destroy entropy).</p></li>
 <li><p><span class="math notranslate nohighlight">\(h(x)\)</span> is a vector-valued function, known as the <strong>equality constraint</strong>. Equality constraints are equations such as mass and energy balances, thermodynamic equations of state, and other engineering correlations you learned about in other chemical engineering classes.</p></li>
 </ul>
-</section>
-<section id="pyomo-in-an-example">
+</div>
+<div class="section" id="pyomo-in-an-example">
 <h2><span class="section-number">8.1.4. </span>Pyomo in an Example<a class="headerlink" href="#pyomo-in-an-example" title="Permalink to this headline">#</a></h2>
 <p>Let’s start with a purely mathematical example:</p>
 <div class="math notranslate nohighlight">
@@ -1372,8 +1371,8 @@ title="Print to PDF"
 <p>We want to solve the constrained optimization problem numerically.</p>
 <p><code class="docutils literal notranslate"><span class="pre">scipy.optimize</span></code> supports several different numerical methods for optimization. Based on past experiences, many of these implementations are not reliable. The solvers also do not use a standard interface.</p>
 <p>Instead, we will learn how to use Pyomo, an open-source optimization modeling environment for Python. Prof. Dowling uses Pyomo in his research. Moreover, Prof. Kantor will ask you to use Pyomo extensively next year in Process Controls.</p>
-</section>
-<section id="declare-model">
+</div>
+<div class="section" id="declare-model">
 <h2><span class="section-number">8.1.5. </span>Declare Model<a class="headerlink" href="#declare-model" title="Permalink to this headline">#</a></h2>
 <p>We start by declaring the model in Pyomo.</p>
 <div class="admonition note">
@@ -1414,8 +1413,8 @@ title="Print to PDF"
 </pre></div>
 </div>
 <p>This shows the lower bound, initial value, and upper bound for the variable named <code class="docutils literal notranslate"><span class="pre">x1</span></code>.</p>
-</section>
-<section id="solve-numerically">
+</div>
+<div class="section" id="solve-numerically">
 <h2><span class="section-number">8.1.6. </span>Solve Numerically<a class="headerlink" href="#solve-numerically" title="Permalink to this headline">#</a></h2>
 <p>We can now solve the optimization problem. We will use the solver <code class="docutils literal notranslate"><span class="pre">Ipopt</span></code>.</p>
 <div class="admonition note">
@@ -1445,8 +1444,8 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</section>
-<section id="visualize-solution">
+</div>
+<div class="section" id="visualize-solution">
 <h2><span class="section-number">8.1.7. </span>Visualize Solution<a class="headerlink" href="#visualize-solution" title="Permalink to this headline">#</a></h2>
 <p>Is our answer correct?</p>
 <p>We can solve this optimization problem with guess and check. If we guess <span class="math notranslate nohighlight">\(x_3\)</span>, we can then solve the constraints for <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span>. We can then evaluate the objective. Let’s see the graphical solution to our optimization problem.</p>
@@ -1503,19 +1502,19 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</section>
-<section id="example-planting-cherry-trees">
+</div>
+<div class="section" id="example-planting-cherry-trees">
 <h2><span class="section-number">8.1.8. </span>Example: Planting Cherry Trees<a class="headerlink" href="#example-planting-cherry-trees" title="Permalink to this headline">#</a></h2>
 <p>Suppose we have 20,000 USD to invest in planting cherry trees.  We can plant a mix of sour (dessert) cherries and sweet cherries (the ones you like to eat).  The sour cherry trees cost 20 USD each, and the sweet cherry trees cost 10 USD each.  The sweet cherries, however, can be sold for 100 USD per tree per year when mature if fully pollinated, while the sour cherries can be sold for only 25 USD per tree when mature.  Finally, the yield per tree of the sweet cherry trees depends on their proximity to the sour cherry trees, since they are not self-pollinating.  If the number of sour trees is given by <span class="math notranslate nohighlight">\(x_1\)</span> and the number of sweet trees is <span class="math notranslate nohighlight">\(x_2\)</span>, we shall take the yield (the fraction of the fully pollinated yield) of the sweet trees to be <span class="math notranslate nohighlight">\(x_1\)</span> / (<span class="math notranslate nohighlight">\(x_2\)</span> + <span class="math notranslate nohighlight">\(x_1\)</span>).</p>
-</section>
-<section id="step-1-develop-mathematical-model-convert-to-canonical-form">
+</div>
+<div class="section" id="step-1-develop-mathematical-model-convert-to-canonical-form">
 <h2><span class="section-number">8.1.9. </span>Step 1: Develop Mathematical Model, Convert to Canonical Form<a class="headerlink" href="#step-1-develop-mathematical-model-convert-to-canonical-form" title="Permalink to this headline">#</a></h2>
 <div class="admonition note">
 <p class="admonition-title"><b>Class Activity</b></p>
 <p>Write the optimization problem in canonical form on paper. Use this to solve step 2.</p>
 </div>
-</section>
-<section id="step-2-solve-in-python">
+</div>
+<div class="section" id="step-2-solve-in-python">
 <h2><span class="section-number">8.1.10. </span>Step 2: Solve in Python<a class="headerlink" href="#step-2-solve-in-python" title="Permalink to this headline">#</a></h2>
 <div class="admonition note">
 <p class="admonition-title"><b>Class Activity</b></p>
@@ -1582,8 +1581,8 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</section>
-<section id="interpret-answer">
+</div>
+<div class="section" id="interpret-answer">
 <h2><span class="section-number">8.1.11. </span>Interpret Answer<a class="headerlink" href="#interpret-answer" title="Permalink to this headline">#</a></h2>
 <p>Can we plant 2/3 of a cherry tree?</p>
 <div class="admonition note">
@@ -1615,8 +1614,8 @@ title="Print to PDF"
 </div>
 </div>
 <p>Which method produces a larger revenue?  Is there a significant difference?</p>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
