@@ -13,7 +13,7 @@ In this class, you will learn the fundamentals of i) computing in Python, ii) li
 | | Prof. Alexander (Alex) Dowling | Ms. Kyla Jones | Mr. Wilson Raney|
 | ----------- | ----------- | ----------- | ----------- |
 | | ![](https://dowlinglab.nd.edu/assets/320333/200x200/dowling_alex_sq.jpg) | ![](https://dowlinglab.nd.edu/assets/516355/200x200/resized_portrait_grey_background.png) | ![](https://dowlinglab.nd.edu/assets/527717/200x200/wilson_raney.jpg) |
-| Office Hours | 8:45-9:15am, Tuesdays \& Thursdays in 369 Nieuwland Hall | TBA in 366 Nieuwland Hall | TBA in 366 Nieuwland Hall |
+| Office Hours | 8:45-9:15am, Tuesdays \& Thursdays in 369 Nieuwland Hall | 2pm on Thursdays in 366 Nieuwland Hall | 10am on Fridays in 366 Nieuwland Hall |
 
 ## Discussion Board (Canvas) and Email Correspondance
 * Post your questions to the **discussion board in Canvas**
