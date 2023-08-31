@@ -1219,6 +1219,23 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#more-practice-with-linear-systems">
    3.4.5. More Practice with Linear Systems
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linear-model">
+     3.4.5.1. Linear Model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solve">
+     3.4.5.2. Solve
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#submission">
+   3.4.6. Submission
+  </a>
  </li>
 </ul>
 
@@ -1302,6 +1319,23 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#more-practice-with-linear-systems">
    3.4.5. More Practice with Linear Systems
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linear-model">
+     3.4.5.1. Linear Model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solve">
+     3.4.5.2. Solve
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#submission">
+   3.4.6. Submission
+  </a>
  </li>
 </ul>
 
@@ -1334,7 +1368,21 @@ title="Print to PDF"
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> ipympl
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+    <span class="c1"># If running on colab, install ipympl</span>
+    <span class="o">!</span>pip install -q ipympl
+
+    <span class="c1"># Enable 3rd party output/widgets</span>
+    <span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">output</span>
+    <span class="n">output</span><span class="o">.</span><span class="n">enable_custom_widget_manager</span><span class="p">()</span>
+
+<span class="c1"># % means a &quot;magic command&quot; that is special</span>
+<span class="c1"># for Jupyter notebooks.</span>
+<span class="c1"># This specific command enables interactive plots</span>
+<span class="o">%</span><span class="k">matplotlib</span> ipympl
+
+<span class="c1"># Here are our standard imports</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">scipy.linalg</span> <span class="k">as</span> <span class="nn">la</span>
@@ -1793,6 +1841,69 @@ $<span class="math notranslate nohighlight">\( \underbrace{\begin{bmatrix} 1 &am
 </section>
 <section id="more-practice-with-linear-systems">
 <h2><span class="section-number">3.4.5. </span>More Practice with Linear Systems<a class="headerlink" href="#more-practice-with-linear-systems" title="Permalink to this headline">#</a></h2>
+<p>This question is from <a class="reference external" href="https://engineering.nd.edu/faculty/david-leighton/">Prof. David Leighton</a>.</p>
+<p>In your laboratory, you measure UV absorbance ( units: [-]/(g/liter) ) to infer protein concentrations in a solution. For dilute solutions, the protein absorbance is proportional to the concentration, and the total absorbance is just the sum of that resulting from each species independently. Suppose you have calibrated the absorbance at three different wavelengths (200 nm, 300 nm, 400 nm) for three samples of pure protein species (BSA, BHb, Insulin):</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Species</p></th>
+<th class="head"><p>200 nm</p></th>
+<th class="head"><p>300 nm</p></th>
+<th class="head"><p>400 nm</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>BSA</p></td>
+<td><p>0.1</p></td>
+<td><p>0.2</p></td>
+<td><p>0.1</p></td>
+</tr>
+<tr class="row-odd"><td><p>BHb</p></td>
+<td><p>0.1</p></td>
+<td><p>0.3</p></td>
+<td><p>0.4</p></td>
+</tr>
+<tr class="row-even"><td><p>Insulin</p></td>
+<td><p>0.1</p></td>
+<td><p>0.1</p></td>
+<td><p>0.2</p></td>
+</tr>
+</tbody>
+</table>
+<p>All entries in this table have units [-]/(g/liter). We are using [-] to represent dimensionless units for absorbance.</p>
+<p>For a new sample, you measure the absorbance at 200 nm, 300 nm, and 400 nm to be 0.08 [-], 0.16 [-], and 0.20 [-], respectively. What is the concentration of each protein in your new sample?</p>
+<section id="linear-model">
+<h3><span class="section-number">3.4.5.1. </span>Linear Model<a class="headerlink" href="#linear-model" title="Permalink to this headline">#</a></h3>
+<p>Develop a linear model on paper in canonical form (i.e., <span class="math notranslate nohighlight">\(\mathbf{A} \vec{x} = \vec{b}\)</span>) to calculate the concentration of each protein. Express your final answer in matrix form and turn in via <strong>Gradescope</strong> (pencil and paper submission).</p>
+<p>Hint: What is unknown and what is known? What should be <span class="math notranslate nohighlight">\(\vec{x}\)</span> and what should be <span class="math notranslate nohighlight">\(\vec{b}\)</span>?</p>
+</section>
+<section id="solve">
+<h3><span class="section-number">3.4.5.2. </span>Solve<a class="headerlink" href="#solve" title="Permalink to this headline">#</a></h3>
+<p>Solve the model in Python. Store your answers for protein concentration in the numpy array <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up the system of equations in matrix form</span>
+
+<span class="n">proteins</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;BSA&#39;</span><span class="p">,</span><span class="s1">&#39;BHb&#39;</span><span class="p">,</span><span class="s1">&#39;Insulin&#39;</span><span class="p">]</span>
+
+<span class="c1"># Add your solution here</span>
+
+<span class="c1"># Print solutions</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The concentration of each protein in the sample is as follows:&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Concentration of </span><span class="si">{0}</span><span class="s2"> = </span><span class="si">{1:0.3f}</span><span class="s2"> g/liter.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">proteins</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="submission">
+<h2><span class="section-number">3.4.6. </span>Submission<a class="headerlink" href="#submission" title="Permalink to this headline">#</a></h2>
+<p>Please submit two files for this assignment:</p>
+<ol class="simple">
+<li><p>Submit your written answers (e.g., pencil and paper calculation) to Gradescope (one assignment)</p></li>
+<li><p>Download this notebook as a .ipynb file and submit to to Gradescope (second assignment)</p></li>
+</ol>
 </section>
 </section>
 
