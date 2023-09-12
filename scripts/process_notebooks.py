@@ -106,6 +106,7 @@ def process_notebook(folder_original, folder_new, filename, verbose=1):
     
     for cell in nb.cells:
         if cell.cell_type == "markdown":
+        # if True: # Process media links in Python code too, this did not work for chapter6 notebook
             media_links = re.findall(MEDIA_LINK, cell.source)
             # copy media files to _images
             for txt, media_file in media_links:
