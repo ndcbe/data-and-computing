@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Stochastic Simulation of Chemical Reactions &#8212; Data and Computing for Chemical Engineers</title>
     
   <!-- Loaded before other Sphinx assets -->
@@ -20,7 +21,7 @@
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
@@ -36,7 +37,7 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -1294,12 +1295,12 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="stochastic-simulation-of-chemical-reactions">
+  <section class="tex2jax_ignore mathjax_ignore" id="stochastic-simulation-of-chemical-reactions">
 <h1>Stochastic Simulation of Chemical Reactions<a class="headerlink" href="#stochastic-simulation-of-chemical-reactions" title="Permalink to this headline">#</a></h1>
 <p><strong>Prepared by:</strong> Raghav Saxena (<a class="reference external" href="mailto:rsaxena&#37;&#52;&#48;nd&#46;edu">rsaxena<span>&#64;</span>nd<span>&#46;</span>edu</a>) and Sarah Nano (<a class="reference external" href="mailto:snano&#37;&#52;&#48;nd&#46;edu">snano<span>&#64;</span>nd<span>&#46;</span>edu</a>)</p>
 <p><strong>Reference:</strong> <a class="reference external" href="https://sites.engineering.ucsb.edu/~jbraw/chemreacfun/">Chemical Reactor Analysis and Design Fundamentals by Rawlings et al. (Nob Hill Pub, LLC, 2002)</a></p>
 <p><strong>Intended Audience:</strong> This problem is intended for Chemical and Biomolecular Engineering juniors and seniors from the University of Notre Dame who are either enrolled in or have taken Reaction Engineering.</p>
-<div class="section" id="learning-objectives">
+<section id="learning-objectives">
 <h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">#</a></h2>
 <p>After studying this notebook, completing the activities, and asking questions in class, you should be able to:</p>
 <ul class="simple">
@@ -1307,8 +1308,8 @@ title="Print to PDF"
 <li><p>Highlight similarities and differences between stochastic and deterministic rate models for chemical reactions.</p></li>
 <li><p>Properly graph and visualize data using matplotlib.</p></li>
 </ul>
-</div>
-<div class="section" id="coding-resources">
+</section>
+<section id="coding-resources">
 <h2>Coding Resources<a class="headerlink" href="#coding-resources" title="Permalink to this headline">#</a></h2>
 <p>Relevant Modules in Class Website:</p>
 <ul class="simple">
@@ -1324,8 +1325,8 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="introduction">
+</section>
+<section id="introduction">
 <h2>1. Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
 <p>Kinetic reactions are mostly modeled using deterministic rate laws, which involve solving nonlinear differential equations. Deterministic models work excellently with large systems involving many thousands of atoms.</p>
 <p>However, in some cases, we might want to model systems with only a few hundred atoms, such as when modeling reactions at an interface or a catalyst surface. For such systems, the random behavior of the molecules becomes essential. Such systems can be modeled using random simulation techniques (also called kinetic monte carlo) which we explain later below in detail.</p>
@@ -1336,28 +1337,28 @@ title="Print to PDF"
 <li><p>Explore effect of number of molecules and rate constant on reaction profiles from Gillespie algorithm.</p></li>
 <li><p>Discuss similarities and differences between the rate law model and the random simulation model.</p></li>
 </ol>
-</div>
-<div class="section" id="a-random-simulation-gillespie-algorithm">
+</section>
+<section id="a-random-simulation-gillespie-algorithm">
 <h2>1a. Random Simulation - Gillespie Algorithm<a class="headerlink" href="#a-random-simulation-gillespie-algorithm" title="Permalink to this headline">#</a></h2>
 <p>In a random simulation, one can directly capture the random nature of molecules by using random molecular motion and probability of collision as the basis of reaction rates.</p>
 <p>Through this exercise, we will highlight similarities and differences between a random simulation model and a deterministic model.</p>
 <p>We will use the following two reaction constant volume batch system for the purpose of this excercise.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7ae9aa3a-8bd9-4b26-82c8-3f1746f69dd2">
-<span class="eqno">(42)<a class="headerlink" href="#equation-7ae9aa3a-8bd9-4b26-82c8-3f1746f69dd2" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-698694c2-ce31-4d1e-a179-43f106507a59">
+<span class="eqno">(42)<a class="headerlink" href="#equation-698694c2-ce31-4d1e-a179-43f106507a59" title="Permalink to this equation">#</a></span>\[\begin{equation}
 A \xrightarrow{k_1} B
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-b2821574-5fb8-4e9b-8be2-d55eb216d28d">
-<span class="eqno">(43)<a class="headerlink" href="#equation-b2821574-5fb8-4e9b-8be2-d55eb216d28d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-90768eb5-6e02-4276-98c8-97a14c3fafdb">
+<span class="eqno">(43)<a class="headerlink" href="#equation-90768eb5-6e02-4276-98c8-97a14c3fafdb" title="Permalink to this equation">#</a></span>\[\begin{equation}
 B \xrightarrow{k_2} C
 \end{equation}\]</div>
 <p>For stochastic (random) modeling, the systems are generally small and consist of about a few hundred molecules. Thus, we will model the system using the exact number of molecules instead of using concentrations. We will assume that these reactions are actual molecular events, i.e., a molecule of A converts to B in the first reaction, and a molecule of B converts to C in the second reaction.</p>
 <p>Which reaction takes place is governed by their probabilities; this is proportional to the rate constant and the number of molecules as shown below:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-dfcf83f8-9d32-4bb0-87c0-88ef09e6c429">
-<span class="eqno">(44)<a class="headerlink" href="#equation-dfcf83f8-9d32-4bb0-87c0-88ef09e6c429" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c3d6f697-c73b-4509-a930-04368771b83a">
+<span class="eqno">(44)<a class="headerlink" href="#equation-c3d6f697-c73b-4509-a930-04368771b83a" title="Permalink to this equation">#</a></span>\[\begin{equation}
 r1 = k_1x_a
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-0cbb8a54-8264-4dd5-b6a3-ec45aece45b1">
-<span class="eqno">(45)<a class="headerlink" href="#equation-0cbb8a54-8264-4dd5-b6a3-ec45aece45b1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-02834cad-368d-4e81-ab4f-8c145f3f7032">
+<span class="eqno">(45)<a class="headerlink" href="#equation-02834cad-368d-4e81-ab4f-8c145f3f7032" title="Permalink to this equation">#</a></span>\[\begin{equation}
 r2 = k_2x_b
 \end{equation}\]</div>
 <p>These reaction probabilities look very similar to rate equations from the deterministic models. However, <strong>x<span class="math notranslate nohighlight">\(_i\)</span></strong> is the number of component <strong><span class="math notranslate nohighlight">\(i\)</span></strong> molecules in the reactor volume, not concentration <strong>C<span class="math notranslate nohighlight">\(_i\)</span></strong>.</p>
@@ -1371,16 +1372,16 @@ r2 = k_2x_b
 <li><p>Update reaction time <span class="math notranslate nohighlight">\(t = t + \tau\)</span>  and adjust number of molecules x<span class="math notranslate nohighlight">\(_i\)</span> for each species. For example, if reaction 1 is selected in step 5, we will reduce number of A molecules by 1 and increase number of B molecules by 1.</p></li>
 <li><p>Return to step 2 and continue until total reaction probability is zero.</p></li>
 </ol>
-</div>
-<div class="section" id="random-simulation-model-gillespie-algorithm">
+</section>
+<section id="random-simulation-model-gillespie-algorithm">
 <h2>2. Random Simulation Model - Gillespie Algorithm<a class="headerlink" href="#random-simulation-model-gillespie-algorithm" title="Permalink to this headline">#</a></h2>
 <p>Complete the function “gillespie” to perform stochastic simulation of the two reaction batch system.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-160b0e3a-3ad5-4528-8d31-a1d92b89494b">
-<span class="eqno">(46)<a class="headerlink" href="#equation-160b0e3a-3ad5-4528-8d31-a1d92b89494b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-763818d1-030f-4472-8edb-31b9e56c6a74">
+<span class="eqno">(46)<a class="headerlink" href="#equation-763818d1-030f-4472-8edb-31b9e56c6a74" title="Permalink to this equation">#</a></span>\[\begin{equation}
 A \xrightarrow{k_1} B
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-1fc1075e-a3e2-4c5f-bca4-39cfa2973e04">
-<span class="eqno">(47)<a class="headerlink" href="#equation-1fc1075e-a3e2-4c5f-bca4-39cfa2973e04" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-16ea24e8-8872-4f0e-9770-71b2490d03c7">
+<span class="eqno">(47)<a class="headerlink" href="#equation-16ea24e8-8872-4f0e-9770-71b2490d03c7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 B \xrightarrow{k_2} C
 \end{equation}\]</div>
 <p><strong>Write a pseudocode for the while loop to complete the code.</strong>  Submit this answer on an attached pdf file.</p>
@@ -1463,36 +1464,36 @@ B \xrightarrow{k_2} C
 <img alt="../../_images/Stochastic-Kinetics_11_0.png" src="../../_images/Stochastic-Kinetics_11_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="a-deterministic-equations">
+</section>
+<section id="a-deterministic-equations">
 <h2>3a. Deterministic Equations<a class="headerlink" href="#a-deterministic-equations" title="Permalink to this headline">#</a></h2>
 <p>Deterministic rate model for the same reaction network would result in the following rate expressions:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-706dce0a-823f-480d-aa5b-abe211067247">
-<span class="eqno">(48)<a class="headerlink" href="#equation-706dce0a-823f-480d-aa5b-abe211067247" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-41271179-4dba-471f-aa67-2e583ea9f057">
+<span class="eqno">(48)<a class="headerlink" href="#equation-41271179-4dba-471f-aa67-2e583ea9f057" title="Permalink to this equation">#</a></span>\[\begin{equation}
 r1 = k_1C_a
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-59f8f322-40ad-4619-a4f3-8b464dda6877">
-<span class="eqno">(49)<a class="headerlink" href="#equation-59f8f322-40ad-4619-a4f3-8b464dda6877" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ef8899de-acc0-4a45-a29c-b4345dd605c0">
+<span class="eqno">(49)<a class="headerlink" href="#equation-ef8899de-acc0-4a45-a29c-b4345dd605c0" title="Permalink to this equation">#</a></span>\[\begin{equation}
 r2 = k_2C_b
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(C_i\)</span> is the concentration of species <span class="math notranslate nohighlight">\(i\)</span>, unlike number of molecules of stochastic model.</p>
 <p><strong>Using these rate laws, write down the differential equations for the concentration of each species?</strong> Submit this answer on an attached pdf file.</p>
 <p><strong>Answer:</strong></p>
-<div class="amsmath math notranslate nohighlight" id="equation-10ec77ff-6f2e-4110-ae11-e350f8e85d1f">
-<span class="eqno">(50)<a class="headerlink" href="#equation-10ec77ff-6f2e-4110-ae11-e350f8e85d1f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5f628e57-41e6-4e19-95b3-793d134ea0ca">
+<span class="eqno">(50)<a class="headerlink" href="#equation-5f628e57-41e6-4e19-95b3-793d134ea0ca" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \frac{dC_a}{dt} = -k_1C_a
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-34f639aa-c019-46ea-a9db-9669e9741a31">
-<span class="eqno">(51)<a class="headerlink" href="#equation-34f639aa-c019-46ea-a9db-9669e9741a31" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f0fe0bb1-254a-4c83-a69b-2b34157b1b54">
+<span class="eqno">(51)<a class="headerlink" href="#equation-f0fe0bb1-254a-4c83-a69b-2b34157b1b54" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \frac{dC_b}{dt} = k_1C_a - k_2C_b
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-54f61957-7e96-4ea6-9ee5-0de336dc5d81">
-<span class="eqno">(52)<a class="headerlink" href="#equation-54f61957-7e96-4ea6-9ee5-0de336dc5d81" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-209635d9-0f83-4ee1-8991-68286f32a98d">
+<span class="eqno">(52)<a class="headerlink" href="#equation-209635d9-0f83-4ee1-8991-68286f32a98d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \frac{dC_c}{dt} = k_2C_b
 \end{equation}\]</div>
 <p>Note: These equations would be exactly same for number of molecules, i.e, one can replace <span class="math notranslate nohighlight">\(C_i\)</span> with <span class="math notranslate nohighlight">\(x_i\)</span> in the differential equations above. Concentrations can be converetd to number of molecules using avogadros number <span class="math notranslate nohighlight">\(N_A\)</span> and volume V of the reactor and these constants will cancel out in the equations.</p>
-</div>
-<div class="section" id="b-deterministic-rate-model-solving-differential-equations">
+</section>
+<section id="b-deterministic-rate-model-solving-differential-equations">
 <h2>3b. Deterministic Rate Model - Solving Differential Equations<a class="headerlink" href="#b-deterministic-rate-model-solving-differential-equations" title="Permalink to this headline">#</a></h2>
 <p><strong>Solve the differential equations to find the analytical solution of the deterministic rate models.</strong> Submit this answer on an attached pdf file. Add these solutions to the code below to plot this deterministic rate model profiles.</p>
 <div class="cell docutils container">
@@ -1524,8 +1525,8 @@ r2 = k_2C_b
 <img alt="../../_images/Stochastic-Kinetics_16_0.png" src="../../_images/Stochastic-Kinetics_16_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="c-stochastic-vs-deterministic-solution">
+</section>
+<section id="c-stochastic-vs-deterministic-solution">
 <h2>3c. Stochastic vs Deterministic Solution<a class="headerlink" href="#c-stochastic-vs-deterministic-solution" title="Permalink to this headline">#</a></h2>
 <p>Plot the stochastic solution and deterministic solution for the species profiles in the same plot starting with 1000 molecules of A. <strong>Write a few sentences to explain what you observe?</strong> Submit your answer on an attached pdf file.</p>
 <div class="cell docutils container">
@@ -1539,8 +1540,8 @@ r2 = k_2C_b
 </div>
 </div>
 <p><strong>Answer:</strong> For N = 1000 molecules, we see that the profiles for the stochastic solution are similar to the deterministic solution with little noise. For even larger systems, the profiles will be even more accurate. Intuitively this is what we would expect; the random behavior becomes less important for large systems. In the next section, we will see that random behavior is important for small systems.</p>
-</div>
-<div class="section" id="d-effect-of-number-of-molecules-in-stochastic-simulation">
+</section>
+<section id="d-effect-of-number-of-molecules-in-stochastic-simulation">
 <h2>3d. Effect of number of molecules in stochastic simulation<a class="headerlink" href="#d-effect-of-number-of-molecules-in-stochastic-simulation" title="Permalink to this headline">#</a></h2>
 <p><strong>How does changing the starting number of molecules affect the reaction profiles?</strong> Run the gillespie function with A = 100 and A = 1000 molecules and create a subplot for the species profile. Submit this answer in a few sentences on an attached pdf file.</p>
 <div class="cell docutils container">
@@ -1581,8 +1582,8 @@ r2 = k_2C_b
 </div>
 </div>
 <p><strong>Answer:</strong> For N = 100 molecules, we can clearly see more noise in the species profile compared to N = 1000 molecules, where the profile is more smooth and closer to the analytical solution. This reinforces our idea that stochastic modeling is important if the system of interest is small.</p>
-</div>
-<div class="section" id="effect-of-rate-constants-k1-and-k2">
+</section>
+<section id="effect-of-rate-constants-k1-and-k2">
 <h2>4. Effect of rate constants k1 and k2<a class="headerlink" href="#effect-of-rate-constants-k1-and-k2" title="Permalink to this headline">#</a></h2>
 <p>Plot reaction profiles using different rate constant values (using the same number of starting molecules. <em>Hint:</em> Change the value of one rate constant while keeping the other the same; this will make any changes obvious.</p>
 <p><strong>How does changing the rate constant affect the reaction profiles?</strong> Submit this answer in a few sentences on an attached pdf file.</p>
@@ -1622,12 +1623,12 @@ r2 = k_2C_b
 </div>
 <p><strong>Answer:</strong> We see that for the top figure with higher k1, the maximum in B was reached faster and in a steeper way than the bottom figure with lower k1; this makes sense because a higher k1 means a higher probability of the first reaction, meaning faster conversion of A to B molecules. With the same logic, we can explain the decay in A and growth in C is also fast in the top figure compared to the bottom figure.</p>
 <p>All of these characteristics would also be expected in the deterministic model. This exercise shows us the beauty of the Gillespie algorithm and how it can capture features of deterministic models while keeping the random behavior of the system into account.</p>
-</div>
-<div class="section" id="final-discussion">
+</section>
+<section id="final-discussion">
 <h2>5. Final Discussion<a class="headerlink" href="#final-discussion" title="Permalink to this headline">#</a></h2>
 <p>Through this project, we aimed to highlight the importance of stochastic (random) modeling (aka KMC simulations in the present time). We used the famous Gillespie algorithm for stochastic modeling and compared it to well-known deterministic reaction engineering models for a simple two irreversible reactions constant volume batch system. We showed that the stochastic solution has more noise in the profiles for smaller systems because of the random behavior of the molecules moving in the gas phase and colliding with each other. We showed that this random behavior becomes less critical for larger systems, and profiles were closer to deterministic models as captured by the Gillespie algorithm.</p>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
