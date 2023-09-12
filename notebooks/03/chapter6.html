@@ -1709,6 +1709,23 @@ x_1 = \frac{-t}{2}, \quad x_2 = 0, \quad x_3 = t
 </section>
 <section id="svd-and-matrix-compression">
 <h2><span class="section-number">3.6.5. </span>SVD and Matrix Compression<a class="headerlink" href="#svd-and-matrix-compression" title="Permalink to this headline">#</a></h2>
+<p>See <a class="reference internal" href="chapter5.html"><span class="doc std std-doc">Chapter 5: Linear Transformations</span></a> for a quick introduction to SVD and its relationship to condition number.</p>
+<p>How do we calculate the SVD of a matrix?</p>
+<p>The left signular vectors are the eigenvectors of <span class="math notranslate nohighlight">\({\bf A}{\bf A}^T\)</span>.</p>
+<p>The right singular vectors are the eigenvectors of <span class="math notranslate nohighlight">\({\bf A}^T{\bf A}\)</span>.</p>
+<p>The eigenvalues <span class="math notranslate nohighlight">\(\lambda_i\)</span> of <span class="math notranslate nohighlight">\({\bf A}{\bf A}^T\)</span> and <span class="math notranslate nohighlight">\({\bf A}^T{\bf A}\)</span> are equal. Moreover, the singular values <span class="math notranslate nohighlight">\(\sigma_i = \sqrt{\lambda_i}\)</span>.</p>
+<p>Thus, the linear tranformation <span class="math notranslate nohighlight">\(T_{A}({\bf A}) = {\bf A x}\)</span> can be interpreted as a three step process:</p>
+<ol class="simple">
+<li><p>Convert <span class="math notranslate nohighlight">\({\bf x}\)</span> from the standard basis to the basis of the right singular vectors</p></li>
+<li><p>Scale componenets by the singular values</p></li>
+<li><p>Convert the output from the basis of the left singular vectors to the standard basis</p></li>
+</ol>
+<p>Finally, we can write a matrix using SVD as follows:</p>
+<div class="math notranslate nohighlight">
+\[
+{\bf A} = {\bf U \Sigma V}^T = \sum_{i} \sigma_i {\bf u}_i {\bf v}^{T}_i
+\]</div>
+<p>Thus, we can compress <span class="math notranslate nohighlight">\({\bf A}\)</span> by truncated the summation. Let’s see this with an example.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Disable the interactive plots</span>
