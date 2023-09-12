@@ -1882,8 +1882,8 @@ title="Print to PDF"
 <section id="perform-nonlinear-regression">
 <h2><span class="section-number">16.1.5. </span>Perform Nonlinear Regression<a class="headerlink" href="#perform-nonlinear-regression" title="Permalink to this headline">#</a></h2>
 <p>We esimate the unknown model parameters from data by solving a (weighted) nonlinear regression problem.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-709a59bb-dd56-4bd3-8507-786014036e58">
-<span class="eqno">(16.1)<a class="headerlink" href="#equation-709a59bb-dd56-4bd3-8507-786014036e58" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-86ed6ef0-a01f-4fa6-b513-0d277df68536">
+<span class="eqno">(16.1)<a class="headerlink" href="#equation-86ed6ef0-a01f-4fa6-b513-0d277df68536" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat{\mathbf{\theta}} = \operatorname*{argmin}_{\underline{\theta}~\leq~\theta~\leq~\overline{\theta}} \sum_{d} \left(\mathbf{y}_d - f(\mathbf{\theta}, \mathbf{x}_d) \right)^\intercal \mathbf{W}_d \left(\mathbf{y}_d - f(\mathbf{\theta}, \mathbf{x}_d) \right)
 \end{equation}\]</div>
 <p>Here <span class="math notranslate nohighlight">\(y_d = C_{B,d}\)</span> is the measured data, <span class="math notranslate nohighlight">\(\mathbf{f}(\cdot,\cdot)\)</span> is the mathematical model, <span class="math notranslate nohighlight">\(\mathbf{\theta} = [A_1, A_2, E_1, E_2]\)</span> are the regressed parameters, <span class="math notranslate nohighlight">\(\mathbf{x} = [C_{A0}, T, t]\)</span> are the conditions for each data point (experiment) <span class="math notranslate nohighlight">\(d\)</span>, and <span class="math notranslate nohighlight">\(\mathbf{W} = \mathbf{I}\)</span> is the weight matrix. For the code below, we are minimizing the sum of squared error using only data for <span class="math notranslate nohighlight">\(C_B\)</span>.</p>
@@ -2392,13 +2392,13 @@ FIM for CC measurements:
 <section id="eigendecomposition">
 <h3><span class="section-number">16.1.6.4. </span>Eigendecomposition<a class="headerlink" href="#eigendecomposition" title="Permalink to this headline">#</a></h3>
 <p>Next let us interpret the eigendecomposition of each FIM. For simplicity, we can going to drop the index <span class="math notranslate nohighlight">\(i\)</span>. Recall <span class="math notranslate nohighlight">\(\mathbf{M} \in \mathbb{R}^{m \times m}\)</span> because <span class="math notranslate nohighlight">\(\mathbf{\theta} \in \mathbb{R}^{m}\)</span>.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-10894249-83af-4fa2-8e70-9a89452576e9">
-<span class="eqno">(16.2)<a class="headerlink" href="#equation-10894249-83af-4fa2-8e70-9a89452576e9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0a6503b8-6e6d-427f-971a-2f17e89ba84d">
+<span class="eqno">(16.2)<a class="headerlink" href="#equation-0a6503b8-6e6d-427f-971a-2f17e89ba84d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbf{M} = \mathbf{W} \mathbf{\Lambda} \mathbf{W}^{-1}, \quad \mathbf{W} = \begin{bmatrix} \mathbf{v}_{1} \cdots \mathbf{v}_{p} \end{bmatrix}, \quad \mathbf{\Lambda} = \begin{bmatrix} \lambda_1 &amp; \cdots &amp; 0 \\ \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; \cdots &amp; \lambda_p \end{bmatrix} 
 \end{equation}\]</div>
 <p>Here <span class="math notranslate nohighlight">\(\mathbf{W} \in \mathbb{R}^{m \times m}\)</span> is the matrix of eigenvectors <span class="math notranslate nohighlight">\(\mathbf{v}_{1},\ldots,\mathbf{v}_{p}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{\Lambda} \in \mathbb{R}^{m \times m}\)</span> is a diagonal matrix containing the corresponding eigenvalues <span class="math notranslate nohighlight">\(\lambda_1,\ldots,\lambda_p\)</span>. Because <span class="math notranslate nohighlight">\(\mathbf{M}\)</span> is a <a class="reference external" href="https://en.wikipedia.org/wiki/Eigendecomposition_of_a_matrix#Real_symmetric_matrices">real symmetric matrix</a> by definition, <span class="math notranslate nohighlight">\(\mathbf{W}^{-1} = \mathbf{W}^\intercal\)</span>, and the eigendecomposition can be written as follows:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9bbf5a51-eaad-4f4c-973b-a7e2c6624df1">
-<span class="eqno">(16.3)<a class="headerlink" href="#equation-9bbf5a51-eaad-4f4c-973b-a7e2c6624df1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b5f20e6d-1117-47f1-b76f-2d86e9d717b5">
+<span class="eqno">(16.3)<a class="headerlink" href="#equation-b5f20e6d-1117-47f1-b76f-2d86e9d717b5" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbf{M} = \sum_{k=1}^{p} \lambda_{k} \mathbf{v}_{k} \mathbf{v}_{k}^\intercal
 \end{equation}\]</div>
 <p>Now back to the example!</p>
@@ -2543,13 +2543,13 @@ Eigendecomposition for measurement all
 <section id="covariance-matrix-of-regressed-paramters">
 <h3><span class="section-number">16.1.6.5. </span>Covariance Matrix of Regressed Paramters<a class="headerlink" href="#covariance-matrix-of-regressed-paramters" title="Permalink to this headline">#</a></h3>
 <p>The covariance matrix <span class="math notranslate nohighlight">\(\mathbf{\Sigma_{\theta}}\)</span> is approximately the inverse of the Fisher information matrix <span class="math notranslate nohighlight">\(\mathbf{M}\)</span> (again dropping the measurement index <span class="math notranslate nohighlight">\(i\)</span> for simplicity):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5f6579b6-6a59-4e67-9226-f65f545c78d0">
-<span class="eqno">(16.4)<a class="headerlink" href="#equation-5f6579b6-6a59-4e67-9226-f65f545c78d0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a0526179-b9fb-46ec-bcca-aecd4feae5ae">
+<span class="eqno">(16.4)<a class="headerlink" href="#equation-a0526179-b9fb-46ec-bcca-aecd4feae5ae" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbf{\Sigma_{\theta}} \approx \mathbf{M}^{-1} = \sigma^{2} \left(\mathbf{Q}^{\intercal} \mathbf{Q} \right)^{-1}
 \end{equation}\]</div>
 <p>What is we are able to measure the concentration of all of the species simultaneously? Under the assumption that the measurement errors are uncorrelated across measurement types, we can compute a total FIM as the sum of the contributions.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-209adc74-34b2-4cb8-8372-dae9a6695f11">
-<span class="eqno">(16.5)<a class="headerlink" href="#equation-209adc74-34b2-4cb8-8372-dae9a6695f11" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-71e85347-6bdc-4999-ac1f-048bf4c099cd">
+<span class="eqno">(16.5)<a class="headerlink" href="#equation-71e85347-6bdc-4999-ac1f-048bf4c099cd" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbf{\Sigma_{\theta}} \approx \left(\sum_{i\in \mathcal{I}} \mathbf{M}_{i}^{-1} \right)^{-1} = \left( \sum_{i\in \mathcal{I}} \sigma_{i}^{2} \left(\mathbf{Q}_{i}^{\intercal} \mathbf{Q}_{i} \right) \right)^{-1}, \quad \mathcal{I} = \{C_{A}, C_{B}, C_{C} \}
 \end{equation}\]</div>
 <p>Now let’s compute the covariance matrices (by measurement):</p>

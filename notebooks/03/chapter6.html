@@ -1591,7 +1591,7 @@ x_1 = \frac{-t}{2}, \quad x_2 = 0, \quad x_3 = t
 </section>
 <section id="tranformations-as-projections-onto-the-eigenbasis">
 <h2><span class="section-number">3.6.4. </span>Tranformations as Projections onto the Eigenbasis<a class="headerlink" href="#tranformations-as-projections-onto-the-eigenbasis" title="Permalink to this headline">#</a></h2>
-<p>Recall, we can represent a linear transformation <span class="math notranslate nohighlight">\(T({\bf x})\)</span> as the matrix vector product <span class="math notranslate nohighlight">\(\bf A x\)</span>. Let’s interpret the linear transformation <span class="math notranslate nohighlight">\(\bf A\)</span> using an eigendecomposition.</p>
+<p>Recall, we can represent a linear transformation <span class="math notranslate nohighlight">\(T({\bf x})\)</span> as the matrix vector product <span class="math notranslate nohighlight">\(\bf A x\)</span>. Let’s interpret the linear transformation <span class="math notranslate nohighlight">\(\bf A\)</span> using an eigendecomposition. This requires <span class="math notranslate nohighlight">\({\bf A}\)</span> to be a <a class="reference external" href="https://en.wikipedia.org/wiki/Diagonalizable_matrix">diagonalizable matrix</a>.</p>
 <div class="math notranslate nohighlight">
 \[
 \bf{A} = \sum_i \lambda_i {\bf w}_i {\bf w}_i^T
@@ -1642,9 +1642,25 @@ x_1 = \frac{-t}{2}, \quad x_2 = 0, \quad x_3 = t
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mf">0.5</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]])</span>
-
-<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a linear transformation</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mf">0.5</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A</span><span class="se">\n</span><span class="s2">=&quot;</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>First, let’s verify <span class="math notranslate nohighlight">\({\bf A}\)</span> is <a class="reference external" href="https://en.wikipedia.org/wiki/Normal_matrix">normal</a>, i.e., <span class="math notranslate nohighlight">\({\bf{A}}^T{\bf A} = {\bf A}{\bf{A}}^T\)</span>.  Recall, a normal matrix is also diagonalizable.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A.T@A=</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="nd">@A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A@A.T=</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="nd">@A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x =&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
@@ -1695,7 +1711,11 @@ x_1 = \frac{-t}{2}, \quad x_2 = 0, \quad x_3 = t
 <h2><span class="section-number">3.6.5. </span>SVD and Matrix Compression<a class="headerlink" href="#svd-and-matrix-compression" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import opencv</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Disable the interactive plots</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+
+<span class="c1"># Import opencv</span>
 <span class="kn">import</span> <span class="nn">cv2</span>
   
 <span class="c1"># Import a picture of Prof. Dowling in grayscale</span>
@@ -1703,7 +1723,7 @@ x_1 = \frac{-t}{2}, \quad x_2 = 0, \quad x_3 = t
     <span class="c1"># Download</span>
     <span class="o">!</span>wget <span class="s1">&#39;https://dowlinglab.nd.edu/assets/320333/dowling_alex_sq.jpg&#39;</span>
     <span class="n">image_location</span> <span class="o">=</span> <span class="s1">&#39;dowling_alex_sq.jpg&#39;</span>
-<span class="k">else</span>
+<span class="k">else</span><span class="p">:</span>
     <span class="c1"># Use local copy already in repo (no internet required)</span>
     <span class="n">image_location</span> <span class="o">=</span> <span class="s1">&#39;../../media/dowling_alex_sq.jpg&#39;</span>
 
