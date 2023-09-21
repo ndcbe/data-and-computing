@@ -9,7 +9,7 @@
 | Friday, September 8, 2023 | [](../notebooks/03/chapter4.ipynb) and [](../notebooks/03/chapter5.ipynb)  |
 | Friday, September 15, 2023 | [](../notebooks/03/chapter6.ipynb) and mini-project pseudocode |
 | Friday, September 22, 2023 | Mini-Project: Simulating Games of Chance |
-| Friday, September 29, 2023 | Problem Set 1: Systems of Equations and Taylor Series |
+| Friday, September 29, 2023 | [Problem Set 1: Linear Systems and Taylor Series](../notebooks/assignments/ProblemSet1_F23.ipynb) |
 | Friday, October 6, 2023 | Problem Set 2: Numeric Integration; Project Proposals |
 | Friday, October 27, 2023 | Problem Set 3: Pandas and Probability |
 | Friday, November 3, 2023 | Problem Set 4: Error Propagation |
