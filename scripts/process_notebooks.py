@@ -153,4 +153,18 @@ for fld in folders:
             
             # process the notebook!
             process_notebook(full_folder_name_original, full_folder_name_new, file, verbose=1)
-            
+
+"""
+Process assignments which are in a private repo
+"""
+# Loop over filenames
+full_folder_name_original = "../data-and-computing-private/notebooks/assignments/"
+full_folder_name_new = "./notebooks/assignments/"
+
+for file in sorted(os.listdir(full_folder_name_original)):
+    
+    # Check if file is a notebook using ending
+    if re.match("(.*?)\.ipynb$", file):
+        
+        # process the notebook!
+        process_notebook(full_folder_name_original, full_folder_name_new, file, verbose=1)
