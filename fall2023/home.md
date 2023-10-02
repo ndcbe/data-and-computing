@@ -1,4 +1,4 @@
-# CBE 60258 Information
+# Fall 2023
 
 ```{tableofcontents}
 ```
