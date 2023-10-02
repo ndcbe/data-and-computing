@@ -887,10 +887,8 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../contrib/Ficks-Law.html">
-     <strong>
-      Solving Fick’s second law using numerical integration
-     </strong>
+    <a class="reference internal" href="../contrib/Ficks_Law.html">
+     Solving Fick’s Second Law Using Numeric Integration
     </a>
    </li>
    <li class="toctree-l2">
@@ -1332,13 +1330,13 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Over the past few years the lottery has reached amazing heights, in part due to the decrease in the individual odds of any set of numbers winning from 1/175M to 1/292.2M which begain in the fall of 2015. The all-time record payout drawing was on 1/13/16 and was worth <span class="math notranslate nohighlight">\(\$1.586B\)</span> which, after taxes, was roughly <span class="math notranslate nohighlight">\(\$590M\)</span>. About <span class="math notranslate nohighlight">\(\$1B\)</span> in tickets were sold at <span class="math notranslate nohighlight">\(\$2\)</span> per ticket.</p>
 <p>What is the probability there will be exactly <span class="math notranslate nohighlight">\(k\)</span> winners for the lottery? If we assume that everyone choose to use the “computer option” to pick their numbers randomly, these probabilities can be computed from the binomial distribution.</p>
 <p>Here is the probability mass function (PMF) of the binomial distribution:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e8adbb6c-092b-49de-ad50-e5a5c082d4c3">
-<span class="eqno">(12)<a class="headerlink" href="#equation-e8adbb6c-092b-49de-ad50-e5a5c082d4c3" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-22b12c29-499b-4cb7-874e-9923af01a52c">
+<span class="eqno">(12)<a class="headerlink" href="#equation-22b12c29-499b-4cb7-874e-9923af01a52c" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 x(p,k,N) = \binom{N}{k} p^{k}(1-p)^{N-k}
 \end{equation}\]</div>
 <p>It uses the binomial coefficient, which is another name for combinations:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8665dcc4-1d7e-4e79-aa69-0ffeda2777de">
-<span class="eqno">(13)<a class="headerlink" href="#equation-8665dcc4-1d7e-4e79-aa69-0ffeda2777de" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-56bcdc02-639e-43a9-9be6-348cc296b539">
+<span class="eqno">(13)<a class="headerlink" href="#equation-56bcdc02-639e-43a9-9be6-348cc296b539" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \binom{N}{k} = \frac{N!}{k!(N-k)!} \label{eq:2}
 \end{equation}\]</div>
 <p><span class="math notranslate nohighlight">\(N\)</span> is the number of events (e.g., coin flips), <span class="math notranslate nohighlight">\(k\)</span> is the number of “successes” (e.g., heads) and <span class="math notranslate nohighlight">\(p\)</span> is the probability of success for a single event (e.g., heads for a single coin flip).</p>
@@ -1385,8 +1383,8 @@ x(p,k,N) = \binom{N}{k} p^{k}(1-p)^{N-k}
 <h3>1a. Naive Calculation<a class="headerlink" href="#a-naive-calculation" title="Permalink to this headline">¶</a></h3>
 <p>Let’s start with something simple: calculate the probability of exactly 2 winners.</p>
 <p>We will first start with computing the binomial coefficient.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e8e659ee-8ba6-48f0-b7bd-284c8af28131">
-<span class="eqno">(14)<a class="headerlink" href="#equation-e8e659ee-8ba6-48f0-b7bd-284c8af28131" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-cc24a10b-5f27-4905-b45d-f4985e6be956">
+<span class="eqno">(14)<a class="headerlink" href="#equation-cc24a10b-5f27-4905-b45d-f4985e6be956" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \binom{N}{k} = \frac{N!}{k!(N-k)!} 
 \end{equation}\]</div>
 <p>Let’s divide this calculation into three pieces.</p>
@@ -1544,13 +1542,13 @@ n! \approx \sqrt{2 \pi n} \left( \frac{n}{e} \right)^n
 <h3>1b. First Approximation<a class="headerlink" href="#b-first-approximation" title="Permalink to this headline">¶</a></h3>
 <p>Alright, we need to new strategy to approximate the binomial coefficient. We will now build an asymptotic approximations. You’ll see this idea again in Transport.</p>
 <p>A mathematician would write:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2bfeebd4-213a-4ce0-b012-c5c57b74e4eb">
-<span class="eqno">(15)<a class="headerlink" href="#equation-2bfeebd4-213a-4ce0-b012-c5c57b74e4eb" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-69923997-d2fc-4747-aaee-0531e3e5b455">
+<span class="eqno">(15)<a class="headerlink" href="#equation-69923997-d2fc-4747-aaee-0531e3e5b455" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 N &gt;&gt; k \implies N - k \approx N
 \end{equation}\]</div>
 <p>Let’s take a minute to unpack this notation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-07b922ba-974a-48a9-ae28-94885ec806f5">
-<span class="eqno">(16)<a class="headerlink" href="#equation-07b922ba-974a-48a9-ae28-94885ec806f5" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-55af55ad-15a1-44b9-a97e-9cef4d8b770a">
+<span class="eqno">(16)<a class="headerlink" href="#equation-55af55ad-15a1-44b9-a97e-9cef4d8b770a" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \underbrace{N}_{\mathrm{lottery \ participants}} \qquad
 \underbrace{&gt;&gt;}_{\mathrm{much \ greater \ than}} \qquad
 \underbrace{k}_{\mathrm{lottery \ winners}} \qquad
@@ -1560,8 +1558,8 @@ N - k
 N
 \end{equation}\]</div>
 <p>This allows us to make the following simplifications:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e0067708-e28b-4d18-933d-42fca6e5801a">
-<span class="eqno">(17)<a class="headerlink" href="#equation-e0067708-e28b-4d18-933d-42fca6e5801a" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-4d561617-5f83-43d4-9121-a056cbb60c5e">
+<span class="eqno">(17)<a class="headerlink" href="#equation-4d561617-5f83-43d4-9121-a056cbb60c5e" title="Permalink to this equation">¶</a></span>\[\begin{align}
 (N-k)! &amp;= (N-k) \times (N-k-1) \times ... \times 1 \\
 &amp; = (N-k) \times (N-k-1)  \times ... \times 1 \times
 \left(\frac{N \times (N-1)  \times ... \times (N-k+1)}{N \times (N-1)  \times ... \times (N-k+1)} \right)\\
@@ -1569,13 +1567,13 @@ N
 {N \times (N-1) \times ... \times (N -k + 1)} 
 \end{align}\]</div>
 <p>Notice that the numerator above is the definition of <span class="math notranslate nohighlight">\(N!\)</span>. We can use <span class="math notranslate nohighlight">\(N-k \approx N\)</span> to simplify the demoniation to <span class="math notranslate nohighlight">\(N\)</span> multiplied by itself <span class="math notranslate nohighlight">\(k\)</span> times. Thus we have:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-79106f9b-0093-4adc-92d2-0ff4143bd4c8">
-<span class="eqno">(18)<a class="headerlink" href="#equation-79106f9b-0093-4adc-92d2-0ff4143bd4c8" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-36f510c0-a080-41a5-b471-5f5361b5561b">
+<span class="eqno">(18)<a class="headerlink" href="#equation-36f510c0-a080-41a5-b471-5f5361b5561b" title="Permalink to this equation">¶</a></span>\[\begin{align}
 (N-k)! \approx \frac{N!}{N^{k}} 
 \end{align}\]</div>
 <p><strong>Instructions:</strong> Starting with the definition for the binomial coefficient, show that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-962d6400-f935-4101-ba40-a2413ed663c3">
-<span class="eqno">(19)<a class="headerlink" href="#equation-962d6400-f935-4101-ba40-a2413ed663c3" title="Permalink to this equation">¶</a></span>\[\begin{equation} \label{finapp1}
+<div class="amsmath math notranslate nohighlight" id="equation-14bccf6d-fbd5-4dfc-87c5-71ff4ce14c66">
+<span class="eqno">(19)<a class="headerlink" href="#equation-14bccf6d-fbd5-4dfc-87c5-71ff4ce14c66" title="Permalink to this equation">¶</a></span>\[\begin{equation} \label{finapp1}
 \binom{N}{k} \approx \frac{N^k}{k!}
 \end{equation}\]</div>
 <p>In other words, write out all of the mathematical steps to go from <span class="math notranslate nohighlight">\(\binom{N}{k}\)</span> to <span class="math notranslate nohighlight">\(\frac{N^k}{k!}\)</span>, similar to a proof. Submit your written work via <strong>Gradescope</strong>.</p>
@@ -1583,18 +1581,18 @@ N
 <div class="section" id="c-second-approximation">
 <h3>1c. Second Approximation<a class="headerlink" href="#c-second-approximation" title="Permalink to this headline">¶</a></h3>
 <p>Evaluation of <span class="math notranslate nohighlight">\((1-p)^{N-k}\)</span> can also be problematic. Construct a mathematical argument (i.e., proof) to establish that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3165c2a5-dbca-4a2a-bbc5-a56518c7c92b">
-<span class="eqno">(20)<a class="headerlink" href="#equation-3165c2a5-dbca-4a2a-bbc5-a56518c7c92b" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0889de0c-b8f1-40e5-b4d9-bb3ec7e3862a">
+<span class="eqno">(20)<a class="headerlink" href="#equation-0889de0c-b8f1-40e5-b4d9-bb3ec7e3862a" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 (1-p)^{N-k} \approx e^{-Np}
 \end{equation}\]</div>
 <p><em>Hint</em>: Consider the following Taylor series expansion:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-21806a43-051c-4228-88d1-4040444fbfac">
-<span class="eqno">(21)<a class="headerlink" href="#equation-21806a43-051c-4228-88d1-4040444fbfac" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-efb74fcc-acb5-4f90-a2eb-38362324f333">
+<span class="eqno">(21)<a class="headerlink" href="#equation-efb74fcc-acb5-4f90-a2eb-38362324f333" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \log_e (1 - p) = -p - \frac{p^2}{2} - \frac{p^3}{3} - ...
 \end{equation}\]</div>
 <p>and truncate as follows:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-19ad1800-4f38-4aaf-9871-56629ffb4dc6">
-<span class="eqno">(22)<a class="headerlink" href="#equation-19ad1800-4f38-4aaf-9871-56629ffb4dc6" title="Permalink to this equation">¶</a></span>\[\begin{equation} \label{tsep}
+<div class="amsmath math notranslate nohighlight" id="equation-39e6e02b-4e67-4377-8d84-55273bc1c986">
+<span class="eqno">(22)<a class="headerlink" href="#equation-39e6e02b-4e67-4377-8d84-55273bc1c986" title="Permalink to this equation">¶</a></span>\[\begin{equation} \label{tsep}
 \log_e (1 - p) \approx -p
 \end{equation}\]</div>
 <p>The higher order terms (<span class="math notranslate nohighlight">\(p^2\)</span>, <span class="math notranslate nohighlight">\(p^3\)</span>, …) are incredibly small and can be ignored with negligible consequence.</p>
@@ -1809,8 +1807,8 @@ N
 <div class="section" id="a-return-rate">
 <h3>3a. Return Rate<a class="headerlink" href="#a-return-rate" title="Permalink to this headline">¶</a></h3>
 <p>You are given a Stock_Data.csv file. Using the stock data, calculate the 1-day return rate:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c7bc0d1d-2760-4b00-8a73-80435a960f9a">
-<span class="eqno">(23)<a class="headerlink" href="#equation-c7bc0d1d-2760-4b00-8a73-80435a960f9a" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b23fce5a-7f6f-4ba1-815c-771933dbab6c">
+<span class="eqno">(23)<a class="headerlink" href="#equation-b23fce5a-7f6f-4ba1-815c-771933dbab6c" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 	r_{t,i} = \frac{p_{t+1,i} - p_{t,i}}{p_{t,i}}
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(p_{t+1,i}\)</span> and <span class="math notranslate nohighlight">\(p_{t,i}\)</span> are the <em>Adjusted Closing Prices</em> at the end of days <span class="math notranslate nohighlight">\(t+1\)</span> and <span class="math notranslate nohighlight">\(t\)</span>, respectively, for stock <span class="math notranslate nohighlight">\(i\)</span>. These results are stored in matrix <code class="docutils literal notranslate"><span class="pre">R</span></code>. <em>Hint</em>: Use Pandas.</p>
@@ -1896,8 +1894,8 @@ N
 <div class="section" id="d-markowitz-mean-variance-portfolio-model">
 <h3>3d. Markowitz Mean/Variance Portfolio Model<a class="headerlink" href="#d-markowitz-mean-variance-portfolio-model" title="Permalink to this headline">¶</a></h3>
 <p>The Markowitz mean/variance model, shown below, computes the optimal allocation of funds in a portfolio:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f0ac31c9-dafd-4df7-92fa-4947603f331f">
-<span class="eqno">(24)<a class="headerlink" href="#equation-f0ac31c9-dafd-4df7-92fa-4947603f331f" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-ae92e057-6673-4f49-872f-27a6e4aae828">
+<span class="eqno">(24)<a class="headerlink" href="#equation-ae92e057-6673-4f49-872f-27a6e4aae828" title="Permalink to this equation">¶</a></span>\[\begin{align}
 		\min_{{x} \geq {0}} \qquad &amp; z:= {x}^T \cdot {\Sigma_r} \cdot {x} \\
 		\text{s.t.} \qquad &amp; {\bar{r}}^T \cdot {x} \geq \rho \\
 		 &amp; \sum_{i =1}^N x_i = 1 
