@@ -4,11 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Estimating the Entrance Length of Channel Flow &#8212; Data and Computing for Chemical Engineers</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet">
-  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,20 +20,16 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -39,12 +37,13 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -55,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Non-Isothermal Packed Bed Reactor" href="Non-Isothermal-PBR.html" />
+    <link rel="next" title="Solving Fick’s Second Law Using Numeric Integration" href="Ficks_Law.html" />
     <link rel="prev" title="Contributed Examples" href="contribute.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -64,7 +63,21 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -73,9 +86,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -93,14 +107,15 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../intro.html">
-   Data and Computing for Engineers
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Data and Computing for Engineers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Python Programming
  </span>
@@ -882,11 +897,6 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="Non-Isothermal-PBR.html">
-     Non-Isothermal Packed Bed Reactor
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="Ficks_Law.html">
      Solving Fick’s Second Law Using Numeric Integration
     </a>
@@ -931,112 +941,227 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/contrib/Biotransport-Entrance-Length.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/ndcbe/data-and-computing"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/contrib/Biotransport-Entrance-Length.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/contrib/Biotransport-Entrance-Length.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/contrib/Biotransport-Entrance-Length.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/contrib/Biotransport-Entrance-Length.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/contrib/Biotransport-Entrance-Length.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ndcbe/data-and-computing"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/contrib/Biotransport-Entrance-Length.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/notebooks/contrib/Biotransport-Entrance-Length.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#learning-objectives">
    Learning Objectives
@@ -1118,12 +1243,11 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Estimating the Entrance Length of Channel Flow</h1>
@@ -1221,25 +1345,26 @@ const thebe_selector_output = ".output, .cell_output"
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="estimating-the-entrance-length-of-channel-flow">
-<h1>Estimating the Entrance Length of Channel Flow<a class="headerlink" href="#estimating-the-entrance-length-of-channel-flow" title="Permalink to this headline">¶</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="estimating-the-entrance-length-of-channel-flow">
+<h1>Estimating the Entrance Length of Channel Flow<a class="headerlink" href="#estimating-the-entrance-length-of-channel-flow" title="Permalink to this headline">#</a></h1>
 <p><strong>Prepared by</strong>: Stephen Cini (<a class="reference external" href="mailto:scini&#37;&#52;&#48;nd&#46;edu">scini<span>&#64;</span>nd<span>&#46;</span>edu</a>) and David Gazzo (<a class="reference external" href="mailto:dgazzo&#37;&#52;&#48;nd&#46;edu">dgazzo<span>&#64;</span>nd<span>&#46;</span>edu</a>)</p>
 <p><strong>Reference</strong>: Problem 4.5, pg. 210, Transport Phenomena in Biological Systems by Truskey et al. (ISBN 978-0-13-156988-1)</p>
 <p><strong>Intended Audience</strong>: This problem is intended for Chemical and Biomolecular Engineering juniors and seniors from the University of Notre Dame who are either enrolled in or have taken Transport.</p>
-<div class="section" id="learning-objectives">
-<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">¶</a></h2>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">#</a></h2>
 <p>After studying this notebook, completing the activities, and asking questions in class, you should be able to:</p>
 <ul class="simple">
 <li><p>Apply integration techniques to ordinary differential equations using Python.</p></li>
 <li><p>Properly graph and visualize data using <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>.</p></li>
 <li><p>Apply integration techniques to realistic scenarios using Python tools such as <code class="docutils literal notranslate"><span class="pre">scipy.integrate</span></code>.</p></li>
 </ul>
-</div>
-<div class="section" id="coding-resources">
-<h2>Coding Resources<a class="headerlink" href="#coding-resources" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="coding-resources">
+<h2>Coding Resources<a class="headerlink" href="#coding-resources" title="Permalink to this headline">#</a></h2>
 <p>Relevant Modules in Class Website:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/01/Functions-and-Scope.html">Functions and Scope</a></p></li>
@@ -1258,9 +1383,9 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="problem-statement">
-<h2>Problem Statement:<a class="headerlink" href="#problem-statement" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="problem-statement">
+<h2>Problem Statement:<a class="headerlink" href="#problem-statement" title="Permalink to this headline">#</a></h2>
 <div class="admonition seealso">
 <p class="admonition-title"><b>Homework Problem</b></p>
 <p>Complete the following problem outside of class to practice the concepts discussed.</p>
@@ -1268,42 +1393,42 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Developing flow within a channel can be examined with boundary layer theory. Consider a rectangular channel of height <span class="math notranslate nohighlight">\(H\)</span> and width <span class="math notranslate nohighlight">\(w\)</span> such that <span class="math notranslate nohighlight">\(w &gt;&gt; H\)</span>.</p>
 <p><img alt="" src="https://ndcbe.github.io/data-and-computing/_images/FlowDiagram.png" /></p>
 <p>The velocity field in the entrance depends upon the x and y directions. As shown in the figure below, a boundary layer develops as flow enters the channel: Once the boundary layer has grown to equal H/2, the flow is fully developed.</p>
-</div>
-<div class="section" id="estimating-entrance-length">
-<h2>1. Estimating Entrance Length<a class="headerlink" href="#estimating-entrance-length" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="estimating-entrance-length">
+<h2>1. Estimating Entrance Length<a class="headerlink" href="#estimating-entrance-length" title="Permalink to this headline">#</a></h2>
 <p>As a first approximation, assume that the boundary layer is described by the results for flow over a flat plate. That is, the development of the boundary layer <span class="math notranslate nohighlight">\(δ\)</span> is given by</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9dd63b1a-1b4e-49e9-8bf2-bef210966a42">
-<span class="eqno">(25)<a class="headerlink" href="#equation-9dd63b1a-1b4e-49e9-8bf2-bef210966a42" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-81a43ea3-6b2d-457a-ae5c-0b204707ea05">
+<span class="eqno">(25)<a class="headerlink" href="#equation-81a43ea3-6b2d-457a-ae5c-0b204707ea05" title="Permalink to this equation">#</a></span>\[\begin{equation}
 δ(x)=5.00xRe_x^{-1/2}
 \end{equation}\]</div>
 <p>where,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4d754419-522c-4288-a050-d18b15f28d24">
-<span class="eqno">(26)<a class="headerlink" href="#equation-4d754419-522c-4288-a050-d18b15f28d24" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-22c0878b-5861-45de-bbbd-25d7953bfb94">
+<span class="eqno">(26)<a class="headerlink" href="#equation-22c0878b-5861-45de-bbbd-25d7953bfb94" title="Permalink to this equation">#</a></span>\[\begin{equation}
  Re_x=ρUx/μ
 \end{equation}\]</div>
 <p>Develop an expression for the entrance length in terms of the channels Reynolds number, <span class="math notranslate nohighlight">\(Re_x=2ρUH/μ = 2ρQ/wμ\)</span>, where <span class="math notranslate nohighlight">\(〈v〉\)</span> is the average velocity in the channel.</p>
 <p>Show that the entrance length <span class="math notranslate nohighlight">\(Le\)</span> is equal to <span class="math notranslate nohighlight">\(0.005ReH\)</span>.</p>
 <p>Submit your answer and written work via <strong>Gradescope</strong>.</p>
-</div>
-<div class="section" id="more-accurate-rigorous-method">
-<h2>2. More Accurate/Rigorous Method<a class="headerlink" href="#more-accurate-rigorous-method" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="a-normalize-the-expression-on-paper">
-<h3>2a. Normalize the expression on paper<a class="headerlink" href="#a-normalize-the-expression-on-paper" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="more-accurate-rigorous-method">
+<h2>2. More Accurate/Rigorous Method<a class="headerlink" href="#more-accurate-rigorous-method" title="Permalink to this headline">#</a></h2>
+<section id="a-normalize-the-expression-on-paper">
+<h3>2a. Normalize the expression on paper<a class="headerlink" href="#a-normalize-the-expression-on-paper" title="Permalink to this headline">#</a></h3>
 <p>The analysis in Question 1 assumes that <span class="math notranslate nohighlight">\(U(x) = U_o = 〈v〉\)</span>. But in fact, the free-stream velocity changes as the boundary layer grows in the channel. Therefore, assuming a linear velocity profile, <span class="math notranslate nohighlight">\(v_x=\frac{U_xy}{δ}\)</span>, in the boundary layer, and utilizing the von Karman momentum integral equation,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9ea8deb9-386b-4cfd-ad55-909f9f73319a">
-<span class="eqno">(27)<a class="headerlink" href="#equation-9ea8deb9-386b-4cfd-ad55-909f9f73319a" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f483f877-238a-4267-a77f-6a9953832136">
+<span class="eqno">(27)<a class="headerlink" href="#equation-f483f877-238a-4267-a77f-6a9953832136" title="Permalink to this equation">#</a></span>\[\begin{equation}
 τ_w=ρ \frac{∂}{∂x} ∫_0^∞v_x (U-v_x )dy+ρ\frac{∂U}{∂x} ∫_0^∞(U-v_x )dy
 \end{equation}\]</div>
 <p>and the fact that the flow rate <span class="math notranslate nohighlight">\(Q\)</span> is constant, the following expression for the growth of the boundary layer can be derived:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cf56ec60-a753-4985-9448-2d0ac6889a0e">
-<span class="eqno">(28)<a class="headerlink" href="#equation-cf56ec60-a753-4985-9448-2d0ac6889a0e" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d00bdcab-56f1-48e2-baed-cc295263d721">
+<span class="eqno">(28)<a class="headerlink" href="#equation-d00bdcab-56f1-48e2-baed-cc295263d721" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \frac{dδ_{(x)}}{dx}=\frac{6μW}{ρδ_{(x)}Q}\frac{[H-δ_{(x)}]^2}{H+4δ_{(x)}}
 \end{equation}\]</div>
 <p>Manipulate this expression so that it can be integrated numerically. Hint: normalize it and keep symmetry in mind.</p>
 <p>Submit your answer and written work via <strong>Gradescope</strong>.</p>
-</div>
-<div class="section" id="b-numerically-integrate-the-normalized-expression">
-<h3>2b. Numerically integrate the normalized expression<a class="headerlink" href="#b-numerically-integrate-the-normalized-expression" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="b-numerically-integrate-the-normalized-expression">
+<h3>2b. Numerically integrate the normalized expression<a class="headerlink" href="#b-numerically-integrate-the-normalized-expression" title="Permalink to this headline">#</a></h3>
 <p>Using the normalized form of the differential equation, use <code class="docutils literal notranslate"><span class="pre">scipy.integrate.solve_ivp</span></code> to numerically integrate the expression and find the value of x where <span class="math notranslate nohighlight">\(δ\)</span> is fully developed.</p>
 <p>For more information on how to use <code class="docutils literal notranslate"><span class="pre">scipy.integrate</span></code>, click <a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/07/Systems-of-Differential-Equations-and-Scipy.html#scipy">here</a> to go to the relevant section of the class website.</p>
 <div class="cell docutils container">
@@ -1337,9 +1462,9 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="c-plot-the-results">
-<h3>2c. Plot the results<a class="headerlink" href="#c-plot-the-results" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="c-plot-the-results">
+<h3>2c. Plot the results<a class="headerlink" href="#c-plot-the-results" title="Permalink to this headline">#</a></h3>
 <p>Plot the resulting data to show the behavior of the integrated expression.</p>
 <p>For more information on how to use <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> to make publication quality plots, click <a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/01/Publication-Quality-Figures.html#preparing-publication-quality-figures-in-python">here</a> to go to the relevant section of the class website.</p>
 <div class="cell docutils container">
@@ -1363,9 +1488,9 @@ const thebe_selector_output = ".output, .cell_output"
 <img alt="../../_images/Biotransport-Entrance-Length_18_0.png" src="../../_images/Biotransport-Entrance-Length_18_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="d-define-the-entrance-length">
-<h3>2d. Define the entrance length<a class="headerlink" href="#d-define-the-entrance-length" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="d-define-the-entrance-length">
+<h3>2d. Define the entrance length<a class="headerlink" href="#d-define-the-entrance-length" title="Permalink to this headline">#</a></h3>
 <p>At what value of x does the boundary layer become fully developed?</p>
 <p>Hint: What is the coordinate where <span class="math notranslate nohighlight">\(δ\)</span> = 1?</p>
 <p>Store your solution as a numpy array labelled <code class="docutils literal notranslate"><span class="pre">Le</span></code>.</p>
@@ -1386,15 +1511,15 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="e-define-an-equation-for-le-using-new-value">
-<h3>2e. Define an equation for Le using new value<a class="headerlink" href="#e-define-an-equation-for-le-using-new-value" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="e-define-an-equation-for-le-using-new-value">
+<h3>2e. Define an equation for Le using new value<a class="headerlink" href="#e-define-an-equation-for-le-using-new-value" title="Permalink to this headline">#</a></h3>
 <p>Using the obtained value of <code class="docutils literal notranslate"><span class="pre">Le</span></code>, make a general expression for the entrance length similar to the expression derived in part 1.</p>
 <p><em>Hint</em>: The value obtained for Le is dimensionless.</p>
 <p>Submit your answer and written work via <strong>Gradescope</strong>.</p>
-</div>
-<div class="section" id="f-comparing-integration-methods">
-<h3>2f. Comparing integration methods<a class="headerlink" href="#f-comparing-integration-methods" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="f-comparing-integration-methods">
+<h3>2f. Comparing integration methods<a class="headerlink" href="#f-comparing-integration-methods" title="Permalink to this headline">#</a></h3>
 <p>Compare your previous results using the <code class="docutils literal notranslate"><span class="pre">RK45</span></code> integration method with alternative methods.</p>
 <p>Define your equation as <code class="docutils literal notranslate"><span class="pre">methods</span></code>.</p>
 <p>For more information on other integration methods for <code class="docutils literal notranslate"><span class="pre">scipy.integrate</span></code>, click <a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/07/Systems-of-Differential-Equations-and-Scipy.html">here</a> to go to the relevant section of the class website. Further detail into integration methods for <code class="docutils literal notranslate"><span class="pre">scipy.integrate</span></code>, is also provided in the documentation <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/integrate.html">here</a>.</p>
@@ -1436,22 +1561,22 @@ Le (x @ δ*=1) = 0.12694710642481696
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="discussion-and-analysis">
-<h2>3. Discussion and Analysis<a class="headerlink" href="#discussion-and-analysis" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="a-explain-why-the-equation-derived-in-question-2e-differs-from-the-one-obtained-in-question-1">
-<h3>3a.  Explain why the equation derived in Question 2e differs from the one obtained in Question 1.<a class="headerlink" href="#a-explain-why-the-equation-derived-in-question-2e-differs-from-the-one-obtained-in-question-1" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="discussion-and-analysis">
+<h2>3. Discussion and Analysis<a class="headerlink" href="#discussion-and-analysis" title="Permalink to this headline">#</a></h2>
+<section id="a-explain-why-the-equation-derived-in-question-2e-differs-from-the-one-obtained-in-question-1">
+<h3>3a.  Explain why the equation derived in Question 2e differs from the one obtained in Question 1.<a class="headerlink" href="#a-explain-why-the-equation-derived-in-question-2e-differs-from-the-one-obtained-in-question-1" title="Permalink to this headline">#</a></h3>
 <p><strong>Discuss</strong> in 1-3 sentences.</p>
 <p><strong>Answer</strong>:</p>
-</div>
-<div class="section" id="b-describe-the-integration-methods-used-in-2f-and-how-they-differ-in-performance-was-the-best-method-used-originally-in-2b-why-or-why-not">
-<h3>3b.  Describe the integration methods used in 2f and how they differ in performance. Was the best method used originally in 2b? Why or why not?<a class="headerlink" href="#b-describe-the-integration-methods-used-in-2f-and-how-they-differ-in-performance-was-the-best-method-used-originally-in-2b-why-or-why-not" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="b-describe-the-integration-methods-used-in-2f-and-how-they-differ-in-performance-was-the-best-method-used-originally-in-2b-why-or-why-not">
+<h3>3b.  Describe the integration methods used in 2f and how they differ in performance. Was the best method used originally in 2b? Why or why not?<a class="headerlink" href="#b-describe-the-integration-methods-used-in-2f-and-how-they-differ-in-performance-was-the-best-method-used-originally-in-2b-why-or-why-not" title="Permalink to this headline">#</a></h3>
 <p><strong>Discuss</strong> in 3-5 sentences.</p>
 <p><strong>Answer</strong>:</p>
-</div>
-<div class="section" id="c-a-reynolds-number-of-1-was-used-as-a-starting-point-to-simulate-laminar-flow-if-the-reynolds-number-were-increased-what-would-happen-to-the-entrance-length-does-it-get-larger-or-smaller-why-does-this-occur">
-<h3>3c. 	A Reynolds number of 1 was used as a starting point to simulate laminar flow. If the Reynolds number were increased, what would happen to the entrance length? Does it get larger or smaller? Why does this occur?<a class="headerlink" href="#c-a-reynolds-number-of-1-was-used-as-a-starting-point-to-simulate-laminar-flow-if-the-reynolds-number-were-increased-what-would-happen-to-the-entrance-length-does-it-get-larger-or-smaller-why-does-this-occur" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="c-a-reynolds-number-of-1-was-used-as-a-starting-point-to-simulate-laminar-flow-if-the-reynolds-number-were-increased-what-would-happen-to-the-entrance-length-does-it-get-larger-or-smaller-why-does-this-occur">
+<h3>3c. 	A Reynolds number of 1 was used as a starting point to simulate laminar flow. If the Reynolds number were increased, what would happen to the entrance length? Does it get larger or smaller? Why does this occur?<a class="headerlink" href="#c-a-reynolds-number-of-1-was-used-as-a-starting-point-to-simulate-laminar-flow-if-the-reynolds-number-were-increased-what-would-happen-to-the-entrance-length-does-it-get-larger-or-smaller-why-does-this-occur" title="Permalink to this headline">#</a></h3>
 <p><strong>Explain</strong> your reasoning using the derived equations for <code class="docutils literal notranslate"><span class="pre">Le</span></code> and the nature of turbulence.
 <strong>Discuss</strong> in 3-5 sentences.</p>
 <p><strong>Answer</strong>:</p>
@@ -1503,9 +1628,9 @@ Le (x @ δ*=1) for Re = 5000 = 634.7565284345559
 <img alt="../../_images/Biotransport-Entrance-Length_30_1.png" src="../../_images/Biotransport-Entrance-Length_30_1.png" />
 </div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1529,9 +1654,11 @@ Le (x @ δ*=1) for Re = 5000 = 634.7565284345559
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="contribute.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1539,32 +1666,36 @@ Le (x @ δ*=1) for Re = 5000 = 634.7565284345559
             <p class="prev-next-title">Contributed Examples</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="Non-Isothermal-PBR.html" title="next page">
+    <a class='right-next' id="next-link" href="Ficks_Law.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Non-Isothermal Packed Bed Reactor</p>
+        <p class="prev-next-title">Solving Fick’s Second Law Using Numeric Integration</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
     
-      By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>

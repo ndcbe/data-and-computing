@@ -4,11 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Stochastic Simulation of Chemical Reactions &#8212; Data and Computing for Chemical Engineers</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet">
-  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,20 +20,16 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -39,12 +37,13 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -64,7 +63,21 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -73,9 +86,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -93,14 +107,15 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../intro.html">
-   Data and Computing for Engineers
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Data and Computing for Engineers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Python Programming
  </span>
@@ -882,11 +897,6 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="Non-Isothermal-PBR.html">
-     Non-Isothermal Packed Bed Reactor
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="Ficks_Law.html">
      Solving Fick’s Second Law Using Numeric Integration
     </a>
@@ -931,112 +941,227 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/contrib/Stochastic-Kinetics.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/ndcbe/data-and-computing"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/contrib/Stochastic-Kinetics.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/contrib/Stochastic-Kinetics.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/contrib/Stochastic-Kinetics.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/contrib/Stochastic-Kinetics.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/contrib/Stochastic-Kinetics.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ndcbe/data-and-computing"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/contrib/Stochastic-Kinetics.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/notebooks/contrib/Stochastic-Kinetics.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#learning-objectives">
    Learning Objectives
@@ -1094,12 +1219,11 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Stochastic Simulation of Chemical Reactions</h1>
@@ -1173,25 +1297,26 @@ const thebe_selector_output = ".output, .cell_output"
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="stochastic-simulation-of-chemical-reactions">
-<h1>Stochastic Simulation of Chemical Reactions<a class="headerlink" href="#stochastic-simulation-of-chemical-reactions" title="Permalink to this headline">¶</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="stochastic-simulation-of-chemical-reactions">
+<h1>Stochastic Simulation of Chemical Reactions<a class="headerlink" href="#stochastic-simulation-of-chemical-reactions" title="Permalink to this headline">#</a></h1>
 <p><strong>Prepared by:</strong> Raghav Saxena (<a class="reference external" href="mailto:rsaxena&#37;&#52;&#48;nd&#46;edu">rsaxena<span>&#64;</span>nd<span>&#46;</span>edu</a>) and Sarah Nano (<a class="reference external" href="mailto:snano&#37;&#52;&#48;nd&#46;edu">snano<span>&#64;</span>nd<span>&#46;</span>edu</a>)</p>
 <p><strong>Reference:</strong> <a class="reference external" href="https://sites.engineering.ucsb.edu/~jbraw/chemreacfun/">Chemical Reactor Analysis and Design Fundamentals by Rawlings et al. (Nob Hill Pub, LLC, 2002)</a></p>
 <p><strong>Intended Audience:</strong> This problem is intended for Chemical and Biomolecular Engineering juniors and seniors from the University of Notre Dame who are either enrolled in or have taken Reaction Engineering.</p>
-<div class="section" id="learning-objectives">
-<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">¶</a></h2>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">#</a></h2>
 <p>After studying this notebook, completing the activities, and asking questions in class, you should be able to:</p>
 <ul class="simple">
 <li><p>Understand stochastic simulations and how to use them to model chemical reactions.</p></li>
 <li><p>Highlight similarities and differences between stochastic and deterministic rate models for chemical reactions.</p></li>
 <li><p>Properly graph and visualize data using matplotlib.</p></li>
 </ul>
-</div>
-<div class="section" id="coding-resources">
-<h2>Coding Resources<a class="headerlink" href="#coding-resources" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="coding-resources">
+<h2>Coding Resources<a class="headerlink" href="#coding-resources" title="Permalink to this headline">#</a></h2>
 <p>Relevant Modules in Class Website:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/01/Functions-and-Scope.html">Functions and Scope</a></p></li>
@@ -1206,9 +1331,9 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="introduction">
-<h2>1. Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="introduction">
+<h2>1. Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
 <p>Kinetic reactions are mostly modeled using deterministic rate laws, which involve solving nonlinear differential equations. Deterministic models work excellently with large systems involving many thousands of atoms.</p>
 <p>However, in some cases, we might want to model systems with only a few hundred atoms, such as when modeling reactions at an interface or a catalyst surface. For such systems, the random behavior of the molecules becomes essential. Such systems can be modeled using random simulation techniques (also called kinetic monte carlo) which we explain later below in detail.</p>
 <p><strong>The objectives of this excercise are:</strong></p>
@@ -1218,28 +1343,28 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>Explore effect of number of molecules and rate constant on reaction profiles from Gillespie algorithm.</p></li>
 <li><p>Discuss similarities and differences between the rate law model and the random simulation model.</p></li>
 </ol>
-</div>
-<div class="section" id="a-random-simulation-gillespie-algorithm">
-<h2>1a. Random Simulation - Gillespie Algorithm<a class="headerlink" href="#a-random-simulation-gillespie-algorithm" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="a-random-simulation-gillespie-algorithm">
+<h2>1a. Random Simulation - Gillespie Algorithm<a class="headerlink" href="#a-random-simulation-gillespie-algorithm" title="Permalink to this headline">#</a></h2>
 <p>In a random simulation, one can directly capture the random nature of molecules by using random molecular motion and probability of collision as the basis of reaction rates.</p>
 <p>Through this exercise, we will highlight similarities and differences between a random simulation model and a deterministic model.</p>
 <p>We will use the following two reaction constant volume batch system for the purpose of this excercise.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-19c717e4-e0b0-485c-9cf5-05cd634eb6bb">
-<span class="eqno">(66)<a class="headerlink" href="#equation-19c717e4-e0b0-485c-9cf5-05cd634eb6bb" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-380db6a9-85c7-4f9d-b7ac-8ddb2c46fbec">
+<span class="eqno">(33)<a class="headerlink" href="#equation-380db6a9-85c7-4f9d-b7ac-8ddb2c46fbec" title="Permalink to this equation">#</a></span>\[\begin{equation}
 A \xrightarrow{k_1} B
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-8efe32f9-5d92-44c6-bb83-23b955892343">
-<span class="eqno">(67)<a class="headerlink" href="#equation-8efe32f9-5d92-44c6-bb83-23b955892343" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0b016f01-dfad-44e9-9a68-34ea9fb2dad2">
+<span class="eqno">(34)<a class="headerlink" href="#equation-0b016f01-dfad-44e9-9a68-34ea9fb2dad2" title="Permalink to this equation">#</a></span>\[\begin{equation}
 B \xrightarrow{k_2} C
 \end{equation}\]</div>
 <p>For stochastic (random) modeling, the systems are generally small and consist of about a few hundred molecules. Thus, we will model the system using the exact number of molecules instead of using concentrations. We will assume that these reactions are actual molecular events, i.e., a molecule of A converts to B in the first reaction, and a molecule of B converts to C in the second reaction.</p>
 <p>Which reaction takes place is governed by their probabilities; this is proportional to the rate constant and the number of molecules as shown below:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8d9a514b-c8f0-45a8-b4b0-92b0345a070d">
-<span class="eqno">(68)<a class="headerlink" href="#equation-8d9a514b-c8f0-45a8-b4b0-92b0345a070d" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1f0d6281-6114-4587-8d26-3e1d3f1fa9a7">
+<span class="eqno">(35)<a class="headerlink" href="#equation-1f0d6281-6114-4587-8d26-3e1d3f1fa9a7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 r1 = k_1x_a
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-79b475d0-cd41-4c6d-b017-91cd5be88bba">
-<span class="eqno">(69)<a class="headerlink" href="#equation-79b475d0-cd41-4c6d-b017-91cd5be88bba" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b635eb52-fe17-4224-9ba8-d7ea4538d3c8">
+<span class="eqno">(36)<a class="headerlink" href="#equation-b635eb52-fe17-4224-9ba8-d7ea4538d3c8" title="Permalink to this equation">#</a></span>\[\begin{equation}
 r2 = k_2x_b
 \end{equation}\]</div>
 <p>These reaction probabilities look very similar to rate equations from the deterministic models. However, <strong>x<span class="math notranslate nohighlight">\(_i\)</span></strong> is the number of component <strong><span class="math notranslate nohighlight">\(i\)</span></strong> molecules in the reactor volume, not concentration <strong>C<span class="math notranslate nohighlight">\(_i\)</span></strong>.</p>
@@ -1253,16 +1378,16 @@ r2 = k_2x_b
 <li><p>Update reaction time <span class="math notranslate nohighlight">\(t = t + \tau\)</span>  and adjust number of molecules x<span class="math notranslate nohighlight">\(_i\)</span> for each species. For example, if reaction 1 is selected in step 5, we will reduce number of A molecules by 1 and increase number of B molecules by 1.</p></li>
 <li><p>Return to step 2 and continue until total reaction probability is zero.</p></li>
 </ol>
-</div>
-<div class="section" id="random-simulation-model-gillespie-algorithm">
-<h2>2. Random Simulation Model - Gillespie Algorithm<a class="headerlink" href="#random-simulation-model-gillespie-algorithm" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="random-simulation-model-gillespie-algorithm">
+<h2>2. Random Simulation Model - Gillespie Algorithm<a class="headerlink" href="#random-simulation-model-gillespie-algorithm" title="Permalink to this headline">#</a></h2>
 <p>Complete the function “gillespie” to perform stochastic simulation of the two reaction batch system.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-28ad37bd-ad7c-4c06-9f97-80cda690d247">
-<span class="eqno">(70)<a class="headerlink" href="#equation-28ad37bd-ad7c-4c06-9f97-80cda690d247" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-95f4f11d-d37f-41d6-a5a3-c4e897cb9f4d">
+<span class="eqno">(37)<a class="headerlink" href="#equation-95f4f11d-d37f-41d6-a5a3-c4e897cb9f4d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 A \xrightarrow{k_1} B
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-2a6f0ea9-3aa5-4c2d-958b-d239c3c6cbb4">
-<span class="eqno">(71)<a class="headerlink" href="#equation-2a6f0ea9-3aa5-4c2d-958b-d239c3c6cbb4" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f506d69f-9c3a-49d6-8011-86f80e389298">
+<span class="eqno">(38)<a class="headerlink" href="#equation-f506d69f-9c3a-49d6-8011-86f80e389298" title="Permalink to this equation">#</a></span>\[\begin{equation}
 B \xrightarrow{k_2} C
 \end{equation}\]</div>
 <p><strong>Write a pseudocode for the while loop to complete the code.</strong>  Submit this answer on an attached pdf file.</p>
@@ -1345,37 +1470,37 @@ B \xrightarrow{k_2} C
 <img alt="../../_images/Stochastic-Kinetics_11_0.png" src="../../_images/Stochastic-Kinetics_11_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="a-deterministic-equations">
-<h2>3a. Deterministic Equations<a class="headerlink" href="#a-deterministic-equations" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="a-deterministic-equations">
+<h2>3a. Deterministic Equations<a class="headerlink" href="#a-deterministic-equations" title="Permalink to this headline">#</a></h2>
 <p>Deterministic rate model for the same reaction network would result in the following rate expressions:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-013cc85a-57e6-4338-ae45-a3141a181d9a">
-<span class="eqno">(72)<a class="headerlink" href="#equation-013cc85a-57e6-4338-ae45-a3141a181d9a" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9b547b94-df22-4aef-9081-b07a62786f10">
+<span class="eqno">(39)<a class="headerlink" href="#equation-9b547b94-df22-4aef-9081-b07a62786f10" title="Permalink to this equation">#</a></span>\[\begin{equation}
 r1 = k_1C_a
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-79952595-4064-4090-a0ab-10e2bc9140e7">
-<span class="eqno">(73)<a class="headerlink" href="#equation-79952595-4064-4090-a0ab-10e2bc9140e7" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8d6b140c-d450-43d0-8bc5-a245c5460102">
+<span class="eqno">(40)<a class="headerlink" href="#equation-8d6b140c-d450-43d0-8bc5-a245c5460102" title="Permalink to this equation">#</a></span>\[\begin{equation}
 r2 = k_2C_b
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(C_i\)</span> is the concentration of species <span class="math notranslate nohighlight">\(i\)</span>, unlike number of molecules of stochastic model.</p>
 <p><strong>Using these rate laws, write down the differential equations for the concentration of each species?</strong> Submit this answer on an attached pdf file.</p>
 <p><strong>Answer:</strong></p>
-<div class="amsmath math notranslate nohighlight" id="equation-f31cc923-5f43-4af8-8bd0-edea51128ee2">
-<span class="eqno">(74)<a class="headerlink" href="#equation-f31cc923-5f43-4af8-8bd0-edea51128ee2" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fe5961ec-6a4a-4e29-b708-bf7bdc19c220">
+<span class="eqno">(41)<a class="headerlink" href="#equation-fe5961ec-6a4a-4e29-b708-bf7bdc19c220" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \frac{dC_a}{dt} = -k_1C_a
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-f9dcb347-8324-4566-bf88-6e12c5de05ff">
-<span class="eqno">(75)<a class="headerlink" href="#equation-f9dcb347-8324-4566-bf88-6e12c5de05ff" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b0fbb5a0-4431-474d-b39b-c219cee153ba">
+<span class="eqno">(42)<a class="headerlink" href="#equation-b0fbb5a0-4431-474d-b39b-c219cee153ba" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \frac{dC_b}{dt} = k_1C_a - k_2C_b
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-3aab0453-04e0-4c78-9daa-7232193a0f13">
-<span class="eqno">(76)<a class="headerlink" href="#equation-3aab0453-04e0-4c78-9daa-7232193a0f13" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a1c0a399-b0a9-468e-a935-b546322c68bd">
+<span class="eqno">(43)<a class="headerlink" href="#equation-a1c0a399-b0a9-468e-a935-b546322c68bd" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \frac{dC_c}{dt} = k_2C_b
 \end{equation}\]</div>
 <p>Note: These equations would be exactly same for number of molecules, i.e, one can replace <span class="math notranslate nohighlight">\(C_i\)</span> with <span class="math notranslate nohighlight">\(x_i\)</span> in the differential equations above. Concentrations can be converetd to number of molecules using avogadros number <span class="math notranslate nohighlight">\(N_A\)</span> and volume V of the reactor and these constants will cancel out in the equations.</p>
-</div>
-<div class="section" id="b-deterministic-rate-model-solving-differential-equations">
-<h2>3b. Deterministic Rate Model - Solving Differential Equations<a class="headerlink" href="#b-deterministic-rate-model-solving-differential-equations" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="b-deterministic-rate-model-solving-differential-equations">
+<h2>3b. Deterministic Rate Model - Solving Differential Equations<a class="headerlink" href="#b-deterministic-rate-model-solving-differential-equations" title="Permalink to this headline">#</a></h2>
 <p><strong>Solve the differential equations to find the analytical solution of the deterministic rate models.</strong> Submit this answer on an attached pdf file. Add these solutions to the code below to plot this deterministic rate model profiles.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1406,9 +1531,9 @@ r2 = k_2C_b
 <img alt="../../_images/Stochastic-Kinetics_16_0.png" src="../../_images/Stochastic-Kinetics_16_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="c-stochastic-vs-deterministic-solution">
-<h2>3c. Stochastic vs Deterministic Solution<a class="headerlink" href="#c-stochastic-vs-deterministic-solution" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="c-stochastic-vs-deterministic-solution">
+<h2>3c. Stochastic vs Deterministic Solution<a class="headerlink" href="#c-stochastic-vs-deterministic-solution" title="Permalink to this headline">#</a></h2>
 <p>Plot the stochastic solution and deterministic solution for the species profiles in the same plot starting with 1000 molecules of A. <strong>Write a few sentences to explain what you observe?</strong> Submit your answer on an attached pdf file.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1421,9 +1546,9 @@ r2 = k_2C_b
 </div>
 </div>
 <p><strong>Answer:</strong> For N = 1000 molecules, we see that the profiles for the stochastic solution are similar to the deterministic solution with little noise. For even larger systems, the profiles will be even more accurate. Intuitively this is what we would expect; the random behavior becomes less important for large systems. In the next section, we will see that random behavior is important for small systems.</p>
-</div>
-<div class="section" id="d-effect-of-number-of-molecules-in-stochastic-simulation">
-<h2>3d. Effect of number of molecules in stochastic simulation<a class="headerlink" href="#d-effect-of-number-of-molecules-in-stochastic-simulation" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="d-effect-of-number-of-molecules-in-stochastic-simulation">
+<h2>3d. Effect of number of molecules in stochastic simulation<a class="headerlink" href="#d-effect-of-number-of-molecules-in-stochastic-simulation" title="Permalink to this headline">#</a></h2>
 <p><strong>How does changing the starting number of molecules affect the reaction profiles?</strong> Run the gillespie function with A = 100 and A = 1000 molecules and create a subplot for the species profile. Submit this answer in a few sentences on an attached pdf file.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1463,9 +1588,9 @@ r2 = k_2C_b
 </div>
 </div>
 <p><strong>Answer:</strong> For N = 100 molecules, we can clearly see more noise in the species profile compared to N = 1000 molecules, where the profile is more smooth and closer to the analytical solution. This reinforces our idea that stochastic modeling is important if the system of interest is small.</p>
-</div>
-<div class="section" id="effect-of-rate-constants-k1-and-k2">
-<h2>4. Effect of rate constants k1 and k2<a class="headerlink" href="#effect-of-rate-constants-k1-and-k2" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="effect-of-rate-constants-k1-and-k2">
+<h2>4. Effect of rate constants k1 and k2<a class="headerlink" href="#effect-of-rate-constants-k1-and-k2" title="Permalink to this headline">#</a></h2>
 <p>Plot reaction profiles using different rate constant values (using the same number of starting molecules. <em>Hint:</em> Change the value of one rate constant while keeping the other the same; this will make any changes obvious.</p>
 <p><strong>How does changing the rate constant affect the reaction profiles?</strong> Submit this answer in a few sentences on an attached pdf file.</p>
 <div class="cell docutils container">
@@ -1504,12 +1629,12 @@ r2 = k_2C_b
 </div>
 <p><strong>Answer:</strong> We see that for the top figure with higher k1, the maximum in B was reached faster and in a steeper way than the bottom figure with lower k1; this makes sense because a higher k1 means a higher probability of the first reaction, meaning faster conversion of A to B molecules. With the same logic, we can explain the decay in A and growth in C is also fast in the top figure compared to the bottom figure.</p>
 <p>All of these characteristics would also be expected in the deterministic model. This exercise shows us the beauty of the Gillespie algorithm and how it can capture features of deterministic models while keeping the random behavior of the system into account.</p>
-</div>
-<div class="section" id="final-discussion">
-<h2>5. Final Discussion<a class="headerlink" href="#final-discussion" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="final-discussion">
+<h2>5. Final Discussion<a class="headerlink" href="#final-discussion" title="Permalink to this headline">#</a></h2>
 <p>Through this project, we aimed to highlight the importance of stochastic (random) modeling (aka KMC simulations in the present time). We used the famous Gillespie algorithm for stochastic modeling and compared it to well-known deterministic reaction engineering models for a simple two irreversible reactions constant volume batch system. We showed that the stochastic solution has more noise in the profiles for smaller systems because of the random behavior of the molecules moving in the gas phase and colliding with each other. We showed that this random behavior becomes less critical for larger systems, and profiles were closer to deterministic models as captured by the Gillespie algorithm.</p>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1533,9 +1658,11 @@ r2 = k_2C_b
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="Ficks_Law.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1551,24 +1678,28 @@ r2 = k_2C_b
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
     
-      By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>

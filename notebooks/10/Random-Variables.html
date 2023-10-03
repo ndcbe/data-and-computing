@@ -4,11 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>10.2. Random Variables &#8212; Data and Computing for Chemical Engineers</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet">
-  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,20 +20,16 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -39,12 +37,13 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -64,7 +63,21 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -73,9 +86,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -93,14 +107,15 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../intro.html">
-   Data and Computing for Engineers
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Data and Computing for Engineers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Python Programming
  </span>
@@ -882,11 +897,6 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../contrib/Non-Isothermal-PBR.html">
-     Non-Isothermal Packed Bed Reactor
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="../contrib/Ficks_Law.html">
      Solving Fick’s Second Law Using Numeric Integration
     </a>
@@ -931,112 +941,227 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/10/Random-Variables.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/ndcbe/data-and-computing"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/10/Random-Variables.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/10/Random-Variables.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/10/Random-Variables.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/10/Random-Variables.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/10/Random-Variables.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ndcbe/data-and-computing"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/10/Random-Variables.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/notebooks/10/Random-Variables.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#learning-objectives">
    10.2.1. Learning Objectives
@@ -1094,12 +1219,11 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Random Variables</h1>
@@ -1173,14 +1297,15 @@ const thebe_selector_output = ".output, .cell_output"
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="random-variables">
-<h1><span class="section-number">10.2. </span>Random Variables<a class="headerlink" href="#random-variables" title="Permalink to this headline">¶</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="random-variables">
+<h1><span class="section-number">10.2. </span>Random Variables<a class="headerlink" href="#random-variables" title="Permalink to this headline">#</a></h1>
 <p><strong>Further Reading</strong>: §2.4 in Navidi (2015)</p>
-<div class="section" id="learning-objectives">
-<h2><span class="section-number">10.2.1. </span>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">¶</a></h2>
+<section id="learning-objectives">
+<h2><span class="section-number">10.2.1. </span>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">#</a></h2>
 <p>After attending class, completing these activities, asking questions, and studying notes, you should be able to:</p>
 <ul class="simple">
 <li><p>Give at least three examples of how an engineer would use statistics</p></li>
@@ -1195,21 +1320,21 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="statistics-using-data-to">
-<h2><span class="section-number">10.2.2. </span>Statistics: Using Data to …<a class="headerlink" href="#statistics-using-data-to" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="describe-the-world">
-<h2><span class="section-number">10.2.3. </span>1. Describe the World<a class="headerlink" href="#describe-the-world" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="statistics-using-data-to">
+<h2><span class="section-number">10.2.2. </span>Statistics: Using Data to …<a class="headerlink" href="#statistics-using-data-to" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="describe-the-world">
+<h2><span class="section-number">10.2.3. </span>1. Describe the World<a class="headerlink" href="#describe-the-world" title="Permalink to this headline">#</a></h2>
 <p><a class="reference external" href="https://istats.shinyapps.io/EDA_quantitative/">https://istats.shinyapps.io/EDA_quantitative/</a></p>
-</div>
-<div class="section" id="draw-conclusions-inferences">
-<h2><span class="section-number">10.2.4. </span>2. Draw Conclusions (Inferences)<a class="headerlink" href="#draw-conclusions-inferences" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="draw-conclusions-inferences">
+<h2><span class="section-number">10.2.4. </span>2. Draw Conclusions (Inferences)<a class="headerlink" href="#draw-conclusions-inferences" title="Permalink to this headline">#</a></h2>
 <p><a class="reference external" href="https://istats.shinyapps.io/Inference_prop/">https://istats.shinyapps.io/Inference_prop/</a></p>
 <p><a class="reference external" href="https://istats.shinyapps.io/Association_Categorical/">https://istats.shinyapps.io/Association_Categorical/</a></p>
-</div>
-<div class="section" id="make-decisions-under-uncertainty">
-<h2><span class="section-number">10.2.5. </span>3. Make Decisions Under Uncertainty<a class="headerlink" href="#make-decisions-under-uncertainty" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="make-decisions-under-uncertainty">
+<h2><span class="section-number">10.2.5. </span>3. Make Decisions Under Uncertainty<a class="headerlink" href="#make-decisions-under-uncertainty" title="Permalink to this headline">#</a></h2>
 <p><strong>Example: Chemical Reactor Design</strong></p>
 <p>Recall the phenolphthalein reaction from an earlier notebook:</p>
 <div class="math notranslate nohighlight">
@@ -1229,9 +1354,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>Use statistical inference to quantify uncertainty in fitted parameters.</p></li>
 <li><p>How much should we oversize/overdesign the reactor to account for the uncertainty in the fitted reaction kinetic parameters?</p></li>
 </ol>
-</div>
-<div class="section" id="independent-random-variables">
-<h2><span class="section-number">10.2.6. </span>Independent Random Variables<a class="headerlink" href="#independent-random-variables" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="independent-random-variables">
+<h2><span class="section-number">10.2.6. </span>Independent Random Variables<a class="headerlink" href="#independent-random-variables" title="Permalink to this headline">#</a></h2>
 <p><strong>Random variable:</strong> assigns numeric value to each outcome in sample</p>
 <p><strong>Realization:</strong> outcome of an experiment</p>
 <p>Observing a random variable (e.g. measuring realization) is analogous to taking a sample from a population.</p>
@@ -1300,9 +1425,9 @@ Check if <span class="math notranslate nohighlight">\(\rho(X=x \textrm{ and } Y=
 <div class="math notranslate nohighlight">
 \[0.2 \times 0.6 = 0.12\]</div>
 <p>Yes, it turns out these data are independent.</p>
-</div>
-<div class="section" id="discrete-random-variables">
-<h2><span class="section-number">10.2.7. </span>Discrete Random Variables<a class="headerlink" href="#discrete-random-variables" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="discrete-random-variables">
+<h2><span class="section-number">10.2.7. </span>Discrete Random Variables<a class="headerlink" href="#discrete-random-variables" title="Permalink to this headline">#</a></h2>
 <p>For discrete random variables: possible values are discrete, may be infinite</p>
 <p><strong>Probability Mass Function (PMF):</strong></p>
 <div class="math notranslate nohighlight">
@@ -1348,9 +1473,9 @@ Check if <span class="math notranslate nohighlight">\(\rho(X=x \textrm{ and } Y=
 <img alt="../../_images/Random-Variables_14_0.png" src="../../_images/Random-Variables_14_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="example-for-discrete-random-variables-flipping-two-independent-coins">
-<h2><span class="section-number">10.2.8. </span>Example for Discrete Random Variables: Flipping Two Independent Coins<a class="headerlink" href="#example-for-discrete-random-variables-flipping-two-independent-coins" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="example-for-discrete-random-variables-flipping-two-independent-coins">
+<h2><span class="section-number">10.2.8. </span>Example for Discrete Random Variables: Flipping Two Independent Coins<a class="headerlink" href="#example-for-discrete-random-variables-flipping-two-independent-coins" title="Permalink to this headline">#</a></h2>
 <p>Imagine we have two coins: A and B.</p>
 <div class="math notranslate nohighlight">
 \[P(A=\mathrm{Head}) = 0.6\]</div>
@@ -1716,9 +1841,9 @@ P(A=T|B=H)  =  0.6120826709062003
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="continuous-random-variables">
-<h2><span class="section-number">10.2.9. </span>Continuous Random Variables<a class="headerlink" href="#continuous-random-variables" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="continuous-random-variables">
+<h2><span class="section-number">10.2.9. </span>Continuous Random Variables<a class="headerlink" href="#continuous-random-variables" title="Permalink to this headline">#</a></h2>
 <p>For continuous random variables: outcomes are continuous and even if outcomes are bounded, the space is infinite.</p>
 <p><strong>Probability Density Function:</strong></p>
 <div class="math notranslate nohighlight">
@@ -1736,9 +1861,9 @@ P(A=T|B=H)  =  0.6120826709062003
 <p>It’s important to note that</p>
 <div class="math notranslate nohighlight">
 \[\int_{-\infty}^{\infty} f(x)dx = 1\]</div>
-</div>
-<div class="section" id="another-example-continous-random-variables">
-<h2><span class="section-number">10.2.10. </span>Another Example: Continous Random Variables<a class="headerlink" href="#another-example-continous-random-variables" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="another-example-continous-random-variables">
+<h2><span class="section-number">10.2.10. </span>Another Example: Continous Random Variables<a class="headerlink" href="#another-example-continous-random-variables" title="Permalink to this headline">#</a></h2>
 <p>In class, we will derive the mean and standard deviation for a random variable that follows the <strong>uniform distribution</strong> (all outcomes equally probable). Let’s explore these properties with simulation first.</p>
 <p>Let’s generate 1000 random numbers between 0 and 1 with equal probability.</p>
 <div class="cell docutils container">
@@ -1840,9 +1965,9 @@ P(A=T|B=H)  =  0.6120826709062003
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="linear-combination-of-random-variables">
-<h2><span class="section-number">10.2.11. </span>Linear Combination of Random Variables<a class="headerlink" href="#linear-combination-of-random-variables" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="linear-combination-of-random-variables">
+<h2><span class="section-number">10.2.11. </span>Linear Combination of Random Variables<a class="headerlink" href="#linear-combination-of-random-variables" title="Permalink to this headline">#</a></h2>
 <p>Consider</p>
 <div class="math notranslate nohighlight">
 \[c_1x_1 + ... + c_2x_2 = z\]</div>
@@ -1869,8 +1994,8 @@ P(A=T|B=H)  =  0.6120826709062003
 <div class="math notranslate nohighlight">
 \[E[z^2] = c_1^2 var[X] + 2c_1c_2 cov[X,Y] + c_2^2 var[Y]\]</div>
 <p>See the textbook for more detailed steps. We will use this with error propogation.</p>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1894,9 +2019,11 @@ P(A=T|B=H)  =  0.6120826709062003
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="Probability-Basics.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1912,24 +2039,28 @@ P(A=T|B=H)  =  0.6120826709062003
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
     
-      By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>
