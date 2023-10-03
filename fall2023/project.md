@@ -36,11 +36,11 @@ Each person also needs to make at least one substantial intellectual contributio
 * Draw a strong connection to linear algebra
 * Perform regression in Python instead of Excel in [](../notebooks/contrib/McCabe-Thiele.ipynb)
 
-Alternately, a team may decide to contribute a new notebook to the class website. This may be either a new example (hint: look to a textbook for inspiration) or an explanation of an advanced topics. Here are some advanced topics to consider:
+Alternately, a team of 2 students may decide to contribute a new notebook to the class website. This may be either a new example (hint: look to a textbook for inspiration) or an explanation of an advanced topics. Here are some advanced topics to consider:
 * QR factorization
 * Line search or trust regions for globalization of Newton's method
 * Finite volume or finite element discretization methods
-* Shooting for boundary value problems
+* Shooting methods for boundary value problems
 
 For each topic, Prof. Dowling can provide a recommended textbook chapter to use a basis for the contributed notebook.
 
