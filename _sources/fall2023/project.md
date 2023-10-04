@@ -23,6 +23,7 @@ Please take a few minutes to browse [previously contributed notebooks](../notebo
 
 Many of these notebooks need some minor editing:
 * Ensure consistent section numbers
+* Make plots publication quality
 * Fix equations not rendered correctly
 * Fix links to other notebooks
 * Move all solutions, including discussion solutions, to between `### BEGIN SOLUTION` and `### END SOLUTION` in code block.
@@ -35,6 +36,8 @@ Each person also needs to make at least one substantial intellectual contributio
 * Add a new sensitivity analysis and discussion question
 * Draw a strong connection to linear algebra
 * Perform regression in Python instead of Excel in [](../notebooks/contrib/McCabe-Thiele.ipynb)
+* Compare different numeric integration methods
+* Add section connecting results back to engineering science theory (e.g., material from other classes)
 
 Alternately, a team of 2 students may decide to contribute a new notebook to the class website. This may be either a new example (hint: look to a textbook for inspiration) or an explanation of an advanced topics. Here are some advanced topics to consider:
 * QR factorization
@@ -57,21 +60,25 @@ You will also submit via Gradescope up to 1-page (PDF) highlighting the key revi
 ### Anticipated Time Requirements
 
 **Notebook Editting**
-Project Proposal: 1 hour
-Complete Activities in Notebook, Verify Answers: 2 hours
-Formatting and Edits: 2 hours
-Intellectual Contribution: 3 hours
-Learning GitHub: 1 hour
-Miscellanous: 1 hour
+| Activity | Time |
+| -------- | ---- |
+| Project Proposal | 1 hour |
+| Complete Activities in Notebook, Verify Answers | 2 hours |
+| Formatting and Edits | 2 hours |
+| Intellectual Contribution | 3 hours |
+| Learning GitHub | 1 hour |
+| Miscellanous | 1 hour |
 
 **Create New Notebook** (per person)
-Project Proposal: 1 hour
-Agree on Project Idea, Coordinate Effort: 1 hour
-Review Reference Material: 2 hours
-Prepare Notebook (keep it simple): 2 hours
-Formatting and Edits: 2 hours
-Learning GitHub: 1 hour
-Miscellanous: 1 hour
+| Activity | Time |
+| -------- | ---- |
+| Project Proposal | 1 hour |
+| Agree on Project Idea, Coordinate Effort | 1 hour |
+| Review Reference Material | 2 hours |
+| Prepare Notebook (keep it simple) | 2 hours |
+| Formatting and Edits | 2 hours |
+| Learning GitHub | 1 hour |
+| Miscellanous | 1 hour |
 
 ## Part 2: Create a Data Analysis Jupyter Notebook
 
@@ -121,15 +128,17 @@ You will also submit via Gradescope up to 1-page (PDF) explaining how this examp
 ### Anticipated Time Requirements
 
 (per person)
-Brainstorm Ideas: 1 hour
-Agree on Project Scope: 2 hour
-Identify Data Sources and Examples: 2 hour
-Prepare Notebook Draft 1: 2 hours
-Project Status Update: 1 hour
-Prepare Notebook Draft 2: 2 hours
-Team Coordination: 2 hours
-Formatting and Editting: 2 hours
-Submission: 1 hour
+| Activity | Time |
+| -------- | ---- |
+| Brainstorm Ideas | 1 hour |
+| Agree on Project Scope | 2 hours |
+| Identify Data Sources and Examples | 2 hours |
+| Prepare Notebook Draft 1 | 2 hours |
+| Project Status Update | 1 hour |
+| Prepare Notebook Draft 2 | 2 hours |
+| Team Coordination | 2 hours |
+| Formatting and Editting | 2 hours |
+| Submission | 1 hour |
 
 ## Part 3: Deliver a Final Presentation
 

@@ -1324,23 +1324,23 @@ title="Print to PDF"
 <h3>1.3 Fick’s Second Law<a class="headerlink" href="#fick-s-second-law" title="Permalink to this headline">#</a></h3>
 <p>An analytical solution can be developed for the concentration, in this case, for steady-state diffusion in two dimensions. We can start off with equation (1). This expression relates the radius of the conical flask to its height. This equation could help guide through three fundamental expressions: one for the concentration profile, one for the flux of the salt, and one for the total flow of the salt(i.e., the flux times the cross-sectional area of the flask). In this notebook we shall focus on the concentration profile. <span class="math notranslate nohighlight">\(R_{0}\)</span> is the radius at <span class="math notranslate nohighlight">\(z\)</span> = 0, <span class="math notranslate nohighlight">\(R_{l}\)</span> is the radius at <span class="math notranslate nohighlight">\(z = l\)</span> and <span class="math notranslate nohighlight">\(l\)</span> is the height of the flask.</p>
 <p><span class="math notranslate nohighlight">\(c(z,t)\)</span> is the concentration of the salt at the position <span class="math notranslate nohighlight">\(z\)</span> at time <span class="math notranslate nohighlight">\(t\)</span>, in <span class="math notranslate nohighlight">\([mol-cm^{-3}]\)</span>, <span class="math notranslate nohighlight">\(A(z)\)</span> is the cross-sectional area in <span class="math notranslate nohighlight">\([cm^{2}]\)</span> that varies through which diffusion takes place and <span class="math notranslate nohighlight">\(D\)</span> is the diffusion coefficient for salt and water in <span class="math notranslate nohighlight">\([cm^{2}-s^{-1}]\)</span>. As time tends to infinity, the change in concentration with respect to time disappears. This leads to equation (4) and a linear ordinary differential equation is obtained. In Figure 1, we can observe a cross section of Fick’s funnel-shaped vessel with a variable, <span class="math notranslate nohighlight">\(z\)</span>.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3ee9c1d0-69ba-43da-a6bc-40140586e9cb">
-<span class="eqno">(62)<a class="headerlink" href="#equation-3ee9c1d0-69ba-43da-a6bc-40140586e9cb" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2d6b1663-aabc-4553-9154-74596d525c11">
+<span class="eqno">(62)<a class="headerlink" href="#equation-2d6b1663-aabc-4553-9154-74596d525c11" title="Permalink to this equation">#</a></span>\[\begin{equation}
  R = R_{0} + (R_{l} - R_{0}) \frac{z}{l}
  \tag{1}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-dfc86389-64f5-4c62-8385-5ba57ecf830f">
-<span class="eqno">(63)<a class="headerlink" href="#equation-dfc86389-64f5-4c62-8385-5ba57ecf830f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ff00a1c4-ac2f-47d6-9238-97dfec5046d9">
+<span class="eqno">(63)<a class="headerlink" href="#equation-ff00a1c4-ac2f-47d6-9238-97dfec5046d9" title="Permalink to this equation">#</a></span>\[\begin{equation}
  A = \pi \big(R_{0} + (R_{l} - R_{0}) \frac{z}{l}\big)^{2}
  \tag{2}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-1cf7ab9a-4942-4459-8019-4987225a5552">
-<span class="eqno">(64)<a class="headerlink" href="#equation-1cf7ab9a-4942-4459-8019-4987225a5552" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-69ff33b4-fa1e-495b-ac94-d35440918281">
+<span class="eqno">(64)<a class="headerlink" href="#equation-69ff33b4-fa1e-495b-ac94-d35440918281" title="Permalink to this equation">#</a></span>\[\begin{equation}
  D\bigg[\frac{\partial^2 c}{\partial z^2} + \frac{\partial c}{\partial z}\frac{1}{A(z)}\frac{dA}{dz}\bigg] = \frac{\partial c}{\partial t}
  \tag{3}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-43ce18c6-94a7-40c8-b49c-9054d57cc6cb">
-<span class="eqno">(65)<a class="headerlink" href="#equation-43ce18c6-94a7-40c8-b49c-9054d57cc6cb" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-812105bb-0d2d-46cf-b51c-07ed3aacc116">
+<span class="eqno">(65)<a class="headerlink" href="#equation-812105bb-0d2d-46cf-b51c-07ed3aacc116" title="Permalink to this equation">#</a></span>\[\begin{equation}
  \bigg[\frac{d^2 c}{d z^2} + \frac{dc}{dz}\frac{1}{A(z)}\frac{dA}{dz}\bigg] = 0
  \tag{4}
 \end{equation}\]</div>
@@ -1363,6 +1363,8 @@ title="Print to PDF"
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>import shutil
 import sys
 import os.path
+
+## TODO: Update this with code from other examples for installing Ipopt and Pyomo. This is out of date.
 
 if not shutil.which(&quot;pyomo&quot;):
     !pip install -q pyomo
@@ -1408,54 +1410,71 @@ assert(shutil.which(&quot;ipopt&quot;) or os.path.isfile(&quot;ipopt&quot;))
 <span class="n">m</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">ConcreteModel</span><span class="p">()</span>
 
 <span class="c1"># Define model parameters</span>
-<span class="n">m</span><span class="o">.</span><span class="n">L</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">initialize</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span> <span class="c1"># height of conical flask in [cm]</span>
-<span class="n">m</span><span class="o">.</span><span class="n">R0</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">initialize</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span> <span class="c1"># bottom radius of conical flaskcm in [cm]</span>
-<span class="n">m</span><span class="o">.</span><span class="n">Rl</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">initialize</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span> <span class="c1"># top radius of conical flask in [cm]</span>
-<span class="n">m</span><span class="o">.</span><span class="n">Csat</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">initialize</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span> <span class="c1"># saturated concentration at bottom of flask in [mol/cm3]</span>
+<span class="n">m</span><span class="o">.</span><span class="n">L</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">initialize</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># height of conical flask in [cm]</span>
+<span class="n">m</span><span class="o">.</span><span class="n">R0</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">initialize</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>  <span class="c1"># bottom radius of conical flaskcm in [cm]</span>
+<span class="n">m</span><span class="o">.</span><span class="n">Rl</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">initialize</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>  <span class="c1"># top radius of conical flask in [cm]</span>
+<span class="n">m</span><span class="o">.</span><span class="n">Csat</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span>
+    <span class="n">initialize</span><span class="o">=</span><span class="mf">2.0</span>
+<span class="p">)</span>  <span class="c1"># saturated concentration at bottom of flask in [mol/cm3]</span>
 
 <span class="c1"># Define continuous set for the z coordinate</span>
-<span class="n">m</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="n">dae</span><span class="o">.</span><span class="n">ContinuousSet</span><span class="p">(</span><span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">m</span><span class="o">.</span><span class="n">L</span><span class="p">))</span>
+<span class="n">m</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="n">dae</span><span class="o">.</span><span class="n">ContinuousSet</span><span class="p">(</span><span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">L</span><span class="p">))</span>
 
-<span class="c1"># Define variables </span>
+<span class="c1"># Define variables</span>
 <span class="n">m</span><span class="o">.</span><span class="n">c</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Var</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
 <span class="n">m</span><span class="o">.</span><span class="n">A</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Var</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
 
 <span class="c1"># Define variables for derivatives</span>
 <span class="n">m</span><span class="o">.</span><span class="n">dcdz</span> <span class="o">=</span> <span class="n">dae</span><span class="o">.</span><span class="n">DerivativeVar</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">c</span><span class="p">,</span> <span class="n">wrt</span><span class="o">=</span><span class="n">m</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
-<span class="n">m</span><span class="o">.</span><span class="n">dc2dz2</span> <span class="o">=</span> <span class="n">dae</span><span class="o">.</span><span class="n">DerivativeVar</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">c</span><span class="p">,</span> <span class="n">wrt</span><span class="o">=</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">z</span><span class="p">,</span><span class="n">m</span><span class="o">.</span><span class="n">z</span><span class="p">))</span>
+<span class="n">m</span><span class="o">.</span><span class="n">dc2dz2</span> <span class="o">=</span> <span class="n">dae</span><span class="o">.</span><span class="n">DerivativeVar</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">c</span><span class="p">,</span> <span class="n">wrt</span><span class="o">=</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">z</span><span class="p">))</span>
 <span class="n">m</span><span class="o">.</span><span class="n">dAdz</span> <span class="o">=</span> <span class="n">dae</span><span class="o">.</span><span class="n">DerivativeVar</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">wrt</span><span class="o">=</span><span class="n">m</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
 
+
 <span class="c1"># Define ODE as contraint</span>
-<span class="k">def</span> <span class="nf">ode</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">z</span><span class="p">):</span>
-  <span class="k">if</span> <span class="n">z</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">z</span> <span class="o">==</span> <span class="n">L</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Constraint</span><span class="o">.</span><span class="n">Skip</span>
-  <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">dAdz</span><span class="p">[</span><span class="n">z</span><span class="p">]</span><span class="o">*</span><span class="n">m</span><span class="o">.</span><span class="n">dcdz</span><span class="p">[</span><span class="n">z</span><span class="p">]</span> <span class="o">+</span> <span class="n">m</span><span class="o">.</span><span class="n">A</span><span class="p">[</span><span class="n">z</span><span class="p">]</span><span class="o">*</span><span class="n">m</span><span class="o">.</span><span class="n">dc2dz2</span><span class="p">[</span><span class="n">z</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span>
-<span class="n">m</span><span class="o">.</span><span class="n">ode</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Constraint</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">z</span><span class="p">,</span><span class="n">rule</span><span class="o">=</span><span class="n">ode</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">ode</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">z</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">z</span> <span class="o">==</span> <span class="n">L</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Constraint</span><span class="o">.</span><span class="n">Skip</span>
+    <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">dAdz</span><span class="p">[</span><span class="n">z</span><span class="p">]</span> <span class="o">*</span> <span class="n">m</span><span class="o">.</span><span class="n">dcdz</span><span class="p">[</span><span class="n">z</span><span class="p">]</span> <span class="o">+</span> <span class="n">m</span><span class="o">.</span><span class="n">A</span><span class="p">[</span><span class="n">z</span><span class="p">]</span> <span class="o">*</span> <span class="n">m</span><span class="o">.</span><span class="n">dc2dz2</span><span class="p">[</span><span class="n">z</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span>
+
+
+<span class="n">m</span><span class="o">.</span><span class="n">ode</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Constraint</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="n">rule</span><span class="o">=</span><span class="n">ode</span><span class="p">)</span>
+
 
 <span class="c1"># define area</span>
-<span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">z</span><span class="p">):</span>
-  <span class="k">if</span> <span class="n">z</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">z</span> <span class="o">==</span> <span class="n">L</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Constraint</span><span class="o">.</span><span class="n">Skip</span>
-  <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">A</span><span class="p">[</span><span class="n">z</span><span class="p">]</span> <span class="o">==</span> <span class="mf">3.14</span><span class="o">*</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">R0</span> <span class="o">+</span> <span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">Rl</span> <span class="o">-</span> <span class="n">m</span><span class="o">.</span><span class="n">R0</span><span class="p">)</span><span class="o">*</span><span class="n">z</span><span class="o">/</span><span class="n">m</span><span class="o">.</span><span class="n">L</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
-<span class="n">m</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Constraint</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">z</span><span class="p">,</span><span class="n">rule</span><span class="o">=</span><span class="n">area</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">z</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">z</span> <span class="o">==</span> <span class="n">L</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Constraint</span><span class="o">.</span><span class="n">Skip</span>
+    <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">A</span><span class="p">[</span><span class="n">z</span><span class="p">]</span> <span class="o">==</span> <span class="mf">3.14</span> <span class="o">*</span> <span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">R0</span> <span class="o">+</span> <span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">Rl</span> <span class="o">-</span> <span class="n">m</span><span class="o">.</span><span class="n">R0</span><span class="p">)</span> <span class="o">*</span> <span class="n">z</span> <span class="o">/</span> <span class="n">m</span><span class="o">.</span><span class="n">L</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+
+
+<span class="n">m</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Constraint</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="n">rule</span><span class="o">=</span><span class="n">area</span><span class="p">)</span>
+
+
 <span class="c1"># Define first boundary condition</span>
 <span class="k">def</span> <span class="nf">boundary_condition1</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
-  <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">m</span><span class="o">.</span><span class="n">Csat</span> 
+    <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">m</span><span class="o">.</span><span class="n">Csat</span>
+
+
 <span class="n">m</span><span class="o">.</span><span class="n">bc1</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Constraint</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="n">boundary_condition1</span><span class="p">)</span>
+
 
 <span class="c1"># Define second boundary condition</span>
 <span class="k">def</span> <span class="nf">boundary_condition2</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
-  <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="n">L</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> 
+    <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="n">L</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span>
+
+
 <span class="n">m</span><span class="o">.</span><span class="n">bc2</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Constraint</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="n">boundary_condition2</span><span class="p">)</span>
 
 <span class="c1"># Define objective function</span>
 <span class="n">m</span><span class="o">.</span><span class="n">obj</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Objective</span><span class="p">(</span><span class="n">expr</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="c1"># Discretize z coordinate with forward finite difference and 50 elements</span>
-<span class="n">pyo</span><span class="o">.</span><span class="n">TransformationFactory</span><span class="p">(</span><span class="s1">&#39;dae.finite_difference&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">apply_to</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">nfe</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s1">&#39;FORWARD&#39;</span><span class="p">,</span> <span class="n">wrt</span><span class="o">=</span><span class="n">m</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
+<span class="n">pyo</span><span class="o">.</span><span class="n">TransformationFactory</span><span class="p">(</span><span class="s2">&quot;dae.finite_difference&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">apply_to</span><span class="p">(</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">nfe</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s2">&quot;FORWARD&quot;</span><span class="p">,</span> <span class="n">wrt</span><span class="o">=</span><span class="n">m</span><span class="o">.</span><span class="n">z</span>
+<span class="p">)</span>
 
 <span class="c1"># Solve model</span>
-<span class="n">pyo</span><span class="o">.</span><span class="n">SolverFactory</span><span class="p">(</span><span class="s1">&#39;ipopt&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">tee</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+<span class="n">pyo</span><span class="o">.</span><span class="n">SolverFactory</span><span class="p">(</span><span class="s2">&quot;ipopt&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">tee</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1562,8 +1581,8 @@ Solution:
 
 
 <span class="c1"># configure plot area</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;font.size&quot;</span><span class="p">:</span><span class="mi">10</span><span class="p">})</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;font.size&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">})</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;axes.labelweight&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;bold&quot;</span>
 
 <span class="c1"># Add your solution here ###</span>
@@ -1618,69 +1637,74 @@ Solution:
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># define function to create numeric model for ODE in python</span>
 <span class="k">def</span> <span class="nf">create_model</span><span class="p">(</span><span class="n">L</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">R0</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">Rl</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">C_sat</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
-  <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">  Function to create instance of pyomo model for numeric integration of Fick&#39;s (second) law</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to create instance of pyomo model for numeric integration of Fick&#39;s (second) law</span>
 
-<span class="sd">  Arguments:</span>
-<span class="sd">    L: float, height of conical flask [cm]</span>
-<span class="sd">    R0: float, bottom radius of conical flask [cm]</span>
-<span class="sd">    Rl: float, top radius of conical flash [cm]</span>
-<span class="sd">    c_sat: float, # saturated salt concentration at bottom of flask [mol/cm3]</span>
+<span class="sd">    Arguments:</span>
+<span class="sd">      L: float, height of conical flask [cm]</span>
+<span class="sd">      R0: float, bottom radius of conical flask [cm]</span>
+<span class="sd">      Rl: float, top radius of conical flash [cm]</span>
+<span class="sd">      c_sat: float, # saturated salt concentration at bottom of flask [mol/cm3]</span>
 
-<span class="sd">  return:</span>
-<span class="sd">    m: concrete pyomo model</span>
+<span class="sd">    return:</span>
+<span class="sd">      m: concrete pyomo model</span>
 
-<span class="sd">  &#39;&#39;&#39;</span>
-  <span class="c1"># create pyomo model</span>
-  <span class="n">m</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">ConcreteModel</span><span class="p">()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># create pyomo model</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">ConcreteModel</span><span class="p">()</span>
 
-  <span class="c1"># Define model parameters</span>
-  <span class="n">m</span><span class="o">.</span><span class="n">L</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">initialize</span><span class="o">=</span><span class="n">L</span><span class="p">)</span> <span class="c1"># height of conical flask [cm]</span>
-  <span class="n">m</span><span class="o">.</span><span class="n">R0</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">initialize</span><span class="o">=</span><span class="n">R0</span><span class="p">)</span> <span class="c1"># bottom radius of conical flask [cm]</span>
-  <span class="n">m</span><span class="o">.</span><span class="n">Rl</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">initialize</span><span class="o">=</span><span class="n">Rl</span><span class="p">)</span> <span class="c1"># top radius of conical flash [cm]</span>
-  <span class="n">m</span><span class="o">.</span><span class="n">c_sat</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">initialize</span><span class="o">=</span><span class="n">C_sat</span><span class="p">)</span> <span class="c1"># saturated salt concentration at bottom of flask [mol/cm3]</span>
+    <span class="c1"># Define model parameters</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">L</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">initialize</span><span class="o">=</span><span class="n">L</span><span class="p">)</span>  <span class="c1"># height of conical flask [cm]</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">R0</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">initialize</span><span class="o">=</span><span class="n">R0</span><span class="p">)</span>  <span class="c1"># bottom radius of conical flask [cm]</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">Rl</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span><span class="n">initialize</span><span class="o">=</span><span class="n">Rl</span><span class="p">)</span>  <span class="c1"># top radius of conical flash [cm]</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">c_sat</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Param</span><span class="p">(</span>
+        <span class="n">initialize</span><span class="o">=</span><span class="n">C_sat</span>
+    <span class="p">)</span>  <span class="c1"># saturated salt concentration at bottom of flask [mol/cm3]</span>
 
+    <span class="c1"># Define continuous set for the z coordinate</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="n">dae</span><span class="o">.</span><span class="n">ContinuousSet</span><span class="p">(</span><span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">))</span>
 
-  <span class="c1"># Define continuous set for the z coordinate</span>
-  <span class="n">m</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="n">dae</span><span class="o">.</span><span class="n">ContinuousSet</span><span class="p">(</span><span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">L</span><span class="p">))</span>
+    <span class="c1"># Define variables</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">c</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Var</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">A</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Var</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
 
-  <span class="c1"># Define variables </span>
-  <span class="n">m</span><span class="o">.</span><span class="n">c</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Var</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
-  <span class="n">m</span><span class="o">.</span><span class="n">A</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Var</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
+    <span class="c1"># Define variables for derivatives</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">dcdz</span> <span class="o">=</span> <span class="n">dae</span><span class="o">.</span><span class="n">DerivativeVar</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">c</span><span class="p">,</span> <span class="n">wrt</span><span class="o">=</span><span class="n">m</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">dc2dz2</span> <span class="o">=</span> <span class="n">dae</span><span class="o">.</span><span class="n">DerivativeVar</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">c</span><span class="p">,</span> <span class="n">wrt</span><span class="o">=</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">z</span><span class="p">))</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">dAdz</span> <span class="o">=</span> <span class="n">dae</span><span class="o">.</span><span class="n">DerivativeVar</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">wrt</span><span class="o">=</span><span class="n">m</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
 
-  <span class="c1"># Define variables for derivatives</span>
-  <span class="n">m</span><span class="o">.</span><span class="n">dcdz</span> <span class="o">=</span> <span class="n">dae</span><span class="o">.</span><span class="n">DerivativeVar</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">c</span><span class="p">,</span> <span class="n">wrt</span><span class="o">=</span><span class="n">m</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
-  <span class="n">m</span><span class="o">.</span><span class="n">dc2dz2</span> <span class="o">=</span> <span class="n">dae</span><span class="o">.</span><span class="n">DerivativeVar</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">c</span><span class="p">,</span> <span class="n">wrt</span><span class="o">=</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">z</span><span class="p">,</span><span class="n">m</span><span class="o">.</span><span class="n">z</span><span class="p">))</span>
-  <span class="n">m</span><span class="o">.</span><span class="n">dAdz</span> <span class="o">=</span> <span class="n">dae</span><span class="o">.</span><span class="n">DerivativeVar</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">wrt</span><span class="o">=</span><span class="n">m</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
+    <span class="c1"># Define ODE as contraint</span>
+    <span class="k">def</span> <span class="nf">ode</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">z</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">z</span> <span class="o">==</span> <span class="n">m</span><span class="o">.</span><span class="n">L</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Constraint</span><span class="o">.</span><span class="n">Skip</span>
+        <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">dAdz</span><span class="p">[</span><span class="n">z</span><span class="p">]</span> <span class="o">*</span> <span class="n">m</span><span class="o">.</span><span class="n">dcdz</span><span class="p">[</span><span class="n">z</span><span class="p">]</span> <span class="o">+</span> <span class="n">m</span><span class="o">.</span><span class="n">A</span><span class="p">[</span><span class="n">z</span><span class="p">]</span> <span class="o">*</span> <span class="n">m</span><span class="o">.</span><span class="n">dc2dz2</span><span class="p">[</span><span class="n">z</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span>
 
-  <span class="c1"># Define ODE as contraint</span>
-  <span class="k">def</span> <span class="nf">ode</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">z</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">z</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">z</span> <span class="o">==</span> <span class="n">m</span><span class="o">.</span><span class="n">L</span><span class="p">:</span>
-      <span class="k">return</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Constraint</span><span class="o">.</span><span class="n">Skip</span>
-    <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">dAdz</span><span class="p">[</span><span class="n">z</span><span class="p">]</span><span class="o">*</span><span class="n">m</span><span class="o">.</span><span class="n">dcdz</span><span class="p">[</span><span class="n">z</span><span class="p">]</span> <span class="o">+</span> <span class="n">m</span><span class="o">.</span><span class="n">A</span><span class="p">[</span><span class="n">z</span><span class="p">]</span><span class="o">*</span><span class="n">m</span><span class="o">.</span><span class="n">dc2dz2</span><span class="p">[</span><span class="n">z</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span>
-  <span class="n">m</span><span class="o">.</span><span class="n">ode</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Constraint</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">z</span><span class="p">,</span><span class="n">rule</span><span class="o">=</span><span class="n">ode</span><span class="p">)</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">ode</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Constraint</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="n">rule</span><span class="o">=</span><span class="n">ode</span><span class="p">)</span>
 
-  <span class="c1"># define area</span>
-  <span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">z</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">z</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">z</span> <span class="o">==</span> <span class="n">m</span><span class="o">.</span><span class="n">L</span><span class="p">:</span>
-      <span class="k">return</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Constraint</span><span class="o">.</span><span class="n">Skip</span>
-    <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">A</span><span class="p">[</span><span class="n">z</span><span class="p">]</span> <span class="o">==</span> <span class="mf">3.14</span><span class="o">*</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">R0</span> <span class="o">+</span> <span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">Rl</span> <span class="o">-</span> <span class="n">m</span><span class="o">.</span><span class="n">R0</span><span class="p">)</span><span class="o">*</span><span class="n">z</span><span class="o">/</span><span class="n">m</span><span class="o">.</span><span class="n">L</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
-  <span class="n">m</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Constraint</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">z</span><span class="p">,</span><span class="n">rule</span><span class="o">=</span><span class="n">area</span><span class="p">)</span>
-  
-  <span class="c1"># Define first boundary condition</span>
-  <span class="k">def</span> <span class="nf">boundary_condition1</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">m</span><span class="o">.</span><span class="n">c_sat</span> 
-  <span class="n">m</span><span class="o">.</span><span class="n">bc1</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Constraint</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="n">boundary_condition1</span><span class="p">)</span>
+    <span class="c1"># define area</span>
+    <span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">z</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">z</span> <span class="o">==</span> <span class="n">m</span><span class="o">.</span><span class="n">L</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Constraint</span><span class="o">.</span><span class="n">Skip</span>
+        <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">A</span><span class="p">[</span><span class="n">z</span><span class="p">]</span> <span class="o">==</span> <span class="mf">3.14</span> <span class="o">*</span> <span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">R0</span> <span class="o">+</span> <span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">Rl</span> <span class="o">-</span> <span class="n">m</span><span class="o">.</span><span class="n">R0</span><span class="p">)</span> <span class="o">*</span> <span class="n">z</span> <span class="o">/</span> <span class="n">m</span><span class="o">.</span><span class="n">L</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
 
-  <span class="c1"># Define second boundary condition</span>
-  <span class="k">def</span> <span class="nf">boundary_condition2</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">L</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> 
-  <span class="n">m</span><span class="o">.</span><span class="n">bc2</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Constraint</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="n">boundary_condition2</span><span class="p">)</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Constraint</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="n">rule</span><span class="o">=</span><span class="n">area</span><span class="p">)</span>
 
-  <span class="c1"># Define objective function</span>
-  <span class="n">m</span><span class="o">.</span><span class="n">obj</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Objective</span><span class="p">(</span><span class="n">expr</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># Define first boundary condition</span>
+    <span class="k">def</span> <span class="nf">boundary_condition1</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">m</span><span class="o">.</span><span class="n">c_sat</span>
 
-  <span class="k">return</span> <span class="n">m</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">bc1</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Constraint</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="n">boundary_condition1</span><span class="p">)</span>
+
+    <span class="c1"># Define second boundary condition</span>
+    <span class="k">def</span> <span class="nf">boundary_condition2</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">c</span><span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">L</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span>
+
+    <span class="n">m</span><span class="o">.</span><span class="n">bc2</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Constraint</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="n">boundary_condition2</span><span class="p">)</span>
+
+    <span class="c1"># Define objective function</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">obj</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Objective</span><span class="p">(</span><span class="n">expr</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">m</span>
 </pre></div>
 </div>
 </div>
@@ -1693,10 +1717,12 @@ Solution:
 <span class="n">m</span> <span class="o">=</span> <span class="n">create_model</span><span class="p">()</span>
 
 <span class="c1"># discritize z</span>
-<span class="n">pyo</span><span class="o">.</span><span class="n">TransformationFactory</span><span class="p">(</span><span class="s1">&#39;dae.finite_difference&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">apply_to</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">nfe</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s1">&#39;FORWARD&#39;</span><span class="p">,</span> <span class="n">wrt</span><span class="o">=</span><span class="n">m</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
+<span class="n">pyo</span><span class="o">.</span><span class="n">TransformationFactory</span><span class="p">(</span><span class="s2">&quot;dae.finite_difference&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">apply_to</span><span class="p">(</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">nfe</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">scheme</span><span class="o">=</span><span class="s2">&quot;FORWARD&quot;</span><span class="p">,</span> <span class="n">wrt</span><span class="o">=</span><span class="n">m</span><span class="o">.</span><span class="n">z</span>
+<span class="p">)</span>
 
 <span class="c1"># Solve model</span>
-<span class="n">pyo</span><span class="o">.</span><span class="n">SolverFactory</span><span class="p">(</span><span class="s1">&#39;ipopt&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">tee</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">pyo</span><span class="o">.</span><span class="n">SolverFactory</span><span class="p">(</span><span class="s2">&quot;ipopt&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">tee</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="c1"># plot solution. Hint: reuse code from sections above</span>
 
@@ -1716,19 +1742,19 @@ Solution:
 <span class="n">L</span> <span class="o">=</span> <span class="mf">1.0</span>
 
 <span class="c1"># make list of step-sizes</span>
-<span class="n">num_element</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">80</span><span class="p">]</span> <span class="c1"># list of number of elements</span>
-<span class="n">step_size</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># list of step sizes</span>
+<span class="n">num_element</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">80</span><span class="p">]</span>  <span class="c1"># list of number of elements</span>
+<span class="n">step_size</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># list of step sizes</span>
 <span class="c1"># loop through number of elements to calculate step-sizes</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">num_element</span><span class="p">:</span>
-  <span class="n">step_size</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">L</span><span class="o">/</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">step_size</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">L</span> <span class="o">/</span> <span class="n">i</span><span class="p">)</span>
 
 <span class="c1"># configure plotting area</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;font.size&quot;</span><span class="p">:</span><span class="mi">10</span><span class="p">})</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;font.size&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">})</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;axes.labelweight&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;bold&quot;</span>
-<span class="n">color_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;m&#39;</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
+<span class="n">color_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">]</span>
 
-<span class="c1"># loop through list of number of elements and step sizes to solve ODE and </span>
+<span class="c1"># loop through list of number of elements and step sizes to solve ODE and</span>
 <span class="c1"># plot conc profile. Hint: use &quot;enumerate&quot;</span>
 
 <span class="c1"># Add your solution here ###</span>
@@ -1749,13 +1775,13 @@ Solution:
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># list of finite different methods</span>
-<span class="n">method_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;FORWARD&quot;</span><span class="p">,</span><span class="s2">&quot;BACKWARD&quot;</span><span class="p">,</span><span class="s2">&quot;CENTRAL&quot;</span><span class="p">]</span>
+<span class="n">method_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;FORWARD&quot;</span><span class="p">,</span> <span class="s2">&quot;BACKWARD&quot;</span><span class="p">,</span> <span class="s2">&quot;CENTRAL&quot;</span><span class="p">]</span>
 
 <span class="c1"># configure plotting area</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span><span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;font.size&quot;</span><span class="p">:</span><span class="mi">10</span><span class="p">})</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;font.size&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">})</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;axes.labelweight&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;bold&quot;</span>
-<span class="n">color_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">]</span>
+<span class="n">color_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">]</span>
 
 <span class="c1"># empty container to hold error</span>
 <span class="n">error</span> <span class="o">=</span> <span class="p">{}</span>
@@ -1772,24 +1798,24 @@ Solution:
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># define function to estimate error</span>
-<span class="k">def</span> <span class="nf">integration_error</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">yapprox</span><span class="p">,</span><span class="n">yexact</span><span class="p">):</span>
-  <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">  function to estimate integration error</span>
-<span class="sd">  </span>
+<span class="k">def</span> <span class="nf">integration_error</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">yapprox</span><span class="p">,</span> <span class="n">yexact</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    function to estimate integration error</span>
 
-<span class="sd">  arguments:</span>
-<span class="sd">    N: int, number of data points</span>
-<span class="sd">    yapprox: list, approximate solutions rom integration</span>
-<span class="sd">    yexact: list, exact value</span>
 
-<span class="sd">  returns:</span>
-<span class="sd">    error: float, integration error</span>
-<span class="sd">  &#39;&#39;&#39;</span>
+<span class="sd">    arguments:</span>
+<span class="sd">      N: int, number of data points</span>
+<span class="sd">      yapprox: list, approximate solutions rom integration</span>
+<span class="sd">      yexact: list, exact value</span>
 
-  <span class="c1"># estimate error</span>
-  <span class="n">error</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N</span><span class="p">))</span><span class="o">*</span><span class="nb">sum</span><span class="p">((</span><span class="n">yapprox</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">yexact</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">len</span><span class="p">(</span><span class="n">N</span><span class="p">))</span>
+<span class="sd">    returns:</span>
+<span class="sd">      error: float, integration error</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
-  <span class="k">return</span> <span class="n">error</span>
+    <span class="c1"># estimate error</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N</span><span class="p">))</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">((</span><span class="n">yapprox</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">yexact</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">len</span><span class="p">(</span><span class="n">N</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">error</span>
 </pre></div>
 </div>
 </div>

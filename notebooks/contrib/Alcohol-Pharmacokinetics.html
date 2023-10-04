@@ -1303,7 +1303,6 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="alcohol-pharmacokinetics-and-blood-alcohol-content-modeling">
 <h1>Alcohol Pharmacokinetics and  Blood Alcohol Content % Modeling<a class="headerlink" href="#alcohol-pharmacokinetics-and-blood-alcohol-content-modeling" title="Permalink to this headline">#</a></h1>
 <p>Prepared by: Phuong Cao - <a class="reference external" href="mailto:tcao2&#37;&#52;&#48;nd&#46;edu">tcao2<span>&#64;</span>nd<span>&#46;</span>edu</a> and Cleveland Keal - <a class="reference external" href="mailto:ckeal&#37;&#52;&#48;nd&#46;edu">ckeal<span>&#64;</span>nd<span>&#46;</span>edu</a></p>
-<p>Team 10</p>
 <p>Based on Problem 6-7b of Fogler, H. S. (2006). 6. In Elements of chemical reaction engineering (3rd ed., pp. 323–324). essay, Prentice-Hall of India. ISBN 978-0135317082</p>
 <section id="problem-description">
 <h2>Problem Description<a class="headerlink" href="#problem-description" title="Permalink to this headline">#</a></h2>
@@ -1327,7 +1326,7 @@ title="Print to PDF"
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">integrate</span>
 </pre></div>
@@ -1364,22 +1363,21 @@ title="Print to PDF"
 <p>This function helps to etermine the initial alcohol concentration in the intestine based on number of tall martinis drank and body weight(kg)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">drinks</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
-  <span class="sd">&#39;&#39;&#39; Determines the initial alcohol concentration in the intestine based on </span>
-<span class="sd">  # of tall martinis drank and body weight(kg)</span>
-<span class="sd">    Args:</span>
-<span class="sd">	      n: number of martinis drank</span>
-<span class="sd">	      m: Body weight (kg)</span>
-<span class="sd">    Returns:</span>
-<span class="sd">        CT: The total amount concentration of alcohol ingested, </span>
-<span class="sd">      Ca0 for the differential equation</span>
-<span class="sd">        &#39;&#39;&#39;</span>     
-  
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">drinks</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;Determines the initial alcohol concentration in the intestine based on</span>
+<span class="sd">  of tall martinis drank and body weight(kg)</span>
+<span class="sd">  Args:</span>
+<span class="sd">    n: number of martinis drank</span>
+<span class="sd">    m: Body weight (kg)</span>
+<span class="sd">  Returns:</span>
+<span class="sd">    CT: The total amount concentration of alcohol ingested,</span>
+<span class="sd">    Ca0 for the differential equation</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+
   <span class="c1"># add your solution here</span>
   <span class="c1"># Add your solution here</span>
- 
-  <span class="n">CT</span> <span class="o">=</span> <span class="n">g_alcohol</span><span class="o">/</span><span class="n">L_blood</span>
 
+  <span class="n">CT</span> <span class="o">=</span> <span class="n">g_alcohol</span> <span class="o">/</span> <span class="n">L_blood</span>
   <span class="k">return</span> <span class="n">CT</span>
 </pre></div>
 </div>
@@ -1390,20 +1388,20 @@ title="Print to PDF"
 <h3>1B. ODE Equations<a class="headerlink" href="#b-ode-equations" title="Permalink to this headline">#</a></h3>
 <p>The Pharmacokinetics of alcohol involves 3 reactions occuring:</p>
 <p><strong>1. Rate of alcohol injestion (how fast one drinks or how fast the alcohol enters ones stomach)</strong></p>
-<div class="amsmath math notranslate nohighlight" id="equation-61a20932-ed07-4089-a8be-72ba2307814e">
-<span class="eqno">(77)<a class="headerlink" href="#equation-61a20932-ed07-4089-a8be-72ba2307814e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-93650455-ec2d-4c2c-b241-06d07d0ffabf">
+<span class="eqno">(77)<a class="headerlink" href="#equation-93650455-ec2d-4c2c-b241-06d07d0ffabf" title="Permalink to this equation">#</a></span>\[\begin{equation}
 r_0 ≈ -k_0 \left[ C_0 \right]t
 \end{equation}\]</div>
 <p>rate of injestion into the gastrointestinal tract is a first-order reaction with a specific reaction rate constant of about 10 h-L (h-L is hour litter blood)</p>
 <p><strong>2. Rate of alcohol distribution (how fast the alcohol leaves ones stomach and enters the bloodstream)</strong></p>
-<div class="amsmath math notranslate nohighlight" id="equation-6c9aa786-218b-4912-a035-108712489f8f">
-<span class="eqno">(78)<a class="headerlink" href="#equation-6c9aa786-218b-4912-a035-108712489f8f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-46b3af41-4ee7-4547-b7de-60434ec8e5e5">
+<span class="eqno">(78)<a class="headerlink" href="#equation-46b3af41-4ee7-4547-b7de-60434ec8e5e5" title="Permalink to this equation">#</a></span>\[\begin{equation}
 r_1 = -r_0-k_1 \left[ C_A \right]
 \end{equation}\]</div>
 <p>rate of absorption from the gastrointestinal tract into the bloodstream and body is a first-order reaction with a specific reaction rate constant of 10 h-L (h-L is hour litter blood)</p>
 <p><strong>3. Rate of alcohol elimination (how fast the breaks down after entering the bloodstream)</strong></p>
-<div class="amsmath math notranslate nohighlight" id="equation-3b29d1cd-e8c8-4a33-a355-d80f375cbfcb">
-<span class="eqno">(79)<a class="headerlink" href="#equation-3b29d1cd-e8c8-4a33-a355-d80f375cbfcb" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a3be684b-6f22-412c-857d-731624ff679d">
+<span class="eqno">(79)<a class="headerlink" href="#equation-a3be684b-6f22-412c-857d-731624ff679d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 r_2 = -r_1 - k_2
 \end{equation}\]</div>
 <p>The rate at which ethanol is broken down in the bloodstream is limited by regeneration of a coenzyme. Consequently, the process may be modeled as a zero-order reaction with a specific reaction rate of 1.92 g/h-L of blood.</p>
@@ -1416,41 +1414,41 @@ r_2 = -r_1 - k_2
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39; RHS of differential equation for reaction kinetics</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;RHS of differential equation for reaction kinetics</span>
 <span class="sd">    Args:</span>
 <span class="sd">        t: time</span>
 <span class="sd">        y: values for differential questions, [CA, CB, BAC]</span>
 <span class="sd">    Returns:</span>
 <span class="sd">        dydt: first derivation of y w.r.t. t</span>
-<span class="sd">    </span>
-<span class="sd">    &#39;&#39;&#39;</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># unpack current values of y</span>
-    <span class="n">C0</span><span class="p">,</span><span class="n">CA</span><span class="p">,</span> <span class="n">CB</span><span class="p">,</span> <span class="n">BAC</span> <span class="o">=</span> <span class="n">y</span>      
-    
-   <span class="c1"># dC0 rate constant.</span>
-    <span class="c1"># if statment added so models dont go below 0 </span>
+    <span class="n">C0</span><span class="p">,</span> <span class="n">CA</span><span class="p">,</span> <span class="n">CB</span><span class="p">,</span> <span class="n">BAC</span> <span class="o">=</span> <span class="n">y</span>
+
+    <span class="c1"># dC0 rate constant.</span>
+    <span class="c1"># if statment added so models dont go below 0</span>
     <span class="k">if</span> <span class="n">C0</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-      <span class="n">k0</span> <span class="o">=</span> <span class="mi">0</span>  
+        <span class="n">k0</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">else</span><span class="p">:</span>
-      <span class="n">k0</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">t</span> <span class="c1">#1/h</span>
-  
-   <span class="c1"># dCa rate constant </span>
-    <span class="n">k1</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1">#1/h</span>
+        <span class="n">k0</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">t</span>  <span class="c1"># 1/h</span>
+
+    <span class="c1"># dCa rate constant</span>
+    <span class="n">k1</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># 1/h</span>
 
     <span class="c1"># dCb and dBAC rate constant</span>
     <span class="c1"># if statment added so models dont go below 0</span>
     <span class="k">if</span> <span class="n">BAC</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-      <span class="n">k2</span> <span class="o">=</span> <span class="mi">0</span> 
+        <span class="n">k2</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">else</span><span class="p">:</span>
-      <span class="n">k2</span> <span class="o">=</span> <span class="mf">1.92</span>  <span class="c1">#g/hL</span>
-    
-    <span class="c1">#Store equations as a list in the variable dydt</span>
-    
-    <span class="c1"># Add your solution here  </span>
+        <span class="n">k2</span> <span class="o">=</span> <span class="mf">1.92</span>  <span class="c1"># g/hL</span>
+
+    <span class="c1"># Store equations as a list in the variable dydt</span>
+
     <span class="c1"># Add your solution here</span>
-    <span class="n">dydt</span> <span class="o">=</span> <span class="n">dC0</span><span class="p">,</span><span class="n">dCA</span><span class="p">,</span><span class="n">dCB</span><span class="p">,</span><span class="n">dBAC</span>
-    
+    <span class="c1"># Add your solution here</span>
+    <span class="n">dydt</span> <span class="o">=</span> <span class="n">dC0</span><span class="p">,</span> <span class="n">dCA</span><span class="p">,</span> <span class="n">dCB</span><span class="p">,</span> <span class="n">dBAC</span>
+
     <span class="k">return</span> <span class="n">dydt</span>
 </pre></div>
 </div>
@@ -1465,42 +1463,40 @@ r_2 = -r_1 - k_2
 <p><strong>Its important to note that this ODE assumes that a person of “m” weight  drinks “n” number of drinks on a moderatley full stomach at a given rate then stops.</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">SolveODE</span><span class="p">(</span><span class="n">CT</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="n">f</span><span class="p">):</span>
-
-  <span class="sd">&#39;&#39;&#39; Solves differential equation for reaction kinetics</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">SolveODE</span><span class="p">(</span><span class="n">CT</span><span class="p">,</span> <span class="n">tmax</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Solves differential equation for reaction kinetics</span>
 <span class="sd">    Args:</span>
 <span class="sd">        CT: initial concentration of C0</span>
-<span class="sd">        tmax: the amount of time passed/ the x value of the model </span>
+<span class="sd">        tmax: the amount of time passed/ the x value of the model</span>
 <span class="sd">        f: the Setup function for the solver</span>
 <span class="sd">    Returns:</span>
 <span class="sd">        C0: Concentration profile of alcohol in the stomach</span>
 <span class="sd">        CA: Concentration profile of alcohol in the intestine</span>
 <span class="sd">        CB: Concentration profile of alcohol in the blood</span>
 <span class="sd">        BAC: % value of CB</span>
-<span class="sd">    </span>
-<span class="sd">    &#39;&#39;&#39;</span>
-<span class="c1"># Initial values</span>
-  <span class="n">C00</span> <span class="o">=</span> <span class="n">CT</span>
-  <span class="n">CA0</span> <span class="o">=</span> <span class="mf">0.0</span>
-  <span class="n">CB0</span> <span class="o">=</span> <span class="mf">0.0</span> 
-  <span class="n">BAC0</span> <span class="o">=</span> <span class="mf">0.0</span>
-  
-<span class="c1"># Bundle initial conditions for ODE solver</span>
-  <span class="n">y0</span> <span class="o">=</span> <span class="p">[</span><span class="n">C00</span><span class="p">,</span><span class="n">CA0</span><span class="p">,</span> <span class="n">CB0</span><span class="p">,</span> <span class="n">BAC0</span><span class="p">]</span>
-  <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">tmax</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
-  <span class="n">tspan</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">t</span><span class="p">)]</span>
- 
-<span class="c1"># Call the ODE solver</span>
-  <span class="n">soln</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">solve_ivp</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">tspan</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;RK23&#39;</span><span class="p">)</span>
 
-<span class="c1"># print(soln)</span>
-  <span class="n">C0</span> <span class="o">=</span> <span class="n">soln</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-  <span class="n">CA</span> <span class="o">=</span> <span class="n">soln</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-  <span class="n">CB</span> <span class="o">=</span> <span class="n">soln</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-  <span class="n">BAC</span> <span class="o">=</span> <span class="n">soln</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Initial values</span>
+    <span class="n">C00</span> <span class="o">=</span> <span class="n">CT</span>
+    <span class="n">CA0</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">CB0</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">BAC0</span> <span class="o">=</span> <span class="mf">0.0</span>
 
-  <span class="k">return</span> <span class="n">C0</span><span class="p">,</span><span class="n">CA</span><span class="p">,</span><span class="n">CB</span><span class="p">,</span><span class="n">BAC</span><span class="p">,</span><span class="n">t</span>
- 
+    <span class="c1"># Bundle initial conditions for ODE solver</span>
+    <span class="n">y0</span> <span class="o">=</span> <span class="p">[</span><span class="n">C00</span><span class="p">,</span> <span class="n">CA0</span><span class="p">,</span> <span class="n">CB0</span><span class="p">,</span> <span class="n">BAC0</span><span class="p">]</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">tmax</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+    <span class="n">tspan</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">t</span><span class="p">)]</span>
+
+    <span class="c1"># Call the ODE solver</span>
+    <span class="n">soln</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">solve_ivp</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">tspan</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;RK23&quot;</span><span class="p">)</span>
+
+    <span class="c1"># print(soln)</span>
+    <span class="n">C0</span> <span class="o">=</span> <span class="n">soln</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">CA</span> <span class="o">=</span> <span class="n">soln</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">CB</span> <span class="o">=</span> <span class="n">soln</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">BAC</span> <span class="o">=</span> <span class="n">soln</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">C0</span><span class="p">,</span> <span class="n">CA</span><span class="p">,</span> <span class="n">CB</span><span class="p">,</span> <span class="n">BAC</span><span class="p">,</span> <span class="n">t</span>
 </pre></div>
 </div>
 </div>
@@ -1508,20 +1504,20 @@ r_2 = -r_1 - k_2
 <p>This function puts it all together and places the model info into an array.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Model_info</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">tmax</span><span class="p">):</span>
-  <span class="sd">&#39;&#39;&#39; Puts the previous functions together, </span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Model_info</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">tmax</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Puts the previous functions together,</span>
 <span class="sd">      puts the information into a single variable array</span>
 <span class="sd">    Args:</span>
 <span class="sd">        n: number of martinis drank</span>
-<span class="sd">	      m: Body weight (kg)</span>
-<span class="sd">        tmax: the amount of time passed/ the x value of the model </span>
-<span class="sd">        </span>
+<span class="sd">              m: Body weight (kg)</span>
+<span class="sd">        tmax: the amount of time passed/ the x value of the model</span>
+
 <span class="sd">    Returns:</span>
-<span class="sd">        S: The list array of information </span>
-<span class="sd">  &#39;&#39;&#39;</span>
-  <span class="n">Cai</span> <span class="o">=</span> <span class="n">drinks</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
-  <span class="n">S</span> <span class="o">=</span> <span class="n">SolveODE</span><span class="p">(</span><span class="n">Cai</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="n">f</span><span class="p">)</span>
-  <span class="k">return</span> <span class="n">S</span>
+<span class="sd">        S: The list array of information</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">Cai</span> <span class="o">=</span> <span class="n">drinks</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="n">SolveODE</span><span class="p">(</span><span class="n">Cai</span><span class="p">,</span> <span class="n">tmax</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">S</span>
 </pre></div>
 </div>
 </div>
@@ -1536,20 +1532,13 @@ r_2 = -r_1 - k_2
 <p><strong>Answer (after plotting):</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="c1"># You can change tmax(3) here</span>
-<span class="n">C</span> <span class="o">=</span> <span class="n">Model_info</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">75</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># You can change tmax(3) here</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">Model_info</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 
- <span class="c1"># Add your solution here</span>
- <span class="c1"># Add your solution here</span>
+<span class="c1"># Add your solution here</span>
+<span class="c1"># Add your solution here</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0954929536223611
-</pre></div>
-</div>
-<img alt="../../_images/Alcohol-Pharmacokinetics_19_1.png" src="../../_images/Alcohol-Pharmacokinetics_19_1.png" />
-<img alt="../../_images/Alcohol-Pharmacokinetics_19_2.png" src="../../_images/Alcohol-Pharmacokinetics_19_2.png" />
 </div>
 </div>
 <p>Using the plotted kinetics <strong>Discuss in 3-6 sentences</strong> how long it takes for alcohol to enter the blood stream vs how long it takes for the alcohol to break down. How would BAC change over time if the person weighed more/less? If they drank more/less?</p>
@@ -1562,20 +1551,20 @@ Therefore, we’re going to model how many shots one can drink before poisoning 
 <p>Rework, the drinks function to calculate Cai for shots</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">drinks</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
-  <span class="sd">&#39;&#39;&#39; Determines the initial alcohol concentration in the intestine based on </span>
-<span class="sd">  # of tall martinis drank and body weight(kg)</span>
-<span class="sd">    Args:</span>
-<span class="sd">	      n: number of martinis drank</span>
-<span class="sd">	      m: Body weight (kg)</span>
-<span class="sd">    Returns:</span>
-<span class="sd">       CT: The total amount concentration of alcohol ingested, </span>
-<span class="sd">      Ca0 for the differential equation</span>
-<span class="sd">        &#39;&#39;&#39;</span>
-  <span class="c1"># add your solution here</span>
-  <span class="c1"># Add your solution here</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">drinks</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Determines the initial alcohol concentration in the intestine based on</span>
+<span class="sd">    # of tall martinis drank and body weight(kg)</span>
+<span class="sd">      Args:</span>
+<span class="sd">                n: number of martinis drank</span>
+<span class="sd">                m: Body weight (kg)</span>
+<span class="sd">      Returns:</span>
+<span class="sd">         CT: The total amount concentration of alcohol ingested,</span>
+<span class="sd">        Ca0 for the differential equation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># add your solution here</span>
+    <span class="c1"># Add your solution here</span>
 
-  <span class="k">return</span> <span class="n">CT</span>
+    <span class="k">return</span> <span class="n">CT</span>
 </pre></div>
 </div>
 </div>
@@ -1588,20 +1577,13 @@ Therefore, we’re going to model how many shots one can drink before poisoning 
 <p><strong>Answer (after graphing):</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="c1"># Change n,m and tmax here</span>
-<span class="n">C</span> <span class="o">=</span> <span class="n">Model_info</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Change n,m and tmax here</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">Model_info</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 
- <span class="c1"># Add your solution here</span>
- <span class="c1"># Add your solution here</span>
+<span class="c1"># Add your solution here</span>
+<span class="c1"># Add your solution here</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7779908086843336
-</pre></div>
-</div>
-<img alt="../../_images/Alcohol-Pharmacokinetics_27_1.png" src="../../_images/Alcohol-Pharmacokinetics_27_1.png" />
-<img alt="../../_images/Alcohol-Pharmacokinetics_27_2.png" src="../../_images/Alcohol-Pharmacokinetics_27_2.png" />
 </div>
 </div>
 <p>Some people can develop a tolerance to alcohol. So  they may not feel the same  effects of alcohol even after drinking the same amount they used to drink. This doesn’t mean their BAC is lower. It just means they experience the effects of alcohol differently.</p>
@@ -1621,38 +1603,38 @@ slowly, reducing the rate of absorption and thereby attenuating the subsequent b
 <p>Change the “f” function to account for someone drinking faster/slower and having more/less food in ones stomach before drinking and model how that affects the BAC over time <em>under the same n and m values</em>. <strong>Discuss those effects in 3-5 sentences.</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39; RHS of differential equation for reaction kinetics</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;RHS of differential equation for reaction kinetics</span>
 <span class="sd">    Args:</span>
 <span class="sd">        t: time</span>
 <span class="sd">        y: values for differential questions, [CA, CB, BAC]</span>
 <span class="sd">    Returns:</span>
 <span class="sd">        dydt: first derivation of y w.r.t. t</span>
-<span class="sd">    </span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="c1"># unpack current values of y</span>
-    <span class="n">C0</span><span class="p">,</span><span class="n">CA</span><span class="p">,</span> <span class="n">CB</span><span class="p">,</span> <span class="n">BAC</span> <span class="o">=</span> <span class="n">y</span>      
-  
-   <span class="c1"># dC0 rate constant. </span>
-   <span class="c1">#How fast is one drinking? Define parameters here</span>
-    <span class="k">if</span> <span class="n">C0</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-      <span class="n">k0</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1">#1/h</span>
-    <span class="k">else</span><span class="p">:</span>
-      <span class="n">k0</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">t</span> <span class="c1">#1/h</span>
 
-   <span class="c1"># dCa rate constant.</span>
-   <span class="c1">#How much did one eat? Define parameters here</span>
-    <span class="n">k1</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1">#1/h</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># unpack current values of y</span>
+    <span class="n">C0</span><span class="p">,</span> <span class="n">CA</span><span class="p">,</span> <span class="n">CB</span><span class="p">,</span> <span class="n">BAC</span> <span class="o">=</span> <span class="n">y</span>
+
+    <span class="c1"># dC0 rate constant.</span>
+    <span class="c1"># How fast is one drinking? Define parameters here</span>
+    <span class="k">if</span> <span class="n">C0</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">k0</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># 1/h</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">k0</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">t</span>  <span class="c1"># 1/h</span>
+
+    <span class="c1"># dCa rate constant.</span>
+    <span class="c1"># How much did one eat? Define parameters here</span>
+    <span class="n">k1</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># 1/h</span>
     <span class="c1"># dCb and dBAC rate constant</span>
     <span class="c1"># if statment added so they dont go below 0</span>
     <span class="k">if</span> <span class="n">BAC</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-      <span class="n">k2</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1">#g/hL</span>
+        <span class="n">k2</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># g/hL</span>
     <span class="k">else</span><span class="p">:</span>
-      <span class="n">k2</span> <span class="o">=</span> <span class="mf">1.92</span>  <span class="c1">#g/hL</span>
-    
-    <span class="c1">#Store equations as a list in the variable dydt</span>
-    
-    <span class="c1"># Add your solution here  </span>
+        <span class="n">k2</span> <span class="o">=</span> <span class="mf">1.92</span>  <span class="c1"># g/hL</span>
+
+    <span class="c1"># Store equations as a list in the variable dydt</span>
+
+    <span class="c1"># Add your solution here</span>
     <span class="c1"># Add your solution here</span>
 
     <span class="k">return</span> <span class="n">dydt</span>
@@ -1662,20 +1644,13 @@ slowly, reducing the rate of absorption and thereby attenuating the subsequent b
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="c1">#add input values into the function</span>
-<span class="n">C</span> <span class="o">=</span> <span class="n">Model_info</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># add input values into the function</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">Model_info</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
 
 <span class="c1"># Add your solution here</span>
 <span class="c1"># Add your solution here</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.15489696767904365
-</pre></div>
-</div>
-<img alt="../../_images/Alcohol-Pharmacokinetics_32_1.png" src="../../_images/Alcohol-Pharmacokinetics_32_1.png" />
-<img alt="../../_images/Alcohol-Pharmacokinetics_32_2.png" src="../../_images/Alcohol-Pharmacokinetics_32_2.png" />
 </div>
 </div>
 </section>
