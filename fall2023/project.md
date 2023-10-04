@@ -60,21 +60,25 @@ You will also submit via Gradescope up to 1-page (PDF) highlighting the key revi
 ### Anticipated Time Requirements
 
 **Notebook Editting**
-Project Proposal: 1 hour
-Complete Activities in Notebook, Verify Answers: 2 hours
-Formatting and Edits: 2 hours
-Intellectual Contribution: 3 hours
-Learning GitHub: 1 hour
-Miscellanous: 1 hour
+| Activity | Time |
+| -------- | ---- |
+| Project Proposal | 1 hour |
+| Complete Activities in Notebook, Verify Answers | 2 hours |
+| Formatting and Edits | 2 hours |
+| Intellectual Contribution | 3 hours |
+| Learning GitHub | 1 hour |
+| Miscellanous | 1 hour |
 
 **Create New Notebook** (per person)
-Project Proposal: 1 hour
-Agree on Project Idea, Coordinate Effort: 1 hour
-Review Reference Material: 2 hours
-Prepare Notebook (keep it simple): 2 hours
-Formatting and Edits: 2 hours
-Learning GitHub: 1 hour
-Miscellanous: 1 hour
+| Activity | Time |
+| -------- | ---- |
+| Project Proposal | 1 hour |
+| Agree on Project Idea, Coordinate Effort | 1 hour |
+| Review Reference Material | 2 hours |
+| Prepare Notebook (keep it simple) | 2 hours |
+| Formatting and Edits | 2 hours |
+| Learning GitHub | 1 hour |
+| Miscellanous | 1 hour |
 
 ## Part 2: Create a Data Analysis Jupyter Notebook
 
@@ -124,15 +128,17 @@ You will also submit via Gradescope up to 1-page (PDF) explaining how this examp
 ### Anticipated Time Requirements
 
 (per person)
-Brainstorm Ideas: 1 hour
-Agree on Project Scope: 2 hour
-Identify Data Sources and Examples: 2 hour
-Prepare Notebook Draft 1: 2 hours
-Project Status Update: 1 hour
-Prepare Notebook Draft 2: 2 hours
-Team Coordination: 2 hours
-Formatting and Editting: 2 hours
-Submission: 1 hour
+| Activity | Time |
+| -------- | ---- |
+| Brainstorm Ideas | 1 hour |
+| Agree on Project Scope | 2 hours |
+| Identify Data Sources and Examples | 2 hours |
+| Prepare Notebook Draft 1 | 2 hours |
+| Project Status Update | 1 hour |
+| Prepare Notebook Draft 2 | 2 hours |
+| Team Coordination | 2 hours |
+| Formatting and Editting | 2 hours |
+| Submission | 1 hour |
 
 ## Part 3: Deliver a Final Presentation
 
