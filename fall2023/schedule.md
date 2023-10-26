@@ -107,17 +107,17 @@
 [](../notebooks/13/Bootstrap-Confidence-Intervals.ipynb) |
 | **Tuesday, November 7** | Project Workshop | 
 | **Thursday, November 9** | Project Workshop | 
-| **Tuesday, November 14** | Statistical Power | 
-| [](../notebooks/13/Type-I-and-Type-II-Errors.ipynb) | [](../notebooks/13/Statistical-Power-in-Python.ipynb)
-| [](../notebooks/13/Statistical-Power-Basics.ipynb) | [](../notebooks/13/Statistical-Power-Practice-Problems.ipynb) 
-| **Thursday, November 16** | Multivariate Linear Regression | 
+| **Tuesday, November 14** | Multivariate Linear Regression | 
 | | [](../notebooks/14/Ordinary-Least-Squares-Linear-Regression.ipynb) |
 | | [](../notebooks/14/Residual-Analysis.ipynb) |
 | | [](../notebooks/14/Regression-Assumption-Examples.ipynb) |
 | | [](../notebooks/14/Uncertainty-Analysis-and-Statistical-Inference.ipynb) |
 | | [](../notebooks/14/Multivariate-Linear-Regression.ipynb) |
 | | [](../notebooks/14/Linear-Regression-Practice-Problems.ipynb) |
-| **Tuesday, November 21** | Multivariate Linear Regression Continued | 
+| **Thursday, November 16** | Multivariate Linear Regression Continued |
+| **Tuesday, November 21** | Statistical Power | 
+| [](../notebooks/13/Type-I-and-Type-II-Errors.ipynb) | [](../notebooks/13/Statistical-Power-in-Python.ipynb)
+| [](../notebooks/13/Statistical-Power-Basics.ipynb) | [](../notebooks/13/Statistical-Power-Practice-Problems.ipynb)  
 | **Thursday, November 23** | Thanksgiving | 
 | **Tuesday, November 28** | Probability and Statistics Quiz, Nonlinear Regression  |
 | [](../notebooks/15/Transformations-and-Linear-Regression.ipynb) |
