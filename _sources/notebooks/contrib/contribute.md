@@ -42,9 +42,13 @@ Select your new branch from the dropdown menu. Then navigate to the `/notebooks/
 
 ![](/media/contrib_instructions/upload-files.png)
 
-### Step 5: Create a Pull Request
+### Step 5: Upload Image Files (Optional)
 
-On the [main class repository](https://github.com/ndcbe/data-and-computing), create a pull request to merge your branch on your fork into the `contributed-notebooks` branch on the main class repository. After uploading the new notebook file to your branch, you should see an orange/yellow box with your branch name.
+Upload any media files you created or modified to the `/media` folder. Please include both the image (as a `.png`) and the source file (e.g., `.pptx`). Use the same interface as the previous step.
+
+### Step 6: Create a Pull Request
+
+On the [main class repository](https://github.com/ndcbe/data-and-computing), create a pull request (PR) to merge your branch on your fork into the `contributed-notebooks` branch on the main class repository. After uploading the new notebook file to your branch, you should see an orange/yellow box with your branch name.
 
 ![](/media/contrib_instructions/pull-request1.png)
 
@@ -58,4 +62,6 @@ Make sure you see **main <-- your branch name**. Then add a descriptive comment 
 
 Tag `@adowling2` in the comments of your pull request.
 
-### Step 6: Run JypyterBook to Publish to the Class Website
+### Step 7: Run JypyterBook to Publish to the Class Website
+
+Professor Dowling will do this step.
