@@ -24,11 +24,12 @@ Please take a few minutes to browse [previously contributed notebooks](../notebo
 Many of these notebooks need some minor editing:
 * Ensure consistent section numbers
 * Make plots publication quality
-* Fix equations not rendered correctly
-* Fix links to other notebooks
+* Fix equations that are not rendered correctly on the class website
+* Check and fix links to other notebooks
 * Move all solutions, including discussion solutions, to between `### BEGIN SOLUTION` and `### END SOLUTION` in code block.
 * Spelling and grammar checks
 * Ensure all images render correctly
+* At the top of the notebook after the original creators, add "Edited by: YOUR NAME, youremail@nd.edu"
 
 Each person will contribute their editted notebook via GitHub following [these instructions](../notebooks/contrib/contribute.md). **Important:** Do NOT edit the notebook using the "Launch Colab" link on the class website. Instead, you need to download the correct file [here](https://github.com/ndcbe/data-and-computing/tree/main/notebooks/contrib-dev). You can then upload this version to Google Colab for editting. If you do not follow these instructions, you will end the wrong version of the file and need to redo your work.
 
@@ -53,9 +54,9 @@ Please indicate your preferences [here](https://forms.gle/MyLb75GS2RzFd1nm7).
 
 ### Submission
 
-Each person (or team) will submit their revisions via GitHub. See [](../notebooks/contrib/contribute.md) for instructions. We are doing this so everyone practices using GitHub.
+Each person (or team) will submit their revisions via a GitHub pull request (PR). See [](../notebooks/contrib/contribute.md) for instructions. We are doing this so everyone practices using GitHub. In your GitHub PR, update a new version of the notebook with the same file name as the current version (before revisions). This way GitHub will recognize you as a contributor to that file.
 
-You will also submit via Gradescope up to 1-page (PDF) highlighting the key revisions you made. In this document, you need to clearly articulate your intellectual contributions.
+You will also submit via Gradescope up to 1-page (PDF) highlighting the key revisions you made. In this document, you need to clearly articulate your intellectual contributions. Please also include a link to the GitHub pull request that contains the final version of your revised notebook.
 
 ### Anticipated Time Requirements
 
@@ -82,7 +83,7 @@ You will also submit via Gradescope up to 1-page (PDF) highlighting the key revi
 
 ## Part 2: Create a Data Analysis Jupyter Notebook
 
-In teams of 2 or 3 people, you will contribute a Jupyter notebook to the class website demonstrating one or more data analysis skills from CBE 60258.
+In teams of two, you will contribute a Jupyter notebook to the class website demonstrating one or more data analysis skills from CBE 60258.
 
 ### Choosing a Good Problem and Data Set
 
@@ -104,7 +105,7 @@ Each team should submit a 1-page project update that:
 5. Lists anticipated take-away messages from your analysis
 6. Lists references (full bibliographic information)
 
-You will also submit a draft of the 
+You will also submit a draft of your notebook. At a minimum, this draft should include an outline for the notebook (including subsection and subsubsection titles -- see below for required content) and demonstrate your team has begun making progress.
 
 ### Project Notebook
 
