@@ -887,7 +887,7 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="Non-Isothermal-PBR.html">
+    <a class="reference internal" href="Non_Isothermal_PBR.html">
      Non-Isothermal Packed Bed Reactor
     </a>
    </li>
@@ -1392,7 +1392,7 @@ const thebe_selector_output = ".output, .cell_output"
 <h3>2.1. Solve for mole fraction of each stream<a class="headerlink" href="#solve-for-mole-fraction-of-each-stream" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="c1"># libraries used</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># libraries used</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -1411,9 +1411,9 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Density of each species</span>
 <span class="c1"># water</span>
-<span class="n">P_water</span> <span class="o">=</span> <span class="mi">997</span> <span class="c1"># kg/m^3</span>
+<span class="n">P_water</span> <span class="o">=</span> <span class="mi">997</span>  <span class="c1"># kg/m^3</span>
 <span class="c1"># Methanol</span>
-<span class="n">P_Methanol</span> <span class="o">=</span> <span class="mi">792</span> <span class="c1"># kg/m^3</span>
+<span class="n">P_Methanol</span> <span class="o">=</span> <span class="mi">792</span>  <span class="c1"># kg/m^3</span>
 </pre></div>
 </div>
 </div>
@@ -1427,18 +1427,18 @@ const thebe_selector_output = ".output, .cell_output"
 \]</div>
 <p>We also know that the density (ρ) of a mixutre can be calculated by summing the mole fraction (X) of each component by that component’s density.
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2422a10d-9a7d-49f3-95de-905eddc991ad">
-<span class="eqno">(83)<a class="headerlink" href="#equation-2422a10d-9a7d-49f3-95de-905eddc991ad" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-895fb458-730a-4da2-b56a-9f0350a21520">
+<span class="eqno">(83)<a class="headerlink" href="#equation-895fb458-730a-4da2-b56a-9f0350a21520" title="Permalink to this equation">¶</a></span>\[\begin{align}
         ρ_t = ρ_a X_a + ρ_b X_b
     \end{align}\]</div>
 <div class="math notranslate nohighlight">
 \[From these information, we can write a system of linear equations to calculate the mole fraction of methanol and water in each stream:\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-48e53280-3273-4763-9834-8bfe839d8851">
-<span class="eqno">(84)<a class="headerlink" href="#equation-48e53280-3273-4763-9834-8bfe839d8851" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-7b52ea6e-0d30-4789-8dfd-fee2faa85bd3">
+<span class="eqno">(84)<a class="headerlink" href="#equation-7b52ea6e-0d30-4789-8dfd-fee2faa85bd3" title="Permalink to this equation">¶</a></span>\[\begin{align}
         1 = X_W + X_M
     \end{align}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-09c9a9c6-848d-4f08-b423-4587f133b5ee">
-<span class="eqno">(85)<a class="headerlink" href="#equation-09c9a9c6-848d-4f08-b423-4587f133b5ee" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-4ea2df2c-b5bf-4970-882f-a0d92e4d0313">
+<span class="eqno">(85)<a class="headerlink" href="#equation-4ea2df2c-b5bf-4970-882f-a0d92e4d0313" title="Permalink to this equation">¶</a></span>\[\begin{align}
         ρ_t = ρ_M X_M + ρ_W X_W
     \end{align}\]</div>
 <p>$$</p>
@@ -1449,8 +1449,8 @@ $$</p>
 <p>An easier method to calculate the mole fraciton of Methanol in each stream is to use linear algebra.</p>
 <p>Matrix form:
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3f679ad4-a585-4641-ab35-10930cb7bf5d">
-<span class="eqno">(86)<a class="headerlink" href="#equation-3f679ad4-a585-4641-ab35-10930cb7bf5d" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9e8f45ad-83d5-40f9-9960-73f40b7fb4b7">
+<span class="eqno">(86)<a class="headerlink" href="#equation-9e8f45ad-83d5-40f9-9960-73f40b7fb4b7" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \begin{bmatrix}
 ρ_W &amp; ρ_m\\
 1 &amp; 1
@@ -1469,7 +1469,7 @@ $$</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">conc_solver</span><span class="p">(</span><span class="n">SG</span><span class="p">):</span>
-  <span class="c1"># Add your solution hereS</span>
+    <span class="c1"># Add your solution hereS</span>
 </pre></div>
 </div>
 </div>
@@ -1483,7 +1483,7 @@ $$</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Specify the Specific Gravity of each stream</span>
- <span class="c1"># Add your solution hereS</span>
+<span class="c1"># Add your solution hereS</span>
 </pre></div>
 </div>
 </div>
@@ -1498,7 +1498,7 @@ $$</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate the molar fraction of each stream</span>
- <span class="c1"># Add your solution hereS</span>
+<span class="c1"># Add your solution hereS</span>
 </pre></div>
 </div>
 </div>
@@ -1520,8 +1520,8 @@ The molar fraction of Methanol in the feed stream is: 0.550
 <p>Using the points of VLE obtained from Aspen Plus to generate a best fit line to model VLE. <strong>Hint:</strong> Use Excel or Python.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#imports the csv data into python</span>
-<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/chennieXD/McCabe-Thiele/main/LiquidVaporEquil.csv&#39;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># imports the csv data into python</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/chennieXD/McCabe-Thiele/main/LiquidVaporEquil.csv&quot;</span>
 <span class="n">liq_vap_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">liq_vap_data</span><span class="p">)</span>
 </pre></div>
@@ -1729,9 +1729,8 @@ beta_hat = [ 1.56311059e-02  6.16921967e+00 -2.72479383e+01  7.04901787e+01
 <p>Create a function that is able to generate the points requried to plot the stepping line.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">stair</span><span class="p">(</span><span class="n">slope</span><span class="p">,</span><span class="n">y_intercept</span><span class="p">,</span><span class="n">x_start</span> <span class="p">,</span><span class="n">y_start</span><span class="p">,</span> <span class="n">y_end</span><span class="p">,</span> <span class="n">Efficiency</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">stair</span><span class="p">(</span><span class="n">slope</span><span class="p">,</span> <span class="n">y_intercept</span><span class="p">,</span> <span class="n">x_start</span><span class="p">,</span> <span class="n">y_start</span><span class="p">,</span> <span class="n">y_end</span><span class="p">,</span> <span class="n">Efficiency</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="c1"># Add your solution hereS</span>
-    
 </pre></div>
 </div>
 </div>
@@ -1763,12 +1762,12 @@ beta_hat = [ 1.56311059e-02  6.16921967e+00 -2.72479383e+01  7.04901787e+01
 <div class="section" id="solve-for-the-slope-of-the-q-and-rectifying-line">
 <h3>4.1. Solve for the slope of the q and rectifying line<a class="headerlink" href="#solve-for-the-slope-of-the-q-and-rectifying-line" title="Permalink to this headline">¶</a></h3>
 <p>Using the relationship below, calculate the slope of the q and rectifying line. q is the mole fraction of liquid in the feed stream and R is the reflux ratio. Store the slope of q-line as <strong>m_q</strong> and slope of rectifying operating line as <strong>m_rec</strong></p>
-<div class="amsmath math notranslate nohighlight" id="equation-ea09f282-8755-4290-9ba2-ca647465a51a">
-<span class="eqno">(87)<a class="headerlink" href="#equation-ea09f282-8755-4290-9ba2-ca647465a51a" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-2f6d53bb-7cca-499e-b1d9-d46b530995c7">
+<span class="eqno">(87)<a class="headerlink" href="#equation-2f6d53bb-7cca-499e-b1d9-d46b530995c7" title="Permalink to this equation">¶</a></span>\[\begin{align}
         m_{feed} = \frac{q}{ q - 1 }
     \end{align}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-dfd355c6-d498-4be8-8c9e-ef9e2074ec83">
-<span class="eqno">(88)<a class="headerlink" href="#equation-dfd355c6-d498-4be8-8c9e-ef9e2074ec83" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-45223576-9f42-4030-ac12-419c8cb22435">
+<span class="eqno">(88)<a class="headerlink" href="#equation-45223576-9f42-4030-ac12-419c8cb22435" title="Permalink to this equation">¶</a></span>\[\begin{align}
         m_{rec} = \frac{R}{ R + 1 }        
     \end{align}\]</div>
 <div class="cell docutils container">
@@ -1776,7 +1775,7 @@ beta_hat = [ 1.56311059e-02  6.16921967e+00 -2.72479383e+01  7.04901787e+01
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mole fraction of liquid in feed</span>
 <span class="n">q</span> <span class="o">=</span> <span class="mf">0.36</span>
 <span class="c1"># Reflux Ratio</span>
-<span class="n">R</span><span class="o">=</span> <span class="mf">1.25</span> 
+<span class="n">R</span> <span class="o">=</span> <span class="mf">1.25</span>
 
 <span class="c1"># Add your solution hereS</span>
 </pre></div>
@@ -1798,8 +1797,8 @@ beta_hat = [ 1.56311059e-02  6.16921967e+00 -2.72479383e+01  7.04901787e+01
 \]</div>
 <p>Matrix form:
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9c6b023b-4d8f-488a-9ac4-7b673baf57d7">
-<span class="eqno">(89)<a class="headerlink" href="#equation-9c6b023b-4d8f-488a-9ac4-7b673baf57d7" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ddce9e67-b103-401f-a63c-caf36a5206d2">
+<span class="eqno">(89)<a class="headerlink" href="#equation-ddce9e67-b103-401f-a63c-caf36a5206d2" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \begin{bmatrix}
 m_{rec} &amp; -1\\
 m_{q} &amp; -1
@@ -1881,45 +1880,64 @@ m_{q} &amp; -1
 
 <span class="c1"># McCabe-Thiele of a feed run</span>
 <span class="c1"># stripping portion of stepping line generation</span>
-<span class="n">stripping_line</span> <span class="o">=</span> <span class="n">stair</span><span class="p">(</span><span class="n">slope</span> <span class="o">=</span> <span class="n">m_strip</span> <span class="p">,</span><span class="n">y_intercept</span> <span class="o">=</span> <span class="n">y_intercept_strip</span><span class="p">,</span> <span class="n">x_start</span> <span class="o">=</span> <span class="n">xB</span> <span class="p">,</span> <span class="n">y_start</span> <span class="o">=</span> <span class="n">xB</span> <span class="p">,</span> <span class="n">y_end</span> <span class="o">=</span> <span class="n">intercept</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">Efficiency</span> <span class="o">=</span> <span class="n">efficiency</span><span class="p">)</span>
+<span class="n">stripping_line</span> <span class="o">=</span> <span class="n">stair</span><span class="p">(</span>
+    <span class="n">slope</span><span class="o">=</span><span class="n">m_strip</span><span class="p">,</span>
+    <span class="n">y_intercept</span><span class="o">=</span><span class="n">y_intercept_strip</span><span class="p">,</span>
+    <span class="n">x_start</span><span class="o">=</span><span class="n">xB</span><span class="p">,</span>
+    <span class="n">y_start</span><span class="o">=</span><span class="n">xB</span><span class="p">,</span>
+    <span class="n">y_end</span><span class="o">=</span><span class="n">intercept</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+    <span class="n">Efficiency</span><span class="o">=</span><span class="n">efficiency</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="n">xplot_stripping</span> <span class="o">=</span> <span class="n">stripping_line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">yplot_stripping</span> <span class="o">=</span> <span class="n">stripping_line</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
 <span class="c1"># rectifying portion of stepping line generation</span>
-<span class="n">rectifying_line</span> <span class="o">=</span> <span class="n">stair</span><span class="p">(</span><span class="n">slope</span> <span class="o">=</span> <span class="n">m_rec</span> <span class="p">,</span><span class="n">y_intercept</span> <span class="o">=</span> <span class="n">y_intercept_rec</span><span class="p">,</span> <span class="n">x_start</span> <span class="o">=</span> <span class="p">(</span><span class="n">yplot_stripping</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">y_intercept_rec</span><span class="p">)</span><span class="o">/</span><span class="n">m_rec</span> <span class="p">,</span> <span class="n">y_start</span> <span class="o">=</span> <span class="n">yplot_stripping</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="p">,</span> <span class="n">y_end</span> <span class="o">=</span> <span class="n">xD</span><span class="p">,</span> <span class="n">Efficiency</span> <span class="o">=</span> <span class="n">efficiency</span><span class="p">)</span>
+<span class="n">rectifying_line</span> <span class="o">=</span> <span class="n">stair</span><span class="p">(</span>
+    <span class="n">slope</span><span class="o">=</span><span class="n">m_rec</span><span class="p">,</span>
+    <span class="n">y_intercept</span><span class="o">=</span><span class="n">y_intercept_rec</span><span class="p">,</span>
+    <span class="n">x_start</span><span class="o">=</span><span class="p">(</span><span class="n">yplot_stripping</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_intercept_rec</span><span class="p">)</span> <span class="o">/</span> <span class="n">m_rec</span><span class="p">,</span>
+    <span class="n">y_start</span><span class="o">=</span><span class="n">yplot_stripping</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+    <span class="n">y_end</span><span class="o">=</span><span class="n">xD</span><span class="p">,</span>
+    <span class="n">Efficiency</span><span class="o">=</span><span class="n">efficiency</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="n">xplot_rectifying</span> <span class="o">=</span> <span class="n">rectifying_line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">yplot_rectifying</span> <span class="o">=</span> <span class="n">rectifying_line</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
-<span class="c1"># complie the x and y points to respective liststogether </span>
+<span class="c1"># complie the x and y points to respective liststogether</span>
 <span class="n">xplot</span> <span class="o">=</span> <span class="n">xplot_stripping</span> <span class="o">+</span> <span class="n">xplot_rectifying</span>
 <span class="n">yplot</span> <span class="o">=</span> <span class="n">yplot_stripping</span> <span class="o">+</span> <span class="n">yplot_rectifying</span>
 
 
 <span class="c1"># McCabe-Thiele diagram</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 <span class="c1"># plot the LVE line</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">liqvapx</span><span class="p">,</span><span class="n">liqvapy</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">liqvapx</span><span class="p">,</span> <span class="n">liqvapy</span><span class="p">)</span>
 <span class="c1"># plot the 45 degree line</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
 <span class="c1"># plot the step line</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xplot</span><span class="p">,</span> <span class="n">yplot</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xplot</span><span class="p">,</span> <span class="n">yplot</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
 <span class="c1"># plot the SOP</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">xB</span><span class="p">,</span><span class="n">intercept</span><span class="p">[</span><span class="mi">0</span><span class="p">]],[</span><span class="n">xB</span><span class="p">,</span><span class="n">intercept</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;purple&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">xB</span><span class="p">,</span> <span class="n">intercept</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">xB</span><span class="p">,</span> <span class="n">intercept</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;purple&quot;</span><span class="p">)</span>
 <span class="c1"># plot the ROP</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">xD</span><span class="p">,</span><span class="n">intercept</span><span class="p">[</span><span class="mi">0</span><span class="p">]],[</span><span class="n">xD</span><span class="p">,</span><span class="n">intercept</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">xD</span><span class="p">,</span> <span class="n">intercept</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">xD</span><span class="p">,</span> <span class="n">intercept</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">)</span>
 <span class="c1"># plot the q-line</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">xZ</span><span class="p">,</span><span class="n">intercept</span><span class="p">[</span><span class="mi">0</span><span class="p">]],[</span><span class="n">xZ</span><span class="p">,</span><span class="n">intercept</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">xZ</span><span class="p">,</span> <span class="n">intercept</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">xZ</span><span class="p">,</span> <span class="n">intercept</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">)</span>
 <span class="c1"># Formating the plot</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Liquid Mole Fraction </span><span class="se">\n</span><span class="s1"> of Methanol&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span><span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Vapor Mole Fraction </span><span class="se">\n</span><span class="s1"> of Methanol&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span><span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Liquid Mole Fraction </span><span class="se">\n</span><span class="s2"> of Methanol&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Vapor Mole Fraction </span><span class="se">\n</span><span class="s2"> of Methanol&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s2">&quot;in&quot;</span><span class="p">,</span><span class="n">top</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;McCabe-Thiele of a </span><span class="se">\n</span><span class="s1"> feed system&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span> <span class="s1">&#39;bold&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;LVE line&#39;</span><span class="p">,</span> <span class="s1">&#39;45 line&#39;</span><span class="p">,</span> <span class="s1">&#39;step line&#39;</span><span class="p">,</span> <span class="s1">&#39;SOP&#39;</span><span class="p">,</span><span class="s1">&#39;ROP&#39;</span><span class="p">,</span><span class="s1">&#39;q-line&#39;</span><span class="p">),</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.43</span><span class="p">),</span><span class="n">borderaxespad</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;McCabe-Thiele of a </span><span class="se">\n</span><span class="s2"> feed system&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span>
+    <span class="n">labels</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;LVE line&quot;</span><span class="p">,</span> <span class="s2">&quot;45 line&quot;</span><span class="p">,</span> <span class="s2">&quot;step line&quot;</span><span class="p">,</span> <span class="s2">&quot;SOP&quot;</span><span class="p">,</span> <span class="s2">&quot;ROP&quot;</span><span class="p">,</span> <span class="s2">&quot;q-line&quot;</span><span class="p">),</span>
+    <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.43</span><span class="p">),</span>
+    <span class="n">borderaxespad</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 <span class="n">total_stage</span> <span class="o">=</span> <span class="n">stripping_line</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">rectifying_line</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The number of total theoretical stage is &quot;</span><span class="p">,</span><span class="n">total_stage</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The number of total theoretical stage is &quot;</span><span class="p">,</span> <span class="n">total_stage</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

@@ -887,7 +887,7 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="Non-Isothermal-PBR.html">
+    <a class="reference internal" href="Non_Isothermal_PBR.html">
      Non-Isothermal Packed Bed Reactor
     </a>
    </li>
@@ -1229,22 +1229,22 @@ const thebe_selector_output = ".output, .cell_output"
 <p>In a random simulation, one can directly capture the random nature of molecules by using random molecular motion and probability of collision as the basis of reaction rates.</p>
 <p>Through this exercise, we will highlight similarities and differences between a random simulation model and a deterministic model.</p>
 <p>We will use the following two reaction constant volume batch system for the purpose of this excercise.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2003bd97-8d27-498d-aed8-74b6a137ca11">
-<span class="eqno">(69)<a class="headerlink" href="#equation-2003bd97-8d27-498d-aed8-74b6a137ca11" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ed770b5e-6cdf-4093-8fb7-5c7721b40227">
+<span class="eqno">(69)<a class="headerlink" href="#equation-ed770b5e-6cdf-4093-8fb7-5c7721b40227" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 A \xrightarrow{k_1} B
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-876cc1fe-274a-4875-852d-7646be5ae0f2">
-<span class="eqno">(70)<a class="headerlink" href="#equation-876cc1fe-274a-4875-852d-7646be5ae0f2" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4da449ca-5de2-4553-a461-0685edf00d02">
+<span class="eqno">(70)<a class="headerlink" href="#equation-4da449ca-5de2-4553-a461-0685edf00d02" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 B \xrightarrow{k_2} C
 \end{equation}\]</div>
 <p>For stochastic (random) modeling, the systems are generally small and consist of about a few hundred molecules. Thus, we will model the system using the exact number of molecules instead of using concentrations. We will assume that these reactions are actual molecular events, i.e., a molecule of A converts to B in the first reaction, and a molecule of B converts to C in the second reaction.</p>
 <p>Which reaction takes place is governed by their probabilities; this is proportional to the rate constant and the number of molecules as shown below:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1f267384-ac2a-4e83-a117-7d7c7f5b38e5">
-<span class="eqno">(71)<a class="headerlink" href="#equation-1f267384-ac2a-4e83-a117-7d7c7f5b38e5" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-94620b26-f7f1-4487-a8ed-2ef17ea749d9">
+<span class="eqno">(71)<a class="headerlink" href="#equation-94620b26-f7f1-4487-a8ed-2ef17ea749d9" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 r1 = k_1x_a
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-6f34785b-c09e-47a9-9254-63b6ca9e7533">
-<span class="eqno">(72)<a class="headerlink" href="#equation-6f34785b-c09e-47a9-9254-63b6ca9e7533" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c4a3c365-0caf-4631-9ff4-270691180ff5">
+<span class="eqno">(72)<a class="headerlink" href="#equation-c4a3c365-0caf-4631-9ff4-270691180ff5" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 r2 = k_2x_b
 \end{equation}\]</div>
 <p>These reaction probabilities look very similar to rate equations from the deterministic models. However, <strong>x<span class="math notranslate nohighlight">\(_i\)</span></strong> is the number of component <strong><span class="math notranslate nohighlight">\(i\)</span></strong> molecules in the reactor volume, not concentration <strong>C<span class="math notranslate nohighlight">\(_i\)</span></strong>.</p>
@@ -1262,51 +1262,50 @@ r2 = k_2x_b
 <div class="section" id="random-simulation-model-gillespie-algorithm">
 <h2>2. Random Simulation Model - Gillespie Algorithm<a class="headerlink" href="#random-simulation-model-gillespie-algorithm" title="Permalink to this headline">¶</a></h2>
 <p>Complete the function “gillespie” to perform stochastic simulation of the two reaction batch system.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-37cac6a0-eddb-4482-86d9-ea77fd992d4b">
-<span class="eqno">(73)<a class="headerlink" href="#equation-37cac6a0-eddb-4482-86d9-ea77fd992d4b" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-807f3621-127f-474f-a969-a345719df60a">
+<span class="eqno">(73)<a class="headerlink" href="#equation-807f3621-127f-474f-a969-a345719df60a" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 A \xrightarrow{k_1} B
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-cfc7643c-4c77-496a-bf48-0315c5b29a92">
-<span class="eqno">(74)<a class="headerlink" href="#equation-cfc7643c-4c77-496a-bf48-0315c5b29a92" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-aa1ca103-b280-495e-8a15-774e04afe6b3">
+<span class="eqno">(74)<a class="headerlink" href="#equation-aa1ca103-b280-495e-8a15-774e04afe6b3" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 B \xrightarrow{k_2} C
 \end{equation}\]</div>
 <p><strong>Write a pseudocode for the while loop to complete the code.</strong>  Submit this answer on an attached pdf file.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gillespie</span><span class="p">(</span><span class="n">k1</span><span class="p">,</span><span class="n">k2</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="p">):</span>
-  <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">  Function to implement Gillespie algorithm to perform stochastic simulation of the two reaction batch system</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gillespie</span><span class="p">(</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to implement Gillespie algorithm to perform stochastic simulation of the two reaction batch system</span>
 
-<span class="sd">  Arguments: </span>
-<span class="sd">  k1,k2: Reaction rate constants of the two reactions</span>
-<span class="sd">  A,B,C: Initial number of A, B and C molecules</span>
+<span class="sd">    Arguments:</span>
+<span class="sd">    k1,k2: Reaction rate constants of the two reactions</span>
+<span class="sd">    A,B,C: Initial number of A, B and C molecules</span>
 
-<span class="sd">  Returns: </span>
-<span class="sd">  y: A numpy array of simulation time and number of A, B and C molecules</span>
-<span class="sd">  &#39;&#39;&#39;</span>
-  <span class="c1"># Random Simulation using Gillespie algorithm</span>
+<span class="sd">    Returns:</span>
+<span class="sd">    y: A numpy array of simulation time and number of A, B and C molecules</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Random Simulation using Gillespie algorithm</span>
 
-  <span class="c1"># Index counter</span>
-  <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>   
+    <span class="c1"># Index counter</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
 
-  <span class="c1"># Initialize list for storing simulation time        </span>
-  <span class="n">time</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>  
+    <span class="c1"># Initialize list for storing simulation time</span>
+    <span class="n">time</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-  <span class="c1"># Initialize list for storing number of A, B and C molecules</span>
-  <span class="n">x_a</span> <span class="o">=</span> <span class="p">[</span><span class="n">A</span><span class="p">]</span>
-  <span class="n">x_b</span> <span class="o">=</span> <span class="p">[</span><span class="n">B</span><span class="p">]</span>
-  <span class="n">x_c</span> <span class="o">=</span> <span class="p">[</span><span class="n">C</span><span class="p">]</span>
+    <span class="c1"># Initialize list for storing number of A, B and C molecules</span>
+    <span class="n">x_a</span> <span class="o">=</span> <span class="p">[</span><span class="n">A</span><span class="p">]</span>
+    <span class="n">x_b</span> <span class="o">=</span> <span class="p">[</span><span class="n">B</span><span class="p">]</span>
+    <span class="n">x_c</span> <span class="o">=</span> <span class="p">[</span><span class="n">C</span><span class="p">]</span>
 
-  <span class="c1"># Total reaction probability at time t = 0</span>
-  <span class="n">r1</span> <span class="o">=</span> <span class="n">k1</span><span class="o">*</span><span class="n">x_a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-  <span class="n">r2</span> <span class="o">=</span> <span class="n">k2</span><span class="o">*</span><span class="n">x_b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-  <span class="n">rtot</span> <span class="o">=</span> <span class="n">r1</span> <span class="o">+</span> <span class="n">r2</span>     
+    <span class="c1"># Total reaction probability at time t = 0</span>
+    <span class="n">r1</span> <span class="o">=</span> <span class="n">k1</span> <span class="o">*</span> <span class="n">x_a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">r2</span> <span class="o">=</span> <span class="n">k2</span> <span class="o">*</span> <span class="n">x_b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">rtot</span> <span class="o">=</span> <span class="n">r1</span> <span class="o">+</span> <span class="n">r2</span>
 
-  <span class="k">while</span> <span class="n">rtot</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
+    <span class="k">while</span> <span class="n">rtot</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># Add your solution here ###</span>
 
-    <span class="c1"># Add your solution here ###</span>
-
-  <span class="k">return</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">y</span>
 </pre></div>
 </div>
 </div>
@@ -1316,8 +1315,8 @@ B \xrightarrow{k_2} C
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define initial number of molecules and rate constants</span>
 
-<span class="n">k1</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="c1">#s-1</span>
-<span class="n">k2</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1">#s-1</span>
+<span class="n">k1</span> <span class="o">=</span> <span class="mf">0.5</span>  <span class="c1"># s-1</span>
+<span class="n">k2</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># s-1</span>
 <span class="n">A</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="n">B</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">C</span> <span class="o">=</span> <span class="mi">0</span>
@@ -1329,7 +1328,7 @@ B \xrightarrow{k_2} C
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run gillespie function</span>
 
-<span class="n">x</span> <span class="o">=</span> <span class="n">gillespie</span><span class="p">(</span><span class="n">k1</span><span class="p">,</span><span class="n">k2</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">gillespie</span><span class="p">(</span><span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">)</span>
 <span class="n">time</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">xa</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">xb</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
@@ -1354,27 +1353,27 @@ B \xrightarrow{k_2} C
 <div class="section" id="a-deterministic-equations">
 <h2>3a. Deterministic Equations<a class="headerlink" href="#a-deterministic-equations" title="Permalink to this headline">¶</a></h2>
 <p>Deterministic rate model for the same reaction network would result in the following rate expressions:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cbe1078c-546c-4cb5-a61c-b38bfff9f4cf">
-<span class="eqno">(75)<a class="headerlink" href="#equation-cbe1078c-546c-4cb5-a61c-b38bfff9f4cf" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7eb794f0-dfd2-4680-9d31-6905f3d5e2ff">
+<span class="eqno">(75)<a class="headerlink" href="#equation-7eb794f0-dfd2-4680-9d31-6905f3d5e2ff" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 r1 = k_1C_a
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-c2a3cf80-02f3-44be-8fa0-7fb4574c4a84">
-<span class="eqno">(76)<a class="headerlink" href="#equation-c2a3cf80-02f3-44be-8fa0-7fb4574c4a84" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5aabb9f1-335a-4e5b-b46e-e9c8508ada21">
+<span class="eqno">(76)<a class="headerlink" href="#equation-5aabb9f1-335a-4e5b-b46e-e9c8508ada21" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 r2 = k_2C_b
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(C_i\)</span> is the concentration of species <span class="math notranslate nohighlight">\(i\)</span>, unlike number of molecules of stochastic model.</p>
 <p><strong>Using these rate laws, write down the differential equations for the concentration of each species?</strong> Submit this answer on an attached pdf file.</p>
 <p><strong>Answer:</strong></p>
-<div class="amsmath math notranslate nohighlight" id="equation-4d1d8bfa-11ac-4944-9ea5-8b26443b225f">
-<span class="eqno">(77)<a class="headerlink" href="#equation-4d1d8bfa-11ac-4944-9ea5-8b26443b225f" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ac1443f3-8e0f-4982-9f53-de46c7dbc736">
+<span class="eqno">(77)<a class="headerlink" href="#equation-ac1443f3-8e0f-4982-9f53-de46c7dbc736" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \frac{dC_a}{dt} = -k_1C_a
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-38869402-09b5-4346-898c-c49f268f8e1c">
-<span class="eqno">(78)<a class="headerlink" href="#equation-38869402-09b5-4346-898c-c49f268f8e1c" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-baa5cf6c-c901-4e66-a02c-c8a40031a179">
+<span class="eqno">(78)<a class="headerlink" href="#equation-baa5cf6c-c901-4e66-a02c-c8a40031a179" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \frac{dC_b}{dt} = k_1C_a - k_2C_b
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-8f286f51-adb8-454a-913e-010db3cc2381">
-<span class="eqno">(79)<a class="headerlink" href="#equation-8f286f51-adb8-454a-913e-010db3cc2381" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-841f103c-8396-4760-b624-39d5564b0861">
+<span class="eqno">(79)<a class="headerlink" href="#equation-841f103c-8396-4760-b624-39d5564b0861" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \frac{dC_c}{dt} = k_2C_b
 \end{equation}\]</div>
 <p>Note: These equations would be exactly same for number of molecules, i.e, one can replace <span class="math notranslate nohighlight">\(C_i\)</span> with <span class="math notranslate nohighlight">\(x_i\)</span> in the differential equations above. Concentrations can be converetd to number of molecules using avogadros number <span class="math notranslate nohighlight">\(N_A\)</span> and volume V of the reactor and these constants will cancel out in the equations.</p>
@@ -1387,18 +1386,22 @@ r2 = k_2C_b
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Analytical solution from solving differential equations of deterministic rate models</span>
 <span class="c1"># These models were solved mathematically on paper and in this section we are just plotting the obtained solutions</span>
 
-<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
 
-<span class="n">X_a</span> <span class="o">=</span> <span class="n">xa</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k1</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+<span class="n">X_a</span> <span class="o">=</span> <span class="n">xa</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k1</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
 
 
 <span class="k">if</span> <span class="n">k1</span> <span class="o">==</span> <span class="n">k2</span><span class="p">:</span>
-    <span class="n">X_b</span> <span class="o">=</span> <span class="n">xa</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">k1</span><span class="o">*</span><span class="n">t</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k1</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
-    <span class="n">X_c</span> <span class="o">=</span> <span class="n">xa</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">k1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k1</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">/</span><span class="n">k1</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k1</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">/</span><span class="n">k1</span><span class="o">**</span><span class="mi">2</span><span class="p">)))</span>
+    <span class="n">X_b</span> <span class="o">=</span> <span class="n">xa</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">k1</span> <span class="o">*</span> <span class="n">t</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k1</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+    <span class="n">X_c</span> <span class="o">=</span> <span class="n">xa</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span>
+        <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">k1</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">t</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k1</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">/</span> <span class="n">k1</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k1</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">/</span> <span class="n">k1</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+    <span class="p">)</span>
 
 <span class="k">else</span><span class="p">:</span>
-    <span class="n">X_b</span> <span class="o">=</span> <span class="n">xa</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">k1</span><span class="o">/</span><span class="p">(</span><span class="n">k1</span><span class="o">-</span><span class="n">k2</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k2</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k1</span><span class="o">*</span><span class="n">t</span><span class="p">))</span>
-    <span class="n">X_c</span> <span class="o">=</span> <span class="n">xa</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">k1</span><span class="o">*</span><span class="n">k2</span><span class="o">/</span><span class="p">(</span><span class="n">k1</span><span class="o">-</span><span class="n">k2</span><span class="p">))</span><span class="o">*</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k1</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">/</span><span class="n">k1</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k2</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">/</span><span class="n">k2</span><span class="p">)))</span>
+    <span class="n">X_b</span> <span class="o">=</span> <span class="n">xa</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">k1</span> <span class="o">/</span> <span class="p">(</span><span class="n">k1</span> <span class="o">-</span> <span class="n">k2</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k2</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k1</span> <span class="o">*</span> <span class="n">t</span><span class="p">))</span>
+    <span class="n">X_c</span> <span class="o">=</span> <span class="n">xa</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span>
+        <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">k1</span> <span class="o">*</span> <span class="n">k2</span> <span class="o">/</span> <span class="p">(</span><span class="n">k1</span> <span class="o">-</span> <span class="n">k2</span><span class="p">))</span> <span class="o">*</span> <span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k1</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">/</span> <span class="n">k1</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k2</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">/</span> <span class="n">k2</span><span class="p">))</span>
+    <span class="p">)</span>
 
 
 <span class="c1"># Plot deterministic solution of number of A, B and C molecules vs time</span>
@@ -1435,28 +1438,28 @@ r2 = k_2C_b
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here ###</span>
 
 <span class="c1"># creating a subplot for the two stochastic simulations</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;+&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;A&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="s1">&#39;*&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;B&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span> <span class="s1">&#39;bold&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of molecules x$_i$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span> <span class="s1">&#39;bold&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;N=100 molecules&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span> <span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;B&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;C&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (s)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Number of molecules x$_i$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;N=100 molecules&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
 <span class="n">leg</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;+&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;A&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="s1">&#39;*&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;B&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">y</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;B&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;C&quot;</span><span class="p">)</span>
 <span class="n">leg</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span> <span class="s1">&#39;bold&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of molecules x$_i$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span> <span class="s1">&#39;bold&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;N=1000 molecules&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span> <span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (s)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Number of molecules x$_i$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;N=1000 molecules&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
 <span class="n">leg</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
@@ -1478,27 +1481,27 @@ r2 = k_2C_b
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here ###</span>
 
 <span class="c1"># creating a subplot for the two stochastic simulations</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;+&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;A&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">e</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="s1">&#39;*&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;B&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">e</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">e</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;B&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">e</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;C&quot;</span><span class="p">)</span>
 <span class="n">leg</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;k1 = 2 and k2 = 1&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number molecules x$_i$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;k1 = 2 and k2 = 1&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (s)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Number molecules x$_i$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
 <span class="n">leg</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;+&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;A&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">f</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="s1">&#39;*&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;B&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">f</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;B&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;C&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="n">leg</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;k1 = 1 and k2 = 1&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number molecules x$_i$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;k1 = 1 and k2 = 1&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (s)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Number molecules x$_i$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
 <span class="n">leg</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
 </pre></div>
 </div>

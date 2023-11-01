@@ -887,7 +887,7 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="Non-Isothermal-PBR.html">
+    <a class="reference internal" href="Non_Isothermal_PBR.html">
      Non-Isothermal Packed Bed Reactor
     </a>
    </li>
@@ -1389,11 +1389,11 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Define the constants used in this problem. Use scholarly sources such as NASA to determine the mass of the sun. Use the height of the bus as the diameter of your cylinder.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#Constants</span>
-<span class="n">Y</span> <span class="o">=</span> <span class="mf">69e9</span> <span class="c1"># Youngs modulus for aluminum</span>
-<span class="n">m_2</span> <span class="o">=</span> <span class="mi">15000</span> <span class="c1"># Mass of school bus in kg</span>
-<span class="n">L_0</span> <span class="o">=</span> <span class="mf">0.01</span> <span class="c1"># length of school bus in km</span>
-<span class="c1">#Add your solution here</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Constants</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="mf">69e9</span>  <span class="c1"># Youngs modulus for aluminum</span>
+<span class="n">m_2</span> <span class="o">=</span> <span class="mi">15000</span>  <span class="c1"># Mass of school bus in kg</span>
+<span class="n">L_0</span> <span class="o">=</span> <span class="mf">0.01</span>  <span class="c1"># length of school bus in km</span>
+<span class="c1"># Add your solution here</span>
 </pre></div>
 </div>
 </div>
@@ -1470,34 +1470,43 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="c1"># Add your solution here</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">r_1</span><span class="p">)):</span>
-  <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ΔL</span><span class="p">)):</span>
-    <span class="n">r_grid</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">r_1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-    <span class="c1"># Add your solution here </span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ΔL</span><span class="p">)):</span>
+        <span class="n">r_grid</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">r_1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="c1"># Add your solution here</span>
 
-<span class="c1">#Plot Figure</span>
+<span class="c1"># Plot Figure</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
 
-<span class="n">cs</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">r_grid</span><span class="p">),</span> <span class="n">ΔL_grid</span><span class="p">,</span> <span class="n">f_grid</span><span class="p">,</span> <span class="n">locator</span><span class="o">=</span><span class="n">ticker</span><span class="o">.</span><span class="n">LogLocator</span><span class="p">(),</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">coolwarm</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">cs</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">r_grid</span><span class="p">),</span>
+    <span class="n">ΔL_grid</span><span class="p">,</span>
+    <span class="n">f_grid</span><span class="p">,</span>
+    <span class="n">locator</span><span class="o">=</span><span class="n">ticker</span><span class="o">.</span><span class="n">LogLocator</span><span class="p">(),</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">coolwarm</span><span class="p">,</span>
+    <span class="n">levels</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+<span class="p">)</span>
 
 <span class="n">cbar</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cs</span><span class="p">)</span>
-<span class="n">cbar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Residual&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Residual&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
 <span class="n">cbar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 
-<span class="n">cs2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">cs</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">cs</span><span class="o">.</span><span class="n">levels</span><span class="p">[::</span><span class="mi">15</span><span class="p">],</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">linestyles</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">cs2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span>
+    <span class="n">cs</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">cs</span><span class="o">.</span><span class="n">levels</span><span class="p">[::</span><span class="mi">15</span><span class="p">],</span> <span class="n">colors</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">linestyles</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mi">3</span>
+<span class="p">)</span>
 
 <span class="c1"># plot heatmap label</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">clabel</span><span class="p">(</span><span class="n">cs2</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%2.2f</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">clabel</span><span class="p">(</span><span class="n">cs2</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%2.2f</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 
 <span class="c1"># define tick size</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s2">&quot;in&quot;</span><span class="p">,</span><span class="n">top</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># plot titile and x,y label</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Distance (km)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;ΔL (km)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Contour of Residuals&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Distance (km)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;ΔL (km)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Contour of Residuals&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 <span class="c1">### END SOLUTION</span>
 </pre></div>
@@ -1539,7 +1548,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p>For more information on how to use the inexact Newton’s Method, click <a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/06/More-Newton-Type-Methods.html">here</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">inexact_newton</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x0</span><span class="p">,</span><span class="n">delta</span> <span class="o">=</span> <span class="mf">1.0e-7</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1.0e-6</span><span class="p">,</span> <span class="n">LOUD</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">inexact_newton</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mf">1.0e-7</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1.0e-6</span><span class="p">,</span> <span class="n">LOUD</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Find the root of the function f via Newton-Raphson method</span>
 <span class="sd">    Args:</span>
 <span class="sd">        f: function to find root of [function]</span>
@@ -1548,53 +1557,54 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="sd">        epsilon: tolerance [float]</span>
 <span class="sd">        LOUD: toggle on/off print statements [boolean]</span>
 <span class="sd">        max_iter: maximum number of iterations [int]</span>
-<span class="sd">        </span>
+
 <span class="sd">    Returns:</span>
 <span class="sd">        estimate of root [float]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    
+
     <span class="k">assert</span> <span class="n">callable</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="s2">&quot;Warning: &#39;f&#39; should be a Python function&quot;</span>
-    <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">float</span> <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">int</span><span class="p">,</span> <span class="s2">&quot;Warning: &#39;x0&#39; should be a float or integer&quot;</span>
+    <span class="k">assert</span> <span class="p">(</span>
+        <span class="nb">type</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">float</span> <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">int</span>
+    <span class="p">),</span> <span class="s2">&quot;Warning: &#39;x0&#39; should be a float or integer&quot;</span>
     <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">float</span><span class="p">,</span> <span class="s2">&quot;Warning: &#39;delta&#39; should be a float&quot;</span>
     <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">epsilon</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">float</span><span class="p">,</span> <span class="s2">&quot;Warning: &#39;eps&#39; should be a float&quot;</span>
     <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">max_iter</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">int</span><span class="p">,</span> <span class="s2">&quot;Warning: &#39;max_iter&#39; should be an integer&quot;</span>
     <span class="k">assert</span> <span class="n">max_iter</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Warning: &#39;max_iter&#39; should be non-negative&quot;</span>
-    
+
     <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span>
 
     <span class="c1"># print intial guess</span>
-    <span class="c1">#if (LOUD):</span>
-        <span class="c1">#print(&quot;x0 =&quot;,x0)</span>
-    
+    <span class="c1"># if (LOUD):</span>
+    <span class="c1"># print(&quot;x0 =&quot;,x0)</span>
+
     <span class="n">iterations</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">converged</span> <span class="o">=</span> <span class="kc">False</span>
-    
+
     <span class="c1"># Check if the residual is close enough to zero</span>
-    <span class="k">while</span> <span class="p">(</span><span class="ow">not</span> <span class="n">converged</span> <span class="ow">and</span> <span class="n">iterations</span> <span class="o">&lt;</span> <span class="n">max_iter</span><span class="p">):</span>
-        
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">converged</span> <span class="ow">and</span> <span class="n">iterations</span> <span class="o">&lt;</span> <span class="n">max_iter</span><span class="p">:</span>
         <span class="c1"># evaluate function &#39;f&#39; at new &#39;x&#39;</span>
         <span class="n">fx</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        
+
         <span class="c1"># calculate &#39;slope&#39;</span>
-        <span class="n">slope</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">delta</span><span class="p">)</span><span class="o">-</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">/</span><span class="n">delta</span>
-        
+        <span class="n">slope</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">delta</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">/</span> <span class="n">delta</span>
+
         <span class="c1"># print every iteration</span>
-        <span class="c1">#if (LOUD):</span>
-            <span class="c1">#print(&quot;x_&quot;,iterations+1,&quot;=&quot;,x,&quot;-&quot;,fx,&quot;/&quot;,slope,&quot;=&quot;,x - fx/slope)</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">fx</span><span class="o">/</span><span class="n">slope</span>
-        
+        <span class="c1"># if (LOUD):</span>
+        <span class="c1"># print(&quot;x_&quot;,iterations+1,&quot;=&quot;,x,&quot;-&quot;,fx,&quot;/&quot;,slope,&quot;=&quot;,x - fx/slope)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">fx</span> <span class="o">/</span> <span class="n">slope</span>
+
         <span class="n">iterations</span> <span class="o">+=</span> <span class="mi">1</span>
-        
+
         <span class="c1"># check if converged</span>
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">fabs</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">&lt;</span> <span class="n">epsilon</span><span class="p">:</span>
             <span class="n">converged</span> <span class="o">=</span> <span class="kc">True</span>
-            
-    <span class="k">if</span> <span class="p">(</span><span class="n">LOUD</span><span class="p">):</span>
-      <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It took&quot;</span><span class="p">,</span><span class="n">iterations</span><span class="p">,</span><span class="s2">&quot;iterations&quot;</span><span class="p">)</span>
-    
+
+    <span class="k">if</span> <span class="n">LOUD</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It took&quot;</span><span class="p">,</span> <span class="n">iterations</span><span class="p">,</span> <span class="s2">&quot;iterations&quot;</span><span class="p">)</span>
+
     <span class="k">if</span> <span class="ow">not</span> <span class="n">converged</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: Not a solution. Maximum number of iterations exceeded.&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">x</span> <span class="c1">#return estimate of root</span>
+    <span class="k">return</span> <span class="n">x</span>  <span class="c1"># return estimate of root</span>
 </pre></div>
 </div>
 </div>
@@ -1652,15 +1662,16 @@ The result of the inexact newton function is 37407.4751508785
 <span class="n">ΔL</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">guess</span> <span class="o">=</span> <span class="mi">1000</span>
 
+
 <span class="k">def</span> <span class="nf">derivative_form</span><span class="p">(</span><span class="n">r_1</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39; Find max distance using canonical derivative</span>
-<span class="sd">    </span>
+    <span class="sd">&quot;&quot;&quot;Find max distance using canonical derivative</span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        r_1</span>
-<span class="sd">        </span>
+
 <span class="sd">    Returns:</span>
-<span class="sd">        derivative    </span>
-<span class="sd">    &#39;&#39;&#39;</span>
+<span class="sd">        derivative</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Add your solution here</span>
     <span class="k">return</span> <span class="n">derivative</span>
@@ -1757,7 +1768,7 @@ The root using the inexact newton function for guess3 is found at 37424.27645628
 
 <span class="c1"># Add your solution here</span>
 
-<span class="n">inexact_newton</span><span class="p">(</span><span class="n">canonical_form</span><span class="p">,</span> <span class="n">upper_limit_inexact</span><span class="p">,</span> <span class="n">epsilon</span> <span class="o">=</span> <span class="mf">1.0e-2</span><span class="p">)</span>
+<span class="n">inexact_newton</span><span class="p">(</span><span class="n">canonical_form</span><span class="p">,</span> <span class="n">upper_limit_inexact</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1.0e-2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1770,14 +1781,20 @@ The root using the inexact newton function for guess3 is found at 37424.27645628
 <span class="n">lower_limit_inexact</span> <span class="o">=</span> <span class="mf">7.7240e-3</span>
 <span class="c1">### END SOLTUON</span>
 
-<span class="n">inexact_newton</span><span class="p">(</span><span class="n">canonical_form</span><span class="p">,</span> <span class="n">lower_limit_inexact</span><span class="p">,</span> <span class="n">epsilon</span> <span class="o">=</span> <span class="mf">1.0e-2</span><span class="p">)</span>
+<span class="n">inexact_newton</span><span class="p">(</span><span class="n">canonical_form</span><span class="p">,</span> <span class="n">lower_limit_inexact</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1.0e-2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The range of guesses that you can use for the inexact newton method is&#39;</span><span class="p">,</span> <span class="n">lower_limit_inexact</span><span class="p">,</span> <span class="s1">&#39;km &lt; guess &lt;&#39;</span><span class="p">,</span> <span class="n">upper_limit_inexact</span><span class="p">,</span> <span class="s1">&#39;km&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;The range of guesses that you can use for the inexact newton method is&quot;</span><span class="p">,</span>
+    <span class="n">lower_limit_inexact</span><span class="p">,</span>
+    <span class="s2">&quot;km &lt; guess &lt;&quot;</span><span class="p">,</span>
+    <span class="n">upper_limit_inexact</span><span class="p">,</span>
+    <span class="s2">&quot;km&quot;</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1796,7 +1813,9 @@ The root using the inexact newton function for guess3 is found at 37424.27645628
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initial Guess</span>
 <span class="c1"># Add your solution here</span>
 
-<span class="n">scipy_sln1</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">newton</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">canonical_form</span><span class="p">,</span> <span class="n">x0</span> <span class="o">=</span> <span class="n">guess1</span><span class="p">,</span> <span class="n">fprime</span><span class="o">=</span><span class="n">derivative_form</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">full_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">scipy_sln1</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">newton</span><span class="p">(</span>
+    <span class="n">func</span><span class="o">=</span><span class="n">canonical_form</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">guess1</span><span class="p">,</span> <span class="n">fprime</span><span class="o">=</span><span class="n">derivative_form</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">full_output</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1808,7 +1827,9 @@ The root using the inexact newton function for guess3 is found at 37424.27645628
 <span class="c1">### BEGIN SOLUTION</span>
 <span class="n">guess2</span> <span class="o">=</span> <span class="mf">1e3</span>
 <span class="c1">### END SOLTUION</span>
-<span class="n">scipy_sln2</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">newton</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">canonical_form</span><span class="p">,</span> <span class="n">x0</span> <span class="o">=</span> <span class="n">guess2</span><span class="p">,</span> <span class="n">fprime</span><span class="o">=</span><span class="n">derivative_form</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">full_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">scipy_sln2</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">newton</span><span class="p">(</span>
+    <span class="n">func</span><span class="o">=</span><span class="n">canonical_form</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">guess2</span><span class="p">,</span> <span class="n">fprime</span><span class="o">=</span><span class="n">derivative_form</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">full_output</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1817,7 +1838,9 @@ The root using the inexact newton function for guess3 is found at 37424.27645628
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># even larger guess</span>
 <span class="c1"># Add your solution here</span>
-<span class="n">scipy_sln3</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">newton</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">canonical_form</span><span class="p">,</span> <span class="n">x0</span> <span class="o">=</span> <span class="n">guess3</span><span class="p">,</span> <span class="n">fprime</span><span class="o">=</span><span class="n">derivative_form</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">full_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">scipy_sln3</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">newton</span><span class="p">(</span>
+    <span class="n">func</span><span class="o">=</span><span class="n">canonical_form</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">guess3</span><span class="p">,</span> <span class="n">fprime</span><span class="o">=</span><span class="n">derivative_form</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">full_output</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1848,9 +1871,9 @@ The result of guess3 is
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The result of guess1 is </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">scipy_sln1</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The result of guess2 is </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">scipy_sln2</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The result of guess3 is </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">scipy_sln3</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The result of guess1 is </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">scipy_sln1</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The result of guess2 is </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">scipy_sln2</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The result of guess3 is </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">scipy_sln3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1860,8 +1883,10 @@ The result of guess3 is
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initial Guess</span>
 <span class="n">guess</span> <span class="o">=</span> <span class="mf">1e6</span>
 
-<span class="n">scipy_sln</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">newton</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">canonical_form</span><span class="p">,</span> <span class="n">x0</span> <span class="o">=</span> <span class="n">guess</span><span class="p">,</span> <span class="n">fprime</span><span class="o">=</span><span class="n">derivative_form</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The root is found at&quot;</span><span class="p">,</span><span class="n">scipy_sln</span><span class="p">)</span>
+<span class="n">scipy_sln</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">newton</span><span class="p">(</span>
+    <span class="n">func</span><span class="o">=</span><span class="n">canonical_form</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">guess</span><span class="p">,</span> <span class="n">fprime</span><span class="o">=</span><span class="n">derivative_form</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-2</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The root is found at&quot;</span><span class="p">,</span> <span class="n">scipy_sln</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1903,12 +1928,14 @@ The result of guess3 is
 <span class="n">upper_limit_scipy</span> <span class="o">=</span> <span class="mf">2.9e5</span>
 
 <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-  <span class="k">try</span><span class="p">:</span>
-    <span class="n">upper_limit_scipy</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="n">optimize</span><span class="o">.</span><span class="n">newton</span><span class="p">(</span><span class="n">func</span> <span class="o">=</span> <span class="n">canonical_form</span><span class="p">,</span> <span class="n">x0</span> <span class="o">=</span> <span class="n">upper_limit_scipy</span><span class="p">,</span> <span class="n">fprime</span> <span class="o">=</span> <span class="n">derivative_form</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">)</span>
-  <span class="k">except</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">upper_limit_scipy</span><span class="p">)</span>
-    <span class="k">break</span>   
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">upper_limit_scipy</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">optimize</span><span class="o">.</span><span class="n">newton</span><span class="p">(</span>
+            <span class="n">func</span><span class="o">=</span><span class="n">canonical_form</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">upper_limit_scipy</span><span class="p">,</span> <span class="n">fprime</span><span class="o">=</span><span class="n">derivative_form</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-2</span>
+        <span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">upper_limit_scipy</span><span class="p">)</span>
+        <span class="k">break</span>
 </pre></div>
 </div>
 </div>
@@ -1919,19 +1946,27 @@ The result of guess3 is
 <span class="n">lower_limit_scipy</span> <span class="o">=</span> <span class="mf">1e3</span>
 
 <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-  <span class="k">try</span><span class="p">:</span>
-    <span class="n">lower_limit_scipy</span> <span class="o">-=</span> <span class="mi">1</span>
-    <span class="n">optimize</span><span class="o">.</span><span class="n">newton</span><span class="p">(</span><span class="n">func</span> <span class="o">=</span> <span class="n">canonical_form</span><span class="p">,</span> <span class="n">x0</span> <span class="o">=</span> <span class="n">lower_limit_scipy</span><span class="p">,</span> <span class="n">fprime</span> <span class="o">=</span> <span class="n">derivative_form</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">)</span>
-  <span class="k">except</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">lower_limit_scipy</span><span class="p">)</span>
-    <span class="k">break</span>  
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">lower_limit_scipy</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="n">optimize</span><span class="o">.</span><span class="n">newton</span><span class="p">(</span>
+            <span class="n">func</span><span class="o">=</span><span class="n">canonical_form</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">lower_limit_scipy</span><span class="p">,</span> <span class="n">fprime</span><span class="o">=</span><span class="n">derivative_form</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-2</span>
+        <span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">lower_limit_scipy</span><span class="p">)</span>
+        <span class="k">break</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;optimize.newton function from scipy works over&#39;</span><span class="p">,</span> <span class="n">lower_limit_scipy</span><span class="p">,</span> <span class="s1">&#39;km &lt; guess &lt;&#39;</span><span class="p">,</span> <span class="n">upper_limit_scipy</span><span class="p">,</span> <span class="s1">&#39;km&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;optimize.newton function from scipy works over&quot;</span><span class="p">,</span>
+    <span class="n">lower_limit_scipy</span><span class="p">,</span>
+    <span class="s2">&quot;km &lt; guess &lt;&quot;</span><span class="p">,</span>
+    <span class="n">upper_limit_scipy</span><span class="p">,</span>
+    <span class="s2">&quot;km&quot;</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
