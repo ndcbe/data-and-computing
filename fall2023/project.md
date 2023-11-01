@@ -23,11 +23,13 @@ Please take a few minutes to browse [previously contributed notebooks](../notebo
 
 Many of these notebooks need some minor editing:
 * Ensure consistent section numbers
-* Fix equations not rendered correctly
-* Fix links to other notebooks
+* Make plots publication quality
+* Fix equations that are not rendered correctly on the class website
+* Check and fix links to other notebooks
 * Move all solutions, including discussion solutions, to between `### BEGIN SOLUTION` and `### END SOLUTION` in code block.
 * Spelling and grammar checks
 * Ensure all images render correctly
+* At the top of the notebook after the original creators, add "Edited by: YOUR NAME, youremail@nd.edu"
 
 Each person will contribute their editted notebook via GitHub following [these instructions](../notebooks/contrib/contribute.md). **Important:** Do NOT edit the notebook using the "Launch Colab" link on the class website. Instead, you need to download the correct file [here](https://github.com/ndcbe/data-and-computing/tree/main/notebooks/contrib-dev). You can then upload this version to Google Colab for editting. If you do not follow these instructions, you will end the wrong version of the file and need to redo your work.
 
@@ -35,6 +37,8 @@ Each person also needs to make at least one substantial intellectual contributio
 * Add a new sensitivity analysis and discussion question
 * Draw a strong connection to linear algebra
 * Perform regression in Python instead of Excel in [](../notebooks/contrib/McCabe-Thiele.ipynb)
+* Compare different numeric integration methods
+* Add section connecting results back to engineering science theory (e.g., material from other classes)
 
 Alternately, a team of 2 students may decide to contribute a new notebook to the class website. This may be either a new example (hint: look to a textbook for inspiration) or an explanation of an advanced topics. Here are some advanced topics to consider:
 * QR factorization
@@ -50,32 +54,36 @@ Please indicate your preferences [here](https://forms.gle/MyLb75GS2RzFd1nm7).
 
 ### Submission
 
-Each person (or team) will submit their revisions via GitHub. See [](../notebooks/contrib/contribute.md) for instructions. We are doing this so everyone practices using GitHub.
+Each person (or team) will submit their revisions via a GitHub pull request (PR). See [](../notebooks/contrib/contribute.md) for instructions. We are doing this so everyone practices using GitHub. In your GitHub PR, update a new version of the notebook with the same file name as the current version (before revisions). This way GitHub will recognize you as a contributor to that file.
 
-You will also submit via Gradescope up to 1-page (PDF) highlighting the key revisions you made. In this document, you need to clearly articulate your intellectual contributions.
+You will also submit via Gradescope up to 1-page (PDF) highlighting the key revisions you made. In this document, you need to clearly articulate your intellectual contributions. Please also include a link to the GitHub pull request that contains the final version of your revised notebook.
 
 ### Anticipated Time Requirements
 
 **Notebook Editting**
-Project Proposal: 1 hour
-Complete Activities in Notebook, Verify Answers: 2 hours
-Formatting and Edits: 2 hours
-Intellectual Contribution: 3 hours
-Learning GitHub: 1 hour
-Miscellanous: 1 hour
+| Activity | Time |
+| -------- | ---- |
+| Project Proposal | 1 hour |
+| Complete Activities in Notebook, Verify Answers | 2 hours |
+| Formatting and Edits | 2 hours |
+| Intellectual Contribution | 3 hours |
+| Learning GitHub | 1 hour |
+| Miscellanous | 1 hour |
 
 **Create New Notebook** (per person)
-Project Proposal: 1 hour
-Agree on Project Idea, Coordinate Effort: 1 hour
-Review Reference Material: 2 hours
-Prepare Notebook (keep it simple): 2 hours
-Formatting and Edits: 2 hours
-Learning GitHub: 1 hour
-Miscellanous: 1 hour
+| Activity | Time |
+| -------- | ---- |
+| Project Proposal | 1 hour |
+| Agree on Project Idea, Coordinate Effort | 1 hour |
+| Review Reference Material | 2 hours |
+| Prepare Notebook (keep it simple) | 2 hours |
+| Formatting and Edits | 2 hours |
+| Learning GitHub | 1 hour |
+| Miscellanous | 1 hour |
 
 ## Part 2: Create a Data Analysis Jupyter Notebook
 
-In teams of 2 or 3 people, you will contribute a Jupyter notebook to the class website demonstrating one or more data analysis skills from CBE 60258.
+In teams of two, you will contribute a Jupyter notebook to the class website demonstrating one or more data analysis skills from CBE 60258.
 
 ### Choosing a Good Problem and Data Set
 
@@ -97,7 +105,7 @@ Each team should submit a 1-page project update that:
 5. Lists anticipated take-away messages from your analysis
 6. Lists references (full bibliographic information)
 
-You will also submit a draft of the 
+You will also submit a draft of your notebook. At a minimum, this draft should include an outline for the notebook (including subsection and subsubsection titles -- see below for required content) and demonstrate your team has begun making progress.
 
 ### Project Notebook
 
@@ -121,15 +129,17 @@ You will also submit via Gradescope up to 1-page (PDF) explaining how this examp
 ### Anticipated Time Requirements
 
 (per person)
-Brainstorm Ideas: 1 hour
-Agree on Project Scope: 2 hour
-Identify Data Sources and Examples: 2 hour
-Prepare Notebook Draft 1: 2 hours
-Project Status Update: 1 hour
-Prepare Notebook Draft 2: 2 hours
-Team Coordination: 2 hours
-Formatting and Editting: 2 hours
-Submission: 1 hour
+| Activity | Time |
+| -------- | ---- |
+| Brainstorm Ideas | 1 hour |
+| Agree on Project Scope | 2 hours |
+| Identify Data Sources and Examples | 2 hours |
+| Prepare Notebook Draft 1 | 2 hours |
+| Project Status Update | 1 hour |
+| Prepare Notebook Draft 2 | 2 hours |
+| Team Coordination | 2 hours |
+| Formatting and Editting | 2 hours |
+| Submission | 1 hour |
 
 ## Part 3: Deliver a Final Presentation
 
