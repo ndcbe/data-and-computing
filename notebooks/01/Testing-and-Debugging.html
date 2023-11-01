@@ -4,13 +4,11 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>1.14. Testing and Debugging in Python &#8212; Data and Computing for Chemical Engineers</title>
     
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -20,16 +18,20 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
+    
+      
+
+    
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -37,13 +39,12 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/design-tabs.js"></script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -63,21 +64,7 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
-
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
     
     <div class="container-fluid" id="banner"></div>
 
@@ -86,10 +73,9 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -107,15 +93,14 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="../../intro.html">
-                    Data and Computing for Engineers
-                </a>
-            </li>
-        </ul>
-        <p aria-level="2" class="caption" role="heading">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../intro.html">
+   Data and Computing for Engineers
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Python Programming
  </span>
@@ -879,6 +864,11 @@ const thebe_selector_output = ".output, .cell_output"
      Problem Set 3
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../assignments/ProblemSet4_F23.html">
+     Problem Set 4
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -897,7 +887,7 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../contrib/Non_Isothermal_PBR.html">
+    <a class="reference internal" href="../contrib/Non-Isothermal-PBR.html">
      Non-Isothermal Packed Bed Reactor
     </a>
    </li>
@@ -946,17 +936,12 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
-    </div>
-    <div id="rtd-footer-container"></div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
 </div>
 
 
@@ -964,209 +949,99 @@ const thebe_selector_output = ".output, .cell_output"
 
 
           
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="header-article row sticky-top noprint">
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
         
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/01/Testing-and-Debugging.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
-  
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../../_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/01/Testing-and-Debugging.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Colab"
->
-  
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../../_static/images/logo_colab.png">
-  </span>
-<span class="headerbtn__text-container">Colab</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/ndcbe/data-and-computing"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/01/Testing-and-Debugging.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../../_sources/notebooks/01/Testing-and-Debugging.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/01/Testing-and-Debugging.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/ndcbe/data-and-computing"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/01/Testing-and-Debugging.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
     </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/01/Testing-and-Debugging.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/01/Testing-and-Debugging.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#learning-objectives">
    1.14.1. Learning Objectives
@@ -1239,11 +1114,12 @@ title="Print to PDF"
  </li>
 </ul>
 
-    </nav>
-</div>
+            </nav>
+        </div>
     </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Testing and Debugging in Python</h1>
@@ -1332,27 +1208,26 @@ title="Print to PDF"
                     </div>
                 </div>
             </div>
-            <main id="main-content" role="main">
-                
+            
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="testing-and-debugging-in-python">
-<h1><span class="section-number">1.14. </span>Testing and Debugging in Python<a class="headerlink" href="#testing-and-debugging-in-python" title="Permalink to this headline">#</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="testing-and-debugging-in-python">
+<h1><span class="section-number">1.14. </span>Testing and Debugging in Python<a class="headerlink" href="#testing-and-debugging-in-python" title="Permalink to this headline">¶</a></h1>
 <p><strong>Reference</strong>: Chapter 6 of <em>Computational Nuclear Engineering and Radiological Science Using Python</em>, R. McClarren (2018)</p>
-<section id="learning-objectives">
-<h2><span class="section-number">1.14.1. </span>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">#</a></h2>
+<div class="section" id="learning-objectives">
+<h2><span class="section-number">1.14.1. </span>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">¶</a></h2>
 <p>After studying this notebook, completing the activities, and asking questions in class, you should be able to:</p>
 <ul class="simple">
 <li><p>Create <code class="docutils literal notranslate"><span class="pre">assert</span></code> statements and <code class="docutils literal notranslate"><span class="pre">try</span></code>-<code class="docutils literal notranslate"><span class="pre">except</span></code> blocks of code</p></li>
 <li><p>Embrace the “debugging mindset” and test code you write. We strongly recommend creating a handful of unit tests for each function you write, especially for complex codes (e.g., mini-projects)</p></li>
 </ul>
-</section>
-<section id="testing-your-code">
-<h2><span class="section-number">1.14.2. </span>Testing Your Code<a class="headerlink" href="#testing-your-code" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="testing-your-code">
+<h2><span class="section-number">1.14.2. </span>Testing Your Code<a class="headerlink" href="#testing-your-code" title="Permalink to this headline">¶</a></h2>
 <p>Anytime you write code, you want to make sure that it accomplishes the desired task.</p>
-</section>
-<section id="motivating-example">
-<h2><span class="section-number">1.14.3. </span>Motivating Example<a class="headerlink" href="#motivating-example" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="motivating-example">
+<h2><span class="section-number">1.14.3. </span>Motivating Example<a class="headerlink" href="#motivating-example" title="Permalink to this headline">¶</a></h2>
 <p>Through an example, we will demonstrate several strategies for systematically testing code.</p>
 <p>Phenolphthalein is a base indicator (it turns a pretty purple), but in the presence of a strong base it will fade over time.  This is a reversible reaction: pseudo first-order in the forward (fading) direction and first-order in the reverse direction.  The rate expression is:</p>
 <div class="math notranslate nohighlight">
@@ -1419,9 +1294,9 @@ title="Print to PDF"
 </div>
 </div>
 <p>We will now go through several tests to see if our function behaves correctly. <em>Note:</em> There are a few intentional mistakes above to make this exercise more interesting.</p>
-</section>
-<section id="test-0-takes-inputs-as-advertised">
-<h2><span class="section-number">1.14.4. </span>Test 0: Takes Inputs as Advertised?<a class="headerlink" href="#test-0-takes-inputs-as-advertised" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="test-0-takes-inputs-as-advertised">
+<h2><span class="section-number">1.14.4. </span>Test 0: Takes Inputs as Advertised?<a class="headerlink" href="#test-0-takes-inputs-as-advertised" title="Permalink to this headline">¶</a></h2>
 <p>Does the function return a single value if input t is a scalar and return a numpy array if t is a vector?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1450,9 +1325,9 @@ title="Print to PDF"
 </div>
 </div>
 <p>Good. The time input works as advertised.</p>
-</section>
-<section id="test-1-initial-condition">
-<h2><span class="section-number">1.14.5. </span>Test 1: Initial Condition<a class="headerlink" href="#test-1-initial-condition" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="test-1-initial-condition">
+<h2><span class="section-number">1.14.5. </span>Test 1: Initial Condition<a class="headerlink" href="#test-1-initial-condition" title="Permalink to this headline">¶</a></h2>
 <p>First, let’s check if our function returns the initial condition at <span class="math notranslate nohighlight">\(t=0\)</span>. From the formula above, we expect:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1523,9 +1398,9 @@ Test passed.
 <p class="admonition-title"><b>Tutorial Activity</b></p>
 <p>Take a few minutes to try a few more inputs. For example, <span class="math notranslate nohighlight">\(P_0\)</span> = 10, <span class="math notranslate nohighlight">\(k_1' = 0.0001\)</span> and <span class="math notranslate nohighlight">\(k_2\)</span> = 0.3. Can you find a set of inputs that causes the test to fail?</p>
 </div>
-</section>
-<section id="test-2-asymptotics">
-<h2><span class="section-number">1.14.6. </span>Test 2: Asymptotics<a class="headerlink" href="#test-2-asymptotics" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="test-2-asymptotics">
+<h2><span class="section-number">1.14.6. </span>Test 2: Asymptotics<a class="headerlink" href="#test-2-asymptotics" title="Permalink to this headline">¶</a></h2>
 <p>Let’s examine the solution again, but consider <span class="math notranslate nohighlight">\(t \rightarrow \infty\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1595,9 +1470,9 @@ Test passed.
 </div>
 </div>
 </div>
-</section>
-<section id="test-3-check-a-few-inputs">
-<h2><span class="section-number">1.14.7. </span>Test 3: Check a Few Inputs<a class="headerlink" href="#test-3-check-a-few-inputs" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="test-3-check-a-few-inputs">
+<h2><span class="section-number">1.14.7. </span>Test 3: Check a Few Inputs<a class="headerlink" href="#test-3-check-a-few-inputs" title="Permalink to this headline">¶</a></h2>
 <p>We can calculate with pencil, paper and a calculator values for <span class="math notranslate nohighlight">\([P]\)</span> for a few sets of inputs. We can then test if our Python code is close.</p>
 <p>For simplicity, let’s consider <span class="math notranslate nohighlight">\(t=1\)</span>, <span class="math notranslate nohighlight">\(P[0] = 1\)</span>, <span class="math notranslate nohighlight">\(k_1' = 1\)</span>, <span class="math notranslate nohighlight">\(k_2 = 1\)</span>.</p>
 <div class="math notranslate nohighlight">
@@ -1654,9 +1529,9 @@ Test passed.
 </div>
 </div>
 </div>
-</section>
-<section id="debugging">
-<h2><span class="section-number">1.14.8. </span>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="debugging">
+<h2><span class="section-number">1.14.8. </span>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h2>
 <p>Now that we’ve identified that our code has a bug, the process of finding that error is called debugging. Given that we ran three tests, and two of them passed we can use how the tests are different to identify where the bug might be.</p>
 <p>We’ll repeat the formula and function again:</p>
 <div class="math notranslate nohighlight">
@@ -1706,9 +1581,9 @@ Test passed.
 </div>
 </div>
 </div>
-</section>
-<section id="debugging-is-a-mindset">
-<h2><span class="section-number">1.14.9. </span>Debugging is a Mindset<a class="headerlink" href="#debugging-is-a-mindset" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="debugging-is-a-mindset">
+<h2><span class="section-number">1.14.9. </span>Debugging is a Mindset<a class="headerlink" href="#debugging-is-a-mindset" title="Permalink to this headline">¶</a></h2>
 <p>To properly identify the bug you need to think about</p>
 <ol>
 <li> How is the code failing?
@@ -1719,9 +1594,9 @@ Test passed.
 <p><b>When in doubt, print it (all) out!</b></p>
 <p>Notice that we used the <code class="docutils literal notranslate"><span class="pre">LOUD</span></code> keyword to help us quick toggle print statements on and off. You should always use this trick in this class.</p>
 <p>Let’s use the print statements to walk through the tests.</p>
-</section>
-<section id="test-1">
-<h2><span class="section-number">1.14.10. </span>Test 1<a class="headerlink" href="#test-1" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="test-1">
+<h2><span class="section-number">1.14.10. </span>Test 1<a class="headerlink" href="#test-1" title="Permalink to this headline">¶</a></h2>
 <p><strong>Test 1</strong> checks that we get the initial condition at <span class="math notranslate nohighlight">\(t=0\)</span>. We expect that <code class="docutils literal notranslate"><span class="pre">prexpon</span></code> evaluates to 0.0 and <code class="docutils literal notranslate"><span class="pre">expon</span></code> evaluates to 1.0. Let’s see if this is happening:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1743,9 +1618,9 @@ P =  1.0
 </div>
 </div>
 <p>With <code class="docutils literal notranslate"><span class="pre">expon</span></code> at 1.0, <strong>Test 1</strong> checks that <code class="docutils literal notranslate"><span class="pre">frac1</span></code> and <code class="docutils literal notranslate"><span class="pre">frac2</span></code> sum to 1.0, which they do. Thus, it makes sense that <strong>Test 1</strong> passes.</p>
-</section>
-<section id="test-2">
-<h2><span class="section-number">1.14.11. </span>Test 2<a class="headerlink" href="#test-2" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="test-2">
+<h2><span class="section-number">1.14.11. </span>Test 2<a class="headerlink" href="#test-2" title="Permalink to this headline">¶</a></h2>
 <p><strong>Test 2</strong> checks for the correct properties as <span class="math notranslate nohighlight">\(t \rightarrow \infty\)</span>. Let’s look at the output with <code class="docutils literal notranslate"><span class="pre">t</span></code> set to a huge number.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1767,9 +1642,9 @@ P =  0.6666666666666666
 </div>
 </div>
 <p>As expected, with <code class="docutils literal notranslate"><span class="pre">t</span></code> set to <span class="math notranslate nohighlight">\(10^7\)</span>, <code class="docutils literal notranslate"><span class="pre">expon</span></code> evaluates to 0.0. This kills <code class="docutils literal notranslate"><span class="pre">frac2</span></code>. The calculated value for <code class="docutils literal notranslate"><span class="pre">P</span></code> matches <code class="docutils literal notranslate"><span class="pre">frac1</span></code>, which we expect.</p>
-</section>
-<section id="test-3">
-<h2><span class="section-number">1.14.12. </span>Test 3<a class="headerlink" href="#test-3" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="test-3">
+<h2><span class="section-number">1.14.12. </span>Test 3<a class="headerlink" href="#test-3" title="Permalink to this headline">¶</a></h2>
 <p>Now let’s compare the intermediate values we calculated by hand in <strong>Test 3</strong> to those reported below:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1907,9 +1782,9 @@ Passed Test 3.
 <p>When first typing this model, I mistakenly specified <tt>pre_expon = -(k1prime) + k2*t</tt>. Without running any Python code, which tests would fail with this bug? (This is a good exam practice question.)</p>
 </div>
 <p>Write your answer here:</p>
-</section>
-<section id="assertions">
-<h2><span class="section-number">1.14.13. </span>Assertions<a class="headerlink" href="#assertions" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="assertions">
+<h2><span class="section-number">1.14.13. </span>Assertions<a class="headerlink" href="#assertions" title="Permalink to this headline">¶</a></h2>
 <p>In life it pays to be assertive.  The same is true in programming.  Let’s try an example.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2116,9 +1991,9 @@ With negative P0, P(t=10) = -5.000000010305769
 </div>
 <p>Notice that python tells us which assertion failed so we know that the function call had a bad value of <code class="docutils literal notranslate"><span class="pre">k1prime</span></code>.  The program still fails, but it tells us exactly why. We can also use assertions to test that the code behaves the way we expect.</p>
 <p>These types of assert statements can help you debug later on down the road.</p>
-</section>
-<section id="error-handling">
-<h2><span class="section-number">1.14.14. </span>Error Handling<a class="headerlink" href="#error-handling" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="error-handling">
+<h2><span class="section-number">1.14.14. </span>Error Handling<a class="headerlink" href="#error-handling" title="Permalink to this headline">¶</a></h2>
 <p>There are times when you want to handle an error gracefully. When a program is running, if it encounters an error it can raise an exception. The exception will give some indication of what the error is. In Python, you can place some code in a special block of code called a <strong>try block</strong>. After the try block, the types of exception to handle are listed using except blocks. Only the exceptions that are explicitly handled are caught.</p>
 <p>One type of exception is the <code class="docutils literal notranslate"><span class="pre">ZeroDivisionError</span></code> that is raised when a number is divided by zero. First, we will look at an uncaught exception:</p>
 <div class="cell docutils container">
@@ -2312,8 +2187,8 @@ k2 = 0.0
 </div>
 </div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -2337,11 +2212,9 @@ k2 = 0.0
 
               </div>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="Functions-as-Arguments.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -2357,28 +2230,24 @@ k2 = 0.0
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            </footer>
+            
         </div>
     </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
+    <footer class="footer">
+  <p>
     
-</div>
+      By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
 
 
       </div>
     </div>
   
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
-
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
   </body>
 </html>
