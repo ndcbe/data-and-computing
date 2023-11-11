@@ -13,9 +13,9 @@
 | Friday, October 6, 2023 | [Problem Set 2: Numeric Integration](../notebooks/assignments/ProblemSet2_F23.ipynb) and Project Proposal Part 1 |
 | Friday, October 27, 2023 | [Problem Set 3: Pyomo, Pandas, and Probability](../notebooks/assignments/ProblemSet3_F23.ipynb) |
 | Friday, November 3, 2023 | Submit Project Part 1 Notebooks |
-| Friday, November 10, 2023 | Problem Set 4: Error Propagation, Project Part 2 Updates Due |
-| Friday, November 17, 2023 | Problem Set 5: Hypothesis Testing and Statistical Power |
-| Friday, December 1, 2023| Problem Set 6: Linear and Nonlinear Regression |
+| Friday, November 10, 2023 | [Problem Set 4: Error Propagation](../notebooks/assignments/ProblemSet4_F23.ipynb), Project Part 2 Updates Due |
+| Friday, November 17, 2023 | [Problem Set 5: Hypothesis Testing](../notebooks/assignments/ProblemSet5_F23.ipynb) |
+| Friday, December 1, 2023| Problem Set 6: Statistical Power and Nonlinear Regression |
 | Thursday, December 7, 2023 | Project Notebook(s) Due |
 | Friday, December 15, 2023, 10:30 AM - 12:30 PM (Final Exam Timeslot) | Project Presentations |
 
