@@ -15,7 +15,7 @@
 | Friday, November 3, 2023 | Submit Project Part 1 Notebooks |
 | Friday, November 10, 2023 | [Problem Set 4: Error Propagation](../notebooks/assignments/ProblemSet4_F23.ipynb), Project Part 2 Updates Due |
 | Friday, November 17, 2023 | [Problem Set 5: Hypothesis Testing](../notebooks/assignments/ProblemSet5_F23.ipynb) |
-| Friday, December 1, 2023| Problem Set 6: Statistical Power and Nonlinear Regression |
+| Friday, December 1, 2023| [Problem Set 6: Statistical Power and Nonlinear Regression](../notebooks/assignments/ProblemSet6_F23.ipynb) |
 | Thursday, December 7, 2023 | Project Notebook(s) Due |
 | Friday, December 15, 2023, 10:30 AM - 12:30 PM (Final Exam Timeslot) | Project Presentations |
 
@@ -119,11 +119,11 @@
 | [](../notebooks/13/Type-I-and-Type-II-Errors.ipynb) | [](../notebooks/13/Statistical-Power-in-Python.ipynb)
 | [](../notebooks/13/Statistical-Power-Basics.ipynb) | [](../notebooks/13/Statistical-Power-Practice-Problems.ipynb)  
 | **Thursday, November 23** | Thanksgiving | 
-| **Tuesday, November 28** | Probability and Statistics Quiz, Nonlinear Regression  |
+| **Tuesday, November 28** | Nonlinear Regression  |
 | [](../notebooks/15/Transformations-and-Linear-Regression.ipynb) |
 | [](../notebooks/15/Weighted-Regression.ipynb) |
 | [](../notebooks/15/Nonlinear-Regression.ipynb) | 
-| **Thursday, November 30** | Nonlinear Regression Continued |
+| **Thursday, November 30** | Probability and Statistics Quiz, Nonlinear Regression Continued |
 | [](../notebooks/15/Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression.ipynb ) | [](../notebooks/15/Nonlinear-Case-Study-Adsorptive-Membranes.ipynb )|
 | [](../notebooks/15/Nonlinear-Regression-Practice-Problem.ipynb) |
 | **Tuesday, December 5** | Design of Experiments | 

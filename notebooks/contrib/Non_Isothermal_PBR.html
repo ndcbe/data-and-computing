@@ -4,11 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Non-Isothermal Packed Bed Reactor &#8212; Data and Computing for Chemical Engineers</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet">
-  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,20 +20,16 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -39,12 +37,13 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -64,7 +63,21 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -73,9 +86,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -93,14 +107,15 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../intro.html">
-   Data and Computing for Engineers
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Data and Computing for Engineers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Python Programming
  </span>
@@ -874,6 +889,11 @@ const thebe_selector_output = ".output, .cell_output"
      Problem Set 5
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../assignments/ProblemSet6_F23.html">
+     Problem Set 6
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 current active has-children">
@@ -941,112 +961,227 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/contrib/Non_Isothermal_PBR.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/ndcbe/data-and-computing"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/contrib/Non_Isothermal_PBR.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/contrib/Non_Isothermal_PBR.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/contrib/Non_Isothermal_PBR.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/contrib/Non_Isothermal_PBR.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/contrib/Non_Isothermal_PBR.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ndcbe/data-and-computing"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/contrib/Non_Isothermal_PBR.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/notebooks/contrib/Non_Isothermal_PBR.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#learning-objectives">
    Learning Objectives:
@@ -1218,12 +1353,11 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Non-Isothermal Packed Bed Reactor</h1>
@@ -1411,17 +1545,18 @@ const thebe_selector_output = ".output, .cell_output"
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="non-isothermal-packed-bed-reactor">
-<h1>Non-Isothermal Packed Bed Reactor<a class="headerlink" href="#non-isothermal-packed-bed-reactor" title="Permalink to this headline">¶</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="non-isothermal-packed-bed-reactor">
+<h1>Non-Isothermal Packed Bed Reactor<a class="headerlink" href="#non-isothermal-packed-bed-reactor" title="Permalink to this headline">#</a></h1>
 <p><strong>Prepared by</strong>: Fathya Salih (<a class="reference external" href="mailto:fsalih&#37;&#52;&#48;nd&#46;edu">fsalih<span>&#64;</span>nd<span>&#46;</span>edu</a>) and Connor Schmidt (<a class="reference external" href="mailto:cschmid9&#37;&#52;&#48;nd&#46;edu">cschmid9<span>&#64;</span>nd<span>&#46;</span>edu</a>)</p>
 <p><strong>Reference</strong>: Problem 11-7, Elements of Chemical Reaction Engineering, Fifth Edition by H. Scott Fogler.</p>
 <p><strong>Intended Audience</strong>: Chemical Engineering undergraduate seniors who have studied reaction engineering, but may not have touched on non-ideal reactors.</p>
 <p>This problem is meant to provide practice for designing real reactors where running them at isothermal conditions is not always feasible and the kinetics are limited by equilibrium. The ultimate question to be answered is “<em>what’s the best way of controlling the reaction temperature if a cooling jacket is not feasible?</em>”</p>
-<div class="section" id="learning-objectives">
-<h2>Learning Objectives:<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">¶</a></h2>
+<section id="learning-objectives">
+<h2>Learning Objectives:<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>Practice diagramming and labeling the problem</p></li>
 <li><p>Deriving the mass and energy balance equations to the given forms.</p></li>
@@ -1429,20 +1564,20 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>To practice plotting multiple series using for-loops</p></li>
 <li><p>To study the effects of thermal non-idealities on reactor performance</p></li>
 </ul>
-</div>
-<div class="section" id="relevant-resources">
-<h2>Relevant Resources:<a class="headerlink" href="#relevant-resources" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="relevant-resources">
+<h2>Relevant Resources:<a class="headerlink" href="#relevant-resources" title="Permalink to this headline">#</a></h2>
 <ol class="simple">
 <li><p>Elements of Chemical Reaction Engineering, Fifth Edition by H. Scott Fogler</p></li>
 <li><p><a class="reference external" href="https://ndcbe.github.io/data-and-computing/intro.html">The class website</a>, especially the notebook on <a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/07/Example-Reaction-Rates.html">reaction rates</a></p></li>
 </ol>
-</div>
-<div class="section" id="problem-statement">
-<h2>Problem Statement<a class="headerlink" href="#problem-statement" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="problem-statement">
+<h2>Problem Statement<a class="headerlink" href="#problem-statement" title="Permalink to this headline">#</a></h2>
 <p><em>Modified from: Problem 11-7, Elements of Chemical Reaction Engineering, Fifth Edition by H. Scott Fogler</em></p>
 <p>The gas-phase reversible reaction:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f33b5af2-b972-4b59-97ad-ff8d64046119">
-<span class="eqno">(32)<a class="headerlink" href="#equation-f33b5af2-b972-4b59-97ad-ff8d64046119" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-45392492-bbc7-47c1-b710-1722f6d31adb">
+<span class="eqno">(32)<a class="headerlink" href="#equation-45392492-bbc7-47c1-b710-1722f6d31adb" title="Permalink to this equation">#</a></span>\[\begin{equation}
 A \rightarrow B
 \end{equation}\]</div>
 <p>is carried out under high pressure (150 bar at the inlet) in a packed-bed reactor with pressure drop. The feed consists of both inerts <span class="math notranslate nohighlight">\(I\)</span> and species <span class="math notranslate nohighlight">\(A\)</span> at a 2 to 1 ratio. The entering molar flow rate of A is 5 mol/min at a temperature of 300 K and a concentration of 2 mol/L. Work this problem in terms of volume (<span class="math notranslate nohighlight">\(V \rho_B=W\)</span>, and <span class="math notranslate nohighlight">\(r_i [\frac{mol\  'i'\  produced}{time . vol_{reactor}}] = r_i' [\frac{mol\  'i'\  produced}{min . kg_{cat}}]*\rho [\frac{kg_{cat}}{vol_{reactor}}]\)</span>).</p>
@@ -1464,124 +1599,124 @@ A \rightarrow B
 <li><p>Analyze the effect of heat capacities and pressure drop using parametric sweeps.</p></li>
 <li><p>Analyze the effect of inlet temperature (<span class="math notranslate nohighlight">\(T_0\)</span>) and the inlet fraction of inerts (<span class="math notranslate nohighlight">\(\Theta_I\)</span>) using parametric sweeps. Then, find the optimal combination of <span class="math notranslate nohighlight">\(T_0\)</span> and <span class="math notranslate nohighlight">\(\Theta_I\)</span> that controls the reaction temprature to maximize conversion.</p></li>
 </ol>
-</div>
-<div class="section" id="hints">
-<h2>Hints<a class="headerlink" href="#hints" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="a-algorithm">
-<h3>A) Algorithm<a class="headerlink" href="#a-algorithm" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="hints">
+<h2>Hints<a class="headerlink" href="#hints" title="Permalink to this headline">#</a></h2>
+<section id="a-algorithm">
+<h3>A) Algorithm<a class="headerlink" href="#a-algorithm" title="Permalink to this headline">#</a></h3>
 <p><em>Fogler</em> provides algorithms or a sequence of assembling equations needed to design different kinds of reactors. The equations below are the algorithm for designing a non-isobaric non-isothermal reactor.</p>
 <p><strong>1. Mole Balance</strong></p>
 <p>The design equation (mole balance equation) of a gas reaction in a PBR is most conveniently written in terms of molar flow rates and catalyst weight, so that for component ‘<span class="math notranslate nohighlight">\(i\)</span>’,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7cc7d857-4e26-47de-bb34-e452761feb28">
-<span class="eqno">(33)<a class="headerlink" href="#equation-7cc7d857-4e26-47de-bb34-e452761feb28" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-50b88fa6-793e-41d8-8898-fc3a874ad56f">
+<span class="eqno">(33)<a class="headerlink" href="#equation-50b88fa6-793e-41d8-8898-fc3a874ad56f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \frac{dF_i}{dW} = r'_i
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(r'_i\)</span> is the rate of production of component ‘<span class="math notranslate nohighlight">\(i\)</span>’ per unit of catalyst mass.</p>
 <p><strong>2. Rate Law</strong></p>
 <p>Only one reaction occurs in this system, and it can be written in terms of component ‘<span class="math notranslate nohighlight">\(A\)</span>’, since it is the only reactant (and hence the limiting reactant).</p>
 <p>The rate of <em>production</em> of ‘<span class="math notranslate nohighlight">\(A\)</span>’ is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-05ae66b7-8c58-4f9a-9c47-5aeeae6087d4">
-<span class="eqno">(34)<a class="headerlink" href="#equation-05ae66b7-8c58-4f9a-9c47-5aeeae6087d4" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f163c1bb-33c7-4b30-b0d4-eb4b4cf728f5">
+<span class="eqno">(34)<a class="headerlink" href="#equation-f163c1bb-33c7-4b30-b0d4-eb4b4cf728f5" title="Permalink to this equation">#</a></span>\[\begin{equation}
 r'_A = - k_1 \left[ C_A - \frac{C_B}{K_c} \right]
 \end{equation}\]</div>
 <p>Where:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a1b61f76-88ae-4982-8049-47a57cb00626">
-<span class="eqno">(35)<a class="headerlink" href="#equation-a1b61f76-88ae-4982-8049-47a57cb00626" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-59635c91-f74f-4520-80cd-995136d2cdcd">
+<span class="eqno">(35)<a class="headerlink" href="#equation-59635c91-f74f-4520-80cd-995136d2cdcd" title="Permalink to this equation">#</a></span>\[\begin{equation}
 k_1(T) = k_1(T_1) exp \left[ \frac{E}{R} \left( \frac{1}{T_1} - \frac{1}{T} \right) \right]
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-93a895e9-4018-4778-9d5a-8bdd150d5dc5">
-<span class="eqno">(36)<a class="headerlink" href="#equation-93a895e9-4018-4778-9d5a-8bdd150d5dc5" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-169b2551-7cd4-43e5-866b-c3d31539a3de">
+<span class="eqno">(36)<a class="headerlink" href="#equation-169b2551-7cd4-43e5-866b-c3d31539a3de" title="Permalink to this equation">#</a></span>\[\begin{equation}
 K_c(T) = K_c(T_2) exp \left[ \frac{ΔH_{rxn}}{R} \left( \frac{1}{T_2} - \frac{1}{T} \right) \right]
 \end{equation}\]</div>
 <p><strong>3. Stoichiometry</strong></p>
 <p>From the reaction stoichiometry, the rate of production of component ‘B’ is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-15efcec7-50ce-45c7-bdf4-9ecf4190e993">
-<span class="eqno">(37)<a class="headerlink" href="#equation-15efcec7-50ce-45c7-bdf4-9ecf4190e993" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1fa3a937-81f4-4e3c-9496-8f16755476c9">
+<span class="eqno">(37)<a class="headerlink" href="#equation-1fa3a937-81f4-4e3c-9496-8f16755476c9" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \frac{r'_B}{v_B} = \frac{r'_A}{v_A}
 \end{equation}\]</div>
 <p>Where the stoichiometric coefficients are <span class="math notranslate nohighlight">\(v_A=-1\)</span> and <span class="math notranslate nohighlight">\(v_B=1\)</span>, leaving</p>
-<div class="amsmath math notranslate nohighlight" id="equation-58ad74b7-14f9-433b-9b14-b50b71ddb687">
-<span class="eqno">(38)<a class="headerlink" href="#equation-58ad74b7-14f9-433b-9b14-b50b71ddb687" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9ead9e3b-fb4d-432b-a947-07faec390211">
+<span class="eqno">(38)<a class="headerlink" href="#equation-9ead9e3b-fb4d-432b-a947-07faec390211" title="Permalink to this equation">#</a></span>\[\begin{equation}
 r'_B = - r'_A
 \end{equation}\]</div>
 <p>And for the inert,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2063fa76-60ac-4ee4-96e1-5e5cff08a4f8">
-<span class="eqno">(39)<a class="headerlink" href="#equation-2063fa76-60ac-4ee4-96e1-5e5cff08a4f8" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-37c283be-ae3e-4a8e-a220-fc71de5b96f3">
+<span class="eqno">(39)<a class="headerlink" href="#equation-37c283be-ae3e-4a8e-a220-fc71de5b96f3" title="Permalink to this equation">#</a></span>\[\begin{equation}
 r'_I = 0
 \end{equation}\]</div>
 <p>Also, reaction rates (<span class="math notranslate nohighlight">\(r'_i\)</span>) need to be expressed in terms of molar flowrates to match the mole balance equation.</p>
 <p>Thus, applying the ideal gas law, concentrations can be written as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ee813d69-db0f-493e-a106-ebf09fa7bfe9">
-<span class="eqno">(40)<a class="headerlink" href="#equation-ee813d69-db0f-493e-a106-ebf09fa7bfe9" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a8a8be04-ab21-41e3-b447-093d134e840b">
+<span class="eqno">(40)<a class="headerlink" href="#equation-a8a8be04-ab21-41e3-b447-093d134e840b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 C_A  = C_{T0} \frac{F_A}{F_{T0}} \frac{T_0}{T} \frac{P}{P_0}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-0c1cf059-c424-4993-b01b-dc3791b7e908">
-<span class="eqno">(41)<a class="headerlink" href="#equation-0c1cf059-c424-4993-b01b-dc3791b7e908" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b97ad1c4-e2a3-4b4f-a36b-f6590bdc3633">
+<span class="eqno">(41)<a class="headerlink" href="#equation-b97ad1c4-e2a3-4b4f-a36b-f6590bdc3633" title="Permalink to this equation">#</a></span>\[\begin{equation}
 C_B  = C_{T0} \frac{F_B}{F_{T0}} \frac{T_0}{T} \frac{P}{P_0}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-14bc5b26-a935-4734-a654-d574b80e1e25">
-<span class="eqno">(42)<a class="headerlink" href="#equation-14bc5b26-a935-4734-a654-d574b80e1e25" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3c2ab76a-227d-408b-a376-95315daa17ad">
+<span class="eqno">(42)<a class="headerlink" href="#equation-3c2ab76a-227d-408b-a376-95315daa17ad" title="Permalink to this equation">#</a></span>\[\begin{equation}
 C_I  = C_{T0} \frac{F_I}{F_{T0}} \frac{T_0}{T} \frac{P}{P_0}
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(C_{T0}\)</span> is the total molar concentration at the inlet, meaning:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bf4415c1-3ea1-4ced-9cbc-ca2be462995c">
-<span class="eqno">(43)<a class="headerlink" href="#equation-bf4415c1-3ea1-4ced-9cbc-ca2be462995c" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-72dfe1f3-44b0-4561-92df-8d16a1d445e7">
+<span class="eqno">(43)<a class="headerlink" href="#equation-72dfe1f3-44b0-4561-92df-8d16a1d445e7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 C_{T0} = \frac{P_0}{R T_0}
 \end{equation}\]</div>
 <p><strong>4. Energy Balance</strong></p>
 <p>For an adiabatic PBR (no heat added or removed),</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c068a91a-3ebd-4eb6-8e4a-8499e922a81e">
-<span class="eqno">(44)<a class="headerlink" href="#equation-c068a91a-3ebd-4eb6-8e4a-8499e922a81e" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b24b538e-90ea-434f-bba9-c59893a3c564">
+<span class="eqno">(44)<a class="headerlink" href="#equation-b24b538e-90ea-434f-bba9-c59893a3c564" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \frac{dT}{dW} = \frac{r'_A ΔH_{rxn}}{\sum\limits_i F_i C_{p,i}}
 \end{equation}\]</div>
 <p>Where:
 <span class="math notranslate nohighlight">\(\Delta H_{rxn} \equiv\)</span> the heat released by the reaction per mole of ‘<span class="math notranslate nohighlight">\(A\)</span>’ reacted/consumed, and is a function of temperature</p>
 <p><strong>5. Pressure Drop Equation</strong></p>
 <p>The pressure drop through a packed bed can be described using the following form of the Ergun equation</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d3daf7f9-41d3-4b90-b712-bca7379ee846">
-<span class="eqno">(45)<a class="headerlink" href="#equation-d3daf7f9-41d3-4b90-b712-bca7379ee846" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c68e6f16-05a4-49ce-bdd3-0a88d16e5ba2">
+<span class="eqno">(45)<a class="headerlink" href="#equation-c68e6f16-05a4-49ce-bdd3-0a88d16e5ba2" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \frac{dp}{dW} = -\frac{α}{2p} \frac{F_T}{F_{T0}} \frac{T}{T_0}
 \end{equation}\]</div>
 <p>Where:</p>
 <p><span class="math notranslate nohighlight">\(p \equiv\)</span> The pressure ratio (<span class="math notranslate nohighlight">\(P/P_0\)</span>) [dimensionless]</p>
 <p><span class="math notranslate nohighlight">\(\alpha \equiv\)</span> pressure ratio drop per unit mass of catalyst mass [<span class="math notranslate nohighlight">\(kg_{cat}^{-1}\)</span>]</p>
 <p><span class="math notranslate nohighlight">\(\alpha\)</span> lumps a number of packed bed parameters and important material properties like void fraction, particle size, gas viscosity ,etc. It is used here to simplify using the Ergun equation.</p>
-</div>
-<div class="section" id="b-additional-equations-and-parameters">
-<h3>B) Additional Equations and Parameters<a class="headerlink" href="#b-additional-equations-and-parameters" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="b-additional-equations-and-parameters">
+<h3>B) Additional Equations and Parameters<a class="headerlink" href="#b-additional-equations-and-parameters" title="Permalink to this headline">#</a></h3>
 <p><strong>1. Equilibrium Conversion</strong></p>
 <p>Eqilibrium conversion is calculated at equilibrium, where the net rate of reaction is zero. Setting <span class="math notranslate nohighlight">\(r'_A=0\)</span> in the equation provided above yeilds:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-310d0a3f-7e5e-4ba4-8c8e-5343f21dc994">
-<span class="eqno">(46)<a class="headerlink" href="#equation-310d0a3f-7e5e-4ba4-8c8e-5343f21dc994" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3e53b728-7904-4b18-8e87-618459a8dc68">
+<span class="eqno">(46)<a class="headerlink" href="#equation-3e53b728-7904-4b18-8e87-618459a8dc68" title="Permalink to this equation">#</a></span>\[\begin{equation}
 X_e = \frac{K_c}{1+K_c}
 \end{equation}\]</div>
 <p><strong>2. Temperature Dependence</strong></p>
 <p>The temperature dependence of the heat of reaction can be written using a known value for <span class="math notranslate nohighlight">\(\Delta H_{rxn}\)</span> at a reference temperature <span class="math notranslate nohighlight">\(T_R\)</span></p>
-<div class="amsmath math notranslate nohighlight" id="equation-a29c3f7b-eb33-4448-843a-cedc086761b6">
-<span class="eqno">(47)<a class="headerlink" href="#equation-a29c3f7b-eb33-4448-843a-cedc086761b6" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-22235e75-ca48-4493-8a60-057d192075a4">
+<span class="eqno">(47)<a class="headerlink" href="#equation-22235e75-ca48-4493-8a60-057d192075a4" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \Delta H_{rxn}(T) = \Delta H_{rxn}(T_R) + \Delta C_p (T-T_R)
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(\Delta C_p\)</span> lumps the temperature dependence</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2028b7bd-afff-43c1-8c14-6e37ae9519d3">
-<span class="eqno">(48)<a class="headerlink" href="#equation-2028b7bd-afff-43c1-8c14-6e37ae9519d3" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e05729aa-9a12-472a-a685-3e27d9d61f30">
+<span class="eqno">(48)<a class="headerlink" href="#equation-e05729aa-9a12-472a-a685-3e27d9d61f30" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \Delta C_p = \sum\limits_i v_i C_{p,i}
 \end{equation}\]</div>
-</div>
-</div>
-<div class="section" id="derivation-of-mole-and-energy-balances">
-<h2>1. Derivation of Mole and Energy Balances<a class="headerlink" href="#derivation-of-mole-and-energy-balances" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="a-sketch-control-volume">
-<h3>1a. Sketch &amp; Control Volume<a class="headerlink" href="#a-sketch-control-volume" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="derivation-of-mole-and-energy-balances">
+<h2>1. Derivation of Mole and Energy Balances<a class="headerlink" href="#derivation-of-mole-and-energy-balances" title="Permalink to this headline">#</a></h2>
+<section id="a-sketch-control-volume">
+<h3>1a. Sketch &amp; Control Volume<a class="headerlink" href="#a-sketch-control-volume" title="Permalink to this headline">#</a></h3>
 <p>Draw a sketch of a PBR and on the sketch, select an appropriate control volume and indicate the selected volume on the sketch</p>
 <p><img alt="" src="https://ndcbe.github.io/data-and-computing/_images/PBR_Sketch.png" /></p>
-</div>
-<div class="section" id="b-mole-balance">
-<h3>1b. Mole Balance<a class="headerlink" href="#b-mole-balance" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="b-mole-balance">
+<h3>1b. Mole Balance<a class="headerlink" href="#b-mole-balance" title="Permalink to this headline">#</a></h3>
 <p>Apply a mole balance on component ‘<span class="math notranslate nohighlight">\(i\)</span>’ in the selected control volume and attempt to produce the mole balance equation provided in the hints</p>
 <p><img alt="" src="notebooks/contrib/PBR_Mole_Balance.png" /></p>
 <p>The mole balance for each component on the selected control volume can be written as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b0e7b4c4-9fdf-44c4-9511-a0cf26998768">
-<span class="eqno">(49)<a class="headerlink" href="#equation-b0e7b4c4-9fdf-44c4-9511-a0cf26998768" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-54e96e1b-5e94-4915-9be2-5cfa66dd7d09">
+<span class="eqno">(49)<a class="headerlink" href="#equation-54e96e1b-5e94-4915-9be2-5cfa66dd7d09" title="Permalink to this equation">#</a></span>\[\begin{equation}
 F_{i_{in}} - F_{i_{out}} + F_{i_{gen}} = F_{i_{accumulation}}
 \end{equation}\]</div>
 <p>But,</p>
@@ -1590,34 +1725,34 @@ F_{i_{in}} - F_{i_{out}} + F_{i_{gen}} = F_{i_{accumulation}}
 <li><p>Generation is <span class="math notranslate nohighlight">\(r'_i\Delta W\)</span></p></li>
 </ul>
 <p>So we can rewrite as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5f002b68-0bab-436d-bf4e-8183c77732eb">
-<span class="eqno">(50)<a class="headerlink" href="#equation-5f002b68-0bab-436d-bf4e-8183c77732eb" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8bc1cc4c-4b74-4f04-b514-4b0b4c2c83b9">
+<span class="eqno">(50)<a class="headerlink" href="#equation-8bc1cc4c-4b74-4f04-b514-4b0b4c2c83b9" title="Permalink to this equation">#</a></span>\[\begin{equation}
 F_{i_{in}} - F_{i_{out}} + r'_i\Delta W = 0
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(r'_i\)</span> is rate of production of component ‘i’ per unit of catalyst mass, <span class="math notranslate nohighlight">\(F_{i_{in}}\)</span> and <span class="math notranslate nohighlight">\(F_{i_{out}}\)</span> are the molar flow rates in and out of the reactor for component ‘i’.</p>
 <p>Solving for <span class="math notranslate nohighlight">\(r'_i\)</span> we find</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5b66ce24-abb1-440e-9bf7-b090a83088c8">
-<span class="eqno">(51)<a class="headerlink" href="#equation-5b66ce24-abb1-440e-9bf7-b090a83088c8" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b9d4839d-5481-4919-9985-9b4308335331">
+<span class="eqno">(51)<a class="headerlink" href="#equation-b9d4839d-5481-4919-9985-9b4308335331" title="Permalink to this equation">#</a></span>\[\begin{equation}
 r'_i = \frac{-(F_{i_{in}} - F_{i_{out}})}{\Delta W}
 \end{equation}\]</div>
 <p>With infinitely small <span class="math notranslate nohighlight">\(\Delta W\)</span> we arrive at the mole balance equation provided in the hints:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bb3a196c-cda9-4025-879b-c2aa9c7bd746">
-<span class="eqno">(52)<a class="headerlink" href="#equation-bb3a196c-cda9-4025-879b-c2aa9c7bd746" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-35fa39d0-5280-4041-abe3-c4ea86492bf4">
+<span class="eqno">(52)<a class="headerlink" href="#equation-35fa39d0-5280-4041-abe3-c4ea86492bf4" title="Permalink to this equation">#</a></span>\[\begin{equation}
 r'_i = \frac{dF_i }{ dW }
 \end{equation}\]</div>
-</div>
-<div class="section" id="c-energy-balance">
-<h3>1c. Energy Balance<a class="headerlink" href="#c-energy-balance" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="c-energy-balance">
+<h3>1c. Energy Balance<a class="headerlink" href="#c-energy-balance" title="Permalink to this headline">#</a></h3>
 <p>Apply an energy balance on the selected control volume and attempt to produce the energy balance equation provided in the hints</p>
 <p><img alt="PBR_Energy_Balance.png" src="https://ndcbe.github.io/data-and-computing/_images/PBR_Energy_Balance.png" /></p>
 <p>The energy balance on the selected control volume can be written as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6b5ba3be-6e6f-4fec-ad7d-3cf3a53ba926">
-<span class="eqno">(53)<a class="headerlink" href="#equation-6b5ba3be-6e6f-4fec-ad7d-3cf3a53ba926" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-be66ad72-86c1-4bed-8255-f172b82bd3a1">
+<span class="eqno">(53)<a class="headerlink" href="#equation-be66ad72-86c1-4bed-8255-f172b82bd3a1" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \dot{H}_{in} - \dot{H}_{out} + \dot{Q}_{ext} ΔV = Q_{accumulation}
 \end{equation}\]</div>
 <p>At steady state, <span class="math notranslate nohighlight">\(Q_{accumulation}=0\)</span>, leaving:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0c34d4d2-df43-45bf-91a1-5e247b1b3bbf">
-<span class="eqno">(54)<a class="headerlink" href="#equation-0c34d4d2-df43-45bf-91a1-5e247b1b3bbf" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-94ad4540-89f1-418b-b46e-eee81bc2dc4c">
+<span class="eqno">(54)<a class="headerlink" href="#equation-94ad4540-89f1-418b-b46e-eee81bc2dc4c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \dot{H}_{in} - \dot{H}_{out} + \dot{Q}_{ext} ΔV = 0
 \end{equation}\]</div>
 <p>Where
@@ -1629,67 +1764,67 @@ r'_i = \frac{dF_i }{ dW }
 <p><span class="math notranslate nohighlight">\(\dot{Q}_{ext} ΔV = \frac{\dot{Q}_{ext}}{ρ_B} ΔW
 \)</span></p>
 <p>Combining,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-110d9206-9487-4420-87b3-7696eba97ab1">
-<span class="eqno">(55)<a class="headerlink" href="#equation-110d9206-9487-4420-87b3-7696eba97ab1" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f4ffad88-6d18-4cbd-813f-82cf18538c15">
+<span class="eqno">(55)<a class="headerlink" href="#equation-f4ffad88-6d18-4cbd-813f-82cf18538c15" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum\limits_{comp,i} F_i \bar{H}_i \Big|_{W} 
 - \sum\limits_{comp,i} F_i \bar{H}_i \Big|_{W+ΔW} 
 + \frac{\dot{Q}_{ext}}{ρ_B} ΔW = 0
 \end{equation}\]</div>
 <p>Dividing through by <span class="math notranslate nohighlight">\(ΔW\)</span>,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e6f001b0-557f-40b8-9151-d478091837f9">
-<span class="eqno">(56)<a class="headerlink" href="#equation-e6f001b0-557f-40b8-9151-d478091837f9" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a4c5c8a2-751d-45ce-af3f-2f11ace668b3">
+<span class="eqno">(56)<a class="headerlink" href="#equation-a4c5c8a2-751d-45ce-af3f-2f11ace668b3" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum\limits_{comp,i} \frac{F_i \bar{H}_i \Big|_{W}- F_i \bar{H}_i \Big|_{W+ΔW}}{ΔW}
 + \frac{\dot{Q}_{ext}}{ρ_B}= 0
 \end{equation}\]</div>
 <p>Taking the limit as <span class="math notranslate nohighlight">\(ΔW ⟶ ∞\)</span>,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f03f8cb9-7807-4af2-9a75-d8386ea2e856">
-<span class="eqno">(57)<a class="headerlink" href="#equation-f03f8cb9-7807-4af2-9a75-d8386ea2e856" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-47e1bc3f-5186-4a92-9864-b4c1cbd51bcc">
+<span class="eqno">(57)<a class="headerlink" href="#equation-47e1bc3f-5186-4a92-9864-b4c1cbd51bcc" title="Permalink to this equation">#</a></span>\[\begin{equation}
  \frac{d}{dW} \left[ \sum\limits_{comp,i} F_i \bar{H}_i \right]
 + \frac{\dot{Q}_{ext}}{ρ_B}= 0
 \end{equation}\]</div>
 <p>Taking the derivative of the sum and applying the product rule to each term,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0062e74e-5958-48ec-b94d-119cbeb26dcb">
-<span class="eqno">(58)<a class="headerlink" href="#equation-0062e74e-5958-48ec-b94d-119cbeb26dcb" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ac9b5ade-975e-4d31-b774-bc0f08ef946f">
+<span class="eqno">(58)<a class="headerlink" href="#equation-ac9b5ade-975e-4d31-b774-bc0f08ef946f" title="Permalink to this equation">#</a></span>\[\begin{equation}
  \sum\limits_{comp,i} \left[ \frac{dF_i}{dW} \bar{H}_i + \frac{d\bar{H}_i}{dW} F_i \right]
 + \frac{\dot{Q}_{ext}}{ρ_B}= 0
 \end{equation}\]</div>
 <p>By definiton, <span class="math notranslate nohighlight">\(dF_i/dW = r'_i\)</span>. And taking component <span class="math notranslate nohighlight">\(A\)</span> as a reference component in the reaction <span class="math notranslate nohighlight">\(A + \frac{b}{a} B ⟶ \frac{c}{a} C + \frac{d}{a} D\)</span>, the rate equations for other components can be written using their stoichiometric coefficients ‘<span class="math notranslate nohighlight">\(v_i\)</span>’ (e.g. <span class="math notranslate nohighlight">\(v_B=b/a\)</span>). Thus:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b7789428-742b-4683-b9dc-2491869f6b66">
-<span class="eqno">(59)<a class="headerlink" href="#equation-b7789428-742b-4683-b9dc-2491869f6b66" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2c3eea32-a6b6-4ea9-a5a6-aa7da0d30d5e">
+<span class="eqno">(59)<a class="headerlink" href="#equation-2c3eea32-a6b6-4ea9-a5a6-aa7da0d30d5e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \frac{dF_i}{dW} = v_i (-r'_A)
 \end{equation}\]</div>
 <p>Using the chain rule on the derivative <span class="math notranslate nohighlight">\(\frac{d\bar{H}_i}{dW}\)</span>,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3febca11-ad79-4a86-b6b9-2c5f1fb7d366">
-<span class="eqno">(60)<a class="headerlink" href="#equation-3febca11-ad79-4a86-b6b9-2c5f1fb7d366" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f3e60cd3-a19b-4506-bca1-8e6a8fb2ca19">
+<span class="eqno">(60)<a class="headerlink" href="#equation-f3e60cd3-a19b-4506-bca1-8e6a8fb2ca19" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \frac{d\bar{H}_i}{dW} = \frac{dT}{dW} \frac{d\bar{H}_i}{dT} = \frac{dT}{dW} \bar{C}_{p,i}
 \end{equation}\]</div>
 <p>Combining,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ad41b601-6edd-4e51-aa2e-42d93c2ff8c1">
-<span class="eqno">(61)<a class="headerlink" href="#equation-ad41b601-6edd-4e51-aa2e-42d93c2ff8c1" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-55fed6e6-ee1d-4f3d-8a08-96f4006076e9">
+<span class="eqno">(61)<a class="headerlink" href="#equation-55fed6e6-ee1d-4f3d-8a08-96f4006076e9" title="Permalink to this equation">#</a></span>\[\begin{equation}
  \sum\limits_{comp,i} \bar{H}_i v_i (-r'_A)
 + \sum\limits_{comp,i} \frac{dT}{dW} F_i \bar{C}_{p,i}
 + \frac{\dot{Q}_{ext}}{ρ_B}= 0
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-358b3ef8-7aed-4dbe-b0ae-33f97f7bf094">
-<span class="eqno">(62)<a class="headerlink" href="#equation-358b3ef8-7aed-4dbe-b0ae-33f97f7bf094" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d43c8b8e-73fb-4275-aab7-bf9e0ffb14bb">
+<span class="eqno">(62)<a class="headerlink" href="#equation-d43c8b8e-73fb-4275-aab7-bf9e0ffb14bb" title="Permalink to this equation">#</a></span>\[\begin{equation}
  -r'_A \sum\limits_{comp,i} \bar{H}_i v_i 
 + \frac{dT}{dW} \sum\limits_{comp,i} F_i \bar{C}_{p,i}
 + \frac{\dot{Q}_{ext}}{ρ_B}= 0
 \end{equation}\]</div>
 <p>Substituting for the definition of heat of reaction (<span class="math notranslate nohighlight">\(ΔH_{rxn}=\sum\limits_{comp,i} \bar{H}_i v_i\)</span>) and rearranging,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f726251a-17a7-4863-8f8d-ca4a2be5f096">
-<span class="eqno">(63)<a class="headerlink" href="#equation-f726251a-17a7-4863-8f8d-ca4a2be5f096" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-649e967f-e6e3-447e-8c12-699dfa61f572">
+<span class="eqno">(63)<a class="headerlink" href="#equation-649e967f-e6e3-447e-8c12-699dfa61f572" title="Permalink to this equation">#</a></span>\[\begin{equation}
  \frac{dT}{dW} = \frac{r'_A ΔH_{rxn} + \dot{Q}_{ext}/ρ_B}{\sum\limits_{comp,i} F_i \bar{C}_{p,i}}
 \end{equation}\]</div>
 <p>This can be interpreted as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ac9697b2-eac2-445d-a0d8-794f09a8150c">
-<span class="eqno">(64)<a class="headerlink" href="#equation-ac9697b2-eac2-445d-a0d8-794f09a8150c" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ced2fcce-465c-4866-ab88-94844775264e">
+<span class="eqno">(64)<a class="headerlink" href="#equation-ced2fcce-465c-4866-ab88-94844775264e" title="Permalink to this equation">#</a></span>\[\begin{equation}
  \frac{dT}{dW} = \frac{\dot{Q}_{gen} + \dot{Q}_{added}}{C_{p,overall}}
 \end{equation}\]</div>
-</div>
-</div>
-<div class="section" id="solving-the-system-of-equations-numerically">
-<h2>2. Solving the system of Equations Numerically<a class="headerlink" href="#solving-the-system-of-equations-numerically" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="solving-the-system-of-equations-numerically">
+<h2>2. Solving the system of Equations Numerically<a class="headerlink" href="#solving-the-system-of-equations-numerically" title="Permalink to this headline">#</a></h2>
 <p>Solve using <code class="docutils literal notranslate"><span class="pre">scipy.integrate.solve_ivp()</span></code></p>
 <p>For information on using scipy:
 <a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/07/Systems-of-Differential-Equations-and-Scipy.html">https://ndcbe.github.io/data-and-computing/notebooks/07/Systems-of-Differential-Equations-and-Scipy.html</a></p>
@@ -1801,14 +1936,14 @@ r'_i = \frac{dF_i }{ dW }
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="analysis-of-results">
-<h2>3. Analysis of Results<a class="headerlink" href="#analysis-of-results" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="a-visualization">
-<h3>3a. Visualization<a class="headerlink" href="#a-visualization" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="analysis-of-results">
+<h2>3. Analysis of Results<a class="headerlink" href="#analysis-of-results" title="Permalink to this headline">#</a></h2>
+<section id="a-visualization">
+<h3>3a. Visualization<a class="headerlink" href="#a-visualization" title="Permalink to this headline">#</a></h3>
 <p>For information on making quality plots see: <a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/01/Matplotlib.html">https://ndcbe.github.io/data-and-computing/notebooks/01/Matplotlib.html</a></p>
-<div class="section" id="i-python-function">
-<h4>i) Python Function<a class="headerlink" href="#i-python-function" title="Permalink to this headline">¶</a></h4>
+<section id="i-python-function">
+<h4>i) Python Function<a class="headerlink" href="#i-python-function" title="Permalink to this headline">#</a></h4>
 <p>Write a function that calculates <span class="math notranslate nohighlight">\(X\)</span>, <span class="math notranslate nohighlight">\(X_e\)</span> and <span class="math notranslate nohighlight">\(-r_A\)</span> for a given set of parameters of interest (<span class="math notranslate nohighlight">\(T_0\)</span>, <span class="math notranslate nohighlight">\(\Theta_I\)</span>, <span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(C_{p,A}\)</span>, <span class="math notranslate nohighlight">\(C_{p,B}\)</span>, <span class="math notranslate nohighlight">\(C_{p,I}\)</span>)</p>
 <p>Much of the coding is provided, but to be completed sections include:</p>
 <ul class="simple">
@@ -1948,9 +2083,9 @@ r'_i = \frac{dF_i }{ dW }
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="ii-plotting">
-<h4>ii) Plotting<a class="headerlink" href="#ii-plotting" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="ii-plotting">
+<h4>ii) Plotting<a class="headerlink" href="#ii-plotting" title="Permalink to this headline">#</a></h4>
 <p>Create a 2x2 subplot figure for conversion (<span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(X_e\)</span>), <span class="math notranslate nohighlight">\(T\)</span>, <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(-r_A\)</span> profiles, (all plotted vs reactor volume) in distinct suplots. Use the written function for the solution from 2b</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1982,12 +2117,12 @@ r'_i = \frac{dF_i }{ dW }
 <img alt="../../_images/Non_Isothermal_PBR_28_0.png" src="../../_images/Non_Isothermal_PBR_28_0.png" />
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="b-effect-of-heat-capacities">
-<h3>3b. Effect of Heat Capacities<a class="headerlink" href="#b-effect-of-heat-capacities" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="i-numerical-solution">
-<h4>i) Numerical Solution<a class="headerlink" href="#i-numerical-solution" title="Permalink to this headline">¶</a></h4>
+</section>
+</section>
+<section id="b-effect-of-heat-capacities">
+<h3>3b. Effect of Heat Capacities<a class="headerlink" href="#b-effect-of-heat-capacities" title="Permalink to this headline">#</a></h3>
+<section id="i-numerical-solution">
+<h4>i) Numerical Solution<a class="headerlink" href="#i-numerical-solution" title="Permalink to this headline">#</a></h4>
 <p>Solve for the case where <span class="math notranslate nohighlight">\(C_{P,B}\)</span> is varied and plot conversion and temperature profiles for those cases</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2208,18 +2343,18 @@ The exit conversion at $C_{p,B}$ = 80 is 56.12%
 <img alt="../../_images/Non_Isothermal_PBR_33_1.png" src="../../_images/Non_Isothermal_PBR_33_1.png" />
 </div>
 </div>
-</div>
-<div class="section" id="ii-discussion">
-<h4>ii) Discussion<a class="headerlink" href="#ii-discussion" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="ii-discussion">
+<h4>ii) Discussion<a class="headerlink" href="#ii-discussion" title="Permalink to this headline">#</a></h4>
 <p>Comment on the effect of having <span class="math notranslate nohighlight">\(ΔC_P \neq 0\)</span> (compare plots 3b and 3c)</p>
 <p>A higher product heat capacity is beneficial in all cases for this reaction because this reaction is limited by equilibrium. And the equilibrium conversion is negatively affected by temperature. Having a product with a high heat capacity means the product will act as a heat sink and prevent the reaction mixture temperature from rising easily.</p>
 <p>This, in turn, prevents the equilibrium conversion from dropping deeper into the reactor, allowing exit conversion to reach larger values.</p>
-</div>
-</div>
-<div class="section" id="c-effect-of-pressure-drop">
-<h3>3c. Effect of Pressure Drop<a class="headerlink" href="#c-effect-of-pressure-drop" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="i-solve-and-plot">
-<h4>i) Solve and plot<a class="headerlink" href="#i-solve-and-plot" title="Permalink to this headline">¶</a></h4>
+</section>
+</section>
+<section id="c-effect-of-pressure-drop">
+<h3>3c. Effect of Pressure Drop<a class="headerlink" href="#c-effect-of-pressure-drop" title="Permalink to this headline">#</a></h3>
+<section id="i-solve-and-plot">
+<h4>i) Solve and plot<a class="headerlink" href="#i-solve-and-plot" title="Permalink to this headline">#</a></h4>
 <p>Solve and plot for the case where pressure drop is ignored (<span class="math notranslate nohighlight">\(\alpha = 0 \Rightarrow dp/dW=0\)</span>)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2245,21 +2380,21 @@ The exit conversion at α = 0.02 is 66.77%
 <img alt="../../_images/Non_Isothermal_PBR_38_1.png" src="../../_images/Non_Isothermal_PBR_38_1.png" />
 </div>
 </div>
-</div>
-<div class="section" id="ii-comment-on-the-effect-of-including-pressure-drop">
-<h4>ii) Comment on the effect of including pressure drop<a class="headerlink" href="#ii-comment-on-the-effect-of-including-pressure-drop" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="ii-comment-on-the-effect-of-including-pressure-drop">
+<h4>ii) Comment on the effect of including pressure drop<a class="headerlink" href="#ii-comment-on-the-effect-of-including-pressure-drop" title="Permalink to this headline">#</a></h4>
 <p>The effect of omitting pressure drop is very small in this case, because the equilibrium position of this reaction is not affected by pressure.</p>
 <p>Le Chatelier’s principle says that increasing pressure should push the equilibrium position to whichever side of the reaction has less mols. However, this reaction has the same number of mols on both sides (<span class="math notranslate nohighlight">\(A + I ⟷ B + I\)</span>).</p>
-</div>
-</div>
-</div>
-<div class="section" id="optimal-way-to-control-reactor-temperature">
-<h2>4. Optimal Way to Control Reactor Temperature<a class="headerlink" href="#optimal-way-to-control-reactor-temperature" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="a-effect-of-i">
-<h3>4a. Effect of <span class="math notranslate nohighlight">\(Θ_I\)</span><a class="headerlink" href="#a-effect-of-i" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+</section>
+<section id="optimal-way-to-control-reactor-temperature">
+<h2>4. Optimal Way to Control Reactor Temperature<a class="headerlink" href="#optimal-way-to-control-reactor-temperature" title="Permalink to this headline">#</a></h2>
+<section id="a-effect-of-i">
+<h3>4a. Effect of <span class="math notranslate nohighlight">\(Θ_I\)</span><a class="headerlink" href="#a-effect-of-i" title="Permalink to this headline">#</a></h3>
 <p>Solve for a set of cases where the fraction of inerts in the inlet varies <span class="math notranslate nohighlight">\(Θ_I=[0,10]\)</span> and analyze the effect of the fraction of inerts on the exit conversion.</p>
-<div class="section" id="i-sensitivity-analysis">
-<h4>i) Sensitivity analysis<a class="headerlink" href="#i-sensitivity-analysis" title="Permalink to this headline">¶</a></h4>
+<section id="i-sensitivity-analysis">
+<h4>i) Sensitivity analysis<a class="headerlink" href="#i-sensitivity-analysis" title="Permalink to this headline">#</a></h4>
 <p>Solve for a set of fraction of inerts (set of thetas) using solve_pbr. Hint: Use a for-loop</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2280,9 +2415,9 @@ The exit conversion at α = 0.02 is 66.77%
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="ii-visualize">
-<h4>ii) Visualize<a class="headerlink" href="#ii-visualize" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="ii-visualize">
+<h4>ii) Visualize<a class="headerlink" href="#ii-visualize" title="Permalink to this headline">#</a></h4>
 <p>Plot exit conversion Xout vs Theta Initial and comment on the effect of inert concentration on exit conversion. (4-6 sentences)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2338,13 +2473,13 @@ The exit conversion at α = 0.02 is 66.77%
 </div>
 <p>iii) Student Comments on High Theta Plots:</p>
 <p>Above we see that we do not reach equilibrium at high thetas (X and Xe do not meet and we do not see the full pattern of a peak followed by a drop to an equilibrium rate in the rate of consumption plot). At high theta values the inert in essence drowns out the reactive species, preventing sufficient reaction to achieve equilibrium.</p>
-</div>
-</div>
-<div class="section" id="b-effect-of-t-0">
-<h3>4b. Effect of <span class="math notranslate nohighlight">\(T_0\)</span><a class="headerlink" href="#b-effect-of-t-0" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="b-effect-of-t-0">
+<h3>4b. Effect of <span class="math notranslate nohighlight">\(T_0\)</span><a class="headerlink" href="#b-effect-of-t-0" title="Permalink to this headline">#</a></h3>
 <p>Solve for a set of cases where the inlet temperature varies <span class="math notranslate nohighlight">\(T_0=[280,350]\)</span> K</p>
-<div class="section" id="id1">
-<h4>i) Sensitivity analysis<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<section id="id1">
+<h4>i) Sensitivity analysis<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h4>
 <p>Solve for a set of Inlet Temperatures using solve_pbr. Hint: Use a for-loop just as in 4a</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2356,9 +2491,9 @@ The exit conversion at α = 0.02 is 66.77%
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="id2">
-<h4>ii) Visualize<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="id2">
+<h4>ii) Visualize<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h4>
 <p>Plot exit conversion <span class="math notranslate nohighlight">\(X_{out}\)</span> vs <span class="math notranslate nohighlight">\(T_0\)</span> and comment on the effect of inlet temperature. (1 sentence)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2397,10 +2532,10 @@ The exit conversion at α = 0.02 is 66.77%
 </div>
 <p>Student Comments:</p>
 <p>Above we see that as temperature increases, the temperature that equillibrium occurs at increases and the conversion decreases. This suggests that the reaction rate in inversly dependent on temperature with the reaction rate being faster when at lower temperatures.</p>
-</div>
-</div>
-<div class="section" id="c-optimal-temperature-control">
-<h3>4c. Optimal Temperature Control<a class="headerlink" href="#c-optimal-temperature-control" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="c-optimal-temperature-control">
+<h3>4c. Optimal Temperature Control<a class="headerlink" href="#c-optimal-temperature-control" title="Permalink to this headline">#</a></h3>
 <p>Using the function <code class="docutils literal notranslate"><span class="pre">solve_pbr()</span></code>, find the optimal combination of <span class="math notranslate nohighlight">\(Θ_I\)</span> and <span class="math notranslate nohighlight">\(T_0\)</span> that maximizes <span class="math notranslate nohighlight">\(X_{out}\)</span>. Display in a contour plot. Comment on the optimization results and the trends in the contour plot (5-6 sentences).</p>
 <p>Hint: Use a nested for-loop.</p>
 <p>For information on making quality plots see:
@@ -2507,9 +2642,9 @@ Optimal Initial Theta:  2.3
 <p>The contour plot, however, reveals a more nuanced depiction of optimal initial conditions.
 If we choose to use a low theta initial (0-2) we should use low temperatures (280 K), but if we use a much higher theta initial (8-9) the optimal temperature is much higher (310 K) with a smooth curve inbetween as an optimal range.</p>
 <p>While our earlier analysis had suggested high temperatures lead to lower conversion, we see here that at high theta, low temperatures can also be detrimental to conversion. This is likely because energy from the higher temperatures are needed for the interactions between reactive molecules to occur when they are at such low proportion to the inert molecules. Hence, there is an ideal temperature range at high theta initials, with both higher and lower temperatures limiting conversion.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -2533,9 +2668,11 @@ If we choose to use a low theta initial (0-2) we should use low temperatures (28
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="Biotransport-Entrance-Length.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -2551,24 +2688,28 @@ If we choose to use a low theta initial (0-2) we should use low temperatures (28
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
     
-      By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>

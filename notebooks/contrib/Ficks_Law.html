@@ -4,11 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Solving Fick’s Second Law Using Numeric Integration &#8212; Data and Computing for Chemical Engineers</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet">
-  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,20 +20,16 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -39,12 +37,13 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -64,7 +63,21 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -73,9 +86,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -93,14 +107,15 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../intro.html">
-   Data and Computing for Engineers
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Data and Computing for Engineers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Python Programming
  </span>
@@ -874,6 +889,11 @@ const thebe_selector_output = ".output, .cell_output"
      Problem Set 5
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../assignments/ProblemSet6_F23.html">
+     Problem Set 6
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 current active has-children">
@@ -941,112 +961,227 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/contrib/Ficks_Law.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/ndcbe/data-and-computing"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/contrib/Ficks_Law.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/contrib/Ficks_Law.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/contrib/Ficks_Law.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/ndcbe/data-and-computing/master?urlpath=tree/notebooks/contrib/Ficks_Law.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/contrib/Ficks_Law.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ndcbe/data-and-computing"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/contrib/Ficks_Law.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/notebooks/contrib/Ficks_Law.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction">
    1. Introduction
@@ -1103,12 +1238,11 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Solving Fick’s Second Law Using Numeric Integration</h1>
@@ -1181,46 +1315,47 @@ const thebe_selector_output = ".output, .cell_output"
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="solving-ficks-second-law-using-numeric-integration">
-<h1>Solving Fick’s Second Law Using Numeric Integration<a class="headerlink" href="#solving-ficks-second-law-using-numeric-integration" title="Permalink to this headline">¶</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="solving-ficks-second-law-using-numeric-integration">
+<h1>Solving Fick’s Second Law Using Numeric Integration<a class="headerlink" href="#solving-ficks-second-law-using-numeric-integration" title="Permalink to this headline">#</a></h1>
 <p><strong>Prepared by</strong>:</p>
 <p>Damian Agi - <a class="reference external" href="mailto:dagi&#37;&#52;&#48;nd&#46;edu">dagi<span>&#64;</span>nd<span>&#46;</span>edu</a></p>
 <p>Marvin Diaz Segura - <a class="reference external" href="mailto:mdiazseg&#37;&#52;&#48;nd&#46;edu">mdiazseg<span>&#64;</span>nd<span>&#46;</span>edu</a></p>
-<div class="section" id="introduction">
-<h2>1. Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="project-motivation-and-background">
-<h3>1.1 Project Motivation and Background<a class="headerlink" href="#project-motivation-and-background" title="Permalink to this headline">¶</a></h3>
+<section id="introduction">
+<h2>1. Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
+<section id="project-motivation-and-background">
+<h3>1.1 Project Motivation and Background<a class="headerlink" href="#project-motivation-and-background" title="Permalink to this headline">#</a></h3>
 <p>This project presents an example on the numeric integration of differential equations. The problem set is based on Fick’s second law of diffusion, a concept that chemical engineering students often encounter in transport phenomena classes. The material provided in this project, including the class activities, builds on the course’s principles on applying computational thinking in solving chemical engineering problems. Particularly, it applies tools from the class such as numeric integration and graphical representation of data. The material is designed to be interactive so as to encourage thinking, good strategy using ‘paper and pen’ calculations, and peer discussions.</p>
-</div>
-<div class="section" id="problem-description">
-<h3>1.2 Problem Description<a class="headerlink" href="#problem-description" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="problem-description">
+<h3>1.2 Problem Description<a class="headerlink" href="#problem-description" title="Permalink to this headline">#</a></h3>
 <p>We have seen somewhere where a drop of ink is inserted into a glass of water for instance. At a certain time all of the water in the glass is going to be filled with ink. When we observe how the ink molecules are spreading all over the volume of the water we are observing a phenomenon called diffusion. This occurrence can be explained with Fick’s laws of diffusion. Fick’s laws are named after Adolph Fick. Fick’s second law predicts how diffusion causes the concentration to change with respect to time. If we consider Fick’s first law, which states that diffusive flux will move from regions of high concentration to regions of low concentration, it is possible to derive Fick’s second law. Fick conducted experiments to prove his second law which consisted of salt diffusion experiments. He used a layer of sodium chloride crystals and positioned them at the bottom of two different shaped vessels that were connected to large reservoirs of water. What was noticed was that salt molecules started to diffuse up and out of the vessel. As these were being replaced by water molecules, the connected reservoirs at one end of the diffusion vessels were refreshed steadily with pure water to establish a steady-state concentration gradient. The results that Fick obtained experimentally matched his theoretical calculations, which supports his well known second law of diffusion. The problem that we are confronted with consists of developing general solutions for any shape of the vessel for steady diffusion in two dimensions using Fick’s second law. The solutions will be performed analytically and verified using the computational skills learned in the course.</p>
 <p><img alt="" src="https://ndcbe.github.io/data-and-computing/_images/experiment_setup.jpg" /></p>
-</div>
-<div class="section" id="fick-s-second-law">
-<h3>1.3 Fick’s Second Law<a class="headerlink" href="#fick-s-second-law" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="fick-s-second-law">
+<h3>1.3 Fick’s Second Law<a class="headerlink" href="#fick-s-second-law" title="Permalink to this headline">#</a></h3>
 <p>An analytical solution can be developed for the concentration, in this case, for steady-state diffusion in two dimensions. We can start off with equation (1). This expression relates the radius of the conical flask to its height. This equation could help guide through three fundamental expressions: one for the concentration profile, one for the flux of the salt, and one for the total flow of the salt(i.e., the flux times the cross-sectional area of the flask). In this notebook we shall focus on the concentration profile. <span class="math notranslate nohighlight">\(R_{0}\)</span> is the radius at <span class="math notranslate nohighlight">\(z\)</span> = 0, <span class="math notranslate nohighlight">\(R_{l}\)</span> is the radius at <span class="math notranslate nohighlight">\(z = l\)</span> and <span class="math notranslate nohighlight">\(l\)</span> is the height of the flask.</p>
 <p><span class="math notranslate nohighlight">\(c(z,t)\)</span> is the concentration of the salt at the position <span class="math notranslate nohighlight">\(z\)</span> at time <span class="math notranslate nohighlight">\(t\)</span>, in <span class="math notranslate nohighlight">\([mol-cm^{-3}]\)</span>, <span class="math notranslate nohighlight">\(A(z)\)</span> is the cross-sectional area in <span class="math notranslate nohighlight">\([cm^{2}]\)</span> that varies through which diffusion takes place and <span class="math notranslate nohighlight">\(D\)</span> is the diffusion coefficient for salt and water in <span class="math notranslate nohighlight">\([cm^{2}-s^{-1}]\)</span>. As time tends to infinity, the change in concentration with respect to time disappears. This leads to equation (4) and a linear ordinary differential equation is obtained. In Figure 1, we can observe a cross section of Fick’s funnel-shaped vessel with a variable, <span class="math notranslate nohighlight">\(z\)</span>.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ac9a9fcd-02ac-44be-b9ca-7c92f7fa3723">
-<span class="eqno">(65)<a class="headerlink" href="#equation-ac9a9fcd-02ac-44be-b9ca-7c92f7fa3723" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6c78bb9e-25fb-4477-81f4-651c0a9afe20">
+<span class="eqno">(65)<a class="headerlink" href="#equation-6c78bb9e-25fb-4477-81f4-651c0a9afe20" title="Permalink to this equation">#</a></span>\[\begin{equation}
  R = R_{0} + (R_{l} - R_{0}) \frac{z}{l}
  \tag{1}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-dc42348a-947b-4961-a62a-bba11f3c5c8b">
-<span class="eqno">(66)<a class="headerlink" href="#equation-dc42348a-947b-4961-a62a-bba11f3c5c8b" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a91fcf6e-9564-4dec-8bae-3052058c1f2f">
+<span class="eqno">(66)<a class="headerlink" href="#equation-a91fcf6e-9564-4dec-8bae-3052058c1f2f" title="Permalink to this equation">#</a></span>\[\begin{equation}
  A = \pi \big(R_{0} + (R_{l} - R_{0}) \frac{z}{l}\big)^{2}
  \tag{2}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-40156aaf-1c23-4b76-89b7-2f431a421bf3">
-<span class="eqno">(67)<a class="headerlink" href="#equation-40156aaf-1c23-4b76-89b7-2f431a421bf3" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4f774d5e-cb24-42df-af48-3f21bb413f8a">
+<span class="eqno">(67)<a class="headerlink" href="#equation-4f774d5e-cb24-42df-af48-3f21bb413f8a" title="Permalink to this equation">#</a></span>\[\begin{equation}
  D\bigg[\frac{\partial^2 c}{\partial z^2} + \frac{\partial c}{\partial z}\frac{1}{A(z)}\frac{dA}{dz}\bigg] = \frac{\partial c}{\partial t}
  \tag{3}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-4210af03-0a79-4eb3-b168-ae1ca348a9cb">
-<span class="eqno">(68)<a class="headerlink" href="#equation-4210af03-0a79-4eb3-b168-ae1ca348a9cb" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-91cbe635-94a2-43a6-9bce-3cbed405985f">
+<span class="eqno">(68)<a class="headerlink" href="#equation-91cbe635-94a2-43a6-9bce-3cbed405985f" title="Permalink to this equation">#</a></span>\[\begin{equation}
  \bigg[\frac{d^2 c}{d z^2} + \frac{dc}{dz}\frac{1}{A(z)}\frac{dA}{dz}\bigg] = 0
  \tag{4}
 \end{equation}\]</div>
@@ -1233,10 +1368,10 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Beginning with this material balance equation, develop Fick’s (second) law of diffusion shown in equation (4). Hint: The flux through the control volume, j, is described by Fick’s (first) law of diffusion as;</p>
 <p><span class="math notranslate nohighlight">\(j = D \frac{dc}{dz}\)</span></p>
 <p>Turn in your solution as .pdf file</p>
-</div>
-</div>
-<div class="section" id="numeric-integration">
-<h2>2. Numeric Integration<a class="headerlink" href="#numeric-integration" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="numeric-integration">
+<h2>2. Numeric Integration<a class="headerlink" href="#numeric-integration" title="Permalink to this headline">#</a></h2>
 <p>Install packages</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1448,11 +1583,11 @@ Solution:
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="visualizing-concentration-profiles">
-<h2>3 Visualizing Concentration Profiles<a class="headerlink" href="#visualizing-concentration-profiles" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="concentration-profile-for-numeric-solution">
-<h3>3.1 Concentration Profile for Numeric Solution<a class="headerlink" href="#concentration-profile-for-numeric-solution" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="visualizing-concentration-profiles">
+<h2>3 Visualizing Concentration Profiles<a class="headerlink" href="#visualizing-concentration-profiles" title="Permalink to this headline">#</a></h2>
+<section id="concentration-profile-for-numeric-solution">
+<h3>3.1 Concentration Profile for Numeric Solution<a class="headerlink" href="#concentration-profile-for-numeric-solution" title="Permalink to this headline">#</a></h3>
 <p><strong>Class Activity 3:</strong> Access results of the numeric solution from section 2.1 above to plot normalized concentration (C/C_sat) against normalized z coordinate (z/L).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1473,9 +1608,9 @@ Solution:
 <img alt="../../_images/Ficks_Law_23_0.png" src="../../_images/Ficks_Law_23_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="matching-numeric-solution-with-analytical-solution">
-<h3>3.2 Matching Numeric Solution with Analytical Solution<a class="headerlink" href="#matching-numeric-solution-with-analytical-solution" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="matching-numeric-solution-with-analytical-solution">
+<h3>3.2 Matching Numeric Solution with Analytical Solution<a class="headerlink" href="#matching-numeric-solution-with-analytical-solution" title="Permalink to this headline">#</a></h3>
 <p>We understand from Prof. Phillip’s class that the analytical solution for this problem is as given in equation (<strong>6</strong>).</p>
 <div class="math notranslate nohighlight">
 \[\begin{equation}
@@ -1508,9 +1643,9 @@ Solution:
 </div>
 <p><strong>Discussion:</strong></p>
 <p>Is there any noticeable deviation between two concentration profiles from analytical and numeric solutions? If yes, what is the cause of the deviation?</p>
-</div>
-<div class="section" id="influence-of-step-size-on-accuracy-of-finite-difference-approximations">
-<h3>3.3 Influence of Step-size on Accuracy of Finite-difference Approximations<a class="headerlink" href="#influence-of-step-size-on-accuracy-of-finite-difference-approximations" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="influence-of-step-size-on-accuracy-of-finite-difference-approximations">
+<h3>3.3 Influence of Step-size on Accuracy of Finite-difference Approximations<a class="headerlink" href="#influence-of-step-size-on-accuracy-of-finite-difference-approximations" title="Permalink to this headline">#</a></h3>
 <p>We shall repeat the numeric integration for different step-sizes in the finite-difference method and plot solutions together with analytical solution.</p>
 <p><strong>Define Function to Create Pyomo Model</strong></p>
 <div class="cell docutils container">
@@ -1647,9 +1782,9 @@ Solution:
 </div>
 <p><strong>Discussion:</strong></p>
 <p>In 1-3 sentences discuss any observations from the above plot. Hint: refer to error of Euler method for finite difference approximations (<a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/07/Forward-and-Backward-Euler.html">7.5. Forward and Backward Euler Methods</a>). Submit solution as .pdf file</p>
-</div>
-<div class="section" id="comparison-of-different-algorithms-for-finite-difference-approximation-of-numeric-solutions">
-<h3>3.4 Comparison of Different Algorithms for Finite Difference Approximation of Numeric Solutions<a class="headerlink" href="#comparison-of-different-algorithms-for-finite-difference-approximation-of-numeric-solutions" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="comparison-of-different-algorithms-for-finite-difference-approximation-of-numeric-solutions">
+<h3>3.4 Comparison of Different Algorithms for Finite Difference Approximation of Numeric Solutions<a class="headerlink" href="#comparison-of-different-algorithms-for-finite-difference-approximation-of-numeric-solutions" title="Permalink to this headline">#</a></h3>
 <p><strong>Class Activity 7</strong></p>
 <p>Using a fixed finite elements number of 50, solve the ODE for foward, backward and central difference methods. Makes concentration profiles for these different algorithms together with the analytical solution and discuss your findings.</p>
 <div class="cell docutils container">
@@ -1712,9 +1847,9 @@ Solution:
 </div>
 </div>
 <p><strong>Discussion:</strong> In 2-3 sentences, discuss your observations from the plot above. Include (1) which method is more accurate and (2) why is it more accurate. Submit your response in the .pdf file.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1738,9 +1873,11 @@ Solution:
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="Non_Isothermal_PBR.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1756,24 +1893,28 @@ Solution:
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
     
-      By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>
