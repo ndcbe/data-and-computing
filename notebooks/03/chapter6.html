@@ -1,0 +1,1446 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>3.6. Chapter 6: Theoretical Linear Algebra &#8212; Data and Computing for Chemical Engineers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/03/chapter6';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="4. Applied Linear Algebra" href="../04/linear_algebra.html" />
+    <link rel="prev" title="3.5. Chapter 5: Linear Transformations" href="chapter5.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/cbe_logo.jpg" class="logo__image only-light" alt="Data and Computing for Chemical Engineers - Home"/>
+    <script>document.write(`<img src="../../_static/cbe_logo.jpg" class="logo__image only-dark" alt="Data and Computing for Chemical Engineers - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Data and Computing for Engineers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../01/Python-Primer.html">1. Python Primer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../01/Jupyter-Notebooks.html">1.1. Welcome to Jupyter Notebooks and Vocareum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Python-Basics-I-Variables-Strings-Bugs.html">1.2. Python Basics I: Variables, Strings, and Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Flow-control.html">1.3. Python Basics II: Loopy Logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Python-Basics-III-Lists-Dictionaries-Enumeration.html">1.4. Python Basics III: Lists, Dictionaries, and Enumeration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Functions-and-Scope.html">1.5. Functions and Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Recursion.html">1.6. Recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Pseudocode.html">1.7. Pseudocode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Example-High-Low-Game.html">1.8. High/Low Guess My Number Game</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Modules-and-Files.html">1.9. Modules and Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/NumPy.html">1.10. Linear Algebra with Numpy and Scipy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Matplotlib.html">1.11. Visualization with matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Pandas.html">1.12. Manipulating Data with Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Functions-as-Arguments.html">1.13. Functions as Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Testing-and-Debugging.html">1.14. Testing and Debugging in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Publication-Quality-Figures.html">1.15. Preparing Publication Quality Figures in Python</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../02/advanced_python.html">2. Advanced Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Methods</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="linear_algebra.html">3. Linear Algebra Primer</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="chapter1.html">3.1. Chapter 1: Math Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter2.html">3.2. Chapter 2: Intro to Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter3.html">3.3. Chapter 3: Computational linear algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter4.html">3.4. Chapter 4: Geometric Aspects of Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter5.html">3.5. Chapter 5: Linear Transformations</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">3.6. Chapter 6: Theoretical Linear Algebra</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../04/linear_algebra.html">4. Applied Linear Algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../04/Modeling-Systems-of-Linear-Equations.html">4.1. Modeling Systems of Linear Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Gauss-Elimination.html">4.2. Gaussian Elimination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Invertible-Matrix-Theorem-and-Gauss-Example.html">4.3. Invertible Matrix Theorem and Gaussian Elimination Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/LU-Decomposition.html">4.4. LU Decomposition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Condition-Number.html">4.5. Errors in Linear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Example-Atomic-Mass-Balances.html">4.6. Example: Mass Balances and Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Linear-Algebra-in-Numpy.html">4.7. Linear Algebra Review and SciPy Basics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05/algorithms.html">5. Algorithm Building Blocks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../05/Taylor-Series.html">5.1. Taylor Series Approximations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05/Finite-Difference.html">5.2. Finite Difference Derivative Approximations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05/Example-Heating-a-Metal-Slab.html">5.3. Example: Heating a Metal Slab</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../06/nonlinear_systems.html">6. Nonlinear Systems of Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../06/Modeling-Systems-of-Nonlinear-Equations.html">6.1. Modeling Systems of Nonlinear Equations: Flash Calculation Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Raphson-Method-in-One-Dimension.html">6.2. Newton-Raphson Method in One Dimension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/More-Newton-Type-Methods.html">6.3. More Newton-Type Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Convergence-Analysis-for-Newton-Raphson-Methods.html">6.4. Convergence Analysis for Newton-Raphson Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Raphson-Methods-for-Systems-of-Equations.html">6.5. Newton-Raphson Methods for Systems of Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Methods-in-Scipy.html">6.6. Newton Methods in Scipy</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../07/integration.html">7. Numeric Integration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../07/Intro-and-Newton-Cotes.html">7.1. Introduction and Newton-Cotes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Gauss-Quadrature.html">7.2. Gauss Quadrature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Scipy-Library-Adaptive-Methods-for-Newton-Cotes-and-Gauss-Quadrature.html">7.3. Scipy Library: Adaptive Methods for Newton-Cotes and Gauss Quadrature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Application-Inertial-Navigation-Systems.html">7.4. Application: Inertial Navigation Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Forward-and-Backward-Euler.html">7.5. Forward and Backward Euler Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Trapezoid-Rule.html">7.6. Crank-Nicolson (Trapezoid Rule)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Stability-Analysis.html">7.7. Stability Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Explicit-Runge-Kutta.html">7.8. Explicit Range Kutta Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Systems-of-Differential-Equations-and-Scipy.html">7.9. Systems of Differential Equations and Scipy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Example-Reaction-Rates.html">7.10. Example: Reaction Rates</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../08/optimization.html">8. Continuous Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../08/Pyomo-Basics.html">8.1. Pyomo Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../08/Electricity-Market-Optimization.html">8.2. Electricity Market Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../08/Flash-Calculations-in-Pyomo.html">8.3. Flash Calculations in Pyomo</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../09/stats.html">9. Descriptive Statistics and Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../09/Sampling.html">9.1. Sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../09/Summary-Statistics.html">9.2. Summary Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../09/Visualizing-Data.html">9.3. Visualizing Data</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../10/probability.html">10. Probability Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../10/Probability-Basics.html">10.1. Basic Ideas of Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Random-Variables.html">10.2. Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Jointly-Distributed-Random-Variables.html">10.3. Jointly Distributed Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Jointly-Continuous-Random-Variables.html">10.4. Jointly Continuous Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Practice-Problems.html">10.5. Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../11/distributions.html">11. Common Probability Distributions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../11/Bernoulli-Probability-Distribution.html">11.1. Bernoulli Probability Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Binomial-Probability-Distribtuion.html">11.2. Binomial Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Poisson-Probability-Distribution.html">11.3. Poisson Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Normal-Probability-Distribution.html">11.4. Normal Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Common-Probability-Distributions-Summary.html">11.5. Summary</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../12/uncertainty.html">12. Uncertainty and Error Propagation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../12/Measurement-Error.html">12.1. Measurement Error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Error-Propagation.html">12.2. Error Propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Measuring-Flowrate-Example.html">12.3. Measuring Flowrate Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Car-and-Incline-Example.html">12.4. Car and Incline Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Simulation.html">12.5. Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Monte-Carlo-Error-Propogation.html">12.6. Monte Carlo Error Propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Practice-Problems.html">12.7. Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../13/inference.html">13. Statistical Inference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../13/Central-Limit-Theorem.html">13.1. Central Limit Theorem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Standard-Normal-Distribution.html">13.2. Standard Normal Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Confidence-Intervals.html">13.3. Confidence Intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Students-t-Distribution.html">13.4. Student’s t-Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Hypothesis-Testing-Basics.html">13.5. Hypothesis Testing Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Flavors-of-Hypothesis-Testing.html">13.6. Flavors of Hypothesis Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Type-I-and-Type-II-Errors.html">13.7. Type I and Type II Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Statistical-Power-Basics.html">13.8. Statistical Power Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Statistical-Power-in-Python.html">13.9. Statistical Power in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Statistical-Power-Practice-Problems.html">13.10. Statistical Power Practice Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Bootstrap-Confidence-Intervals.html">13.11. Bootstrap Confidence Intervals</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../14/regression.html">14. Multivariate Linear Regression</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../14/Correlation-Covariance-and-Independence.html">14.1. Correlation, Covariance, and Independence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Least-Squares-Line.html">14.2. Simple Least Squares</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Ordinary-Least-Squares-Linear-Regression.html">14.3. Ordinary Least Squares Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Residual-Analysis.html">14.4. Residual Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Regression-Assumption-Examples.html">14.5. Regression Assumption Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Uncertainty-Analysis-and-Statistical-Inference.html">14.6. Uncertainty Analysis and Statistical Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Multivariate-Linear-Regression.html">14.7. Multivariate Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Linear-Regression-Practice-Problems.html">14.8. Linear Regression Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../15/advanced_regression.html">15. Nonlinear Regression</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../15/Transformations-and-Linear-Regression.html">15.1. Transformations and Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Weighted-Regression.html">15.2. Weighted Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Regression.html">15.3. Nonlinear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Regression-Practice-Problem.html">15.4. Nonlinear Regression Practice Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression.html">15.5. Monte Carlo Uncertainty Analysis for Nonlinear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Case-Study-Adsorptive-Membranes.html">15.6. Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../16/design_of_experiments.html">16. Design of Experiments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../16/Reaction-MBDoE.html">16.1. Model-Based Design of Experiments</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extra Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2022/home.html">Fall 2022</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/schedule.html">Fall 2022 Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/project1.html">Project 1: Computating for Problem Solving (Fall 2022)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/project2.html">Project 2: Data Analysis (Fall 2022)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2023/home.html">Fall 2023</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/schedule.html">Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/project.html">Semester Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet1_F23.html">Problem Set 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet2_F23.html">Problem Set 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet3_F23.html">Problem Set 3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet4_F23.html">Problem Set 4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet5_F23.html">Problem Set 5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet6_F23.html">Problem Set 6</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../contrib/contribute.html">Contributed Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Biotransport-Entrance-Length.html">Estimating the Entrance Length of Channel Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Non_Isothermal_PBR.html">Non-Isothermal Packed Bed Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Ficks_Law.html">Solving Fick’s Second Law Using Numeric Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Stochastic-Kinetics.html">Stochastic Simulation of Chemical Reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Spaghettification.html">Spaghettification of the Magic School Bus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Alcohol-Pharmacokinetics.html">Alcohol Pharmacokinetics and  Blood Alcohol Content % Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/McCabe-Thiele.html">Plotting McCabe-Thiele diagram through computational methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Wastewater-Treatment-Mass-Balance.html">Example of Mass Balance Problem in Wastewater Treatment Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Filtration.html">Filtration of a Yeast Suspension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Fraction_of_Molecular_Collisions.html">Calculating Fraction of Molecular Collisions</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/03/chapter6.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/data-and-computing" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/03/chapter6.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/03/chapter6.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Chapter 6: Theoretical Linear Algebra</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#our-first-eigendecomposition">3.6.1. Our First Eigendecomposition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-eigendecompositions">3.6.2. More Eigendecompositions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-power">3.6.3. Matrix Power</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tranformations-as-projections-onto-the-eigenbasis">3.6.4. Tranformations as Projections onto the Eigenbasis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#svd-and-matrix-compression">3.6.5. SVD and Matrix Compression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#svd-to-diagnose-linearly-dependent-equations">3.6.5.1. SVD to Diagnose Linearly Dependent Equations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-svd">3.6.5.2. Calculate SVD</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpret-left-singular-vector">3.6.5.3. Interpret left singular vector</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpret-right-singular-vector">3.6.5.4. Interpret right singular vector</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">3.6.5.5. Homework</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-6-theoretical-linear-algebra">
+<h1><span class="section-number">3.6. </span>Chapter 6: Theoretical Linear Algebra<a class="headerlink" href="#chapter-6-theoretical-linear-algebra" title="Link to this heading">#</a></h1>
+<p><strong>Before Class</strong>:</p>
+<ul class="simple">
+<li><p>Read Chapter 6 in Savov (2020) and take notes</p></li>
+<li><p>Watch the following videos and take notes:</p>
+<ul>
+<li><p><a class="reference external" href="https://www.3blue1brown.com/lessons/eigenvalues">Eigenvectors and eigenvalues</a></p></li>
+<li><p><a class="reference external" href="https://www.3blue1brown.com/lessons/quick-eigen">A quick trick for computing eigenvalues</a></p></li>
+<li><p><a class="reference external" href="https://www.3blue1brown.com/lessons/abstract-vector-spaces">Abstract vector spaces</a></p></li>
+</ul>
+</li>
+<li><p>Compile a list of questions to bring to class</p></li>
+</ul>
+<p><strong>During and After Class</strong>:</p>
+<ul class="simple">
+<li><p>Take notes (on paper or a tablet computer)</p></li>
+<li><p>Complete this notebook, submit you answer via Gradescope</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+    <span class="c1"># If running on colab, install ipympl</span>
+    <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>-q<span class="w"> </span>ipympl
+
+    <span class="c1"># Enable 3rd party output/widgets</span>
+    <span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">output</span>
+    <span class="n">output</span><span class="o">.</span><span class="n">enable_custom_widget_manager</span><span class="p">()</span>
+
+<span class="c1"># % means a &quot;magic command&quot; that is special</span>
+<span class="c1"># for Jupyter notebooks.</span>
+<span class="c1"># This specific command enables interactive plots</span>
+<span class="o">%</span><span class="k">matplotlib</span> ipympl
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Here are our standard imports</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.linalg</span> <span class="k">as</span> <span class="nn">la</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="our-first-eigendecomposition">
+<h2><span class="section-number">3.6.1. </span>Our First Eigendecomposition<a class="headerlink" href="#our-first-eigendecomposition" title="Link to this heading">#</a></h2>
+<p>Calculate the eigendecomposition of</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+{\bf A}_0 = \begin{bmatrix} 1 &amp; 2 &amp; 0 \\ 0 &amp; 3 &amp; 0 \\ 2 &amp; -4 &amp; 2 \end{bmatrix}
+\end{split}\]</div>
+<p>This example is from pg. 302 - 303 of Savov (2020).</p>
+<p>We start by writing the definition of an eigenvalue:</p>
+<div class="math notranslate nohighlight">
+\[
+{\bf A}_0 {\bf w}_i = \lambda_i {\bf w}_i
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\left({\bf A}_0 - \lambda_i {\bf I} \right) {\bf w}_i = {\bf 0}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\text{det}\left({\bf A}_0 - \lambda {\bf I} \right) = 0
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\text{det}\left( \begin{bmatrix} 1 - \lambda &amp; 2 &amp; 0 \\ 0 &amp; 3 - \lambda &amp; 0 \\ 2 &amp; -4 &amp; 2 - \lambda \end{bmatrix}    \right) = 0 
+\end{split}\]</div>
+<p>Now let’s compute the determinant:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align*}
+\text{det}\left( \begin{bmatrix} 1 - \lambda &amp; 2 &amp; 0 \\ 0 &amp; 3 - \lambda &amp; 0 \\ 2 &amp; -4 &amp; 2 - \lambda \end{bmatrix}    \right) 
+&amp;= (1 - \lambda) \text{det} \left(\begin{bmatrix} 3 - \lambda &amp; 0 \\ -4 &amp; 2 - \lambda \end{bmatrix} \right) 
++ 2 ~ \text{det} \left(\begin{bmatrix} 0 &amp; 0 \\ 2 &amp; 2 - \lambda \end{bmatrix}\right)
++ 0  ~ \text{det} \left(\begin{bmatrix} 0 &amp; 3 - \lambda \\ 2 &amp; -4 \end{bmatrix}\right) \\
+&amp;= (1-\lambda) \left( (3 - \lambda)(2 - \lambda) + 4 \cdot 0 \right) 
+- 2 \left(0 (2 - \lambda) - 0 \cdot 2 \right)
++ 0 \left( -0 \cdot 4 - 2 (3 - \lambda) \right) \\
+&amp; = (1-\lambda) (3 - \lambda) (2 - \lambda)
+\end{align*}
+\end{split}\]</div>
+<p>This gives the characteristic polynomial:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{det}\left({\bf A}_0 - \lambda {\bf I} \right) = 0 = (1-\lambda) (3 - \lambda) (2 - \lambda)
+\]</div>
+<p>By inspection, see the roots of the characteristic equation are <span class="math notranslate nohighlight">\(\lambda = 3\)</span>, <span class="math notranslate nohighlight">\(\lambda = 2\)</span>, and <span class="math notranslate nohighlight">\(\lambda = 1\)</span> (written from largest to smallest by convention). These are the eigenvalues. (Yes, this is textbook example, hence the math was easy.)</p>
+<p>Next, we need to calculate the eigenvector that corresponds to each eigenvalue. To do this, we need to calculate the null space of <span class="math notranslate nohighlight">\(({\bf A}_0 - \lambda_i {\bf I})\)</span> for each <span class="math notranslate nohighlight">\(i\)</span>.</p>
+<p>To calculate the null space, we need to convert <span class="math notranslate nohighlight">\({\bf A}_0 - \lambda_i {\bf I}\)</span> into reduced row eschelon form. You can do this by hand of course, which would be excellent practice. We’ll use <code class="docutils literal notranslate"><span class="pre">sympy</span></code> to speed up this example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">Matrix</span>
+
+<span class="k">def</span> <span class="nf">rref_eigensystem</span><span class="p">(</span><span class="n">eigval</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; Calculate the reduced row eschelon form of</span>
+<span class="sd">    A0 - eigval * I</span>
+<span class="sd">    for this specific example, i.e., A0 is hard coded</span>
+<span class="sd">    into this function for simplicity</span>
+
+<span class="sd">    Argument:</span>
+<span class="sd">        eigval: eigenvalue</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+
+   
+    <span class="c1"># Define A</span>
+    <span class="n">A_</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">([[</span><span class="mi">1</span> <span class="o">-</span> <span class="n">eigval</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span> <span class="o">-</span> <span class="n">eigval</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">eigval</span><span class="p">]])</span>
+    <span class="c1">#print(&quot;A - eigval I=\n&quot;,A_)</span>
+    <span class="c1"># Calculate reduced row eschelon form</span>
+    <span class="n">rref_</span> <span class="o">=</span> <span class="n">A_</span> <span class="o">.</span><span class="n">rref</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;rref =&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">rref_</span><span class="p">)</span>
+
+<span class="n">rref_eigensystem</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, we need to go from RREF to the null space. Let’s use the RREF to write a system of linear equations:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix} 1 &amp; 0 &amp; \frac{1}{2} \\
+0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 0 \\
+\end{bmatrix}
+~
+\begin{bmatrix} x_1 \\ x_2 \\ t \end{bmatrix} = {\bf 0}
+\end{split}\]</div>
+<p>Notice in the RREF matrix, there is no pivot (1 on the diagonal) for the column corresponding for <span class="math notranslate nohighlight">\(x_3\)</span>. Thus, we replaced <span class="math notranslate nohighlight">\(x_3\)</span> with <span class="math notranslate nohighlight">\(t\)</span> to denote it is a free variable. From this linear system, we obtain:</p>
+<div class="math notranslate nohighlight">
+\[
+x_1 + \frac{t}{2} = 0, \qquad x_2 = 0, \qquad 0 = 0
+\]</div>
+<p>With a little algebra, we obtain:</p>
+<div class="math notranslate nohighlight">
+\[
+x_1 = \frac{-t}{2}, \quad x_2 = 0, \quad x_3 = t
+\]</div>
+<p>Thus the solution to the linear system is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+{\bf x} = \begin{bmatrix} -1 \\ 0 \\ 2 \end{bmatrix} t, \quad \forall t \in \mathbb{R}
+\end{split}\]</div>
+<p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\text{null}({\bf A}_0 - 1 {\bf I}) = \text{span}\left( \begin{bmatrix} -1 \\ 0 \\ 2 \end{bmatrix} \right)
+\end{split}\]</div>
+<p>Let’s verify this with Python.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">null_eigen</span><span class="p">(</span><span class="n">eigval</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; Calculate the null space</span>
+<span class="sd">    A0 - eigval * I</span>
+<span class="sd">    for this specific example, i.e., A0 is hard coded</span>
+<span class="sd">    into this function for simplicity</span>
+
+<span class="sd">    Argument:</span>
+<span class="sd">        eigval: eigenvalue</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="n">A_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span> <span class="o">-</span> <span class="n">eigval</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span> <span class="o">-</span> <span class="n">eigval</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">eigval</span><span class="p">]])</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;null space =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">la</span><span class="o">.</span><span class="n">null_space</span><span class="p">(</span><span class="n">A_</span><span class="p">))</span>
+
+<span class="n">null_eigen</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s compare this to out by hand answer.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;eigenvector 3 (unscaled) =&quot;</span><span class="p">,</span> <span class="n">w3</span><span class="p">)</span>
+
+<span class="n">w3</span> <span class="o">=</span> <span class="n">w3</span> <span class="o">/</span> <span class="n">la</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">w3</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;eigenvector 3 (scaled) =&quot;</span><span class="p">,</span> <span class="n">w3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As homework, calculate the remaining two eigenvectors on paper and then verify with Python. In other words, repeat the procedure above. You may use Python to calculate the RREFs, but you should calculate the null space with paper.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Verify the first eigenvector here (\lambda = 3)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Verify the second eigenvector here (\lambda = 2)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="more-eigendecompositions">
+<h2><span class="section-number">3.6.2. </span>More Eigendecompositions<a class="headerlink" href="#more-eigendecompositions" title="Link to this heading">#</a></h2>
+<p>Calculate the eigendecomposition of the following matrices by hand and then verify with Python. Please complete the entire eigendecomposition calculation on paper, including find the eigenvectors (RREF, null space). This is practice for the quiz.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+{\bf A}_1 = \begin{bmatrix} 2 &amp; 0 \\ 0 &amp; -3 \end{bmatrix}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">print_eigen</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; Calculate eigendecomposition and print information</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">w</span><span class="p">,</span> <span class="n">l</span> <span class="o">=</span> <span class="n">la</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;eigenvalues = &quot;</span><span class="p">,</span><span class="n">w</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;eigenvectors =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;rank =&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;condition number =&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">]])</span>
+<span class="n">print_eigen</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+{\bf A}_2 = \begin{bmatrix} 1 &amp; 0 \\ 1 &amp; 0 \end{bmatrix}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="n">print_eigen</span><span class="p">(</span><span class="n">A2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+{\bf A}_3 = \begin{bmatrix} 2 &amp; 1 \\ 0 &amp; 2 \end{bmatrix}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="n">print_eigen</span><span class="p">(</span><span class="n">A3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="matrix-power">
+<h2><span class="section-number">3.6.3. </span>Matrix Power<a class="headerlink" href="#matrix-power" title="Link to this heading">#</a></h2>
+<p>Let’s say we want to compute</p>
+<div class="math notranslate nohighlight">
+\[
+{\bf A}^n = {\bf A A} ...  {\bf A }
+\]</div>
+<p>This requires <span class="math notranslate nohighlight">\(n\)</span> matrix multiplications, which is tedious.</p>
+<p>Recall, we decompose a diagonalizable matrix into its eigenvectors and eigenvalues.</p>
+<div class="math notranslate nohighlight">
+\[
+{\bf A} = {\bf Q} {\bf \Lambda} {\bf Q}^{-1}
+\]</div>
+<p>Here <span class="math notranslate nohighlight">\({\bf Q}\)</span> is the matrix of right eigenvectors and <span class="math notranslate nohighlight">\({\bf \Lambda} = \text{diag}(\lambda_1, \lambda_2, ...)\)</span>. If <span class="math notranslate nohighlight">\(\bf A\)</span> is symmetric, then <span class="math notranslate nohighlight">\({\bf Q}^T\)</span> = <span class="math notranslate nohighlight">\({\bf Q}^{-1}\)</span>.</p>
+<p>Now let’s plug this into the matrix exponential:</p>
+<div class="math notranslate nohighlight">
+\[
+{\bf A}^n = \left({\bf Q} {\bf \Lambda} {\bf Q}^{-1} \right)^n = \left({\bf Q} {\bf \Lambda} {\bf Q}^{-1} \right) \left({\bf Q} {\bf \Lambda} {\bf Q}^{-1} \right) ... \left({\bf Q} {\bf \Lambda} {\bf Q}^{-1} \right)
+\]</div>
+<p>Finally, we can simplify as <span class="math notranslate nohighlight">\({\bf Q}^{-1} {\bf Q} = {\bf I}\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+{\bf A}^n = {\bf Q} {\bf \Lambda}^n {\bf Q}^{-1}
+\]</div>
+<p>This is easy to compute because <span class="math notranslate nohighlight">\({\bf \Lambda}\)</span> is a diagonal matrix, thus:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+{\bf \Lambda}^n = \begin{bmatrix} (\lambda_1)^n &amp; 0 &amp; \dots \\ 0 &amp; (\lambda_2)^n &amp; \dots \\ \vdots &amp; \vdots &amp; \ddots \end{bmatrix}
+\end{split}\]</div>
+<p>Calculate</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\left( {\bf A}_3 \right)^3 = \left( \begin{bmatrix} 2 &amp; 1 \\ 0 &amp; 2 \end{bmatrix} \right)^3
+\end{split}\]</div>
+<p>with pencil and paper two ways: simple matrix multiplication and with the eigendecomposition approach. (Hint, you already calculcated the eigendecomposition.) Then, verify your calculation with Python.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="tranformations-as-projections-onto-the-eigenbasis">
+<h2><span class="section-number">3.6.4. </span>Tranformations as Projections onto the Eigenbasis<a class="headerlink" href="#tranformations-as-projections-onto-the-eigenbasis" title="Link to this heading">#</a></h2>
+<p>Recall, we can represent a linear transformation <span class="math notranslate nohighlight">\(T({\bf x})\)</span> as the matrix vector product <span class="math notranslate nohighlight">\(\bf A x\)</span>. Let’s interpret the linear transformation <span class="math notranslate nohighlight">\(\bf A\)</span> using an eigendecomposition. This requires <span class="math notranslate nohighlight">\({\bf A}\)</span> to be a <a class="reference external" href="https://en.wikipedia.org/wiki/Diagonalizable_matrix">diagonalizable matrix</a>.</p>
+<div class="math notranslate nohighlight">
+\[
+\bf{A} = \sum_i \lambda_i {\bf w}_i {\bf w}_i^T
+\]</div>
+<p>Here, <span class="math notranslate nohighlight">\(\lambda_i\)</span> are the eigenvalues and <span class="math notranslate nohighlight">\({\bf w}_i\)</span> are the corresponding eigenvectors.</p>
+<div class="math notranslate nohighlight">
+\[
+\bf{A x} = \sum_i \lambda_i \left( {\bf w}_i {\bf w}_i^T {\bf x} \right)
+\]</div>
+<p>Also recall that dot products are communitive, i.e., <span class="math notranslate nohighlight">\({\bf w}_i^T {\bf x} = {\bf x}^T {\bf w}_i = {\bf x} \cdot {\bf w}_i\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+\bf{A x} = \sum_i \lambda_i \left( {\bf w}_i {\bf x} \cdot {\bf w}_i  \right)
+\]</div>
+<p>Recall that <span class="math notranslate nohighlight">\({\bf w}_i\)</span> are unit vectors, i.e., <span class="math notranslate nohighlight">\(||{\bf w}_i|| = 1\)</span> and rearrange:</p>
+<div class="math notranslate nohighlight">
+\[
+\bf{A x} = \sum_i \lambda_i \left( \frac{{\bf x} \cdot {\bf w}_i}{|| {\bf w}_i ||^2}  {\bf w}_i  \right)
+\]</div>
+<p>This means we can intrepet the matrix multiplication <span class="math notranslate nohighlight">\(\bf{A x}\)</span> as projecting <span class="math notranslate nohighlight">\({\bf x}\)</span> onto each eigenvector <span class="math notranslate nohighlight">\({\bf w}_i\)</span> and scaling by the eigenvalue <span class="math notranslate nohighlight">\(\lambda_i\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+\bf{A x} = \sum_i \lambda_i \left( \Pi_{u} {\bf x} \right)
+\]</div>
+<p>Let’s visualize this in 3D.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
+
+<span class="c1"># Plot vectors</span>
+<span class="k">def</span> <span class="nf">plot_vector</span><span class="p">(</span><span class="n">vector</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; Plot a 3D vector</span>
+<span class="sd">        Arguments:</span>
+<span class="sd">            vector: np array</span>
+<span class="sd">            color: &#39;r&#39;, &#39;b&#39;, &#39;g&#39;, etc.</span>
+<span class="sd">            label: string for legend</span>
+<span class="sd">            p: point to start vector</span>
+<span class="sd">        </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;Must be a 3D vector&quot;</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;p must have length 3&quot;</span>
+
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">vector</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vector</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">vector</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">arrow_length_ratio</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="n">linestyle</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a linear transformation</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mf">0.5</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A</span><span class="se">\n</span><span class="s2">=&quot;</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>First, let’s verify <span class="math notranslate nohighlight">\({\bf A}\)</span> is <a class="reference external" href="https://en.wikipedia.org/wiki/Normal_matrix">normal</a>, i.e., <span class="math notranslate nohighlight">\({\bf{A}}^T{\bf A} = {\bf A}{\bf{A}}^T\)</span>.  Recall, a normal matrix is also diagonalizable.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A.T@A=</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="nd">@A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A@A.T=</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="nd">@A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x =&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ax =&quot;</span><span class="p">,</span> <span class="n">A</span><span class="nd">@x</span><span class="p">)</span>
+
+<span class="c1"># Calculate eigendecomposition</span>
+<span class="n">l</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">la</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;eigenvalues = &quot;</span><span class="p">,</span><span class="n">l</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;eigenvectors =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+
+<span class="c1"># Create empty plot</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">Axes3D</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">auto_add_to_figure</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="s1">&#39;green&#39;</span><span class="p">]</span>
+
+<span class="n">plot_vector</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;${\bf x}$&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot eigenvectors</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">plot_vector</span><span class="p">(</span><span class="n">w</span><span class="p">[:,</span><span class="n">i</span><span class="p">],</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="sa">r</span><span class="s1">&#39;${\bf w}_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;$&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot projections</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">proj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">[:,</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="n">w</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">w</span><span class="p">[:,</span><span class="n">i</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
+    <span class="c1">#plot_vector(proj, &#39;black&#39;, r&#39;$\lambda_&#39;+str(i+1)+&#39;\Pi_{w_&#39;+str(i+1)+&#39;}} {x}$&#39;)</span>
+    <span class="c1">#plot_vector(proj, &#39;black&#39;, r&#39;$\Pi_{w_&#39;+str(i+1)+&#39;}} x$&#39;, linestyle=&#39;-.&#39;)</span>
+    <span class="n">plot_vector</span><span class="p">(</span><span class="n">proj</span><span class="p">,</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$\mathrm{proj.}~{\bf x}~\mathrm</span><span class="si">{onto}</span><span class="s1">~{\bf w}_{&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;}$&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-.&#39;</span><span class="p">)</span>
+
+<span class="n">plot_vector</span><span class="p">(</span><span class="n">A</span> <span class="o">@</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;purple&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;${\bf A x}$&#39;</span><span class="p">)</span>
+
+<span class="c1"># Set labels and limits</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;z&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_zlim</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">ncol</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="svd-and-matrix-compression">
+<h2><span class="section-number">3.6.5. </span>SVD and Matrix Compression<a class="headerlink" href="#svd-and-matrix-compression" title="Link to this heading">#</a></h2>
+<p>See <a class="reference internal" href="chapter5.html"><span class="std std-doc">Chapter 5: Linear Transformations</span></a> for a quick introduction to SVD and its relationship to condition number.</p>
+<p>How do we calculate the SVD of a matrix?</p>
+<p>The left signular vectors are the eigenvectors of <span class="math notranslate nohighlight">\({\bf A}{\bf A}^T\)</span>.</p>
+<p>The right singular vectors are the eigenvectors of <span class="math notranslate nohighlight">\({\bf A}^T{\bf A}\)</span>.</p>
+<p>The eigenvalues <span class="math notranslate nohighlight">\(\lambda_i\)</span> of <span class="math notranslate nohighlight">\({\bf A}{\bf A}^T\)</span> and <span class="math notranslate nohighlight">\({\bf A}^T{\bf A}\)</span> are equal. Moreover, the singular values <span class="math notranslate nohighlight">\(\sigma_i = \sqrt{\lambda_i}\)</span>.</p>
+<p>Thus, the linear tranformation <span class="math notranslate nohighlight">\(T_{A}({\bf A}) = {\bf A x}\)</span> can be interpreted as a three step process:</p>
+<ol class="arabic simple">
+<li><p>Convert <span class="math notranslate nohighlight">\({\bf x}\)</span> from the standard basis to the basis of the right singular vectors</p></li>
+<li><p>Scale componenets by the singular values</p></li>
+<li><p>Convert the output from the basis of the left singular vectors to the standard basis</p></li>
+</ol>
+<p>Finally, we can write a matrix using SVD as follows:</p>
+<div class="math notranslate nohighlight">
+\[
+{\bf A} = {\bf U \Sigma V}^T = \sum_{i} \sigma_i {\bf u}_i {\bf v}^{T}_i
+\]</div>
+<p>Thus, we can compress <span class="math notranslate nohighlight">\({\bf A}\)</span> by truncated the summation. Let’s see this with an example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Disable the interactive plots</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+
+<span class="c1"># Import opencv</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+  
+<span class="c1"># Import a picture of Prof. Dowling in grayscale</span>
+<span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+    <span class="c1"># Download</span>
+    <span class="o">!</span>wget<span class="w"> </span><span class="s1">&#39;https://dowlinglab.nd.edu/assets/320333/dowling_alex_sq.jpg&#39;</span>
+    <span class="n">image_location</span> <span class="o">=</span> <span class="s1">&#39;dowling_alex_sq.jpg&#39;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># Use local copy already in repo (no internet required)</span>
+    <span class="n">image_location</span> <span class="o">=</span> <span class="s1">&#39;../../media/dowling_alex_sq.jpg&#39;</span>
+
+<span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">image_location</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">show_image</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; Plot grayscale image stored as a matrix</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">255</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+
+<span class="n">show_image</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="s1">&#39;Original&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">U</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">Vh</span> <span class="o">=</span> <span class="n">la</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">S</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Index&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$|~\sigma_i~|$&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compress_image</span><span class="p">(</span><span class="n">original_image</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; Compress imagage</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        original_image: matrix with values represented greyscale colors</span>
+<span class="sd">        n: number of eigenvalues to keep</span>
+
+<span class="sd">    Actions:</span>
+<span class="sd">        Show compressed image</span>
+
+<span class="sd">    </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="c1"># Singular value decomposition</span>
+    <span class="n">U</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">Vh</span> <span class="o">=</span> <span class="n">la</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">original_image</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+    <span class="c1"># Compress matrix</span>
+    <span class="n">compressed</span> <span class="o">=</span> <span class="n">U</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="n">n</span><span class="p">]</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">n</span><span class="p">])</span> <span class="o">@</span> <span class="n">Vh</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">n</span><span class="p">,:]</span>
+
+    <span class="c1"># Plot image</span>
+    <span class="n">show_image</span><span class="p">(</span><span class="n">compressed</span> <span class="p">,</span><span class="s1">&#39;n=&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using only 10 largest singular values (and corresponding vectors)</span>
+<span class="n">compress_image</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using only 20 largest singular values (and corresponding vectors)</span>
+<span class="n">compress_image</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using only 100 largest singular values (and corresponding vectors)</span>
+<span class="n">compress_image</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="svd-to-diagnose-linearly-dependent-equations">
+<h3><span class="section-number">3.6.5.1. </span>SVD to Diagnose Linearly Dependent Equations<a class="headerlink" href="#svd-to-diagnose-linearly-dependent-equations" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A4</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A4=</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">A4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice that the row 2 equals (row 0) minus 2 times (row 1). In other words, this system of equations is rank deficient.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">A4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="calculate-svd">
+<h3><span class="section-number">3.6.5.2. </span>Calculate SVD<a class="headerlink" href="#calculate-svd" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">U</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">Vh</span> <span class="o">=</span> <span class="n">la</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">A4</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;left singular vectors</span><span class="se">\n</span><span class="s2">U=</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">U</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;singular values</span><span class="se">\n</span><span class="s2">S=</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">S</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;right singular vectors (transposed)</span><span class="se">\n</span><span class="s2">Vh=</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">Vh</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="interpret-left-singular-vector">
+<h3><span class="section-number">3.6.5.3. </span>Interpret left singular vector<a class="headerlink" href="#interpret-left-singular-vector" title="Link to this heading">#</a></h3>
+<p>Let’s scale the left singular vector corresponding to the near-zero singular value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Original unit vector</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;unit vector&quot;</span><span class="p">,</span><span class="n">U</span><span class="p">[:,</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Scale by the inverse of the lower left corner of U</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;scaled vector&quot;</span><span class="p">,</span><span class="n">U</span><span class="p">[:,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">U</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This tells us that 1 times (row 0) plus -2 times (row 1) plus -1 times (row 2) equals 0. Let’s verify.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="o">*</span><span class="n">A4</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">A4</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span> <span class="o">-</span> <span class="mi">1</span><span class="o">*</span><span class="n">A4</span><span class="p">[</span><span class="mi">2</span><span class="p">,:]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Take Away</strong>: The left singular vector corresponding to a near-zero singular value tells us how to add the rows of a matrix together to achieve a rank deficiency. Thus, SVD helps us identify the linearly dependent equations.</p>
+</section>
+<section id="interpret-right-singular-vector">
+<h3><span class="section-number">3.6.5.4. </span>Interpret right singular vector<a class="headerlink" href="#interpret-right-singular-vector" title="Link to this heading">#</a></h3>
+<p>Let’s scale the right singular vector corresponding to the near-zero singular value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Original unit vector</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;unit vector&quot;</span><span class="p">,</span><span class="n">Vh</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,:])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Scale by the inverse of the lower right corner of Vh</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;scaled vector&quot;</span><span class="p">,</span><span class="n">Vh</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,:]</span> <span class="o">/</span> <span class="n">Vh</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This tells us that 2 times (columun 0) plus -1 times (column 1) plus 1 times (column 2) equals 0. Let’s verify.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">2</span><span class="o">*</span><span class="n">A4</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="o">*</span><span class="n">A4</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="o">*</span><span class="n">A4</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Take Away</strong>: The right singular vector corresponding to a near-zero singular value tells us how to add the columns of a matrix together to achieve a rank deficiency. SVD is a very help tool to find modeling mistakes.</p>
+</section>
+<section id="homework">
+<h3><span class="section-number">3.6.5.5. </span>Homework<a class="headerlink" href="#homework" title="Link to this heading">#</a></h3>
+<p>Create your own example below to show how SVD helps diagnose a linearly dependent system of equations. Specifically:</p>
+<ol class="arabic simple">
+<li><p>Propose a linearly dependent system of equations (as an <span class="math notranslate nohighlight">\(\bf A\)</span> matrix).</p></li>
+<li><p>Perform SVD</p></li>
+<li><p>Interpret the left and right singular vectors corresponding to the near-zero singular value.</p></li>
+</ol>
+<p>Everyone should submit a unique <span class="math notranslate nohighlight">\(\bf A\)</span> matrix.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define and print A</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate SVD and print components</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Rescale left singular vector</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Your Interpretation Here</strong>: [replace with 1 sentence]</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Rescale right singular vector</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Your Interpretation Here</strong>: [replace with 1 sentence]</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/03"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chapter5.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">3.5. </span>Chapter 5: Linear Transformations</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../04/linear_algebra.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Applied Linear Algebra</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#our-first-eigendecomposition">3.6.1. Our First Eigendecomposition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-eigendecompositions">3.6.2. More Eigendecompositions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-power">3.6.3. Matrix Power</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tranformations-as-projections-onto-the-eigenbasis">3.6.4. Tranformations as Projections onto the Eigenbasis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#svd-and-matrix-compression">3.6.5. SVD and Matrix Compression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#svd-to-diagnose-linearly-dependent-equations">3.6.5.1. SVD to Diagnose Linearly Dependent Equations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-svd">3.6.5.2. Calculate SVD</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpret-left-singular-vector">3.6.5.3. Interpret left singular vector</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpret-right-singular-vector">3.6.5.4. Interpret right singular vector</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">3.6.5.5. Homework</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

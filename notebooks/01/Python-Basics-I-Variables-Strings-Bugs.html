@@ -1,0 +1,1417 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>1.2. Python Basics I: Variables, Strings, and Bugs &#8212; Data and Computing for Chemical Engineers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/01/Python-Basics-I-Variables-Strings-Bugs';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="1.3. Python Basics II: Loopy Logic" href="Flow-control.html" />
+    <link rel="prev" title="1.1. Welcome to Jupyter Notebooks and Vocareum" href="Jupyter-Notebooks.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/cbe_logo.jpg" class="logo__image only-light" alt="Data and Computing for Chemical Engineers - Home"/>
+    <script>document.write(`<img src="../../_static/cbe_logo.jpg" class="logo__image only-dark" alt="Data and Computing for Chemical Engineers - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Data and Computing for Engineers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Programming</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Python-Primer.html">1. Python Primer</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Jupyter-Notebooks.html">1.1. Welcome to Jupyter Notebooks and Vocareum</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.2. Python Basics I: Variables, Strings, and Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Flow-control.html">1.3. Python Basics II: Loopy Logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Python-Basics-III-Lists-Dictionaries-Enumeration.html">1.4. Python Basics III: Lists, Dictionaries, and Enumeration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Functions-and-Scope.html">1.5. Functions and Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Recursion.html">1.6. Recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Pseudocode.html">1.7. Pseudocode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example-High-Low-Game.html">1.8. High/Low Guess My Number Game</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Modules-and-Files.html">1.9. Modules and Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NumPy.html">1.10. Linear Algebra with Numpy and Scipy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Matplotlib.html">1.11. Visualization with matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Pandas.html">1.12. Manipulating Data with Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Functions-as-Arguments.html">1.13. Functions as Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Testing-and-Debugging.html">1.14. Testing and Debugging in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Publication-Quality-Figures.html">1.15. Preparing Publication Quality Figures in Python</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../02/advanced_python.html">2. Advanced Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Methods</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03/linear_algebra.html">3. Linear Algebra Primer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter1.html">3.1. Chapter 1: Math Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter2.html">3.2. Chapter 2: Intro to Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter3.html">3.3. Chapter 3: Computational linear algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter4.html">3.4. Chapter 4: Geometric Aspects of Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter5.html">3.5. Chapter 5: Linear Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter6.html">3.6. Chapter 6: Theoretical Linear Algebra</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../04/linear_algebra.html">4. Applied Linear Algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../04/Modeling-Systems-of-Linear-Equations.html">4.1. Modeling Systems of Linear Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Gauss-Elimination.html">4.2. Gaussian Elimination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Invertible-Matrix-Theorem-and-Gauss-Example.html">4.3. Invertible Matrix Theorem and Gaussian Elimination Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/LU-Decomposition.html">4.4. LU Decomposition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Condition-Number.html">4.5. Errors in Linear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Example-Atomic-Mass-Balances.html">4.6. Example: Mass Balances and Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Linear-Algebra-in-Numpy.html">4.7. Linear Algebra Review and SciPy Basics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05/algorithms.html">5. Algorithm Building Blocks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../05/Taylor-Series.html">5.1. Taylor Series Approximations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05/Finite-Difference.html">5.2. Finite Difference Derivative Approximations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05/Example-Heating-a-Metal-Slab.html">5.3. Example: Heating a Metal Slab</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../06/nonlinear_systems.html">6. Nonlinear Systems of Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../06/Modeling-Systems-of-Nonlinear-Equations.html">6.1. Modeling Systems of Nonlinear Equations: Flash Calculation Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Raphson-Method-in-One-Dimension.html">6.2. Newton-Raphson Method in One Dimension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/More-Newton-Type-Methods.html">6.3. More Newton-Type Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Convergence-Analysis-for-Newton-Raphson-Methods.html">6.4. Convergence Analysis for Newton-Raphson Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Raphson-Methods-for-Systems-of-Equations.html">6.5. Newton-Raphson Methods for Systems of Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Methods-in-Scipy.html">6.6. Newton Methods in Scipy</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../07/integration.html">7. Numeric Integration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../07/Intro-and-Newton-Cotes.html">7.1. Introduction and Newton-Cotes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Gauss-Quadrature.html">7.2. Gauss Quadrature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Scipy-Library-Adaptive-Methods-for-Newton-Cotes-and-Gauss-Quadrature.html">7.3. Scipy Library: Adaptive Methods for Newton-Cotes and Gauss Quadrature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Application-Inertial-Navigation-Systems.html">7.4. Application: Inertial Navigation Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Forward-and-Backward-Euler.html">7.5. Forward and Backward Euler Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Trapezoid-Rule.html">7.6. Crank-Nicolson (Trapezoid Rule)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Stability-Analysis.html">7.7. Stability Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Explicit-Runge-Kutta.html">7.8. Explicit Range Kutta Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Systems-of-Differential-Equations-and-Scipy.html">7.9. Systems of Differential Equations and Scipy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Example-Reaction-Rates.html">7.10. Example: Reaction Rates</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../08/optimization.html">8. Continuous Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../08/Pyomo-Basics.html">8.1. Pyomo Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../08/Electricity-Market-Optimization.html">8.2. Electricity Market Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../08/Flash-Calculations-in-Pyomo.html">8.3. Flash Calculations in Pyomo</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../09/stats.html">9. Descriptive Statistics and Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../09/Sampling.html">9.1. Sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../09/Summary-Statistics.html">9.2. Summary Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../09/Visualizing-Data.html">9.3. Visualizing Data</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../10/probability.html">10. Probability Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../10/Probability-Basics.html">10.1. Basic Ideas of Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Random-Variables.html">10.2. Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Jointly-Distributed-Random-Variables.html">10.3. Jointly Distributed Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Jointly-Continuous-Random-Variables.html">10.4. Jointly Continuous Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Practice-Problems.html">10.5. Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../11/distributions.html">11. Common Probability Distributions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../11/Bernoulli-Probability-Distribution.html">11.1. Bernoulli Probability Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Binomial-Probability-Distribtuion.html">11.2. Binomial Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Poisson-Probability-Distribution.html">11.3. Poisson Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Normal-Probability-Distribution.html">11.4. Normal Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Common-Probability-Distributions-Summary.html">11.5. Summary</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../12/uncertainty.html">12. Uncertainty and Error Propagation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../12/Measurement-Error.html">12.1. Measurement Error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Error-Propagation.html">12.2. Error Propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Measuring-Flowrate-Example.html">12.3. Measuring Flowrate Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Car-and-Incline-Example.html">12.4. Car and Incline Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Simulation.html">12.5. Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Monte-Carlo-Error-Propogation.html">12.6. Monte Carlo Error Propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Practice-Problems.html">12.7. Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../13/inference.html">13. Statistical Inference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../13/Central-Limit-Theorem.html">13.1. Central Limit Theorem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Standard-Normal-Distribution.html">13.2. Standard Normal Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Confidence-Intervals.html">13.3. Confidence Intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Students-t-Distribution.html">13.4. Student’s t-Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Hypothesis-Testing-Basics.html">13.5. Hypothesis Testing Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Flavors-of-Hypothesis-Testing.html">13.6. Flavors of Hypothesis Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Type-I-and-Type-II-Errors.html">13.7. Type I and Type II Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Statistical-Power-Basics.html">13.8. Statistical Power Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Statistical-Power-in-Python.html">13.9. Statistical Power in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Statistical-Power-Practice-Problems.html">13.10. Statistical Power Practice Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Bootstrap-Confidence-Intervals.html">13.11. Bootstrap Confidence Intervals</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../14/regression.html">14. Multivariate Linear Regression</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../14/Correlation-Covariance-and-Independence.html">14.1. Correlation, Covariance, and Independence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Least-Squares-Line.html">14.2. Simple Least Squares</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Ordinary-Least-Squares-Linear-Regression.html">14.3. Ordinary Least Squares Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Residual-Analysis.html">14.4. Residual Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Regression-Assumption-Examples.html">14.5. Regression Assumption Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Uncertainty-Analysis-and-Statistical-Inference.html">14.6. Uncertainty Analysis and Statistical Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Multivariate-Linear-Regression.html">14.7. Multivariate Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Linear-Regression-Practice-Problems.html">14.8. Linear Regression Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../15/advanced_regression.html">15. Nonlinear Regression</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../15/Transformations-and-Linear-Regression.html">15.1. Transformations and Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Weighted-Regression.html">15.2. Weighted Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Regression.html">15.3. Nonlinear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Regression-Practice-Problem.html">15.4. Nonlinear Regression Practice Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression.html">15.5. Monte Carlo Uncertainty Analysis for Nonlinear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Case-Study-Adsorptive-Membranes.html">15.6. Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../16/design_of_experiments.html">16. Design of Experiments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../16/Reaction-MBDoE.html">16.1. Model-Based Design of Experiments</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extra Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2022/home.html">Fall 2022</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/schedule.html">Fall 2022 Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/project1.html">Project 1: Computating for Problem Solving (Fall 2022)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/project2.html">Project 2: Data Analysis (Fall 2022)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2023/home.html">Fall 2023</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/schedule.html">Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/project.html">Semester Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet1_F23.html">Problem Set 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet2_F23.html">Problem Set 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet3_F23.html">Problem Set 3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet4_F23.html">Problem Set 4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet5_F23.html">Problem Set 5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet6_F23.html">Problem Set 6</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../contrib/contribute.html">Contributed Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Biotransport-Entrance-Length.html">Estimating the Entrance Length of Channel Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Non_Isothermal_PBR.html">Non-Isothermal Packed Bed Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Ficks_Law.html">Solving Fick’s Second Law Using Numeric Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Stochastic-Kinetics.html">Stochastic Simulation of Chemical Reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Spaghettification.html">Spaghettification of the Magic School Bus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Alcohol-Pharmacokinetics.html">Alcohol Pharmacokinetics and  Blood Alcohol Content % Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/McCabe-Thiele.html">Plotting McCabe-Thiele diagram through computational methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Wastewater-Treatment-Mass-Balance.html">Example of Mass Balance Problem in Wastewater Treatment Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Filtration.html">Filtration of a Yeast Suspension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Fraction_of_Molecular_Collisions.html">Calculating Fraction of Molecular Collisions</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/01/Python-Basics-I-Variables-Strings-Bugs.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/data-and-computing" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/01/Python-Basics-I-Variables-Strings-Bugs.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/01/Python-Basics-I-Variables-Strings-Bugs.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Python Basics I: Variables, Strings, and Bugs</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">1.2.1. Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hello-world-and-interactive-sessions">1.2.2. Hello World and Interactive Sessions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#command-line-mode">1.2.3. Command Line Mode</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comments">1.2.4. Comments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errors">1.2.5. Errors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#good-bugs">1.2.6. “Good” Bugs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bad-bugs">1.2.7. “Bad” Bugs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indentation">1.2.8. Indentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input">1.2.9. Input</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables">1.2.10. Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integers">1.2.11. Integers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#floating-point-numbers">1.2.12. Floating Point Numbers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-mathematical-functions">1.2.13. Built-in Mathematical Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strings-and-overloading">1.2.14. Strings and Overloading</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="python-basics-i-variables-strings-and-bugs">
+<h1><span class="section-number">1.2. </span>Python Basics I: Variables, Strings, and Bugs<a class="headerlink" href="#python-basics-i-variables-strings-and-bugs" title="Link to this heading">#</a></h1>
+<p><strong>Reference</strong>: Chapter 1 of <em>Computational Nuclear Engineering and Radiological Science Using Python</em>, R. McClarren (2018)</p>
+<section id="learning-objectives">
+<h2><span class="section-number">1.2.1. </span>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>After studying this notebook, completing the activities, and asking questions in class, you should be able to:</p>
+<ul class="simple">
+<li><p>Print and concatenate strings</p></li>
+<li><p>Add relevant comments to batches of code</p></li>
+<li><p>Recognize and correct bugs in code</p></li>
+<li><p>Differentiate between the different types of variables and know what output to expect</p></li>
+<li><p>Understand how to import and utilize the math library</p></li>
+</ul>
+</section>
+<section id="hello-world-and-interactive-sessions">
+<h2><span class="section-number">1.2.2. </span>Hello World and Interactive Sessions<a class="headerlink" href="#hello-world-and-interactive-sessions" title="Link to this heading">#</a></h2>
+<p>In almost any computer language the first thing you do is create a program called “Hello world!”.</p>
+<p>This <strong>notebook</strong> is an interactive session. We just type the command <code class="docutils literal notranslate"><span class="pre">print(&quot;Hello</span> <span class="pre">World.&quot;)</span></code> and the press Shift+Enter to execute.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello World.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello World.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Print the first two lines of your favorite poem or song.</p>
+</div>
+<p>Hint: Use <code class="docutils literal notranslate"><span class="pre">\n</span></code> anywhere inside of the quotes to create a new line.</p>
+<p><strong>Unicode Characters</strong></p>
+<ul class="simple">
+<li><p>A way to express fancy letters, like emojis</p></li>
+<li><p>Supported by Python</p></li>
+<li><p>Copy-and-paste is the easiest way to write in code</p></li>
+<li><p>Easy to find on website such as <a class="reference external" href="http://xahlee.info">http://xahlee.info</a>, <a class="reference external" href="https://www.compart.com/en/unicode/">https://www.compart.com/en/unicode/</a>, and <a class="reference external" href="https://unicode-table.com/en/#control-character">https://unicode-table.com/en/#control-character</a> (top Google search results)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The temperature was 56 °F this morning.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The temperature was 56 °F this morning.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Write a print statement using at least two unicode characters.</p>
+</div>
+</section>
+<section id="command-line-mode">
+<h2><span class="section-number">1.2.3. </span>Command Line Mode<a class="headerlink" href="#command-line-mode" title="Link to this heading">#</a></h2>
+<p>Above, we used the <em>interactive mode</em>, which means the result of each line is displayed when I enter the line.</p>
+<p>It is more common to put your code into a separate file and then execute it by typing</p>
+<p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">codename.py</span></code></p>
+<p>where <code class="docutils literal notranslate"><span class="pre">codename.py</span></code> is the name of your file.</p>
+<p><strong>How to access a Python interpreter?</strong></p>
+<ul class="simple">
+<li><p>Mac or Linux: Open terminal and type <code class="docutils literal notranslate"><span class="pre">python</span></code></p></li>
+<li><p>Mac, Linux, or Windows: Use an IDE.</p></li>
+</ul>
+<p><em>Anaconda</em> is the easiest free Python environment to install. It is already available in B19.</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Optional Home Activity</b></p>
+<p>Install Anaconda on your computer.</p>
+</div>
+<p>Hint: Start at <a class="reference external" href="https://www.anaconda.com/distribution/#download-section">https://www.anaconda.com/distribution/#download-section</a>. Ask questions in tutorial if you get stuck.</p>
+</section>
+<section id="comments">
+<h2><span class="section-number">1.2.4. </span>Comments<a class="headerlink" href="#comments" title="Link to this heading">#</a></h2>
+<p>Comments are your best friend.  They can be time consuming to add, but never have I looked back at old code and regreted adding them.</p>
+<p>A <b>comment</b> is a annotation in your code to</p>
+<ul>
+<li> inform the reader, often yourself, of what a particular piece of code is trying to do
+<li> indicate the designed output, result, etc. of a part of the code
+<li> make the code more readable
+</ul>
+<p><b><blink>Any code you submit for a class assignment must be well commented!</blink></b>
+This is not to punish you, but to help you.</p>
+<p>You use the pound (aka hashtag) to comment out the rest of a line: everything that follows the # is ignored by python.  Therefore, you can put little notes to yourself or others about what is going on in the code.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#This next line should compute 9*9 + 19 = 100</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">9</span><span class="o">*</span><span class="mi">9</span> <span class="o">+</span> <span class="mi">19</span><span class="p">)</span>
+
+<span class="c1">#You can also make comments inside a line at the end</span>
+<span class="mi">9</span><span class="o">*</span><span class="mi">9</span> <span class="c1">#+ 19</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>81
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are also ways to make multiline comments by use a triple quote ‘’’</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;The beginning of a multiline comment.</span>
+<span class="sd">This comment will be followed by meaningless </span>
+<span class="sd">code.  Enjoy &#39;&#39;&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I am the very model of a modern major general.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>I am the very model of a modern major general.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Add comments to the following calculation. At the top, write a sentence describing the program in the multiline comment block. Then fill in each empty single line comment with <b>units</b>.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="c1">#</span>
+<span class="n">r</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="c1"># </span>
+<span class="n">pi</span> <span class="o">=</span>  <span class="mf">3.14159265359</span>
+
+<span class="c1"># Calculate sphere area (m^2)</span>
+<span class="n">area</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">r</span><span class="o">**</span><span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sphere surface area:&quot;</span><span class="p">,</span><span class="n">area</span><span class="p">,</span><span class="s2">&quot;m^2&quot;</span><span class="p">)</span>
+
+<span class="c1">#</span>
+<span class="n">vol</span> <span class="o">=</span> <span class="mi">4</span><span class="o">/</span><span class="mi">3</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">r</span><span class="o">**</span><span class="mi">3</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sphere volume:&quot;</span><span class="p">,</span><span class="n">vol</span><span class="p">,</span><span class="s2">&quot;m^3&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sphere surface area: 12.56637061436 m^2
+Sphere volume: 4.188790204786667 m^3
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="errors">
+<h2><span class="section-number">1.2.5. </span>Errors<a class="headerlink" href="#errors" title="Link to this heading">#</a></h2>
+<p>We call errors in computer programs <strong>bugs</strong>. Even experienced programmers write code with bugs. We will learn best practice procedures to try to rid a code of bugs, but even the most sophisticated software quality assurance techniques will not catch every one. Let’s look at a <strong>good bug</strong> and a <strong>bad bug</strong>.</p>
+</section>
+<section id="good-bugs">
+<h2><span class="section-number">1.2.6. </span>“Good” Bugs<a class="headerlink" href="#good-bugs" title="Link to this heading">#</a></h2>
+<p>Good bug: A syntax mistake that Python will catch and scream about.</p>
+<p><strong>Example</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#This is a good bug because the python interpreter complains</span>
+<span class="mi">9</span><span class="o">*</span><span class="mi">9</span> <span class="o">+</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Input</span> <span class="n">In</span> <span class="p">[</span><span class="mi">16</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">9</span><span class="o">*</span><span class="mi">9</span> <span class="o">+</span>
+          <span class="o">^</span>
+<span class="ne">SyntaxError</span>: invalid syntax
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Create another example of a “good” bug. Share with a friend.</p>
+</div>
+</section>
+<section id="bad-bugs">
+<h2><span class="section-number">1.2.7. </span>“Bad” Bugs<a class="headerlink" href="#bad-bugs" title="Link to this heading">#</a></h2>
+<p>Bad bug: A flaw in the logic of the computer program. These are much harder to catch.</p>
+<p><strong>Example</strong>: We want to compute</p>
+<div class="math notranslate nohighlight">
+\[(3 + 5)^2 = 8^2 = 64\]</div>
+<p>But we input:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">3</span> <span class="o">+</span> <span class="mi">5</span><span class="o">**</span><span class="mi">2</span>
+<span class="c1">#You don&#39;t get the correct answer, and no one tells you that you&#39;re wrong.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>28
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Copy the code below and then fix the bad bug.</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is an example of the power and feebleness of computers.  A computer can do anything <strong>you tell it to</strong>, but it doesn’t necessarily do what you want it to. Always keep this in mind: just because the computer did something, that doesn’t mean it did what you wanted.</p>
+<p>Later we will talk in more detail about bugs, finding bugs (called debugging), and testing of code.</p>
+</section>
+<section id="indentation">
+<h2><span class="section-number">1.2.8. </span>Indentation<a class="headerlink" href="#indentation" title="Link to this heading">#</a></h2>
+<p>Python is, by design, <strong>very picky about how you lay out your code</strong>.  It requires that code blocks be properly indented. We’ll discuss what code blocks are later, but your code needs to be properly aligned to make this work.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#If I improperly indent, my code won&#39;t work</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Not indented&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;indented, but it shouldn&#39;t be&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Input</span> <span class="n">In</span> <span class="p">[</span><span class="mi">20</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;indented, but it shouldn&#39;t be&quot;</span><span class="p">)</span>
+    <span class="o">^</span>
+<span class="ne">IndentationError</span>: unexpected indent
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice that none of my code executed because of the indentation error. An indent tells the Python interpreter the indented code is part of a code block and needs to be executed in a special way. Only at certain times can one indent and it makes sense. We will revisit this in a few lectures.</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Copy the code below and fix the indentation error.</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#If I improperly indent, my code won&#39;t work</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="input">
+<h2><span class="section-number">1.2.9. </span>Input<a class="headerlink" href="#input" title="Link to this heading">#</a></h2>
+<p>You can prompt the user for input using the <tt> input </tt> command:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_value</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a number: &quot;</span><span class="p">)</span>
+<span class="n">user_value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">user_value</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2 *&quot;</span><span class="p">,</span> <span class="n">user_value</span><span class="p">,</span><span class="s2">&quot;=&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">user_value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2 * 5.0 = 10.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_value</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a number (just type 7): &quot;</span><span class="p">)</span>
+<span class="n">user_value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">user_value</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">user_value</span> <span class="o">==</span> <span class="mi">7</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Correct, we have a winner&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Claim your prize&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You guessed poorly.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Correct, we have a winner
+Claim your prize
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice that in this example we used an <tt>if-else</tt> statement.  The <tt>if-else</tt> statement is a way to execute different parts of the code based on some conditional expression.  This type of execution is sometimes called <b>branching</b> or <b>selection</b>. We will discuss this in detail below.</p>
+<p>Also notice the indentation in the <tt>if-else</tt> block.</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Rerun the code above. Find input values that execute each part (a.k.a., branch, section) of the if statement. In other words, find one input value that causes the program to output “Claim your prize”. Then find a different input value that causes the program to output “You guessed poorly”. Record your answer below in the text (Markdown) cell:</p>
+</div>
+<p><strong>Answer to Home Activity:</strong></p>
+<p>Input that printed “claim your prize”:</p>
+<p>Input that printed “You guessed poorly”:</p>
+</section>
+<section id="variables">
+<h2><span class="section-number">1.2.10. </span>Variables<a class="headerlink" href="#variables" title="Link to this heading">#</a></h2>
+<p>Information, or data, is stored in variables.  Common types of variables include <em>floating point numbers</em> (decimals), <em>integer numbers</em>, and <em>text</em> to name a few. For a complete list of the python data types, see <a class="reference external" href="https://docs.python.org/3.4/library/stdtypes.html">https://docs.python.org/3.4/library/stdtypes.html</a></p>
+</section>
+<section id="integers">
+<h2><span class="section-number">1.2.11. </span>Integers<a class="headerlink" href="#integers" title="Link to this heading">#</a></h2>
+<p>Integers are whole numbers, including the negatives.  They never have a fractional, or decimal, part and should only be used for data that is a count.</p>
+<p>To assign an integer to a variable use the equals sign.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#assign the value 2 to x</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="mf">2.0</span><span class="p">)</span>
+
+<span class="c1">#check that x is an integer</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.0
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>int
+</pre></div>
+</div>
+</div>
+</div>
+<p>Integers are useful for things that can be counted: perhaps that number of times we execute a loop, the number of elements of a vector, or the number of students in a class.</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Copy the code from above and modify to multiple x by <b>2</b> instead of <b>2.0</b>. What is the variable type now?</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#assign the value 2 to x</span>
+<span class="c1"># Add your solution here</span>
+
+<span class="c1">#check that x is an integer</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="floating-point-numbers">
+<h2><span class="section-number">1.2.12. </span>Floating Point Numbers<a class="headerlink" href="#floating-point-numbers" title="Link to this heading">#</a></h2>
+<p>Floating point numbers are numbers that do have a fractional part.  Most numbers in engineering calculations are floating point types.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Now make some others floating point variables</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mf">4.2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;y =&quot;</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+<span class="c1">#note that exponentiation is **</span>
+<span class="n">z</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;(2 / 4.2)**3 =&quot;</span><span class="p">,</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>y = 4.2
+&lt;class &#39;float&#39;&gt;
+(2 / 4.2)**3 = 0.10797969981643449
+</pre></div>
+</div>
+</div>
+</div>
+<p>The way that floating point numbers are represented on a computer has <strong>only a finite precision</strong>.  That means we cannot represent a number exactly in many cases. We’ll see later an example of how floating point accuracy can make a difference in a calculation.</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Add 1E-10 to 1E-20. Is the answer what you expect?</p>
+</div>
+<p>Hint: <code class="docutils literal notranslate"><span class="pre">1E-20</span></code> is shorthand for <span class="math notranslate nohighlight">\(1 \times 10^{-20}\)</span>, which is sometimes called scientific notation.</p>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="built-in-mathematical-functions">
+<h2><span class="section-number">1.2.13. </span>Built-in Mathematical Functions<a class="headerlink" href="#built-in-mathematical-functions" title="Link to this heading">#</a></h2>
+<p>There are almost every common mathematical function you might need for python already built in. To use them you have to import that math functions using the command <tt>import</tt>.  In the code below, I set it up so that to use a math function you use the syntax <tt>math.[function]</tt> where <tt>[function]</tt> is the name of the function you want to call.</p>
+<p>See <a class="reference external" href="https://docs.python.org/3.4/library/math.html">https://docs.python.org/3.4/library/math.html</a> for the complete list of built-in mathematical functions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span> <span class="k">as</span> <span class="nn">m</span>
+<span class="c1">#take cosine of a number close to pi</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="mf">3.14159</span>
+<span class="n">trig_variable</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;cos(&quot;</span><span class="p">,</span><span class="n">theta</span><span class="p">,</span><span class="s2">&quot;) =&quot;</span><span class="p">,</span><span class="n">trig_variable</span><span class="p">)</span>
+
+<span class="c1">#use the exponential to give me e</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The base of the natural logarithm is&quot;</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
+
+<span class="c1">#python has a built-in pi as well</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The value of pi is&quot;</span><span class="p">,</span><span class="n">m</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cos( 3.14159 ) = -0.9999999999964793
+The base of the natural logarithm is 2.718281828459045
+The value of pi is 3.141592653589793
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice how in the print statements, if I give it multiple arguments, it prints each with a space in between. The natural logarithm is just <tt>math.log</tt> and the base 10 logarithm is <tt>math.log10</tt>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The natural log of 10 is&quot;</span><span class="p">,</span><span class="n">m</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The log base-10 of 10 is&quot;</span><span class="p">,</span><span class="n">m</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The natural log of 10 is 2.302585092994046
+The log base-10 of 10 is 1.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are two non-obvious mathematical operators, integer division: //, and the modulus (or remainder): %</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 7 / 3 is 2 remainder 1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;7 divided by 3 is&quot;</span><span class="p">,</span><span class="mi">7</span><span class="o">//</span><span class="mi">3</span><span class="p">,</span><span class="s2">&quot;remainder&quot;</span><span class="p">,</span><span class="mi">7</span><span class="o">%</span><span class="k">3</span>)
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;851 divided by 13 is&quot;</span><span class="p">,</span><span class="mi">851</span><span class="o">//</span><span class="mi">13</span><span class="p">,</span><span class="s2">&quot;remainder&quot;</span><span class="p">,</span><span class="mi">851</span><span class="o">%</span><span class="k">13</span>)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7 divided by 3 is 2 remainder 1
+851 divided by 13 is 65 remainder 6
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Study and execute the code below. Then write a sentence to explain the different between integer and floating point division.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># integer division</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;7 // 3 = &quot;</span><span class="p">,</span><span class="mi">7</span><span class="o">//</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># floating division</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;7 / 3 = &quot;</span><span class="p">,</span><span class="mi">7</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7 // 3 =  2
+7 / 3 =  2.3333333333333335
+</pre></div>
+</div>
+</div>
+</div>
+<p><em>Write a sentence to explain difference between integer and floating point division:</em></p>
+<p>Let’s also look at how to generate a random number.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A random number between 0 and 1: &quot;</span><span class="p">,</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A random number between 0 and 1:  0.9763983823355622
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Generate a random whole number between 0 and 100 using <tt>random.random()</tt>.</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="strings-and-overloading">
+<h2><span class="section-number">1.2.14. </span>Strings and Overloading<a class="headerlink" href="#strings-and-overloading" title="Link to this heading">#</a></h2>
+<p>A string is a data type that is a collection of characters, and needs to be inside quotes:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#This is a string</span>
+<span class="n">aString</span> <span class="o">=</span> <span class="s2">&quot;Coffee is for closers.&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">aString</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;aString&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Coffee is for closers.
+aString
+</pre></div>
+</div>
+</div>
+</div>
+<p>Anything inside the quotes is taken literally by python. That is why the second print statement above just printed <tt>aString</tt>.</p>
+<p>You can also subset, that is get some of the characters in a string, using brackets. Putting a single number in a bracket gives you the character in that position. Note, python starts numbering at 0 so that 0 is the first character in a string.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aString</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;C&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aString</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;e&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can also get a range of characters in a string using the colon. The colon operator is funny in a way in that <tt>[a:b]</tt> says give me the elements in the string from position <tt>a</tt> to position <tt>b-1</tt>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aString</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;offee&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Python defines its ranges this way so that if the string is of length <tt>N</tt>, <tt>[0:N]</tt> returns the whole string.</p>
+<p>Negative subsets start at the end of the string (i.e., -1 is the last character of the string).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aString</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;.&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aString</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;ser&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Print “closers” by accessing elements of <tt>aString</tt></p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>With characters (and strings) the + <strong>operator is overloaded</strong>.  What we mean by overloaded, is that it is defined so that the idea of what addition means is conferred to strings.  Therefore,</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;Negative Ghostrider: &#39;</span> <span class="o">+</span> <span class="s1">&#39;the pattern is full&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Negative Ghostrider: the pattern is full&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;a&#39;</span> <span class="o">+</span> <span class="s1">&#39;b&#39;</span> <span class="o">+</span> <span class="s1">&#39;c&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;abc&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The + operator <strong>concatenates</strong> (or smushes together) the strings/characters it operates on.</p>
+<p>The multiplication operator is similarly overloaded, though it is not as general.  It is simple to think about ‘The roof, ‘ * 3</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;The roof, &#39;</span> <span class="o">*</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;The roof, The roof, The roof, &#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>However, ‘The roof, ‘ * 3.15 is not defined and will give an error:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;The roof, &#39;</span> <span class="o">*</span> <span class="mf">3.15</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">Input In [42],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="s1">&#39;The roof, &#39;</span> <span class="o">*</span> <span class="mf">3.15</span>
+
+<span class="ne">TypeError</span>: can&#39;t multiply sequence by non-int of type &#39;float&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The upshot is that only an integer times a character/string makes sense. The order of operations is respected</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;The roof, &#39;</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="s1">&#39;is on fire...&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Minus makes sense, but only sometimes, so it is not allowed.</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Create the string “row row row your boat gently down the stream” using string multiplication and concatenation.</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/01"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Jupyter-Notebooks.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">1.1. </span>Welcome to Jupyter Notebooks and Vocareum</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Flow-control.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">1.3. </span>Python Basics II: Loopy Logic</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">1.2.1. Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hello-world-and-interactive-sessions">1.2.2. Hello World and Interactive Sessions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#command-line-mode">1.2.3. Command Line Mode</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comments">1.2.4. Comments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#errors">1.2.5. Errors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#good-bugs">1.2.6. “Good” Bugs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bad-bugs">1.2.7. “Bad” Bugs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indentation">1.2.8. Indentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input">1.2.9. Input</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables">1.2.10. Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integers">1.2.11. Integers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#floating-point-numbers">1.2.12. Floating Point Numbers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-mathematical-functions">1.2.13. Built-in Mathematical Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strings-and-overloading">1.2.14. Strings and Overloading</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1209 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>4.1. Modeling Systems of Linear Equations &#8212; Data and Computing for Chemical Engineers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/04/Modeling-Systems-of-Linear-Equations';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="4.2. Gaussian Elimination" href="Gauss-Elimination.html" />
+    <link rel="prev" title="4. Applied Linear Algebra" href="linear_algebra.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/cbe_logo.jpg" class="logo__image only-light" alt="Data and Computing for Chemical Engineers - Home"/>
+    <script>document.write(`<img src="../../_static/cbe_logo.jpg" class="logo__image only-dark" alt="Data and Computing for Chemical Engineers - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Data and Computing for Engineers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../01/Python-Primer.html">1. Python Primer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../01/Jupyter-Notebooks.html">1.1. Welcome to Jupyter Notebooks and Vocareum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Python-Basics-I-Variables-Strings-Bugs.html">1.2. Python Basics I: Variables, Strings, and Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Flow-control.html">1.3. Python Basics II: Loopy Logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Python-Basics-III-Lists-Dictionaries-Enumeration.html">1.4. Python Basics III: Lists, Dictionaries, and Enumeration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Functions-and-Scope.html">1.5. Functions and Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Recursion.html">1.6. Recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Pseudocode.html">1.7. Pseudocode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Example-High-Low-Game.html">1.8. High/Low Guess My Number Game</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Modules-and-Files.html">1.9. Modules and Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/NumPy.html">1.10. Linear Algebra with Numpy and Scipy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Matplotlib.html">1.11. Visualization with matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Pandas.html">1.12. Manipulating Data with Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Functions-as-Arguments.html">1.13. Functions as Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Testing-and-Debugging.html">1.14. Testing and Debugging in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Publication-Quality-Figures.html">1.15. Preparing Publication Quality Figures in Python</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../02/advanced_python.html">2. Advanced Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Methods</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03/linear_algebra.html">3. Linear Algebra Primer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter1.html">3.1. Chapter 1: Math Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter2.html">3.2. Chapter 2: Intro to Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter3.html">3.3. Chapter 3: Computational linear algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter4.html">3.4. Chapter 4: Geometric Aspects of Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter5.html">3.5. Chapter 5: Linear Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter6.html">3.6. Chapter 6: Theoretical Linear Algebra</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="linear_algebra.html">4. Applied Linear Algebra</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">4.1. Modeling Systems of Linear Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Gauss-Elimination.html">4.2. Gaussian Elimination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Invertible-Matrix-Theorem-and-Gauss-Example.html">4.3. Invertible Matrix Theorem and Gaussian Elimination Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LU-Decomposition.html">4.4. LU Decomposition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Condition-Number.html">4.5. Errors in Linear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example-Atomic-Mass-Balances.html">4.6. Example: Mass Balances and Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Linear-Algebra-in-Numpy.html">4.7. Linear Algebra Review and SciPy Basics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05/algorithms.html">5. Algorithm Building Blocks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../05/Taylor-Series.html">5.1. Taylor Series Approximations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05/Finite-Difference.html">5.2. Finite Difference Derivative Approximations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05/Example-Heating-a-Metal-Slab.html">5.3. Example: Heating a Metal Slab</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../06/nonlinear_systems.html">6. Nonlinear Systems of Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../06/Modeling-Systems-of-Nonlinear-Equations.html">6.1. Modeling Systems of Nonlinear Equations: Flash Calculation Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Raphson-Method-in-One-Dimension.html">6.2. Newton-Raphson Method in One Dimension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/More-Newton-Type-Methods.html">6.3. More Newton-Type Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Convergence-Analysis-for-Newton-Raphson-Methods.html">6.4. Convergence Analysis for Newton-Raphson Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Raphson-Methods-for-Systems-of-Equations.html">6.5. Newton-Raphson Methods for Systems of Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Methods-in-Scipy.html">6.6. Newton Methods in Scipy</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../07/integration.html">7. Numeric Integration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../07/Intro-and-Newton-Cotes.html">7.1. Introduction and Newton-Cotes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Gauss-Quadrature.html">7.2. Gauss Quadrature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Scipy-Library-Adaptive-Methods-for-Newton-Cotes-and-Gauss-Quadrature.html">7.3. Scipy Library: Adaptive Methods for Newton-Cotes and Gauss Quadrature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Application-Inertial-Navigation-Systems.html">7.4. Application: Inertial Navigation Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Forward-and-Backward-Euler.html">7.5. Forward and Backward Euler Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Trapezoid-Rule.html">7.6. Crank-Nicolson (Trapezoid Rule)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Stability-Analysis.html">7.7. Stability Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Explicit-Runge-Kutta.html">7.8. Explicit Range Kutta Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Systems-of-Differential-Equations-and-Scipy.html">7.9. Systems of Differential Equations and Scipy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Example-Reaction-Rates.html">7.10. Example: Reaction Rates</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../08/optimization.html">8. Continuous Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../08/Pyomo-Basics.html">8.1. Pyomo Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../08/Electricity-Market-Optimization.html">8.2. Electricity Market Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../08/Flash-Calculations-in-Pyomo.html">8.3. Flash Calculations in Pyomo</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../09/stats.html">9. Descriptive Statistics and Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../09/Sampling.html">9.1. Sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../09/Summary-Statistics.html">9.2. Summary Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../09/Visualizing-Data.html">9.3. Visualizing Data</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../10/probability.html">10. Probability Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../10/Probability-Basics.html">10.1. Basic Ideas of Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Random-Variables.html">10.2. Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Jointly-Distributed-Random-Variables.html">10.3. Jointly Distributed Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Jointly-Continuous-Random-Variables.html">10.4. Jointly Continuous Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Practice-Problems.html">10.5. Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../11/distributions.html">11. Common Probability Distributions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../11/Bernoulli-Probability-Distribution.html">11.1. Bernoulli Probability Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Binomial-Probability-Distribtuion.html">11.2. Binomial Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Poisson-Probability-Distribution.html">11.3. Poisson Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Normal-Probability-Distribution.html">11.4. Normal Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Common-Probability-Distributions-Summary.html">11.5. Summary</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../12/uncertainty.html">12. Uncertainty and Error Propagation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../12/Measurement-Error.html">12.1. Measurement Error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Error-Propagation.html">12.2. Error Propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Measuring-Flowrate-Example.html">12.3. Measuring Flowrate Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Car-and-Incline-Example.html">12.4. Car and Incline Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Simulation.html">12.5. Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Monte-Carlo-Error-Propogation.html">12.6. Monte Carlo Error Propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Practice-Problems.html">12.7. Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../13/inference.html">13. Statistical Inference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../13/Central-Limit-Theorem.html">13.1. Central Limit Theorem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Standard-Normal-Distribution.html">13.2. Standard Normal Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Confidence-Intervals.html">13.3. Confidence Intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Students-t-Distribution.html">13.4. Student’s t-Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Hypothesis-Testing-Basics.html">13.5. Hypothesis Testing Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Flavors-of-Hypothesis-Testing.html">13.6. Flavors of Hypothesis Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Type-I-and-Type-II-Errors.html">13.7. Type I and Type II Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Statistical-Power-Basics.html">13.8. Statistical Power Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Statistical-Power-in-Python.html">13.9. Statistical Power in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Statistical-Power-Practice-Problems.html">13.10. Statistical Power Practice Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Bootstrap-Confidence-Intervals.html">13.11. Bootstrap Confidence Intervals</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../14/regression.html">14. Multivariate Linear Regression</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../14/Correlation-Covariance-and-Independence.html">14.1. Correlation, Covariance, and Independence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Least-Squares-Line.html">14.2. Simple Least Squares</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Ordinary-Least-Squares-Linear-Regression.html">14.3. Ordinary Least Squares Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Residual-Analysis.html">14.4. Residual Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Regression-Assumption-Examples.html">14.5. Regression Assumption Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Uncertainty-Analysis-and-Statistical-Inference.html">14.6. Uncertainty Analysis and Statistical Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Multivariate-Linear-Regression.html">14.7. Multivariate Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Linear-Regression-Practice-Problems.html">14.8. Linear Regression Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../15/advanced_regression.html">15. Nonlinear Regression</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../15/Transformations-and-Linear-Regression.html">15.1. Transformations and Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Weighted-Regression.html">15.2. Weighted Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Regression.html">15.3. Nonlinear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Regression-Practice-Problem.html">15.4. Nonlinear Regression Practice Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression.html">15.5. Monte Carlo Uncertainty Analysis for Nonlinear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Case-Study-Adsorptive-Membranes.html">15.6. Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../16/design_of_experiments.html">16. Design of Experiments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../16/Reaction-MBDoE.html">16.1. Model-Based Design of Experiments</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extra Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2022/home.html">Fall 2022</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/schedule.html">Fall 2022 Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/project1.html">Project 1: Computating for Problem Solving (Fall 2022)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/project2.html">Project 2: Data Analysis (Fall 2022)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2023/home.html">Fall 2023</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/schedule.html">Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/project.html">Semester Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet1_F23.html">Problem Set 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet2_F23.html">Problem Set 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet3_F23.html">Problem Set 3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet4_F23.html">Problem Set 4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet5_F23.html">Problem Set 5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet6_F23.html">Problem Set 6</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../contrib/contribute.html">Contributed Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Biotransport-Entrance-Length.html">Estimating the Entrance Length of Channel Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Non_Isothermal_PBR.html">Non-Isothermal Packed Bed Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Ficks_Law.html">Solving Fick’s Second Law Using Numeric Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Stochastic-Kinetics.html">Stochastic Simulation of Chemical Reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Spaghettification.html">Spaghettification of the Magic School Bus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Alcohol-Pharmacokinetics.html">Alcohol Pharmacokinetics and  Blood Alcohol Content % Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/McCabe-Thiele.html">Plotting McCabe-Thiele diagram through computational methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Wastewater-Treatment-Mass-Balance.html">Example of Mass Balance Problem in Wastewater Treatment Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Filtration.html">Filtration of a Yeast Suspension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Fraction_of_Molecular_Collisions.html">Calculating Fraction of Molecular Collisions</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/04/Modeling-Systems-of-Linear-Equations.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/data-and-computing" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/04/Modeling-Systems-of-Linear-Equations.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/04/Modeling-Systems-of-Linear-Equations.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Modeling Systems of Linear Equations</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">4.1.1. Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">4.1.2. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environmental-controls-for-a-power-plant">4.1.3. Environmental Controls for a Power Plant</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#determine-additional-data-and-analysis-goal">4.1.4. Determine Additional Data and Analysis Goal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#draw-a-picture">4.1.5. Draw a Picture</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-assumptions">4.1.6. State Assumptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-model">4.1.7. Mathematical Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#degree-of-freedom-analysis">4.1.8. Degree of Freedom Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#revised-model">4.1.9. Revised Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculations">4.1.10. Calculations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-result-and-discussion">4.1.11. Final Result and Discussion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fgd-revisited-with-linear-algebra">4.1.12. FGD Revisited with Linear Algebra</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rewrite-model-as-a-linear-system">4.1.13. Rewrite Model as a Linear System</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solve-linear-system-with-python">4.1.14. Solve Linear System with Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perform-sensitivity-analysis-to-determine-l">4.1.15. Perform Sensitivity Analysis to Determine L</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="modeling-systems-of-linear-equations">
+<h1><span class="section-number">4.1. </span>Modeling Systems of Linear Equations<a class="headerlink" href="#modeling-systems-of-linear-equations" title="Link to this heading">#</a></h1>
+<section id="learning-objectives">
+<h2><span class="section-number">4.1.1. </span>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>After studying this notebook, completing the activities, and asking questions in class, you should be able to:</p>
+<ul class="simple">
+<li><p>Create a mathematical model on paper for a system of linear equations.</p></li>
+<li><p>Implement the model in python to solve for the solutions and interpret the results.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="introduction">
+<h2><span class="section-number">4.1.2. </span>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>I would bet you can think of at least five classes where you solved one or more algebraic equations as part of a <strong>scientific or engineering calculation.</strong> In this class, we will learn how to solve algebraic equations in Python for several fundamental chemical engineering problems.</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>List out the <b>problem solving steps</b> you learned in CBE 20255 for mass and energy balance analysis of chemical processes.</p>
+</div>
+<p>We will now practice these problem solving steps.</p>
+</section>
+<section id="environmental-controls-for-a-power-plant">
+<h2><span class="section-number">4.1.3. </span>Environmental Controls for a Power Plant<a class="headerlink" href="#environmental-controls-for-a-power-plant" title="Link to this heading">#</a></h2>
+<p>In power plants, it is essential to remove pollutants such as SO<span class="math notranslate nohighlight">\(_x\)</span> from the flue gas before it is vented to the atmosphere. This is commonly done with a <strong>wet flue gas desulfuriziation</strong> (WFGD) system in a coal power plant. The main idea is to react calcium carbonate, calcium hydroxide, or magnesium hydroxide with SO<span class="math notranslate nohighlight">\(_2\)</span> to form calcium or magnesium sulfate. In fact, calcium sulfate is commonly known as <a class="reference external" href="https://en.wikipedia.org/wiki/Gypsum">gypsum</a>, which can be sold as an ingredient to make drywall. While SO<span class="math notranslate nohighlight">\(_x\)</span> refers to many components, we will focus our analysis on just SO<span class="math notranslate nohighlight">\(_2\)</span>.</p>
+<p>Here are the main chemical reactions:</p>
+<p>CaCO<span class="math notranslate nohighlight">\(_{3\mathrm{(s)}}\)</span> + SO<span class="math notranslate nohighlight">\(_{2\mathrm{(g)}}\)</span> <span class="math notranslate nohighlight">\(\rightarrow\)</span> CaSO<span class="math notranslate nohighlight">\(_{3{(s)}}\)</span> + CO<span class="math notranslate nohighlight">\(_{2\mathrm{(g)}}\)</span></p>
+<p>or</p>
+<p>Ca(OH)<span class="math notranslate nohighlight">\(_{2\mathrm{(s)}}\)</span> + SO<span class="math notranslate nohighlight">\(_{2\mathrm{(g)}}\)</span> <span class="math notranslate nohighlight">\(\rightarrow\)</span> CaSO<span class="math notranslate nohighlight">\(_\mathrm{3(s)}\)</span> + H<span class="math notranslate nohighlight">\(_{2}\)</span>O<span class="math notranslate nohighlight">\(_{\mathrm{(l)}}\)</span></p>
+<p>or</p>
+<p>Mg(OH)<span class="math notranslate nohighlight">\(_{2\mathrm{(s)}}\)</span> + SO<span class="math notranslate nohighlight">\(_{2\mathrm{(g)}}\)</span> <span class="math notranslate nohighlight">\(\rightarrow\)</span> MgSO<span class="math notranslate nohighlight">\(_\mathrm{3(s)}\)</span> + H<span class="math notranslate nohighlight">\(_{2}\)</span>O<span class="math notranslate nohighlight">\(_{\mathrm{(l)}}\)</span></p>
+<p>Below is an illustration of a wet FGD unit (adapted from Babcock and Wilcox Company, <em>Steam: Its Generation and Uses</em>, 2005):</p>
+<ol class="arabic simple">
+<li><p><strong>Feed.</strong> Flue gas with SO<span class="math notranslate nohighlight">\(_x\)</span> enters the FGD.</p></li>
+<li><p><strong>Absorption Zone.</strong> As flue gas moves upward through the unit, it comes in contact with a slurry.  SO<span class="math notranslate nohighlight">\(_x\)</span> moves from the vapor phase (flue gas) to the liquid phase (slurry). Chemical engineers call this process absorption.</p></li>
+<li><p><strong>Oxidation Zone.</strong> The SO<span class="math notranslate nohighlight">\(_x\)</span> reacts to form a solid product via the chemical reactions stated above. It is reasonable to assume these reactions go to completition and all of the SO<span class="math notranslate nohighlight">\(_x\)</span> in the oxidation zone reacts.</p></li>
+<li><p><strong>Pump.</strong> The slurry mixture is pumped to the top of the absorber.</p></li>
+<li><p><strong>Sprayer.</strong> The slurry mixture is spray at the top of the absorber to ensure even distribution throughout the column.</p></li>
+<li><p><strong>Effluent.</strong> Cleaned flue gas leaves the absorber.</p></li>
+</ol>
+<p><img alt="WFGD" src="https://ndcbe.github.io/data-and-computing/_images/wet_fgd3.png" /></p>
+<p>The wet FGD is an excellent example for our class because it foreshadows then entire CBE undergraduate curriculum. For the next 5 semesters, you will develop the technical background to fully analyze a WFGD and similar systems:</p>
+<ul class="simple">
+<li><p>Thermodynamics (CBE 20260): Solubility of SO<span class="math notranslate nohighlight">\(_x\)</span> in the water-slurry</p></li>
+<li><p>Transport (CBE 30355, 30356): Rate of mass and energy transfer bewteen the vapor and liquid phases</p></li>
+<li><p>Phase Equilibrium and Separations (CBE 30370): Detailed equipment design including sizing</p></li>
+<li><p>Process Control (CBE 30338): Dynamic operation (i.e., NOT at steady-state)</p></li>
+<li><p>Reaction Engineering (CBE 40445): Oxidation reaction to create byproduct</p></li>
+<li><p>Process Design (CBE 40448): Integration of a system (e.g., WFGD) into a larger process (e.g., power plant)</p></li>
+</ul>
+</section>
+<section id="determine-additional-data-and-analysis-goal">
+<h2><span class="section-number">4.1.4. </span>Determine Additional Data and Analysis Goal<a class="headerlink" href="#determine-additional-data-and-analysis-goal" title="Link to this heading">#</a></h2>
+<p>Let’s use <strong>your background from CBE 20255</strong> (Introduction to Chemical Engineering) to analyze this system.</p>
+<p><strong>Feed Specifications</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Species</p></th>
+<th class="head text-center"><p>Mass Flowrate</p></th>
+<th class="head text-center"><p>Mass Fraction</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(H_20\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(240,000\)</span> lb/h</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(4.3\)</span> %</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><span class="math notranslate nohighlight">\(SO_2\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(34,900\)</span> lb/h</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(0.6\)</span> %</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(HCl\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(458\)</span> lb/h</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(8.0\)</span> x <span class="math notranslate nohighlight">\(10^{-3}\)</span> %</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Air/other</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(5,245,600\)</span> lb/h</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(95.0\)</span> %</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><em>Table 1</em>: Flue gas flow rate and compositions before treatment for a 500 MW coal-fired power plant (Babcock and Wilcox Company, <em>Steam: Its Generation and Uses</em>, 2005).</p>
+<p>For reference, the Notre Dame power plant has a maximum electricity output capacity of 28.6 MW. It also co-generates steam and chilled water, so direct comparison is difficult. It is about 20 times smaller. Notre Dame phased out coal use in the power plant in 2020.</p>
+<p><strong>Equilibrium Information</strong></p>
+<p>For a first approximation, we can assume:</p>
+<ol class="arabic simple">
+<li><p>Virtually no air dissolves in the slurry</p></li>
+<li><p>Virtually no water evaporates from the slurry into the flue gas</p></li>
+</ol>
+<p>This means we only need to worry about the solubility of the SO<span class="math notranslate nohighlight">\(_x\)</span> that dissolves into the slurry. As another assumption, we will model the slurry as water. In CBE 20255, you may have learned about Henry’s Law, a simple correlation for solubility.</p>
+<p><img alt="henrys" src="https://ndcbe.github.io/data-and-computing/_images/henrys_law_2.png" /></p>
+<p><em>Figure 2</em>: Henry’s law for SO<span class="math notranslate nohighlight">\(_2\)</span> solubility in water (C. J. Geankoplis, <em>Transport Processes and Separation Process Principles: Includes Unit Operations</em>, 2003).</p>
+<p><strong>Design/Analysis Goal</strong></p>
+<p>We want to <strong>compute</strong> the required flow rate of water to achieve 98% removal of SO<span class="math notranslate nohighlight">\(_2\)</span> for a large (500 MW) power plant.</p>
+</section>
+<section id="draw-a-picture">
+<h2><span class="section-number">4.1.5. </span>Draw a Picture<a class="headerlink" href="#draw-a-picture" title="Link to this heading">#</a></h2>
+<p>Next, let’s draw a picture of the system.</p>
+<p><img alt="single_FGD" src="https://ndcbe.github.io/data-and-computing/_images/single_stage_model.png" /></p>
+<p>In this simplified picture, the vapor stream (flue gas) enters at the bottom right and the liquid stream (slurry) enters at the top left. We assume only SO<span class="math notranslate nohighlight">\(_2\)</span> moves from the vapor to the liquid. In this picture, <span class="math notranslate nohighlight">\(L\)</span> and <span class="math notranslate nohighlight">\(V\)</span> are total stream flowrates. <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are the mole fraction of <span class="math notranslate nohighlight">\(SO_2\)</span>.</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Copy this picture onto paper. Then identify the quantities we already know from the previous information.</p>
+</div>
+</section>
+<section id="state-assumptions">
+<h2><span class="section-number">4.1.6. </span>State Assumptions<a class="headerlink" href="#state-assumptions" title="Link to this heading">#</a></h2>
+<p>With enough assumptions, we can perform quick “back of the envelope” design calculations for the SO<span class="math notranslate nohighlight">\(_2\)</span> absorber using mostly skills you learned in CBE 20255.</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Make a list of at least three assumptions we need to compute the required liquid flowrate to achieve 98% SO<span class="math notranslate nohighlight">\(_2\)</span> removal.</p>
+</div>
+</section>
+<section id="mathematical-model">
+<h2><span class="section-number">4.1.7. </span>Mathematical Model<a class="headerlink" href="#mathematical-model" title="Link to this heading">#</a></h2>
+<p>With these assumptions, we can propose a mathematical model for the absorber:</p>
+<p>Equation A: <span class="math notranslate nohighlight">\(V_{in} + L_{in} = V_{out} + L_{out}\)</span></p>
+<p>Equation B: <span class="math notranslate nohighlight">\(y_{out} = K x_{out}\)</span></p>
+<p>Equation C: <span class="math notranslate nohighlight">\(V_{in} y_{in} + L_{in} x_{in} = V_{out} y_{out} + L_{out} x_{out}\)</span></p>
+<p>Equation D: <span class="math notranslate nohighlight">\(y_{out} = (1 - 0.98) y_{in}\)</span></p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Identify the name for each equation from the list of choices below. Record your answer in the dictionary <tt>eqn_names</tt>. Use ‘A’, ‘B’, ‘C’, and ‘D’ as the keys and 1, 2, 3, 4, 5, 6, 7, or 8 as the values.</p>
+</div>
+<p>Choices for equation names:</p>
+<ol class="arabic simple">
+<li><p>Overall mass (mole) balance</p></li>
+<li><p>SO<span class="math notranslate nohighlight">\(_2\)</span> component mass (mole) balance</p></li>
+<li><p>Water component mass (mole) balance</p></li>
+<li><p>Air component mass (mole) balance</p></li>
+<li><p>Energy balance</p></li>
+<li><p>Entropy balance</p></li>
+<li><p>Design goal: 98% SO<span class="math notranslate nohighlight">\(_2\)</span> removal</p></li>
+<li><p>SO<span class="math notranslate nohighlight">\(_2\)</span> equilibrium (Henry’s Law)</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eqn_names</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">}</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="degree-of-freedom-analysis">
+<h2><span class="section-number">4.1.8. </span>Degree of Freedom Analysis<a class="headerlink" href="#degree-of-freedom-analysis" title="Link to this heading">#</a></h2>
+<p>The next step after writing a model is to perform degree of freedom analysis.</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Perform degree of freedom analysis. On paper, identify the number of unknowns (variables) and the number of equations. Then determine the number of additional specifications or equations needed to complete the design calculations.</p>
+</div>
+</section>
+<section id="revised-model">
+<h2><span class="section-number">4.1.9. </span>Revised Model<a class="headerlink" href="#revised-model" title="Link to this heading">#</a></h2>
+<p>Let’s make two additional assumptions:</p>
+<ol class="arabic simple">
+<li><p>The slurry entering the top of the absorber contains no water, i.e., <span class="math notranslate nohighlight">\(x_{in} = 0\)</span></p></li>
+<li><p>The flowrate of liquid in the absorber is approximately constant, i.e., <span class="math notranslate nohighlight">\(L_{in} = L_{out}\)</span></p></li>
+</ol>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Provide a physical justification for <span class="math notranslate nohighlight">\(L_{in} = L_{out}\)</span>. Why is this a reasonable assumption? Write a few sentences.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Does <span class="math notranslate nohighlight">\(L_{in} = L_{out}\)</span> imply <span class="math notranslate nohighlight">\(V_{in} = V_{out}\)</span>? Explain in a few sentences.</p>
+</div>
+</section>
+<section id="calculations">
+<h2><span class="section-number">4.1.10. </span>Calculations<a class="headerlink" href="#calculations" title="Link to this heading">#</a></h2>
+<p>We now have a mathematical model with zero degrees of freedom. But before we use Python, let’s first manipulate the model on paper.</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Using the mathematical model and algebra, derive the following formula for the liquid flowrate <span class="math notranslate nohighlight">\(L\)</span>.</p>
+</div>
+<div class="math notranslate nohighlight">
+\[L = V \frac{y_{in} - y_{out}}{y_{out} / K - x_{in}}\]</div>
+<p>We can now use Python as a calculator to compute <span class="math notranslate nohighlight">\(L\)</span>. First, we will copy the given data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Step 1. Define Given Data</span>
+
+<span class="c1"># Feed flowrate of SO2 in [lb / hr]</span>
+<span class="n">m_SO2</span> <span class="o">=</span> <span class="mi">34900</span>
+
+<span class="c1"># Feed flowrate of air in [lb / hr]</span>
+<span class="n">m_air</span> <span class="o">=</span> <span class="mi">5245600</span>
+
+<span class="c1"># Molecular weights [g / mol]</span>
+<span class="n">mw_SO2</span> <span class="o">=</span> <span class="mf">64.066</span>
+<span class="n">mw_air</span> <span class="o">=</span> <span class="mf">28.97</span>
+<span class="n">mw_water</span> <span class="o">=</span> <span class="mf">18.01528</span>
+
+<span class="c1"># Removal efficieny (design goal)</span>
+<span class="n">eff</span> <span class="o">=</span> <span class="mf">0.98</span>
+
+<span class="c1"># Equilibrium coefficient [mol frac SO2 in vapor / mol frac SO2 in liquid ]</span>
+<span class="c1"># Taken from plot with Henry&#39;s law fit</span>
+<span class="n">K</span> <span class="o">=</span> <span class="mf">29.6</span>
+
+<span class="c1"># Composition of SO2 in liquid feed in [mol frac]</span>
+<span class="n">xin</span> <span class="o">=</span> <span class="mf">0.0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>How important is it to include SO<span class="math notranslate nohighlight">\(_2\)</span> when computing <span class="math notranslate nohighlight">\(V\)</span>?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Step 2. Convert to molar basis</span>
+<span class="c1"># Vapor flowrate in [lb-mol / hr]</span>
+<span class="c1"># How much does neglecting SO2 in feed change the final answer?</span>
+<span class="n">V</span> <span class="o">=</span> <span class="n">m_air</span> <span class="o">/</span> <span class="n">mw_air</span> <span class="o">+</span> <span class="n">m_SO2</span> <span class="o">/</span> <span class="n">mw_SO2</span><span class="p">;</span>
+<span class="n">Valt</span> <span class="o">=</span> <span class="n">m_air</span> <span class="o">/</span> <span class="n">mw_air</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Flowrate if SO2 is considered&quot;</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="s2">&quot; lb-mol / hr&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Flowrate if SO2 is neglected&quot;</span><span class="p">,</span><span class="n">Valt</span><span class="p">,</span><span class="s2">&quot; lb-mol/hr&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Relative difference: &quot;</span><span class="p">,(</span><span class="n">V</span><span class="o">-</span><span class="n">Valt</span><span class="p">)</span><span class="o">/</span><span class="n">V</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="s2">&quot;%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Flowrate if SO2 is considered 181614.8232145955  lb-mol / hr
+Flowrate if SO2 is neglected 181070.0724887815  lb-mol/hr
+Relative difference:  0.29994838316161015 %
+</pre></div>
+</div>
+</div>
+</div>
+<p>Not very important! We can live with a 0.3% error.</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Compute the mole fraction of SO<span class="math notranslate nohighlight">\(_2\)</span> in the vapor inlet. Store your answer in <tt>yin</tt></p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SO2 in flue gas feed</span>
+<span class="c1"># Add your solution here</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;yin = &quot;</span><span class="p">,</span><span class="n">yin</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="s2">&quot;mol %&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Compute the mole fraction of SO<span class="math notranslate nohighlight">\(_2\)</span> in the vapor outlet if the unit achieves with 98% SO<span class="math notranslate nohighlight">\(_2\)</span> removal. Store your answer in <tt>yout</tt>.</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Step 3. Compute vapor outlet composition</span>
+<span class="c1"># SO2 in vapor outlet in [mol frac]</span>
+
+<span class="c1"># Add your solution here</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;yout = &quot;</span><span class="p">,</span><span class="n">yout</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="s2">&quot;mol %&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, we can apply the formula we derived. We will calculate from lb-mol/hr to lb/hr, because, who really has intuition in lb-mol/hr?</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Compute the liquid flowrate. Store your answer in <tt>L</tt> with units lb-mol/hr and <tt>L_lb</tt> with units lb/hr.</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Step 4. Apply formulas we derived with direct substitution</span>
+<span class="c1"># Liquid outlet composition in [mol frac]</span>
+<span class="n">xout</span> <span class="o">=</span> <span class="n">yout</span> <span class="o">/</span> <span class="n">K</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;xout = &quot;</span><span class="p">,</span><span class="n">xout</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="s2">&quot;mol %&quot;</span><span class="p">)</span>
+
+<span class="c1"># Liquid flowrate in lb-mol/hr</span>
+<span class="c1"># Add your solution here</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;L = &quot;</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="s2">&quot;lb-mol/hr&quot;</span><span class="p">)</span>
+
+<span class="c1"># Liquid flowrate in lb/hr</span>
+<span class="c1"># Add your solution here</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;L = &quot;</span><span class="p">,</span><span class="n">L_lb</span><span class="o">/</span><span class="mf">1E6</span><span class="p">,</span><span class="s2">&quot;millon lb/hr of water&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>I, for one, do not have a good intuition for the size of 1 millions pounds of water. Let’s convert into Olympic swimming pools!</p>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Step 5. Convert and interpret</span>
+
+<span class="c1"># How much water does an Olympic swimming pool hold (in [lb])?</span>
+<span class="n">swimming_pool</span> <span class="o">=</span> <span class="mf">5.5E6</span><span class="p">;</span>
+
+<span class="c1"># Convert to swimming pools</span>
+<span class="n">L_pool</span> <span class="o">=</span> <span class="n">L_lb</span> <span class="o">/</span> <span class="n">swimming_pool</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;L = &quot;</span><span class="p">,</span><span class="n">L_pool</span><span class="p">,</span><span class="s2">&quot;Olympic swimming pools per hour&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Compare your home activity results with a partner. Create a list of questions to discuss as a class.</p>
+</div>
+</section>
+<section id="final-result-and-discussion">
+<h2><span class="section-number">4.1.11. </span>Final Result and Discussion<a class="headerlink" href="#final-result-and-discussion" title="Link to this heading">#</a></h2>
+<p>This is the final step of our analysis: interpret the results.</p>
+<p>Based on these calculates, we approximate a naive WFGD system would require 870 Olympic swimming pools per hour of fresh water to treat the flue gas in the 500 MW power plant.</p>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>As a class, complete the following: (i) This result is reasonable/unreasonable because… (ii) To refine these calculations, we could…</p>
+</div>
+</section>
+<section id="fgd-revisited-with-linear-algebra">
+<h2><span class="section-number">4.1.12. </span>FGD Revisited with Linear Algebra<a class="headerlink" href="#fgd-revisited-with-linear-algebra" title="Link to this heading">#</a></h2>
+<p>Earlier in this notebook we practiced modeling and problem solving steps from CBE 20255. We performed direct substitution on paper and used Python as a simple calculator. Is there an alternate way to attack this problem? You bet!</p>
+</section>
+<section id="rewrite-model-as-a-linear-system">
+<h2><span class="section-number">4.1.13. </span>Rewrite Model as a Linear System<a class="headerlink" href="#rewrite-model-as-a-linear-system" title="Link to this heading">#</a></h2>
+<p>If we write the model in matrix form, we can use tools from linear algebra to solve the equations simultaneously.</p>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Rewrite the mathematical model as a linear system of equations.</p>
+</div>
+</section>
+<section id="solve-linear-system-with-python">
+<h2><span class="section-number">4.1.14. </span>Solve Linear System with Python<a class="headerlink" href="#solve-linear-system-with-python" title="Link to this heading">#</a></h2>
+<p>Now let’s see how to solve a linear system of equations in Python. Notice, we need to choose a value of <span class="math notranslate nohighlight">\(L\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Assemble linear system</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">L</span><span class="p">,</span> <span class="n">V</span><span class="p">],[</span><span class="n">K</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">L</span><span class="o">*</span><span class="n">xin</span> <span class="o">+</span> <span class="n">V</span><span class="o">*</span><span class="n">yin</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">b = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+
+<span class="c1"># Solve linear system</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">z = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A = 
+ [[ 2.63414140e+08  1.81614823e+05]
+ [ 2.96000000e+01 -1.00000000e+00]]
+
+b = 
+ [544.75072581   0.        ]
+
+z = 
+ [2.02667826e-06 5.99896766e-05]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="perform-sensitivity-analysis-to-determine-l">
+<h2><span class="section-number">4.1.15. </span>Perform Sensitivity Analysis to Determine L<a class="headerlink" href="#perform-sensitivity-analysis-to-determine-l" title="Link to this heading">#</a></h2>
+<p>How can we use our model to calculate <span class="math notranslate nohighlight">\(L\)</span> for the design goal? We can perform sensitivity analysis and plot our results. Consider the following steps:</p>
+<ul class="simple">
+<li><p>Loop over a range of L values. For each value of L:</p></li>
+<li><p>Solve the linear system</p></li>
+<li><p>Record yout</p></li>
+<li><p>Plot L vs yout on a semilog plot.</p></li>
+<li><p>Add the design target for yout to the plot.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Write pseudocode to perform the following steps.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create values of L to try that are log spaced</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1.00000000e+06 2.78255940e+06 7.74263683e+06 2.15443469e+07
+ 5.99484250e+07 1.66810054e+08 4.64158883e+08 1.29154967e+09
+ 3.59381366e+09 1.00000000e+10]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="c1"># define values from 1E6 to 1E10 to try for L</span>
+<span class="n">Ltry</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># allocate array to store results</span>
+<span class="n">yout_store</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Ltry</span><span class="p">))</span>
+
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="c1"># Loop through values in Ltry</span>
+<span class="c1"># Add your solution here</span>
+    
+    <span class="c1"># Solve linear system</span>
+    <span class="c1"># Add your solution here</span>
+    
+    <span class="c1"># Store value</span>
+    <span class="c1"># Add your solution here</span>
+    
+    <span class="c1"># increment counter</span>
+    <span class="c1"># Add your solution here</span>
+
+<span class="c1"># convert L to swimming pool units</span>
+<span class="n">Ltry2</span> <span class="o">=</span> <span class="n">Ltry</span> <span class="o">*</span> <span class="n">mw_water</span> <span class="o">/</span> <span class="n">swimming_pool</span>
+
+<span class="c1"># create plot</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/04"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="linear_algebra.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Applied Linear Algebra</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Gauss-Elimination.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4.2. </span>Gaussian Elimination</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">4.1.1. Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">4.1.2. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environmental-controls-for-a-power-plant">4.1.3. Environmental Controls for a Power Plant</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#determine-additional-data-and-analysis-goal">4.1.4. Determine Additional Data and Analysis Goal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#draw-a-picture">4.1.5. Draw a Picture</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-assumptions">4.1.6. State Assumptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-model">4.1.7. Mathematical Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#degree-of-freedom-analysis">4.1.8. Degree of Freedom Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#revised-model">4.1.9. Revised Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculations">4.1.10. Calculations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-result-and-discussion">4.1.11. Final Result and Discussion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fgd-revisited-with-linear-algebra">4.1.12. FGD Revisited with Linear Algebra</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rewrite-model-as-a-linear-system">4.1.13. Rewrite Model as a Linear System</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solve-linear-system-with-python">4.1.14. Solve Linear System with Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perform-sensitivity-analysis-to-determine-l">4.1.15. Perform Sensitivity Analysis to Determine L</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

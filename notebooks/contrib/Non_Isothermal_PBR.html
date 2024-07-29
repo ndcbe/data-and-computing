@@ -1,0 +1,1915 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Non-Isothermal Packed Bed Reactor &#8212; Data and Computing for Chemical Engineers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/contrib/Non_Isothermal_PBR';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Solving Fick’s Second Law Using Numeric Integration" href="Ficks_Law.html" />
+    <link rel="prev" title="Estimating the Entrance Length of Channel Flow" href="Biotransport-Entrance-Length.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/cbe_logo.jpg" class="logo__image only-light" alt="Data and Computing for Chemical Engineers - Home"/>
+    <script>document.write(`<img src="../../_static/cbe_logo.jpg" class="logo__image only-dark" alt="Data and Computing for Chemical Engineers - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Data and Computing for Engineers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../01/Python-Primer.html">1. Python Primer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../01/Jupyter-Notebooks.html">1.1. Welcome to Jupyter Notebooks and Vocareum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Python-Basics-I-Variables-Strings-Bugs.html">1.2. Python Basics I: Variables, Strings, and Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Flow-control.html">1.3. Python Basics II: Loopy Logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Python-Basics-III-Lists-Dictionaries-Enumeration.html">1.4. Python Basics III: Lists, Dictionaries, and Enumeration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Functions-and-Scope.html">1.5. Functions and Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Recursion.html">1.6. Recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Pseudocode.html">1.7. Pseudocode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Example-High-Low-Game.html">1.8. High/Low Guess My Number Game</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Modules-and-Files.html">1.9. Modules and Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/NumPy.html">1.10. Linear Algebra with Numpy and Scipy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Matplotlib.html">1.11. Visualization with matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Pandas.html">1.12. Manipulating Data with Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Functions-as-Arguments.html">1.13. Functions as Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Testing-and-Debugging.html">1.14. Testing and Debugging in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Publication-Quality-Figures.html">1.15. Preparing Publication Quality Figures in Python</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../02/advanced_python.html">2. Advanced Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Methods</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03/linear_algebra.html">3. Linear Algebra Primer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter1.html">3.1. Chapter 1: Math Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter2.html">3.2. Chapter 2: Intro to Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter3.html">3.3. Chapter 3: Computational linear algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter4.html">3.4. Chapter 4: Geometric Aspects of Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter5.html">3.5. Chapter 5: Linear Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter6.html">3.6. Chapter 6: Theoretical Linear Algebra</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../04/linear_algebra.html">4. Applied Linear Algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../04/Modeling-Systems-of-Linear-Equations.html">4.1. Modeling Systems of Linear Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Gauss-Elimination.html">4.2. Gaussian Elimination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Invertible-Matrix-Theorem-and-Gauss-Example.html">4.3. Invertible Matrix Theorem and Gaussian Elimination Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/LU-Decomposition.html">4.4. LU Decomposition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Condition-Number.html">4.5. Errors in Linear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Example-Atomic-Mass-Balances.html">4.6. Example: Mass Balances and Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Linear-Algebra-in-Numpy.html">4.7. Linear Algebra Review and SciPy Basics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05/algorithms.html">5. Algorithm Building Blocks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../05/Taylor-Series.html">5.1. Taylor Series Approximations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05/Finite-Difference.html">5.2. Finite Difference Derivative Approximations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05/Example-Heating-a-Metal-Slab.html">5.3. Example: Heating a Metal Slab</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../06/nonlinear_systems.html">6. Nonlinear Systems of Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../06/Modeling-Systems-of-Nonlinear-Equations.html">6.1. Modeling Systems of Nonlinear Equations: Flash Calculation Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Raphson-Method-in-One-Dimension.html">6.2. Newton-Raphson Method in One Dimension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/More-Newton-Type-Methods.html">6.3. More Newton-Type Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Convergence-Analysis-for-Newton-Raphson-Methods.html">6.4. Convergence Analysis for Newton-Raphson Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Raphson-Methods-for-Systems-of-Equations.html">6.5. Newton-Raphson Methods for Systems of Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Methods-in-Scipy.html">6.6. Newton Methods in Scipy</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../07/integration.html">7. Numeric Integration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../07/Intro-and-Newton-Cotes.html">7.1. Introduction and Newton-Cotes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Gauss-Quadrature.html">7.2. Gauss Quadrature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Scipy-Library-Adaptive-Methods-for-Newton-Cotes-and-Gauss-Quadrature.html">7.3. Scipy Library: Adaptive Methods for Newton-Cotes and Gauss Quadrature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Application-Inertial-Navigation-Systems.html">7.4. Application: Inertial Navigation Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Forward-and-Backward-Euler.html">7.5. Forward and Backward Euler Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Trapezoid-Rule.html">7.6. Crank-Nicolson (Trapezoid Rule)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Stability-Analysis.html">7.7. Stability Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Explicit-Runge-Kutta.html">7.8. Explicit Range Kutta Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Systems-of-Differential-Equations-and-Scipy.html">7.9. Systems of Differential Equations and Scipy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Example-Reaction-Rates.html">7.10. Example: Reaction Rates</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../08/optimization.html">8. Continuous Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../08/Pyomo-Basics.html">8.1. Pyomo Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../08/Electricity-Market-Optimization.html">8.2. Electricity Market Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../08/Flash-Calculations-in-Pyomo.html">8.3. Flash Calculations in Pyomo</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../09/stats.html">9. Descriptive Statistics and Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../09/Sampling.html">9.1. Sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../09/Summary-Statistics.html">9.2. Summary Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../09/Visualizing-Data.html">9.3. Visualizing Data</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../10/probability.html">10. Probability Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../10/Probability-Basics.html">10.1. Basic Ideas of Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Random-Variables.html">10.2. Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Jointly-Distributed-Random-Variables.html">10.3. Jointly Distributed Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Jointly-Continuous-Random-Variables.html">10.4. Jointly Continuous Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Practice-Problems.html">10.5. Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../11/distributions.html">11. Common Probability Distributions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../11/Bernoulli-Probability-Distribution.html">11.1. Bernoulli Probability Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Binomial-Probability-Distribtuion.html">11.2. Binomial Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Poisson-Probability-Distribution.html">11.3. Poisson Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Normal-Probability-Distribution.html">11.4. Normal Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Common-Probability-Distributions-Summary.html">11.5. Summary</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../12/uncertainty.html">12. Uncertainty and Error Propagation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../12/Measurement-Error.html">12.1. Measurement Error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Error-Propagation.html">12.2. Error Propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Measuring-Flowrate-Example.html">12.3. Measuring Flowrate Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Car-and-Incline-Example.html">12.4. Car and Incline Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Simulation.html">12.5. Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Monte-Carlo-Error-Propogation.html">12.6. Monte Carlo Error Propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Practice-Problems.html">12.7. Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../13/inference.html">13. Statistical Inference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../13/Central-Limit-Theorem.html">13.1. Central Limit Theorem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Standard-Normal-Distribution.html">13.2. Standard Normal Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Confidence-Intervals.html">13.3. Confidence Intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Students-t-Distribution.html">13.4. Student’s t-Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Hypothesis-Testing-Basics.html">13.5. Hypothesis Testing Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Flavors-of-Hypothesis-Testing.html">13.6. Flavors of Hypothesis Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Type-I-and-Type-II-Errors.html">13.7. Type I and Type II Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Statistical-Power-Basics.html">13.8. Statistical Power Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Statistical-Power-in-Python.html">13.9. Statistical Power in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Statistical-Power-Practice-Problems.html">13.10. Statistical Power Practice Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Bootstrap-Confidence-Intervals.html">13.11. Bootstrap Confidence Intervals</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../14/regression.html">14. Multivariate Linear Regression</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../14/Correlation-Covariance-and-Independence.html">14.1. Correlation, Covariance, and Independence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Least-Squares-Line.html">14.2. Simple Least Squares</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Ordinary-Least-Squares-Linear-Regression.html">14.3. Ordinary Least Squares Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Residual-Analysis.html">14.4. Residual Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Regression-Assumption-Examples.html">14.5. Regression Assumption Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Uncertainty-Analysis-and-Statistical-Inference.html">14.6. Uncertainty Analysis and Statistical Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Multivariate-Linear-Regression.html">14.7. Multivariate Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Linear-Regression-Practice-Problems.html">14.8. Linear Regression Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../15/advanced_regression.html">15. Nonlinear Regression</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../15/Transformations-and-Linear-Regression.html">15.1. Transformations and Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Weighted-Regression.html">15.2. Weighted Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Regression.html">15.3. Nonlinear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Regression-Practice-Problem.html">15.4. Nonlinear Regression Practice Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression.html">15.5. Monte Carlo Uncertainty Analysis for Nonlinear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Case-Study-Adsorptive-Membranes.html">15.6. Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../16/design_of_experiments.html">16. Design of Experiments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../16/Reaction-MBDoE.html">16.1. Model-Based Design of Experiments</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extra Information</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2022/home.html">Fall 2022</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/schedule.html">Fall 2022 Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/project1.html">Project 1: Computating for Problem Solving (Fall 2022)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/project2.html">Project 2: Data Analysis (Fall 2022)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2023/home.html">Fall 2023</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/schedule.html">Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/project.html">Semester Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet1_F23.html">Problem Set 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet2_F23.html">Problem Set 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet3_F23.html">Problem Set 3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet4_F23.html">Problem Set 4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet5_F23.html">Problem Set 5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet6_F23.html">Problem Set 6</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="contribute.html">Contributed Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Biotransport-Entrance-Length.html">Estimating the Entrance Length of Channel Flow</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Non-Isothermal Packed Bed Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ficks_Law.html">Solving Fick’s Second Law Using Numeric Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Stochastic-Kinetics.html">Stochastic Simulation of Chemical Reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Spaghettification.html">Spaghettification of the Magic School Bus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Alcohol-Pharmacokinetics.html">Alcohol Pharmacokinetics and  Blood Alcohol Content % Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="McCabe-Thiele.html">Plotting McCabe-Thiele diagram through computational methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Wastewater-Treatment-Mass-Balance.html">Example of Mass Balance Problem in Wastewater Treatment Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Filtration.html">Filtration of a Yeast Suspension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Fraction_of_Molecular_Collisions.html">Calculating Fraction of Molecular Collisions</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/contrib/Non_Isothermal_PBR.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/data-and-computing" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/contrib/Non_Isothermal_PBR.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/contrib/Non_Isothermal_PBR.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Non-Isothermal Packed Bed Reactor</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relevant-resources">Relevant Resources:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-statement">Problem Statement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hints">Hints</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-algorithm">A) Algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-additional-equations-and-parameters">B) Additional Equations and Parameters</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation-of-mole-and-energy-balances">1. Derivation of Mole and Energy Balances</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-sketch-control-volume">1a. Sketch &amp; Control Volume</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-mole-balance">1b. Mole Balance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-energy-balance">1c. Energy Balance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-the-system-of-equations-numerically">2. Solving the system of Equations Numerically</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-of-results">3. Analysis of Results</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-visualization">3a. Visualization</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#i-python-function">i) Python Function</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ii-plotting">ii) Plotting</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-effect-of-heat-capacities">3b. Effect of Heat Capacities</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#i-numerical-solution">i) Numerical Solution</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ii-discussion">ii) Discussion</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-effect-of-pressure-drop">3c. Effect of Pressure Drop</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#i-solve-and-plot">i) Solve and plot</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ii-comment-on-the-effect-of-including-pressure-drop">ii) Comment on the effect of including pressure drop</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimal-way-to-control-reactor-temperature">4. Optimal Way to Control Reactor Temperature</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-effect-of-i">4a. Effect of <span class="math notranslate nohighlight">\(Θ_I\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#i-sensitivity-analysis">i) Sensitivity analysis</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ii-visualize">ii) Visualize</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-effect-of-t-0">4b. Effect of <span class="math notranslate nohighlight">\(T_0\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">i) Sensitivity analysis</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">ii) Visualize</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-optimal-temperature-control">4c. Optimal Temperature Control</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="non-isothermal-packed-bed-reactor">
+<h1>Non-Isothermal Packed Bed Reactor<a class="headerlink" href="#non-isothermal-packed-bed-reactor" title="Link to this heading">#</a></h1>
+<p><strong>Prepared by</strong>: Fathya Salih (<a class="reference external" href="mailto:fsalih&#37;&#52;&#48;nd&#46;edu">fsalih<span>&#64;</span>nd<span>&#46;</span>edu</a>) and Connor Schmidt (<a class="reference external" href="mailto:cschmid9&#37;&#52;&#48;nd&#46;edu">cschmid9<span>&#64;</span>nd<span>&#46;</span>edu</a>)</p>
+<p><strong>Reference</strong>: Problem 11-7, Elements of Chemical Reaction Engineering, Fifth Edition by H. Scott Fogler.</p>
+<p><strong>Intended Audience</strong>: Chemical Engineering undergraduate seniors who have studied reaction engineering, but may not have touched on non-ideal reactors.</p>
+<p>This problem is meant to provide practice for designing real reactors where running them at isothermal conditions is not always feasible and the kinetics are limited by equilibrium. The ultimate question to be answered is “<em>what’s the best way of controlling the reaction temperature if a cooling jacket is not feasible?</em>”</p>
+<section id="learning-objectives">
+<h2>Learning Objectives:<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Practice diagramming and labeling the problem</p></li>
+<li><p>Deriving the mass and energy balance equations to the given forms.</p></li>
+<li><p>To practice solving ODEs using <code class="docutils literal notranslate"><span class="pre">scipy.integrate.solve_ivp()</span></code></p></li>
+<li><p>To practice plotting multiple series using for-loops</p></li>
+<li><p>To study the effects of thermal non-idealities on reactor performance</p></li>
+</ul>
+</section>
+<section id="relevant-resources">
+<h2>Relevant Resources:<a class="headerlink" href="#relevant-resources" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Elements of Chemical Reaction Engineering, Fifth Edition by H. Scott Fogler</p></li>
+<li><p><a class="reference external" href="https://ndcbe.github.io/data-and-computing/intro.html">The class website</a>, especially the notebook on <a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/07/Example-Reaction-Rates.html">reaction rates</a></p></li>
+</ol>
+</section>
+<section id="problem-statement">
+<h2>Problem Statement<a class="headerlink" href="#problem-statement" title="Link to this heading">#</a></h2>
+<p><em>Modified from: Problem 11-7, Elements of Chemical Reaction Engineering, Fifth Edition by H. Scott Fogler</em></p>
+<p>The gas-phase reversible reaction:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-2a4854be-0b16-4af9-b495-597511e6ab47">
+<span class="eqno">(32)<a class="headerlink" href="#equation-2a4854be-0b16-4af9-b495-597511e6ab47" title="Permalink to this equation">#</a></span>\[\begin{equation}
+A \rightarrow B
+\end{equation}\]</div>
+<p>is carried out under high pressure (150 bar at the inlet) in a packed-bed reactor with pressure drop. The feed consists of both inerts <span class="math notranslate nohighlight">\(I\)</span> and species <span class="math notranslate nohighlight">\(A\)</span> at a 2 to 1 ratio. The entering molar flow rate of A is 5 mol/min at a temperature of 300 K and a concentration of 2 mol/L. Work this problem in terms of volume (<span class="math notranslate nohighlight">\(V \rho_B=W\)</span>, and <span class="math notranslate nohighlight">\(r_i [\frac{mol\  'i'\  produced}{time . vol_{reactor}}] = r_i' [\frac{mol\  'i'\  produced}{min . kg_{cat}}]*\rho [\frac{kg_{cat}}{vol_{reactor}}]\)</span>).</p>
+<p>|Additional Information           ||  |
+|———————————–||———————————|
+|<strong>Inlet Conditions</strong>             || <strong>Kinetic Parameters</strong>            |
+|<span class="math notranslate nohighlight">\(F_{A0}=\)</span> 5.0 [mol/min]            ||  <span class="math notranslate nohighlight">\(k_1=\)</span> 0.1 [min<span class="math notranslate nohighlight">\(^{-1}\)</span>] at 300 K |
+|<span class="math notranslate nohighlight">\(C_{A0}=\)</span> 2 [mol/dm<span class="math notranslate nohighlight">\(^3\)</span>]             || <span class="math notranslate nohighlight">\(K_C =\)</span> 1000 [-] at 300 K       |
+|<span class="math notranslate nohighlight">\(C_{I0}= Θ_I C_{A0}\)</span>; <span class="math notranslate nohighlight">\(Θ_I = 2\)</span>   || <span class="math notranslate nohighlight">\(E =\)</span> 10,000 [cal/mol]          |
+|<span class="math notranslate nohighlight">\(T_{0}=\)</span> 300 [K]                   || <strong>Energy Equation Parameters</strong>    |
+|<strong>Reactor Properties</strong>           || <span class="math notranslate nohighlight">\(ΔH_{Rxn}=\)</span> -20,000 [cal/mol of A] |
+|<span class="math notranslate nohighlight">\(V=\)</span> 40 [dm<span class="math notranslate nohighlight">\(^3\)</span>]                     || <span class="math notranslate nohighlight">\(C_{p,I} =\)</span> 18 [cal/mol.K]  |
+|<span class="math notranslate nohighlight">\(α ρ_B=\)</span> 0.02 [dm<span class="math notranslate nohighlight">\(^{-3}\)</span>]              || <span class="math notranslate nohighlight">\(C_{p,A} =\)</span> 160 [cal/mol.K] |
+|<span class="math notranslate nohighlight">\(ρ_B=\)</span> 1.2 [kg/dm<span class="math notranslate nohighlight">\(^3\)</span>]               || <span class="math notranslate nohighlight">\(C_{p,B} =\)</span> 160 [cal/mol.K] |</p>
+<p>Considering adiabatic operation,</p>
+<ol class="arabic simple">
+<li><p>Derive the mole and energy balance equations for a PBR.</p></li>
+<li><p>Solve the system of ODEs (assembled using the provided hints) numerically for the given parameters and plot profiles for <span class="math notranslate nohighlight">\(X\)</span>, <span class="math notranslate nohighlight">\(X_e\)</span>, <span class="math notranslate nohighlight">\(T\)</span>, <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(-r_A\)</span> over reactor volume.</p></li>
+<li><p>Analyze the effect of heat capacities and pressure drop using parametric sweeps.</p></li>
+<li><p>Analyze the effect of inlet temperature (<span class="math notranslate nohighlight">\(T_0\)</span>) and the inlet fraction of inerts (<span class="math notranslate nohighlight">\(\Theta_I\)</span>) using parametric sweeps. Then, find the optimal combination of <span class="math notranslate nohighlight">\(T_0\)</span> and <span class="math notranslate nohighlight">\(\Theta_I\)</span> that controls the reaction temprature to maximize conversion.</p></li>
+</ol>
+</section>
+<section id="hints">
+<h2>Hints<a class="headerlink" href="#hints" title="Link to this heading">#</a></h2>
+<section id="a-algorithm">
+<h3>A) Algorithm<a class="headerlink" href="#a-algorithm" title="Link to this heading">#</a></h3>
+<p><em>Fogler</em> provides algorithms or a sequence of assembling equations needed to design different kinds of reactors. The equations below are the algorithm for designing a non-isobaric non-isothermal reactor.</p>
+<p><strong>1. Mole Balance</strong></p>
+<p>The design equation (mole balance equation) of a gas reaction in a PBR is most conveniently written in terms of molar flow rates and catalyst weight, so that for component ‘<span class="math notranslate nohighlight">\(i\)</span>’,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-92be776f-1ca6-41e8-a24e-4423cb87a59e">
+<span class="eqno">(33)<a class="headerlink" href="#equation-92be776f-1ca6-41e8-a24e-4423cb87a59e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\frac{dF_i}{dW} = r'_i
+\end{equation}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(r'_i\)</span> is the rate of production of component ‘<span class="math notranslate nohighlight">\(i\)</span>’ per unit of catalyst mass.</p>
+<p><strong>2. Rate Law</strong></p>
+<p>Only one reaction occurs in this system, and it can be written in terms of component ‘<span class="math notranslate nohighlight">\(A\)</span>’, since it is the only reactant (and hence the limiting reactant).</p>
+<p>The rate of <em>production</em> of ‘<span class="math notranslate nohighlight">\(A\)</span>’ is:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-e25fd014-af60-488c-83d0-630fe30440a6">
+<span class="eqno">(34)<a class="headerlink" href="#equation-e25fd014-af60-488c-83d0-630fe30440a6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+r'_A = - k_1 \left[ C_A - \frac{C_B}{K_c} \right]
+\end{equation}\]</div>
+<p>Where:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-30cb3f53-05d6-4a15-aec8-9f6b2af49e8f">
+<span class="eqno">(35)<a class="headerlink" href="#equation-30cb3f53-05d6-4a15-aec8-9f6b2af49e8f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+k_1(T) = k_1(T_1) exp \left[ \frac{E}{R} \left( \frac{1}{T_1} - \frac{1}{T} \right) \right]
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-fc1a7765-94d8-48ff-8a3f-3179ac641b24">
+<span class="eqno">(36)<a class="headerlink" href="#equation-fc1a7765-94d8-48ff-8a3f-3179ac641b24" title="Permalink to this equation">#</a></span>\[\begin{equation}
+K_c(T) = K_c(T_2) exp \left[ \frac{ΔH_{rxn}}{R} \left( \frac{1}{T_2} - \frac{1}{T} \right) \right]
+\end{equation}\]</div>
+<p><strong>3. Stoichiometry</strong></p>
+<p>From the reaction stoichiometry, the rate of production of component ‘B’ is:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-f5f9de76-47ed-4e20-b0bd-da2aa093d5d3">
+<span class="eqno">(37)<a class="headerlink" href="#equation-f5f9de76-47ed-4e20-b0bd-da2aa093d5d3" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\frac{r'_B}{v_B} = \frac{r'_A}{v_A}
+\end{equation}\]</div>
+<p>Where the stoichiometric coefficients are <span class="math notranslate nohighlight">\(v_A=-1\)</span> and <span class="math notranslate nohighlight">\(v_B=1\)</span>, leaving</p>
+<div class="amsmath math notranslate nohighlight" id="equation-b9af8ad2-b8c1-4c9d-9fe8-a78bb05d4b40">
+<span class="eqno">(38)<a class="headerlink" href="#equation-b9af8ad2-b8c1-4c9d-9fe8-a78bb05d4b40" title="Permalink to this equation">#</a></span>\[\begin{equation}
+r'_B = - r'_A
+\end{equation}\]</div>
+<p>And for the inert,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-713a47e0-cbcd-45b2-8d5a-774849458b37">
+<span class="eqno">(39)<a class="headerlink" href="#equation-713a47e0-cbcd-45b2-8d5a-774849458b37" title="Permalink to this equation">#</a></span>\[\begin{equation}
+r'_I = 0
+\end{equation}\]</div>
+<p>Also, reaction rates (<span class="math notranslate nohighlight">\(r'_i\)</span>) need to be expressed in terms of molar flowrates to match the mole balance equation.</p>
+<p>Thus, applying the ideal gas law, concentrations can be written as:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-07df6cc0-1c3e-402d-9792-5e464a50204f">
+<span class="eqno">(40)<a class="headerlink" href="#equation-07df6cc0-1c3e-402d-9792-5e464a50204f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+C_A  = C_{T0} \frac{F_A}{F_{T0}} \frac{T_0}{T} \frac{P}{P_0}
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-40ee95ec-7ec4-4af7-b6e2-eebff4aeda46">
+<span class="eqno">(41)<a class="headerlink" href="#equation-40ee95ec-7ec4-4af7-b6e2-eebff4aeda46" title="Permalink to this equation">#</a></span>\[\begin{equation}
+C_B  = C_{T0} \frac{F_B}{F_{T0}} \frac{T_0}{T} \frac{P}{P_0}
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-5d766eff-c3fa-4538-929b-43eaaa7a1705">
+<span class="eqno">(42)<a class="headerlink" href="#equation-5d766eff-c3fa-4538-929b-43eaaa7a1705" title="Permalink to this equation">#</a></span>\[\begin{equation}
+C_I  = C_{T0} \frac{F_I}{F_{T0}} \frac{T_0}{T} \frac{P}{P_0}
+\end{equation}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(C_{T0}\)</span> is the total molar concentration at the inlet, meaning:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-7df808ae-9124-4bb5-b148-3729d6bb2e2f">
+<span class="eqno">(43)<a class="headerlink" href="#equation-7df808ae-9124-4bb5-b148-3729d6bb2e2f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+C_{T0} = \frac{P_0}{R T_0}
+\end{equation}\]</div>
+<p><strong>4. Energy Balance</strong></p>
+<p>For an adiabatic PBR (no heat added or removed),</p>
+<div class="amsmath math notranslate nohighlight" id="equation-95137e75-57f2-4e96-b9ef-edd79e875130">
+<span class="eqno">(44)<a class="headerlink" href="#equation-95137e75-57f2-4e96-b9ef-edd79e875130" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\frac{dT}{dW} = \frac{r'_A ΔH_{rxn}}{\sum\limits_i F_i C_{p,i}}
+\end{equation}\]</div>
+<p>Where:
+<span class="math notranslate nohighlight">\(\Delta H_{rxn} \equiv\)</span> the heat released by the reaction per mole of ‘<span class="math notranslate nohighlight">\(A\)</span>’ reacted/consumed, and is a function of temperature</p>
+<p><strong>5. Pressure Drop Equation</strong></p>
+<p>The pressure drop through a packed bed can be described using the following form of the Ergun equation</p>
+<div class="amsmath math notranslate nohighlight" id="equation-241dcaa6-1774-4604-901b-d17364eada22">
+<span class="eqno">(45)<a class="headerlink" href="#equation-241dcaa6-1774-4604-901b-d17364eada22" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\frac{dp}{dW} = -\frac{α}{2p} \frac{F_T}{F_{T0}} \frac{T}{T_0}
+\end{equation}\]</div>
+<p>Where:</p>
+<p><span class="math notranslate nohighlight">\(p \equiv\)</span> The pressure ratio (<span class="math notranslate nohighlight">\(P/P_0\)</span>) [dimensionless]</p>
+<p><span class="math notranslate nohighlight">\(\alpha \equiv\)</span> pressure ratio drop per unit mass of catalyst mass [<span class="math notranslate nohighlight">\(kg_{cat}^{-1}\)</span>]</p>
+<p><span class="math notranslate nohighlight">\(\alpha\)</span> lumps a number of packed bed parameters and important material properties like void fraction, particle size, gas viscosity ,etc. It is used here to simplify using the Ergun equation.</p>
+</section>
+<section id="b-additional-equations-and-parameters">
+<h3>B) Additional Equations and Parameters<a class="headerlink" href="#b-additional-equations-and-parameters" title="Link to this heading">#</a></h3>
+<p><strong>1. Equilibrium Conversion</strong></p>
+<p>Eqilibrium conversion is calculated at equilibrium, where the net rate of reaction is zero. Setting <span class="math notranslate nohighlight">\(r'_A=0\)</span> in the equation provided above yeilds:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-0314ec37-01c5-4af6-82ab-a422d21ad8cb">
+<span class="eqno">(46)<a class="headerlink" href="#equation-0314ec37-01c5-4af6-82ab-a422d21ad8cb" title="Permalink to this equation">#</a></span>\[\begin{equation}
+X_e = \frac{K_c}{1+K_c}
+\end{equation}\]</div>
+<p><strong>2. Temperature Dependence</strong></p>
+<p>The temperature dependence of the heat of reaction can be written using a known value for <span class="math notranslate nohighlight">\(\Delta H_{rxn}\)</span> at a reference temperature <span class="math notranslate nohighlight">\(T_R\)</span></p>
+<div class="amsmath math notranslate nohighlight" id="equation-95f5161c-f989-4678-b5e3-aa07925bb48d">
+<span class="eqno">(47)<a class="headerlink" href="#equation-95f5161c-f989-4678-b5e3-aa07925bb48d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\Delta H_{rxn}(T) = \Delta H_{rxn}(T_R) + \Delta C_p (T-T_R)
+\end{equation}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(\Delta C_p\)</span> lumps the temperature dependence</p>
+<div class="amsmath math notranslate nohighlight" id="equation-bfec8f63-20ad-4f39-84f5-aae879593cda">
+<span class="eqno">(48)<a class="headerlink" href="#equation-bfec8f63-20ad-4f39-84f5-aae879593cda" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\Delta C_p = \sum\limits_i v_i C_{p,i}
+\end{equation}\]</div>
+</section>
+</section>
+<section id="derivation-of-mole-and-energy-balances">
+<h2>1. Derivation of Mole and Energy Balances<a class="headerlink" href="#derivation-of-mole-and-energy-balances" title="Link to this heading">#</a></h2>
+<section id="a-sketch-control-volume">
+<h3>1a. Sketch &amp; Control Volume<a class="headerlink" href="#a-sketch-control-volume" title="Link to this heading">#</a></h3>
+<p>Draw a sketch of a PBR and on the sketch, select an appropriate control volume and indicate the selected volume on the sketch</p>
+<p><img alt="" src="https://ndcbe.github.io/data-and-computing/_images/PBR_Sketch.png" /></p>
+</section>
+<section id="b-mole-balance">
+<h3>1b. Mole Balance<a class="headerlink" href="#b-mole-balance" title="Link to this heading">#</a></h3>
+<p>Apply a mole balance on component ‘<span class="math notranslate nohighlight">\(i\)</span>’ in the selected control volume and attempt to produce the mole balance equation provided in the hints</p>
+<p><img alt="" src="notebooks/contrib/PBR_Mole_Balance.png" /></p>
+<p>The mole balance for each component on the selected control volume can be written as:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-24eda0c8-4568-45b1-90d4-014b4d80ca98">
+<span class="eqno">(49)<a class="headerlink" href="#equation-24eda0c8-4568-45b1-90d4-014b4d80ca98" title="Permalink to this equation">#</a></span>\[\begin{equation}
+F_{i_{in}} - F_{i_{out}} + F_{i_{gen}} = F_{i_{accumulation}}
+\end{equation}\]</div>
+<p>But,</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(F_{i_{accumulation}}\)</span> is 0 at steady state</p></li>
+<li><p>Generation is <span class="math notranslate nohighlight">\(r'_i\Delta W\)</span></p></li>
+</ul>
+<p>So we can rewrite as:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-cd636461-9257-4b25-a7a9-b601d4002339">
+<span class="eqno">(50)<a class="headerlink" href="#equation-cd636461-9257-4b25-a7a9-b601d4002339" title="Permalink to this equation">#</a></span>\[\begin{equation}
+F_{i_{in}} - F_{i_{out}} + r'_i\Delta W = 0
+\end{equation}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(r'_i\)</span> is rate of production of component ‘i’ per unit of catalyst mass, <span class="math notranslate nohighlight">\(F_{i_{in}}\)</span> and <span class="math notranslate nohighlight">\(F_{i_{out}}\)</span> are the molar flow rates in and out of the reactor for component ‘i’.</p>
+<p>Solving for <span class="math notranslate nohighlight">\(r'_i\)</span> we find</p>
+<div class="amsmath math notranslate nohighlight" id="equation-6e221076-40c9-4722-952d-afeb80a5a1a0">
+<span class="eqno">(51)<a class="headerlink" href="#equation-6e221076-40c9-4722-952d-afeb80a5a1a0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+r'_i = \frac{-(F_{i_{in}} - F_{i_{out}})}{\Delta W}
+\end{equation}\]</div>
+<p>With infinitely small <span class="math notranslate nohighlight">\(\Delta W\)</span> we arrive at the mole balance equation provided in the hints:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-ef1e79f6-f087-45a9-95d2-63e59104f264">
+<span class="eqno">(52)<a class="headerlink" href="#equation-ef1e79f6-f087-45a9-95d2-63e59104f264" title="Permalink to this equation">#</a></span>\[\begin{equation}
+r'_i = \frac{dF_i }{ dW }
+\end{equation}\]</div>
+</section>
+<section id="c-energy-balance">
+<h3>1c. Energy Balance<a class="headerlink" href="#c-energy-balance" title="Link to this heading">#</a></h3>
+<p>Apply an energy balance on the selected control volume and attempt to produce the energy balance equation provided in the hints</p>
+<p><img alt="PBR_Energy_Balance.png" src="https://ndcbe.github.io/data-and-computing/_images/PBR_Energy_Balance.png" /></p>
+<p>The energy balance on the selected control volume can be written as:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-f6b82c0e-3277-4c8a-8306-8b92b10062ce">
+<span class="eqno">(53)<a class="headerlink" href="#equation-f6b82c0e-3277-4c8a-8306-8b92b10062ce" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\dot{H}_{in} - \dot{H}_{out} + \dot{Q}_{ext} ΔV = Q_{accumulation}
+\end{equation}\]</div>
+<p>At steady state, <span class="math notranslate nohighlight">\(Q_{accumulation}=0\)</span>, leaving:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a7b3a4d3-5840-4e08-9ee2-1c4978d16d40">
+<span class="eqno">(54)<a class="headerlink" href="#equation-a7b3a4d3-5840-4e08-9ee2-1c4978d16d40" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\dot{H}_{in} - \dot{H}_{out} + \dot{Q}_{ext} ΔV = 0
+\end{equation}\]</div>
+<p>Where
+<span class="math notranslate nohighlight">\(\dot{H}_{in}\)</span> and <span class="math notranslate nohighlight">\(\dot{H}_{out}\)</span> are the enthalpies of the streams entering and leaving the control volume. And <span class="math notranslate nohighlight">\(\dot{Q}_{ext}\)</span> is the heat added from external sources per unit volume. So that:</p>
+<p><span class="math notranslate nohighlight">\(\dot{H}_{in} =  \sum\limits_{comp,i} F_i \bar{H}_i \bigg|_{W}
+\)</span></p>
+<p><span class="math notranslate nohighlight">\(\dot{H}_{out} =  \sum\limits_{comp,i} F_i \bar{H}_i \bigg|_{W+ΔW}
+\)</span></p>
+<p><span class="math notranslate nohighlight">\(\dot{Q}_{ext} ΔV = \frac{\dot{Q}_{ext}}{ρ_B} ΔW
+\)</span></p>
+<p>Combining,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-413bf5e7-ba3c-49ad-bf2f-99ed3a55cf54">
+<span class="eqno">(55)<a class="headerlink" href="#equation-413bf5e7-ba3c-49ad-bf2f-99ed3a55cf54" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\sum\limits_{comp,i} F_i \bar{H}_i \Big|_{W} 
+- \sum\limits_{comp,i} F_i \bar{H}_i \Big|_{W+ΔW} 
++ \frac{\dot{Q}_{ext}}{ρ_B} ΔW = 0
+\end{equation}\]</div>
+<p>Dividing through by <span class="math notranslate nohighlight">\(ΔW\)</span>,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-fb1bb695-af17-4c72-96a1-11c86c1c18b1">
+<span class="eqno">(56)<a class="headerlink" href="#equation-fb1bb695-af17-4c72-96a1-11c86c1c18b1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\sum\limits_{comp,i} \frac{F_i \bar{H}_i \Big|_{W}- F_i \bar{H}_i \Big|_{W+ΔW}}{ΔW}
++ \frac{\dot{Q}_{ext}}{ρ_B}= 0
+\end{equation}\]</div>
+<p>Taking the limit as <span class="math notranslate nohighlight">\(ΔW ⟶ ∞\)</span>,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-2dfeaba3-cb56-4132-89b9-509e8bfae318">
+<span class="eqno">(57)<a class="headerlink" href="#equation-2dfeaba3-cb56-4132-89b9-509e8bfae318" title="Permalink to this equation">#</a></span>\[\begin{equation}
+ \frac{d}{dW} \left[ \sum\limits_{comp,i} F_i \bar{H}_i \right]
++ \frac{\dot{Q}_{ext}}{ρ_B}= 0
+\end{equation}\]</div>
+<p>Taking the derivative of the sum and applying the product rule to each term,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-2f879900-c097-4457-8451-b5061f865430">
+<span class="eqno">(58)<a class="headerlink" href="#equation-2f879900-c097-4457-8451-b5061f865430" title="Permalink to this equation">#</a></span>\[\begin{equation}
+ \sum\limits_{comp,i} \left[ \frac{dF_i}{dW} \bar{H}_i + \frac{d\bar{H}_i}{dW} F_i \right]
++ \frac{\dot{Q}_{ext}}{ρ_B}= 0
+\end{equation}\]</div>
+<p>By definiton, <span class="math notranslate nohighlight">\(dF_i/dW = r'_i\)</span>. And taking component <span class="math notranslate nohighlight">\(A\)</span> as a reference component in the reaction <span class="math notranslate nohighlight">\(A + \frac{b}{a} B ⟶ \frac{c}{a} C + \frac{d}{a} D\)</span>, the rate equations for other components can be written using their stoichiometric coefficients ‘<span class="math notranslate nohighlight">\(v_i\)</span>’ (e.g. <span class="math notranslate nohighlight">\(v_B=b/a\)</span>). Thus:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-4844633a-238f-42ea-a998-7da70ec9c529">
+<span class="eqno">(59)<a class="headerlink" href="#equation-4844633a-238f-42ea-a998-7da70ec9c529" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\frac{dF_i}{dW} = v_i (-r'_A)
+\end{equation}\]</div>
+<p>Using the chain rule on the derivative <span class="math notranslate nohighlight">\(\frac{d\bar{H}_i}{dW}\)</span>,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c1ee0cb9-285f-40a7-a353-bdfe4dbd402a">
+<span class="eqno">(60)<a class="headerlink" href="#equation-c1ee0cb9-285f-40a7-a353-bdfe4dbd402a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\frac{d\bar{H}_i}{dW} = \frac{dT}{dW} \frac{d\bar{H}_i}{dT} = \frac{dT}{dW} \bar{C}_{p,i}
+\end{equation}\]</div>
+<p>Combining,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-7c2dd6e5-c230-4df6-9799-2171db921b06">
+<span class="eqno">(61)<a class="headerlink" href="#equation-7c2dd6e5-c230-4df6-9799-2171db921b06" title="Permalink to this equation">#</a></span>\[\begin{equation}
+ \sum\limits_{comp,i} \bar{H}_i v_i (-r'_A)
++ \sum\limits_{comp,i} \frac{dT}{dW} F_i \bar{C}_{p,i}
++ \frac{\dot{Q}_{ext}}{ρ_B}= 0
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-ff405414-8e35-4e4a-8277-88aaf3d8a458">
+<span class="eqno">(62)<a class="headerlink" href="#equation-ff405414-8e35-4e4a-8277-88aaf3d8a458" title="Permalink to this equation">#</a></span>\[\begin{equation}
+ -r'_A \sum\limits_{comp,i} \bar{H}_i v_i 
++ \frac{dT}{dW} \sum\limits_{comp,i} F_i \bar{C}_{p,i}
++ \frac{\dot{Q}_{ext}}{ρ_B}= 0
+\end{equation}\]</div>
+<p>Substituting for the definition of heat of reaction (<span class="math notranslate nohighlight">\(ΔH_{rxn}=\sum\limits_{comp,i} \bar{H}_i v_i\)</span>) and rearranging,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-157eee92-b59e-410f-83b5-62abc3dc7c52">
+<span class="eqno">(63)<a class="headerlink" href="#equation-157eee92-b59e-410f-83b5-62abc3dc7c52" title="Permalink to this equation">#</a></span>\[\begin{equation}
+ \frac{dT}{dW} = \frac{r'_A ΔH_{rxn} + \dot{Q}_{ext}/ρ_B}{\sum\limits_{comp,i} F_i \bar{C}_{p,i}}
+\end{equation}\]</div>
+<p>This can be interpreted as:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-9d97675e-6590-4f35-b162-4731e3453338">
+<span class="eqno">(64)<a class="headerlink" href="#equation-9d97675e-6590-4f35-b162-4731e3453338" title="Permalink to this equation">#</a></span>\[\begin{equation}
+ \frac{dT}{dW} = \frac{\dot{Q}_{gen} + \dot{Q}_{added}}{C_{p,overall}}
+\end{equation}\]</div>
+</section>
+</section>
+<section id="solving-the-system-of-equations-numerically">
+<h2>2. Solving the system of Equations Numerically<a class="headerlink" href="#solving-the-system-of-equations-numerically" title="Link to this heading">#</a></h2>
+<p>Solve using <code class="docutils literal notranslate"><span class="pre">scipy.integrate.solve_ivp()</span></code></p>
+<p>For information on using scipy:
+<a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/07/Systems-of-Differential-Equations-and-Scipy.html">https://ndcbe.github.io/data-and-computing/notebooks/07/Systems-of-Differential-Equations-and-Scipy.html</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Importing libraries</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">integrate</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the code below we declare all the known parameters and then create a function setting up the ODEs, before solving them with <code class="docutils literal notranslate"><span class="pre">scipy.integrate.solve_ivp()</span></code> Most of the code is prepared, but the equations derived in part 1 must be added as the student solution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pbr_odes</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Function that returns the RHS of the ODEs for the ODE solver</span>
+<span class="sd">    Arguments:</span>
+<span class="sd">        y: Vector of dependent variables</span>
+<span class="sd">        W: Independent variable</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dydW: Vector of derivatives of dependent variables</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Unpacking vector of dependent variables</span>
+    <span class="n">p</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">F_A</span><span class="p">,</span> <span class="n">F_B</span><span class="p">,</span> <span class="n">F_I</span> <span class="o">=</span> <span class="n">y</span>
+
+    <span class="c1"># Initializing and naming vector of derivatives</span>
+    <span class="n">dydW</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+
+    <span class="c1"># Energy equation parameters ------------------------------------------------</span>
+    <span class="n">T_R</span> <span class="o">=</span> <span class="mi">300</span>  <span class="c1"># [K] - reference temperature</span>
+    <span class="n">H_rxn</span> <span class="o">=</span> <span class="o">-</span><span class="mi">20000</span>  <span class="c1"># [cal/mol] - heat of reaction at 300 K</span>
+    <span class="n">C_pA</span> <span class="o">=</span> <span class="mi">160</span>  <span class="c1"># [cal/mol.K] - heat capacity at const pressure of component A (assuming Cp are weak functions of temperature)</span>
+    <span class="n">C_pB</span> <span class="o">=</span> <span class="mi">160</span>  <span class="c1"># [cal/mol.K] - heat capacity at const pressure of component B</span>
+    <span class="n">C_pI</span> <span class="o">=</span> <span class="mi">18</span>  <span class="c1"># [cal/mol.K] - heat capacity at const pressure of component I</span>
+
+    <span class="c1"># Stoichiometry &amp; rate law --------------------------------------------------</span>
+    <span class="n">F_T</span> <span class="o">=</span> <span class="n">F_A</span> <span class="o">+</span> <span class="n">F_B</span> <span class="o">+</span> <span class="n">F_I</span>  <span class="c1"># [mol/min] - Total molar flowrate</span>
+    <span class="n">C_T0</span> <span class="o">=</span> <span class="mi">150</span> <span class="o">/</span> <span class="mf">0.082</span> <span class="o">/</span> <span class="n">T0</span>  <span class="c1"># [mol/dm^3] - assuming a &#39;high&#39; inlet pressure of 150 atm</span>
+    <span class="n">C_A</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">C_T0</span> <span class="o">*</span> <span class="n">F_A</span> <span class="o">/</span> <span class="n">F_T0</span> <span class="o">*</span> <span class="n">T0</span> <span class="o">/</span> <span class="n">T</span> <span class="o">*</span> <span class="n">p</span>
+    <span class="p">)</span>  <span class="c1"># [mol/dm^3] - current concentration of component A</span>
+    <span class="n">C_B</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">C_T0</span> <span class="o">*</span> <span class="n">F_B</span> <span class="o">/</span> <span class="n">F_T0</span> <span class="o">*</span> <span class="n">T0</span> <span class="o">/</span> <span class="n">T</span> <span class="o">*</span> <span class="n">p</span>
+    <span class="p">)</span>  <span class="c1"># [mol/dm^3] - current concentration of component B</span>
+    <span class="n">C_I</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">C_T0</span> <span class="o">*</span> <span class="n">F_I</span> <span class="o">/</span> <span class="n">F_T0</span> <span class="o">*</span> <span class="n">T0</span> <span class="o">/</span> <span class="n">T</span> <span class="o">*</span> <span class="n">p</span>
+    <span class="p">)</span>  <span class="c1"># [mol/dm^3] - current concentration of component I</span>
+
+    <span class="c1"># Rate law &amp; kinetic parameters ---------------------------------------------</span>
+    <span class="n">R_E</span> <span class="o">=</span> <span class="mf">1.9872</span>  <span class="c1"># [cal/mol.K] - universal gas constant for energy equation</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="mi">10000</span>  <span class="c1"># [cal/mol] - activation energy at 300 K</span>
+    <span class="n">k1</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">E</span> <span class="o">/</span> <span class="n">R_E</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">300</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">T</span><span class="p">))</span>  <span class="c1"># [min^-1] - reaction rate constant</span>
+    <span class="n">Kc</span> <span class="o">=</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">H_rxn</span> <span class="o">/</span> <span class="n">R_E</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">300</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">T</span><span class="p">))</span>  <span class="c1"># [-] - equilibrium constant</span>
+
+    <span class="n">r_A</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span>
+        <span class="n">k1</span> <span class="o">/</span> <span class="n">rho_b</span> <span class="o">*</span> <span class="p">(</span><span class="n">C_A</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">Kc</span> <span class="o">*</span> <span class="n">C_B</span><span class="p">)</span>
+    <span class="p">)</span>  <span class="c1"># [mol/min.kg_cat] - rate of production of component A</span>
+    <span class="n">r_B</span> <span class="o">=</span> <span class="o">-</span><span class="n">r_A</span>  <span class="c1"># [mol/min.kg_cat] - rate of production of component B</span>
+    <span class="n">r_I</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># [mol/min.kg_cat] - rate of production of component I</span>
+
+    <span class="c1"># Mole Balance Equations ----------------------------------------------------</span>
+    <span class="c1"># Add your solution here</span>
+
+    <span class="c1"># Energy Balance Equation ---------------------------------------------------</span>
+    <span class="c1"># Add your solution here</span>
+
+    <span class="n">dTdW</span> <span class="o">=</span> <span class="n">Q_gen</span> <span class="o">/</span> <span class="n">Fi_Cpi</span>
+
+    <span class="c1"># Pressure Drop Equation ----------------------------------------------------</span>
+    <span class="c1"># Add your solution here</span>
+
+    <span class="c1"># Placing ODEs back into the vector dydW ------------------------------------</span>
+    <span class="n">dydW</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">dpdW</span><span class="p">,</span> <span class="n">dTdW</span><span class="p">,</span> <span class="n">dF_AdW</span><span class="p">,</span> <span class="n">dF_BdW</span><span class="p">,</span> <span class="n">dF_IdW</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">dydW</span> <span class="o">/</span> <span class="n">rho_b</span>  <span class="c1"># changing the basis of differentiation to volume</span>
+
+
+<span class="c1"># Solving the system of ODEs</span>
+<span class="c1"># -------------------------------------------------------------------------------</span>
+<span class="c1"># Inlet conditions</span>
+<span class="n">theta_I</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># [mol_I/mol_A] - ratio of inert concentration to concentration of &#39;A&#39; in the inlet</span>
+<span class="n">theta_B</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># [mol_B/mol_A] - ratio of product concentration to concentration of &#39;A&#39; in the inlet</span>
+<span class="n">C_A0</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># [mol/L] - inlet concentration of A</span>
+<span class="n">C_B0</span> <span class="o">=</span> <span class="n">theta_B</span> <span class="o">*</span> <span class="n">C_A0</span>  <span class="c1"># [mol/L] - inlet concentration of B</span>
+<span class="n">C_I0</span> <span class="o">=</span> <span class="n">theta_I</span> <span class="o">*</span> <span class="n">C_A0</span>  <span class="c1"># [mol/L] - inlet concentration of I (inerts)</span>
+
+<span class="n">F_A0</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># [mol/min] - inlet molar flowrate of A</span>
+<span class="n">F_I0</span> <span class="o">=</span> <span class="n">theta_I</span> <span class="o">*</span> <span class="n">F_A0</span>  <span class="c1"># [mol/min] - inlet molar flowrate of B</span>
+<span class="n">F_B0</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># [mol/min] - inlet molar flowrate of I</span>
+<span class="n">F_T0</span> <span class="o">=</span> <span class="n">F_A0</span> <span class="o">+</span> <span class="n">F_B0</span> <span class="o">+</span> <span class="n">F_I0</span>  <span class="c1"># [mol/min] - total inlet molar flowrate</span>
+
+<span class="n">T0</span> <span class="o">=</span> <span class="mi">300</span>  <span class="c1"># [K] - Inlet temperature</span>
+
+<span class="c1"># Defining initial conditions</span>
+<span class="n">y0</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">T0</span><span class="p">,</span> <span class="n">F_A0</span><span class="p">,</span> <span class="n">F_B0</span><span class="p">,</span> <span class="n">F_I0</span><span class="p">]</span>
+
+<span class="c1"># Reactor properties</span>
+<span class="n">rho_b</span> <span class="o">=</span> <span class="mf">1.2</span>  <span class="c1"># [kg_cat/L] - bulk density</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.02</span> <span class="o">/</span> <span class="n">rho_b</span>  <span class="c1"># [kg_cat^-1] - pressure ratio drop per unit catalyst mass</span>
+<span class="n">V</span> <span class="o">=</span> <span class="mi">40</span>  <span class="c1"># [L] - total reactor volume</span>
+
+<span class="c1"># Integrating using an explicit RK method</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="o">.</span><span class="n">solve_ivp</span><span class="p">(</span><span class="n">pbr_odes</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">V</span><span class="p">],</span> <span class="n">y0</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;RK45&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="analysis-of-results">
+<h2>3. Analysis of Results<a class="headerlink" href="#analysis-of-results" title="Link to this heading">#</a></h2>
+<section id="a-visualization">
+<h3>3a. Visualization<a class="headerlink" href="#a-visualization" title="Link to this heading">#</a></h3>
+<p>For information on making quality plots see: <a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/01/Matplotlib.html">https://ndcbe.github.io/data-and-computing/notebooks/01/Matplotlib.html</a></p>
+<section id="i-python-function">
+<h4>i) Python Function<a class="headerlink" href="#i-python-function" title="Link to this heading">#</a></h4>
+<p>Write a function that calculates <span class="math notranslate nohighlight">\(X\)</span>, <span class="math notranslate nohighlight">\(X_e\)</span> and <span class="math notranslate nohighlight">\(-r_A\)</span> for a given set of parameters of interest (<span class="math notranslate nohighlight">\(T_0\)</span>, <span class="math notranslate nohighlight">\(\Theta_I\)</span>, <span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(C_{p,A}\)</span>, <span class="math notranslate nohighlight">\(C_{p,B}\)</span>, <span class="math notranslate nohighlight">\(C_{p,I}\)</span>)</p>
+<p>Much of the coding is provided, but to be completed sections include:</p>
+<ul class="simple">
+<li><p>Equations from part 1 must be added to pbr_odes_mod as was done in part 2</p></li>
+<li><p>Calculations of conversion, reaction rate, and equilibrium conversion.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">solve_pbr</span><span class="p">(</span><span class="n">param</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A function that solves the PBR model given a set of parameters of interest and returns conversions, reaction rate temperature and pressure</span>
+<span class="sd">    Arguments:</span>
+<span class="sd">        param: Vector of parameters of interest (to be varied)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        V_range: reactor volume values solution is stored at [dm^3] - vector</span>
+<span class="sd">        X_prof: conversion profile of component A [-] - vector</span>
+<span class="sd">        Xe_prof: equilibrium conversion profile [-] - vector</span>
+<span class="sd">        rA_prof: rate of production of component A [mol A/(min.dm^3)] - vector</span>
+<span class="sd">        T: temperature profile [K] - vector</span>
+<span class="sd">        p: pressure ratio profile [-] - vector</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Extracting parameters of interest</span>
+    <span class="n">T0</span><span class="p">,</span> <span class="n">theta_I</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">C_pA</span><span class="p">,</span> <span class="n">C_pB</span><span class="p">,</span> <span class="n">C_pI</span> <span class="o">=</span> <span class="n">param</span>
+
+    <span class="c1"># Defining a new version of `pbr_odes()` that allows for parameters to be taken from the provided param list</span>
+    <span class="k">def</span> <span class="nf">pbr_odes_mod</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Function that returns the RHS of the ODEs for the ODE solver and takes T0, theta_I, alpha, C_pA, C_pB, C_p from the parent function</span>
+<span class="sd">        Arguments:</span>
+<span class="sd">            y: Vector of dependent variables</span>
+<span class="sd">            W: Independent variable</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dydW: Vector of derivatives of dependent variables</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Unpacking vector of dependent variables</span>
+        <span class="n">p</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">F_A</span><span class="p">,</span> <span class="n">F_B</span><span class="p">,</span> <span class="n">F_I</span> <span class="o">=</span> <span class="n">y</span>
+
+        <span class="c1"># Initializing and naming vector of derivatives</span>
+        <span class="n">dydW</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+
+        <span class="c1"># Energy equation parameters ------------------------------------------------</span>
+        <span class="n">T_R</span> <span class="o">=</span> <span class="mi">300</span>  <span class="c1"># [K] - reference temperature</span>
+        <span class="n">H_rxn</span> <span class="o">=</span> <span class="o">-</span><span class="mi">20000</span>  <span class="c1"># [cal/mol] - heat of reaction at 300 K</span>
+        <span class="c1"># C_pA = 160      #[cal/mol.K] - heat capacity at const pressure of component A (assuming Cp are weak functions of temperature)</span>
+        <span class="c1"># C_pB = 160      #[cal/mol.K] - heat capacity at const pressure of component B</span>
+        <span class="c1"># C_pI = 18       #[cal/mol.K] - heat capacity at const pressure of component I</span>
+
+        <span class="c1"># Stoichiometry &amp; rate law --------------------------------------------------</span>
+        <span class="n">F_T</span> <span class="o">=</span> <span class="n">F_A</span> <span class="o">+</span> <span class="n">F_B</span> <span class="o">+</span> <span class="n">F_I</span>  <span class="c1"># [mol/min] - Total molar flowrate</span>
+        <span class="n">C_T0</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="mi">150</span> <span class="o">/</span> <span class="mf">0.082</span> <span class="o">/</span> <span class="n">T0</span>
+        <span class="p">)</span>  <span class="c1"># [mol/dm^3] - assuming a &#39;high&#39; inlet pressure of 150 atm</span>
+        <span class="n">C_A</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">C_T0</span> <span class="o">*</span> <span class="n">F_A</span> <span class="o">/</span> <span class="n">F_T0</span> <span class="o">*</span> <span class="n">T0</span> <span class="o">/</span> <span class="n">T</span> <span class="o">*</span> <span class="n">p</span>
+        <span class="p">)</span>  <span class="c1"># [mol/dm^3] - current concentration of component A</span>
+        <span class="n">C_B</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">C_T0</span> <span class="o">*</span> <span class="n">F_B</span> <span class="o">/</span> <span class="n">F_T0</span> <span class="o">*</span> <span class="n">T0</span> <span class="o">/</span> <span class="n">T</span> <span class="o">*</span> <span class="n">p</span>
+        <span class="p">)</span>  <span class="c1"># [mol/dm^3] - current concentration of component B</span>
+        <span class="n">C_I</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">C_T0</span> <span class="o">*</span> <span class="n">F_I</span> <span class="o">/</span> <span class="n">F_T0</span> <span class="o">*</span> <span class="n">T0</span> <span class="o">/</span> <span class="n">T</span> <span class="o">*</span> <span class="n">p</span>
+        <span class="p">)</span>  <span class="c1"># [mol/dm^3] - current concentration of component I</span>
+
+        <span class="c1"># Rate law &amp; kinetic parameters ---------------------------------------------</span>
+        <span class="n">R_E</span> <span class="o">=</span> <span class="mf">1.9872</span>  <span class="c1"># [cal/mol.K] - universal gas constant for energy equation</span>
+        <span class="n">E</span> <span class="o">=</span> <span class="mi">10000</span>  <span class="c1"># [cal/mol] - activation energy at 300 K</span>
+        <span class="n">k1</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span>
+            <span class="n">E</span> <span class="o">/</span> <span class="n">R_E</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">300</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">T</span><span class="p">)</span>
+        <span class="p">)</span>  <span class="c1"># [min^-1] - reaction rate constant</span>
+        <span class="n">Kc</span> <span class="o">=</span> <span class="mi">1000</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span>
+            <span class="n">H_rxn</span> <span class="o">/</span> <span class="n">R_E</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">300</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">T</span><span class="p">)</span>
+        <span class="p">)</span>  <span class="c1"># [-] - equilibrium constant</span>
+
+        <span class="n">r_A</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span>
+            <span class="n">k1</span> <span class="o">/</span> <span class="n">rho_b</span> <span class="o">*</span> <span class="p">(</span><span class="n">C_A</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">Kc</span> <span class="o">*</span> <span class="n">C_B</span><span class="p">)</span>
+        <span class="p">)</span>  <span class="c1"># [mol/min.kg_cat] - rate of production of component A</span>
+        <span class="n">r_B</span> <span class="o">=</span> <span class="o">-</span><span class="n">r_A</span>  <span class="c1"># [mol/min.kg_cat] - rate of production of component B</span>
+        <span class="n">r_I</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># [mol/min.kg_cat] - rate of production of component I</span>
+
+        <span class="c1"># Mole Balance Equations ----------------------------------------------------</span>
+        <span class="c1"># Add your solution here</span>
+
+        <span class="c1"># Energy Balance Equation ---------------------------------------------------</span>
+        <span class="c1"># Add your solution here</span>
+
+        <span class="n">dTdW</span> <span class="o">=</span> <span class="n">Q_gen</span> <span class="o">/</span> <span class="n">Fi_Cpi</span>
+
+        <span class="c1"># Pressure Drop Equation ----------------------------------------------------</span>
+        <span class="c1"># Add your solution here</span>
+
+        <span class="c1"># Placing ODEs back into the vector dydW ------------------------------------</span>
+        <span class="n">dydW</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">dpdW</span><span class="p">,</span> <span class="n">dTdW</span><span class="p">,</span> <span class="n">dF_AdW</span><span class="p">,</span> <span class="n">dF_BdW</span><span class="p">,</span> <span class="n">dF_IdW</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">dydW</span> <span class="o">/</span> <span class="n">rho_b</span>  <span class="c1"># changing the basis of differentiation to volume</span>
+
+    <span class="c1"># Solving the system of ODEs</span>
+    <span class="c1"># -------------------------------------------------------------------------------</span>
+    <span class="c1"># Inlet conditions</span>
+    <span class="c1"># theta_I = 2         #[mol_I/mol_A] - ratio of inert concentration to concentration of &#39;A&#39; in the inlet</span>
+    <span class="n">theta_B</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># [mol_B/mol_A] - ratio of product concentration to concentration of &#39;A&#39; in the inlet</span>
+    <span class="n">C_A0</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># [mol/L] - inlet concentration of A</span>
+    <span class="n">C_B0</span> <span class="o">=</span> <span class="n">theta_B</span> <span class="o">*</span> <span class="n">C_A0</span>  <span class="c1"># [mol/L] - inlet concentration of B</span>
+    <span class="n">C_I0</span> <span class="o">=</span> <span class="n">theta_I</span> <span class="o">*</span> <span class="n">C_A0</span>  <span class="c1"># [mol/L] - inlet concentration of I (inerts)</span>
+
+    <span class="n">F_A0</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># [mol/min] - inlet molar flowrate of A</span>
+    <span class="n">F_I0</span> <span class="o">=</span> <span class="n">theta_I</span> <span class="o">*</span> <span class="n">F_A0</span>  <span class="c1"># [mol/min] - inlet molar flowrate of B</span>
+    <span class="n">F_B0</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># [mol/min] - inlet molar flowrate of I</span>
+    <span class="n">F_T0</span> <span class="o">=</span> <span class="n">F_A0</span> <span class="o">+</span> <span class="n">F_B0</span> <span class="o">+</span> <span class="n">F_I0</span>  <span class="c1"># [mol/min] - total inlet molar flowrate</span>
+
+    <span class="c1"># T0 = 300            #[K] - Inlet temperature</span>
+
+    <span class="c1"># Defining initial conditions</span>
+    <span class="n">y0</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">T0</span><span class="p">,</span> <span class="n">F_A0</span><span class="p">,</span> <span class="n">F_B0</span><span class="p">,</span> <span class="n">F_I0</span><span class="p">]</span>
+
+    <span class="c1"># Reactor properties</span>
+    <span class="n">rho_b</span> <span class="o">=</span> <span class="mf">1.2</span>  <span class="c1"># [kg_cat/L] - bulk density</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.02</span> <span class="o">/</span> <span class="n">rho_b</span>  <span class="c1"># [kg_cat^-1] - pressure ratio drop per unit catalyst mass</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="mi">40</span>  <span class="c1"># [L] - total reactor volume</span>
+
+    <span class="c1"># Integrating using an explicit RK method</span>
+    <span class="n">sol</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">integrate</span><span class="o">.</span><span class="n">solve_ivp</span><span class="p">(</span>
+        <span class="n">pbr_odes_mod</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">V</span><span class="p">],</span> <span class="n">y0</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;RK45&quot;</span><span class="p">,</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Calculating relevant quantities</span>
+    <span class="c1"># -------------------------------------------------------------------------------</span>
+    <span class="c1"># Extracting solutions</span>
+    <span class="n">V_range</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">t</span>  <span class="c1"># [L]</span>
+    <span class="n">p</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">F_A</span><span class="p">,</span> <span class="n">F_B</span><span class="p">,</span> <span class="n">F_I</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span>
+
+    <span class="n">label</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;p&quot;</span><span class="p">,</span> <span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="s2">&quot;F_A&quot;</span><span class="p">,</span> <span class="s2">&quot;F_B&quot;</span><span class="p">,</span> <span class="s2">&quot;F_I&quot;</span><span class="p">]</span>
+
+    <span class="c1"># Add your solution here</span>
+
+    <span class="k">return</span> <span class="n">V_range</span><span class="p">,</span> <span class="n">X_prof</span><span class="p">,</span> <span class="n">Xe_prof</span><span class="p">,</span> <span class="n">rA_prof</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">p</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ii-plotting">
+<h4>ii) Plotting<a class="headerlink" href="#ii-plotting" title="Link to this heading">#</a></h4>
+<p>Create a 2x2 subplot figure for conversion (<span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(X_e\)</span>), <span class="math notranslate nohighlight">\(T\)</span>, <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(-r_A\)</span> profiles, (all plotted vs reactor volume) in distinct suplots. Use the written function for the solution from 2b</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Defining parameters ------------------------------------------</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="mi">300</span><span class="p">,</span>  <span class="c1"># [K] - T0</span>
+    <span class="mi">2</span><span class="p">,</span>  <span class="c1"># [mol_I/mol_A] - theta_I</span>
+    <span class="mf">0.02</span><span class="p">,</span>  <span class="c1"># alpha,</span>
+    <span class="mi">160</span><span class="p">,</span>  <span class="c1"># [cal/mol.K] - C_pA,</span>
+    <span class="mi">160</span><span class="p">,</span>  <span class="c1"># [cal/mol.K] - C_pB,</span>
+    <span class="mi">18</span><span class="p">,</span>  <span class="c1"># [cal/mol.K] - C_pI,</span>
+<span class="p">]</span>
+
+<span class="c1"># Solving PBR model --------------------------------------------</span>
+<span class="n">V_range</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Xe</span><span class="p">,</span> <span class="n">rA</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">solve_pbr</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+
+<span class="c1"># Plotting -----------------------------------------------------</span>
+<span class="c1"># Setting plot parameters</span>
+<span class="n">lin_wdth</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">mrk_siz</span> <span class="o">=</span> <span class="mi">8</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/aae1530cf1a2f044b0cc211372eb7e39a032d6f76bf43f374e60d831a8b8a211.png" src="../../_images/aae1530cf1a2f044b0cc211372eb7e39a032d6f76bf43f374e60d831a8b8a211.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="b-effect-of-heat-capacities">
+<h3>3b. Effect of Heat Capacities<a class="headerlink" href="#b-effect-of-heat-capacities" title="Link to this heading">#</a></h3>
+<section id="i-numerical-solution">
+<h4>i) Numerical Solution<a class="headerlink" href="#i-numerical-solution" title="Link to this heading">#</a></h4>
+<p>Solve for the case where <span class="math notranslate nohighlight">\(C_{P,B}\)</span> is varied and plot conversion and temperature profiles for those cases</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Setting up variables</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;$C_{p,B} &gt; C_{p,A}$&quot;</span><span class="p">,</span> <span class="s2">&quot;$C_{p,B} = C_{p,A}$&quot;</span><span class="p">,</span> <span class="s2">&quot;$C_{p,B} &lt; C_{p,A}$&quot;</span><span class="p">]</span>
+
+<span class="n">C_pB_levels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">240</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">80</span><span class="p">]</span>
+
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="s2">&quot;red&quot;</span><span class="p">]</span>
+
+<span class="c1"># Creating figure for subplot</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># Plotting for different C_p,B</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)):</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="mi">300</span><span class="p">,</span>  <span class="c1"># [K] - T0</span>
+        <span class="mi">2</span><span class="p">,</span>  <span class="c1"># [mol_I/mol_A] - theta_I</span>
+        <span class="mf">0.02</span><span class="p">,</span>  <span class="c1"># alpha,</span>
+        <span class="mi">160</span><span class="p">,</span>  <span class="c1"># [cal/mol.K] - C_pA,</span>
+        <span class="n">C_pB_levels</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>  <span class="c1"># [cal/mol.K] - C_pB,</span>
+        <span class="mi">18</span><span class="p">,</span>  <span class="c1"># [cal/mol.K] - C_pI,</span>
+    <span class="p">]</span>
+
+    <span class="n">V_range</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Xe</span><span class="p">,</span> <span class="n">rA</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">solve_pbr</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+
+    <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">V_range</span><span class="p">,</span> <span class="o">-</span><span class="n">X</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$X$ for &quot;</span> <span class="o">+</span> <span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">lin_wdth</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">V_range</span><span class="p">,</span>
+        <span class="n">Xe</span><span class="p">,</span>
+        <span class="s2">&quot;--&quot;</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$X_e$ for &quot;</span> <span class="o">+</span> <span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+        <span class="n">linewidth</span><span class="o">=</span><span class="n">lin_wdth</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+    <span class="p">)</span>
+
+    <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">V_range</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">lin_wdth</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+<span class="c1"># Additional plot elements</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span>
+    <span class="s2">&quot;Conversion Profile</span><span class="se">\n</span><span class="s2"> for Different $C_{p,B}$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span>
+<span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Reactor Volume [$dm^3$]&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Conversion, $X$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s2">&quot;major&quot;</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span>
+    <span class="s2">&quot;Temperature Profile</span><span class="se">\n</span><span class="s2"> for Different $C_{p,B}$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span>
+<span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Reactor Volume [$dm^3$]&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Temeprature, $T$ [K]&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s2">&quot;major&quot;</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># set the spacing between subplots</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">left</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/551f8e795660778ca9d5530daf55ba7ff2703be4c9f75d282176abb8c1ebb349.png" src="../../_images/551f8e795660778ca9d5530daf55ba7ff2703be4c9f75d282176abb8c1ebb349.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generalizing the plot recipe above in a function</span>
+
+
+<span class="k">def</span> <span class="nf">plot_profiles</span><span class="p">(</span><span class="n">x_name</span><span class="p">,</span> <span class="n">x_ind</span><span class="p">,</span> <span class="n">x_levels</span><span class="p">,</span> <span class="n">y_plot</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">LOUD</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates a subplot of conversion profile and the profile of a property y_plot for different values of &#39;x&#39;</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        x_name: name of the varaible of interest (String)</span>
+<span class="sd">        x_ind: index of variable &#39;x&#39; in the parameter list &#39;param&#39; (integer)</span>
+<span class="sd">        x_levels: values of &#39;x&#39; to loop over (vector)</span>
+<span class="sd">        y_plot: name of desired profile in plot</span>
+<span class="sd">        labels: labels for plots</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        none</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_levels</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span>
+        <span class="n">labels</span>
+    <span class="p">),</span> <span class="s2">&quot;list of labels and levels must be of the same length&quot;</span>
+    <span class="k">assert</span> <span class="p">(</span>
+        <span class="n">y_plot</span> <span class="o">==</span> <span class="s2">&quot;Rate&quot;</span> <span class="ow">or</span> <span class="n">y_plot</span> <span class="o">==</span> <span class="s2">&quot;Temperature&quot;</span> <span class="ow">or</span> <span class="n">y_plot</span> <span class="o">==</span> <span class="s2">&quot;Pressure&quot;</span>
+    <span class="p">),</span> <span class="s1">&#39;y_plot variable can only take the values &quot;Rate&quot; or &quot;Temperature&quot; or &quot;Pressure&quot;&#39;</span>
+
+    <span class="c1"># Setting up variables</span>
+    <span class="c1"># labels =  [</span>
+    <span class="c1">#     &quot;$C_{p,B} &gt; C_{p,A}$&quot;,</span>
+    <span class="c1">#     &quot;$C_{p,B} = C_{p,A}$&quot;,</span>
+    <span class="c1">#     &quot;$C_{p,B} &lt; C_{p,A}$&quot;</span>
+    <span class="c1"># ]</span>
+
+    <span class="c1"># C_pB_levels = [240, 160, 80]</span>
+
+    <span class="c1"># colors = [&quot;blue&quot;, &quot;black&quot;, &quot;red&quot;]</span>
+
+    <span class="c1"># Creating figure for subplot</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+    <span class="c1"># Checking desired y_plot variable</span>
+    <span class="k">if</span> <span class="n">y_plot</span> <span class="o">==</span> <span class="s2">&quot;Rate&quot;</span><span class="p">:</span>
+        <span class="n">y_index</span> <span class="o">=</span> <span class="mi">3</span>
+        <span class="n">ylabel</span> <span class="o">=</span> <span class="s2">&quot;$-r_A$ [$mol / kg_</span><span class="si">{cat}</span><span class="s2"> . min$]&quot;</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Rate of Consumption of A Profiles</span><span class="se">\n</span><span class="s2">for Different </span><span class="si">{</span><span class="n">x_name</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="k">elif</span> <span class="n">y_plot</span> <span class="o">==</span> <span class="s2">&quot;Temperature&quot;</span><span class="p">:</span>
+        <span class="n">y_index</span> <span class="o">=</span> <span class="mi">4</span>
+        <span class="n">ylabel</span> <span class="o">=</span> <span class="s2">&quot;Temperature, $T$ [K]&quot;</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Temperature Profiles</span><span class="se">\n</span><span class="s2">for Different </span><span class="si">{</span><span class="n">x_name</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="k">elif</span> <span class="n">y_plot</span> <span class="o">==</span> <span class="s2">&quot;Pressure&quot;</span><span class="p">:</span>
+        <span class="n">y_index</span> <span class="o">=</span> <span class="mi">5</span>
+        <span class="n">ylabel</span> <span class="o">=</span> <span class="s2">&quot;Pressure Ratio, $p$&quot;</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Pressure Ratio Profiles</span><span class="se">\n</span><span class="s2">for Different </span><span class="si">{</span><span class="n">x_name</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="c1"># Initializing list of parameters</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="mi">300</span><span class="p">,</span>  <span class="c1"># [K] - T0</span>
+        <span class="mi">2</span><span class="p">,</span>  <span class="c1"># [mol_I/mol_A] - theta_I</span>
+        <span class="mf">0.02</span><span class="p">,</span>  <span class="c1"># alpha,</span>
+        <span class="mi">160</span><span class="p">,</span>  <span class="c1"># [cal/mol.K] - C_pA,</span>
+        <span class="mi">160</span><span class="p">,</span>  <span class="c1"># [cal/mol.K] - C_pB,</span>
+        <span class="mi">18</span><span class="p">,</span>  <span class="c1"># [cal/mol.K] - C_pI,</span>
+    <span class="p">]</span>
+
+    <span class="c1"># Plotting for different C_p,B</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)):</span>
+        <span class="n">params</span><span class="p">[</span><span class="n">x_ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_levels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>  <span class="c1"># updating variable of interest in parameter list</span>
+
+        <span class="n">results</span> <span class="o">=</span> <span class="n">solve_pbr</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+
+        <span class="n">V_range</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Xe</span><span class="p">,</span> <span class="n">rA</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">results</span>
+
+        <span class="k">if</span> <span class="n">LOUD</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;The exit conversion at </span><span class="si">{</span><span class="n">x_name</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">x_levels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2"> is </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="o">-</span><span class="n">X</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">%</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+        <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="n">V_range</span><span class="p">,</span>
+            <span class="o">-</span><span class="n">X</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$X$ for &quot;</span> <span class="o">+</span> <span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+            <span class="n">linewidth</span><span class="o">=</span><span class="n">lin_wdth</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+        <span class="p">)</span>
+
+        <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="n">V_range</span><span class="p">,</span>
+            <span class="n">Xe</span><span class="p">,</span>
+            <span class="s2">&quot;--&quot;</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$X_e$ for &quot;</span> <span class="o">+</span> <span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+            <span class="n">linewidth</span><span class="o">=</span><span class="n">lin_wdth</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+        <span class="p">)</span>
+
+        <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="n">V_range</span><span class="p">,</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="n">y_index</span><span class="p">]),</span>
+            <span class="n">label</span><span class="o">=</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+            <span class="n">linewidth</span><span class="o">=</span><span class="n">lin_wdth</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Additional plot elements</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Conversion Profile for</span><span class="se">\n</span><span class="s2">Different </span><span class="si">{</span><span class="n">x_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span>
+    <span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Reactor Volume [$dm^3$]&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Conversion, $X$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s2">&quot;major&quot;</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+    <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Reactor Volume [$dm^3$]&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s2">&quot;major&quot;</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+    <span class="c1"># set the spacing between subplots</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span>
+        <span class="n">left</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mf">0.4</span>
+    <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># testing the generalized plotting function</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;$C_{p,B} &gt; C_{p,A}$&quot;</span><span class="p">,</span> <span class="s2">&quot;$C_{p,B} = C_{p,A}$&quot;</span><span class="p">,</span> <span class="s2">&quot;$C_{p,B} &lt; C_{p,A}$&quot;</span><span class="p">]</span>
+
+<span class="n">C_pB_levels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">240</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">80</span><span class="p">]</span>
+
+<span class="c1"># param = [T0, theta_I, alpha, C_pA, C_pB, C_pI]</span>
+
+<span class="n">plot_profiles</span><span class="p">(</span><span class="s2">&quot;$C_{p,B}$&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">C_pB_levels</span><span class="p">,</span> <span class="s2">&quot;Temperature&quot;</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The exit conversion at $C_{p,B}$ = 240 is 78.2%
+
+The exit conversion at $C_{p,B}$ = 160 is 66.77%
+
+The exit conversion at $C_{p,B}$ = 80 is 56.12%
+</pre></div>
+</div>
+<img alt="../../_images/829775c3b978f8b0ca1044cf07b62df2e241452a501602f7c355f886e9cf0f0a.png" src="../../_images/829775c3b978f8b0ca1044cf07b62df2e241452a501602f7c355f886e9cf0f0a.png" />
+</div>
+</div>
+</section>
+<section id="ii-discussion">
+<h4>ii) Discussion<a class="headerlink" href="#ii-discussion" title="Link to this heading">#</a></h4>
+<p>Comment on the effect of having <span class="math notranslate nohighlight">\(ΔC_P \neq 0\)</span> (compare plots 3b and 3c)</p>
+<p>A higher product heat capacity is beneficial in all cases for this reaction because this reaction is limited by equilibrium. And the equilibrium conversion is negatively affected by temperature. Having a product with a high heat capacity means the product will act as a heat sink and prevent the reaction mixture temperature from rising easily.</p>
+<p>This, in turn, prevents the equilibrium conversion from dropping deeper into the reactor, allowing exit conversion to reach larger values.</p>
+</section>
+</section>
+<section id="c-effect-of-pressure-drop">
+<h3>3c. Effect of Pressure Drop<a class="headerlink" href="#c-effect-of-pressure-drop" title="Link to this heading">#</a></h3>
+<section id="i-solve-and-plot">
+<h4>i) Solve and plot<a class="headerlink" href="#i-solve-and-plot" title="Link to this heading">#</a></h4>
+<p>Solve and plot for the case where pressure drop is ignored (<span class="math notranslate nohighlight">\(\alpha = 0 \Rightarrow dp/dW=0\)</span>)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Setting up variables</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="sa">r</span><span class="s2">&quot;$\alpha = 0$&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$\alpha = 0.01$&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$\alpha = 0.02$&quot;</span><span class="p">]</span>
+
+<span class="n">alpha_levels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">]</span>
+
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="s2">&quot;red&quot;</span><span class="p">]</span>
+
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The exit conversion at α = 0 is 66.77%
+
+The exit conversion at α = 0.01 is 66.77%
+
+The exit conversion at α = 0.02 is 66.77%
+</pre></div>
+</div>
+<img alt="../../_images/85cd70c7db0e90ac26f06909d99f81467085c4c412fba143fabf0324ce88c56f.png" src="../../_images/85cd70c7db0e90ac26f06909d99f81467085c4c412fba143fabf0324ce88c56f.png" />
+</div>
+</div>
+</section>
+<section id="ii-comment-on-the-effect-of-including-pressure-drop">
+<h4>ii) Comment on the effect of including pressure drop<a class="headerlink" href="#ii-comment-on-the-effect-of-including-pressure-drop" title="Link to this heading">#</a></h4>
+<p>The effect of omitting pressure drop is very small in this case, because the equilibrium position of this reaction is not affected by pressure.</p>
+<p>Le Chatelier’s principle says that increasing pressure should push the equilibrium position to whichever side of the reaction has less mols. However, this reaction has the same number of mols on both sides (<span class="math notranslate nohighlight">\(A + I ⟷ B + I\)</span>).</p>
+</section>
+</section>
+</section>
+<section id="optimal-way-to-control-reactor-temperature">
+<h2>4. Optimal Way to Control Reactor Temperature<a class="headerlink" href="#optimal-way-to-control-reactor-temperature" title="Link to this heading">#</a></h2>
+<section id="a-effect-of-i">
+<h3>4a. Effect of <span class="math notranslate nohighlight">\(Θ_I\)</span><a class="headerlink" href="#a-effect-of-i" title="Link to this heading">#</a></h3>
+<p>Solve for a set of cases where the fraction of inerts in the inlet varies <span class="math notranslate nohighlight">\(Θ_I=[0,10]\)</span> and analyze the effect of the fraction of inerts on the exit conversion.</p>
+<section id="i-sensitivity-analysis">
+<h4>i) Sensitivity analysis<a class="headerlink" href="#i-sensitivity-analysis" title="Link to this heading">#</a></h4>
+<p>Solve for a set of fraction of inerts (set of thetas) using solve_pbr. Hint: Use a for-loop</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># list of theta_I values</span>
+<span class="n">Theta0_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.7/dist-packages/ipykernel_launcher.py:72: RuntimeWarning: divide by zero encountered in double_scalars
+/usr/local/lib/python3.7/dist-packages/ipykernel_launcher.py:69: RuntimeWarning: invalid value encountered in double_scalars
+/usr/local/lib/python3.7/dist-packages/ipykernel_launcher.py:76: RuntimeWarning: invalid value encountered in double_scalars
+/usr/local/lib/python3.7/dist-packages/ipykernel_launcher.py:51: RuntimeWarning: overflow encountered in exp
+/usr/local/lib/python3.7/dist-packages/ipykernel_launcher.py:54: RuntimeWarning: divide by zero encountered in double_scalars
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ii-visualize">
+<h4>ii) Visualize<a class="headerlink" href="#ii-visualize" title="Link to this heading">#</a></h4>
+<p>Plot exit conversion Xout vs Theta Initial and comment on the effect of inert concentration on exit conversion. (4-6 sentences)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plotting the exit conversion vs theta (ratio of inert to reactive species)</span>
+
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/19bd9863ff8ae4beee8a634faffffab9aa08617a22be618ea835a79487b887da.png" src="../../_images/19bd9863ff8ae4beee8a634faffffab9aa08617a22be618ea835a79487b887da.png" />
+</div>
+</div>
+<p>ii) Student Comments:</p>
+<p>In the region of low theta, the increase in inert gas increases the conversion as the inert gas acts as a heat sink by nature of having a heat capacity. See plots below for examination of this in further detail.</p>
+<p>After a certain point, however, we see that further increasing theta causes a drop in conversion. This is a result of there being too high of a ratio of inert to reactive species for the reactive species to interact and the reaction to occur at a high rate. See plots below for examination of this in further detail.</p>
+<p>iii) Now let us examine why we have that trend in exit conversion resulting from different fractions of inert.</p>
+<p>Examine the trend at low theta by:</p>
+<p>Plotting conversion (X and Xe) profiles vs reactor volume at thetas 0, 2, and 4 and the same for temperature (T) vs reactor volume on a second subplot. Use these plots to comment on how the fraction of inert affects the temperature and in turn the exit conversion. (2-3 sentences)</p>
+<p>Examine the trend at high theta by:</p>
+<p>Plotting conversion (X and Xe) profiles vs reactor volume at thetas 6, 8, and 10 and the same for rate of consumption of A vs reactor volume on a second subplot. Use these plots to comment on how high fractions of inert affect the rate of consumption and exit conversion. (2-3 sentences)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">theta0_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.7/dist-packages/ipykernel_launcher.py:72: RuntimeWarning: divide by zero encountered in double_scalars
+/usr/local/lib/python3.7/dist-packages/ipykernel_launcher.py:69: RuntimeWarning: invalid value encountered in double_scalars
+/usr/local/lib/python3.7/dist-packages/ipykernel_launcher.py:76: RuntimeWarning: invalid value encountered in double_scalars
+</pre></div>
+</div>
+<img alt="../../_images/5601557fc195b2b7b1f990c7f09550047f7d53516f5664584f6f7fef7c85efc7.png" src="../../_images/5601557fc195b2b7b1f990c7f09550047f7d53516f5664584f6f7fef7c85efc7.png" />
+</div>
+</div>
+<p>iii) Student Comments on Low Theta Plots:</p>
+<p>Above we see that at low inert concentrations equilibrium occurs at a higher temperature which corresponds to a lower exit conversion. This leads us to believe that the inert molecules are acting as a heat sink which in turn allows the reaction to occur at a lower temperature which leads to a higher conversion.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># list of thetas we are examining</span>
+<span class="n">theta0_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/513f059d7dce48d969b73e751a736de4dff617b285b7d72f1f1e163069a4c320.png" src="../../_images/513f059d7dce48d969b73e751a736de4dff617b285b7d72f1f1e163069a4c320.png" />
+</div>
+</div>
+<p>iii) Student Comments on High Theta Plots:</p>
+<p>Above we see that we do not reach equilibrium at high thetas (X and Xe do not meet and we do not see the full pattern of a peak followed by a drop to an equilibrium rate in the rate of consumption plot). At high theta values the inert in essence drowns out the reactive species, preventing sufficient reaction to achieve equilibrium.</p>
+</section>
+</section>
+<section id="b-effect-of-t-0">
+<h3>4b. Effect of <span class="math notranslate nohighlight">\(T_0\)</span><a class="headerlink" href="#b-effect-of-t-0" title="Link to this heading">#</a></h3>
+<p>Solve for a set of cases where the inlet temperature varies <span class="math notranslate nohighlight">\(T_0=[280,350]\)</span> K</p>
+<section id="id1">
+<h4>i) Sensitivity analysis<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<p>Solve for a set of Inlet Temperatures using solve_pbr. Hint: Use a for-loop just as in 4a</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create list of initial temperatures</span>
+<span class="n">T0_list_full</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">280</span><span class="p">,</span> <span class="mi">350</span><span class="p">))</span>
+
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id2">
+<h4>ii) Visualize<a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
+<p>Plot exit conversion <span class="math notranslate nohighlight">\(X_{out}\)</span> vs <span class="math notranslate nohighlight">\(T_0\)</span> and comment on the effect of inlet temperature. (1 sentence)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot exit convertion vs initial temperature</span>
+
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/f75ae77befd5b5f81576829f610a279f24336aadcdbacf6f18a90117afba6ddf.png" src="../../_images/f75ae77befd5b5f81576829f610a279f24336aadcdbacf6f18a90117afba6ddf.png" />
+</div>
+</div>
+<p>ii) Student Comment:</p>
+<p>Above we see that as the inlet temperature increases, the exit conversion decreases.</p>
+<p>iii) Now let us examine why we have that trend in exit conversion resulting from different initial temperatures.</p>
+<p>Plot conversion (X and Xe) profiles vs reactor volume at initial temperatures: 280K, 300K, 350K and the same for temperature (T) vs reactor volume on a second subplot.</p>
+<p>Use these plots to comment on how initial temperature affects the equilibrium temperature and in turn the exit conversion. (2-3 sentences).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="sa">r</span><span class="s2">&quot;$T_0 = 280 [K]$&quot;</span><span class="p">,</span>
+    <span class="sa">r</span><span class="s2">&quot;$T_0 = 300 [K]$&quot;</span><span class="p">,</span>
+    <span class="sa">r</span><span class="s2">&quot;$T_0 = 350 [K]$&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">T0_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">280</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">350</span><span class="p">]</span>
+
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/70626ed4fd285ad9ab8ecf02339e99401092e7d5ff33cff84acd4109023aa289.png" src="../../_images/70626ed4fd285ad9ab8ecf02339e99401092e7d5ff33cff84acd4109023aa289.png" />
+</div>
+</div>
+<p>Student Comments:</p>
+<p>Above we see that as temperature increases, the temperature that equillibrium occurs at increases and the conversion decreases. This suggests that the reaction rate in inversly dependent on temperature with the reaction rate being faster when at lower temperatures.</p>
+</section>
+</section>
+<section id="c-optimal-temperature-control">
+<h3>4c. Optimal Temperature Control<a class="headerlink" href="#c-optimal-temperature-control" title="Link to this heading">#</a></h3>
+<p>Using the function <code class="docutils literal notranslate"><span class="pre">solve_pbr()</span></code>, find the optimal combination of <span class="math notranslate nohighlight">\(Θ_I\)</span> and <span class="math notranslate nohighlight">\(T_0\)</span> that maximizes <span class="math notranslate nohighlight">\(X_{out}\)</span>. Display in a contour plot. Comment on the optimization results and the trends in the contour plot (5-6 sentences).</p>
+<p>Hint: Use a nested for-loop.</p>
+<p>For information on making quality plots see:
+<a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/01/Matplotlib.html">https://ndcbe.github.io/data-and-computing/notebooks/01/Matplotlib.html</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.7/dist-packages/ipykernel_launcher.py:72: RuntimeWarning: divide by zero encountered in double_scalars
+/usr/local/lib/python3.7/dist-packages/ipykernel_launcher.py:69: RuntimeWarning: invalid value encountered in double_scalars
+/usr/local/lib/python3.7/dist-packages/ipykernel_launcher.py:76: RuntimeWarning: invalid value encountered in double_scalars
+/usr/local/lib/python3.7/dist-packages/ipykernel_launcher.py:51: RuntimeWarning: overflow encountered in exp
+/usr/local/lib/python3.7/dist-packages/ipykernel_launcher.py:54: RuntimeWarning: divide by zero encountered in double_scalars
+/usr/local/lib/python3.7/dist-packages/ipykernel_launcher.py:42: RuntimeWarning: invalid value encountered in double_scalars
+/usr/local/lib/python3.7/dist-packages/ipykernel_launcher.py:44: RuntimeWarning: invalid value encountered in double_scalars
+/usr/local/lib/python3.7/dist-packages/ipykernel_launcher.py:45: RuntimeWarning: invalid value encountered in double_scalars
+/usr/local/lib/python3.7/dist-packages/ipykernel_launcher.py:67: RuntimeWarning: invalid value encountered in double_scalars
+/usr/local/lib/python3.7/dist-packages/ipykernel_launcher.py:52: RuntimeWarning: overflow encountered in exp
+/usr/local/lib/python3.7/dist-packages/ipykernel_launcher.py:54: RuntimeWarning: overflow encountered in double_scalars
+/usr/local/lib/python3.7/dist-packages/ipykernel_launcher.py:69: RuntimeWarning: overflow encountered in double_scalars
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># converting list of exit conversions for different theta_I and temp_I to an array</span>
+<span class="n">X_optim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X_for_theta_and_temp</span><span class="p">)</span>
+
+<span class="c1"># Plotting contours for X vs. T0 and Theta_I</span>
+<span class="n">cs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span>
+    <span class="n">T0_list_full</span><span class="p">,</span>
+    <span class="n">Theta0_list</span><span class="p">,</span>
+    <span class="n">X_optim</span><span class="p">,</span>
+    <span class="c1"># levels=50,</span>
+<span class="p">)</span>
+
+<span class="c1"># plot color bar</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+
+<span class="c1"># plot title in color bar</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Exit Conversion&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+
+<span class="c1"># set font size in color bar</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">clabel</span><span class="p">(</span><span class="n">cs</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%2.2f</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+
+<span class="c1"># define tick size</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># plot title and x,y label</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Inlet Temperature, $T_0$ [K]&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Inlet Ratio of Inerts, $\Theta_I$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span>
+    <span class="s2">&quot;Exit Conversion for </span><span class="se">\n</span><span class="s2">Varying $\Theta_I$ and Inlet Temperature&quot;</span><span class="p">,</span>
+    <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span>
+    <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># ------------------------------------------------------------------</span>
+<span class="c1"># Adding points where X is maximized</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/a75ad947d5b070f030705f92c04311f2bbc43ffdc5704a6d925b6ab3304b6077.png" src="../../_images/a75ad947d5b070f030705f92c04311f2bbc43ffdc5704a6d925b6ab3304b6077.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># printing maximum exit conversion and optimal conditions for it</span>
+<span class="n">Xmax</span> <span class="o">=</span> <span class="n">X_optim</span><span class="p">[</span><span class="n">ind_max</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">Xmax</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;Maximum Exit Conversion: &quot;</span><span class="p">,</span>
+    <span class="nb">round</span><span class="p">(</span><span class="n">Xmax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="s2">&quot;%&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Optimal Initial Temperature: &quot;</span><span class="p">,</span>
+    <span class="n">T0_list_full</span><span class="p">[</span><span class="n">ind_max</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]],</span>
+    <span class="s2">&quot; K &quot;</span><span class="p">,</span>
+    <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Optimal Initial Theta: &quot;</span><span class="p">,</span>
+    <span class="nb">round</span><span class="p">(</span><span class="n">Theta0_list</span><span class="p">[</span><span class="n">ind_max</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]],</span> <span class="mi">2</span><span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Maximum Exit Conversion:  79.58 % 
+Optimal Initial Temperature:  280  K  
+Optimal Initial Theta:  2.3
+</pre></div>
+</div>
+</div>
+</div>
+<p>Student Comments:</p>
+<p>Here we can see that if we want to optimize for the highest exit conversion possible optimal initial conditions for initial theta and temperature conditions lie in the yellow region.</p>
+<p>The maximum exit conversion specifically results from an initial temperature (lowest in our range) and initial theta 2.3.</p>
+<p>The contour plot, however, reveals a more nuanced depiction of optimal initial conditions.
+If we choose to use a low theta initial (0-2) we should use low temperatures (280 K), but if we use a much higher theta initial (8-9) the optimal temperature is much higher (310 K) with a smooth curve inbetween as an optimal range.</p>
+<p>While our earlier analysis had suggested high temperatures lead to lower conversion, we see here that at high theta, low temperatures can also be detrimental to conversion. This is likely because energy from the higher temperatures are needed for the interactions between reactive molecules to occur when they are at such low proportion to the inert molecules. Hence, there is an ideal temperature range at high theta initials, with both higher and lower temperatures limiting conversion.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/contrib"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Biotransport-Entrance-Length.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Estimating the Entrance Length of Channel Flow</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Ficks_Law.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Solving Fick’s Second Law Using Numeric Integration</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relevant-resources">Relevant Resources:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-statement">Problem Statement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hints">Hints</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-algorithm">A) Algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-additional-equations-and-parameters">B) Additional Equations and Parameters</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation-of-mole-and-energy-balances">1. Derivation of Mole and Energy Balances</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-sketch-control-volume">1a. Sketch &amp; Control Volume</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-mole-balance">1b. Mole Balance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-energy-balance">1c. Energy Balance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-the-system-of-equations-numerically">2. Solving the system of Equations Numerically</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-of-results">3. Analysis of Results</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-visualization">3a. Visualization</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#i-python-function">i) Python Function</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ii-plotting">ii) Plotting</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-effect-of-heat-capacities">3b. Effect of Heat Capacities</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#i-numerical-solution">i) Numerical Solution</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ii-discussion">ii) Discussion</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-effect-of-pressure-drop">3c. Effect of Pressure Drop</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#i-solve-and-plot">i) Solve and plot</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ii-comment-on-the-effect-of-including-pressure-drop">ii) Comment on the effect of including pressure drop</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimal-way-to-control-reactor-temperature">4. Optimal Way to Control Reactor Temperature</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-effect-of-i">4a. Effect of <span class="math notranslate nohighlight">\(Θ_I\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#i-sensitivity-analysis">i) Sensitivity analysis</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ii-visualize">ii) Visualize</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-effect-of-t-0">4b. Effect of <span class="math notranslate nohighlight">\(T_0\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">i) Sensitivity analysis</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">ii) Visualize</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-optimal-temperature-control">4c. Optimal Temperature Control</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

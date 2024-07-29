@@ -1,0 +1,1697 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>4.4. LU Decomposition &#8212; Data and Computing for Chemical Engineers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/04/LU-Decomposition';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="4.5. Errors in Linear Systems" href="Condition-Number.html" />
+    <link rel="prev" title="4.3. Invertible Matrix Theorem and Gaussian Elimination Example" href="Invertible-Matrix-Theorem-and-Gauss-Example.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/cbe_logo.jpg" class="logo__image only-light" alt="Data and Computing for Chemical Engineers - Home"/>
+    <script>document.write(`<img src="../../_static/cbe_logo.jpg" class="logo__image only-dark" alt="Data and Computing for Chemical Engineers - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Data and Computing for Engineers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../01/Python-Primer.html">1. Python Primer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../01/Jupyter-Notebooks.html">1.1. Welcome to Jupyter Notebooks and Vocareum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Python-Basics-I-Variables-Strings-Bugs.html">1.2. Python Basics I: Variables, Strings, and Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Flow-control.html">1.3. Python Basics II: Loopy Logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Python-Basics-III-Lists-Dictionaries-Enumeration.html">1.4. Python Basics III: Lists, Dictionaries, and Enumeration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Functions-and-Scope.html">1.5. Functions and Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Recursion.html">1.6. Recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Pseudocode.html">1.7. Pseudocode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Example-High-Low-Game.html">1.8. High/Low Guess My Number Game</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Modules-and-Files.html">1.9. Modules and Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/NumPy.html">1.10. Linear Algebra with Numpy and Scipy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Matplotlib.html">1.11. Visualization with matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Pandas.html">1.12. Manipulating Data with Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Functions-as-Arguments.html">1.13. Functions as Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Testing-and-Debugging.html">1.14. Testing and Debugging in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Publication-Quality-Figures.html">1.15. Preparing Publication Quality Figures in Python</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../02/advanced_python.html">2. Advanced Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Methods</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03/linear_algebra.html">3. Linear Algebra Primer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter1.html">3.1. Chapter 1: Math Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter2.html">3.2. Chapter 2: Intro to Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter3.html">3.3. Chapter 3: Computational linear algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter4.html">3.4. Chapter 4: Geometric Aspects of Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter5.html">3.5. Chapter 5: Linear Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter6.html">3.6. Chapter 6: Theoretical Linear Algebra</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="linear_algebra.html">4. Applied Linear Algebra</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Modeling-Systems-of-Linear-Equations.html">4.1. Modeling Systems of Linear Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Gauss-Elimination.html">4.2. Gaussian Elimination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Invertible-Matrix-Theorem-and-Gauss-Example.html">4.3. Invertible Matrix Theorem and Gaussian Elimination Example</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">4.4. LU Decomposition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Condition-Number.html">4.5. Errors in Linear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example-Atomic-Mass-Balances.html">4.6. Example: Mass Balances and Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Linear-Algebra-in-Numpy.html">4.7. Linear Algebra Review and SciPy Basics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05/algorithms.html">5. Algorithm Building Blocks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../05/Taylor-Series.html">5.1. Taylor Series Approximations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05/Finite-Difference.html">5.2. Finite Difference Derivative Approximations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05/Example-Heating-a-Metal-Slab.html">5.3. Example: Heating a Metal Slab</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../06/nonlinear_systems.html">6. Nonlinear Systems of Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../06/Modeling-Systems-of-Nonlinear-Equations.html">6.1. Modeling Systems of Nonlinear Equations: Flash Calculation Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Raphson-Method-in-One-Dimension.html">6.2. Newton-Raphson Method in One Dimension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/More-Newton-Type-Methods.html">6.3. More Newton-Type Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Convergence-Analysis-for-Newton-Raphson-Methods.html">6.4. Convergence Analysis for Newton-Raphson Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Raphson-Methods-for-Systems-of-Equations.html">6.5. Newton-Raphson Methods for Systems of Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Methods-in-Scipy.html">6.6. Newton Methods in Scipy</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../07/integration.html">7. Numeric Integration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../07/Intro-and-Newton-Cotes.html">7.1. Introduction and Newton-Cotes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Gauss-Quadrature.html">7.2. Gauss Quadrature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Scipy-Library-Adaptive-Methods-for-Newton-Cotes-and-Gauss-Quadrature.html">7.3. Scipy Library: Adaptive Methods for Newton-Cotes and Gauss Quadrature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Application-Inertial-Navigation-Systems.html">7.4. Application: Inertial Navigation Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Forward-and-Backward-Euler.html">7.5. Forward and Backward Euler Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Trapezoid-Rule.html">7.6. Crank-Nicolson (Trapezoid Rule)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Stability-Analysis.html">7.7. Stability Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Explicit-Runge-Kutta.html">7.8. Explicit Range Kutta Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Systems-of-Differential-Equations-and-Scipy.html">7.9. Systems of Differential Equations and Scipy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Example-Reaction-Rates.html">7.10. Example: Reaction Rates</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../08/optimization.html">8. Continuous Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../08/Pyomo-Basics.html">8.1. Pyomo Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../08/Electricity-Market-Optimization.html">8.2. Electricity Market Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../08/Flash-Calculations-in-Pyomo.html">8.3. Flash Calculations in Pyomo</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../09/stats.html">9. Descriptive Statistics and Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../09/Sampling.html">9.1. Sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../09/Summary-Statistics.html">9.2. Summary Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../09/Visualizing-Data.html">9.3. Visualizing Data</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../10/probability.html">10. Probability Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../10/Probability-Basics.html">10.1. Basic Ideas of Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Random-Variables.html">10.2. Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Jointly-Distributed-Random-Variables.html">10.3. Jointly Distributed Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Jointly-Continuous-Random-Variables.html">10.4. Jointly Continuous Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Practice-Problems.html">10.5. Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../11/distributions.html">11. Common Probability Distributions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../11/Bernoulli-Probability-Distribution.html">11.1. Bernoulli Probability Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Binomial-Probability-Distribtuion.html">11.2. Binomial Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Poisson-Probability-Distribution.html">11.3. Poisson Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Normal-Probability-Distribution.html">11.4. Normal Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Common-Probability-Distributions-Summary.html">11.5. Summary</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../12/uncertainty.html">12. Uncertainty and Error Propagation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../12/Measurement-Error.html">12.1. Measurement Error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Error-Propagation.html">12.2. Error Propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Measuring-Flowrate-Example.html">12.3. Measuring Flowrate Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Car-and-Incline-Example.html">12.4. Car and Incline Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Simulation.html">12.5. Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Monte-Carlo-Error-Propogation.html">12.6. Monte Carlo Error Propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Practice-Problems.html">12.7. Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../13/inference.html">13. Statistical Inference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../13/Central-Limit-Theorem.html">13.1. Central Limit Theorem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Standard-Normal-Distribution.html">13.2. Standard Normal Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Confidence-Intervals.html">13.3. Confidence Intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Students-t-Distribution.html">13.4. Student’s t-Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Hypothesis-Testing-Basics.html">13.5. Hypothesis Testing Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Flavors-of-Hypothesis-Testing.html">13.6. Flavors of Hypothesis Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Type-I-and-Type-II-Errors.html">13.7. Type I and Type II Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Statistical-Power-Basics.html">13.8. Statistical Power Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Statistical-Power-in-Python.html">13.9. Statistical Power in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Statistical-Power-Practice-Problems.html">13.10. Statistical Power Practice Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Bootstrap-Confidence-Intervals.html">13.11. Bootstrap Confidence Intervals</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../14/regression.html">14. Multivariate Linear Regression</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../14/Correlation-Covariance-and-Independence.html">14.1. Correlation, Covariance, and Independence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Least-Squares-Line.html">14.2. Simple Least Squares</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Ordinary-Least-Squares-Linear-Regression.html">14.3. Ordinary Least Squares Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Residual-Analysis.html">14.4. Residual Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Regression-Assumption-Examples.html">14.5. Regression Assumption Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Uncertainty-Analysis-and-Statistical-Inference.html">14.6. Uncertainty Analysis and Statistical Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Multivariate-Linear-Regression.html">14.7. Multivariate Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Linear-Regression-Practice-Problems.html">14.8. Linear Regression Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../15/advanced_regression.html">15. Nonlinear Regression</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../15/Transformations-and-Linear-Regression.html">15.1. Transformations and Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Weighted-Regression.html">15.2. Weighted Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Regression.html">15.3. Nonlinear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Regression-Practice-Problem.html">15.4. Nonlinear Regression Practice Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression.html">15.5. Monte Carlo Uncertainty Analysis for Nonlinear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Case-Study-Adsorptive-Membranes.html">15.6. Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../16/design_of_experiments.html">16. Design of Experiments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../16/Reaction-MBDoE.html">16.1. Model-Based Design of Experiments</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extra Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2022/home.html">Fall 2022</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/schedule.html">Fall 2022 Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/project1.html">Project 1: Computating for Problem Solving (Fall 2022)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/project2.html">Project 2: Data Analysis (Fall 2022)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2023/home.html">Fall 2023</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/schedule.html">Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/project.html">Semester Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet1_F23.html">Problem Set 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet2_F23.html">Problem Set 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet3_F23.html">Problem Set 3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet4_F23.html">Problem Set 4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet5_F23.html">Problem Set 5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet6_F23.html">Problem Set 6</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../contrib/contribute.html">Contributed Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Biotransport-Entrance-Length.html">Estimating the Entrance Length of Channel Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Non_Isothermal_PBR.html">Non-Isothermal Packed Bed Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Ficks_Law.html">Solving Fick’s Second Law Using Numeric Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Stochastic-Kinetics.html">Stochastic Simulation of Chemical Reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Spaghettification.html">Spaghettification of the Magic School Bus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Alcohol-Pharmacokinetics.html">Alcohol Pharmacokinetics and  Blood Alcohol Content % Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/McCabe-Thiele.html">Plotting McCabe-Thiele diagram through computational methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Wastewater-Treatment-Mass-Balance.html">Example of Mass Balance Problem in Wastewater Treatment Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Filtration.html">Filtration of a Yeast Suspension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Fraction_of_Molecular_Collisions.html">Calculating Fraction of Molecular Collisions</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/04/LU-Decomposition.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/data-and-computing" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/04/LU-Decomposition.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/04/LU-Decomposition.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>LU Decomposition</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">4.4.1. Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation-solving-the-same-system-multiple-times">4.4.2. Motivation: Solving the “Same” System Multiple Times</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lu-factorization">4.4.3. LU Factorization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#our-first-function-for-lu-factorization">4.4.4. Our First Function for LU Factorization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-more-memory-efficient-version">4.4.5. A More Memory Efficient Version</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-linear-systems">4.4.6. Solving Linear Systems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#our-first-function-for-forward-and-backward-solves">4.4.7. Our First Function for Forward and Backward Solves</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#another-implementation-optional">4.4.8. Another Implementation (Optional)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lu-with-pivoting">4.4.9. LU with Pivoting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#take-home-messages">4.4.10. Take Home Messages</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lu-decomposition">
+<h1><span class="section-number">4.4. </span>LU Decomposition<a class="headerlink" href="#lu-decomposition" title="Link to this heading">#</a></h1>
+<section id="learning-objectives">
+<h2><span class="section-number">4.4.1. </span>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>After studying this notebook, completing the activities, and asking questions in class, you should be able to:</p>
+<ul class="simple">
+<li><p>Explain to a classmate how Gaussian elimination and LU factorization are similar and different</p></li>
+<li><p>In Python, use LU factorization to solve a linear system of equations</p></li>
+<li><p>For LU factorization with partial pivoting, explain the following (same as Gaussian elimination last class):</p>
+<ul>
+<li><p>Why is it important? What are the benefits?</p></li>
+<li><p>How does the algorithm work? What are the basic steps?</p></li>
+<li><p>What are the limitations? What cases will partial pivoting not work?</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="motivation-solving-the-same-system-multiple-times">
+<h2><span class="section-number">4.4.2. </span>Motivation: Solving the “Same” System Multiple Times<a class="headerlink" href="#motivation-solving-the-same-system-multiple-times" title="Link to this heading">#</a></h2>
+<p>In practice, you often want to solve the same linear system multiple times with different right-hand side vectors <span class="math notranslate nohighlight">\(\vec{b}\)</span>. For example, imagine resolving the same mass balance problem with different inlet and outlet compositions.</p>
+<p>From the previous class, we know how to use Gaussian elimination to solve a linear system. But with Gaussian elimination, we need to redo the entire algorithm separately for each new instance of <span class="math notranslate nohighlight">\(\vec{b}\)</span>. Is there an algorithm that lets us reuse some of our work? Spoiler alert: yes, and it is called LU factorization.</p>
+</section>
+<section id="lu-factorization">
+<h2><span class="section-number">4.4.3. </span>LU Factorization<a class="headerlink" href="#lu-factorization" title="Link to this heading">#</a></h2>
+<p>LU factorization writes a matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> as the product of a lower triangular matrix (that is a matrix with nonzero elements on the diagonal and below) times an upper triangular matrix (that is a matrix with nonzero elements above the diagonal). In other words, <span class="math notranslate nohighlight">\(\mathbf{A} = \mathbf{LU},\)</span> where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{L} = \begin{pmatrix} * &amp; 0 &amp; \dots\\ * &amp; * &amp; 0 &amp; \dots\\ * &amp; * &amp; * &amp;0 &amp; \dots\\ \vdots &amp; \vdots &amp; \vdots &amp; \ddots\\ * &amp; * &amp; * &amp; \dots &amp; * \end{pmatrix}
+\end{split}\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{U} = \begin{pmatrix} * &amp; * &amp; * &amp; \dots &amp; * \\ 
+0 &amp; * &amp; * &amp; \dots &amp; * \\ 
+0 &amp; 0 &amp; \ddots &amp; \dots &amp; *\\ 
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots\\
+0 &amp; \dots &amp; &amp;0 &amp; *\end{pmatrix}
+\end{split}\]</div>
+<p>where the <span class="math notranslate nohighlight">\(*\)</span> denote a potentially nonzero matrix element.</p>
+<p>The question remains; how we find the entries in the matrices in the LU factorization?  To see this, let’s look at a matrix we used in last class:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{pmatrix} 3 &amp; 2 &amp; 1\\ -1 &amp; 4 &amp; 5\\ 2&amp; -8 &amp; 10\end{pmatrix}
+\end{split}\]</div>
+<p>we want to find the matrix LU such that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{pmatrix} l_{11} &amp; 0 &amp; 0\\ l_{21} &amp; l_{22} &amp; 0\\ l_{31}&amp; l_{32} &amp; l_{33}\end{pmatrix} \begin{pmatrix} u_{11} &amp; u_{12} &amp; u_{13}\\ 0 &amp; u_{22} &amp; u_{23}\\ 0&amp; 0 &amp; u_{33}\end{pmatrix}=\begin{pmatrix} 3 &amp; 2 &amp; 1\\ -1 &amp; 4 &amp; 5\\ 2&amp; -8 &amp; 10\end{pmatrix}.
+\end{split}\]</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Please read through the explanation below. Think of at least one question to ask in class.</p>
+</div>
+<p>It’s not exactly clear right now, but we actually have a few choices at this point.  The first choice we have is which diagonal, either <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> or <span class="math notranslate nohighlight">\(\mathbf{U}\)</span>, we want to be all ones.  We will choose to have all the <span class="math notranslate nohighlight">\(l_{ii} = 1\)</span>, that is the <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> matrix has a diagonal of all 1’s. (This means we are choosing Doolittle’s method for LU factorization.) Performing the matrix multiplication we get 9 equations and 9 unknowns for the factorization. The product of the first column of <span class="math notranslate nohighlight">\(\mathbf{U}\)</span> by the first column of <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> gives</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} u_{11} = 3\\ l_{21} u_{11} = -1\\ l_{31} u_{11} = 2.\end{split}\]</div>
+<p>Which gives us</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}u_{11} = 3,\\ l_{21} = -\frac{1}{3},\\ l_{31} = \frac{2}{3}.\end{split}\]</div>
+<p>Notice that the solutions below the diagaonal, the <span class="math notranslate nohighlight">\(l_{21}\)</span> and <span class="math notranslate nohighlight">\(l_{31}\)</span>, are the factors we used in our Gaussian elimination algorithm to remove the first column in the second and third equations. And the <span class="math notranslate nohighlight">\(u_{11}\)</span> value is that found in the same position in our Gaussian-eliminated matrix.</p>
+<p>Continuing on, the equations from the second column are</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} u_{12} = 2,\\ u_{12}l_{21} + u_{22}  = 4,\\ u_{12} l_{31} + u_{22} l_{32} = -8,\end{split}\]</div>
+<p>the solutions to these equations are</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}u_{12} = 2,\\ u_{22} =  4\frac{2}{3}, \\ l_{32} = -2.\end{split}\]</div>
+<p>You probably don’t remember, because I didn’t, but the value of <span class="math notranslate nohighlight">\(l_{32}\)</span> is the value of the factor used to eliminate the second column below the diagonal in the Gaussian elimination example from the <a class="reference internal" href="Invertible-Matrix-Theorem-and-Gauss-Example.html"><span class="std std-doc">last notebook.</span></a> Finally, the last three equations are</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} u_{13} = 1,\\u_{13} l_{21} + u_{23} = 5,\\ u_{13} l_{31} + u_{23}l_{32} + u_{33} = 10.\end{split}\]</div>
+<p>The solutions to these equations are</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}u_{13} = 1, \\u_{23} = 5\frac{1}{3},\\ u_{33} = 20.\end{split}\]</div>
+<p>These are precisely the values of the third column in or Gaussian elimination example.</p>
+<p>In other words our factorization looks like:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\underbrace{\begin{pmatrix} 1 &amp; 0 &amp; 0\\ -\frac{1}{3} &amp; 1&amp; 0\\ \frac{2}{3} &amp; -2 &amp; 1\end{pmatrix}}_{\mathbf{L}} \underbrace{\begin{pmatrix} 3 &amp; 2 &amp; 1\\ 0 &amp; 4\frac{2}{3} &amp; 5\frac{1}{3}\\ 0&amp; 0 &amp; 20\end{pmatrix}}_{\mathbf{U}}=\underbrace{\begin{pmatrix} 3 &amp; 2 &amp; 1\\ -1 &amp; 4 &amp; 5\\ 2&amp; -8 &amp; 10\end{pmatrix}}_{\mathbf{A}}.\end{split}\]</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Let’s verify the above equation is correct. Create numpy arrays <tt>L</tt> and <tt>U</tt> for the example above. Then multiple matrices <tt>L</tt> and <tt>U</tt> and store the results in <tt>A</tt>.</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Some observations:</p>
+<ol class="arabic simple">
+<li><p>The upper triangular matrix is the same as the matrix we received after doing Gaussian elimination</p></li>
+<li><p>The non-zero and non-diagonal elements of the lower triangular matrix are the factors we used to arrive at our Gaussian matrix.</p></li>
+</ol>
+<p>This suggests that we can reformulate our Gaussian elimination example to give us an LU factorization.</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Write down questions you can ask in class about the example above.</p>
+</div>
+<p>Record your question(s) here.</p>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Walk through the LU factorization example together.</p>
+</div>
+</section>
+<section id="our-first-function-for-lu-factorization">
+<h2><span class="section-number">4.4.4. </span>Our First Function for LU Factorization<a class="headerlink" href="#our-first-function-for-lu-factorization" title="Link to this heading">#</a></h2>
+<p>We will now generalize the LU factorization algorithm into a Python function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="k">def</span> <span class="nf">LU_factor1</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">LOUD</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Compute LU (Doolitte) decomposition of A</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        A: N by N array</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        L: N by N array</span>
+<span class="sd">        U: N by N array</span>
+<span class="sd">    </span>
+<span class="sd">    Side Effect:</span>
+<span class="sd">        Does not modify A</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="c1"># Check dimensions</span>
+    <span class="p">[</span><span class="n">Nrow</span><span class="p">,</span> <span class="n">Ncol</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">assert</span> <span class="n">Nrow</span> <span class="o">==</span> <span class="n">Ncol</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">Nrow</span>
+    
+    <span class="c1"># Allocate L as identify matrix</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+    
+    <span class="c1"># Copy A into U</span>
+    <span class="n">U</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    
+    <span class="c1"># Loop over columns</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+    
+        <span class="c1"># Loop over rows</span>
+        <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">c</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+        
+            <span class="c1"># Extract row to modify</span>
+            <span class="n">mod_row</span> <span class="o">=</span> <span class="n">U</span><span class="p">[</span><span class="n">r</span><span class="p">,:]</span>
+            
+            <span class="c1"># Calculate factor (just like Gaussian Elimination)</span>
+            <span class="n">factor</span> <span class="o">=</span> <span class="n">mod_row</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">/</span><span class="n">U</span><span class="p">[</span><span class="n">c</span><span class="p">,</span><span class="n">c</span><span class="p">]</span>
+            
+            <span class="c1"># Save factor into L</span>
+            <span class="n">L</span><span class="p">[</span><span class="n">r</span><span class="p">,</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">factor</span>
+            
+            <span class="c1"># Perform elimination, save into U</span>
+            <span class="n">mod_row</span> <span class="o">-=</span> <span class="n">factor</span><span class="o">*</span><span class="n">U</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
+            
+            <span class="c1">#mod_row = U[r-1,:]</span>
+            
+            <span class="k">if</span> <span class="n">LOUD</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After working on column&quot;</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="s2">&quot;and row&quot;</span><span class="p">,</span><span class="n">r</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;L = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">L</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;U = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">U</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">L</span><span class="p">,</span><span class="n">U</span>
+            
+<span class="c1">#let&#39;s try it on a 3 x 3 to start</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="mf">3.0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span><span class="mi">10</span><span class="p">)])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The original matrix is</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
+<span class="n">L</span><span class="p">,</span><span class="n">U</span> <span class="o">=</span> <span class="n">LU_factor1</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="c1">#print(&quot;The LU factored A is\n&quot;,A) </span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;L * U = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">*</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">L</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">U</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The original matrix is
+ [[ 3.  2.  1.]
+ [-1.  4.  5.]
+ [ 2. -8. 10.]]
+After working on column 0 and row 1
+L = 
+ [[ 1.          0.          0.        ]
+ [-0.33333333  1.          0.        ]
+ [ 0.          0.          1.        ]]
+U = 
+ [[ 3.          2.          1.        ]
+ [ 0.          4.66666667  5.33333333]
+ [ 2.         -8.         10.        ]]
+
+
+After working on column 0 and row 2
+L = 
+ [[ 1.          0.          0.        ]
+ [-0.33333333  1.          0.        ]
+ [ 0.66666667  0.          1.        ]]
+U = 
+ [[ 3.          2.          1.        ]
+ [ 0.          4.66666667  5.33333333]
+ [ 0.         -9.33333333  9.33333333]]
+
+
+After working on column 1 and row 2
+L = 
+ [[ 1.          0.          0.        ]
+ [-0.33333333  1.          0.        ]
+ [ 0.66666667 -2.          1.        ]]
+U = 
+ [[ 3.          2.          1.        ]
+ [ 0.          4.66666667  5.33333333]
+ [ 0.          0.         20.        ]]
+
+
+L * U = 
+
+[[ 1.          0.          0.        ]
+ [-0.33333333  1.          0.        ]
+ [ 0.66666667 -2.          1.        ]] 
+*
+ [[ 3.          2.          1.        ]
+ [ 0.          4.66666667  5.33333333]
+ [ 0.          0.         20.        ]] 
+=
+ [[ 3.  2.  1.]
+ [-1.  4.  5.]
+ [ 2. -8. 10.]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see that our function gives the same <code class="docutils literal notranslate"><span class="pre">L</span></code> and <code class="docutils literal notranslate"><span class="pre">U</span></code> as before. At the start of class, we will work through the LU decomposition example on the board together for this example. We will then revist the function above.</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Perform LU decomposition for matrix <tt>A1</tt>, which is defined below. Store the results in variables <tt>L1</tt> and <tt>U1</tt>.</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A1 = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">A1</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Spend 5 honest minutes reading through the function <tt>LU_factor1</tt>. Write down at least two questions you have right now.</p>
+</div>
+<p>My questions while inspecting the code below:
+1.
+2.</p>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Revist your list of questions about <tt>LU_factor1</tt> with your neighbor. We’ll then regroup and discuss as a class.</p>
+</div>
+</section>
+<section id="a-more-memory-efficient-version">
+<h2><span class="section-number">4.4.5. </span>A More Memory Efficient Version<a class="headerlink" href="#a-more-memory-efficient-version" title="Link to this heading">#</a></h2>
+<p>Our function <code class="docutils literal notranslate"><span class="pre">LU_factor1</span></code> makes a copy of <code class="docutils literal notranslate"><span class="pre">A</span></code> to initialize <code class="docutils literal notranslate"><span class="pre">U</span></code>. This is nice because it does not overwrite the original <code class="docutils literal notranslate"><span class="pre">A</span></code>. But imagine if <code class="docutils literal notranslate"><span class="pre">A</span></code> was a 10 million by 10 million matrix. Making a copy would be expensive and require a lot of memory.</p>
+<p>Instead, the function below also performs LU factorization. But instead of returning <code class="docutils literal notranslate"><span class="pre">L</span></code> and <code class="docutils literal notranslate"><span class="pre">U</span></code>, it overwrites <code class="docutils literal notranslate"><span class="pre">A</span></code> with the factorization result. This avoids copying large matrices.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="k">def</span> <span class="nf">LU_factor</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Factor in place A into L*U=A. </span>
+<span class="sd">    The lower triangular parts of A</span>
+<span class="sd">    are the L matrix.  </span>
+<span class="sd">    The L has implied ones on the diagonal.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        A: N by N array</span>
+<span class="sd">    Side Effects:</span>
+<span class="sd">        A is factored in place.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="p">[</span><span class="n">Nrow</span><span class="p">,</span> <span class="n">Ncol</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">assert</span> <span class="n">Nrow</span> <span class="o">==</span> <span class="n">Ncol</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">Nrow</span>
+    <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">column</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+            <span class="n">mod_row</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">row</span><span class="p">]</span>
+            <span class="n">factor</span> <span class="o">=</span> <span class="n">mod_row</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">/</span><span class="n">A</span><span class="p">[</span><span class="n">column</span><span class="p">,</span><span class="n">column</span><span class="p">]</span>
+            <span class="n">mod_row</span> <span class="o">=</span> <span class="n">mod_row</span> <span class="o">-</span> <span class="n">factor</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="n">column</span><span class="p">,:]</span>
+            <span class="c1">#put the factor in the correct place in the modified row</span>
+            <span class="n">mod_row</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">=</span> <span class="n">factor</span>
+            <span class="c1">#only take the part of the modified row we need</span>
+            <span class="n">mod_row</span> <span class="o">=</span> <span class="n">mod_row</span><span class="p">[</span><span class="n">column</span><span class="p">:</span><span class="n">N</span><span class="p">]</span>
+            <span class="n">A</span><span class="p">[</span><span class="n">row</span><span class="p">,</span><span class="n">column</span><span class="p">:</span><span class="n">N</span><span class="p">]</span> <span class="o">=</span> <span class="n">mod_row</span>
+    <span class="k">return</span>
+
+<span class="c1">#let&#39;s try it on a 3 x 3 to start</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="mf">3.0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span><span class="mi">10</span><span class="p">)])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The original matrix is</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
+<span class="n">LU_factor</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The LU factored A is</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The original matrix is
+ [[ 3.  2.  1.]
+ [-1.  4.  5.]
+ [ 2. -8. 10.]]
+The LU factored A is
+ [[ 3.          2.          1.        ]
+ [-0.33333333  4.66666667  5.33333333]
+ [ 0.66666667 -2.         20.        ]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice how our matrix <code class="docutils literal notranslate"><span class="pre">A</span></code> has changed:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 3.          2.          1.        ]
+ [-0.33333333  4.66666667  5.33333333]
+ [ 0.66666667 -2.         20.        ]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Use <tt>LU_factor</tt> for the example below. Your matrix <tt>A1</tt> should change.</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A1 (original) = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">A1</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Add your solution here</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A1 (factored) = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">A1</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="solving-linear-systems">
+<h2><span class="section-number">4.4.6. </span>Solving Linear Systems<a class="headerlink" href="#solving-linear-systems" title="Link to this heading">#</a></h2>
+<p>This algorithm gives us the same thing our onerous, by-hand procedure did. The question we have not answered is how we can take an LU factored matrix and get the solution to the system <span class="math notranslate nohighlight">\(\mathbf{A}\vec{x} = \vec{b}\)</span>.</p>
+<p>Let’s start by substituting <span class="math notranslate nohighlight">\(\mathbf{L U} = \mathbf{A}\)</span> into our original equation:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A}\vec{x} = \mathbf{LU}\vec{x} =  \vec{b}\]</div>
+<p>Now let’s create a new intermediate variable <span class="math notranslate nohighlight">\(\vec{y} = \mathbf{U} \vec{x}\)</span>. If we substitute <span class="math notranslate nohighlight">\(\vec{y}\)</span> into the <span class="math notranslate nohighlight">\(\mathbf{LU}\vec{x} =  \vec{b}\)</span>, we get:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{L}\vec{y} = \vec{b}\]</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Compute <span class="math notranslate nohighlight">\(\vec{y}\)</span> for the example below by hand or with Python. Store the results in a numpy array <tt>y</tt>.</p>
+</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{L} = \begin{pmatrix} 1 &amp; 0 &amp; 0\\ -\frac{1}{3} &amp; 1&amp; 0\\ \frac{2}{3} &amp; -2 &amp; 1\end{pmatrix}, \quad \vec{b} = \begin{pmatrix}6 \\ 8 \\ 4 \end{pmatrix}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You may have noticed in the example, we can easily compute <span class="math notranslate nohighlight">\(\vec{y}\)</span> because <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> is a lower triangular matrix. We start at the top to calculate the first element of <span class="math notranslate nohighlight">\(\vec{y}\)</span>. We then move to the next row of <span class="math notranslate nohighlight">\(\mathbf{L}\)</span>, substitute and compute the next element of <span class="math notranslate nohighlight">\(\vec{y}\)</span>. We call this procedure forward substitution because we start at the top.</p>
+<p>We now have <span class="math notranslate nohighlight">\(\vec{y}\)</span>. We are half way there! We just need to solve the linear system <span class="math notranslate nohighlight">\(\mathbf{U}\vec{x} = \vec{y}\)</span>.</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Compute <span class="math notranslate nohighlight">\(\vec{x}\)</span> for the example below either by hand or with Python. Store your answer in the numpy array <tt>x</tt>.</p>
+</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{U} = \begin{pmatrix} 3 &amp; 2 &amp; 1\\ 0 &amp; 4\frac{2}{3} &amp; 5\frac{1}{3}\\ 0&amp; 0 &amp; 20\end{pmatrix}, \quad \vec{y} = \begin{pmatrix}6 \\ 10 \\ 20 \end{pmatrix}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice again this calculation is easy because <span class="math notranslate nohighlight">\(\mathbf{U}\)</span> is upper triangular. We start at the bottom and calculate the last element of <span class="math notranslate nohighlight">\(\vec{x}\)</span>. We then move up a row, substitute, and calculate the second to last element of <span class="math notranslate nohighlight">\(\vec{x}\)</span>. This is called backward substitution and is the same procedure we used with Gaussian elimination last class.</p>
+</section>
+<section id="our-first-function-for-forward-and-backward-solves">
+<h2><span class="section-number">4.4.7. </span>Our First Function for Forward and Backward Solves<a class="headerlink" href="#our-first-function-for-forward-and-backward-solves" title="Link to this heading">#</a></h2>
+<p>Let’s return to our first factorization function <code class="docutils literal notranslate"><span class="pre">LU_factor</span></code> which returned a distinct <code class="docutils literal notranslate"><span class="pre">L</span></code> and <code class="docutils literal notranslate"><span class="pre">U</span></code>. We will create Python code to generalize the forward and backward substitution steps to solve the linear system.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">LU_solve1</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">LOUD</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Solve L*U*x = b for x where L and U</span>
+<span class="sd">    are lower and upper triangular matrices and</span>
+<span class="sd">    b is RHS vector.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        L: N by N lower triangular matrix with 1 on diagonal</span>
+<span class="sd">        U: N by N upper triangular matrix</span>
+<span class="sd">        b: N by 1 vector</span>
+<span class="sd">        </span>
+<span class="sd">    Returns</span>
+<span class="sd">        x: N by 1 solution to linear system</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="c1"># Check dimensions</span>
+    <span class="p">[</span><span class="n">Nrow_L</span><span class="p">,</span> <span class="n">Ncol_L</span><span class="p">]</span> <span class="o">=</span> <span class="n">L</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">assert</span> <span class="n">Nrow_L</span> <span class="o">==</span> <span class="n">Ncol_L</span>
+    <span class="p">[</span><span class="n">Nrow_U</span><span class="p">,</span> <span class="n">Ncol_U</span><span class="p">]</span> <span class="o">=</span> <span class="n">U</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">assert</span> <span class="n">Nrow_U</span> <span class="o">==</span> <span class="n">Ncol_U</span>
+    <span class="k">assert</span> <span class="n">Nrow_U</span> <span class="o">==</span> <span class="n">Nrow_L</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">Nrow_U</span>
+    <span class="k">assert</span> <span class="n">N</span> <span class="o">==</span> <span class="n">b</span><span class="o">.</span><span class="n">size</span>
+    
+    <span class="c1"># forward solve</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">LOUD</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Forward solve...&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N</span><span class="p">):</span> <span class="c1"># first for loop</span>
+        <span class="n">RHS</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="n">r</span><span class="p">]</span>
+        
+        <span class="c1"># loop over some of the columns to evaluated summation</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">r</span><span class="p">):</span>
+            <span class="n">RHS</span> <span class="o">-=</span> <span class="n">y</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">*</span><span class="n">L</span><span class="p">[</span><span class="n">r</span><span class="p">,</span><span class="n">c</span><span class="p">]</span>
+        
+        <span class="k">if</span> <span class="n">LOUD</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;y[&quot;</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s2">&quot;]=&quot;</span><span class="p">,</span><span class="n">RHS</span><span class="p">)</span>
+        
+        <span class="n">y</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">=</span> <span class="n">RHS</span>
+    
+    <span class="c1"># backward solve</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">LOUD</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Backward solve...&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span> <span class="c1"># second for loop</span>
+        <span class="n">RHS</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">r</span><span class="p">]</span>
+        
+        <span class="c1"># loop over some of the columns to evaluated summation</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+            <span class="n">RHS</span> <span class="o">-=</span> <span class="n">x</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">*</span><span class="n">U</span><span class="p">[</span><span class="n">r</span><span class="p">,</span><span class="n">c</span><span class="p">]</span>
+        
+        <span class="k">if</span> <span class="n">LOUD</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x[&quot;</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s2">&quot;]=&quot;</span><span class="p">,</span><span class="n">RHS</span><span class="o">/</span><span class="n">U</span><span class="p">[</span><span class="n">r</span><span class="p">,</span><span class="n">r</span><span class="p">])</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">=</span> <span class="n">RHS</span><span class="o">/</span><span class="n">U</span><span class="p">[</span><span class="n">r</span><span class="p">,</span><span class="n">r</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s take a minute to look at the first and second for loops in <code class="docutils literal notranslate"><span class="pre">LU_solve1</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="c1"># loop 1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loop 1...&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    
+<span class="c1"># loop 2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Loop 2...&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loop 1...
+0
+1
+2
+3
+4
+
+Loop 2...
+4
+3
+2
+1
+0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Why does the first for loop iterate over <tt>range(0,N)</tt> and the second for loop iterate over <tt>range(N-1,-1,-1)</tt> in <tt>LU_solve1</tt>? Write a sentence below.</p>
+</div>
+<p>Answer:</p>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Discuss the code above with a partner. We’ll then regroup as a class.</p>
+</div>
+<p>And let’s test with the example above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="mf">3.0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span><span class="mi">10</span><span class="p">)])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The original matrix is</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
+
+<span class="n">L</span><span class="p">,</span><span class="n">U</span> <span class="o">=</span> <span class="n">LU_factor1</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;L = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">L</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">U= </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">U</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">LU_solve1</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The original matrix is
+ [[ 3.  2.  1.]
+ [-1.  4.  5.]
+ [ 2. -8. 10.]]
+L = 
+ [[ 1.          0.          0.        ]
+ [-0.33333333  1.          0.        ]
+ [ 0.66666667 -2.          1.        ]]
+
+U= 
+ [[ 3.          2.          1.        ]
+ [ 0.          4.66666667  5.33333333]
+ [ 0.          0.         20.        ]]
+
+Forward solve...
+y[ 0 ]= 6
+y[ 1 ]= 10.0
+y[ 2 ]= 20.0
+
+Backward solve...
+x[ 2 ]= 1.0
+x[ 1 ]= 1.0
+x[ 0 ]= 1.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>And now verify the solution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A*x =&quot;</span><span class="p">,</span><span class="n">A</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;b =&quot;</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A*x = [6. 8. 4.]
+b = [6 8 4]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="another-implementation-optional">
+<h2><span class="section-number">4.4.8. </span>Another Implementation (Optional)<a class="headerlink" href="#another-implementation-optional" title="Link to this heading">#</a></h2>
+<p>Now let’s consider the case where <code class="docutils literal notranslate"><span class="pre">L</span></code> and <code class="docutils literal notranslate"><span class="pre">U</span></code> are stored in the same matrix. This complements our more memory efficient function <code class="docutils literal notranslate"><span class="pre">LU_factor</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">LU_solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Take a LU factorized matrix and </span>
+<span class="sd">    solve it for RHS b</span>
+<span class="sd">    Args:</span>
+<span class="sd">        A: N by N array that has been LU factored with</span>
+<span class="sd">        assumed 1&#39;s on the diagonal of the L matrix</span>
+<span class="sd">        b: N by 1 array of righthand side</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        x: N by 1 array of solutions</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="p">[</span><span class="n">Nrow</span><span class="p">,</span> <span class="n">Ncol</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">assert</span> <span class="n">Nrow</span> <span class="o">==</span> <span class="n">Ncol</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">Nrow</span>
+    
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+    <span class="c1">#temporary vector for L^-1 b</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+    <span class="c1">#forward solve</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">RHS</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="n">row</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">row</span><span class="p">):</span>
+            <span class="n">RHS</span> <span class="o">-=</span> <span class="n">y</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="n">row</span><span class="p">,</span><span class="n">column</span><span class="p">]</span>
+        <span class="n">y</span><span class="p">[</span><span class="n">row</span><span class="p">]</span> <span class="o">=</span> <span class="n">RHS</span>
+    <span class="c1">#back solve</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">RHS</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">row</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">row</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+            <span class="n">RHS</span> <span class="o">-=</span> <span class="n">x</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="n">row</span><span class="p">,</span><span class="n">column</span><span class="p">]</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">row</span><span class="p">]</span> <span class="o">=</span> <span class="n">RHS</span><span class="o">/</span><span class="n">A</span><span class="p">[</span><span class="n">row</span><span class="p">,</span><span class="n">row</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s test on the same system as above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#let&#39;s try it on a 3 x 3 to start</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="mf">3.0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span><span class="mi">10</span><span class="p">)])</span>
+<span class="n">Aorig</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Originally A =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">Aorig</span><span class="p">)</span>
+<span class="n">LU_factor</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">After factorization A =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">LU_solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The solution to the system is&quot;</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Originally A =
+ [[ 3.  2.  1.]
+ [-1.  4.  5.]
+ [ 2. -8. 10.]]
+
+After factorization A =
+ [[ 3.          2.          1.        ]
+ [-0.33333333  4.66666667  5.33333333]
+ [ 0.66666667 -2.         20.        ]]
+
+The solution to the system is [1. 1. 1.]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s resolve for <span class="math notranslate nohighlight">\(\vec{x} = [2, 12, 2019]^T\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">solution2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mf">2019.</span><span class="p">])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Aorig</span><span class="p">,</span><span class="n">solution2</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">LU_solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The solution to the system is&quot;</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The solution to the system is [2.000e+00 1.200e+01 2.019e+03]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="lu-with-pivoting">
+<h2><span class="section-number">4.4.9. </span>LU with Pivoting<a class="headerlink" href="#lu-with-pivoting" title="Link to this heading">#</a></h2>
+<p>Pivoting with LU is needed in the same cases as it is in Gaussian elimination.  However, when we switch equations around, we need to make sure that we keep track of where we’ve switched rows, so we can do the same to the right-hand side when we do our forward and back solves. This complicates things considerably, but only because we have to add that bookkeeping to our algorithm.</p>
+<p>First, we’ll need to be able to swap rows in the matrix:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">swap_rows</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Rows to rows in a matrix, switch row a with row b</span>
+<span class="sd">    args: </span>
+<span class="sd">    A: matrix to perform row swaps on</span>
+<span class="sd">    a: row index of matrix</span>
+<span class="sd">    b: row index of matrix</span>
+<span class="sd">    </span>
+<span class="sd">    returns: </span>
+<span class="sd">    nothing</span>
+<span class="sd">    </span>
+<span class="sd">    side effects:</span>
+<span class="sd">    changes A to have rows a and b swapped</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="p">(</span><span class="n">a</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">b</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1">#number of rows</span>
+    <span class="k">assert</span> <span class="p">(</span><span class="n">a</span><span class="o">&lt;</span><span class="n">N</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">b</span><span class="o">&lt;</span><span class="n">N</span><span class="p">)</span> <span class="c1">#less than because 0-based indexing</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">a</span><span class="p">,:]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">a</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">b</span><span class="p">,:]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">b</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we’ll change our algorithm to handle pivoting and keep track of the pivots:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">LU_factor_pivot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">LOUD</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Factor in place A in L*U=A. </span>
+<span class="sd">    The lower triangular parts of A</span>
+<span class="sd">    are the L matrix.  </span>
+<span class="sd">    The L has implied ones on the diagonal.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        A: N by N array</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        a vector holding the order of the rows, </span>
+<span class="sd">        relative to the original order</span>
+<span class="sd">    Side Effects:</span>
+<span class="sd">        A is factored in place.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># Check dimensions</span>
+    <span class="p">[</span><span class="n">Nrow</span><span class="p">,</span> <span class="n">Ncol</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">assert</span> <span class="n">Nrow</span> <span class="o">==</span> <span class="n">Ncol</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">Nrow</span>
+    
+    <span class="c1"># Create scale factors </span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">row_order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">A</span><span class="p">:</span>
+        <span class="c1"># Save largest absolute element in each row</span>
+        <span class="n">s</span><span class="p">[</span><span class="n">count</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fabs</span><span class="p">(</span><span class="n">row</span><span class="p">))</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">LOUD</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;s =&quot;</span><span class="p">,</span><span class="n">s</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">LOUD</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original Matrix is</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
+    
+    <span class="c1"># loop over columns</span>
+    <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+        <span class="c1">#swap rows if needed</span>
+        <span class="n">largest_pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fabs</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">column</span><span class="p">:</span><span class="n">N</span><span class="p">,</span><span class="n">column</span><span class="p">]</span><span class="o">/</span>
+                                        <span class="n">s</span><span class="p">[</span><span class="n">column</span><span class="p">]))</span> <span class="o">+</span> <span class="n">column</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">largest_pos</span> <span class="o">!=</span> <span class="n">column</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">LOUD</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Swapping row&quot;</span><span class="p">,</span><span class="n">column</span><span class="p">,</span><span class="s2">&quot;with row&quot;</span><span class="p">,</span>
+                      <span class="n">largest_pos</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pre swap</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
+            <span class="n">swap_rows</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">column</span><span class="p">,</span><span class="n">largest_pos</span><span class="p">)</span>
+            <span class="c1">#keep track of changes to RHS</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">row_order</span><span class="p">[</span><span class="n">column</span><span class="p">]</span>
+            <span class="n">row_order</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">=</span> <span class="n">row_order</span><span class="p">[</span><span class="n">largest_pos</span><span class="p">]</span>
+            <span class="n">row_order</span><span class="p">[</span><span class="n">largest_pos</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span>
+            <span class="c1">#re-order s</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">column</span><span class="p">]</span>
+            <span class="n">s</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">largest_pos</span><span class="p">]</span>
+            <span class="n">s</span><span class="p">[</span><span class="n">largest_pos</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">LOUD</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">column</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+            <span class="n">mod_row</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">row</span><span class="p">]</span>
+            <span class="n">factor</span> <span class="o">=</span> <span class="n">mod_row</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">/</span><span class="n">A</span><span class="p">[</span><span class="n">column</span><span class="p">,</span><span class="n">column</span><span class="p">]</span>
+            <span class="n">mod_row</span> <span class="o">=</span> <span class="n">mod_row</span> <span class="o">-</span> <span class="n">factor</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="n">column</span><span class="p">,:]</span>
+            <span class="c1">#put the factor in the correct place in the modified row</span>
+            <span class="n">mod_row</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">=</span> <span class="n">factor</span>
+            <span class="c1">#only take the part of the modified row we need</span>
+            <span class="n">mod_row</span> <span class="o">=</span> <span class="n">mod_row</span><span class="p">[</span><span class="n">column</span><span class="p">:</span><span class="n">N</span><span class="p">]</span>
+            <span class="n">A</span><span class="p">[</span><span class="n">row</span><span class="p">,</span><span class="n">column</span><span class="p">:</span><span class="n">N</span><span class="p">]</span> <span class="o">=</span> <span class="n">mod_row</span>
+    <span class="k">return</span> <span class="n">row_order</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s verify with a 4x4 system</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#let&#39;s try it on a 4 x 4 to start</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="mf">3.0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">),(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mf">0.1</span><span class="p">)])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">answer</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;True solution. x =&quot;</span><span class="p">,</span><span class="n">answer</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">answer</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Thus b =&quot;</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Apply LU with pivoting</span>
+<span class="n">row_order</span> <span class="o">=</span> <span class="n">LU_factor_pivot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Print A and the row order</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After factorization A =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The new row order is&quot;</span><span class="p">,</span><span class="n">row_order</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A =
+ [[ 3.   2.   1.  -2. ]
+ [-1.   4.   5.   4. ]
+ [ 2.  -8.  10.   3. ]
+ [-2.  -8.  10.   0.1]] 
+
+True solution. x = [1. 1. 1. 1.] 
+
+Thus b = [ 4.  12.   7.   0.1] 
+
+After factorization A =
+ [[ 3.          2.          1.         -2.        ]
+ [ 0.66666667 -9.33333333  9.33333333  4.33333333]
+ [-0.33333333 -0.5        10.          5.5       ]
+ [-0.66666667  0.71428571  0.4        -6.52857143]] 
+
+The new row order is [0 2 1 3]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We need to change the LU_solve function to take advantage of the swapped rows.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">LU_solve_pivot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">row_order</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Take a LU factorized matrix and solve it for RHS b</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        A: N by N array that has been LU factored with</span>
+<span class="sd">        assumed 1&#39;s on the diagonal of the L matrix</span>
+<span class="sd">        b: N by 1 array of righthand side</span>
+<span class="sd">        row_order:  list giving the re-ordered equations</span>
+<span class="sd">        from the the LU factorization with pivoting</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        x: N by 1 array of solutions</span>
+<span class="sd">        </span>
+<span class="sd">    Side Effect:</span>
+<span class="sd">        Reorders b using row_order</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="p">[</span><span class="n">Nrow</span><span class="p">,</span> <span class="n">Ncol</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">assert</span> <span class="n">Nrow</span> <span class="o">==</span> <span class="n">Ncol</span>
+    <span class="k">assert</span> <span class="n">b</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="n">Ncol</span>
+    <span class="k">assert</span> <span class="n">row_order</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">==</span> <span class="n">Ncol</span><span class="o">-</span><span class="mi">1</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">Nrow</span>
+    
+    <span class="c1">#reorder the equations</span>
+    <span class="n">tmp</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">b</span><span class="p">[</span><span class="n">row_order</span><span class="p">[</span><span class="n">row</span><span class="p">]]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">[</span><span class="n">row</span><span class="p">]</span>
+    <span class="c1">#b now has the correct order</span>
+    
+    <span class="c1"># We can either reuse our LU_solve code from above now that b has</span>
+    <span class="c1"># been reorded or copy and paste</span>
+    <span class="k">return</span> <span class="n">LU_solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    x = np.zeros(N)</span>
+<span class="sd">    #temporary vector for L^-1 b</span>
+<span class="sd">    y = np.zeros(N)</span>
+<span class="sd">    #forward solve</span>
+<span class="sd">    for row in range(N):</span>
+<span class="sd">        RHS = b[row]</span>
+<span class="sd">        for column in range(0,row):</span>
+<span class="sd">            RHS -= y[column]*A[row,column]</span>
+<span class="sd">        y[row] = RHS</span>
+<span class="sd">    #back solve</span>
+<span class="sd">    for row in range(N-1,-1,-1):</span>
+<span class="sd">        RHS = y[row]</span>
+<span class="sd">        for column in range(row+1,N):</span>
+<span class="sd">            RHS -= x[column]*A[row,column]</span>
+<span class="sd">        x[row] = RHS/A[row,row]</span>
+<span class="sd">    return x</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">Row order =&quot;</span><span class="p">,</span><span class="n">row_order</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">LU_solve_pivot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">row_order</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The solution to the system is&quot;</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A =
+ [[ 3.          2.          1.         -2.        ]
+ [ 0.66666667 -9.33333333  9.33333333  4.33333333]
+ [-0.33333333 -0.5        10.          5.5       ]
+ [-0.66666667  0.71428571  0.4        -6.52857143]] 
+
+Row order = [0 2 1 3] 
+
+The solution to the system is [1. 1. 1. 1.]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Verify that our LU decomposition with pivoting code works for other test cases.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">epsilon</span> <span class="o">=</span> <span class="mf">1e-14</span>
+<span class="n">A_eps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">epsilon</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">),(</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A_eps</span><span class="p">)</span>
+<span class="n">b_eps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b_eps</span><span class="p">)</span>
+
+<span class="n">Asave</span> <span class="o">=</span> <span class="n">A_eps</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">bsave</span> <span class="o">=</span> <span class="n">b_eps</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 1.e-14 -1.e+00  1.e+00]
+ [-1.e+00  2.e+00 -1.e+00]
+ [ 2.e+00 -1.e+00  0.e+00]]
+[0. 0. 1.]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">row_order</span> <span class="o">=</span> <span class="n">LU_factor_pivot</span><span class="p">(</span><span class="n">A_eps</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">x_eps</span> <span class="o">=</span> <span class="n">LU_solve_pivot</span><span class="p">(</span><span class="n">A_eps</span><span class="p">,</span><span class="n">b_eps</span><span class="p">,</span><span class="n">row_order</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The solution is&quot;</span><span class="p">,</span><span class="n">x_eps</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The residual is&quot;</span><span class="p">,</span><span class="n">bsave</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Asave</span><span class="p">,</span><span class="n">x_eps</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The solution is [1. 1. 1.]
+The residual is [0.00000000e+00 1.11022302e-16 0.00000000e+00]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="take-home-messages">
+<h2><span class="section-number">4.4.10. </span>Take Home Messages<a class="headerlink" href="#take-home-messages" title="Link to this heading">#</a></h2>
+<p>LU factorization is <em>very</em> similar to Gaussian elimination:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbf{L}\)</span> matrix saves the scaling factors from Gaussian elimination</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{U}\)</span> matrix is the same as the reduced matrix</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{L}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{U}\)</span> save all of the steps from matrix reduction, making LU factorization efficient to resolve <span class="math notranslate nohighlight">\(\mathbf{A} \vec{x} = \vec{b}\)</span> for many different <span class="math notranslate nohighlight">\(\vec{b}\)</span></p></li>
+<li><p>Partial pivoting works the same way for both LU factorization and Gaussian elimination</p></li>
+</ul>
+<p>Solving a linear system with LU factorization is easy:</p>
+<ul class="simple">
+<li><p>First, perform forward substitution, which exploits that <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> is lower triangular</p></li>
+<li><p>Second, perform backward substitution, which exploits that <span class="math notranslate nohighlight">\(\mathbf{U}\)</span> is upper triangular</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/04"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Invertible-Matrix-Theorem-and-Gauss-Example.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">4.3. </span>Invertible Matrix Theorem and Gaussian Elimination Example</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Condition-Number.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4.5. </span>Errors in Linear Systems</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">4.4.1. Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation-solving-the-same-system-multiple-times">4.4.2. Motivation: Solving the “Same” System Multiple Times</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lu-factorization">4.4.3. LU Factorization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#our-first-function-for-lu-factorization">4.4.4. Our First Function for LU Factorization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-more-memory-efficient-version">4.4.5. A More Memory Efficient Version</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-linear-systems">4.4.6. Solving Linear Systems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#our-first-function-for-forward-and-backward-solves">4.4.7. Our First Function for Forward and Backward Solves</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#another-implementation-optional">4.4.8. Another Implementation (Optional)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lu-with-pivoting">4.4.9. LU with Pivoting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#take-home-messages">4.4.10. Take Home Messages</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1453 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>13.6. Flavors of Hypothesis Testing &#8212; Data and Computing for Chemical Engineers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/13/Flavors-of-Hypothesis-Testing';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="13.7. Type I and Type II Errors" href="Type-I-and-Type-II-Errors.html" />
+    <link rel="prev" title="13.5. Hypothesis Testing Basics" href="Hypothesis-Testing-Basics.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/cbe_logo.jpg" class="logo__image only-light" alt="Data and Computing for Chemical Engineers - Home"/>
+    <script>document.write(`<img src="../../_static/cbe_logo.jpg" class="logo__image only-dark" alt="Data and Computing for Chemical Engineers - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Data and Computing for Engineers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../01/Python-Primer.html">1. Python Primer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../01/Jupyter-Notebooks.html">1.1. Welcome to Jupyter Notebooks and Vocareum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Python-Basics-I-Variables-Strings-Bugs.html">1.2. Python Basics I: Variables, Strings, and Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Flow-control.html">1.3. Python Basics II: Loopy Logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Python-Basics-III-Lists-Dictionaries-Enumeration.html">1.4. Python Basics III: Lists, Dictionaries, and Enumeration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Functions-and-Scope.html">1.5. Functions and Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Recursion.html">1.6. Recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Pseudocode.html">1.7. Pseudocode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Example-High-Low-Game.html">1.8. High/Low Guess My Number Game</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Modules-and-Files.html">1.9. Modules and Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/NumPy.html">1.10. Linear Algebra with Numpy and Scipy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Matplotlib.html">1.11. Visualization with matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Pandas.html">1.12. Manipulating Data with Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Functions-as-Arguments.html">1.13. Functions as Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Testing-and-Debugging.html">1.14. Testing and Debugging in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Publication-Quality-Figures.html">1.15. Preparing Publication Quality Figures in Python</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../02/advanced_python.html">2. Advanced Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Methods</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03/linear_algebra.html">3. Linear Algebra Primer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter1.html">3.1. Chapter 1: Math Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter2.html">3.2. Chapter 2: Intro to Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter3.html">3.3. Chapter 3: Computational linear algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter4.html">3.4. Chapter 4: Geometric Aspects of Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter5.html">3.5. Chapter 5: Linear Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter6.html">3.6. Chapter 6: Theoretical Linear Algebra</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../04/linear_algebra.html">4. Applied Linear Algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../04/Modeling-Systems-of-Linear-Equations.html">4.1. Modeling Systems of Linear Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Gauss-Elimination.html">4.2. Gaussian Elimination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Invertible-Matrix-Theorem-and-Gauss-Example.html">4.3. Invertible Matrix Theorem and Gaussian Elimination Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/LU-Decomposition.html">4.4. LU Decomposition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Condition-Number.html">4.5. Errors in Linear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Example-Atomic-Mass-Balances.html">4.6. Example: Mass Balances and Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Linear-Algebra-in-Numpy.html">4.7. Linear Algebra Review and SciPy Basics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05/algorithms.html">5. Algorithm Building Blocks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../05/Taylor-Series.html">5.1. Taylor Series Approximations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05/Finite-Difference.html">5.2. Finite Difference Derivative Approximations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05/Example-Heating-a-Metal-Slab.html">5.3. Example: Heating a Metal Slab</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../06/nonlinear_systems.html">6. Nonlinear Systems of Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../06/Modeling-Systems-of-Nonlinear-Equations.html">6.1. Modeling Systems of Nonlinear Equations: Flash Calculation Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Raphson-Method-in-One-Dimension.html">6.2. Newton-Raphson Method in One Dimension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/More-Newton-Type-Methods.html">6.3. More Newton-Type Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Convergence-Analysis-for-Newton-Raphson-Methods.html">6.4. Convergence Analysis for Newton-Raphson Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Raphson-Methods-for-Systems-of-Equations.html">6.5. Newton-Raphson Methods for Systems of Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Methods-in-Scipy.html">6.6. Newton Methods in Scipy</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../07/integration.html">7. Numeric Integration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../07/Intro-and-Newton-Cotes.html">7.1. Introduction and Newton-Cotes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Gauss-Quadrature.html">7.2. Gauss Quadrature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Scipy-Library-Adaptive-Methods-for-Newton-Cotes-and-Gauss-Quadrature.html">7.3. Scipy Library: Adaptive Methods for Newton-Cotes and Gauss Quadrature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Application-Inertial-Navigation-Systems.html">7.4. Application: Inertial Navigation Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Forward-and-Backward-Euler.html">7.5. Forward and Backward Euler Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Trapezoid-Rule.html">7.6. Crank-Nicolson (Trapezoid Rule)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Stability-Analysis.html">7.7. Stability Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Explicit-Runge-Kutta.html">7.8. Explicit Range Kutta Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Systems-of-Differential-Equations-and-Scipy.html">7.9. Systems of Differential Equations and Scipy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Example-Reaction-Rates.html">7.10. Example: Reaction Rates</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../08/optimization.html">8. Continuous Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../08/Pyomo-Basics.html">8.1. Pyomo Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../08/Electricity-Market-Optimization.html">8.2. Electricity Market Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../08/Flash-Calculations-in-Pyomo.html">8.3. Flash Calculations in Pyomo</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Analysis</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../09/stats.html">9. Descriptive Statistics and Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../09/Sampling.html">9.1. Sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../09/Summary-Statistics.html">9.2. Summary Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../09/Visualizing-Data.html">9.3. Visualizing Data</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../10/probability.html">10. Probability Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../10/Probability-Basics.html">10.1. Basic Ideas of Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Random-Variables.html">10.2. Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Jointly-Distributed-Random-Variables.html">10.3. Jointly Distributed Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Jointly-Continuous-Random-Variables.html">10.4. Jointly Continuous Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Practice-Problems.html">10.5. Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../11/distributions.html">11. Common Probability Distributions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../11/Bernoulli-Probability-Distribution.html">11.1. Bernoulli Probability Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Binomial-Probability-Distribtuion.html">11.2. Binomial Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Poisson-Probability-Distribution.html">11.3. Poisson Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Normal-Probability-Distribution.html">11.4. Normal Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Common-Probability-Distributions-Summary.html">11.5. Summary</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../12/uncertainty.html">12. Uncertainty and Error Propagation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../12/Measurement-Error.html">12.1. Measurement Error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Error-Propagation.html">12.2. Error Propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Measuring-Flowrate-Example.html">12.3. Measuring Flowrate Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Car-and-Incline-Example.html">12.4. Car and Incline Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Simulation.html">12.5. Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Monte-Carlo-Error-Propogation.html">12.6. Monte Carlo Error Propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Practice-Problems.html">12.7. Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="inference.html">13. Statistical Inference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Central-Limit-Theorem.html">13.1. Central Limit Theorem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Standard-Normal-Distribution.html">13.2. Standard Normal Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Confidence-Intervals.html">13.3. Confidence Intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Students-t-Distribution.html">13.4. Student’s t-Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hypothesis-Testing-Basics.html">13.5. Hypothesis Testing Basics</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">13.6. Flavors of Hypothesis Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Type-I-and-Type-II-Errors.html">13.7. Type I and Type II Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Statistical-Power-Basics.html">13.8. Statistical Power Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Statistical-Power-in-Python.html">13.9. Statistical Power in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Statistical-Power-Practice-Problems.html">13.10. Statistical Power Practice Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Bootstrap-Confidence-Intervals.html">13.11. Bootstrap Confidence Intervals</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../14/regression.html">14. Multivariate Linear Regression</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../14/Correlation-Covariance-and-Independence.html">14.1. Correlation, Covariance, and Independence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Least-Squares-Line.html">14.2. Simple Least Squares</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Ordinary-Least-Squares-Linear-Regression.html">14.3. Ordinary Least Squares Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Residual-Analysis.html">14.4. Residual Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Regression-Assumption-Examples.html">14.5. Regression Assumption Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Uncertainty-Analysis-and-Statistical-Inference.html">14.6. Uncertainty Analysis and Statistical Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Multivariate-Linear-Regression.html">14.7. Multivariate Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Linear-Regression-Practice-Problems.html">14.8. Linear Regression Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../15/advanced_regression.html">15. Nonlinear Regression</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../15/Transformations-and-Linear-Regression.html">15.1. Transformations and Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Weighted-Regression.html">15.2. Weighted Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Regression.html">15.3. Nonlinear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Regression-Practice-Problem.html">15.4. Nonlinear Regression Practice Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression.html">15.5. Monte Carlo Uncertainty Analysis for Nonlinear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Case-Study-Adsorptive-Membranes.html">15.6. Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../16/design_of_experiments.html">16. Design of Experiments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../16/Reaction-MBDoE.html">16.1. Model-Based Design of Experiments</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extra Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2022/home.html">Fall 2022</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/schedule.html">Fall 2022 Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/project1.html">Project 1: Computating for Problem Solving (Fall 2022)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/project2.html">Project 2: Data Analysis (Fall 2022)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2023/home.html">Fall 2023</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/schedule.html">Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/project.html">Semester Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet1_F23.html">Problem Set 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet2_F23.html">Problem Set 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet3_F23.html">Problem Set 3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet4_F23.html">Problem Set 4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet5_F23.html">Problem Set 5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet6_F23.html">Problem Set 6</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../contrib/contribute.html">Contributed Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Biotransport-Entrance-Length.html">Estimating the Entrance Length of Channel Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Non_Isothermal_PBR.html">Non-Isothermal Packed Bed Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Ficks_Law.html">Solving Fick’s Second Law Using Numeric Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Stochastic-Kinetics.html">Stochastic Simulation of Chemical Reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Spaghettification.html">Spaghettification of the Magic School Bus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Alcohol-Pharmacokinetics.html">Alcohol Pharmacokinetics and  Blood Alcohol Content % Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/McCabe-Thiele.html">Plotting McCabe-Thiele diagram through computational methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Wastewater-Treatment-Mass-Balance.html">Example of Mass Balance Problem in Wastewater Treatment Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Filtration.html">Filtration of a Yeast Suspension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Fraction_of_Molecular_Collisions.html">Calculating Fraction of Molecular Collisions</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/13/Flavors-of-Hypothesis-Testing.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/data-and-computing" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/13/Flavors-of-Hypothesis-Testing.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/13/Flavors-of-Hypothesis-Testing.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Flavors of Hypothesis Testing</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">13.6.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">13.6.2. Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#small-sample-test-for-population-mean">13.6.3. Small-Sample Test for Population Mean</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#motivating-example">13.6.3.1. Motivating Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-define-hypotheses">13.6.3.2. Step 1. Define Hypotheses.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-assume-h-0-is-true">13.6.3.3. Step 2. Assume <span class="math notranslate nohighlight">\(H_0\)</span> is True.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-compute-the-test-statistic">13.6.3.4. Step 3. Compute the Test Statistic.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-calculate-p-value">13.6.3.5. Step 4. Calculate P-Value.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-state-conclusions">13.6.3.6. Step 5. State Conclusions.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#small-sample-difference-between-two-means">13.6.4. Small-Sample Difference Between Two Means</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">13.6.4.1. Motivating Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">13.6.4.2. Step 1. Define Hypotheses.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">13.6.4.3. Step 2. Assume <span class="math notranslate nohighlight">\(H_0\)</span> is True.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">13.6.4.4. Step 3. Compute the Test Statistic.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-calculate-the-p-value">13.6.4.5. Step 4. Calculate the P-Value.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">13.6.4.6. Step 5. State Conclusions.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#small-sample-different-between-pairwise-means">13.6.5. Small-Sample Different Between Pairwise Means</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">13.6.5.1. Motivating Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">13.6.5.2. Step 1. Define Hypotheses.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">13.6.5.3. Step 2. Assume <span class="math notranslate nohighlight">\(H_0\)</span> is True.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">13.6.5.4. Step 3. Compute the Test Statistic.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">13.6.5.5. Step 4. Calculate P-Value.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">13.6.5.6. Step 5. State Conclusions.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#population-proportion">13.6.6. Population Proportion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">13.6.6.1. Motivating Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">13.6.6.2. Step 1. Define Hypotheses.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">13.6.6.3. Step 2. Assume <span class="math notranslate nohighlight">\(H_0\)</span> is True.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">13.6.6.4. Step 3. Compute the Test Statistic.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">13.6.6.5. Step 4. Calculate P-Value.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">13.6.6.6. Step 5. State Conclusions.</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="flavors-of-hypothesis-testing">
+<h1><span class="section-number">13.6. </span>Flavors of Hypothesis Testing<a class="headerlink" href="#flavors-of-hypothesis-testing" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load libraries</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="introduction">
+<h2><span class="section-number">13.6.1. </span>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>There are many flavors of hypothesis testing. In this tutorial, we will explore the types of hypothesis testing you are most likely to encounter as an engineer. Our textbook, Navidi (2015), explores many more extensions. Remember, confidence intervals and hypothesis testings are conceptually very similar!</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Problem Type</p></th>
+<th class="head"><p>Confidence Intervals</p></th>
+<th class="head"><p>Hypothesis Testing</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Large-Sample Population Mean</p></td>
+<td><p>§5.1</p></td>
+<td><p>§6.1</p></td>
+</tr>
+<tr class="row-odd"><td><p>Proportions</p></td>
+<td><p>§5.2</p></td>
+<td><p>§6.3</p></td>
+</tr>
+<tr class="row-even"><td><p>Small-Sample Population Mean</p></td>
+<td><p>§5.3</p></td>
+<td><p>§6.4</p></td>
+</tr>
+<tr class="row-odd"><td><p>(Large-Sample) Difference Between Two Means</p></td>
+<td><p>§5.4</p></td>
+<td><p>§6.5</p></td>
+</tr>
+<tr class="row-even"><td><p>Difference Between Two Proportions</p></td>
+<td><p>§5.5</p></td>
+<td><p>§6.6</p></td>
+</tr>
+<tr class="row-odd"><td><p>Small-Sample Difference Between Two Means</p></td>
+<td><p>§5.6</p></td>
+<td><p>§6.7</p></td>
+</tr>
+<tr class="row-even"><td><p>Paired Data</p></td>
+<td><p>§5.7</p></td>
+<td><p>§6.8</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Large-Sample</strong> is code for “use z-statistic” and <strong>Small-Sample</strong> is code for “use t-statistic”.</p>
+</section>
+<section id="learning-objectives">
+<h2><span class="section-number">13.6.2. </span>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>After studying this notebook, completing the activities, and reviewing the textbook, you should be able to:</p>
+<ul class="simple">
+<li><p>Apply the five-step hypothesis testing method</p></li>
+<li><p>Decide which test type and statistic to use based on the problem description</p></li>
+<li><p>Check assumptions for the chosen statistical test</p></li>
+</ul>
+</section>
+<section id="small-sample-test-for-population-mean">
+<h2><span class="section-number">13.6.3. </span>Small-Sample Test for Population Mean<a class="headerlink" href="#small-sample-test-for-population-mean" title="Link to this heading">#</a></h2>
+<p><strong>a.k.a. single-sample t-test</strong></p>
+<section id="motivating-example">
+<h3><span class="section-number">13.6.3.1. </span>Motivating Example<a class="headerlink" href="#motivating-example" title="Link to this heading">#</a></h3>
+<p>During your internships at Off-Brand Cola, Inc. this summer, you learn that a 12oz can of fizz has a sugar content specification of 38.98 - 39.02 grams. The manufacturing process is supposed to be calibrated so the mean sugar per can is 39.00 grams (otherwise the FDA gets upset), which is the center of the specification window. Six cans are randomly selected for inspection. There sugar contents are:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sugar</span> <span class="o">=</span> <span class="p">[</span><span class="mf">39.030</span><span class="p">,</span> <span class="mf">38.997</span><span class="p">,</span> <span class="mf">39.012</span><span class="p">,</span> <span class="mf">39.008</span><span class="p">,</span> <span class="mf">39.019</span><span class="p">,</span> <span class="mf">39.002</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Based on historical data, you are comfortable assuming the population distribution is normal.</p>
+<p><strong>Main Question</strong> Can you conclude the process needs recalibration?</p>
+<p>We will now walk through the 5-step hypothesis testing procedure.</p>
+</section>
+<section id="step-1-define-hypotheses">
+<h3><span class="section-number">13.6.3.2. </span>Step 1. Define Hypotheses.<a class="headerlink" href="#step-1-define-hypotheses" title="Link to this heading">#</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(\mu\)</span> denote the population mean.</p>
+<div class="math notranslate nohighlight">
+\[H_0: \mu = 39.00 \qquad \mathrm{versus} \qquad H_1: \mu \neq 39.00\]</div>
+</section>
+<section id="step-2-assume-h-0-is-true">
+<h3><span class="section-number">13.6.3.3. </span>Step 2. Assume <span class="math notranslate nohighlight">\(H_0\)</span> is True.<a class="headerlink" href="#step-2-assume-h-0-is-true" title="Link to this heading">#</a></h3>
+</section>
+<section id="step-3-compute-the-test-statistic">
+<h3><span class="section-number">13.6.3.4. </span>Step 3. Compute the Test Statistic.<a class="headerlink" href="#step-3-compute-the-test-statistic" title="Link to this heading">#</a></h3>
+<p>We do not know the population standard deviation, so we will use a t-statistic.</p>
+<div class="math notranslate nohighlight">
+\[
+t = \frac{\bar{x} - \mu}{s / \sqrt{n}}
+\]</div>
+<p>Before we proceed with the calculation, we should check out dataset for outliers. We assumed the population distribution is normal, but we should still plot the sample to check.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate sample mean and standard deviation</span>
+<span class="n">xbar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sugar</span><span class="p">)</span>
+
+<span class="c1"># ddof=1 uses the 1/(N-1) formula</span>
+<span class="c1"># ddof=0 uses the 1/N formula (default)</span>
+<span class="c1"># notice we are using numpy instead of pandas to compute standard deviation</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">sugar</span><span class="p">,</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sugar</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sample Mean:&quot;</span><span class="p">,</span><span class="n">xbar</span><span class="p">,</span><span class="s2">&quot;g&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sample Standard Deviation:&quot;</span><span class="p">,</span><span class="n">s</span><span class="p">,</span><span class="s2">&quot;g&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample Mean: 39.01133333333333 g
+Sample Standard Deviation: 0.011927559124425172 g
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot histogram</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">sugar</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Sugar per can [grams]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frequency&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/7714945455f6e626cf04c2ffa9056de7daceefce1397539a651d6b1e9e416dc0.png" src="../../_images/7714945455f6e626cf04c2ffa9056de7daceefce1397539a651d6b1e9e416dc0.png" />
+</div>
+</div>
+<p><strong>Interpretation</strong>: Six samples is fairly small. Although the largest value may look like an outlier, it is within two standard deviations of the sample mean which is not too uncommon by random chance.</p>
+<p>We can now <strong>compute the test statistic</strong>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tscore</span> <span class="o">=</span> <span class="p">(</span><span class="n">xbar</span> <span class="o">-</span> <span class="mf">39.00</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">s</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;t = &quot;</span><span class="p">,</span><span class="n">tscore</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t =  2.3274572326112604
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-4-calculate-p-value">
+<h3><span class="section-number">13.6.3.5. </span>Step 4. Calculate P-Value.<a class="headerlink" href="#step-4-calculate-p-value" title="Link to this heading">#</a></h3>
+<p>Store your answer in <code class="docutils literal notranslate"><span class="pre">pvalue_a</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.06742438341891084
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-5-state-conclusions">
+<h3><span class="section-number">13.6.3.6. </span>Step 5. State Conclusions.<a class="headerlink" href="#step-5-state-conclusions" title="Link to this heading">#</a></h3>
+<p>You now need to interpret the results and state the conclusions. Because the calibration is fast and inexpensive, your team decide to use a significance level of <span class="math notranslate nohighlight">\(\alpha=\)</span> 7.5%.</p>
+<p>Fill in the blank. Store your selection as a integer 1, 2, 3, or 4 in <code class="docutils literal notranslate"><span class="pre">interpret_a</span></code>.</p>
+<p>Therefore, we __________.</p>
+<ol class="arabic simple">
+<li><p>Accept the null hypothesis.</p></li>
+<li><p>Reject the null hypothesis.</p></li>
+<li><p>Fail to reject the null hypothesis.</p></li>
+<li><p>None of the above.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Should we recommend to recalibrate the machine? Store your answer as <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code> in <code class="docutils literal notranslate"><span class="pre">conclude_a</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="small-sample-difference-between-two-means">
+<h2><span class="section-number">13.6.4. </span>Small-Sample Difference Between Two Means<a class="headerlink" href="#small-sample-difference-between-two-means" title="Link to this heading">#</a></h2>
+<p><strong>a.k.a. two-sample t-test</strong></p>
+<section id="id1">
+<h3><span class="section-number">13.6.4.1. </span>Motivating Example<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>Consider the comparison of item recognition between two website designs. A sample of <span class="math notranslate nohighlight">\(n_Y\)</span> = 10 users using a conventional website design averaged <span class="math notranslate nohighlight">\(\bar{Y} = \)</span> 32.2 items identified, with a standard deviation of <span class="math notranslate nohighlight">\(s_Y\)</span> = 8.56. A separate sample of <span class="math notranslate nohighlight">\(n_X\)</span> = 10 users using a new website design averaged <span class="math notranslate nohighlight">\(\bar{X}\)</span> = 44.1 items identified, with a standard deviation of <span class="math notranslate nohighlight">\(s_X\)</span> = 10.09.</p>
+<p>Can we conclude the mean number of items identified is greater with the new website design?</p>
+</section>
+<section id="id2">
+<h3><span class="section-number">13.6.4.2. </span>Step 1. Define Hypotheses.<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(\mu_X\)</span> and <span class="math notranslate nohighlight">\(\mu_Y\)</span> denote the population means for the new and old designs, respectively.</p>
+<div class="math notranslate nohighlight">
+\[H_0: \mu_X - \mu_Y \leq 0 \qquad \mathrm{versus} \qquad H_1: \mu_X - \mu_Y &gt; 0\]</div>
+</section>
+<section id="id3">
+<h3><span class="section-number">13.6.4.3. </span>Step 2. Assume <span class="math notranslate nohighlight">\(H_0\)</span> is True.<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+</section>
+<section id="id4">
+<h3><span class="section-number">13.6.4.4. </span>Step 3. Compute the Test Statistic.<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>We do not know the population standard deviation, so we will use a t-statistic for the difference of means.</p>
+<div class="math notranslate nohighlight">
+\[
+t = \frac{\bar{X} - \bar{Y} - 0}{\sqrt{s_X^2/n_x + s_Y^2/n_Y}}
+\]</div>
+<p>In order to use this test, we must assume both populations are normally distributed.</p>
+<p>The degrees of freedom are:</p>
+<div class="math notranslate nohighlight">
+\[
+\nu = \frac{\left(\frac{s_X^2}{n_X} + \frac{s_Y^2}{n_Y}\right)^2}{\frac{(s_X^2/n_X)^2}{n_X - 1} + \frac{(s_Y^2/n_Y)^2}{n_Y - 1}}, \qquad \mathrm{rounded~down~to~the~nearest~integer}
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># old website</span>
+<span class="n">ybar</span> <span class="o">=</span> <span class="mf">32.2</span>
+<span class="n">sy</span> <span class="o">=</span> <span class="mf">8.56</span>
+<span class="n">ny</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1"># new website</span>
+<span class="n">xbar</span> <span class="o">=</span> <span class="mf">44.1</span>
+<span class="n">sx</span> <span class="o">=</span> <span class="mf">10.09</span>
+<span class="n">nx</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="n">xbar</span> <span class="o">-</span> <span class="n">ybar</span> <span class="o">-</span> <span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sx</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">nx</span> <span class="o">+</span> <span class="n">sy</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">ny</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;t = &quot;</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t =  2.8439803014215195
+</pre></div>
+</div>
+</div>
+</div>
+<p>Calculate the degrees of freedom (<span class="math notranslate nohighlight">\(\nu\)</span>). Store your answer in <code class="docutils literal notranslate"><span class="pre">dof_b</span></code>. Remember to round down.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Degrees of freedom:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dof_b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Degrees of freedom:
+17.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-4-calculate-the-p-value">
+<h3><span class="section-number">13.6.4.5. </span>Step 4. Calculate the P-Value.<a class="headerlink" href="#step-4-calculate-the-p-value" title="Link to this heading">#</a></h3>
+<p>Calculate the P-value. Store your result in <code class="docutils literal notranslate"><span class="pre">pvalue_b</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;P-value&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pvalue_b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P-value
+0.005607955797872655
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id5">
+<h3><span class="section-number">13.6.4.6. </span>Step 5. State Conclusions.<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<p>The marketing team decides a priori to use a significance level of 5% to balance reward and costs.</p>
+<p>Choose the best conclusion from the following:</p>
+<ol class="arabic simple">
+<li><p>Reject the null hypothesis. The <strong>old</strong> website has a higher mean number of items recognized.</p></li>
+<li><p>Reject the null hypothesis. The <strong>new</strong> website has a higher mean number of items recognized.</p></li>
+<li><p>Accept the null hypothesis. The <strong>old</strong> website has a higher mean number of items recognized.</p></li>
+<li><p>Accept the null hypothesis. The <strong>new</strong> website has a higher mean number of items recognized.</p></li>
+<li><p>Fail to reject the null hypothesis. The <strong>old</strong> website has a higher mean number of items recognized.</p></li>
+<li><p>Fail to reject the null hypothesis. The <strong>new</strong> website has a higher mean number of items recognized.</p></li>
+</ol>
+<p>Record your answer as an integer in <code class="docutils literal notranslate"><span class="pre">conclude_b</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="small-sample-different-between-pairwise-means">
+<h2><span class="section-number">13.6.5. </span>Small-Sample Different Between Pairwise Means<a class="headerlink" href="#small-sample-different-between-pairwise-means" title="Link to this heading">#</a></h2>
+<p><strong>a.k.a. paired t-test</strong></p>
+<section id="id6">
+<h3><span class="section-number">13.6.5.1. </span>Motivating Example<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<p>Particulate matter (PM) emissions from automobiles cause serious environmental impacts. Eight vehicles were chosen at random from a fleet, and their emissions were measured under both highway and stop-and-go driving conditions. The difference, stop-and-go minus highway emissions, for each car were then computed. Below are the results in mg per gallon of fuel:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stop_go</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1500</span><span class="p">,</span> <span class="mi">870</span><span class="p">,</span> <span class="mi">1120</span><span class="p">,</span> <span class="mi">1250</span><span class="p">,</span> <span class="mi">3460</span><span class="p">,</span> <span class="mi">1110</span><span class="p">,</span> <span class="mi">1120</span><span class="p">,</span> <span class="mi">880</span><span class="p">])</span>
+<span class="n">highway</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">941</span><span class="p">,</span> <span class="mi">456</span><span class="p">,</span> <span class="mi">893</span><span class="p">,</span> <span class="mi">1060</span><span class="p">,</span> <span class="mi">3107</span><span class="p">,</span> <span class="mi">1339</span><span class="p">,</span> <span class="mi">1346</span><span class="p">,</span> <span class="mi">644</span><span class="p">])</span>
+
+<span class="n">diff</span> <span class="o">=</span> <span class="n">stop_go</span> <span class="o">-</span> <span class="n">highway</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 559  414  227  190  353 -229 -226  236]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The first element of each array are data from car 1, the second for car 2, etc.</p>
+<p>Can we conclude that the mean level of emissions is less for highway driving than for stop-and-go driving?</p>
+</section>
+<section id="id7">
+<h3><span class="section-number">13.6.5.2. </span>Step 1. Define Hypotheses.<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<p>We will treat the difference for each car as a single random variable: <span class="math notranslate nohighlight">\(D\)</span>. Let <span class="math notranslate nohighlight">\(\mu_D\)</span> and <span class="math notranslate nohighlight">\(\sigma_D\)</span> represent the mean and standard deviation of the population distribution for the difference.</p>
+<div class="math notranslate nohighlight">
+\[H_0: \mu_D \leq 0 \qquad \mathrm{versus} \qquad H_1: \mu_D &gt; 0\]</div>
+</section>
+<section id="id8">
+<h3><span class="section-number">13.6.5.3. </span>Step 2. Assume <span class="math notranslate nohighlight">\(H_0\)</span> is True.<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+</section>
+<section id="id9">
+<h3><span class="section-number">13.6.5.4. </span>Step 3. Compute the Test Statistic.<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<p>We do not know the population standard deviation, so we will use a t-statistic.</p>
+<div class="math notranslate nohighlight">
+\[
+t = \frac{\bar{D} - \mu_D}{s / \sqrt{n}}
+\]</div>
+<p>Notice this becomes a “vanilla” one-sample t-test after we take the difference.</p>
+<p>Before we proceed with the calculation, we should check out dataset for outliers. We assumed the population distribution is normal, but we should still plot the sample to check.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate sample mean and standard deviation</span>
+<span class="n">xbar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span>
+
+<span class="c1"># ddof=1 uses the 1/(N-1) formula</span>
+<span class="c1"># ddof=0 uses the 1/N formula (default)</span>
+<span class="c1"># some statistics textbooks strongly emphasize using 1/(N-1)</span>
+<span class="c1"># we will not dwell on the different this semester and use them interchangably</span>
+<span class="c1"># we will use ddof=1 to match the scanned figure below</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">diff</span><span class="p">,</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sample Mean:&quot;</span><span class="p">,</span><span class="n">xbar</span><span class="p">,</span><span class="s2">&quot;mg / gallon fuel&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sample Standard Deviation:&quot;</span><span class="p">,</span><span class="n">s</span><span class="p">,</span><span class="s2">&quot;mg / gallon fuel&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample Mean: 190.5 mg / gallon fuel
+Sample Standard Deviation: 284.1041056675226 mg / gallon fuel
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot histogram</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Difference in PM emissions [mg / gallon fuel]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frequency&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/c6b6031597e61826c99d19324d0b16f554483725b211d45f8b053722c2d3f8d0.png" src="../../_images/c6b6031597e61826c99d19324d0b16f554483725b211d45f8b053722c2d3f8d0.png" />
+</div>
+</div>
+<p><strong>Interpretation</strong>: There are two cars with a negative difference. The remaining six have a positive difference. The two cars look like outliers. We will proceed with the hypothesis testing to offer a complete example, but we need to be extremely skeptical of the results. From an engineering perspective, <strong>we should investigate these two outliers further</strong>. This could give us new insights about PM emissions.</p>
+<p>We will now <strong>compute the test statistic</strong>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tscore</span> <span class="o">=</span> <span class="p">(</span><span class="n">xbar</span> <span class="o">-</span> <span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">s</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;t = &quot;</span><span class="p">,</span><span class="n">tscore</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t =  1.8965419946965025
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id10">
+<h3><span class="section-number">13.6.5.5. </span>Step 4. Calculate P-Value.<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<p>Which graph below shows the correct shaded region for this hypothesis test?</p>
+<p><img alt="one-sided-left" src="https://ndcbe.github.io/data-and-computing/_images/one-sided-left.png" />
+<img alt="two-sided" src="https://ndcbe.github.io/data-and-computing/_images/two-sided.png" />
+<img alt="one-sided-right" src="https://ndcbe.github.io/data-and-computing/_images/one-sided-right.png" /></p>
+<p>Choices:</p>
+<ol class="arabic simple">
+<li><p>one-sided (left)</p></li>
+<li><p>two-sided</p></li>
+<li><p>one-sided (right)</p></li>
+<li><p>none of these</p></li>
+</ol>
+<p>Record your answer as an integer in <code class="docutils literal notranslate"><span class="pre">sketch_c</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now calculate the p-value. Store your answer in <code class="docutils literal notranslate"><span class="pre">pvalue_c</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;P-value:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pvalue_c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P-value:
+0.049855871601833246
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id11">
+<h3><span class="section-number">13.6.5.6. </span>Step 5. State Conclusions.<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
+<p>We will not interpret the P-value for this example because the sample contains likely outliers. This suggests the assumption that the population is normally distributed is violated, and thus we cannot apply the t-test.</p>
+<p>Instead we recommend:</p>
+<ol class="arabic simple">
+<li><p>Investigate why two cars had a different trend than the other 2.</p></li>
+<li><p>Take a larger sample. This would allow us to invoke the central limit theorem.</p></li>
+</ol>
+</section>
+</section>
+<section id="population-proportion">
+<h2><span class="section-number">13.6.6. </span>Population Proportion<a class="headerlink" href="#population-proportion" title="Link to this heading">#</a></h2>
+<section id="id12">
+<h3><span class="section-number">13.6.6.1. </span>Motivating Example<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<p>A supplier of semiconductor wafers claims that for all of the wafers they supply, no more than 10% are defective. We receive and test a sample of 400 wafers, and find 50 of them (<span class="math notranslate nohighlight">\(\hat{p}\)</span> = 50/400 = 12.5%) are defective. Can we conclude the supplier’s claim is false?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># proportion of tested waffers that are defective</span>
+<span class="c1"># sample proportion</span>
+<span class="n">phat</span> <span class="o">=</span> <span class="mf">0.125</span>
+
+<span class="c1"># sample size</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">400</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id13">
+<h3><span class="section-number">13.6.6.2. </span>Step 1. Define Hypotheses.<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(p\)</span> represent the proportion of defective wafers in the population. If we assume the manufacturing of each wafer is independent, <span class="math notranslate nohighlight">\(p\)</span> is also the probability a single wafer is defective.</p>
+<div class="math notranslate nohighlight">
+\[H_0: p \leq 0.1 \qquad \mathrm{versus} \qquad H_1: p &gt; 0.1\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># null hypothesis proportion</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mf">0.1</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id14">
+<h3><span class="section-number">13.6.6.3. </span>Step 2. Assume <span class="math notranslate nohighlight">\(H_0\)</span> is True.<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
+</section>
+<section id="id15">
+<h3><span class="section-number">13.6.6.4. </span>Step 3. Compute the Test Statistic.<a class="headerlink" href="#id15" title="Link to this heading">#</a></h3>
+<p>Recall <span class="math notranslate nohighlight">\(\hat{p}\)</span> is the <strong>sample proportion</strong>, which we will use to draw inferences about the <strong>population proportion</strong> <span class="math notranslate nohighlight">\(p\)</span>.</p>
+<p>If we assume wafers are sampled independently, we can use the large sample size to invoke the Central Limit Theorem:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{p} \sim \mathcal{N}\left(p,~ \frac{p(1-p)}{n} \right)
+\]</div>
+<p><em>Side note</em>: We could model wafer production with the binomial distribution. With a large sample (many trials), the binomial distribution is closely approximated by the normal distribution.</p>
+<p>The standard deviation of <span class="math notranslate nohighlight">\(\hat{p}\)</span>, denoted <span class="math notranslate nohighlight">\(\sigma_{\hat{p}}\)</span> is calculated as follows:</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_{\hat{p}} = \sqrt{\frac{p (1-p)}{n}}
+\]</div>
+<p>We can now calculate the z-statistics:</p>
+<div class="math notranslate nohighlight">
+\[
+z = \frac{\hat{p} - p}{\sigma_{\hat{p}}}
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s_phat</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">p</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p</span><span class="p">)</span><span class="o">/</span><span class="n">n</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;sigma_phat =&quot;</span><span class="p">,</span><span class="n">s_phat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sigma_phat = 0.015000000000000001
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="p">(</span><span class="n">phat</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span><span class="o">/</span><span class="n">s_phat</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;z =&quot;</span><span class="p">,</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>z = 1.666666666666666
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id16">
+<h3><span class="section-number">13.6.6.5. </span>Step 4. Calculate P-Value.<a class="headerlink" href="#id16" title="Link to this heading">#</a></h3>
+<p>Calculate the P-value. Store your answer in <code class="docutils literal notranslate"><span class="pre">pvalue_d</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;P-value:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pvalue_d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P-value:
+0.04779035227281481
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id17">
+<h3><span class="section-number">13.6.6.6. </span>Step 5. State Conclusions.<a class="headerlink" href="#id17" title="Link to this heading">#</a></h3>
+<p>Choose the best set of conclusions using an <span class="math notranslate nohighlight">\(\alpha\)</span> = 0.01 significance level:</p>
+<ol class="arabic simple">
+<li><p>Reject the null hypothesis. The claim is true.</p></li>
+<li><p>Reject the null hypothesis. Based on the data, we cannot determine the claim is false.</p></li>
+<li><p>Reject the null hypothesis. The claim is false.</p></li>
+<li><p>Fail to reject the null hypothesis. The claim is true.</p></li>
+<li><p>Fail to reject the null hypothesis. The claim is false.</p></li>
+<li><p>Fail to reject the null hypothesis. Based on the data, we cannot determine the claim is false.</p></li>
+<li><p>Accept the null hypothesis. The claim is true.</p></li>
+<li><p>Accept the null hypothesis. The claim is false.</p></li>
+<li><p>Accept the null hypothesis. Based on the data, we cannot determine the claim is false.</p></li>
+</ol>
+<p>Record your selection as an integer in <code class="docutils literal notranslate"><span class="pre">conclude_d</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/13"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Hypothesis-Testing-Basics.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">13.5. </span>Hypothesis Testing Basics</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Type-I-and-Type-II-Errors.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">13.7. </span>Type I and Type II Errors</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">13.6.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">13.6.2. Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#small-sample-test-for-population-mean">13.6.3. Small-Sample Test for Population Mean</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#motivating-example">13.6.3.1. Motivating Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-define-hypotheses">13.6.3.2. Step 1. Define Hypotheses.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-assume-h-0-is-true">13.6.3.3. Step 2. Assume <span class="math notranslate nohighlight">\(H_0\)</span> is True.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-compute-the-test-statistic">13.6.3.4. Step 3. Compute the Test Statistic.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-calculate-p-value">13.6.3.5. Step 4. Calculate P-Value.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-state-conclusions">13.6.3.6. Step 5. State Conclusions.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#small-sample-difference-between-two-means">13.6.4. Small-Sample Difference Between Two Means</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">13.6.4.1. Motivating Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">13.6.4.2. Step 1. Define Hypotheses.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">13.6.4.3. Step 2. Assume <span class="math notranslate nohighlight">\(H_0\)</span> is True.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">13.6.4.4. Step 3. Compute the Test Statistic.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-calculate-the-p-value">13.6.4.5. Step 4. Calculate the P-Value.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">13.6.4.6. Step 5. State Conclusions.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#small-sample-different-between-pairwise-means">13.6.5. Small-Sample Different Between Pairwise Means</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">13.6.5.1. Motivating Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">13.6.5.2. Step 1. Define Hypotheses.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">13.6.5.3. Step 2. Assume <span class="math notranslate nohighlight">\(H_0\)</span> is True.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">13.6.5.4. Step 3. Compute the Test Statistic.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">13.6.5.5. Step 4. Calculate P-Value.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">13.6.5.6. Step 5. State Conclusions.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#population-proportion">13.6.6. Population Proportion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">13.6.6.1. Motivating Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">13.6.6.2. Step 1. Define Hypotheses.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">13.6.6.3. Step 2. Assume <span class="math notranslate nohighlight">\(H_0\)</span> is True.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">13.6.6.4. Step 3. Compute the Test Statistic.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">13.6.6.5. Step 4. Calculate P-Value.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">13.6.6.6. Step 5. State Conclusions.</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

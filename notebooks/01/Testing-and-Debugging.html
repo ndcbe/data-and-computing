@@ -1,0 +1,1731 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>1.14. Testing and Debugging in Python &#8212; Data and Computing for Chemical Engineers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/01/Testing-and-Debugging';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="1.15. Preparing Publication Quality Figures in Python" href="Publication-Quality-Figures.html" />
+    <link rel="prev" title="1.13. Functions as Arguments" href="Functions-as-Arguments.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/cbe_logo.jpg" class="logo__image only-light" alt="Data and Computing for Chemical Engineers - Home"/>
+    <script>document.write(`<img src="../../_static/cbe_logo.jpg" class="logo__image only-dark" alt="Data and Computing for Chemical Engineers - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Data and Computing for Engineers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Programming</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Python-Primer.html">1. Python Primer</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Jupyter-Notebooks.html">1.1. Welcome to Jupyter Notebooks and Vocareum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Python-Basics-I-Variables-Strings-Bugs.html">1.2. Python Basics I: Variables, Strings, and Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Flow-control.html">1.3. Python Basics II: Loopy Logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Python-Basics-III-Lists-Dictionaries-Enumeration.html">1.4. Python Basics III: Lists, Dictionaries, and Enumeration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Functions-and-Scope.html">1.5. Functions and Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Recursion.html">1.6. Recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Pseudocode.html">1.7. Pseudocode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example-High-Low-Game.html">1.8. High/Low Guess My Number Game</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Modules-and-Files.html">1.9. Modules and Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NumPy.html">1.10. Linear Algebra with Numpy and Scipy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Matplotlib.html">1.11. Visualization with matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Pandas.html">1.12. Manipulating Data with Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Functions-as-Arguments.html">1.13. Functions as Arguments</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.14. Testing and Debugging in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Publication-Quality-Figures.html">1.15. Preparing Publication Quality Figures in Python</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../02/advanced_python.html">2. Advanced Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Methods</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03/linear_algebra.html">3. Linear Algebra Primer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter1.html">3.1. Chapter 1: Math Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter2.html">3.2. Chapter 2: Intro to Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter3.html">3.3. Chapter 3: Computational linear algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter4.html">3.4. Chapter 4: Geometric Aspects of Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter5.html">3.5. Chapter 5: Linear Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter6.html">3.6. Chapter 6: Theoretical Linear Algebra</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../04/linear_algebra.html">4. Applied Linear Algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../04/Modeling-Systems-of-Linear-Equations.html">4.1. Modeling Systems of Linear Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Gauss-Elimination.html">4.2. Gaussian Elimination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Invertible-Matrix-Theorem-and-Gauss-Example.html">4.3. Invertible Matrix Theorem and Gaussian Elimination Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/LU-Decomposition.html">4.4. LU Decomposition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Condition-Number.html">4.5. Errors in Linear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Example-Atomic-Mass-Balances.html">4.6. Example: Mass Balances and Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Linear-Algebra-in-Numpy.html">4.7. Linear Algebra Review and SciPy Basics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05/algorithms.html">5. Algorithm Building Blocks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../05/Taylor-Series.html">5.1. Taylor Series Approximations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05/Finite-Difference.html">5.2. Finite Difference Derivative Approximations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05/Example-Heating-a-Metal-Slab.html">5.3. Example: Heating a Metal Slab</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../06/nonlinear_systems.html">6. Nonlinear Systems of Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../06/Modeling-Systems-of-Nonlinear-Equations.html">6.1. Modeling Systems of Nonlinear Equations: Flash Calculation Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Raphson-Method-in-One-Dimension.html">6.2. Newton-Raphson Method in One Dimension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/More-Newton-Type-Methods.html">6.3. More Newton-Type Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Convergence-Analysis-for-Newton-Raphson-Methods.html">6.4. Convergence Analysis for Newton-Raphson Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Raphson-Methods-for-Systems-of-Equations.html">6.5. Newton-Raphson Methods for Systems of Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Methods-in-Scipy.html">6.6. Newton Methods in Scipy</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../07/integration.html">7. Numeric Integration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../07/Intro-and-Newton-Cotes.html">7.1. Introduction and Newton-Cotes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Gauss-Quadrature.html">7.2. Gauss Quadrature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Scipy-Library-Adaptive-Methods-for-Newton-Cotes-and-Gauss-Quadrature.html">7.3. Scipy Library: Adaptive Methods for Newton-Cotes and Gauss Quadrature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Application-Inertial-Navigation-Systems.html">7.4. Application: Inertial Navigation Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Forward-and-Backward-Euler.html">7.5. Forward and Backward Euler Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Trapezoid-Rule.html">7.6. Crank-Nicolson (Trapezoid Rule)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Stability-Analysis.html">7.7. Stability Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Explicit-Runge-Kutta.html">7.8. Explicit Range Kutta Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Systems-of-Differential-Equations-and-Scipy.html">7.9. Systems of Differential Equations and Scipy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Example-Reaction-Rates.html">7.10. Example: Reaction Rates</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../08/optimization.html">8. Continuous Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../08/Pyomo-Basics.html">8.1. Pyomo Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../08/Electricity-Market-Optimization.html">8.2. Electricity Market Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../08/Flash-Calculations-in-Pyomo.html">8.3. Flash Calculations in Pyomo</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../09/stats.html">9. Descriptive Statistics and Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../09/Sampling.html">9.1. Sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../09/Summary-Statistics.html">9.2. Summary Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../09/Visualizing-Data.html">9.3. Visualizing Data</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../10/probability.html">10. Probability Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../10/Probability-Basics.html">10.1. Basic Ideas of Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Random-Variables.html">10.2. Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Jointly-Distributed-Random-Variables.html">10.3. Jointly Distributed Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Jointly-Continuous-Random-Variables.html">10.4. Jointly Continuous Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Practice-Problems.html">10.5. Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../11/distributions.html">11. Common Probability Distributions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../11/Bernoulli-Probability-Distribution.html">11.1. Bernoulli Probability Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Binomial-Probability-Distribtuion.html">11.2. Binomial Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Poisson-Probability-Distribution.html">11.3. Poisson Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Normal-Probability-Distribution.html">11.4. Normal Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Common-Probability-Distributions-Summary.html">11.5. Summary</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../12/uncertainty.html">12. Uncertainty and Error Propagation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../12/Measurement-Error.html">12.1. Measurement Error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Error-Propagation.html">12.2. Error Propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Measuring-Flowrate-Example.html">12.3. Measuring Flowrate Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Car-and-Incline-Example.html">12.4. Car and Incline Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Simulation.html">12.5. Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Monte-Carlo-Error-Propogation.html">12.6. Monte Carlo Error Propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Practice-Problems.html">12.7. Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../13/inference.html">13. Statistical Inference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../13/Central-Limit-Theorem.html">13.1. Central Limit Theorem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Standard-Normal-Distribution.html">13.2. Standard Normal Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Confidence-Intervals.html">13.3. Confidence Intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Students-t-Distribution.html">13.4. Student’s t-Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Hypothesis-Testing-Basics.html">13.5. Hypothesis Testing Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Flavors-of-Hypothesis-Testing.html">13.6. Flavors of Hypothesis Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Type-I-and-Type-II-Errors.html">13.7. Type I and Type II Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Statistical-Power-Basics.html">13.8. Statistical Power Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Statistical-Power-in-Python.html">13.9. Statistical Power in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Statistical-Power-Practice-Problems.html">13.10. Statistical Power Practice Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Bootstrap-Confidence-Intervals.html">13.11. Bootstrap Confidence Intervals</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../14/regression.html">14. Multivariate Linear Regression</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../14/Correlation-Covariance-and-Independence.html">14.1. Correlation, Covariance, and Independence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Least-Squares-Line.html">14.2. Simple Least Squares</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Ordinary-Least-Squares-Linear-Regression.html">14.3. Ordinary Least Squares Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Residual-Analysis.html">14.4. Residual Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Regression-Assumption-Examples.html">14.5. Regression Assumption Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Uncertainty-Analysis-and-Statistical-Inference.html">14.6. Uncertainty Analysis and Statistical Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Multivariate-Linear-Regression.html">14.7. Multivariate Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Linear-Regression-Practice-Problems.html">14.8. Linear Regression Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../15/advanced_regression.html">15. Nonlinear Regression</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../15/Transformations-and-Linear-Regression.html">15.1. Transformations and Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Weighted-Regression.html">15.2. Weighted Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Regression.html">15.3. Nonlinear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Regression-Practice-Problem.html">15.4. Nonlinear Regression Practice Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression.html">15.5. Monte Carlo Uncertainty Analysis for Nonlinear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Case-Study-Adsorptive-Membranes.html">15.6. Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../16/design_of_experiments.html">16. Design of Experiments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../16/Reaction-MBDoE.html">16.1. Model-Based Design of Experiments</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extra Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2022/home.html">Fall 2022</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/schedule.html">Fall 2022 Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/project1.html">Project 1: Computating for Problem Solving (Fall 2022)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/project2.html">Project 2: Data Analysis (Fall 2022)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2023/home.html">Fall 2023</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/schedule.html">Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/project.html">Semester Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet1_F23.html">Problem Set 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet2_F23.html">Problem Set 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet3_F23.html">Problem Set 3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet4_F23.html">Problem Set 4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet5_F23.html">Problem Set 5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet6_F23.html">Problem Set 6</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../contrib/contribute.html">Contributed Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Biotransport-Entrance-Length.html">Estimating the Entrance Length of Channel Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Non_Isothermal_PBR.html">Non-Isothermal Packed Bed Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Ficks_Law.html">Solving Fick’s Second Law Using Numeric Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Stochastic-Kinetics.html">Stochastic Simulation of Chemical Reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Spaghettification.html">Spaghettification of the Magic School Bus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Alcohol-Pharmacokinetics.html">Alcohol Pharmacokinetics and  Blood Alcohol Content % Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/McCabe-Thiele.html">Plotting McCabe-Thiele diagram through computational methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Wastewater-Treatment-Mass-Balance.html">Example of Mass Balance Problem in Wastewater Treatment Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Filtration.html">Filtration of a Yeast Suspension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Fraction_of_Molecular_Collisions.html">Calculating Fraction of Molecular Collisions</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/01/Testing-and-Debugging.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/data-and-computing" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/01/Testing-and-Debugging.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/01/Testing-and-Debugging.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Testing and Debugging in Python</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">1.14.1. Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-your-code">1.14.2. Testing Your Code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivating-example">1.14.3. Motivating Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-0-takes-inputs-as-advertised">1.14.4. Test 0: Takes Inputs as Advertised?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-1-initial-condition">1.14.5. Test 1: Initial Condition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-2-asymptotics">1.14.6. Test 2: Asymptotics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-3-check-a-few-inputs">1.14.7. Test 3: Check a Few Inputs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging">1.14.8. Debugging</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-is-a-mindset">1.14.9. Debugging is a Mindset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-1">1.14.10. Test 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-2">1.14.11. Test 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-3">1.14.12. Test 3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assertions">1.14.13. Assertions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-handling">1.14.14. Error Handling</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="testing-and-debugging-in-python">
+<h1><span class="section-number">1.14. </span>Testing and Debugging in Python<a class="headerlink" href="#testing-and-debugging-in-python" title="Link to this heading">#</a></h1>
+<p><strong>Reference</strong>: Chapter 6 of <em>Computational Nuclear Engineering and Radiological Science Using Python</em>, R. McClarren (2018)</p>
+<section id="learning-objectives">
+<h2><span class="section-number">1.14.1. </span>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>After studying this notebook, completing the activities, and asking questions in class, you should be able to:</p>
+<ul class="simple">
+<li><p>Create <code class="docutils literal notranslate"><span class="pre">assert</span></code> statements and <code class="docutils literal notranslate"><span class="pre">try</span></code>-<code class="docutils literal notranslate"><span class="pre">except</span></code> blocks of code</p></li>
+<li><p>Embrace the “debugging mindset” and test code you write. We strongly recommend creating a handful of unit tests for each function you write, especially for complex codes (e.g., mini-projects)</p></li>
+</ul>
+</section>
+<section id="testing-your-code">
+<h2><span class="section-number">1.14.2. </span>Testing Your Code<a class="headerlink" href="#testing-your-code" title="Link to this heading">#</a></h2>
+<p>Anytime you write code, you want to make sure that it accomplishes the desired task.</p>
+</section>
+<section id="motivating-example">
+<h2><span class="section-number">1.14.3. </span>Motivating Example<a class="headerlink" href="#motivating-example" title="Link to this heading">#</a></h2>
+<p>Through an example, we will demonstrate several strategies for systematically testing code.</p>
+<p>Phenolphthalein is a base indicator (it turns a pretty purple), but in the presence of a strong base it will fade over time.  This is a reversible reaction: pseudo first-order in the forward (fading) direction and first-order in the reverse direction.  The rate expression is:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{d[P]}{dt} = -k_{1}[P][OH^-]+k_{2}[POH] ~,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(k_{1}' = k_{1}  \cdot [OH^-]\)</span> is the pseudo first-order rate. <span class="math notranslate nohighlight">\([POH]\)</span> is only produced from this reaction, thus we have the mass balance:</p>
+<div class="math notranslate nohighlight">
+\[
+[POH] = [POH]\Big|_{t=0}+([P]_{0}-[P]) ~.
+\]</div>
+<p>With the initial conditions:</p>
+<div class="math notranslate nohighlight">
+\[
+[P]\Big|_{t=0}=[P]_{0}\qquad; \qquad [POH]\Big|_{t=0}=0 ~.
+\]</div>
+<p>We can solve these equations to get the solution:</p>
+<div class="math notranslate nohighlight">
+\[
+[P] = [P]_{0}\Big(\frac{k_{2}}{k_{1}'+k_{2}}+\frac{k_{1}'}{k_{1}'+k_{2}}e^{-(k_{1}'+k_{2})t}\Big) ~.
+\]</div>
+<p>Let’s examine a Python function to calculate the solution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="k">def</span> <span class="nf">P_conc</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">P0</span><span class="p">,</span> <span class="n">k1prime</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">LOUD</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Computes the concentration of phenolphthalein as a function of time</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        t: time, either a scalar (float) or vector (numpy array)</span>
+<span class="sd">        P0: initial concentration of phenolphthalein</span>
+<span class="sd">        k1prime: forward reaction rate constant</span>
+<span class="sd">        k2: reverse reaction rate constant</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        concentration, either a scalar (float) or vector (numpy array) depending on arg. t</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># compute first fraction in formula</span>
+    <span class="n">frac1</span> <span class="o">=</span> <span class="n">k2</span><span class="o">/</span><span class="p">(</span><span class="n">k1prime</span> <span class="o">+</span> <span class="n">k2</span><span class="p">)</span>
+    
+    <span class="c1"># compute second fraction in formula</span>
+    <span class="n">frac2</span> <span class="o">=</span> <span class="n">k1prime</span><span class="o">/</span><span class="p">(</span><span class="n">k1prime</span> <span class="o">+</span> <span class="n">k2</span><span class="p">)</span>
+    
+    <span class="c1"># compute term that goes into exponent</span>
+    <span class="n">pre_expon</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">k1prime</span> <span class="o">*</span> <span class="n">k2</span><span class="p">)</span><span class="o">*</span><span class="n">t</span>
+    
+    <span class="c1"># evaluate exponent</span>
+    <span class="n">expon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">pre_expon</span><span class="p">)</span>
+    
+    <span class="c1"># combine together</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">P0</span><span class="o">*</span><span class="p">(</span><span class="n">frac1</span> <span class="o">+</span> <span class="n">frac2</span><span class="o">*</span><span class="n">expon</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">LOUD</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;frac1 = &quot;</span><span class="p">,</span><span class="n">frac1</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;frac2 = &quot;</span><span class="p">,</span><span class="n">frac2</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pre_expon = &quot;</span><span class="p">,</span><span class="n">pre_expon</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;expon = &quot;</span><span class="p">,</span><span class="n">expon</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;P = &quot;</span><span class="p">,</span><span class="n">P</span><span class="p">)</span>
+    
+    <span class="c1"># return final value</span>
+    <span class="k">return</span> <span class="n">P</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will now go through several tests to see if our function behaves correctly. <em>Note:</em> There are a few intentional mistakes above to make this exercise more interesting.</p>
+</section>
+<section id="test-0-takes-inputs-as-advertised">
+<h2><span class="section-number">1.14.4. </span>Test 0: Takes Inputs as Advertised?<a class="headerlink" href="#test-0-takes-inputs-as-advertised" title="Link to this heading">#</a></h2>
+<p>Does the function return a single value if input t is a scalar and return a numpy array if t is a vector?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check with scalar t</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">P_conc</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check with vector t</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">P_conc</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1. 1. 1.]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Good. The time input works as advertised.</p>
+</section>
+<section id="test-1-initial-condition">
+<h2><span class="section-number">1.14.5. </span>Test 1: Initial Condition<a class="headerlink" href="#test-1-initial-condition" title="Link to this heading">#</a></h2>
+<p>First, let’s check if our function returns the initial condition at <span class="math notranslate nohighlight">\(t=0\)</span>. From the formula above, we expect:</p>
+<div class="math notranslate nohighlight">
+\[
+[P]\Big|_{t=0} = [P]_{0}\Big(\frac{k_{2}}{k_{1}'+k_{2}}+\frac{k_{1}'}{k_{1}'+k_{2}}e^{0}\Big) = [P]_{0}\Big(\frac{k_{2}}{k_{1}'+k_{2}}+\frac{k_{1}'}{k_{1}'+k_{2}}1\Big) = [P]_0
+\]</div>
+<p>Let’s start by defining a function for this test case. Notice the first input to our function is a function (see <a class="reference internal" href="Functions-and-Scope.html"><span class="std std-doc">this notebook on functions</span></a>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="k">def</span> <span class="nf">test1</span><span class="p">(</span><span class="n">Pfunc</span><span class="p">,</span> <span class="n">P0</span><span class="p">,</span> <span class="n">k1prime</span><span class="p">,</span> <span class="n">k2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; Initial condition test</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        Pfunc: a Python function to calculate P concentration. Expects 4 inputs.</span>
+<span class="sd">        P0: initial condition to test</span>
+<span class="sd">        k1prime: rate constant to test</span>
+<span class="sd">        k2: rate constant to test</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Boolean (true or false) indicates if our function passed or failed the test</span>
+<span class="sd">    </span>
+<span class="sd">    Side Effect:</span>
+<span class="sd">        Prints test parameters and message to screen</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Testing initial condition with following specifications:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;P0 = &quot;</span><span class="p">,</span><span class="n">P0</span><span class="p">,</span><span class="s2">&quot;  k1prime = &quot;</span><span class="p">,</span><span class="n">k1prime</span><span class="p">,</span> <span class="s2">&quot;  k2 = &quot;</span><span class="p">,</span><span class="n">k2</span><span class="p">)</span>
+    <span class="n">Pcalc</span> <span class="o">=</span> <span class="n">Pfunc</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">P0</span><span class="p">,</span> <span class="n">k1prime</span><span class="p">,</span> <span class="n">k2</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Calculate value of P = &quot;</span><span class="p">,</span><span class="n">Pcalc</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">math</span><span class="o">.</span><span class="n">fabs</span><span class="p">(</span><span class="n">Pcalc</span> <span class="o">-</span> <span class="n">P0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1E-8</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test passed.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Something is wrong. You need to debug your code.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>By defining this test as a function, we can quickly test several values for the input parameters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test1</span><span class="p">(</span><span class="n">P_conc</span><span class="p">,</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">)</span>
+
+<span class="n">test1</span><span class="p">(</span><span class="n">P_conc</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Testing initial condition with following specifications:
+P0 =  1.0   k1prime =  1.0   k2 =  1.0
+Calculate value of P =  1.0
+Test passed.
+
+Testing initial condition with following specifications:
+P0 =  5.0   k1prime =  1.0   k2 =  0.001
+Calculate value of P =  5.000000000000001
+Test passed.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition danger">
+<p class="admonition-title"><b>Tutorial Activity</b></p>
+<p>Take a few minutes to try a few more inputs. For example, <span class="math notranslate nohighlight">\(P_0\)</span> = 10, <span class="math notranslate nohighlight">\(k_1' = 0.0001\)</span> and <span class="math notranslate nohighlight">\(k_2\)</span> = 0.3. Can you find a set of inputs that causes the test to fail?</p>
+</div>
+</section>
+<section id="test-2-asymptotics">
+<h2><span class="section-number">1.14.6. </span>Test 2: Asymptotics<a class="headerlink" href="#test-2-asymptotics" title="Link to this heading">#</a></h2>
+<p>Let’s examine the solution again, but consider <span class="math notranslate nohighlight">\(t \rightarrow \infty\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+[P]\Big|_{t\rightarrow\infty} = [P]_{0}\Big(\frac{k_{2}}{k_{1}'+k_{2}}+\frac{k_{1}'}{k_{1}'+k_{2}}e^{-\infty}\Big) = [P]_{0}\Big(\frac{k_{2}}{k_{1}'+k_{2}}+\frac{k_{1}'}{k_{1}'+k_{2}}0\Big) = [P]_0 \Big(\frac{k_{2}}{k_{1}'+k_{2}} \Big)
+\]</div>
+<p>Let’s start by plotting <span class="math notranslate nohighlight">\([P]\)</span> as a function of time and see if it converges:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="c1">#this line is only needed in iPython notebooks</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline 
+
+<span class="k">def</span> <span class="nf">test2</span><span class="p">(</span><span class="n">Pfunc</span><span class="p">,</span> <span class="n">P0</span><span class="p">,</span> <span class="n">k1prime</span><span class="p">,</span> <span class="n">k2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Asymptotics test</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        Pfunc: a Python function to calculate P concentration. Expects 4 inputs.</span>
+<span class="sd">        P0: initial condition to test</span>
+<span class="sd">        k1prime: rate constant to test</span>
+<span class="sd">        k2: rate constant to test</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Boolean (true or false) indicates if our function passed or failed the test</span>
+<span class="sd">    </span>
+<span class="sd">    Side Effect:</span>
+<span class="sd">        Creates a plot. Prints if test passed or failed.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="c1"># Generate 20 points from 10^-1 to 10^4</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">P_conc</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">P0</span><span class="p">,</span> <span class="n">k1prime</span><span class="p">,</span> <span class="n">k2</span><span class="p">)</span>
+    
+    <span class="n">P_infty</span> <span class="o">=</span> <span class="n">P0</span><span class="o">*</span><span class="n">k2</span><span class="o">/</span><span class="p">(</span><span class="n">k1prime</span> <span class="o">+</span> <span class="n">k2</span><span class="p">)</span>
+    <span class="c1"># plot calculated value</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">P</span><span class="p">,</span><span class="s1">&#39;o-&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;function&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># plot calculated asymptotic value</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">P_infty</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;$([P]_0 \cdot k_</span><span class="si">{2}</span><span class="s2">) / (k_</span><span class="si">{1}</span><span class="s2">&#39;+k_</span><span class="si">{2}</span><span class="s2">)$&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># label plot</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (units not given)&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$[P]$ (units not given)&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;$[P]_0$ = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">P0</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;    $k_1&#39;$ = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">k1prime</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;    $k_2$ = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">k2</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+    <span class="c1"># check if solution converges to asymptotic value</span>
+    <span class="k">if</span> <span class="n">math</span><span class="o">.</span><span class="n">fabs</span><span class="p">(</span><span class="n">P</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">P_infty</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1E-6</span><span class="p">:</span>
+        <span class="c1"># Note: P[-1] accesses the last value in array P</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test Passed.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test Failed. Either debug code or increase time in test.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    
+<span class="n">test2</span><span class="p">(</span><span class="n">P_conc</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/d1a39d36525d1abf22df1a9bd38da1b1bfae74369348ffe50482a82cd68391c9.png" src="../../_images/d1a39d36525d1abf22df1a9bd38da1b1bfae74369348ffe50482a82cd68391c9.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test Passed.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="test-3-check-a-few-inputs">
+<h2><span class="section-number">1.14.7. </span>Test 3: Check a Few Inputs<a class="headerlink" href="#test-3-check-a-few-inputs" title="Link to this heading">#</a></h2>
+<p>We can calculate with pencil, paper and a calculator values for <span class="math notranslate nohighlight">\([P]\)</span> for a few sets of inputs. We can then test if our Python code is close.</p>
+<p>For simplicity, let’s consider <span class="math notranslate nohighlight">\(t=1\)</span>, <span class="math notranslate nohighlight">\(P[0] = 1\)</span>, <span class="math notranslate nohighlight">\(k_1' = 1\)</span>, <span class="math notranslate nohighlight">\(k_2 = 1\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[-(k_{1}'+k_{2})t = - (1 + 1) \cdot (1) = -2\]</div>
+<div class="math notranslate nohighlight">
+\[e^{-2} \approx 0.13534\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{k_{2}}{k_{1}'+k_{2}} = \frac{1}{1 + 1} = 0.5\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{k_{1}}{k_{1}'+k_{2}} = \frac{1}{1 + 1} = 0.5\]</div>
+<p>Combine it all together:</p>
+<div class="math notranslate nohighlight">
+\[
+[P] = [P]_{0}\Big(\frac{k_{2}}{k_{1}'+k_{2}}+\frac{k_{1}'}{k_{1}'+k_{2}}e^{-(k_{1}'+k_{2})t}\Big) = (1) \left(0.5 + 0.5 \cdot e^{-2} \right) \approx 0.56766
+\]</div>
+<p><em>Hint:</em> Remember, do not use an exact equality with floating point numbers. Instead, we check if the answers agree within a tolerance. See <a class="reference internal" href="Python-Basics-I-Variables-Strings-Bugs.html"><span class="std std-doc">the Python Basics I notebook</span></a> and <a class="reference internal" href="Flow-control.html"><span class="std std-doc">the Flow Control notebook</span></a> for more details.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define test 3 as a function</span>
+<span class="k">def</span> <span class="nf">test3</span><span class="p">(</span><span class="n">Pfunc</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Test function for known solution with t=1, [P0] = 1, k1prime = 1, k2 = 1</span>
+<span class="sd">    </span>
+<span class="sd">    Arg:</span>
+<span class="sd">        Pfunc: a Python function to calculate P concentration. Expects 4 inputs.</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Boolean (true or false) indicates if our function passed or failed the test</span>
+<span class="sd">    </span>
+<span class="sd">    Side Effect:</span>
+<span class="sd">        Prints test parameters and message to screen</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="c1"># Notice how using the keyword arguments makes the code very clear</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">Pfunc</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span><span class="n">P0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span><span class="n">k1prime</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span><span class="n">k2</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">math</span><span class="o">.</span><span class="n">fabs</span><span class="p">(</span><span class="n">P</span> <span class="o">-</span> <span class="mf">0.56766764161</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1E-6</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Passed Test 3.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Failed Test 3. Recreate your calculations and debug your code.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+<span class="c1"># Run test   </span>
+<span class="n">test3</span><span class="p">(</span><span class="n">P_conc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Failed Test 3. Recreate your calculations and debug your code.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="debugging">
+<h2><span class="section-number">1.14.8. </span>Debugging<a class="headerlink" href="#debugging" title="Link to this heading">#</a></h2>
+<p>Now that we’ve identified that our code has a bug, the process of finding that error is called debugging. Given that we ran three tests, and two of them passed we can use how the tests are different to identify where the bug might be.</p>
+<p>We’ll repeat the formula and function again:</p>
+<div class="math notranslate nohighlight">
+\[
+[P] = [P]_{0}\Big(\frac{k_{2}}{k_{1}'+k_{2}}+\frac{k_{1}'}{k_{1}'+k_{2}}e^{-(k_{1}'+k_{2})t}\Big) ~.
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="k">def</span> <span class="nf">P_conc</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">P0</span><span class="p">,</span> <span class="n">k1prime</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">LOUD</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Computes the concentration of phenolphthalein as a function of time</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        t: time, either a scalar (float) or vector (numpy array)</span>
+<span class="sd">        P0: initial concentration of phenolphthalein</span>
+<span class="sd">        k1prime: forward reaction rate constant</span>
+<span class="sd">        k2: reverse reaction rate constant</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        concentration, either a scalar (float) or vector (numpy array) depending on arg. t</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># compute first fraction in formula</span>
+    <span class="n">frac1</span> <span class="o">=</span> <span class="n">k2</span><span class="o">/</span><span class="p">(</span><span class="n">k1prime</span> <span class="o">+</span> <span class="n">k2</span><span class="p">)</span>
+    
+    <span class="c1"># compute second fraction in formula</span>
+    <span class="n">frac2</span> <span class="o">=</span> <span class="n">k1prime</span><span class="o">/</span><span class="p">(</span><span class="n">k1prime</span> <span class="o">+</span> <span class="n">k2</span><span class="p">)</span>
+    
+    <span class="c1"># compute term that goes into exponent</span>
+    <span class="n">pre_expon</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">k1prime</span> <span class="o">*</span> <span class="n">k2</span><span class="p">)</span><span class="o">*</span><span class="n">t</span>
+    
+    <span class="c1"># evaluate exponent</span>
+    <span class="n">expon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">pre_expon</span><span class="p">)</span>
+    
+    <span class="c1"># combine together</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">P0</span><span class="o">*</span><span class="p">(</span><span class="n">frac1</span> <span class="o">+</span> <span class="n">frac2</span><span class="o">*</span><span class="n">expon</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">LOUD</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;frac1 = &quot;</span><span class="p">,</span><span class="n">frac1</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;frac2 = &quot;</span><span class="p">,</span><span class="n">frac2</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pre_expon = &quot;</span><span class="p">,</span><span class="n">pre_expon</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;expon = &quot;</span><span class="p">,</span><span class="n">expon</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;P = &quot;</span><span class="p">,</span><span class="n">P</span><span class="p">)</span>
+    
+    <span class="c1"># return final value</span>
+    <span class="k">return</span> <span class="n">P</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="debugging-is-a-mindset">
+<h2><span class="section-number">1.14.9. </span>Debugging is a Mindset<a class="headerlink" href="#debugging-is-a-mindset" title="Link to this heading">#</a></h2>
+<p>To properly identify the bug you need to think about</p>
+<ol>
+<li> How is the code failing?
+<li> What is the code doing correctly?
+<li> What pieces of the code are most likely to have an error?
+</ol>
+<p>Moreover, your best tool for debugging is the <tt>print</tt> function.  When in doubt, have the code print out what happens after every line and check that with your intuition/expectation.</p>
+<p><b>When in doubt, print it (all) out!</b></p>
+<p>Notice that we used the <code class="docutils literal notranslate"><span class="pre">LOUD</span></code> keyword to help us quick toggle print statements on and off. You should always use this trick in this class.</p>
+<p>Let’s use the print statements to walk through the tests.</p>
+</section>
+<section id="test-1">
+<h2><span class="section-number">1.14.10. </span>Test 1<a class="headerlink" href="#test-1" title="Link to this heading">#</a></h2>
+<p><strong>Test 1</strong> checks that we get the initial condition at <span class="math notranslate nohighlight">\(t=0\)</span>. We expect that <code class="docutils literal notranslate"><span class="pre">prexpon</span></code> evaluates to 0.0 and <code class="docutils literal notranslate"><span class="pre">expon</span></code> evaluates to 1.0. Let’s see if this is happening:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P_conc</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">P0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">k1prime</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">k2</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">LOUD</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>frac1 =  0.5
+frac2 =  0.5
+pre_expon =  -0.0
+expon =  1.0
+P =  1.0
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>With <code class="docutils literal notranslate"><span class="pre">expon</span></code> at 1.0, <strong>Test 1</strong> checks that <code class="docutils literal notranslate"><span class="pre">frac1</span></code> and <code class="docutils literal notranslate"><span class="pre">frac2</span></code> sum to 1.0, which they do. Thus, it makes sense that <strong>Test 1</strong> passes.</p>
+</section>
+<section id="test-2">
+<h2><span class="section-number">1.14.11. </span>Test 2<a class="headerlink" href="#test-2" title="Link to this heading">#</a></h2>
+<p><strong>Test 2</strong> checks for the correct properties as <span class="math notranslate nohighlight">\(t \rightarrow \infty\)</span>. Let’s look at the output with <code class="docutils literal notranslate"><span class="pre">t</span></code> set to a huge number.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P_conc</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="mf">1E7</span><span class="p">,</span> <span class="n">P0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">k1prime</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">k2</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span> <span class="n">LOUD</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>frac1 =  0.6666666666666666
+frac2 =  0.3333333333333333
+pre_expon =  -20000000.0
+expon =  0.0
+P =  0.6666666666666666
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6666666666666666
+</pre></div>
+</div>
+</div>
+</div>
+<p>As expected, with <code class="docutils literal notranslate"><span class="pre">t</span></code> set to <span class="math notranslate nohighlight">\(10^7\)</span>, <code class="docutils literal notranslate"><span class="pre">expon</span></code> evaluates to 0.0. This kills <code class="docutils literal notranslate"><span class="pre">frac2</span></code>. The calculated value for <code class="docutils literal notranslate"><span class="pre">P</span></code> matches <code class="docutils literal notranslate"><span class="pre">frac1</span></code>, which we expect.</p>
+</section>
+<section id="test-3">
+<h2><span class="section-number">1.14.12. </span>Test 3<a class="headerlink" href="#test-3" title="Link to this heading">#</a></h2>
+<p>Now let’s compare the intermediate values we calculated by hand in <strong>Test 3</strong> to those reported below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P_conc</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">P0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">k1prime</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">k2</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">LOUD</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>frac1 =  0.5
+frac2 =  0.5
+pre_expon =  -1.0
+expon =  0.36787944117144233
+P =  0.6839397205857212
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6839397205857212
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition danger">
+<p class="admonition-title"><b>Tutorial Activity</b></p>
+<p>Examine the output from Tests 1, 2 and 3 above. Find and correct the bug in our code. Then rerun the tests.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Find the bug and fix this function</span>
+<span class="k">def</span> <span class="nf">P_conc_fixed</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">P0</span><span class="p">,</span> <span class="n">k1prime</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">LOUD</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Computes the concentration of phenolphthalein as a function of time</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        t: time, either a scalar (float) or vector (numpy array)</span>
+<span class="sd">        P0: initial concentration of phenolphthalein</span>
+<span class="sd">        k1prime: forward reaction rate constant</span>
+<span class="sd">        k2: reverse reaction rate constant</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        concentration, either a scalar (float) or vector (numpy array) depending on arg. t</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># compute first fraction in formula</span>
+    <span class="n">frac1</span> <span class="o">=</span> <span class="n">k2</span><span class="o">/</span><span class="p">(</span><span class="n">k1prime</span> <span class="o">+</span> <span class="n">k2</span><span class="p">)</span>
+    
+    <span class="c1"># compute second fraction in formula</span>
+    <span class="n">frac2</span> <span class="o">=</span> <span class="n">k1prime</span><span class="o">/</span><span class="p">(</span><span class="n">k1prime</span> <span class="o">+</span> <span class="n">k2</span><span class="p">)</span>
+    
+    <span class="c1"># compute term that goes into exponent</span>
+    <span class="n">pre_expon</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">k1prime</span> <span class="o">+</span> <span class="n">k2</span><span class="p">)</span><span class="o">*</span><span class="n">t</span>
+    
+    <span class="c1"># evaluate exponent</span>
+    <span class="n">expon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">pre_expon</span><span class="p">)</span>
+    
+    <span class="c1"># combine together</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">P0</span><span class="o">*</span><span class="p">(</span><span class="n">frac1</span> <span class="o">+</span> <span class="n">frac2</span><span class="o">*</span><span class="n">expon</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">LOUD</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;frac1 = &quot;</span><span class="p">,</span><span class="n">frac1</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;frac2 = &quot;</span><span class="p">,</span><span class="n">frac2</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pre_expon = &quot;</span><span class="p">,</span><span class="n">pre_expon</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;expon = &quot;</span><span class="p">,</span><span class="n">expon</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;P = &quot;</span><span class="p">,</span><span class="n">P</span><span class="p">)</span>
+    
+    <span class="c1"># return final value</span>
+    <span class="k">return</span> <span class="n">P</span>
+
+<span class="c1"># Rerun the tests</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">TEST 1...&quot;</span><span class="p">)</span>
+<span class="n">test1</span><span class="p">(</span><span class="n">P_conc_fixed</span><span class="p">,</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">test1</span><span class="p">(</span><span class="n">P_conc_fixed</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">TEST 2...&quot;</span><span class="p">)</span>
+<span class="n">test2</span><span class="p">(</span><span class="n">P_conc_fixed</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">TEST 3...&quot;</span><span class="p">)</span>
+<span class="n">test3</span><span class="p">(</span><span class="n">P_conc_fixed</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TEST 1...
+Testing initial condition with following specifications:
+P0 =  1.0   k1prime =  1.0   k2 =  1.0
+Calculate value of P =  1.0
+Test passed.
+
+Testing initial condition with following specifications:
+P0 =  5.0   k1prime =  1.0   k2 =  0.001
+Calculate value of P =  5.000000000000001
+Test passed.
+
+
+TEST 2...
+</pre></div>
+</div>
+<img alt="../../_images/d1a39d36525d1abf22df1a9bd38da1b1bfae74369348ffe50482a82cd68391c9.png" src="../../_images/d1a39d36525d1abf22df1a9bd38da1b1bfae74369348ffe50482a82cd68391c9.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test Passed.
+
+TEST 3...
+Passed Test 3.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Testing initial condition with following specifications:
+P0 =  1.0   k1prime =  1.0   k2 =  1.0
+Calculate value of P =  1.0
+Test passed.
+
+Testing initial condition with following specifications:
+P0 =  5.0   k1prime =  1.0   k2 =  0.001
+Calculate value of P =  5.000000000000001
+Test passed.
+</pre></div>
+</div>
+<img alt="../../_images/d1a39d36525d1abf22df1a9bd38da1b1bfae74369348ffe50482a82cd68391c9.png" src="../../_images/d1a39d36525d1abf22df1a9bd38da1b1bfae74369348ffe50482a82cd68391c9.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test Passed.
+Passed Test 3.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition danger">
+<p class="admonition-title"><b>Tutorial Activity</b></p>
+<p>When first typing this model, I mistakenly specified <tt>pre_expon = -(k1prime) + k2*t</tt>. Without running any Python code, which tests would fail with this bug? (This is a good exam practice question.)</p>
+</div>
+<p>Write your answer here:</p>
+</section>
+<section id="assertions">
+<h2><span class="section-number">1.14.13. </span>Assertions<a class="headerlink" href="#assertions" title="Link to this heading">#</a></h2>
+<p>In life it pays to be assertive.  The same is true in programming.  Let’s try an example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_P</span> <span class="o">=</span> <span class="n">P_conc</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">P0</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="n">k1prime</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">k2</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;With negative P0, P(t=10) =&quot;</span><span class="p">,</span> <span class="n">test_P</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>With negative P0, P(t=10) = -5.000226999648812
+</pre></div>
+</div>
+</div>
+</div>
+<p>The code worked, but the answer is non-sensical.  We’d like to tell the user that <code class="docutils literal notranslate"><span class="pre">P_calc</span></code> was called with an improper value. We could just change the help text to indicate that each input needs to be greater than zero.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">P_conc_docs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">P0</span><span class="p">,</span> <span class="n">k1prime</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">LOUD</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Computes the concentration of phenolphthalein as a function of time</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        t: time, either a scalar (float) or vector (numpy array)</span>
+<span class="sd">        P0: initial concentration of phenolphthalein, MUST BE POSITIVE</span>
+<span class="sd">        k1prime: forward reaction rate constant, MUST BE POSITIVE</span>
+<span class="sd">        k2: reverse reaction rate constant, MUST BE POSITIVE</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        concentration, either a scalar (float) or vector (numpy array) depending on arg. t</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># compute first fraction in formula</span>
+    <span class="n">frac1</span> <span class="o">=</span> <span class="n">k2</span><span class="o">/</span><span class="p">(</span><span class="n">k1prime</span> <span class="o">+</span> <span class="n">k2</span><span class="p">)</span>
+    
+    <span class="c1"># compute second fraction in formula</span>
+    <span class="n">frac2</span> <span class="o">=</span> <span class="n">k1prime</span><span class="o">/</span><span class="p">(</span><span class="n">k1prime</span> <span class="o">+</span> <span class="n">k2</span><span class="p">)</span>
+    
+    <span class="c1"># compute term that goes into exponent. bug has been fixed</span>
+    <span class="n">pre_expon</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">k1prime</span> <span class="o">+</span> <span class="n">k2</span><span class="p">)</span><span class="o">*</span><span class="n">t</span>
+    
+    <span class="c1"># evaluate exponent</span>
+    <span class="n">expon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">pre_expon</span><span class="p">)</span>
+    
+    <span class="c1"># combine together</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">P0</span><span class="o">*</span><span class="p">(</span><span class="n">frac1</span> <span class="o">+</span> <span class="n">frac2</span><span class="o">*</span><span class="n">expon</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">LOUD</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;frac1 = &quot;</span><span class="p">,</span><span class="n">frac1</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;frac2 = &quot;</span><span class="p">,</span><span class="n">frac2</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pre_expon = &quot;</span><span class="p">,</span><span class="n">pre_expon</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;expon = &quot;</span><span class="p">,</span><span class="n">expon</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;P = &quot;</span><span class="p">,</span><span class="n">P</span><span class="p">)</span>
+    
+    <span class="c1"># return final value</span>
+    <span class="k">return</span> <span class="n">P</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">P_conc_docs</span><span class="p">)</span>
+
+<span class="c1">#the result is the same</span>
+<span class="n">test_P</span> <span class="o">=</span> <span class="n">P_conc_docs</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">P0</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="n">k1prime</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">k2</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;With negative P0, P(t=10) =&quot;</span><span class="p">,</span> <span class="n">test_P</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on function P_conc_docs in module __main__:
+
+P_conc_docs(t, P0, k1prime, k2, LOUD=False)
+    Computes the concentration of phenolphthalein as a function of time
+    
+    Args:
+        t: time, either a scalar (float) or vector (numpy array)
+        P0: initial concentration of phenolphthalein, MUST BE POSITIVE
+        k1prime: forward reaction rate constant, MUST BE POSITIVE
+        k2: reverse reaction rate constant, MUST BE POSITIVE
+        
+    Returns:
+        concentration, either a scalar (float) or vector (numpy array) depending on arg. t
+
+With negative P0, P(t=10) = -5.000000010305769
+</pre></div>
+</div>
+</div>
+</div>
+<p>Well the result is the same: if the user doesn’t respect the instruction for the function inputs, the function will behave strangely. It could be even worse:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_P</span> <span class="o">=</span> <span class="n">P_conc_docs</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">P0</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="n">k1prime</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">k2</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;With negative k1prime and negative k2, P(t=10) =&quot;</span><span class="p">,</span> <span class="n">test_P</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ZeroDivisionError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">Input In [17],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">test_P</span> <span class="o">=</span> <span class="n">P_conc_docs</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">P0</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="n">k1prime</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">k2</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;With negative k1prime and negative k2, P(t=10) =&quot;</span><span class="p">,</span> <span class="n">test_P</span><span class="p">)</span>
+
+<span class="nn">Input In [15],</span> in <span class="ni">P_conc_docs</span><span class="nt">(t, P0, k1prime, k2, LOUD)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span><span class="w"> </span><span class="sd">&quot;&quot;&quot; Computes the concentration of phenolphthalein as a function of time</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span><span class="sd"> </span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span><span class="sd"> Args:</span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span><span class="sd">     concentration, either a scalar (float) or vector (numpy array) depending on arg. t</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="c1"># compute first fraction in formula</span>
+<span class="ne">---&gt; </span><span class="mi">16</span> <span class="n">frac1</span> <span class="o">=</span> <span class="n">k2</span><span class="o">/</span><span class="p">(</span><span class="n">k1prime</span> <span class="o">+</span> <span class="n">k2</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="c1"># compute second fraction in formula</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="n">frac2</span> <span class="o">=</span> <span class="n">k1prime</span><span class="o">/</span><span class="p">(</span><span class="n">k1prime</span> <span class="o">+</span> <span class="n">k2</span><span class="p">)</span>
+
+<span class="ne">ZeroDivisionError</span>: float division by zero
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is where the assert statement comes in.  It can assure that the arguments to the function are what they should be.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="k">def</span> <span class="nf">P_conc_assert</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">P0</span><span class="p">,</span> <span class="n">k1prime</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">LOUD</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Computes the concentration of phenolphthalein as a function of time</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        t: time, either a scalar (float) or vector (numpy array)</span>
+<span class="sd">        P0: initial concentration of phenolphthalein, MUST BE POSITIVE</span>
+<span class="sd">        k1prime: forward reaction rate constant, MUST BE POSITIVE</span>
+<span class="sd">        k2: reverse reaction rate constant, MUST BE POSITIVE</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        concentration, either a scalar (float) or vector (numpy array) depending on arg. t</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">assert</span> <span class="p">(</span><span class="n">P0</span> <span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="p">(</span><span class="n">k1prime</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> 
+    <span class="k">assert</span> <span class="p">(</span><span class="n">k2</span> <span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="p">(</span><span class="n">k1prime</span> <span class="o">+</span> <span class="n">k2</span> <span class="o">&gt;</span> <span class="mf">1E-10</span><span class="p">)</span>
+    
+    <span class="c1"># compute first fraction in formula</span>
+    <span class="n">frac1</span> <span class="o">=</span> <span class="n">k2</span><span class="o">/</span><span class="p">(</span><span class="n">k1prime</span> <span class="o">+</span> <span class="n">k2</span><span class="p">)</span>
+    
+    <span class="c1"># compute second fraction in formula</span>
+    <span class="n">frac2</span> <span class="o">=</span> <span class="n">k1prime</span><span class="o">/</span><span class="p">(</span><span class="n">k1prime</span> <span class="o">+</span> <span class="n">k2</span><span class="p">)</span>
+    
+    <span class="c1"># compute term that goes into exponent. bug has been fixed</span>
+    <span class="n">pre_expon</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">k1prime</span> <span class="o">+</span> <span class="n">k2</span><span class="p">)</span><span class="o">*</span><span class="n">t</span>
+    
+    <span class="c1"># evaluate exponent</span>
+    <span class="n">expon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">pre_expon</span><span class="p">)</span>
+    
+    <span class="c1"># for some problems, it makes sense to also apply assert to intermediate values</span>
+    
+    <span class="c1"># combine together</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">P0</span><span class="o">*</span><span class="p">(</span><span class="n">frac1</span> <span class="o">+</span> <span class="n">frac2</span><span class="o">*</span><span class="n">expon</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">LOUD</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;frac1 = &quot;</span><span class="p">,</span><span class="n">frac1</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;frac2 = &quot;</span><span class="p">,</span><span class="n">frac2</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pre_expon = &quot;</span><span class="p">,</span><span class="n">pre_expon</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;expon = &quot;</span><span class="p">,</span><span class="n">expon</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;P = &quot;</span><span class="p">,</span><span class="n">P</span><span class="p">)</span>
+    
+    <span class="c1"># return final value</span>
+    <span class="k">return</span> <span class="n">P</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_P</span> <span class="o">=</span> <span class="n">P_conc_assert</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">P0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">k1prime</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">k2</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;With negative k1prime and negative k2, P(t=10) =&quot;</span><span class="p">,</span> <span class="n">test_P</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="nn">Input In [19],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">test_P</span> <span class="o">=</span> <span class="n">P_conc_assert</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">P0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">k1prime</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">k2</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;With negative k1prime and negative k2, P(t=10) =&quot;</span><span class="p">,</span> <span class="n">test_P</span><span class="p">)</span>
+
+<span class="nn">Input In [18],</span> in <span class="ni">P_conc_assert</span><span class="nt">(t, P0, k1prime, k2, LOUD)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span><span class="w"> </span><span class="sd">&quot;&quot;&quot; Computes the concentration of phenolphthalein as a function of time</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span><span class="sd"> </span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span><span class="sd"> Args:</span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span><span class="sd">     concentration, either a scalar (float) or vector (numpy array) depending on arg. t</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="k">assert</span> <span class="p">(</span><span class="n">P0</span> <span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">16</span> <span class="k">assert</span> <span class="p">(</span><span class="n">k1prime</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> 
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="k">assert</span> <span class="p">(</span><span class="n">k2</span> <span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="k">assert</span> <span class="p">(</span><span class="n">k1prime</span> <span class="o">+</span> <span class="n">k2</span> <span class="o">&gt;</span> <span class="mf">1E-10</span><span class="p">)</span>
+
+<span class="ne">AssertionError</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice that python tells us which assertion failed so we know that the function call had a bad value of <code class="docutils literal notranslate"><span class="pre">k1prime</span></code>.  The program still fails, but it tells us exactly why. We can also use assertions to test that the code behaves the way we expect.</p>
+<p>These types of assert statements can help you debug later on down the road.</p>
+</section>
+<section id="error-handling">
+<h2><span class="section-number">1.14.14. </span>Error Handling<a class="headerlink" href="#error-handling" title="Link to this heading">#</a></h2>
+<p>There are times when you want to handle an error gracefully. When a program is running, if it encounters an error it can raise an exception. The exception will give some indication of what the error is. In Python, you can place some code in a special block of code called a <strong>try block</strong>. After the try block, the types of exception to handle are listed using except blocks. Only the exceptions that are explicitly handled are caught.</p>
+<p>One type of exception is the <code class="docutils literal notranslate"><span class="pre">ZeroDivisionError</span></code> that is raised when a number is divided by zero. First, we will look at an uncaught exception:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="mf">10.5</span><span class="o">/</span><span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ZeroDivisionError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">Input In [20],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">z</span> <span class="o">=</span> <span class="mf">10.5</span><span class="o">/</span><span class="mi">0</span>
+
+<span class="ne">ZeroDivisionError</span>: float division by zero
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="mf">10.5</span><span class="o">/</span><span class="mi">0</span>
+<span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You cannot Divide by zero&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>You cannot Divide by zero
+</pre></div>
+</div>
+</div>
+</div>
+<p>One thing that happens when you catch a raised exception, is that <strong>the program will continue on</strong>. This can be a useful feature, but often times you want to catch an exception, print a useful error message, and then have the program end. This can be done by adding a <code class="docutils literal notranslate"><span class="pre">raise</span></code> statement to the end of the except block. The raise statement tells Python to still fail due to the exception, despite the fact that we caught it. This changes the previous example by one line, but changes the output and forces the program to quit:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="mf">10.5</span><span class="o">/</span><span class="mi">0</span>
+<span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You cannot divide by 0, exiting&quot;</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="c1"># kill the program</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>You cannot divide by 0, exiting
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ZeroDivisionError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">Input In [22],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">----&gt; </span><span class="mi">2</span>     <span class="n">z</span> <span class="o">=</span> <span class="mf">10.5</span><span class="o">/</span><span class="mi">0</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You cannot divide by 0, exiting&quot;</span><span class="p">)</span>
+
+<span class="ne">ZeroDivisionError</span>: float division by zero
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s see this applied to our reaction kinetics example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="k">def</span> <span class="nf">P_conc_assert2</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">P0</span><span class="p">,</span> <span class="n">k1prime</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">LOUD</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Computes the concentration of phenolphthalein as a function of time</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        t: time, either a scalar (float) or vector (numpy array)</span>
+<span class="sd">        P0: initial concentration of phenolphthalein, MUST BE POSITIVE</span>
+<span class="sd">        k1prime: forward reaction rate constant, MUST BE POSITIVE</span>
+<span class="sd">        k2: reverse reaction rate constant, MUST BE POSITIVE</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        concentration, either a scalar (float) or vector (numpy array) depending on arg. t</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="p">(</span><span class="n">P0</span> <span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="p">(</span><span class="n">k1prime</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> 
+        <span class="k">assert</span> <span class="p">(</span><span class="n">k2</span> <span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="p">(</span><span class="n">k1prime</span> <span class="o">+</span> <span class="n">k2</span> <span class="o">&gt;</span> <span class="mf">1E-10</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Input Parameters are not all positive.&quot;</span><span class="p">)</span> 
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;P0 =&quot;</span><span class="p">,</span><span class="n">P0</span><span class="p">)</span> 
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;k1prime =&quot;</span><span class="p">,</span><span class="n">k1prime</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;k2 =&quot;</span><span class="p">,</span><span class="n">k2</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="c1"># kill the program</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;An unexpected error occurred when&quot;</span><span class="p">,</span>
+                              <span class="s2">&quot;checking the function parameters&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="c1"># kill the program</span>
+    
+    
+    <span class="c1"># compute first fraction in formula</span>
+    <span class="n">frac1</span> <span class="o">=</span> <span class="n">k2</span><span class="o">/</span><span class="p">(</span><span class="n">k1prime</span> <span class="o">+</span> <span class="n">k2</span><span class="p">)</span>
+    
+    <span class="c1"># compute second fraction in formula</span>
+    <span class="n">frac2</span> <span class="o">=</span> <span class="n">k1prime</span><span class="o">/</span><span class="p">(</span><span class="n">k1prime</span> <span class="o">+</span> <span class="n">k2</span><span class="p">)</span>
+    
+    <span class="c1"># compute term that goes into exponent. bug has been fixed</span>
+    <span class="n">pre_expon</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">k1prime</span> <span class="o">+</span> <span class="n">k2</span><span class="p">)</span><span class="o">*</span><span class="n">t</span>
+    
+    <span class="c1"># evaluate exponent</span>
+    <span class="n">expon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">pre_expon</span><span class="p">)</span>
+    
+    <span class="c1"># for some problems, it makes sense to also apply assert to intermediate values</span>
+    
+    <span class="c1"># combine together</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">P0</span><span class="o">*</span><span class="p">(</span><span class="n">frac1</span> <span class="o">+</span> <span class="n">frac2</span><span class="o">*</span><span class="n">expon</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">LOUD</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;frac1 = &quot;</span><span class="p">,</span><span class="n">frac1</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;frac2 = &quot;</span><span class="p">,</span><span class="n">frac2</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pre_expon = &quot;</span><span class="p">,</span><span class="n">pre_expon</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;expon = &quot;</span><span class="p">,</span><span class="n">expon</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;P = &quot;</span><span class="p">,</span><span class="n">P</span><span class="p">)</span>
+    
+    <span class="c1"># return final value</span>
+    <span class="k">return</span> <span class="n">P</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>With this function, if it is passed a negative value, it will raise an <tt>AssertionError</tt>. The code catches this error, prints out the input parameters to the user, and then exits by raising the exception.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_P</span> <span class="o">=</span> <span class="n">P_conc_assert2</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">P0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">k1prime</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">k2</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;With negative k1prime and negative k2, P(t=10) =&quot;</span><span class="p">,</span> <span class="n">test_P</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Input Parameters are not all positive.
+P0 = 1.0
+k1prime = 0.0
+k2 = 0.0
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="nn">Input In [24],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">test_P</span> <span class="o">=</span> <span class="n">P_conc_assert2</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">P0</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">k1prime</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">k2</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;With negative k1prime and negative k2, P(t=10) =&quot;</span><span class="p">,</span> <span class="n">test_P</span><span class="p">)</span>
+
+<span class="nn">Input In [23],</span> in <span class="ni">P_conc_assert2</span><span class="nt">(t, P0, k1prime, k2, LOUD)</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span>     <span class="k">assert</span> <span class="p">(</span><span class="n">P0</span> <span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">16</span>     <span class="k">assert</span> <span class="p">(</span><span class="n">k1prime</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> 
+<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="k">assert</span> <span class="p">(</span><span class="n">k2</span> <span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="k">assert</span> <span class="p">(</span><span class="n">k1prime</span> <span class="o">+</span> <span class="n">k2</span> <span class="o">&gt;</span> <span class="mf">1E-10</span><span class="p">)</span>
+
+<span class="ne">AssertionError</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Also, the function has a generic except statement that will catch any other errors in the try block. Because the try block involves comparison of numbers, if we pass a string as a parameter, there will be an error when checking if that parameter is greater than 0. This exception will be caught by the generic except statement, and the code prints out an error message, and then quits:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_P</span> <span class="o">=</span> <span class="n">P_conc_assert2</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">P0</span><span class="o">=</span><span class="s2">&quot;hello world&quot;</span><span class="p">,</span> <span class="n">k1prime</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">k2</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;With negative k1prime and negative k2, P(t=10) =&quot;</span><span class="p">,</span> <span class="n">test_P</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>An unexpected error occurred when checking the function parameters
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">Input In [25],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">test_P</span> <span class="o">=</span> <span class="n">P_conc_assert2</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">P0</span><span class="o">=</span><span class="s2">&quot;hello world&quot;</span><span class="p">,</span> <span class="n">k1prime</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">k2</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;With negative k1prime and negative k2, P(t=10) =&quot;</span><span class="p">,</span> <span class="n">test_P</span><span class="p">)</span>
+
+<span class="nn">Input In [23],</span> in <span class="ni">P_conc_assert2</span><span class="nt">(t, P0, k1prime, k2, LOUD)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span><span class="w"> </span><span class="sd">&quot;&quot;&quot; Computes the concentration of phenolphthalein as a function of time</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span><span class="sd"> </span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span><span class="sd"> Args:</span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span><span class="sd">     concentration, either a scalar (float) or vector (numpy array) depending on arg. t</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">15</span>     <span class="k">assert</span> <span class="p">(</span><span class="n">P0</span> <span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="k">assert</span> <span class="p">(</span><span class="n">k1prime</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> 
+<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="k">assert</span> <span class="p">(</span><span class="n">k2</span> <span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="ne">TypeError</span>: &#39;&gt;&#39; not supported between instances of &#39;str&#39; and &#39;int&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/01"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Functions-as-Arguments.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">1.13. </span>Functions as Arguments</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Publication-Quality-Figures.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">1.15. </span>Preparing Publication Quality Figures in Python</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">1.14.1. Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-your-code">1.14.2. Testing Your Code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivating-example">1.14.3. Motivating Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-0-takes-inputs-as-advertised">1.14.4. Test 0: Takes Inputs as Advertised?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-1-initial-condition">1.14.5. Test 1: Initial Condition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-2-asymptotics">1.14.6. Test 2: Asymptotics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-3-check-a-few-inputs">1.14.7. Test 3: Check a Few Inputs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging">1.14.8. Debugging</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-is-a-mindset">1.14.9. Debugging is a Mindset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-1">1.14.10. Test 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-2">1.14.11. Test 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-3">1.14.12. Test 3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assertions">1.14.13. Assertions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-handling">1.14.14. Error Handling</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

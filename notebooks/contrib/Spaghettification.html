@@ -1,0 +1,1449 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Spaghettification of the Magic School Bus &#8212; Data and Computing for Chemical Engineers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/contrib/Spaghettification';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Alcohol Pharmacokinetics and Blood Alcohol Content % Modeling" href="Alcohol-Pharmacokinetics.html" />
+    <link rel="prev" title="Stochastic Simulation of Chemical Reactions" href="Stochastic-Kinetics.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/cbe_logo.jpg" class="logo__image only-light" alt="Data and Computing for Chemical Engineers - Home"/>
+    <script>document.write(`<img src="../../_static/cbe_logo.jpg" class="logo__image only-dark" alt="Data and Computing for Chemical Engineers - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Data and Computing for Engineers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../01/Python-Primer.html">1. Python Primer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../01/Jupyter-Notebooks.html">1.1. Welcome to Jupyter Notebooks and Vocareum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Python-Basics-I-Variables-Strings-Bugs.html">1.2. Python Basics I: Variables, Strings, and Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Flow-control.html">1.3. Python Basics II: Loopy Logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Python-Basics-III-Lists-Dictionaries-Enumeration.html">1.4. Python Basics III: Lists, Dictionaries, and Enumeration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Functions-and-Scope.html">1.5. Functions and Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Recursion.html">1.6. Recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Pseudocode.html">1.7. Pseudocode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Example-High-Low-Game.html">1.8. High/Low Guess My Number Game</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Modules-and-Files.html">1.9. Modules and Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/NumPy.html">1.10. Linear Algebra with Numpy and Scipy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Matplotlib.html">1.11. Visualization with matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Pandas.html">1.12. Manipulating Data with Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Functions-as-Arguments.html">1.13. Functions as Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Testing-and-Debugging.html">1.14. Testing and Debugging in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Publication-Quality-Figures.html">1.15. Preparing Publication Quality Figures in Python</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../02/advanced_python.html">2. Advanced Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Methods</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03/linear_algebra.html">3. Linear Algebra Primer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter1.html">3.1. Chapter 1: Math Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter2.html">3.2. Chapter 2: Intro to Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter3.html">3.3. Chapter 3: Computational linear algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter4.html">3.4. Chapter 4: Geometric Aspects of Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter5.html">3.5. Chapter 5: Linear Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter6.html">3.6. Chapter 6: Theoretical Linear Algebra</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../04/linear_algebra.html">4. Applied Linear Algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../04/Modeling-Systems-of-Linear-Equations.html">4.1. Modeling Systems of Linear Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Gauss-Elimination.html">4.2. Gaussian Elimination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Invertible-Matrix-Theorem-and-Gauss-Example.html">4.3. Invertible Matrix Theorem and Gaussian Elimination Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/LU-Decomposition.html">4.4. LU Decomposition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Condition-Number.html">4.5. Errors in Linear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Example-Atomic-Mass-Balances.html">4.6. Example: Mass Balances and Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Linear-Algebra-in-Numpy.html">4.7. Linear Algebra Review and SciPy Basics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05/algorithms.html">5. Algorithm Building Blocks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../05/Taylor-Series.html">5.1. Taylor Series Approximations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05/Finite-Difference.html">5.2. Finite Difference Derivative Approximations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05/Example-Heating-a-Metal-Slab.html">5.3. Example: Heating a Metal Slab</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../06/nonlinear_systems.html">6. Nonlinear Systems of Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../06/Modeling-Systems-of-Nonlinear-Equations.html">6.1. Modeling Systems of Nonlinear Equations: Flash Calculation Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Raphson-Method-in-One-Dimension.html">6.2. Newton-Raphson Method in One Dimension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/More-Newton-Type-Methods.html">6.3. More Newton-Type Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Convergence-Analysis-for-Newton-Raphson-Methods.html">6.4. Convergence Analysis for Newton-Raphson Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Raphson-Methods-for-Systems-of-Equations.html">6.5. Newton-Raphson Methods for Systems of Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Methods-in-Scipy.html">6.6. Newton Methods in Scipy</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../07/integration.html">7. Numeric Integration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../07/Intro-and-Newton-Cotes.html">7.1. Introduction and Newton-Cotes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Gauss-Quadrature.html">7.2. Gauss Quadrature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Scipy-Library-Adaptive-Methods-for-Newton-Cotes-and-Gauss-Quadrature.html">7.3. Scipy Library: Adaptive Methods for Newton-Cotes and Gauss Quadrature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Application-Inertial-Navigation-Systems.html">7.4. Application: Inertial Navigation Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Forward-and-Backward-Euler.html">7.5. Forward and Backward Euler Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Trapezoid-Rule.html">7.6. Crank-Nicolson (Trapezoid Rule)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Stability-Analysis.html">7.7. Stability Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Explicit-Runge-Kutta.html">7.8. Explicit Range Kutta Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Systems-of-Differential-Equations-and-Scipy.html">7.9. Systems of Differential Equations and Scipy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Example-Reaction-Rates.html">7.10. Example: Reaction Rates</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../08/optimization.html">8. Continuous Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../08/Pyomo-Basics.html">8.1. Pyomo Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../08/Electricity-Market-Optimization.html">8.2. Electricity Market Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../08/Flash-Calculations-in-Pyomo.html">8.3. Flash Calculations in Pyomo</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../09/stats.html">9. Descriptive Statistics and Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../09/Sampling.html">9.1. Sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../09/Summary-Statistics.html">9.2. Summary Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../09/Visualizing-Data.html">9.3. Visualizing Data</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../10/probability.html">10. Probability Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../10/Probability-Basics.html">10.1. Basic Ideas of Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Random-Variables.html">10.2. Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Jointly-Distributed-Random-Variables.html">10.3. Jointly Distributed Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Jointly-Continuous-Random-Variables.html">10.4. Jointly Continuous Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Practice-Problems.html">10.5. Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../11/distributions.html">11. Common Probability Distributions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../11/Bernoulli-Probability-Distribution.html">11.1. Bernoulli Probability Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Binomial-Probability-Distribtuion.html">11.2. Binomial Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Poisson-Probability-Distribution.html">11.3. Poisson Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Normal-Probability-Distribution.html">11.4. Normal Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Common-Probability-Distributions-Summary.html">11.5. Summary</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../12/uncertainty.html">12. Uncertainty and Error Propagation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../12/Measurement-Error.html">12.1. Measurement Error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Error-Propagation.html">12.2. Error Propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Measuring-Flowrate-Example.html">12.3. Measuring Flowrate Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Car-and-Incline-Example.html">12.4. Car and Incline Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Simulation.html">12.5. Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Monte-Carlo-Error-Propogation.html">12.6. Monte Carlo Error Propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Practice-Problems.html">12.7. Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../13/inference.html">13. Statistical Inference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../13/Central-Limit-Theorem.html">13.1. Central Limit Theorem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Standard-Normal-Distribution.html">13.2. Standard Normal Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Confidence-Intervals.html">13.3. Confidence Intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Students-t-Distribution.html">13.4. Student’s t-Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Hypothesis-Testing-Basics.html">13.5. Hypothesis Testing Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Flavors-of-Hypothesis-Testing.html">13.6. Flavors of Hypothesis Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Type-I-and-Type-II-Errors.html">13.7. Type I and Type II Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Statistical-Power-Basics.html">13.8. Statistical Power Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Statistical-Power-in-Python.html">13.9. Statistical Power in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Statistical-Power-Practice-Problems.html">13.10. Statistical Power Practice Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Bootstrap-Confidence-Intervals.html">13.11. Bootstrap Confidence Intervals</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../14/regression.html">14. Multivariate Linear Regression</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../14/Correlation-Covariance-and-Independence.html">14.1. Correlation, Covariance, and Independence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Least-Squares-Line.html">14.2. Simple Least Squares</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Ordinary-Least-Squares-Linear-Regression.html">14.3. Ordinary Least Squares Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Residual-Analysis.html">14.4. Residual Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Regression-Assumption-Examples.html">14.5. Regression Assumption Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Uncertainty-Analysis-and-Statistical-Inference.html">14.6. Uncertainty Analysis and Statistical Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Multivariate-Linear-Regression.html">14.7. Multivariate Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Linear-Regression-Practice-Problems.html">14.8. Linear Regression Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../15/advanced_regression.html">15. Nonlinear Regression</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../15/Transformations-and-Linear-Regression.html">15.1. Transformations and Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Weighted-Regression.html">15.2. Weighted Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Regression.html">15.3. Nonlinear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Regression-Practice-Problem.html">15.4. Nonlinear Regression Practice Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression.html">15.5. Monte Carlo Uncertainty Analysis for Nonlinear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Case-Study-Adsorptive-Membranes.html">15.6. Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../16/design_of_experiments.html">16. Design of Experiments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../16/Reaction-MBDoE.html">16.1. Model-Based Design of Experiments</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extra Information</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2022/home.html">Fall 2022</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/schedule.html">Fall 2022 Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/project1.html">Project 1: Computating for Problem Solving (Fall 2022)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/project2.html">Project 2: Data Analysis (Fall 2022)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2023/home.html">Fall 2023</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/schedule.html">Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/project.html">Semester Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet1_F23.html">Problem Set 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet2_F23.html">Problem Set 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet3_F23.html">Problem Set 3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet4_F23.html">Problem Set 4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet5_F23.html">Problem Set 5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet6_F23.html">Problem Set 6</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="contribute.html">Contributed Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Biotransport-Entrance-Length.html">Estimating the Entrance Length of Channel Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Non_Isothermal_PBR.html">Non-Isothermal Packed Bed Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ficks_Law.html">Solving Fick’s Second Law Using Numeric Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Stochastic-Kinetics.html">Stochastic Simulation of Chemical Reactions</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Spaghettification of the Magic School Bus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Alcohol-Pharmacokinetics.html">Alcohol Pharmacokinetics and  Blood Alcohol Content % Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="McCabe-Thiele.html">Plotting McCabe-Thiele diagram through computational methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Wastewater-Treatment-Mass-Balance.html">Example of Mass Balance Problem in Wastewater Treatment Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Filtration.html">Filtration of a Yeast Suspension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Fraction_of_Molecular_Collisions.html">Calculating Fraction of Molecular Collisions</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/contrib/Spaghettification.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/data-and-computing" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/contrib/Spaghettification.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/contrib/Spaghettification.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Spaghettification of the Magic School Bus</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-libraries">Import Libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-statement">Problem Statement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#degree-of-freedom-analysis">1. Degree of Freedom Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">1.1. Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis">1.2. Analysis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nonlinear-equation">2. Nonlinear Equation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-a-nonlinear-equation">2.1. Define a nonlinear equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-plot-and-analyze">2.2. Create a plot and analyze</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion">2.3. Discussion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inexact-newton-s-method">3. Inexact Newton’s Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#newton-s-method-using-scipy">4. Newton’s Method using Scipy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-equations">4.1. Setup equations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-scipy-to-determine-r-1">4.2. Use Scipy to determine <span class="math notranslate nohighlight">\(r_1\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-and-comparison-of-each-method">5. Analysis and Comparison of Each Method</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-the-inexact-newton-s-method">5.1. Test the inexact Newton’s Method</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">5.1.1 Discussion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-limits-of-inexact-newton-s-method">5.2. Finding the limits of inexact Newton’s Method</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-newton-s-method-with-scipy">5.3. Test Newton’s Method with Scipy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">5.3.1 Discussion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-limits-of-newton-s-method-with-scipy">5.4. Finding the limits of Newton’s Method with Scipy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">5.5. Discussion</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="spaghettification-of-the-magic-school-bus">
+<h1>Spaghettification of the Magic School Bus<a class="headerlink" href="#spaghettification-of-the-magic-school-bus" title="Link to this heading">#</a></h1>
+<p><strong>Prepared by:</strong> Logan Hennes (<a class="reference external" href="mailto:lhennes&#37;&#52;&#48;nd&#46;edu">lhennes<span>&#64;</span>nd<span>&#46;</span>edu</a>) and Joseph Emery (<a class="reference external" href="mailto:jemery&#37;&#52;&#48;nd&#46;edu">jemery<span>&#64;</span>nd<span>&#46;</span>edu</a>)</p>
+<p><strong>Reference:</strong> This is an original problem created by the authors. With inspiration from Dr. Brian Olson’s Problem Solving class.</p>
+<p><strong>Intended Audience:</strong> This problem is intended for sophomores or juniors from the University of Notre Dame who are taking an introductory physics course.</p>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>After studying this notebook, completing the activities, and asking questions in class, you should be able to:</p>
+<ul class="simple">
+<li><p>Perform a degrees of freedom analysis</p></li>
+<li><p>Solve a nonlinear system of equations using Newton’s Method and Python tools</p></li>
+<li><p>Properly visualize data using matplotlib</p></li>
+</ul>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Link to this heading">#</a></h2>
+<p>Relevant Modules in Class Website:</p>
+<p>1.5. <a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/01/Functions-and-Scope.html">Functions and Scope</a></p>
+<p>6.1. <a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/06/Modeling-Systems-of-Nonlinear-Equations.html">Modeling Systems of Nonlinear Equations: Flash Calculation Example</a></p>
+<p>6.2. <a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/06/Newton-Raphson-Method-in-One-Dimension.html#">Newton-Raphson Method in One Dimension</a></p>
+<p>6.3. <a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/06/More-Newton-Type-Methods.html">More Newton-Type Methods</a></p>
+<p>6.6. <a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/06/Newton-Methods-in-Scipy.html">Newton’s Method in Scipy</a></p>
+</section>
+<section id="import-libraries">
+<h2>Import Libraries<a class="headerlink" href="#import-libraries" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">optimize</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">ticker</span><span class="p">,</span> <span class="n">cm</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="problem-statement">
+<h2>Problem Statement<a class="headerlink" href="#problem-statement" title="Link to this heading">#</a></h2>
+<p><strong>Homework Problem</strong></p>
+<p>Complete the following problem outside of class to practice the concepts discussed.</p>
+<p>Ms. Frizzle and her students have boarded the Magic School Bus for an adventure in space. However, while exploring the Milky Way galaxy, an asteroid collided with the bus, hurtling the bus toward a black hole. Write a python script to find at what distance away the Magic School Bus needs to be to experience a certain amount of stretching by a black hole.</p>
+<p><img alt="" src="https://ndcbe.github.io/data-and-computing/_images/black_hole.png" /></p>
+<p>You will need to use Newton’s Law of Universal Gravitation and Youngs modulus.</p>
+<div class="math notranslate nohighlight">
+\[F = G\frac{m_1m_2}{r^2}\]</div>
+<div class="math notranslate nohighlight">
+\[∆L = \frac{1}{Y}\frac{F}{A}\ L_0 \]</div>
+<p><span class="math notranslate nohighlight">\(F\)</span> = the force exerted on an object by gravity</p>
+<p><span class="math notranslate nohighlight">\(G\)</span> = the gravitational constant</p>
+<p><span class="math notranslate nohighlight">\(m_1\)</span> = the mass of the black hole</p>
+<p><span class="math notranslate nohighlight">\(m_2\)</span> = the mass of the magic school bus</p>
+<p><span class="math notranslate nohighlight">\(r_1\)</span> = the distance between the black hole and the front of the bus</p>
+<p><span class="math notranslate nohighlight">\(r_2\)</span> = the distance between the black hole and the back of the bus</p>
+<p><span class="math notranslate nohighlight">\(\Delta L\)</span> = the change in length of the bus</p>
+<p><span class="math notranslate nohighlight">\(Y\)</span> = a measure of a solid’s resistance to elastic deformation under a load (Young’s Modulus)</p>
+<p><span class="math notranslate nohighlight">\(F\)</span> = the force exerted on the object causing stretching</p>
+<p><span class="math notranslate nohighlight">\(A\)</span> = cross-sectional area of the bus</p>
+<p><span class="math notranslate nohighlight">\(L_0\)</span> = the length of the bus before stretching</p>
+</section>
+<section id="degree-of-freedom-analysis">
+<h2>1. Degree of Freedom Analysis<a class="headerlink" href="#degree-of-freedom-analysis" title="Link to this heading">#</a></h2>
+<section id="setup">
+<h3>1.1. Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h3>
+<p>Define the constants used in this problem. Use scholarly sources such as NASA to determine the mass of the sun. Use the height of the bus as the diameter of your cylinder.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Constants</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="mf">69e9</span>  <span class="c1"># Youngs modulus for aluminum</span>
+<span class="n">m_2</span> <span class="o">=</span> <span class="mi">15000</span>  <span class="c1"># Mass of school bus in kg</span>
+<span class="n">L_0</span> <span class="o">=</span> <span class="mf">0.01</span>  <span class="c1"># length of school bus in km</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="analysis">
+<h3>1.2. Analysis<a class="headerlink" href="#analysis" title="Link to this heading">#</a></h3>
+<p>Perform a degree of freedom analysis using the equations provided and the unknown variables. What does this analysis tell you? How should you approach the problem moving forward?</p>
+<p><strong>Discuss</strong> in 2-4 sentences</p>
+<p><strong>Answer:</strong></p>
+<p>Submit your written work via <strong>Gradescope</strong>.</p>
+</section>
+</section>
+<section id="nonlinear-equation">
+<h2>2. Nonlinear Equation<a class="headerlink" href="#nonlinear-equation" title="Link to this heading">#</a></h2>
+<section id="define-a-nonlinear-equation">
+<h3>2.1. Define a nonlinear equation<a class="headerlink" href="#define-a-nonlinear-equation" title="Link to this heading">#</a></h3>
+<p>Using substitution, define one nonlinear equation <span class="math notranslate nohighlight">\(f(r_1, \Delta L)\)</span>.</p>
+<p><em>Hint:</em> The definition of the function above suggests what the variables are.</p>
+<p>Submit your answer and written work via <strong>Gradescope</strong>.</p>
+</section>
+<section id="create-a-plot-and-analyze">
+<h3>2.2. Create a plot and analyze<a class="headerlink" href="#create-a-plot-and-analyze" title="Link to this heading">#</a></h3>
+<p>Using the nonlinear equation you derived in part a, write a function that calculates the residual of that function given some value of <span class="math notranslate nohighlight">\(r_1\)</span> and some value of <span class="math notranslate nohighlight">\(\Delta L\)</span>. Then define an array of <span class="math notranslate nohighlight">\(r_1\)</span> values labeled as r_1 and an array of <span class="math notranslate nohighlight">\(\Delta L\)</span> values labeled Delta_L. Then use these arrays to calculate the residual for each pair of values.</p>
+<p>Use the 3-D plot function in matplotlib to analyze the results.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function for Nonlinear Equation Residual</span>
+<span class="k">def</span> <span class="nf">Residual_Function</span><span class="p">(</span><span class="n">r_1</span><span class="p">,</span><span class="n">ΔL</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; Find residual using one Nonlinear equation</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        r_1, ΔL</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Residual    </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+  <span class="c1"># Add your solution here</span>
+    <span class="n">Residual</span> <span class="o">=</span> 
+    <span class="k">return</span> <span class="n">Residual</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">  File</span><span class="nn"> &quot;&lt;ipython-input-3-0e08dbf484a5&gt;&quot;</span><span class="gt">, line </span><span class="mi">12</span>
+    <span class="n">Residual</span> <span class="o">=</span>
+               <span class="o">^</span>
+<span class="ne">SyntaxError</span>: invalid syntax
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Plot Residual:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create array</span>
+<span class="c1"># Add your solution here</span>
+
+<span class="c1"># Initialize Matrix</span>
+<span class="c1"># Add your solution here</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">r_1</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ΔL</span><span class="p">)):</span>
+        <span class="n">r_grid</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">r_1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="c1"># Add your solution here</span>
+
+<span class="c1"># Plot Figure</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+
+<span class="n">cs</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">r_grid</span><span class="p">),</span>
+    <span class="n">ΔL_grid</span><span class="p">,</span>
+    <span class="n">f_grid</span><span class="p">,</span>
+    <span class="n">locator</span><span class="o">=</span><span class="n">ticker</span><span class="o">.</span><span class="n">LogLocator</span><span class="p">(),</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">coolwarm</span><span class="p">,</span>
+    <span class="n">levels</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cs</span><span class="p">)</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Residual&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+
+<span class="n">cs2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span>
+    <span class="n">cs</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">cs</span><span class="o">.</span><span class="n">levels</span><span class="p">[::</span><span class="mi">15</span><span class="p">],</span> <span class="n">colors</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">linestyles</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mi">3</span>
+<span class="p">)</span>
+
+<span class="c1"># plot heatmap label</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">clabel</span><span class="p">(</span><span class="n">cs2</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%2.2f</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+
+<span class="c1"># define tick size</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># plot titile and x,y label</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Distance (km)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;ΔL (km)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Contour of Residuals&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="c1">### END SOLUTION</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-13-a0fea10ee60f&gt;:16: UserWarning: Log scale: values of z &lt;= 0 have been masked
+  cs = ax.contourf(np.exp(r_grid), ΔL_grid, f_grid, locator=ticker.LogLocator(), cmap=cm.coolwarm, levels=100)
+</pre></div>
+</div>
+<img alt="../../_images/1c75d02e80bb5f700d8c78882eb7b7d08bd01a5f9b76d5c7f83c35a0ec9e7c1d.png" src="../../_images/1c75d02e80bb5f700d8c78882eb7b7d08bd01a5f9b76d5c7f83c35a0ec9e7c1d.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-14-08db34fb24a9&gt;:22: UserWarning: Log scale: values of z &lt;= 0 have been masked
+  cs = ax.contourf(np.exp(r_grid), ΔL_grid, f_grid, locator=ticker.LogLocator(), cmap=cm.coolwarm, levels=100)
+</pre></div>
+</div>
+<img alt="../../_images/1c75d02e80bb5f700d8c78882eb7b7d08bd01a5f9b76d5c7f83c35a0ec9e7c1d.png" src="../../_images/1c75d02e80bb5f700d8c78882eb7b7d08bd01a5f9b76d5c7f83c35a0ec9e7c1d.png" />
+</div>
+</div>
+</section>
+<section id="discussion">
+<h3>2.3. Discussion<a class="headerlink" href="#discussion" title="Link to this heading">#</a></h3>
+<p>What does the 3-D plot tell you about the solution? Are there multiple solutions?</p>
+<p><strong>Discuss</strong> in 1-3 sentences</p>
+</section>
+</section>
+<section id="inexact-newton-s-method">
+<h2>3. Inexact Newton’s Method<a class="headerlink" href="#inexact-newton-s-method" title="Link to this heading">#</a></h2>
+<p>Typically, a body of aluminum can be subjected to 10% to 25% elongation before deformation becomes permanent (plastic deformation). For simplicity, we will define our maximum tolerance for stretching to be one meter. Solve for the distance when the bus experiences this stretching using the inexact Newton’s Method.</p>
+<p>You will need to write a new function for your nonlinear equation, <span class="math notranslate nohighlight">\(f(r_1)\)</span>, so that the only variable is <span class="math notranslate nohighlight">\(r_1\)</span>.</p>
+<p>For more information on how to use the inexact Newton’s Method, click <a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/06/More-Newton-Type-Methods.html">here</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">inexact_newton</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mf">1.0e-7</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1.0e-6</span><span class="p">,</span> <span class="n">LOUD</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the root of the function f via Newton-Raphson method</span>
+<span class="sd">    Args:</span>
+<span class="sd">        f: function to find root of [function]</span>
+<span class="sd">        x0: initial guess [float]</span>
+<span class="sd">        delta: finite difference parameter [float]</span>
+<span class="sd">        epsilon: tolerance [float]</span>
+<span class="sd">        LOUD: toggle on/off print statements [boolean]</span>
+<span class="sd">        max_iter: maximum number of iterations [int]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        estimate of root [float]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">assert</span> <span class="nb">callable</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="s2">&quot;Warning: &#39;f&#39; should be a Python function&quot;</span>
+    <span class="k">assert</span> <span class="p">(</span>
+        <span class="nb">type</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">float</span> <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">int</span>
+    <span class="p">),</span> <span class="s2">&quot;Warning: &#39;x0&#39; should be a float or integer&quot;</span>
+    <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">float</span><span class="p">,</span> <span class="s2">&quot;Warning: &#39;delta&#39; should be a float&quot;</span>
+    <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">epsilon</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">float</span><span class="p">,</span> <span class="s2">&quot;Warning: &#39;eps&#39; should be a float&quot;</span>
+    <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">max_iter</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">int</span><span class="p">,</span> <span class="s2">&quot;Warning: &#39;max_iter&#39; should be an integer&quot;</span>
+    <span class="k">assert</span> <span class="n">max_iter</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Warning: &#39;max_iter&#39; should be non-negative&quot;</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span>
+
+    <span class="c1"># print intial guess</span>
+    <span class="c1"># if (LOUD):</span>
+    <span class="c1"># print(&quot;x0 =&quot;,x0)</span>
+
+    <span class="n">iterations</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">converged</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1"># Check if the residual is close enough to zero</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">converged</span> <span class="ow">and</span> <span class="n">iterations</span> <span class="o">&lt;</span> <span class="n">max_iter</span><span class="p">:</span>
+        <span class="c1"># evaluate function &#39;f&#39; at new &#39;x&#39;</span>
+        <span class="n">fx</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="c1"># calculate &#39;slope&#39;</span>
+        <span class="n">slope</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">delta</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">/</span> <span class="n">delta</span>
+
+        <span class="c1"># print every iteration</span>
+        <span class="c1"># if (LOUD):</span>
+        <span class="c1"># print(&quot;x_&quot;,iterations+1,&quot;=&quot;,x,&quot;-&quot;,fx,&quot;/&quot;,slope,&quot;=&quot;,x - fx/slope)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">fx</span> <span class="o">/</span> <span class="n">slope</span>
+
+        <span class="n">iterations</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c1"># check if converged</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">fabs</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">&lt;</span> <span class="n">epsilon</span><span class="p">:</span>
+            <span class="n">converged</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">if</span> <span class="n">LOUD</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It took&quot;</span><span class="p">,</span> <span class="n">iterations</span><span class="p">,</span> <span class="s2">&quot;iterations&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">converged</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: Not a solution. Maximum number of iterations exceeded.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span>  <span class="c1"># return estimate of root</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set Value of ΔL</span>
+<span class="n">ΔL</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">guess</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use inexact newton method</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It took 15 iterations
+The result of the inexact newton function is 37407.4751508785
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="newton-s-method-using-scipy">
+<h2>4. Newton’s Method using Scipy<a class="headerlink" href="#newton-s-method-using-scipy" title="Link to this heading">#</a></h2>
+<p>Now we have a working estimate for the correct result. Let’s use one of the functions in scipy to solve for the distance at which the bus experiences one meter of stretching.</p>
+<section id="setup-equations">
+<h3>4.1. Setup equations<a class="headerlink" href="#setup-equations" title="Link to this heading">#</a></h3>
+<p>When using Newton’s Method in Scipy, the derivative of <span class="math notranslate nohighlight">\(f(r_1)\)</span> is required to determine the solution. Calculate the derivative of <span class="math notranslate nohighlight">\(f(r_1)\)</span> and define it as a function.</p>
+<p>Submit your written work via <strong>Gradescope</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set Value of ΔL</span>
+<span class="n">ΔL</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">guess</span> <span class="o">=</span> <span class="mi">1000</span>
+
+
+<span class="k">def</span> <span class="nf">derivative_form</span><span class="p">(</span><span class="n">r_1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find max distance using canonical derivative</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        r_1</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        derivative</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Add your solution here</span>
+    <span class="k">return</span> <span class="n">derivative</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="use-scipy-to-determine-r-1">
+<h3>4.2. Use Scipy to determine <span class="math notranslate nohighlight">\(r_1\)</span><a class="headerlink" href="#use-scipy-to-determine-r-1" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># use scipy method</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The result of the scipy optimize newton function is 
+ (37406.02418060243,       converged: True
+           flag: &#39;converged&#39;
+ function_calls: 36
+     iterations: 18
+           root: 37406.02418060243)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="analysis-and-comparison-of-each-method">
+<h2>5. Analysis and Comparison of Each Method<a class="headerlink" href="#analysis-and-comparison-of-each-method" title="Link to this heading">#</a></h2>
+<section id="test-the-inexact-newton-s-method">
+<h3>5.1. Test the inexact Newton’s Method<a class="headerlink" href="#test-the-inexact-newton-s-method" title="Link to this heading">#</a></h3>
+<p>Test the inexact Newton’s Method function with guesses of different orders of magnitude. Find a guess that gives you a solution and a guess that doesn’t give you a solution. You should continue adjusting your initial guess until you get an error.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initial Guess</span>
+
+<span class="c1"># Add your solution here</span>
+
+<span class="n">newton_sln1</span> <span class="o">=</span> <span class="n">inexact_newton</span><span class="p">(</span><span class="n">canonical_form</span><span class="p">,</span> <span class="n">guess1</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1.0e-2</span><span class="p">,</span> <span class="n">LOUD</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The root using the inexact newton function for guess2 is found at&quot;</span><span class="p">,</span> <span class="n">newton_sln1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Try Newtons inexact with a very large guess to see if the function fails.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Higher Guess</span>
+
+<span class="c1"># Add your solution here</span>
+
+<span class="n">newton_sln2</span> <span class="o">=</span> <span class="n">inexact_newton</span><span class="p">(</span><span class="n">canonical_form</span><span class="p">,</span> <span class="n">guess2</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1.0e-2</span><span class="p">,</span> <span class="n">LOUD</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The root using the inexact newton function for guess2 is found at&quot;</span><span class="p">,</span> <span class="n">newton_sln2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+
+<span class="n">newton_sln3</span> <span class="o">=</span> <span class="n">inexact_newton</span><span class="p">(</span><span class="n">canonical_form</span><span class="p">,</span> <span class="n">guess3</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1.0e-2</span><span class="p">,</span> <span class="n">LOUD</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The root using the inexact newton function for guess3 is found at&quot;</span><span class="p">,</span> <span class="n">newton_sln3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It took 23 iterations
+The root using the inexact newton function for guess1 is found at 37459.136814048645
+It took 15 iterations
+The root using the inexact newton function for guess2 is found at 37407.4751508785
+It took 7 iterations
+The root using the inexact newton function for guess3 is found at 37424.27645628167
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id1">
+<h3>5.1.1 Discussion<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>How do different orders of magnitude change result from guess? How do the number of iterations change?</p>
+<p><strong>Discuss</strong> in 2-4 sentences</p>
+<p><strong>Answer:</strong></p>
+</section>
+<section id="finding-the-limits-of-inexact-newton-s-method">
+<h3>5.2. Finding the limits of inexact Newton’s Method<a class="headerlink" href="#finding-the-limits-of-inexact-newton-s-method" title="Link to this heading">#</a></h3>
+<p>Determine the upper and lower limit for your guess where the inexact Newton’s Method function gives you a usable solution. Continue making your guess larger until you get an error. The error is your upper limit. Then do the same for the lower limit.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find the upper limit using inexact newton method</span>
+
+<span class="c1"># Add your solution here</span>
+
+<span class="n">inexact_newton</span><span class="p">(</span><span class="n">canonical_form</span><span class="p">,</span> <span class="n">upper_limit_inexact</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1.0e-2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find the lower limit using inexact newton method</span>
+
+<span class="c1">### BEGIN SOLUTION</span>
+<span class="n">lower_limit_inexact</span> <span class="o">=</span> <span class="mf">7.7240e-3</span>
+<span class="c1">### END SOLTUON</span>
+
+<span class="n">inexact_newton</span><span class="p">(</span><span class="n">canonical_form</span><span class="p">,</span> <span class="n">lower_limit_inexact</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1.0e-2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;The range of guesses that you can use for the inexact newton method is&quot;</span><span class="p">,</span>
+    <span class="n">lower_limit_inexact</span><span class="p">,</span>
+    <span class="s2">&quot;km &lt; guess &lt;&quot;</span><span class="p">,</span>
+    <span class="n">upper_limit_inexact</span><span class="p">,</span>
+    <span class="s2">&quot;km&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The range of guesses that you can use for the inexact newton method is 0.007724 km &lt; guess &lt; 59326.0 km
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="test-newton-s-method-with-scipy">
+<h3>5.3. Test Newton’s Method with Scipy<a class="headerlink" href="#test-newton-s-method-with-scipy" title="Link to this heading">#</a></h3>
+<p>Now do similar tests using the same numbers for the optimize.newton function in scipy. Find a guess that gives you a solution and a guess that doesn’t give you a solution. For the incorrect guess, you should get an error.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initial Guess</span>
+<span class="c1"># Add your solution here</span>
+
+<span class="n">scipy_sln1</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">newton</span><span class="p">(</span>
+    <span class="n">func</span><span class="o">=</span><span class="n">canonical_form</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">guess1</span><span class="p">,</span> <span class="n">fprime</span><span class="o">=</span><span class="n">derivative_form</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">full_output</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Try scipy with a very large guess to see if the function fails.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># higher Guess</span>
+<span class="c1">### BEGIN SOLUTION</span>
+<span class="n">guess2</span> <span class="o">=</span> <span class="mf">1e3</span>
+<span class="c1">### END SOLTUION</span>
+<span class="n">scipy_sln2</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">newton</span><span class="p">(</span>
+    <span class="n">func</span><span class="o">=</span><span class="n">canonical_form</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">guess2</span><span class="p">,</span> <span class="n">fprime</span><span class="o">=</span><span class="n">derivative_form</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">full_output</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># even larger guess</span>
+<span class="c1"># Add your solution here</span>
+<span class="n">scipy_sln3</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">newton</span><span class="p">(</span>
+    <span class="n">func</span><span class="o">=</span><span class="n">canonical_form</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">guess3</span><span class="p">,</span> <span class="n">fprime</span><span class="o">=</span><span class="n">derivative_form</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">full_output</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The result of guess1 is 
+ (37406.024180626926,       converged: True
+           flag: &#39;converged&#39;
+ function_calls: 52
+     iterations: 26
+           root: 37406.024180626926) 
+
+The result of guess2 is 
+ (37406.02418060243,       converged: True
+           flag: &#39;converged&#39;
+ function_calls: 36
+     iterations: 18
+           root: 37406.02418060243) 
+
+The result of guess3 is 
+ (37406.02418060992,       converged: True
+           flag: &#39;converged&#39;
+ function_calls: 20
+     iterations: 10
+           root: 37406.02418060992)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The result of guess1 is </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">scipy_sln1</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The result of guess2 is </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">scipy_sln2</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The result of guess3 is </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">scipy_sln3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initial Guess</span>
+<span class="n">guess</span> <span class="o">=</span> <span class="mf">1e6</span>
+
+<span class="n">scipy_sln</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">newton</span><span class="p">(</span>
+    <span class="n">func</span><span class="o">=</span><span class="n">canonical_form</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">guess</span><span class="p">,</span> <span class="n">fprime</span><span class="o">=</span><span class="n">derivative_form</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-2</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The root is found at&quot;</span><span class="p">,</span> <span class="n">scipy_sln</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">RuntimeError</span><span class="g g-Whitespace">                              </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">140</span><span class="o">-</span><span class="mi">7238</span><span class="n">afa42cc3</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># Use Scipy method</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># Add your solution here</span>
+<span class="ne">----&gt; </span><span class="mi">7</span> <span class="n">scipy_sln</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">newton</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">canonical_form</span><span class="p">,</span> <span class="n">x0</span> <span class="o">=</span> <span class="n">guess</span><span class="p">,</span> <span class="n">fprime</span><span class="o">=</span><span class="n">derivative_form</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The root is found at&quot;</span><span class="p">,</span><span class="n">scipy_sln</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="c1">### END SOLUTION</span>
+
+<span class="nn">/usr/local/lib/python3.8/dist-packages/scipy/optimize/zeros.py</span> in <span class="ni">newton</span><span class="nt">(func, x0, fprime, args, tol, maxiter, fprime2, x1, rtol, full_output, disp)</span>
+<span class="g g-Whitespace">    </span><span class="mi">292</span>                         <span class="s2">&quot; Failed to converge after </span><span class="si">%d</span><span class="s2"> iterations, value is </span><span class="si">%s</span><span class="s2">.&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">293</span>                         <span class="o">%</span> <span class="p">(</span><span class="n">itr</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">p0</span><span class="p">))</span>
+<span class="ne">--&gt; </span><span class="mi">294</span>                     <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">295</span>                 <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="ne">RuntimeWarning</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">296</span>                 <span class="k">return</span> <span class="n">_results_select</span><span class="p">(</span>
+
+<span class="ne">RuntimeError</span>: Derivative was zero. Failed to converge after 3 iterations, value is -1.0466994161548342e+25.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id2">
+<h3>5.3.1 Discussion<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>How do different orders of magnitude change the result from guess? How do the number of iterations change?</p>
+<p><strong>Discuss</strong> in 2-4 sentences</p>
+<p><strong>Answer:</strong></p>
+</section>
+<section id="finding-the-limits-of-newton-s-method-with-scipy">
+<h3>5.4. Finding the limits of Newton’s Method with Scipy<a class="headerlink" href="#finding-the-limits-of-newton-s-method-with-scipy" title="Link to this heading">#</a></h3>
+<p>Determine the upper and lower limit for your guess where the optimize.newton function in scipy gives you a useable solution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find the upper limit using scipy method</span>
+<span class="n">upper_limit_scipy</span> <span class="o">=</span> <span class="mf">2.9e5</span>
+
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">upper_limit_scipy</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">optimize</span><span class="o">.</span><span class="n">newton</span><span class="p">(</span>
+            <span class="n">func</span><span class="o">=</span><span class="n">canonical_form</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">upper_limit_scipy</span><span class="p">,</span> <span class="n">fprime</span><span class="o">=</span><span class="n">derivative_form</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-2</span>
+        <span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">upper_limit_scipy</span><span class="p">)</span>
+        <span class="k">break</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find the lower limit using scipy method</span>
+<span class="n">lower_limit_scipy</span> <span class="o">=</span> <span class="mf">1e3</span>
+
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">lower_limit_scipy</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="n">optimize</span><span class="o">.</span><span class="n">newton</span><span class="p">(</span>
+            <span class="n">func</span><span class="o">=</span><span class="n">canonical_form</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">lower_limit_scipy</span><span class="p">,</span> <span class="n">fprime</span><span class="o">=</span><span class="n">derivative_form</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-2</span>
+        <span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">lower_limit_scipy</span><span class="p">)</span>
+        <span class="k">break</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;optimize.newton function from scipy works over&quot;</span><span class="p">,</span>
+    <span class="n">lower_limit_scipy</span><span class="p">,</span>
+    <span class="s2">&quot;km &lt; guess &lt;&quot;</span><span class="p">,</span>
+    <span class="n">upper_limit_scipy</span><span class="p">,</span>
+    <span class="s2">&quot;km&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>optimize.newton function from scipy works over 0.0 km &lt; guess &lt; 290001.0 km
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id3">
+<h3>5.5. Discussion<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>Over what range of guesses will the inexact newton function give you a result? Over what range of guesses will the optimize.newton function from scipy gives you a result? Which of the ranges is bigger? Which method uses fewer iterations?</p>
+<p><strong>Discuss</strong> in 2-4 sentences</p>
+<p><strong>Answer:</strong></p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/contrib"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Stochastic-Kinetics.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Stochastic Simulation of Chemical Reactions</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Alcohol-Pharmacokinetics.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Alcohol Pharmacokinetics and  Blood Alcohol Content % Modeling</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-libraries">Import Libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-statement">Problem Statement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#degree-of-freedom-analysis">1. Degree of Freedom Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">1.1. Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis">1.2. Analysis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nonlinear-equation">2. Nonlinear Equation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-a-nonlinear-equation">2.1. Define a nonlinear equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-plot-and-analyze">2.2. Create a plot and analyze</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion">2.3. Discussion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inexact-newton-s-method">3. Inexact Newton’s Method</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#newton-s-method-using-scipy">4. Newton’s Method using Scipy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-equations">4.1. Setup equations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-scipy-to-determine-r-1">4.2. Use Scipy to determine <span class="math notranslate nohighlight">\(r_1\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-and-comparison-of-each-method">5. Analysis and Comparison of Each Method</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-the-inexact-newton-s-method">5.1. Test the inexact Newton’s Method</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">5.1.1 Discussion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-limits-of-inexact-newton-s-method">5.2. Finding the limits of inexact Newton’s Method</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-newton-s-method-with-scipy">5.3. Test Newton’s Method with Scipy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">5.3.1 Discussion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-limits-of-newton-s-method-with-scipy">5.4. Finding the limits of Newton’s Method with Scipy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">5.5. Discussion</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1420 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Plotting McCabe-Thiele diagram through computational methods &#8212; Data and Computing for Chemical Engineers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/contrib/McCabe-Thiele';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Example of Mass Balance Problem in Wastewater Treatment Units" href="Wastewater-Treatment-Mass-Balance.html" />
+    <link rel="prev" title="Alcohol Pharmacokinetics and Blood Alcohol Content % Modeling" href="Alcohol-Pharmacokinetics.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/cbe_logo.jpg" class="logo__image only-light" alt="Data and Computing for Chemical Engineers - Home"/>
+    <script>document.write(`<img src="../../_static/cbe_logo.jpg" class="logo__image only-dark" alt="Data and Computing for Chemical Engineers - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Data and Computing for Engineers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../01/Python-Primer.html">1. Python Primer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../01/Jupyter-Notebooks.html">1.1. Welcome to Jupyter Notebooks and Vocareum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Python-Basics-I-Variables-Strings-Bugs.html">1.2. Python Basics I: Variables, Strings, and Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Flow-control.html">1.3. Python Basics II: Loopy Logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Python-Basics-III-Lists-Dictionaries-Enumeration.html">1.4. Python Basics III: Lists, Dictionaries, and Enumeration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Functions-and-Scope.html">1.5. Functions and Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Recursion.html">1.6. Recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Pseudocode.html">1.7. Pseudocode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Example-High-Low-Game.html">1.8. High/Low Guess My Number Game</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Modules-and-Files.html">1.9. Modules and Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/NumPy.html">1.10. Linear Algebra with Numpy and Scipy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Matplotlib.html">1.11. Visualization with matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Pandas.html">1.12. Manipulating Data with Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Functions-as-Arguments.html">1.13. Functions as Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Testing-and-Debugging.html">1.14. Testing and Debugging in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Publication-Quality-Figures.html">1.15. Preparing Publication Quality Figures in Python</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../02/advanced_python.html">2. Advanced Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Methods</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03/linear_algebra.html">3. Linear Algebra Primer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter1.html">3.1. Chapter 1: Math Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter2.html">3.2. Chapter 2: Intro to Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter3.html">3.3. Chapter 3: Computational linear algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter4.html">3.4. Chapter 4: Geometric Aspects of Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter5.html">3.5. Chapter 5: Linear Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter6.html">3.6. Chapter 6: Theoretical Linear Algebra</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../04/linear_algebra.html">4. Applied Linear Algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../04/Modeling-Systems-of-Linear-Equations.html">4.1. Modeling Systems of Linear Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Gauss-Elimination.html">4.2. Gaussian Elimination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Invertible-Matrix-Theorem-and-Gauss-Example.html">4.3. Invertible Matrix Theorem and Gaussian Elimination Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/LU-Decomposition.html">4.4. LU Decomposition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Condition-Number.html">4.5. Errors in Linear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Example-Atomic-Mass-Balances.html">4.6. Example: Mass Balances and Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Linear-Algebra-in-Numpy.html">4.7. Linear Algebra Review and SciPy Basics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05/algorithms.html">5. Algorithm Building Blocks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../05/Taylor-Series.html">5.1. Taylor Series Approximations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05/Finite-Difference.html">5.2. Finite Difference Derivative Approximations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05/Example-Heating-a-Metal-Slab.html">5.3. Example: Heating a Metal Slab</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../06/nonlinear_systems.html">6. Nonlinear Systems of Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../06/Modeling-Systems-of-Nonlinear-Equations.html">6.1. Modeling Systems of Nonlinear Equations: Flash Calculation Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Raphson-Method-in-One-Dimension.html">6.2. Newton-Raphson Method in One Dimension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/More-Newton-Type-Methods.html">6.3. More Newton-Type Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Convergence-Analysis-for-Newton-Raphson-Methods.html">6.4. Convergence Analysis for Newton-Raphson Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Raphson-Methods-for-Systems-of-Equations.html">6.5. Newton-Raphson Methods for Systems of Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Methods-in-Scipy.html">6.6. Newton Methods in Scipy</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../07/integration.html">7. Numeric Integration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../07/Intro-and-Newton-Cotes.html">7.1. Introduction and Newton-Cotes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Gauss-Quadrature.html">7.2. Gauss Quadrature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Scipy-Library-Adaptive-Methods-for-Newton-Cotes-and-Gauss-Quadrature.html">7.3. Scipy Library: Adaptive Methods for Newton-Cotes and Gauss Quadrature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Application-Inertial-Navigation-Systems.html">7.4. Application: Inertial Navigation Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Forward-and-Backward-Euler.html">7.5. Forward and Backward Euler Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Trapezoid-Rule.html">7.6. Crank-Nicolson (Trapezoid Rule)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Stability-Analysis.html">7.7. Stability Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Explicit-Runge-Kutta.html">7.8. Explicit Range Kutta Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Systems-of-Differential-Equations-and-Scipy.html">7.9. Systems of Differential Equations and Scipy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Example-Reaction-Rates.html">7.10. Example: Reaction Rates</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../08/optimization.html">8. Continuous Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../08/Pyomo-Basics.html">8.1. Pyomo Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../08/Electricity-Market-Optimization.html">8.2. Electricity Market Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../08/Flash-Calculations-in-Pyomo.html">8.3. Flash Calculations in Pyomo</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../09/stats.html">9. Descriptive Statistics and Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../09/Sampling.html">9.1. Sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../09/Summary-Statistics.html">9.2. Summary Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../09/Visualizing-Data.html">9.3. Visualizing Data</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../10/probability.html">10. Probability Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../10/Probability-Basics.html">10.1. Basic Ideas of Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Random-Variables.html">10.2. Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Jointly-Distributed-Random-Variables.html">10.3. Jointly Distributed Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Jointly-Continuous-Random-Variables.html">10.4. Jointly Continuous Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Practice-Problems.html">10.5. Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../11/distributions.html">11. Common Probability Distributions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../11/Bernoulli-Probability-Distribution.html">11.1. Bernoulli Probability Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Binomial-Probability-Distribtuion.html">11.2. Binomial Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Poisson-Probability-Distribution.html">11.3. Poisson Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Normal-Probability-Distribution.html">11.4. Normal Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Common-Probability-Distributions-Summary.html">11.5. Summary</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../12/uncertainty.html">12. Uncertainty and Error Propagation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../12/Measurement-Error.html">12.1. Measurement Error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Error-Propagation.html">12.2. Error Propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Measuring-Flowrate-Example.html">12.3. Measuring Flowrate Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Car-and-Incline-Example.html">12.4. Car and Incline Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Simulation.html">12.5. Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Monte-Carlo-Error-Propogation.html">12.6. Monte Carlo Error Propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Practice-Problems.html">12.7. Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../13/inference.html">13. Statistical Inference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../13/Central-Limit-Theorem.html">13.1. Central Limit Theorem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Standard-Normal-Distribution.html">13.2. Standard Normal Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Confidence-Intervals.html">13.3. Confidence Intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Students-t-Distribution.html">13.4. Student’s t-Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Hypothesis-Testing-Basics.html">13.5. Hypothesis Testing Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Flavors-of-Hypothesis-Testing.html">13.6. Flavors of Hypothesis Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Type-I-and-Type-II-Errors.html">13.7. Type I and Type II Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Statistical-Power-Basics.html">13.8. Statistical Power Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Statistical-Power-in-Python.html">13.9. Statistical Power in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Statistical-Power-Practice-Problems.html">13.10. Statistical Power Practice Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Bootstrap-Confidence-Intervals.html">13.11. Bootstrap Confidence Intervals</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../14/regression.html">14. Multivariate Linear Regression</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../14/Correlation-Covariance-and-Independence.html">14.1. Correlation, Covariance, and Independence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Least-Squares-Line.html">14.2. Simple Least Squares</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Ordinary-Least-Squares-Linear-Regression.html">14.3. Ordinary Least Squares Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Residual-Analysis.html">14.4. Residual Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Regression-Assumption-Examples.html">14.5. Regression Assumption Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Uncertainty-Analysis-and-Statistical-Inference.html">14.6. Uncertainty Analysis and Statistical Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Multivariate-Linear-Regression.html">14.7. Multivariate Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Linear-Regression-Practice-Problems.html">14.8. Linear Regression Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../15/advanced_regression.html">15. Nonlinear Regression</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../15/Transformations-and-Linear-Regression.html">15.1. Transformations and Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Weighted-Regression.html">15.2. Weighted Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Regression.html">15.3. Nonlinear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Regression-Practice-Problem.html">15.4. Nonlinear Regression Practice Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression.html">15.5. Monte Carlo Uncertainty Analysis for Nonlinear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Case-Study-Adsorptive-Membranes.html">15.6. Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../16/design_of_experiments.html">16. Design of Experiments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../16/Reaction-MBDoE.html">16.1. Model-Based Design of Experiments</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extra Information</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2022/home.html">Fall 2022</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/schedule.html">Fall 2022 Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/project1.html">Project 1: Computating for Problem Solving (Fall 2022)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/project2.html">Project 2: Data Analysis (Fall 2022)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2023/home.html">Fall 2023</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/schedule.html">Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/project.html">Semester Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet1_F23.html">Problem Set 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet2_F23.html">Problem Set 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet3_F23.html">Problem Set 3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet4_F23.html">Problem Set 4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet5_F23.html">Problem Set 5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet6_F23.html">Problem Set 6</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="contribute.html">Contributed Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Biotransport-Entrance-Length.html">Estimating the Entrance Length of Channel Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Non_Isothermal_PBR.html">Non-Isothermal Packed Bed Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ficks_Law.html">Solving Fick’s Second Law Using Numeric Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Stochastic-Kinetics.html">Stochastic Simulation of Chemical Reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Spaghettification.html">Spaghettification of the Magic School Bus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Alcohol-Pharmacokinetics.html">Alcohol Pharmacokinetics and  Blood Alcohol Content % Modeling</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Plotting McCabe-Thiele diagram through computational methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Wastewater-Treatment-Mass-Balance.html">Example of Mass Balance Problem in Wastewater Treatment Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Filtration.html">Filtration of a Yeast Suspension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Fraction_of_Molecular_Collisions.html">Calculating Fraction of Molecular Collisions</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/contrib/McCabe-Thiele.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/data-and-computing" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/contrib/McCabe-Thiele.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/contrib/McCabe-Thiele.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Plotting McCabe-Thiele diagram through computational methods</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">1. Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#target-audience-and-learning-objectives">1.1 Target audience and learning objectives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relevant-notebooks-from-the-class">1.2 Relevant notebooks from the class:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">1.3 References:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#background-information">1.4 Background information</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-distillation-column-using-mccabe-thiele-method">2. Solving distillation column using McCabe-Thiele method</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-description">Problem description</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solve-for-mole-fraction-of-each-stream">2.1. Solve for mole fraction of each stream</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-obtaining-density-of-mixture-through-specific-gravity">2.1.a. Obtaining density of mixture through specific gravity</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-create-a-function-to-solve-linear-system">2.1.b. Create a function to solve  Linear System</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-solve-for-the-mole-fraction-of-methanol-in-each-stream">2.1.c. Solve for the mole fraction of Methanol in each stream</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vapor-liquid-equilibrium-vle-model">3. Vapor-liquid equilibrium (VLE) model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-the-vle-data-points-to-create-a-best-fit-line">3.1. Fit the VLE data points to create a best fit line</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vapor-liquid-equilibrium-of-methanol">3.2. Vapor-liquid equilibrium of methanol</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-mccabe-thiele-for-a-total-reflux-run">3.3. Plot the McCabe-Thiele for a total reflux run</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-stepping-line">3.3.a. Stepping line</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-mccabe-thiele-for-a-total-reflux-run">3.3.b. McCabe-Thiele for a total reflux run</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-mccabe-thiele-diagram-of-a-feed-run">4. Plot the McCabe-Thiele diagram of a feed run</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solve-for-the-slope-of-the-q-and-rectifying-line">4.1. Solve for the slope of the q and rectifying line</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intercept-of-the-q-line-and-the-rectifying-line-and-calculate-the-slope-and-y-intercept-of-the-stripping-line">4.2. Intercept of the q-line and the rectifying line, and calculate the slope and y-intercept of the stripping line</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-the-points-needed-to-plot-the-stepping-line-plot-the-mccabe-thiele-diagram-and-calculate-the-number-of-stages">4.3. Generate the points needed to plot the stepping line, plot the McCabe-Thiele diagram, and calculate the number of stages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-question-1">5. Discussion Question 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-question-2">6. Discussion Question 2</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="plotting-mccabe-thiele-diagram-through-computational-methods">
+<h1>Plotting McCabe-Thiele diagram through computational methods<a class="headerlink" href="#plotting-mccabe-thiele-diagram-through-computational-methods" title="Link to this heading">#</a></h1>
+<p>Prepared by:</p>
+<p>Zeping Chen - <a class="reference external" href="mailto:zchen23&#37;&#52;&#48;nd&#46;edu">zchen23<span>&#64;</span>nd<span>&#46;</span>edu</a></p>
+<p>Suporna Paul - <a class="reference external" href="mailto:spaul2&#37;&#52;&#48;nd&#46;edu">spaul2<span>&#64;</span>nd<span>&#46;</span>edu</a></p>
+<section id="introduction">
+<h2>1. Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>When you plot the McCabe-Thiele diagram by hand, have you ever had the thought of there has to be an easier way to do this? Plotting the operating line and step lines computationally is much  more accurate and efficient than plotting it by hand, especially when efficiency of the column is involved. In this notebook, we will learn to plot the McCabe-Thiele diagram using python.</p>
+<section id="target-audience-and-learning-objectives">
+<h3>1.1 Target audience and learning objectives<a class="headerlink" href="#target-audience-and-learning-objectives" title="Link to this heading">#</a></h3>
+<p>This notebook is intended for ChemE students (both undergraduates and graduate students) who have completed or are currently enrolled in a Chemical Engineering Separations Process class.</p>
+<p>After studying this notebook, completing the activities, and asking questions in class, you should be able to:</p>
+<ul class="simple">
+<li><p>Use numpy to solve system of linear equations</p></li>
+<li><p>Use pandas to read csv</p></li>
+<li><p>Produce “publication ready” plots</p></li>
+<li><p>Graph the McCabe-Thiele diagram using computational techniques</p></li>
+</ul>
+</section>
+<section id="relevant-notebooks-from-the-class">
+<h3>1.2 Relevant notebooks from the class:<a class="headerlink" href="#relevant-notebooks-from-the-class" title="Link to this heading">#</a></h3>
+<p>1.15. <a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/01/Publication-Quality-Figures.html">Preparing Publication Quality Figures in Python</a></p>
+<p>1.3. <a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/01/Python-Basics-III-Lists-Dictionaries-Enumeration.html">Modeling Systems of Linear Equations</a></p>
+<p>1.5.<a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/01/Functions-and-Scope.html">Functions and Scope</a></p>
+<p>4.1. <a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/01/Flow-control.html">Python Basics II: Loopy Logic</a></p>
+<p>14.7. <a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/14/Multivariate-Linear-Regression.html">Multivariate Linear Regression</a></p>
+</section>
+<section id="references">
+<h3>1.3 References:<a class="headerlink" href="#references" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>McCabe-Thiele Plot | Neutrium. <a class="reference external" href="https://neutrium.net/unit-operations/distillation/mccabe-thiele-plot/">https://neutrium.net/unit-operations/distillation/mccabe-thiele-plot/</a> (accessed 2022-10-15</p></li>
+<li><p>Vapor-Liquid Equilibrium (VLE) Model for vapor mole frac methanol and liquid mole frac methanol. <a class="reference external" href="https://raw.githubusercontent.com/chennieXD/McCabe-Thiele/main/LiquidVaporEquil.csv">https://raw.githubusercontent.com/chennieXD/McCabe-Thiele/main/LiquidVaporEquil.csv</a> (accessed 2022-10-15).</p></li>
+<li><p>Stichlmair, G.; Klein, H.; Rehfeldt, S. Distillation: Principles and Practice, 2nd ed.; Wiley, 2021.</p></li>
+<li><p>Gorak, A.; Sorensen, E.  Distillation: Fundamentals and Principles (Handbooks in Separation Science), 1st ed.; Academic Press, 2014.</p></li>
+</ol>
+</section>
+<section id="background-information">
+<h3>1.4 Background information<a class="headerlink" href="#background-information" title="Link to this heading">#</a></h3>
+<p>For the separation of organic chemicals, distillation columns are the primary equipment that is being used in a number of chemical process industries including petroleum refineries, natural gas processing plants, etc. In short, a distillation column is made of a tube structure that provides surfaces on which condensations and vaporizations occur to separate binary or multi-component mixtures by varying column pressure, temperature, tube size, and tube diameter. McCabe-Thiele diagram is a diagram utilized frequently in designing distillation columns. The diagram is able to provide an estimate of the number of stages needed to perform the desired separation.</p>
+</section>
+</section>
+<section id="solving-distillation-column-using-mccabe-thiele-method">
+<h2>2. Solving distillation column using McCabe-Thiele method<a class="headerlink" href="#solving-distillation-column-using-mccabe-thiele-method" title="Link to this heading">#</a></h2>
+<section id="problem-description">
+<h3>Problem description<a class="headerlink" href="#problem-description" title="Link to this heading">#</a></h3>
+<p>A student is trying to calculate the number of stages in a distillation column. Since there is insulation installed to improve the efficiency of the column, he can not just count the number of stages physically. To figure out the number of stages, he is feeding a methanol-water mixture into the column to observe how the column performs. Using a hydrometer, the student is able to measure the specific gravity of the feed: 0.887, distillate: 0.815 and bottoms: 0.990. He is also able to measure the reflux ratio to be 1.25 and the feed has a liquid mole fraction of 0.36.</p>
+<p>Using the above information:</p>
+<ol class="arabic simple">
+<li><p>Calculate the mole fraction  of each stream from specific gravity</p></li>
+<li><p>Plot the vapor liquid equilibrium line and 45 degree line.</p></li>
+<li><p>Plot the McCabe-Thiele diagram for a total reflux run for the mixture and calculate the number of stages.</p></li>
+<li><p>Plot the McCabe-Thiele diagram for a feed run for the mixture and calculate the number of stages.</p></li>
+<li><p>Discuss what the McCabe-Thiele diagram tells you about the feed condiiton</p></li>
+<li><p>Discuss how a McCabe-Thiele plot with 100% efficiency is unrealistic.</p></li>
+</ol>
+<p><strong>Note:</strong> This problem is developed by Zeping Chen and Suporna Paul. Here, we demostrated a step by step process of using this python notebook to solve for distillation column parameters.</p>
+<p>For further information, readers are encouraged to read these following text books which contains similar math problems.</p>
+<p><strong>References:</strong></p>
+<ol class="arabic simple">
+<li><p>Stichlmair, G.; Klein, H.; Rehfeldt, S. Distillation: Principles and Practice, 2nd ed.; Wiley, 2021.</p></li>
+<li><p>Gorak, A.; Sorensen, E.  Distillation: Fundamentals and Principles (Handbooks in Separation Science), 1st ed.; Academic Press, 2014.</p></li>
+</ol>
+</section>
+<section id="solve-for-mole-fraction-of-each-stream">
+<h3>2.1. Solve for mole fraction of each stream<a class="headerlink" href="#solve-for-mole-fraction-of-each-stream" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># libraries used</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="a-obtaining-density-of-mixture-through-specific-gravity">
+<h4>2.1.a. Obtaining density of mixture through specific gravity<a class="headerlink" href="#a-obtaining-density-of-mixture-through-specific-gravity" title="Link to this heading">#</a></h4>
+<p>The density of each component is given as below:</p>
+<ul class="simple">
+<li><p>Water: 997 kg/m<span class="math notranslate nohighlight">\(^3\)</span></p></li>
+<li><p>Methanol: 792 kg/m<span class="math notranslate nohighlight">\(^3\)</span></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Density of each species</span>
+<span class="c1"># water</span>
+<span class="n">P_water</span> <span class="o">=</span> <span class="mi">997</span>  <span class="c1"># kg/m^3</span>
+<span class="c1"># Methanol</span>
+<span class="n">P_Methanol</span> <span class="o">=</span> <span class="mi">792</span>  <span class="c1"># kg/m^3</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can rearrange the definition of specific gravity (SG) to get the density of mixture in each stream:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+        SG = \frac{density \ of \ mixture}{density \ of \ water}
+    \end{align}
+\]</div>
+<p>We also know that the density (ρ) of a mixutre can be calculated by summing the mole fraction (X) of each component by that component’s density.
+$$</p>
+<div class="amsmath math notranslate nohighlight" id="equation-d900b508-4fb0-4b33-ae73-d8f588f21ef2">
+<span class="eqno">(83)<a class="headerlink" href="#equation-d900b508-4fb0-4b33-ae73-d8f588f21ef2" title="Permalink to this equation">#</a></span>\[\begin{align}
+        ρ_t = ρ_a X_a + ρ_b X_b
+    \end{align}\]</div>
+<div class="math notranslate nohighlight">
+\[From these information, we can write a system of linear equations to calculate the mole fraction of methanol and water in each stream:\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-edf5a46a-7a86-4989-8dd8-9f2f67598949">
+<span class="eqno">(84)<a class="headerlink" href="#equation-edf5a46a-7a86-4989-8dd8-9f2f67598949" title="Permalink to this equation">#</a></span>\[\begin{align}
+        1 = X_W + X_M
+    \end{align}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-503656b2-059f-49df-8e73-7aa2838d0d83">
+<span class="eqno">(85)<a class="headerlink" href="#equation-503656b2-059f-49df-8e73-7aa2838d0d83" title="Permalink to this equation">#</a></span>\[\begin{align}
+        ρ_t = ρ_M X_M + ρ_W X_W
+    \end{align}\]</div>
+<p>$$</p>
+<p><strong>Calculate the mole fraction of methanol in each stream</strong> by solving the above system of equations by hand. Record Your answer on pencil and paper**</p>
+</section>
+<section id="b-create-a-function-to-solve-linear-system">
+<h4>2.1.b. Create a function to solve  Linear System<a class="headerlink" href="#b-create-a-function-to-solve-linear-system" title="Link to this heading">#</a></h4>
+<p>An easier method to calculate the mole fraciton of Methanol in each stream is to use linear algebra.</p>
+<p>Matrix form:
+$$</p>
+<div class="amsmath math notranslate nohighlight" id="equation-7f232f05-ce15-477b-8528-26c7512ed6da">
+<span class="eqno">(86)<a class="headerlink" href="#equation-7f232f05-ce15-477b-8528-26c7512ed6da" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\begin{bmatrix}
+ρ_W &amp; ρ_m\\
+1 &amp; 1
+\end{bmatrix} \cdot 
+\begin{bmatrix}
+	X_W \\
+	X_M
+\end{bmatrix} = 
+\begin{bmatrix}
+	ρ_t \\
+	1
+\end{bmatrix}
+\end{equation}\]</div>
+<p>$$</p>
+<p>Now let’s write a function that will solve the linear system of equations to obtain the mole fraction of Methanol in each stream <strong>using Python</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">conc_solver</span><span class="p">(</span><span class="n">SG</span><span class="p">):</span>
+    <span class="c1"># Add your solution hereS</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The specific gravity of each stream is given as below:</p>
+<ul class="simple">
+<li><p>Feed: 0.887</p></li>
+<li><p>Distillate: 0.815</p></li>
+<li><p>Bottoms: 0.990</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Specify the Specific Gravity of each stream</span>
+<span class="c1"># Add your solution hereS</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="c-solve-for-the-mole-fraction-of-methanol-in-each-stream">
+<h4>2.1.c. Solve for the mole fraction of Methanol in each stream<a class="headerlink" href="#c-solve-for-the-mole-fraction-of-methanol-in-each-stream" title="Link to this heading">#</a></h4>
+<p>Using the function created previously to calculate and print the mole fraction of Methanol in each stream:</p>
+<p>USe <strong>xD</strong> for the distillate stream</p>
+<p>USe <strong>xB</strong> for the bottom stream</p>
+<p>USe <strong>xZ</strong> for the feed stream</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate the molar fraction of each stream</span>
+<span class="c1"># Add your solution hereS</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The molar fraction of Methanol in the distillate stream is: 0.900
+The molar fraction of Methanol in the bottom stream is: 0.049
+The molar fraction of Methanol in the feed stream is: 0.550
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="vapor-liquid-equilibrium-vle-model">
+<h2>3. Vapor-liquid equilibrium (VLE) model<a class="headerlink" href="#vapor-liquid-equilibrium-vle-model" title="Link to this heading">#</a></h2>
+<section id="fit-the-vle-data-points-to-create-a-best-fit-line">
+<h3>3.1. Fit the VLE data points to create a best fit line<a class="headerlink" href="#fit-the-vle-data-points-to-create-a-best-fit-line" title="Link to this heading">#</a></h3>
+<p>Using the points of VLE obtained from Aspen Plus to generate a best fit line to model VLE. <strong>Hint:</strong> Use Excel or Python.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># imports the csv data into python</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/chennieXD/McCabe-Thiele/main/LiquidVaporEquil.csv&quot;</span>
+<span class="n">liq_vap_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">liq_vap_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    vapor mole frac methanol  liquid mole frac methanol
+0                   1.000000                       1.00
+1                   0.991953                       0.98
+2                   0.983907                       0.96
+3                   0.975858                       0.94
+4                   0.967805                       0.92
+5                   0.959746                       0.90
+6                   0.951678                       0.88
+7                   0.943597                       0.86
+8                   0.935500                       0.84
+9                   0.927383                       0.82
+10                  0.919242                       0.80
+11                  0.911073                       0.78
+12                  0.902868                       0.76
+13                  0.894623                       0.74
+14                  0.886331                       0.72
+15                  0.877983                       0.70
+16                  0.869572                       0.68
+17                  0.861087                       0.66
+18                  0.852518                       0.64
+19                  0.843852                       0.62
+20                  0.835076                       0.60
+21                  0.826174                       0.58
+22                  0.817129                       0.56
+23                  0.807920                       0.54
+24                  0.798526                       0.52
+25                  0.788920                       0.50
+26                  0.779072                       0.48
+27                  0.768950                       0.46
+28                  0.758514                       0.44
+29                  0.747718                       0.42
+30                  0.736511                       0.40
+31                  0.724832                       0.38
+32                  0.712610                       0.36
+33                  0.699758                       0.34
+34                  0.686178                       0.32
+35                  0.671750                       0.30
+36                  0.656326                       0.28
+37                  0.639734                       0.26
+38                  0.621753                       0.24
+39                  0.602116                       0.22
+40                  0.580482                       0.20
+41                  0.556419                       0.18
+42                  0.529364                       0.16
+43                  0.498575                       0.14
+44                  0.463048                       0.12
+45                  0.421395                       0.10
+46                  0.371637                       0.08
+47                  0.310848                       0.06
+48                  0.234504                       0.04
+49                  0.135217                       0.02
+50                  0.000000                       0.00
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="vapor-liquid-equilibrium-of-methanol">
+<h3>3.2. Vapor-liquid equilibrium of methanol<a class="headerlink" href="#vapor-liquid-equilibrium-of-methanol" title="Link to this heading">#</a></h3>
+<p>Plot the VLE of methanol using the model generated from linear regression using the format <span class="math notranslate nohighlight">\(a+bx+cx^2+dx^3+ex^4+fx^5+gx^6\)</span> and define the equation in the function “VLE_Eq”  Plot the 45 degree line on the same plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution hereS</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1.00000000e+00 1.00000000e+00 1.00000000e+00 1.00000000e+00
+  1.00000000e+00 1.00000000e+00 1.00000000e+00]
+ [1.00000000e+00 9.80000000e-01 9.60400000e-01 9.41192000e-01
+  9.22368160e-01 9.03920797e-01 8.85842381e-01]
+ [1.00000000e+00 9.60000000e-01 9.21600000e-01 8.84736000e-01
+  8.49346560e-01 8.15372698e-01 7.82757790e-01]
+ [1.00000000e+00 9.40000000e-01 8.83600000e-01 8.30584000e-01
+  7.80748960e-01 7.33904022e-01 6.89869781e-01]
+ [1.00000000e+00 9.20000000e-01 8.46400000e-01 7.78688000e-01
+  7.16392960e-01 6.59081523e-01 6.06355001e-01]
+ [1.00000000e+00 9.00000000e-01 8.10000000e-01 7.29000000e-01
+  6.56100000e-01 5.90490000e-01 5.31441000e-01]
+ [1.00000000e+00 8.80000000e-01 7.74400000e-01 6.81472000e-01
+  5.99695360e-01 5.27731917e-01 4.64404087e-01]
+ [1.00000000e+00 8.60000000e-01 7.39600000e-01 6.36056000e-01
+  5.47008160e-01 4.70427018e-01 4.04567235e-01]
+ [1.00000000e+00 8.40000000e-01 7.05600000e-01 5.92704000e-01
+  4.97871360e-01 4.18211942e-01 3.51298032e-01]
+ [1.00000000e+00 8.20000000e-01 6.72400000e-01 5.51368000e-01
+  4.52121760e-01 3.70739843e-01 3.04006671e-01]
+ [1.00000000e+00 8.00000000e-01 6.40000000e-01 5.12000000e-01
+  4.09600000e-01 3.27680000e-01 2.62144000e-01]
+ [1.00000000e+00 7.80000000e-01 6.08400000e-01 4.74552000e-01
+  3.70150560e-01 2.88717437e-01 2.25199601e-01]
+ [1.00000000e+00 7.60000000e-01 5.77600000e-01 4.38976000e-01
+  3.33621760e-01 2.53552538e-01 1.92699929e-01]
+ [1.00000000e+00 7.40000000e-01 5.47600000e-01 4.05224000e-01
+  2.99865760e-01 2.21900662e-01 1.64206490e-01]
+ [1.00000000e+00 7.20000000e-01 5.18400000e-01 3.73248000e-01
+  2.68738560e-01 1.93491763e-01 1.39314070e-01]
+ [1.00000000e+00 7.00000000e-01 4.90000000e-01 3.43000000e-01
+  2.40100000e-01 1.68070000e-01 1.17649000e-01]
+ [1.00000000e+00 6.80000000e-01 4.62400000e-01 3.14432000e-01
+  2.13813760e-01 1.45393357e-01 9.88674826e-02]
+ [1.00000000e+00 6.60000000e-01 4.35600000e-01 2.87496000e-01
+  1.89747360e-01 1.25233258e-01 8.26539500e-02]
+ [1.00000000e+00 6.40000000e-01 4.09600000e-01 2.62144000e-01
+  1.67772160e-01 1.07374182e-01 6.87194767e-02]
+ [1.00000000e+00 6.20000000e-01 3.84400000e-01 2.38328000e-01
+  1.47763360e-01 9.16132832e-02 5.68002356e-02]
+ [1.00000000e+00 6.00000000e-01 3.60000000e-01 2.16000000e-01
+  1.29600000e-01 7.77600000e-02 4.66560000e-02]
+ [1.00000000e+00 5.80000000e-01 3.36400000e-01 1.95112000e-01
+  1.13164960e-01 6.56356768e-02 3.80686925e-02]
+ [1.00000000e+00 5.60000000e-01 3.13600000e-01 1.75616000e-01
+  9.83449600e-02 5.50731776e-02 3.08409795e-02]
+ [1.00000000e+00 5.40000000e-01 2.91600000e-01 1.57464000e-01
+  8.50305600e-02 4.59165024e-02 2.47949113e-02]
+ [1.00000000e+00 5.20000000e-01 2.70400000e-01 1.40608000e-01
+  7.31161600e-02 3.80204032e-02 1.97706097e-02]
+ [1.00000000e+00 5.00000000e-01 2.50000000e-01 1.25000000e-01
+  6.25000000e-02 3.12500000e-02 1.56250000e-02]
+ [1.00000000e+00 4.80000000e-01 2.30400000e-01 1.10592000e-01
+  5.30841600e-02 2.54803968e-02 1.22305905e-02]
+ [1.00000000e+00 4.60000000e-01 2.11600000e-01 9.73360000e-02
+  4.47745600e-02 2.05962976e-02 9.47429690e-03]
+ [1.00000000e+00 4.40000000e-01 1.93600000e-01 8.51840000e-02
+  3.74809600e-02 1.64916224e-02 7.25631386e-03]
+ [1.00000000e+00 4.20000000e-01 1.76400000e-01 7.40880000e-02
+  3.11169600e-02 1.30691232e-02 5.48903174e-03]
+ [1.00000000e+00 4.00000000e-01 1.60000000e-01 6.40000000e-02
+  2.56000000e-02 1.02400000e-02 4.09600000e-03]
+ [1.00000000e+00 3.80000000e-01 1.44400000e-01 5.48720000e-02
+  2.08513600e-02 7.92351680e-03 3.01093638e-03]
+ [1.00000000e+00 3.60000000e-01 1.29600000e-01 4.66560000e-02
+  1.67961600e-02 6.04661760e-03 2.17678234e-03]
+ [1.00000000e+00 3.40000000e-01 1.15600000e-01 3.93040000e-02
+  1.33633600e-02 4.54354240e-03 1.54480442e-03]
+ [1.00000000e+00 3.20000000e-01 1.02400000e-01 3.27680000e-02
+  1.04857600e-02 3.35544320e-03 1.07374182e-03]
+ [1.00000000e+00 3.00000000e-01 9.00000000e-02 2.70000000e-02
+  8.10000000e-03 2.43000000e-03 7.29000000e-04]
+ [1.00000000e+00 2.80000000e-01 7.84000000e-02 2.19520000e-02
+  6.14656000e-03 1.72103680e-03 4.81890304e-04]
+ [1.00000000e+00 2.60000000e-01 6.76000000e-02 1.75760000e-02
+  4.56976000e-03 1.18813760e-03 3.08915776e-04]
+ [1.00000000e+00 2.40000000e-01 5.76000000e-02 1.38240000e-02
+  3.31776000e-03 7.96262400e-04 1.91102976e-04]
+ [1.00000000e+00 2.20000000e-01 4.84000000e-02 1.06480000e-02
+  2.34256000e-03 5.15363200e-04 1.13379904e-04]
+ [1.00000000e+00 2.00000000e-01 4.00000000e-02 8.00000000e-03
+  1.60000000e-03 3.20000000e-04 6.40000000e-05]
+ [1.00000000e+00 1.80000000e-01 3.24000000e-02 5.83200000e-03
+  1.04976000e-03 1.88956800e-04 3.40122240e-05]
+ [1.00000000e+00 1.60000000e-01 2.56000000e-02 4.09600000e-03
+  6.55360000e-04 1.04857600e-04 1.67772160e-05]
+ [1.00000000e+00 1.40000000e-01 1.96000000e-02 2.74400000e-03
+  3.84160000e-04 5.37824000e-05 7.52953600e-06]
+ [1.00000000e+00 1.20000000e-01 1.44000000e-02 1.72800000e-03
+  2.07360000e-04 2.48832000e-05 2.98598400e-06]
+ [1.00000000e+00 1.00000000e-01 1.00000000e-02 1.00000000e-03
+  1.00000000e-04 1.00000000e-05 1.00000000e-06]
+ [1.00000000e+00 8.00000000e-02 6.40000000e-03 5.12000000e-04
+  4.09600000e-05 3.27680000e-06 2.62144000e-07]
+ [1.00000000e+00 6.00000000e-02 3.60000000e-03 2.16000000e-04
+  1.29600000e-05 7.77600000e-07 4.66560000e-08]
+ [1.00000000e+00 4.00000000e-02 1.60000000e-03 6.40000000e-05
+  2.56000000e-06 1.02400000e-07 4.09600000e-09]
+ [1.00000000e+00 2.00000000e-02 4.00000000e-04 8.00000000e-06
+  1.60000000e-07 3.20000000e-09 6.40000000e-11]
+ [1.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00
+  0.00000000e+00 0.00000000e+00 0.00000000e+00]]
+inv(XT X) =
+ [[ 6.22202149e-01 -1.46211902e+01  1.08045150e+02 -3.55741797e+02
+   5.80510083e+02 -4.59614724e+02  1.40853168e+02]
+ [-1.46211902e+01  5.27088827e+02 -4.58591254e+03  1.64778205e+04
+  -2.83978418e+04  2.33404947e+04 -7.35035786e+03]
+ [ 1.08045150e+02 -4.58591254e+03  4.31162596e+04 -1.62383633e+05
+   2.88898967e+05 -2.42977521e+05  7.78643253e+04]
+ [-3.55741798e+02  1.64778205e+04 -1.62383633e+05  6.30875827e+05
+  -1.14772073e+06  9.81686322e+05 -3.18767083e+05]
+ [ 5.80510083e+02 -2.83978419e+04  2.88898967e+05 -1.14772073e+06
+   2.12319021e+06 -1.83988730e+06  6.03731412e+05]
+ [-4.59614724e+02  2.33404947e+04 -2.42977521e+05  9.81686322e+05
+  -1.83988730e+06  1.61112956e+06 -5.33217444e+05]
+ [ 1.40853169e+02 -7.35035786e+03  7.78643253e+04 -3.18767083e+05
+   6.03731412e+05 -5.33217445e+05  1.77739148e+05]]
+beta_hat = [ 1.56311059e-02  6.16921967e+00 -2.72479383e+01  7.04901787e+01
+ -9.98474239e+01  7.22077193e+01 -2.07929297e+01]
+</pre></div>
+</div>
+<img alt="../../_images/814f8d1015d48e5372f32c1d66a304838291aff20df9a13a7040d1cd65818815.png" src="../../_images/814f8d1015d48e5372f32c1d66a304838291aff20df9a13a7040d1cd65818815.png" />
+</div>
+</div>
+</section>
+<section id="plot-the-mccabe-thiele-for-a-total-reflux-run">
+<h3>3.3. Plot the McCabe-Thiele for a total reflux run<a class="headerlink" href="#plot-the-mccabe-thiele-for-a-total-reflux-run" title="Link to this heading">#</a></h3>
+<section id="a-stepping-line">
+<h4>3.3.a. Stepping line<a class="headerlink" href="#a-stepping-line" title="Link to this heading">#</a></h4>
+<p>The stepping line connects the points that represent the mole fraction of Methanol in each stage of the distillation column. It starts at the bottom mole fraction of Methanol on the 45 line and ends after reaching the mole fraction of Methanol in the distillate on the 45 line.</p>
+<p><img alt="" src="https://ndcbe.github.io/data-and-computing/_images/MCabe_thiele_stepping_line.png" /></p>
+<p>Create a function that is able to generate the points requried to plot the stepping line.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">stair</span><span class="p">(</span><span class="n">slope</span><span class="p">,</span> <span class="n">y_intercept</span><span class="p">,</span> <span class="n">x_start</span><span class="p">,</span> <span class="n">y_start</span><span class="p">,</span> <span class="n">y_end</span><span class="p">,</span> <span class="n">Efficiency</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="c1"># Add your solution hereS</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="b-mccabe-thiele-for-a-total-reflux-run">
+<h4>3.3.b. McCabe-Thiele for a total reflux run<a class="headerlink" href="#b-mccabe-thiele-for-a-total-reflux-run" title="Link to this heading">#</a></h4>
+<p>In a total reflux run, there are no feed entering the column and no product leaving the column. The distillate is all refluxed back into the top of the column. The stepping line is plotted along the 45 degree line and the vapor-liquid equilibrium line.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution hereS</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of total theoretical stage is  4
+</pre></div>
+</div>
+<img alt="../../_images/d1f25f3e079be5ef5b02375df2c98321132e0f13991380a04c51cf4f7ad41b8d.png" src="../../_images/d1f25f3e079be5ef5b02375df2c98321132e0f13991380a04c51cf4f7ad41b8d.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="plot-the-mccabe-thiele-diagram-of-a-feed-run">
+<h2>4. Plot the McCabe-Thiele diagram of a feed run<a class="headerlink" href="#plot-the-mccabe-thiele-diagram-of-a-feed-run" title="Link to this heading">#</a></h2>
+<p>In a more realistic sense, there will be mixture feed entering the column to be separated. As a result, there will also be a distillate stream and a bottoms stream. When there are feed entering the column and product leaving the column, the McCabe-Thiele diagram will have the feed condition (q) line, rectifying line, and stripping line. The rectifying starts at the distillate mole fraction of Methanol and comes down until it corsses the q-line. The q-line starts at the feed mole fraction of Methanol and meets the stripping and rectifying line. The stripping line starts at the bottom mole fraction of Methanol and meets the q-line and rectifying line.</p>
+<p><img alt="" src="https://ndcbe.github.io/data-and-computing/_images/MCabe_thiele_diagram.png" /></p>
+<section id="solve-for-the-slope-of-the-q-and-rectifying-line">
+<h3>4.1. Solve for the slope of the q and rectifying line<a class="headerlink" href="#solve-for-the-slope-of-the-q-and-rectifying-line" title="Link to this heading">#</a></h3>
+<p>Using the relationship below, calculate the slope of the q and rectifying line. q is the mole fraction of liquid in the feed stream and R is the reflux ratio. Store the slope of q-line as <strong>m_q</strong> and slope of rectifying operating line as <strong>m_rec</strong></p>
+<div class="amsmath math notranslate nohighlight" id="equation-6e3e7d5c-0e49-4831-9f7c-269e8ccfa0e5">
+<span class="eqno">(87)<a class="headerlink" href="#equation-6e3e7d5c-0e49-4831-9f7c-269e8ccfa0e5" title="Permalink to this equation">#</a></span>\[\begin{align}
+        m_{feed} = \frac{q}{ q - 1 }
+    \end{align}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-0cad22f9-4389-473f-b1c7-c3c356e13fdf">
+<span class="eqno">(88)<a class="headerlink" href="#equation-0cad22f9-4389-473f-b1c7-c3c356e13fdf" title="Permalink to this equation">#</a></span>\[\begin{align}
+        m_{rec} = \frac{R}{ R + 1 }        
+    \end{align}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mole fraction of liquid in feed</span>
+<span class="n">q</span> <span class="o">=</span> <span class="mf">0.36</span>
+<span class="c1"># Reflux Ratio</span>
+<span class="n">R</span> <span class="o">=</span> <span class="mf">1.25</span>
+
+<span class="c1"># Add your solution hereS</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="intercept-of-the-q-line-and-the-rectifying-line-and-calculate-the-slope-and-y-intercept-of-the-stripping-line">
+<h3>4.2. Intercept of the q-line and the rectifying line, and calculate the slope and y-intercept of the stripping line<a class="headerlink" href="#intercept-of-the-q-line-and-the-rectifying-line-and-calculate-the-slope-and-y-intercept-of-the-stripping-line" title="Link to this heading">#</a></h3>
+<p>To find the intercept of the q-line and the rectifying line, the point-slope equation of the q-line and the rectifying line can be turned into slope-interecept form and made into a system of linear equations.</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+        y-y_q = m_q(x-x_q)
+    \end{align}
+\begin{align}
+        y-y_{rec} = m_{rec}(x-x_{rec})
+    \end{align}
+\]</div>
+<p>Matrix form:
+$$</p>
+<div class="amsmath math notranslate nohighlight" id="equation-9d3cbbd0-2277-424d-829f-78e8b1a749e3">
+<span class="eqno">(89)<a class="headerlink" href="#equation-9d3cbbd0-2277-424d-829f-78e8b1a749e3" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\begin{bmatrix}
+m_{rec} &amp; -1\\
+m_{q} &amp; -1
+\end{bmatrix} \cdot 
+\begin{bmatrix}
+	x  \\
+	y
+\end{bmatrix} = 
+\begin{bmatrix}
+	m_{rec}*x_{rec} - y_{rec}  \\
+	m_{q} *x_q - y_q
+\end{bmatrix}
+\end{equation}\]</div>
+<p>$$</p>
+<p>After calculating the intercept, we have two points of the stripping line to calculate the slope and y-intercept to get the slope-intercept form of the equation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution hereS</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="generate-the-points-needed-to-plot-the-stepping-line-plot-the-mccabe-thiele-diagram-and-calculate-the-number-of-stages">
+<h2>4.3. Generate the points needed to plot the stepping line, plot the McCabe-Thiele diagram, and calculate the number of stages<a class="headerlink" href="#generate-the-points-needed-to-plot-the-stepping-line-plot-the-mccabe-thiele-diagram-and-calculate-the-number-of-stages" title="Link to this heading">#</a></h2>
+<p>Think where you want the “stair” to stop on your plot when you enter the y_start and y_end for the function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution hereS</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution hereS</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/c3ba111bd66e639a303eb6fac9f7a88832a570d659cb292d196313a0dbc88ab4.png" src="../../_images/c3ba111bd66e639a303eb6fac9f7a88832a570d659cb292d196313a0dbc88ab4.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of total theoretical stage is  5
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="discussion-question-1">
+<h2>5. Discussion Question 1<a class="headerlink" href="#discussion-question-1" title="Link to this heading">#</a></h2>
+<p>From the McCabe-Thiele diagram plotted above what can we say about the phase of the feed stream. <strong>Hint: Look at the slope of the q-line.</strong></p>
+<p><img alt="" src="https://ndcbe.github.io/data-and-computing/_images/MCabe_thiele_q1.png" /></p>
+<p><strong>Your Answer:</strong></p>
+<p>Since the q-line slope is between 0 and -1, it tells us that the feed stream is mostly a vapor feed. This conclusion is in line with the problem statement where q, the mole fraction of liquid, is 0.36, which means the feed is mostly vapor.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution hereS</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="discussion-question-2">
+<h2>6. Discussion Question 2<a class="headerlink" href="#discussion-question-2" title="Link to this heading">#</a></h2>
+<p>Why is the McCabe-Thiele diagram plotted above is unrealistic in the real world? What would you change to make the plot more realistic. Plot the modified plot and talk about how the number of stages changed. <strong>Hint: Think efficiency. Is there ever 100% efficiency in the real world? A distillation column typically have a efficiency of 60%.</strong></p>
+<p><strong>Your Answer:</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Effiicency</span>
+
+<span class="c1"># Add your solution hereS</span>
+
+<span class="c1"># McCabe-Thiele of a feed run</span>
+<span class="c1"># stripping portion of stepping line generation</span>
+<span class="n">stripping_line</span> <span class="o">=</span> <span class="n">stair</span><span class="p">(</span>
+    <span class="n">slope</span><span class="o">=</span><span class="n">m_strip</span><span class="p">,</span>
+    <span class="n">y_intercept</span><span class="o">=</span><span class="n">y_intercept_strip</span><span class="p">,</span>
+    <span class="n">x_start</span><span class="o">=</span><span class="n">xB</span><span class="p">,</span>
+    <span class="n">y_start</span><span class="o">=</span><span class="n">xB</span><span class="p">,</span>
+    <span class="n">y_end</span><span class="o">=</span><span class="n">intercept</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+    <span class="n">Efficiency</span><span class="o">=</span><span class="n">efficiency</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">xplot_stripping</span> <span class="o">=</span> <span class="n">stripping_line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">yplot_stripping</span> <span class="o">=</span> <span class="n">stripping_line</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># rectifying portion of stepping line generation</span>
+<span class="n">rectifying_line</span> <span class="o">=</span> <span class="n">stair</span><span class="p">(</span>
+    <span class="n">slope</span><span class="o">=</span><span class="n">m_rec</span><span class="p">,</span>
+    <span class="n">y_intercept</span><span class="o">=</span><span class="n">y_intercept_rec</span><span class="p">,</span>
+    <span class="n">x_start</span><span class="o">=</span><span class="p">(</span><span class="n">yplot_stripping</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_intercept_rec</span><span class="p">)</span> <span class="o">/</span> <span class="n">m_rec</span><span class="p">,</span>
+    <span class="n">y_start</span><span class="o">=</span><span class="n">yplot_stripping</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+    <span class="n">y_end</span><span class="o">=</span><span class="n">xD</span><span class="p">,</span>
+    <span class="n">Efficiency</span><span class="o">=</span><span class="n">efficiency</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">xplot_rectifying</span> <span class="o">=</span> <span class="n">rectifying_line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">yplot_rectifying</span> <span class="o">=</span> <span class="n">rectifying_line</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># complie the x and y points to respective liststogether</span>
+<span class="n">xplot</span> <span class="o">=</span> <span class="n">xplot_stripping</span> <span class="o">+</span> <span class="n">xplot_rectifying</span>
+<span class="n">yplot</span> <span class="o">=</span> <span class="n">yplot_stripping</span> <span class="o">+</span> <span class="n">yplot_rectifying</span>
+
+
+<span class="c1"># McCabe-Thiele diagram</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="c1"># plot the LVE line</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">liqvapx</span><span class="p">,</span> <span class="n">liqvapy</span><span class="p">)</span>
+<span class="c1"># plot the 45 degree line</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+<span class="c1"># plot the step line</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xplot</span><span class="p">,</span> <span class="n">yplot</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+<span class="c1"># plot the SOP</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">xB</span><span class="p">,</span> <span class="n">intercept</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">xB</span><span class="p">,</span> <span class="n">intercept</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;purple&quot;</span><span class="p">)</span>
+<span class="c1"># plot the ROP</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">xD</span><span class="p">,</span> <span class="n">intercept</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">xD</span><span class="p">,</span> <span class="n">intercept</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">)</span>
+<span class="c1"># plot the q-line</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">xZ</span><span class="p">,</span> <span class="n">intercept</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">xZ</span><span class="p">,</span> <span class="n">intercept</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">)</span>
+<span class="c1"># Formating the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Liquid Mole Fraction </span><span class="se">\n</span><span class="s2"> of Methanol&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Vapor Mole Fraction </span><span class="se">\n</span><span class="s2"> of Methanol&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;McCabe-Thiele of a </span><span class="se">\n</span><span class="s2"> feed system&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span>
+    <span class="n">labels</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;LVE line&quot;</span><span class="p">,</span> <span class="s2">&quot;45 line&quot;</span><span class="p">,</span> <span class="s2">&quot;step line&quot;</span><span class="p">,</span> <span class="s2">&quot;SOP&quot;</span><span class="p">,</span> <span class="s2">&quot;ROP&quot;</span><span class="p">,</span> <span class="s2">&quot;q-line&quot;</span><span class="p">),</span>
+    <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.43</span><span class="p">),</span>
+    <span class="n">borderaxespad</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">total_stage</span> <span class="o">=</span> <span class="n">stripping_line</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">rectifying_line</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The number of total theoretical stage is &quot;</span><span class="p">,</span> <span class="n">total_stage</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/54144ef804e9510b251ed21fa64ecbbeb3fb6a2fb540ed3dc850b660512eb3f1.png" src="../../_images/54144ef804e9510b251ed21fa64ecbbeb3fb6a2fb540ed3dc850b660512eb3f1.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of total theoretical stage is  9
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/contrib"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Alcohol-Pharmacokinetics.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Alcohol Pharmacokinetics and  Blood Alcohol Content % Modeling</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Wastewater-Treatment-Mass-Balance.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Example of Mass Balance Problem in Wastewater Treatment Units</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">1. Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#target-audience-and-learning-objectives">1.1 Target audience and learning objectives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relevant-notebooks-from-the-class">1.2 Relevant notebooks from the class:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">1.3 References:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#background-information">1.4 Background information</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-distillation-column-using-mccabe-thiele-method">2. Solving distillation column using McCabe-Thiele method</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-description">Problem description</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solve-for-mole-fraction-of-each-stream">2.1. Solve for mole fraction of each stream</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-obtaining-density-of-mixture-through-specific-gravity">2.1.a. Obtaining density of mixture through specific gravity</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-create-a-function-to-solve-linear-system">2.1.b. Create a function to solve  Linear System</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-solve-for-the-mole-fraction-of-methanol-in-each-stream">2.1.c. Solve for the mole fraction of Methanol in each stream</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vapor-liquid-equilibrium-vle-model">3. Vapor-liquid equilibrium (VLE) model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-the-vle-data-points-to-create-a-best-fit-line">3.1. Fit the VLE data points to create a best fit line</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vapor-liquid-equilibrium-of-methanol">3.2. Vapor-liquid equilibrium of methanol</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-mccabe-thiele-for-a-total-reflux-run">3.3. Plot the McCabe-Thiele for a total reflux run</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-stepping-line">3.3.a. Stepping line</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-mccabe-thiele-for-a-total-reflux-run">3.3.b. McCabe-Thiele for a total reflux run</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-mccabe-thiele-diagram-of-a-feed-run">4. Plot the McCabe-Thiele diagram of a feed run</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solve-for-the-slope-of-the-q-and-rectifying-line">4.1. Solve for the slope of the q and rectifying line</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intercept-of-the-q-line-and-the-rectifying-line-and-calculate-the-slope-and-y-intercept-of-the-stripping-line">4.2. Intercept of the q-line and the rectifying line, and calculate the slope and y-intercept of the stripping line</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-the-points-needed-to-plot-the-stepping-line-plot-the-mccabe-thiele-diagram-and-calculate-the-number-of-stages">4.3. Generate the points needed to plot the stepping line, plot the McCabe-Thiele diagram, and calculate the number of stages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-question-1">5. Discussion Question 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-question-2">6. Discussion Question 2</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

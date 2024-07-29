@@ -1,0 +1,2557 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>9.2. Summary Statistics &#8212; Data and Computing for Chemical Engineers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/09/Summary-Statistics';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="9.3. Visualizing Data" href="Visualizing-Data.html" />
+    <link rel="prev" title="9.1. Sampling" href="Sampling.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/cbe_logo.jpg" class="logo__image only-light" alt="Data and Computing for Chemical Engineers - Home"/>
+    <script>document.write(`<img src="../../_static/cbe_logo.jpg" class="logo__image only-dark" alt="Data and Computing for Chemical Engineers - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Data and Computing for Engineers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../01/Python-Primer.html">1. Python Primer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../01/Jupyter-Notebooks.html">1.1. Welcome to Jupyter Notebooks and Vocareum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Python-Basics-I-Variables-Strings-Bugs.html">1.2. Python Basics I: Variables, Strings, and Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Flow-control.html">1.3. Python Basics II: Loopy Logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Python-Basics-III-Lists-Dictionaries-Enumeration.html">1.4. Python Basics III: Lists, Dictionaries, and Enumeration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Functions-and-Scope.html">1.5. Functions and Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Recursion.html">1.6. Recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Pseudocode.html">1.7. Pseudocode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Example-High-Low-Game.html">1.8. High/Low Guess My Number Game</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Modules-and-Files.html">1.9. Modules and Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/NumPy.html">1.10. Linear Algebra with Numpy and Scipy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Matplotlib.html">1.11. Visualization with matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Pandas.html">1.12. Manipulating Data with Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Functions-as-Arguments.html">1.13. Functions as Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Testing-and-Debugging.html">1.14. Testing and Debugging in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Publication-Quality-Figures.html">1.15. Preparing Publication Quality Figures in Python</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../02/advanced_python.html">2. Advanced Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Methods</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03/linear_algebra.html">3. Linear Algebra Primer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter1.html">3.1. Chapter 1: Math Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter2.html">3.2. Chapter 2: Intro to Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter3.html">3.3. Chapter 3: Computational linear algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter4.html">3.4. Chapter 4: Geometric Aspects of Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter5.html">3.5. Chapter 5: Linear Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter6.html">3.6. Chapter 6: Theoretical Linear Algebra</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../04/linear_algebra.html">4. Applied Linear Algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../04/Modeling-Systems-of-Linear-Equations.html">4.1. Modeling Systems of Linear Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Gauss-Elimination.html">4.2. Gaussian Elimination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Invertible-Matrix-Theorem-and-Gauss-Example.html">4.3. Invertible Matrix Theorem and Gaussian Elimination Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/LU-Decomposition.html">4.4. LU Decomposition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Condition-Number.html">4.5. Errors in Linear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Example-Atomic-Mass-Balances.html">4.6. Example: Mass Balances and Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Linear-Algebra-in-Numpy.html">4.7. Linear Algebra Review and SciPy Basics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05/algorithms.html">5. Algorithm Building Blocks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../05/Taylor-Series.html">5.1. Taylor Series Approximations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05/Finite-Difference.html">5.2. Finite Difference Derivative Approximations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05/Example-Heating-a-Metal-Slab.html">5.3. Example: Heating a Metal Slab</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../06/nonlinear_systems.html">6. Nonlinear Systems of Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../06/Modeling-Systems-of-Nonlinear-Equations.html">6.1. Modeling Systems of Nonlinear Equations: Flash Calculation Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Raphson-Method-in-One-Dimension.html">6.2. Newton-Raphson Method in One Dimension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/More-Newton-Type-Methods.html">6.3. More Newton-Type Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Convergence-Analysis-for-Newton-Raphson-Methods.html">6.4. Convergence Analysis for Newton-Raphson Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Raphson-Methods-for-Systems-of-Equations.html">6.5. Newton-Raphson Methods for Systems of Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Methods-in-Scipy.html">6.6. Newton Methods in Scipy</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../07/integration.html">7. Numeric Integration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../07/Intro-and-Newton-Cotes.html">7.1. Introduction and Newton-Cotes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Gauss-Quadrature.html">7.2. Gauss Quadrature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Scipy-Library-Adaptive-Methods-for-Newton-Cotes-and-Gauss-Quadrature.html">7.3. Scipy Library: Adaptive Methods for Newton-Cotes and Gauss Quadrature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Application-Inertial-Navigation-Systems.html">7.4. Application: Inertial Navigation Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Forward-and-Backward-Euler.html">7.5. Forward and Backward Euler Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Trapezoid-Rule.html">7.6. Crank-Nicolson (Trapezoid Rule)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Stability-Analysis.html">7.7. Stability Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Explicit-Runge-Kutta.html">7.8. Explicit Range Kutta Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Systems-of-Differential-Equations-and-Scipy.html">7.9. Systems of Differential Equations and Scipy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Example-Reaction-Rates.html">7.10. Example: Reaction Rates</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../08/optimization.html">8. Continuous Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../08/Pyomo-Basics.html">8.1. Pyomo Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../08/Electricity-Market-Optimization.html">8.2. Electricity Market Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../08/Flash-Calculations-in-Pyomo.html">8.3. Flash Calculations in Pyomo</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Analysis</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="stats.html">9. Descriptive Statistics and Visualization</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Sampling.html">9.1. Sampling</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">9.2. Summary Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Visualizing-Data.html">9.3. Visualizing Data</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../10/probability.html">10. Probability Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../10/Probability-Basics.html">10.1. Basic Ideas of Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Random-Variables.html">10.2. Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Jointly-Distributed-Random-Variables.html">10.3. Jointly Distributed Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Jointly-Continuous-Random-Variables.html">10.4. Jointly Continuous Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Practice-Problems.html">10.5. Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../11/distributions.html">11. Common Probability Distributions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../11/Bernoulli-Probability-Distribution.html">11.1. Bernoulli Probability Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Binomial-Probability-Distribtuion.html">11.2. Binomial Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Poisson-Probability-Distribution.html">11.3. Poisson Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Normal-Probability-Distribution.html">11.4. Normal Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Common-Probability-Distributions-Summary.html">11.5. Summary</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../12/uncertainty.html">12. Uncertainty and Error Propagation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../12/Measurement-Error.html">12.1. Measurement Error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Error-Propagation.html">12.2. Error Propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Measuring-Flowrate-Example.html">12.3. Measuring Flowrate Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Car-and-Incline-Example.html">12.4. Car and Incline Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Simulation.html">12.5. Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Monte-Carlo-Error-Propogation.html">12.6. Monte Carlo Error Propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Practice-Problems.html">12.7. Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../13/inference.html">13. Statistical Inference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../13/Central-Limit-Theorem.html">13.1. Central Limit Theorem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Standard-Normal-Distribution.html">13.2. Standard Normal Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Confidence-Intervals.html">13.3. Confidence Intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Students-t-Distribution.html">13.4. Student’s t-Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Hypothesis-Testing-Basics.html">13.5. Hypothesis Testing Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Flavors-of-Hypothesis-Testing.html">13.6. Flavors of Hypothesis Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Type-I-and-Type-II-Errors.html">13.7. Type I and Type II Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Statistical-Power-Basics.html">13.8. Statistical Power Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Statistical-Power-in-Python.html">13.9. Statistical Power in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Statistical-Power-Practice-Problems.html">13.10. Statistical Power Practice Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Bootstrap-Confidence-Intervals.html">13.11. Bootstrap Confidence Intervals</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../14/regression.html">14. Multivariate Linear Regression</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../14/Correlation-Covariance-and-Independence.html">14.1. Correlation, Covariance, and Independence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Least-Squares-Line.html">14.2. Simple Least Squares</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Ordinary-Least-Squares-Linear-Regression.html">14.3. Ordinary Least Squares Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Residual-Analysis.html">14.4. Residual Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Regression-Assumption-Examples.html">14.5. Regression Assumption Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Uncertainty-Analysis-and-Statistical-Inference.html">14.6. Uncertainty Analysis and Statistical Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Multivariate-Linear-Regression.html">14.7. Multivariate Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Linear-Regression-Practice-Problems.html">14.8. Linear Regression Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../15/advanced_regression.html">15. Nonlinear Regression</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../15/Transformations-and-Linear-Regression.html">15.1. Transformations and Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Weighted-Regression.html">15.2. Weighted Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Regression.html">15.3. Nonlinear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Regression-Practice-Problem.html">15.4. Nonlinear Regression Practice Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression.html">15.5. Monte Carlo Uncertainty Analysis for Nonlinear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Case-Study-Adsorptive-Membranes.html">15.6. Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../16/design_of_experiments.html">16. Design of Experiments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../16/Reaction-MBDoE.html">16.1. Model-Based Design of Experiments</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extra Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2022/home.html">Fall 2022</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/schedule.html">Fall 2022 Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/project1.html">Project 1: Computating for Problem Solving (Fall 2022)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/project2.html">Project 2: Data Analysis (Fall 2022)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2023/home.html">Fall 2023</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/schedule.html">Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/project.html">Semester Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet1_F23.html">Problem Set 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet2_F23.html">Problem Set 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet3_F23.html">Problem Set 3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet4_F23.html">Problem Set 4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet5_F23.html">Problem Set 5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet6_F23.html">Problem Set 6</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../contrib/contribute.html">Contributed Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Biotransport-Entrance-Length.html">Estimating the Entrance Length of Channel Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Non_Isothermal_PBR.html">Non-Isothermal Packed Bed Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Ficks_Law.html">Solving Fick’s Second Law Using Numeric Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Stochastic-Kinetics.html">Stochastic Simulation of Chemical Reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Spaghettification.html">Spaghettification of the Magic School Bus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Alcohol-Pharmacokinetics.html">Alcohol Pharmacokinetics and  Blood Alcohol Content % Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/McCabe-Thiele.html">Plotting McCabe-Thiele diagram through computational methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Wastewater-Treatment-Mass-Balance.html">Example of Mass Balance Problem in Wastewater Treatment Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Filtration.html">Filtration of a Yeast Suspension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Fraction_of_Molecular_Collisions.html">Calculating Fraction of Molecular Collisions</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/09/Summary-Statistics.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/data-and-computing" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/09/Summary-Statistics.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/09/Summary-Statistics.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Summary Statistics</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">9.2.1. Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-types-of-data-numerical-and-categorical">9.2.2. Two Types of Data: Numerical and Categorical</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-mean">9.2.3. Sample Mean</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-variance-and-standard-deviation">9.2.4. Sample Variance and Standard Deviation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-median">9.2.5. Sample Median</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-mode-and-range">9.2.6. Sample Mode and Range</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quartiles-and-percentiles">9.2.7. Quartiles and Percentiles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multivariate-data-example-exam-1-scores">9.2.8. Multivariate Data Example: Exam 1 Scores</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-covariance">9.2.9. Sample Covariance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-statistics-for-categorical-variables">9.2.10. Summary Statistics for Categorical Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-statistics-and-population-parameters">9.2.11. Summary Statistics and Population Parameters</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="summary-statistics">
+<h1><span class="section-number">9.2. </span>Summary Statistics<a class="headerlink" href="#summary-statistics" title="Link to this heading">#</a></h1>
+<p><strong>Further Reading</strong>: §1.2 in Navidi (2015)</p>
+<section id="learning-objectives">
+<h2><span class="section-number">9.2.1. </span>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>After studying this notebook and your notes, completing the activities, asking questions in class, you should be able to:</p>
+<ul class="simple">
+<li><p>Compute descriptive statistics for data using Pandas (Python package)</p></li>
+<li><p>Interpret the elements of a covariance matrix</p></li>
+<li><p>Explain why some data distributions have a very different median and mean</p></li>
+</ul>
+</section>
+<section id="two-types-of-data-numerical-and-categorical">
+<h2><span class="section-number">9.2.2. </span>Two Types of Data: Numerical and Categorical<a class="headerlink" href="#two-types-of-data-numerical-and-categorical" title="Link to this heading">#</a></h2>
+<p>As engineers, you will encounter both <strong>numerical</strong> (quantitative) and <strong>categorical</strong> (qualitative) data.</p>
+<p>Unfortunately, Example 1.8 from the textbook was not included in the data files on the publisher’s website. But do not fear! We can recreate the table from a dictionary.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Store all of the data from Example 1.8 in a dictionary</span>
+<span class="c1"># Notice the keys are the column names</span>
+<span class="n">my_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Specimen&quot;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="s2">&quot;Torque&quot;</span><span class="p">:[</span><span class="mi">165</span><span class="p">,</span> <span class="mi">237</span><span class="p">,</span> <span class="mi">222</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">194</span><span class="p">],</span><span class="s2">&quot;Failure Location&quot;</span><span class="p">:[</span><span class="s1">&#39;Weld&#39;</span><span class="p">,</span><span class="s1">&#39;Beam&#39;</span><span class="p">,</span><span class="s1">&#39;Beam&#39;</span><span class="p">,</span><span class="s1">&#39;Beam&#39;</span><span class="p">,</span><span class="s1">&#39;Weld&#39;</span><span class="p">]}</span>
+
+<span class="c1"># Convert the dictionary into a Pandas dataframe</span>
+<span class="n">my_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">my_dict</span><span class="p">)</span>
+
+<span class="c1"># Print</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_df</span><span class="p">)</span>
+
+<span class="c1"># Look at the first five entries</span>
+<span class="n">my_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+
+<span class="c1"># Profit???</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   Specimen  Torque Failure Location
+0         1     165             Weld
+1         2     237             Beam
+2         3     222             Beam
+3         4     255             Beam
+4         5     194             Weld
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Specimen</th>
+      <th>Torque</th>
+      <th>Failure Location</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>165</td>
+      <td>Weld</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>237</td>
+      <td>Beam</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>222</td>
+      <td>Beam</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>255</td>
+      <td>Beam</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>194</td>
+      <td>Weld</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Well that was easy.</p>
+<p>In this example, we see that <em>Torque</em> is a numerical variable and <em>Failure Location</em> is a categorical variable.</p>
+<p>We will now learn about statistics to summarize key characteristics of samples. Let’s start by focusing on numerical variables.</p>
+</section>
+<section id="sample-mean">
+<h2><span class="section-number">9.2.3. </span>Sample Mean<a class="headerlink" href="#sample-mean" title="Link to this heading">#</a></h2>
+<p>The sample mean is the average of the sample.</p>
+<p>Let <span class="math notranslate nohighlight">\(X_1\)</span>, <span class="math notranslate nohighlight">\(X_2\)</span>, …, <span class="math notranslate nohighlight">\(X_n\)</span> be the sample. The <strong>sample mean</strong> is</p>
+<div class="math notranslate nohighlight">
+\[\bar{X} = \frac{1}{n} \sum_{i=1}^{n} X_i\]</div>
+<p>Statisticians have many quirks, which make them the butts of many jokes. I would like to draw your attention to two:</p>
+<ol class="arabic simple">
+<li><p>A capital variable, such as <span class="math notranslate nohighlight">\(X_i\)</span>, is often a <strong>random variable</strong>. More on this next class.</p></li>
+<li><p>Statisticians like to give variables decorations. Here <span class="math notranslate nohighlight">\(\bar{~}\)</span> (bar) means average. Later in the semester we’ll see that <span class="math notranslate nohighlight">\(\hat{~}\)</span> (hat) means estimate.</p></li>
+</ol>
+<p>It is really easy to calculate the sample mean with pandas:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">low</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/ndcbe/data-and-computing/main/notebooks/data/table1-1.csv&#39;</span><span class="p">)</span>
+<span class="n">high</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/ndcbe/data-and-computing/main/notebooks/data/table1-2.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">low</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PM    3.714565
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>That output looks strange.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">low</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pandas.core.series.Series
+</pre></div>
+</div>
+</div>
+</div>
+<p>Interesting. The command <code class="docutils literal notranslate"><span class="pre">low.mean()</span></code> does not return a floating point number. It instead returns a variable that is type <code class="docutils literal notranslate"><span class="pre">pandas.core.series.Series</span></code>. What if I just want the sample mean in a floating point number?</p>
+<p>In pandas, we can access a column using its name. Recall here are the first five elements in the data set:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">low</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PM</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.50</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.87</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.12</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.25</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>3.46</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>This data set only has one column. But if we want to extract that column, we write:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">low</span><span class="o">.</span><span class="n">PM</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0      1.50
+1      0.87
+2      1.12
+3      1.25
+4      3.46
+       ... 
+133    4.63
+134    2.80
+135    2.16
+136    2.97
+137    3.90
+Name: PM, Length: 138, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>And to get the numeric mean, we simply write:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">low</span><span class="o">.</span><span class="n">PM</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.714565217391306
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Optional Home Activity</b></p>
+<p>Calculate the sample mean for PM in the high altitude data set. Store your answer (a float) in the variable <tt>ans_14b_1</tt>.</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="sample-variance-and-standard-deviation">
+<h2><span class="section-number">9.2.4. </span>Sample Variance and Standard Deviation<a class="headerlink" href="#sample-variance-and-standard-deviation" title="Link to this heading">#</a></h2>
+<p>While mean reflects the average of a sample, variance and standard deviation measure the spread.</p>
+<p>Let <span class="math notranslate nohighlight">\(X_1\)</span>, …, <span class="math notranslate nohighlight">\(X_n\)</span> be a sample. The <strong>sample variance</strong> is</p>
+<div class="math notranslate nohighlight">
+\[s^2 = \frac{1}{n-1} \sum_{i}^{n} (X_i - \bar{X})^2\]</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>If the measured quantitfy <span class="math notranslate nohighlight">\(X\)</span> is velocity with units m/s, then what are the units of variance <span class="math notranslate nohighlight">\(s^2\)</span>?</p>
+</div>
+<p><strong>Activity Answer</strong>:</p>
+<p>Let’s dig into the idea that variance measures the spread of the data set. Consider a synthetic (i.e., made up, artificial) data set with two columns, A and B:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;A&quot;</span><span class="p">:[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="s2">&quot;B&quot;</span><span class="p">:[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+<span class="n">my_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>5</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>10</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>10</td>
+      <td>6</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Both columns have the same mean (average):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_data</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A    5.0
+B    5.0
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Optional Home Activity</b></p>
+<p>Please take a minute to verify (on paper or in your head) that both data sets do in fact have a mean of 5.</p>
+</div>
+<p>Cool, pandas just calculated the means for both columns in our synthetic data set.</p>
+<p>What about the variance of both columns? The variance formula,</p>
+<div class="math notranslate nohighlight">
+\[s^2 = \frac{1}{n-1} \sum_{i}^{n} (X_i - \bar{X})^2\]</div>
+<p>sums the squared difference between each datum (a.k.a., data point) and the mean. Thus we expect a data set with a larger spread to have a larger variance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_data</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A    25.0
+B     1.0
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>And this is in fact what we see with the variance calculation. Column A, with range 0 to 10, has a much larger variance than column B, which has a range of 4 to 6.</p>
+<p>Often we prefer to work with <strong>sample standard derivation</strong>, which is the square root of <strong>sample variance</strong>:</p>
+<div class="math notranslate nohighlight">
+\[s = \sqrt{ \frac{1}{n-1} \sum_{i}^{n} (X_i - \bar{X})^2}\]</div>
+<p>Notice that <span class="math notranslate nohighlight">\(s\)</span> has the same units as <span class="math notranslate nohighlight">\(X\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_data</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A    5.0
+B    1.0
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>But why do the standard deviation and variance formulas divide by <span class="math notranslate nohighlight">\(n-1\)</span> and not <span class="math notranslate nohighlight">\(n\)</span>? Short answer: often, we do not know the population standard deviation. (Recall, the sample was drawn from a population.) So we use <span class="math notranslate nohighlight">\(s\)</span> as an estimate for the population standard deviation. This uses one degree of freedom, so we divide by <span class="math notranslate nohighlight">\(n-1\)</span> instead of <span class="math notranslate nohighlight">\(n\)</span>. The <span class="math notranslate nohighlight">\(-1\)</span> is because we want to estimate one parameter (population standard deviation). We will revist this idea a few times during the semester. A common exercise in a graduate level statistics course is to prove that dividing by <span class="math notranslate nohighlight">\(n-1\)</span> makes <span class="math notranslate nohighlight">\(s^2\)</span> an unbiased estimate of population variance. Still curious? Check out this video: <a class="reference external" href="https://www.youtube.com/watch?v=D1hgiAla3KI">https://www.youtube.com/watch?v=D1hgiAla3KI</a></p>
+<p>If we really wanted to, we could change the degree of freedom from the default 1 to any number:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># divide by n - 1 in variance and standard derviation formulae. This is the default</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;variance</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">my_data</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;standard deviation</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">my_data</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>variance
+ A    25.0
+B     1.0
+dtype: float64 
+
+standard deviation
+ A    5.0
+B    1.0
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># divide by n in variance and standard derviation formulae.</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;variance</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">my_data</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;standard deviation</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">my_data</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>variance
+ A    20.0
+B     0.8
+dtype: float64 
+
+standard deviation
+ A    4.472136
+B    0.894427
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># divide by n - 2 in variance and standard derviation formulae.</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;variance</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">my_data</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;standard deviation</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">my_data</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>variance
+ A    33.333333
+B     1.333333
+dtype: float64 
+
+standard deviation
+ A    5.773503
+B    1.154701
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Like with the mean, we can easily extract a floating point number from pandas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_data</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_data</span><span class="o">.</span><span class="n">A</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Optional Home Activity</b></p>
+<p>Calculate the standard deviation (using <span class="math notranslate nohighlight">\(n-1\)</span>) for the particulate matter example. Store the results in the dictionary <tt>ans_14b_2</tt> with keys “low” and “high”. Hint: You’ll need to calculate the standard deviation as a float and then save the answers into the dictionary.</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Optional Home Activity</b></p>
+<p>Show the following formulae are equivalent to the definitions for sample variance and sample standard deviation given above. <b>This is excellent practice for the next exam.</b></p>
+</div>
+<div class="math notranslate nohighlight">
+\[s^2 = \frac{1}{n-1} \left( \sum_{i=1}^{n} X_i^2 - n \bar{X} \right)\]</div>
+<div class="math notranslate nohighlight">
+\[s = \sqrt{\frac{1}{n-1} \left( \sum_{i=1}^{n} X_i^2 - n \bar{X} \right)}\]</div>
+</section>
+<section id="sample-median">
+<h2><span class="section-number">9.2.5. </span>Sample Median<a class="headerlink" href="#sample-median" title="Link to this heading">#</a></h2>
+<p>The sample median also measures the center of a data set. To compute the median, we order the data from smallest to largest and find the middle. For a data set with an even number of objects, we average the two middle datum.</p>
+<p>As you likely expect, pandas computes the median:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_data</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A    5.0
+B    5.0
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Optional Home Activity</b></p>
+<p>Calculate the median for the particulate matter example. Store the results in the dictionary <tt>ans_14b_3</tt> with keys “low” and “high”. Hint: You’ll need to calculate the median as a float and then save the answers into the dictionary.</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="sample-mode-and-range">
+<h2><span class="section-number">9.2.6. </span>Sample Mode and Range<a class="headerlink" href="#sample-mode-and-range" title="Link to this heading">#</a></h2>
+<p>The <strong>sample mode</strong> is the most common element in a sample.</p>
+<p>Let’s review samples A and B:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>5</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>10</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>10</td>
+      <td>6</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Recall, these two data sets have the same mean and median but different variances. Let’s compute the mode:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_data</span><span class="o">.</span><span class="n">mode</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>10</td>
+      <td>6</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Interesting. In data set A, both there are two 0 elements and two 10 elements. Thus 0 and 10 are tied for the mode, and pandas returns two values. Likewise, 4 and 6 are tied for the mode in data set B.</p>
+<p>Let’s look at the particulate matter example together.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">low</span><span class="o">.</span><span class="n">PM</span><span class="o">.</span><span class="n">mode</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    1.11
+1    1.63
+Name: PM, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>This suggests that both 1.11 and 1.63 are tied for the mode. Notice that <code class="docutils literal notranslate"><span class="pre">.mode()</span></code> returns a dictionary-like structure. We can access the first mode with the index (key) 0:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">low</span><span class="o">.</span><span class="n">PM</span><span class="o">.</span><span class="n">mode</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.11
+</pre></div>
+</div>
+</div>
+</div>
+<p>And the second mode with index (key) 1:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">low</span><span class="o">.</span><span class="n">PM</span><span class="o">.</span><span class="n">mode</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.63
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can investigate further using the <code class="docutils literal notranslate"><span class="pre">.value_counts()</span></code> command:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">low</span><span class="o">.</span><span class="n">PM</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.63    3
+1.11    3
+2.67    2
+2.96    2
+5.30    2
+       ..
+0.55    1
+3.67    1
+1.14    1
+1.37    1
+3.90    1
+Name: PM, Length: 124, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>This gives us the number of times each value repeats in the data set, sorted from most to least common.</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Optional Home Activity</b></p>
+<p>Calculate the mode for the high elevation particulate matter example. Store the results in the float <tt>ans_14b_4</tt>. Hint: You’ll need to either extract the float from the pandas output with key 0 or manually enter your answer.</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <strong>sample range</strong> is the different between the smallest and largest values in a sample. Pandas allows us to easily calculate these:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Inspect the data set</span>
+<span class="n">my_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>5</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>10</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>10</td>
+      <td>6</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># identify smallest values</span>
+<span class="n">my_data</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A    0
+B    4
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># identify largest values</span>
+<span class="n">my_data</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A    10
+B     6
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="quartiles-and-percentiles">
+<h2><span class="section-number">9.2.7. </span>Quartiles and Percentiles<a class="headerlink" href="#quartiles-and-percentiles" title="Link to this heading">#</a></h2>
+<p>The median is the 50%-ile of the data set. Half of the elements are above and half are below. But we can generalize this to any numeric value between 0% and 100%. You’ll notice that the pandas documentation says <strong>quantile</strong> instead of <strong>percentile</strong>. These terms mean the same thing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate 50% quantile, a.k.a, 50%-ile</span>
+<span class="n">low</span><span class="o">.</span><span class="n">PM</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.18
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Verify this is the median</span>
+<span class="n">low</span><span class="o">.</span><span class="n">PM</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.18
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Quartiles</strong> divide the data set into quarters (four pieces). Quartiles are specific percentiles:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Quartiles</p></th>
+<th class="head"><p>Percentile / Quantile</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1st</p></td>
+<td><p>25%</p></td>
+</tr>
+<tr class="row-odd"><td><p>2nd</p></td>
+<td><p>50%</p></td>
+</tr>
+<tr class="row-even"><td><p>3rd</p></td>
+<td><p>75%</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Let’s look at the low altitude particulate matter example again:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Determine the number of entries</span>
+<span class="n">low</span><span class="o">.</span><span class="n">PM</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>138
+</pre></div>
+</div>
+</div>
+</div>
+<p>It contains 138 datum. So what happens if we want to compute the 52.1%-ile?</p>
+<p>Pandas will give us a number:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">low</span><span class="o">.</span><span class="n">PM</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.521</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.34754
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice the answer ends in …000004. <em>What is going on?</em></p>
+<p>Because there are only 138 elements, the quantiles increment by 0.724…%</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="o">/</span><span class="mi">138</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.007246376811594203
+</pre></div>
+</div>
+</div>
+</div>
+<p>Pandas is doing interpolation under the hood because there is not a datum exactly at the 52.1%-ile. The …000004 ending is an artifact of inexact floating point arithmetic.</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Optional Home Activity</b></p>
+<p>Calculate the 80%-ile for the high elevation particulate matter example. Store the results in the float <tt>ans_14b_5</tt>.</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="multivariate-data-example-exam-1-scores">
+<h2><span class="section-number">9.2.8. </span>Multivariate Data Example: Exam 1 Scores<a class="headerlink" href="#multivariate-data-example-exam-1-scores" title="Link to this heading">#</a></h2>
+<p>The file <code class="docutils literal notranslate"><span class="pre">Exam-1-scores.csv</span></code> contains anonymized numeric scores from Exam 1 this semester. Let’s open the file with Pandas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Open the file</span>
+<span class="n">exam1_full</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/ndcbe/data-and-computing/main/notebooks/data/Exam_1_scores.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print entire dataframe</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">exam1_full</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    Total Score   1-A   1-B  2-A-1  2-A-2  2-B  2-C-1  2-C-2  2-C-3  3-A  \
+0         60.00  4.00  4.00   2.00   2.00  3.0   2.00   2.00    3.0  3.0   
+1         59.75  4.00  4.00   2.00   2.00  3.0   2.00   2.00    3.0  3.0   
+2         59.75  4.00  4.00   2.00   2.00  3.0   2.00   2.00    3.0  3.0   
+3         59.75  4.00  4.00   2.00   2.00  3.0   2.00   2.00    3.0  3.0   
+4         59.25  4.00  4.00   2.00   2.00  3.0   2.00   2.00    3.0  3.0   
+..          ...   ...   ...    ...    ...  ...    ...    ...    ...  ...   
+61        42.25  2.25  1.00   2.00   2.00  3.0   2.00   2.00    1.0  3.0   
+62        39.00  2.25  1.00   1.25   1.25  3.0   1.25   0.75    1.0  3.0   
+63        22.00  2.25  0.25   0.25   0.25  0.0   2.00   2.00    1.0  3.0   
+64        21.75  4.00  0.00   0.25   0.25  0.0   1.50   2.00    3.0  3.0   
+65        15.50  0.25  1.00   0.25   0.25  0.0   0.50   0.75    0.0  3.0   
+
+    3-B-1  3-B-2  3-B-3  4-A-1  4-A-2   4-B  4-C-1  4-C-2   5-A   5-B  
+0    4.00   1.00   2.00    2.0   2.00  3.00    4.0   3.00  7.00  7.00  
+1    4.00   1.00   2.00    2.0   1.75  3.00    4.0   3.00  7.00  7.00  
+2    4.00   1.00   2.00    2.0   1.75  3.00    4.0   3.00  7.00  7.00  
+3    4.00   1.00   2.00    2.0   1.75  3.00    4.0   3.00  7.00  7.00  
+4    4.00   1.00   2.00    2.0   1.50  3.00    4.0   3.00  6.75  7.00  
+..    ...    ...    ...    ...    ...   ...    ...    ...   ...   ...  
+61   4.00   1.00   2.00    2.0   1.75  3.00    1.5   0.00  7.00  1.75  
+62   4.00   1.00   2.00    1.0   0.00  0.25    4.0   2.75  5.50  3.75  
+63   0.75   1.00   1.00    2.0   1.25  1.00    1.5   0.00  1.00  1.50  
+64   0.75   1.00   0.00    0.0   1.00  0.00    0.0   0.00  5.00  0.00  
+65   0.25   0.25   0.25    2.0   1.25  3.00    1.0   0.00  0.00  1.50  
+
+[66 rows x 20 columns]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see 65 rows (students) and 20 columns. A perfect score was 60 points. Let’s loop over the column names:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">exam1_full</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total Score
+1-A
+1-B
+2-A-1
+2-A-2
+2-B
+2-C-1
+2-C-2
+2-C-3
+3-A
+3-B-1
+3-B-2
+3-B-3
+4-A-1
+4-A-2
+4-B
+4-C-1
+4-C-2
+5-A
+5-B
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s make a new Pandas dataframe with only the problem totals.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create empty dictionary</span>
+<span class="n">new_data</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">new_data</span><span class="p">[</span><span class="s1">&#39;Total&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">exam1_full</span><span class="p">[</span><span class="s1">&#39;Total Score&#39;</span><span class="p">]</span>
+<span class="n">new_data</span><span class="p">[</span><span class="s1">&#39;P1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">exam1_full</span><span class="p">[</span><span class="s1">&#39;1-A&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">exam1_full</span><span class="p">[</span><span class="s1">&#39;1-B&#39;</span><span class="p">]</span>
+<span class="n">new_data</span><span class="p">[</span><span class="s1">&#39;P2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">exam1_full</span><span class="p">[</span><span class="s1">&#39;2-A-1&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">exam1_full</span><span class="p">[</span><span class="s1">&#39;2-A-2&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">exam1_full</span><span class="p">[</span><span class="s1">&#39;2-B&#39;</span><span class="p">]</span>
+<span class="n">new_data</span><span class="p">[</span><span class="s1">&#39;P2&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">exam1_full</span><span class="p">[</span><span class="s1">&#39;2-C-1&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">exam1_full</span><span class="p">[</span><span class="s1">&#39;2-C-2&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">exam1_full</span><span class="p">[</span><span class="s1">&#39;2-C-3&#39;</span><span class="p">]</span>
+<span class="n">new_data</span><span class="p">[</span><span class="s1">&#39;P3&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">exam1_full</span><span class="p">[</span><span class="s1">&#39;3-A&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">exam1_full</span><span class="p">[</span><span class="s1">&#39;3-B-1&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">exam1_full</span><span class="p">[</span><span class="s1">&#39;3-B-2&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">exam1_full</span><span class="p">[</span><span class="s1">&#39;3-B-3&#39;</span><span class="p">]</span>
+<span class="n">new_data</span><span class="p">[</span><span class="s1">&#39;P4&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">exam1_full</span><span class="p">[</span><span class="s1">&#39;4-A-1&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">exam1_full</span><span class="p">[</span><span class="s1">&#39;4-A-2&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">exam1_full</span><span class="p">[</span><span class="s1">&#39;4-B&#39;</span><span class="p">]</span>
+<span class="n">new_data</span><span class="p">[</span><span class="s1">&#39;P4&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">exam1_full</span><span class="p">[</span><span class="s1">&#39;4-B&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">exam1_full</span><span class="p">[</span><span class="s1">&#39;4-C-1&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">exam1_full</span><span class="p">[</span><span class="s1">&#39;4-C-2&#39;</span><span class="p">]</span>
+<span class="n">new_data</span><span class="p">[</span><span class="s1">&#39;P5&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">exam1_full</span><span class="p">[</span><span class="s1">&#39;5-A&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">exam1_full</span><span class="p">[</span><span class="s1">&#39;5-B&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exam1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">new_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Print the first and last five elements of the data set.</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># print top (&quot;head&quot;) of data frame</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># print bottom (&quot;tail&quot;) of data frame</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Compute the mean, median, mode, standard deviation, and quartiles using pandas.</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># mean</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># median</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># mode</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># standard deviation</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 25%-ile</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 50%-ile</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 75%-ile</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Pandas offers a single function to compute these summary statistics.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># all in one line</span>
+<span class="n">exam1</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Total</th>
+      <th>P1</th>
+      <th>P2</th>
+      <th>P3</th>
+      <th>P4</th>
+      <th>P5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>66.000000</td>
+      <td>66.000000</td>
+      <td>66.000000</td>
+      <td>66.000000</td>
+      <td>66.000000</td>
+      <td>66.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>51.261364</td>
+      <td>5.734848</td>
+      <td>12.875000</td>
+      <td>9.435606</td>
+      <td>14.924242</td>
+      <td>11.083333</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>8.487823</td>
+      <td>1.839146</td>
+      <td>2.156051</td>
+      <td>1.281008</td>
+      <td>3.065932</td>
+      <td>3.025956</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>15.500000</td>
+      <td>1.250000</td>
+      <td>1.750000</td>
+      <td>3.750000</td>
+      <td>1.000000</td>
+      <td>1.500000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>49.312500</td>
+      <td>5.000000</td>
+      <td>12.312500</td>
+      <td>9.500000</td>
+      <td>13.562500</td>
+      <td>9.937500</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>52.500000</td>
+      <td>5.000000</td>
+      <td>14.000000</td>
+      <td>10.000000</td>
+      <td>16.500000</td>
+      <td>12.250000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>56.500000</td>
+      <td>8.000000</td>
+      <td>14.000000</td>
+      <td>10.000000</td>
+      <td>17.000000</td>
+      <td>12.937500</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>60.000000</td>
+      <td>8.000000</td>
+      <td>14.000000</td>
+      <td>10.000000</td>
+      <td>17.000000</td>
+      <td>14.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="sample-covariance">
+<h2><span class="section-number">9.2.9. </span>Sample Covariance<a class="headerlink" href="#sample-covariance" title="Link to this heading">#</a></h2>
+<p>Standard devation (and variance) measure the average squared distance from each element of a dataset and the mean. Standard deviation is for a single dimension.</p>
+<p>Often, we want to know to the extent two variables are related. Let <span class="math notranslate nohighlight">\(X_1\)</span>, <span class="math notranslate nohighlight">\(X_2\)</span>, …, <span class="math notranslate nohighlight">\(X_n\)</span> and <span class="math notranslate nohighlight">\(Y_1\)</span>, <span class="math notranslate nohighlight">\(Y_2\)</span>, …, <span class="math notranslate nohighlight">\(Y_n\)</span> be the sample. Each pair (<span class="math notranslate nohighlight">\(X_i\)</span>, <span class="math notranslate nohighlight">\(Y_i\)</span>) corresponds to one experiment. For example, <span class="math notranslate nohighlight">\(X\)</span> could be the effluent temperature and <span class="math notranslate nohighlight">\(Y\)</span> could be the conversion for an adiabitic reactor. The experiment was repeated for <span class="math notranslate nohighlight">\(n\)</span> trials.</p>
+<p>The <strong>sample covariance</strong> if a generalization of variance from one to two dimensions:</p>
+<div class="math notranslate nohighlight">
+\[s_{X,Y}^2 = \frac{1}{n-1} \sum_{i}^{n} (X_i - \bar{X})(Y_i - \bar{Y})\]</div>
+<p><span class="math notranslate nohighlight">\(\bar{X}\)</span> and <span class="math notranslate nohighlight">\(\bar{Y}\)</span> are the sample means for variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>.</p>
+<p>If both <span class="math notranslate nohighlight">\(X_i\)</span> and <span class="math notranslate nohighlight">\(Y_i\)</span> tend to move together, i.e., both are either above (<span class="math notranslate nohighlight">\(Y_i &gt; \bar{Y}\)</span> when <span class="math notranslate nohighlight">\(X_{i} &gt; \bar{X}\)</span>) or below (<span class="math notranslate nohighlight">\(Y_i &lt; \bar{Y}\)</span> when <span class="math notranslate nohighlight">\(X_{i} &lt; \bar{X}\)</span>) their sample means, then <span class="math notranslate nohighlight">\(s_{X,Y}^2 &gt;&gt; 0\)</span>.</p>
+<p>If they move in oppositive directions, i.e., <span class="math notranslate nohighlight">\(Y_i &gt; \bar{Y}\)</span> when <span class="math notranslate nohighlight">\(X_{i} &lt; \bar{X}\)</span> and <span class="math notranslate nohighlight">\(Y_i &gt; \bar{Y}\)</span> when <span class="math notranslate nohighlight">\(X_{i} &lt; \bar{X}\)</span>, then <span class="math notranslate nohighlight">\(s_{X,Y}^2 &lt;&lt; 0\)</span>.</p>
+<p>If there is not a strong trend, then <span class="math notranslate nohighlight">\(s_{X,Y}^2 \approx 0\)</span>.</p>
+<p>We can quickly compute covariance with Pandas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exam1</span><span class="o">.</span><span class="n">cov</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Total</th>
+      <th>P1</th>
+      <th>P2</th>
+      <th>P3</th>
+      <th>P4</th>
+      <th>P5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Total</th>
+      <td>72.043138</td>
+      <td>10.143444</td>
+      <td>16.003365</td>
+      <td>7.843051</td>
+      <td>19.822028</td>
+      <td>20.955769</td>
+    </tr>
+    <tr>
+      <th>P1</th>
+      <td>10.143444</td>
+      <td>3.382459</td>
+      <td>1.928846</td>
+      <td>0.750932</td>
+      <td>2.007488</td>
+      <td>2.357051</td>
+    </tr>
+    <tr>
+      <th>P2</th>
+      <td>16.003365</td>
+      <td>1.928846</td>
+      <td>4.648558</td>
+      <td>1.763942</td>
+      <td>3.881731</td>
+      <td>4.382692</td>
+    </tr>
+    <tr>
+      <th>P3</th>
+      <td>7.843051</td>
+      <td>0.750932</td>
+      <td>1.763942</td>
+      <td>1.640982</td>
+      <td>2.086393</td>
+      <td>1.952564</td>
+    </tr>
+    <tr>
+      <th>P4</th>
+      <td>19.822028</td>
+      <td>2.007488</td>
+      <td>3.881731</td>
+      <td>2.086393</td>
+      <td>9.399942</td>
+      <td>3.725641</td>
+    </tr>
+    <tr>
+      <th>P5</th>
+      <td>20.955769</td>
+      <td>2.357051</td>
+      <td>4.382692</td>
+      <td>1.952564</td>
+      <td>3.725641</td>
+      <td>9.156410</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>What are the units of sample covariance?</p>
+</div>
+<p><strong>Home Activity Answer:</strong></p>
+<p>Often, it is more convinent to interpret <strong>sample correlation</strong>, which is sample covariance scaled by the standard deviation of each variable.</p>
+<div class="math notranslate nohighlight">
+\[
+r_{X,Y} = \frac{s_{X,Y}}{s_X \cdot s_Y}
+\]</div>
+<p>Recall, <span class="math notranslate nohighlight">\(s_{X,Y}\)</span> is the covariance. <span class="math notranslate nohighlight">\(s_{X}\)</span> and <span class="math notranslate nohighlight">\(s_{Y}\)</span> are the standard deviations for variable <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>.</p>
+<p>By construction, correlation is bounded between -1 and 1. During the remainded of the semester, we will see why the following rules hold:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Correlation</p></th>
+<th class="head text-center"><p>Interpretation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><div style="width:290px"></div></p></td>
+<td class="text-center"><p><div style="width:290px"></div></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><span class="math notranslate nohighlight">\(r_{X,Y} = -1.0\)</span></p></td>
+<td class="text-center"><p><strong>Perfect negative correlation.</strong> Samples <span class="math notranslate nohighlight">\(X_i\)</span> and <span class="math notranslate nohighlight">\(Y_i\)</span> lie exactly on a straight line with a negative slope.</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(-1.0 &lt; r_{X,Y} &lt; 0\)</span></p></td>
+<td class="text-center"><p><strong>Negative correlation.</strong> If we fit a line to the data <span class="math notranslate nohighlight">\(X_i\)</span> and <span class="math notranslate nohighlight">\(Y_i\)</span>, the slope would be negative.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><span class="math notranslate nohighlight">\(r_{X,Y} = 0\)</span></p></td>
+<td class="text-center"><p><strong>No correlation.</strong> If we fit a line to the data <span class="math notranslate nohighlight">\(X_i\)</span> and <span class="math notranslate nohighlight">\(Y_i\)</span>, the slope would be zero.</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(0 &lt; r_{X,Y} &lt; 1\)</span></p></td>
+<td class="text-center"><p><strong>Positive correlation.</strong> If we fit a line to the data <span class="math notranslate nohighlight">\(X_i\)</span> and <span class="math notranslate nohighlight">\(Y_i\)</span>, the slope would be positive.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><span class="math notranslate nohighlight">\(r_{X,Y} = -1.0\)</span></p></td>
+<td class="text-center"><p><strong>Perfect positive correlation.</strong> Samples <span class="math notranslate nohighlight">\(X_i\)</span> and <span class="math notranslate nohighlight">\(Y_i\)</span> lie exactly on a straight line with a positive slope.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>What are the units of sample correlation?</p>
+</div>
+<p><strong>Activity Answer:</strong></p>
+<p>Let’s look at the correlation for the exam1 data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exam1</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Total</th>
+      <th>P1</th>
+      <th>P2</th>
+      <th>P3</th>
+      <th>P4</th>
+      <th>P5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Total</th>
+      <td>1.000000</td>
+      <td>0.649790</td>
+      <td>0.874492</td>
+      <td>0.721335</td>
+      <td>0.761709</td>
+      <td>0.815915</td>
+    </tr>
+    <tr>
+      <th>P1</th>
+      <td>0.649790</td>
+      <td>1.000000</td>
+      <td>0.486432</td>
+      <td>0.318737</td>
+      <td>0.356020</td>
+      <td>0.423536</td>
+    </tr>
+    <tr>
+      <th>P2</th>
+      <td>0.874492</td>
+      <td>0.486432</td>
+      <td>1.000000</td>
+      <td>0.638665</td>
+      <td>0.587224</td>
+      <td>0.671768</td>
+    </tr>
+    <tr>
+      <th>P3</th>
+      <td>0.721335</td>
+      <td>0.318737</td>
+      <td>0.638665</td>
+      <td>1.000000</td>
+      <td>0.531229</td>
+      <td>0.503722</td>
+    </tr>
+    <tr>
+      <th>P4</th>
+      <td>0.761709</td>
+      <td>0.356020</td>
+      <td>0.587224</td>
+      <td>0.531229</td>
+      <td>1.000000</td>
+      <td>0.401583</td>
+    </tr>
+    <tr>
+      <th>P5</th>
+      <td>0.815915</td>
+      <td>0.423536</td>
+      <td>0.671768</td>
+      <td>0.503722</td>
+      <td>0.401583</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Interpret correlation for the exam data. Why is the diagonal exactly 1.0. What would a negative correlation mean?</p>
+</div>
+<p>What happens if we first normalize the scores by the number of available points?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make a copy of the DataFrame</span>
+<span class="n">exam1_norm</span> <span class="o">=</span> <span class="n">exam1</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># Divide by the total number of available points</span>
+<span class="n">exam1_norm</span><span class="p">[</span><span class="s2">&quot;P1&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">exam1_norm</span><span class="p">[</span><span class="s2">&quot;P1&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">8</span>
+<span class="n">exam1_norm</span><span class="p">[</span><span class="s2">&quot;P2&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">exam1_norm</span><span class="p">[</span><span class="s2">&quot;P2&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">14</span>
+<span class="n">exam1_norm</span><span class="p">[</span><span class="s2">&quot;P3&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">exam1_norm</span><span class="p">[</span><span class="s2">&quot;P3&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">10</span>
+<span class="n">exam1_norm</span><span class="p">[</span><span class="s2">&quot;P4&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">exam1_norm</span><span class="p">[</span><span class="s2">&quot;P4&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">17</span>
+<span class="n">exam1_norm</span><span class="p">[</span><span class="s2">&quot;P5&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">exam1_norm</span><span class="p">[</span><span class="s2">&quot;P5&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">14</span>
+<span class="n">exam1_norm</span><span class="p">[</span><span class="s2">&quot;Total&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">exam1_norm</span><span class="p">[</span><span class="s2">&quot;Total&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">60</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute covariance matrix</span>
+<span class="n">exam1_norm</span><span class="o">.</span><span class="n">cov</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Total</th>
+      <th>P1</th>
+      <th>P2</th>
+      <th>P3</th>
+      <th>P4</th>
+      <th>P5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Total</th>
+      <td>0.020012</td>
+      <td>0.021132</td>
+      <td>0.019052</td>
+      <td>0.013072</td>
+      <td>0.019433</td>
+      <td>0.024947</td>
+    </tr>
+    <tr>
+      <th>P1</th>
+      <td>0.021132</td>
+      <td>0.052851</td>
+      <td>0.017222</td>
+      <td>0.009387</td>
+      <td>0.014761</td>
+      <td>0.021045</td>
+    </tr>
+    <tr>
+      <th>P2</th>
+      <td>0.019052</td>
+      <td>0.017222</td>
+      <td>0.023717</td>
+      <td>0.012600</td>
+      <td>0.016310</td>
+      <td>0.022361</td>
+    </tr>
+    <tr>
+      <th>P3</th>
+      <td>0.013072</td>
+      <td>0.009387</td>
+      <td>0.012600</td>
+      <td>0.016410</td>
+      <td>0.012273</td>
+      <td>0.013947</td>
+    </tr>
+    <tr>
+      <th>P4</th>
+      <td>0.019433</td>
+      <td>0.014761</td>
+      <td>0.016310</td>
+      <td>0.012273</td>
+      <td>0.032526</td>
+      <td>0.015654</td>
+    </tr>
+    <tr>
+      <th>P5</th>
+      <td>0.024947</td>
+      <td>0.021045</td>
+      <td>0.022361</td>
+      <td>0.013947</td>
+      <td>0.015654</td>
+      <td>0.046716</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute correlation matrix</span>
+<span class="n">exam1_norm</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Total</th>
+      <th>P1</th>
+      <th>P2</th>
+      <th>P3</th>
+      <th>P4</th>
+      <th>P5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Total</th>
+      <td>1.000000</td>
+      <td>0.649790</td>
+      <td>0.874492</td>
+      <td>0.721335</td>
+      <td>0.761709</td>
+      <td>0.815915</td>
+    </tr>
+    <tr>
+      <th>P1</th>
+      <td>0.649790</td>
+      <td>1.000000</td>
+      <td>0.486432</td>
+      <td>0.318737</td>
+      <td>0.356020</td>
+      <td>0.423536</td>
+    </tr>
+    <tr>
+      <th>P2</th>
+      <td>0.874492</td>
+      <td>0.486432</td>
+      <td>1.000000</td>
+      <td>0.638665</td>
+      <td>0.587224</td>
+      <td>0.671768</td>
+    </tr>
+    <tr>
+      <th>P3</th>
+      <td>0.721335</td>
+      <td>0.318737</td>
+      <td>0.638665</td>
+      <td>1.000000</td>
+      <td>0.531229</td>
+      <td>0.503722</td>
+    </tr>
+    <tr>
+      <th>P4</th>
+      <td>0.761709</td>
+      <td>0.356020</td>
+      <td>0.587224</td>
+      <td>0.531229</td>
+      <td>1.000000</td>
+      <td>0.401583</td>
+    </tr>
+    <tr>
+      <th>P5</th>
+      <td>0.815915</td>
+      <td>0.423536</td>
+      <td>0.671768</td>
+      <td>0.503722</td>
+      <td>0.401583</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Why is the correlation matrix not changed by scaling?</p>
+</div>
+</section>
+<section id="summary-statistics-for-categorical-variables">
+<h2><span class="section-number">9.2.10. </span>Summary Statistics for Categorical Variables<a class="headerlink" href="#summary-statistics-for-categorical-variables" title="Link to this heading">#</a></h2>
+<p>Categorical variables are qualititative. Recall our example from earlier:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Specimen</th>
+      <th>Torque</th>
+      <th>Failure Location</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>165</td>
+      <td>Weld</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>237</td>
+      <td>Beam</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>222</td>
+      <td>Beam</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>255</td>
+      <td>Beam</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>194</td>
+      <td>Weld</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Here failure location was a categorical variable. We cannot compute the median, standard deviation, or range for a categorical variable. Instead, we often compute <strong>frequencies</strong> by counting.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_df</span><span class="p">[</span><span class="s1">&#39;Failure Location&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Beam    3
+Weld    2
+Name: Failure Location, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can instead compute the <strong>sample proportions</strong> by normalizing (dividing by) the total number of samples.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_df</span><span class="p">[</span><span class="s1">&#39;Failure Location&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Beam    0.6
+Weld    0.4
+Name: Failure Location, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="summary-statistics-and-population-parameters">
+<h2><span class="section-number">9.2.11. </span>Summary Statistics and Population Parameters<a class="headerlink" href="#summary-statistics-and-population-parameters" title="Link to this heading">#</a></h2>
+<p>Each sample statistic we have discussed (e.g., mean, median, standard deviation, covariance) has a counterpart for the population. We will call numerical summaries of samples <strong>statistics</strong> and numerical summaries of populations <strong>parameters</strong>. A central idea in data analysis is to use statistics to estimate/infer parameters. Often, we cannot directly measure a population. So instead we sample.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/09"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Sampling.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">9.1. </span>Sampling</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Visualizing-Data.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">9.3. </span>Visualizing Data</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">9.2.1. Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-types-of-data-numerical-and-categorical">9.2.2. Two Types of Data: Numerical and Categorical</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-mean">9.2.3. Sample Mean</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-variance-and-standard-deviation">9.2.4. Sample Variance and Standard Deviation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-median">9.2.5. Sample Median</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-mode-and-range">9.2.6. Sample Mode and Range</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quartiles-and-percentiles">9.2.7. Quartiles and Percentiles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multivariate-data-example-exam-1-scores">9.2.8. Multivariate Data Example: Exam 1 Scores</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-covariance">9.2.9. Sample Covariance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-statistics-for-categorical-variables">9.2.10. Summary Statistics for Categorical Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-statistics-and-population-parameters">9.2.11. Summary Statistics and Population Parameters</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

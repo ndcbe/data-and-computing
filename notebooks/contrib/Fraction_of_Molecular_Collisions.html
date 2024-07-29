@@ -1,0 +1,1259 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Calculating Fraction of Molecular Collisions &#8212; Data and Computing for Chemical Engineers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/contrib/Fraction_of_Molecular_Collisions';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Filtration of a Yeast Suspension" href="Filtration.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/cbe_logo.jpg" class="logo__image only-light" alt="Data and Computing for Chemical Engineers - Home"/>
+    <script>document.write(`<img src="../../_static/cbe_logo.jpg" class="logo__image only-dark" alt="Data and Computing for Chemical Engineers - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Data and Computing for Engineers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../01/Python-Primer.html">1. Python Primer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../01/Jupyter-Notebooks.html">1.1. Welcome to Jupyter Notebooks and Vocareum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Python-Basics-I-Variables-Strings-Bugs.html">1.2. Python Basics I: Variables, Strings, and Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Flow-control.html">1.3. Python Basics II: Loopy Logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Python-Basics-III-Lists-Dictionaries-Enumeration.html">1.4. Python Basics III: Lists, Dictionaries, and Enumeration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Functions-and-Scope.html">1.5. Functions and Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Recursion.html">1.6. Recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Pseudocode.html">1.7. Pseudocode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Example-High-Low-Game.html">1.8. High/Low Guess My Number Game</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Modules-and-Files.html">1.9. Modules and Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/NumPy.html">1.10. Linear Algebra with Numpy and Scipy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Matplotlib.html">1.11. Visualization with matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Pandas.html">1.12. Manipulating Data with Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Functions-as-Arguments.html">1.13. Functions as Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Testing-and-Debugging.html">1.14. Testing and Debugging in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Publication-Quality-Figures.html">1.15. Preparing Publication Quality Figures in Python</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../02/advanced_python.html">2. Advanced Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Methods</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03/linear_algebra.html">3. Linear Algebra Primer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter1.html">3.1. Chapter 1: Math Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter2.html">3.2. Chapter 2: Intro to Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter3.html">3.3. Chapter 3: Computational linear algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter4.html">3.4. Chapter 4: Geometric Aspects of Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter5.html">3.5. Chapter 5: Linear Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter6.html">3.6. Chapter 6: Theoretical Linear Algebra</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../04/linear_algebra.html">4. Applied Linear Algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../04/Modeling-Systems-of-Linear-Equations.html">4.1. Modeling Systems of Linear Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Gauss-Elimination.html">4.2. Gaussian Elimination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Invertible-Matrix-Theorem-and-Gauss-Example.html">4.3. Invertible Matrix Theorem and Gaussian Elimination Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/LU-Decomposition.html">4.4. LU Decomposition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Condition-Number.html">4.5. Errors in Linear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Example-Atomic-Mass-Balances.html">4.6. Example: Mass Balances and Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04/Linear-Algebra-in-Numpy.html">4.7. Linear Algebra Review and SciPy Basics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05/algorithms.html">5. Algorithm Building Blocks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../05/Taylor-Series.html">5.1. Taylor Series Approximations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05/Finite-Difference.html">5.2. Finite Difference Derivative Approximations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05/Example-Heating-a-Metal-Slab.html">5.3. Example: Heating a Metal Slab</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../06/nonlinear_systems.html">6. Nonlinear Systems of Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../06/Modeling-Systems-of-Nonlinear-Equations.html">6.1. Modeling Systems of Nonlinear Equations: Flash Calculation Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Raphson-Method-in-One-Dimension.html">6.2. Newton-Raphson Method in One Dimension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/More-Newton-Type-Methods.html">6.3. More Newton-Type Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Convergence-Analysis-for-Newton-Raphson-Methods.html">6.4. Convergence Analysis for Newton-Raphson Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Raphson-Methods-for-Systems-of-Equations.html">6.5. Newton-Raphson Methods for Systems of Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Methods-in-Scipy.html">6.6. Newton Methods in Scipy</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../07/integration.html">7. Numeric Integration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../07/Intro-and-Newton-Cotes.html">7.1. Introduction and Newton-Cotes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Gauss-Quadrature.html">7.2. Gauss Quadrature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Scipy-Library-Adaptive-Methods-for-Newton-Cotes-and-Gauss-Quadrature.html">7.3. Scipy Library: Adaptive Methods for Newton-Cotes and Gauss Quadrature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Application-Inertial-Navigation-Systems.html">7.4. Application: Inertial Navigation Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Forward-and-Backward-Euler.html">7.5. Forward and Backward Euler Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Trapezoid-Rule.html">7.6. Crank-Nicolson (Trapezoid Rule)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Stability-Analysis.html">7.7. Stability Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Explicit-Runge-Kutta.html">7.8. Explicit Range Kutta Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Systems-of-Differential-Equations-and-Scipy.html">7.9. Systems of Differential Equations and Scipy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Example-Reaction-Rates.html">7.10. Example: Reaction Rates</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../08/optimization.html">8. Continuous Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../08/Pyomo-Basics.html">8.1. Pyomo Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../08/Electricity-Market-Optimization.html">8.2. Electricity Market Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../08/Flash-Calculations-in-Pyomo.html">8.3. Flash Calculations in Pyomo</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../09/stats.html">9. Descriptive Statistics and Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../09/Sampling.html">9.1. Sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../09/Summary-Statistics.html">9.2. Summary Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../09/Visualizing-Data.html">9.3. Visualizing Data</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../10/probability.html">10. Probability Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../10/Probability-Basics.html">10.1. Basic Ideas of Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Random-Variables.html">10.2. Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Jointly-Distributed-Random-Variables.html">10.3. Jointly Distributed Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Jointly-Continuous-Random-Variables.html">10.4. Jointly Continuous Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Practice-Problems.html">10.5. Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../11/distributions.html">11. Common Probability Distributions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../11/Bernoulli-Probability-Distribution.html">11.1. Bernoulli Probability Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Binomial-Probability-Distribtuion.html">11.2. Binomial Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Poisson-Probability-Distribution.html">11.3. Poisson Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Normal-Probability-Distribution.html">11.4. Normal Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Common-Probability-Distributions-Summary.html">11.5. Summary</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../12/uncertainty.html">12. Uncertainty and Error Propagation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../12/Measurement-Error.html">12.1. Measurement Error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Error-Propagation.html">12.2. Error Propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Measuring-Flowrate-Example.html">12.3. Measuring Flowrate Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Car-and-Incline-Example.html">12.4. Car and Incline Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Simulation.html">12.5. Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Monte-Carlo-Error-Propogation.html">12.6. Monte Carlo Error Propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Practice-Problems.html">12.7. Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../13/inference.html">13. Statistical Inference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../13/Central-Limit-Theorem.html">13.1. Central Limit Theorem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Standard-Normal-Distribution.html">13.2. Standard Normal Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Confidence-Intervals.html">13.3. Confidence Intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Students-t-Distribution.html">13.4. Student’s t-Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Hypothesis-Testing-Basics.html">13.5. Hypothesis Testing Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Flavors-of-Hypothesis-Testing.html">13.6. Flavors of Hypothesis Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Type-I-and-Type-II-Errors.html">13.7. Type I and Type II Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Statistical-Power-Basics.html">13.8. Statistical Power Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Statistical-Power-in-Python.html">13.9. Statistical Power in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Statistical-Power-Practice-Problems.html">13.10. Statistical Power Practice Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Bootstrap-Confidence-Intervals.html">13.11. Bootstrap Confidence Intervals</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../14/regression.html">14. Multivariate Linear Regression</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../14/Correlation-Covariance-and-Independence.html">14.1. Correlation, Covariance, and Independence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Least-Squares-Line.html">14.2. Simple Least Squares</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Ordinary-Least-Squares-Linear-Regression.html">14.3. Ordinary Least Squares Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Residual-Analysis.html">14.4. Residual Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Regression-Assumption-Examples.html">14.5. Regression Assumption Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Uncertainty-Analysis-and-Statistical-Inference.html">14.6. Uncertainty Analysis and Statistical Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Multivariate-Linear-Regression.html">14.7. Multivariate Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Linear-Regression-Practice-Problems.html">14.8. Linear Regression Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../15/advanced_regression.html">15. Nonlinear Regression</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../15/Transformations-and-Linear-Regression.html">15.1. Transformations and Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Weighted-Regression.html">15.2. Weighted Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Regression.html">15.3. Nonlinear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Regression-Practice-Problem.html">15.4. Nonlinear Regression Practice Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression.html">15.5. Monte Carlo Uncertainty Analysis for Nonlinear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Case-Study-Adsorptive-Membranes.html">15.6. Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../16/design_of_experiments.html">16. Design of Experiments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../16/Reaction-MBDoE.html">16.1. Model-Based Design of Experiments</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extra Information</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2022/home.html">Fall 2022</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/schedule.html">Fall 2022 Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/project1.html">Project 1: Computating for Problem Solving (Fall 2022)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/project2.html">Project 2: Data Analysis (Fall 2022)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2023/home.html">Fall 2023</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/schedule.html">Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/project.html">Semester Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet1_F23.html">Problem Set 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet2_F23.html">Problem Set 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet3_F23.html">Problem Set 3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet4_F23.html">Problem Set 4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet5_F23.html">Problem Set 5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet6_F23.html">Problem Set 6</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="contribute.html">Contributed Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Biotransport-Entrance-Length.html">Estimating the Entrance Length of Channel Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Non_Isothermal_PBR.html">Non-Isothermal Packed Bed Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Ficks_Law.html">Solving Fick’s Second Law Using Numeric Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Stochastic-Kinetics.html">Stochastic Simulation of Chemical Reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Spaghettification.html">Spaghettification of the Magic School Bus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Alcohol-Pharmacokinetics.html">Alcohol Pharmacokinetics and  Blood Alcohol Content % Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="McCabe-Thiele.html">Plotting McCabe-Thiele diagram through computational methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Wastewater-Treatment-Mass-Balance.html">Example of Mass Balance Problem in Wastewater Treatment Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Filtration.html">Filtration of a Yeast Suspension</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Calculating Fraction of Molecular Collisions</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/contrib/Fraction_of_Molecular_Collisions.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/data-and-computing" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/contrib/Fraction_of_Molecular_Collisions.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/contrib/Fraction_of_Molecular_Collisions.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Calculating Fraction of Molecular Collisions</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intended-audiences">Intended Audiences:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-statement">Problem Statement:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-libraries">Import Libraries:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-fraction-of-collisions">1. Visualizing Fraction of Collisions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#determining-the-fraction-of-molecules">2. Determining the Fraction of Molecules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-the-ratio-of-the-fraction-of-energies">3. Calculating the Ratio of the Fraction of Energies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-analysis">Additional Analysis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fraction-of-collisions-that-have-energies-greater-than-a-certain-value-e-a">4. Fraction of Collisions that have Energies Greater Than a Certain Value, <span class="math notranslate nohighlight">\(E_A\)</span>.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-manually-integrate-equation-5-to-obtain-the-equation-for-fraction-of-collision-from-e-a-to-infinite-on-your-paper-to-get-to-equation-7">4a. Manually integrate equation 5 to obtain the equation for fraction of collision from <span class="math notranslate nohighlight">\(E_A\)</span> to infinite on your paper to get to equation 7.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-numeric-integration">4b. Numeric Integration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-visualization">4c. Visualization:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-what-fraction-of-collisions-have-energies-greater-than-e-25-kcal-mol">4d. What fraction of collisions have energies greater than <span class="math notranslate nohighlight">\(E\)</span> = 25 kcal/mol?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-visualization-at-different-temperature">4e. Visualization at different temperature:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-what-fraction-of-molecules-have-energies-greater-than-15-kcal-mol-at-500k">4f. What fraction of molecules have energies greater than 15 kcal/mol at 500K?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fraction-of-collisions-at-various-temperatures">5. Fraction of Collisions at Various Temperatures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-graph-f-e-e-a-t-versus-t-for-e-a-3-10-25-and-40-kcal-mol">5a. Graph <span class="math notranslate nohighlight">\(f(E &gt; E_A,T)\)</span> versus <span class="math notranslate nohighlight">\(T\)</span> for <span class="math notranslate nohighlight">\(E_A\)</span> = 3, 10, 25 and 40 kcal/mol.</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="calculating-fraction-of-molecular-collisions">
+<h1>Calculating Fraction of Molecular Collisions<a class="headerlink" href="#calculating-fraction-of-molecular-collisions" title="Link to this heading">#</a></h1>
+<p>CBE 60535, University of Notre Dame</p>
+<p>Problem 3.4 ( pg. 99 ) from Elements of Chemical Reaction Engineering by H. Scott Fogler, Fifth edition, 2016, ISBN: 978-0-13-388751-8.</p>
+<p>Prepared by:</p>
+<p>Yun Young Choi <a class="reference external" href="mailto:ychoi3&#37;&#52;&#48;nd&#46;edu">ychoi3<span>&#64;</span>nd<span>&#46;</span>edu</a></p>
+<p>Bingxin Yang <a class="reference external" href="mailto:byang3&#37;&#52;&#48;nd&#46;edu">byang3<span>&#64;</span>nd<span>&#46;</span>edu</a></p>
+<section id="learning-objectives">
+<h2>Learning Objectives:<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>After completing this assignment, you should be able to:</p>
+<ul class="simple">
+<li><p>Apply integration techniques to Ordinary Differential Equations using Python</p></li>
+<li><p>Plot multiple data on a single graph</p></li>
+</ul>
+</section>
+<section id="intended-audiences">
+<h2>Intended Audiences:<a class="headerlink" href="#intended-audiences" title="Link to this heading">#</a></h2>
+<p>This problem is intended for undergraduate students in Chemical and Biomolecular Engineering students from the University of Notre Dame who have taken Chemical Reaction Engineering.</p>
+<p><strong>Useful link to review library:</strong></p>
+<ol class="arabic">
+<li><p>Plot</p>
+<p><a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/01/Matplotlib.html?highlight=plot">https://ndcbe.github.io/data-and-computing/notebooks/01/Matplotlib.html?highlight=plot</a></p>
+</li>
+<li><p>Scipy</p>
+<p><a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/07/Scipy-Library-Adaptive-Methods-for-Newton-Cotes-and-Gauss-Quadrature.html?highlight=scipy">https://ndcbe.github.io/data-and-computing/notebooks/07/Scipy-Library-Adaptive-Methods-for-Newton-Cotes-and-Gauss-Quadrature.html?highlight=scipy</a></p>
+</li>
+<li><p>Integral</p>
+<p><a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/01/Functions-as-Arguments.html?highlight=integral">https://ndcbe.github.io/data-and-computing/notebooks/01/Functions-as-Arguments.html?highlight=integral</a></p>
+</li>
+<li><p>Ordinary Differential Equations</p>
+<p><a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/07/Systems-of-Differential-Equations-and-Scipy.html?highlight=odes">https://ndcbe.github.io/data-and-computing/notebooks/07/Systems-of-Differential-Equations-and-Scipy.html?highlight=odes</a></p>
+</li>
+<li><p>Sympy</p>
+<p><a class="reference external" href="https://scipy-lectures.org/packages/sympy.html">https://scipy-lectures.org/packages/sympy.html</a></p>
+</li>
+</ol>
+</section>
+<section id="problem-statement">
+<h2>Problem Statement:<a class="headerlink" href="#problem-statement" title="Link to this heading">#</a></h2>
+<p>Atoms and molecules have their own unique specific activation energy when undergoing reaction, and have specific minimum energy barriers that it must overcome, also known as barrier height. Now, we must know what fraction of molecular collisions have sufficient energy to cross over the barrier and react.</p>
+<p>For reactions in the gas phase, the reacting molecules will not have only one velocity, <span class="math notranslate nohighlight">\(U\)</span>, but it will also have a distribution of velocities, <span class="math notranslate nohighlight">\(f(U,T)\)</span>. Some will have high velocities and some will have low velocities as they move around and collide. These velocities are not defined with respect to a fixed coordinate system; these velocities are defined with respect to the other reactant molecules. The Maxwell-Boltzmann distribution of relative velocities is given by the probability function, <span class="math notranslate nohighlight">\(f(U,T)\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-71872e8b-838f-41a8-a009-4173b5a18fc1">
+<span class="eqno">(92)<a class="headerlink" href="#equation-71872e8b-838f-41a8-a009-4173b5a18fc1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+f(U,T) = 4π(\frac{m}{2πk_BT})^{3/2}exp(\frac{-mU^2}{2k_BT})U^2....(Eq.1)
+\end{equation}\]</div>
+<p><span class="math notranslate nohighlight">\(K_B\)</span> = Boltzmann’s constnat = 3.29 E-24 (cal/molecule/<span class="math notranslate nohighlight">\(K\)</span>)</p>
+<p><span class="math notranslate nohighlight">\(m\)</span> = Reduced mass <span class="math notranslate nohighlight">\((g)\)</span></p>
+<p><span class="math notranslate nohighlight">\(U\)</span> = Relative velocity <span class="math notranslate nohighlight">\((m/s)\)</span></p>
+<p><span class="math notranslate nohighlight">\(T\)</span>= Absolute Temperature <span class="math notranslate nohighlight">\((K)\)</span></p>
+<p><span class="math notranslate nohighlight">\(e\)</span> = Energy (kcal/molecule)</p>
+<p><span class="math notranslate nohighlight">\(E\)</span> = Kinetic energy (kcal/mol)</p>
+<p>Rather than using velocities to discuss the fraction of molecules with sufficient energy to cross the barrier, we convert these velocities to energies using the equation for kinetic energy in making this conversion:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a74460f9-4415-49b0-bac7-a55f58ca6e1c">
+<span class="eqno">(93)<a class="headerlink" href="#equation-a74460f9-4415-49b0-bac7-a55f58ca6e1c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+e = \frac{1}{2}mU^{2}....(Eq.2)
+\end{equation}\]</div>
+<p>Using this substitute, the Maxwell Boltzmann probability distribution of collision with energy <span class="math notranslate nohighlight">\(e\)</span> <span class="math notranslate nohighlight">\((cal/molecule)\)</span> at temperature <span class="math notranslate nohighlight">\(T\)</span> is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-693859ff-af71-4f4b-9f4f-e3e03ff7657e">
+<span class="eqno">(94)<a class="headerlink" href="#equation-693859ff-af71-4f4b-9f4f-e3e03ff7657e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+f(e,T) = 2π(\frac{1}{πk_BT})^{3/2}e^{1/2}exp(\frac{-e}{k_BT})....(Eq. 3)
+\end{equation}\]</div>
+<p>In terms of energy per mole, <span class="math notranslate nohighlight">\(E\)</span>, instead of energy per molecule, <span class="math notranslate nohighlight">\(e\)</span> ,we have:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a12773cb-7efd-4041-abe7-e51de91ca7c9">
+<span class="eqno">(95)<a class="headerlink" href="#equation-a12773cb-7efd-4041-abe7-e51de91ca7c9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+f(E,T) = 2π(\frac{1}{πRT})^{3/2}E^{1/2}exp(\frac{-E}{RT})....(Eq.4)
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(E\)</span> is in <span class="math notranslate nohighlight">\((cal/mol)\)</span>, <span class="math notranslate nohighlight">\(R\)</span> is in <span class="math notranslate nohighlight">\((cal/mol/K)\)</span>, and <span class="math notranslate nohighlight">\(f(E,T)\)</span> is in <span class="math notranslate nohighlight">\((mol/cal)\)</span>.</p>
+<p>The distribution function <span class="math notranslate nohighlight">\(f(E,T)\)</span> is most easily interpreted by recognizing that <span class="math notranslate nohighlight">\([f(E,T),dE]\)</span> is the <strong>Fraction of Collision</strong> with enerfies between <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(E + dE\)</span></p>
+<div class="amsmath math notranslate nohighlight" id="equation-3218b496-6eb5-48e0-9e77-c865c1eae7b1">
+<span class="eqno">(96)<a class="headerlink" href="#equation-3218b496-6eb5-48e0-9e77-c865c1eae7b1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+f(E,T)dE = 2π(\frac{1}{πk_BT})^{3/2}E^{1/2}exp(\frac{-E}{k_BT})dE....(Eq.5)
+\end{equation}\]</div>
+<p>For example, the fraction of collisions with energies between 0.25 and 0.35 kcal/mol would be:</p>
+<div class="math notranslate nohighlight">
+\[\int_{0.25}^{0.35} f(E,T)dE\]</div>
+</section>
+<section id="import-libraries">
+<h2>Import Libraries:<a class="headerlink" href="#import-libraries" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sympy.geometry.line</span> <span class="kn">import</span> <span class="n">pi_coeff</span>
+<span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">integrate</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualizing-fraction-of-collisions">
+<h2>1. Visualizing Fraction of Collisions<a class="headerlink" href="#visualizing-fraction-of-collisions" title="Link to this heading">#</a></h2>
+<p>Plot the fraction of collision with energy per mole from 0 to 30 <span class="math notranslate nohighlight">\(kcal/mol\)</span> for different given temperatures (T = 300, 500, 800 and 1200K).</p>
+<p>Hint: Fraction of collision as function of energy per mole, uses equation 4.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Gas constant needs to be converted into cal/k mol</span>
+<span class="n">R</span> <span class="o">=</span> <span class="mf">8.314</span> <span class="o">*</span> <span class="mf">0.000239</span>
+
+<span class="c1"># Generate an array of tempeartures for calculation based on the requirements</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">300</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">1200</span><span class="p">])</span>  <span class="c1"># unit: K</span>
+<span class="c1"># Create an empty list to store Fraction of collions</span>
+<span class="n">F</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">pi</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">6.4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>  <span class="c1"># Plot figure size 6.4x4 with 300 DPi</span>
+<span class="c1"># Create a for loop for fraction of collisions calculation at different temperatures from 0 to 30 kcal/mol</span>
+<span class="c1"># add your solution here</span>
+<span class="c1"># Add your solution here</span>
+
+<span class="c1"># Plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>  <span class="c1"># Tick font size 15</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Major tick direction: in</span>
+<span class="c1"># plt.tick_params(which=&quot;minor&quot;,direction=&quot;in&quot;,top=True, right=True) #minor tick will make the graph look more crowded so is left out</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span>
+    <span class="s2">&quot;E[kcal/mol]&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span>
+<span class="p">)</span>  <span class="c1"># axis label font size: 16, bold</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span>
+    <span class="s2">&quot; f[(mol/kcal)]&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span>
+<span class="p">)</span>  <span class="c1"># axis label font size: 16, bold</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/b2dffdc7159ba1cdfc29da329a40d25ee2e566404d4967f5b951bc34f6b29a94.png" src="../../_images/b2dffdc7159ba1cdfc29da329a40d25ee2e566404d4967f5b951bc34f6b29a94.png" />
+</div>
+</div>
+<p>Discussion: Explain how the fraction of collisions change as a function of given temperatures as you see on the graph.</p>
+<p><strong>Answer</strong>: When you look at the graph, you can see that fraction of collision increase with increasing temperature at <span class="math notranslate nohighlight">\(E\)</span> = 5 kcal/mol. For kinetic energy lower than 5 kcal/mol, lower the temperature, the probability of collision is lower, therefore it will require more energy to get over the activation energy barrier. For higher temperature below <span class="math notranslate nohighlight">\(E\)</span> = 5 kcal/mol, it will have more movement within itself that it require less energy.</p>
+</section>
+<section id="determining-the-fraction-of-molecules">
+<h2>2. Determining the Fraction of Molecules<a class="headerlink" href="#determining-the-fraction-of-molecules" title="Link to this heading">#</a></h2>
+<p>What is the fraction of molecules that have sufficient energy to pass over an energy barrier of 25 kcal at 300,500, 800 and 1200K.</p>
+<p>Hint: Perform integration of <span class="math notranslate nohighlight">\(f(E,T)\)</span> from 0 to 25 kcal?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Regenerate an array of tempeartures for calculation based on the requirements</span>
+
+
+<span class="c1"># Define a function for fraction of molecules that has sufficient energy to pass over an energy barrier calculation</span>
+<span class="k">def</span> <span class="nf">fraction</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Using integration to calculate the fraction of molecules from 0 to 25 kcal</span>
+<span class="sd">    Args:</span>
+<span class="sd">        T: temperature (K)</span>
+<span class="sd">        E: Energy (per mole)</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        f(E,T) : distribution of collision for energy per mole (mol/cal)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Store fraction of molecules that does not have sufficient energy to pass over an energy barrier of 25 kcal in a list</span>
+    <span class="n">I</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># i in terms of the order of temperatures in T</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># Create a for loop for integration calculation at different temperatures</span>
+    <span class="c1"># Add your solution here</span>
+    <span class="c1"># Add your solution here</span>
+
+    <span class="k">return</span> <span class="n">I</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Store the fraction of molecule you integrated above into <code class="docutils literal notranslate"><span class="pre">I1</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Store data in I1 for the fraction</span>
+<span class="n">I1</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># Add your solution here</span>
+<span class="c1"># Add your solution here</span>
+
+<span class="c1"># Print I1 to confirm</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fraction from 300 K to 1200 K from intergation: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">I1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fraction from 300 K to 1200 K from intergation: 
+ [0.9999999999999933, 0.9999999999318481, 0.9999993178365589, 0.9998931593409495]
+</pre></div>
+</div>
+</div>
+</div>
+<p>To get over an energy barrier, subtract fraction of molecule obtained from 1.
+Store answers as a list in <code class="docutils literal notranslate"><span class="pre">F_1</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a list of fraction of molecules that has sufficient energy to pass over an energy barrier of 25 kcal from 300K to 1200 K</span>
+<span class="n">F_1</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># create an empty list</span>
+
+<span class="c1"># i in terms of the temperature order in T1</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># Create a while loop that will calculate the fraction of molecules that has sufficient energy to pass over an energy barrier</span>
+<span class="c1"># Add your solution here</span>
+<span class="c1"># Add your solution here</span>
+
+<span class="c1"># Print results</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;Fraction of molecules that has sufficient energy to pass over an energy barrier of 25 kcal: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="n">F_1</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fraction of molecules that has sufficient energy to pass over an energy barrier of 25 kcal: 
+ [6.661338147750939e-15, 6.815192854503493e-11, 6.821634410680844e-07, 0.0001068406590505333]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="calculating-the-ratio-of-the-fraction-of-energies">
+<h2>3. Calculating the Ratio of the Fraction of Energies<a class="headerlink" href="#calculating-the-ratio-of-the-fraction-of-energies" title="Link to this heading">#</a></h2>
+<p>Create a list that shows fraction of energies between 0 and 25 kcal for 300 K and 1200 K. Store answer in <code class="docutils literal notranslate"><span class="pre">I2</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define Temperature in a list T2 (300K and 1200K)</span>
+<span class="n">T1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">300</span><span class="p">,</span> <span class="mi">1200</span><span class="p">])</span>
+
+<span class="c1"># Store the fraction from the integration in I2 to obtain the fraction at differnt given tempeartures</span>
+<span class="c1"># Create an empty list I2</span>
+<span class="n">I2</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># Add your solution here</span>
+<span class="c1"># Add your solution here</span>
+
+<span class="c1"># print data</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fraction from 300 K to 1200 K from intergation: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">I2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fraction from 300 K to 1200 K from intergation: 
+ [0.9999999999999933, 0.9998931593409495]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, obtain the ratio using the <code class="docutils literal notranslate"><span class="pre">I2</span></code> obtained above comparing 300 K to 1200 K.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># define a list for ratio data store</span>
+<span class="n">R</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Add your solution here that will calculate and show the ratio here</span>
+<span class="c1"># Add your solution here</span>
+
+<span class="c1"># print the obtained ratio</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Baseline resistance = </span><span class="si">{0:0.4f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">R</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Baseline resistance = 1.0000
+</pre></div>
+</div>
+</div>
+</div>
+<section id="additional-analysis">
+<h3>Additional Analysis<a class="headerlink" href="#additional-analysis" title="Link to this heading">#</a></h3>
+<p>As mentioned above, The distribution function <span class="math notranslate nohighlight">\(f(E,T)\)</span> is most easily interpreted by recognizing that <span class="math notranslate nohighlight">\([f(E,T)dE]\)</span> is the <strong>Fraction of Collision</strong> with energies between <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(E + dE\)</span></p>
+<div class="amsmath math notranslate nohighlight" id="equation-278fe313-82b2-40d6-88eb-87f12ba7b726">
+<span class="eqno">(97)<a class="headerlink" href="#equation-278fe313-82b2-40d6-88eb-87f12ba7b726" title="Permalink to this equation">#</a></span>\[\begin{equation}
+f(E,T)dE = 2π(\frac{1}{πk_BT})^{3/2}E^{1/2}exp(\frac{-E}{k_BT})dE....(Eq.5)
+\end{equation}\]</div>
+<p>The <strong>Reaction of Collision</strong> that have energies greater than a certain value, <span class="math notranslate nohighlight">\(E_{A}\)</span> can be expressed as below:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-e9007dcc-808b-464d-8a15-86f1a99ddafa">
+<span class="eqno">(98)<a class="headerlink" href="#equation-e9007dcc-808b-464d-8a15-86f1a99ddafa" title="Permalink to this equation">#</a></span>\[\begin{equation}
+F(E&gt;E_A,T) = \int_{E_A}^{∞} f(E,T)dE....(Eq.6)
+\end{equation}\]</div>
+<p>For <span class="math notranslate nohighlight">\(E_{A}\)</span> &gt; 3<span class="math notranslate nohighlight">\(RT\)</span>, analytical approximation for the fraction of molecules of collision with energies greater than <span class="math notranslate nohighlight">\(E_{A}\)</span> as below can be obtained from equation 5 and 6 and integration:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-2b9d4849-07e0-42f5-b194-c736431b8fa6">
+<span class="eqno">(99)<a class="headerlink" href="#equation-2b9d4849-07e0-42f5-b194-c736431b8fa6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+F(E&gt;E_A,T) = (\frac{2}{{π}^{0.5}})(\frac{E_A}{RT})^{1/2}exp(\frac{-E_A}{RT})....(Eq.7)
+\end{equation}\]</div>
+</section>
+</section>
+<section id="fraction-of-collisions-that-have-energies-greater-than-a-certain-value-e-a">
+<h2>4. Fraction of Collisions that have Energies Greater Than a Certain Value, <span class="math notranslate nohighlight">\(E_A\)</span>.<a class="headerlink" href="#fraction-of-collisions-that-have-energies-greater-than-a-certain-value-e-a" title="Link to this heading">#</a></h2>
+<section id="a-manually-integrate-equation-5-to-obtain-the-equation-for-fraction-of-collision-from-e-a-to-infinite-on-your-paper-to-get-to-equation-7">
+<h3>4a. Manually integrate equation 5 to obtain the equation for fraction of collision from <span class="math notranslate nohighlight">\(E_A\)</span> to infinite on your paper to get to equation 7.<a class="headerlink" href="#a-manually-integrate-equation-5-to-obtain-the-equation-for-fraction-of-collision-from-e-a-to-infinite-on-your-paper-to-get-to-equation-7" title="Link to this heading">#</a></h3>
+<p>Hint: Starting with equation 5, integrate from <span class="math notranslate nohighlight">\(E_A\)</span> to infinity (shown as equation 6) and solve to get equation 7.</p>
+<p>Hint 2: The constants in the equation can be grouped and substituted with constnat such as A and/or B.</p>
+<p>Hint 3: Use u-substition.</p>
+<p>Submit the written work via <em><strong>Gradescope</strong></em>.</p>
+</section>
+<section id="b-numeric-integration">
+<h3>4b. Numeric Integration<a class="headerlink" href="#b-numeric-integration" title="Link to this heading">#</a></h3>
+<p>Design a code that will integrate equation 5 to equation 7 for you and compare the equation you have obtained from 4a (written part).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Integrate the equation</span>
+<span class="c1"># Define symbols</span>
+<span class="n">init_printing</span><span class="p">(</span><span class="n">use_unicode</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">wrap_line</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">E</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s2">&quot;E&quot;</span><span class="p">)</span>
+<span class="n">pi</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s2">&quot;pi&quot;</span><span class="p">)</span>
+<span class="n">R</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s2">&quot;R&quot;</span><span class="p">)</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">)</span>
+
+<span class="c1"># add your solution that shows integrated equation</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/ef8fb6cbefeeb9c9a1405eed0e51476d544a0f3f93ceb60fffd43c2f15fcf660.png" src="../../_images/ef8fb6cbefeeb9c9a1405eed0e51476d544a0f3f93ceb60fffd43c2f15fcf660.png" />
+</div>
+</div>
+<p>Hint: you will run into gamma when doing the integration. Gamma is shown below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># lower case gamma follows this equation shown below</span>
+<span class="n">z</span> <span class="o">=</span> <span class="mf">1.5</span>
+<span class="n">E_A</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s2">&quot;E_A&quot;</span><span class="p">)</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">E_A</span> <span class="o">/</span> <span class="p">(</span><span class="n">R</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="p">(</span><span class="n">t</span> <span class="o">**</span> <span class="p">(</span><span class="n">z</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gamma</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(E_A/(R*T))**0.5*exp(-E_A/(R*T))
+</pre></div>
+</div>
+</div>
+</div>
+<p>Label the integrated equation (eq.7) as <code class="docutils literal notranslate"><span class="pre">y</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># define the integrated equation as y</span>
+<span class="c1"># Add your solution here</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="c-visualization">
+<h3>4c. Visualization:<a class="headerlink" href="#c-visualization" title="Link to this heading">#</a></h3>
+<p>Graph using the equation you have obtained from 4b for 700K.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/718f50b52cc1076e6aac31d08dc97ac34ac7339aed7caaa1cd28806a2c98d047.png" src="../../_images/718f50b52cc1076e6aac31d08dc97ac34ac7339aed7caaa1cd28806a2c98d047.png" />
+</div>
+</div>
+</section>
+<section id="d-what-fraction-of-collisions-have-energies-greater-than-e-25-kcal-mol">
+<h3>4d. What fraction of collisions have energies greater than <span class="math notranslate nohighlight">\(E\)</span> = 25 kcal/mol?<a class="headerlink" href="#d-what-fraction-of-collisions-have-energies-greater-than-e-25-kcal-mol" title="Link to this heading">#</a></h3>
+<p>Hint: What is the y axis value when x = 25 kcal?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define constants</span>
+<span class="n">E_A1</span> <span class="o">=</span> <span class="mi">25</span>  <span class="c1"># unit: kcal</span>
+
+<span class="c1"># Call the function F_C and calculate the fraction of collisions at 700K.</span>
+<span class="c1"># Add your solution here</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;Fraction of collisions have energies greater than E = 25 kcal/mol at 700K: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="n">F_C</span><span class="p">(</span><span class="n">E_A1</span><span class="p">,</span> <span class="n">T2</span><span class="p">),</span>
+    <span class="s2">&quot;when E = 25 kcal&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fraction of collisions have energies greater than E = 25 kcal/mol at 700K: 
+ 5.37835222623192e-08 when E = 25 kcal
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="e-visualization-at-different-temperature">
+<h3>4e. Visualization at different temperature:<a class="headerlink" href="#e-visualization-at-different-temperature" title="Link to this heading">#</a></h3>
+<p>Graph using the code you have obtained from 4b for 500K.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># add your solution here to get the graph shown below</span>
+<span class="n">E_A2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="c1"># define temperature for this problem</span>
+<span class="n">T3</span> <span class="o">=</span> <span class="mi">500</span>  <span class="c1"># unit: K</span>
+
+<span class="c1"># Call the funcation and calculate the fraction of collisions and create a semilog plot as shown in 4c.</span>
+<span class="c1"># Add your solution here</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/afe7da8f3a4d15ba98489a7b2c4d5f3ba9f1390bed668449238cf215c540cc6b.png" src="../../_images/afe7da8f3a4d15ba98489a7b2c4d5f3ba9f1390bed668449238cf215c540cc6b.png" />
+</div>
+</div>
+</section>
+<section id="f-what-fraction-of-molecules-have-energies-greater-than-15-kcal-mol-at-500k">
+<h3>4f. What fraction of molecules have energies greater than 15 kcal/mol at 500K?<a class="headerlink" href="#f-what-fraction-of-molecules-have-energies-greater-than-15-kcal-mol-at-500k" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find F_500 when E = 25</span>
+<span class="c1"># Add your solution here</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;F_500 is&quot;</span><span class="p">,</span> <span class="n">F_C</span><span class="p">(</span><span class="n">E_A1</span><span class="p">,</span> <span class="n">T3</span><span class="p">),</span> <span class="s2">&quot;when E=15&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>F_500 is 6.722248169794792e-11 when E=15
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find F_700 when E = 25</span>
+<span class="c1"># Add your solution here</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;F_700 is&quot;</span><span class="p">,</span> <span class="n">F_C</span><span class="p">(</span><span class="n">E_A1</span><span class="p">,</span> <span class="n">T2</span><span class="p">),</span> <span class="s2">&quot;when E=15&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>F_700 is 5.37835222623192e-08 when E=15
+</pre></div>
+</div>
+</div>
+</div>
+<p>Discussion:
+Compare fraction of collision(of molecules) with energies greater than 25 kcal/mol at 500K and 700K. Explain the results below.</p>
+<p><strong>Answer</strong>:
+The fraction increases at 700K of 3 order of magnitude. The rate increases with the increasing fraction of collisions that have sufficient energy to cross over the barrier and form products.</p>
+</section>
+</section>
+<section id="fraction-of-collisions-at-various-temperatures">
+<h2>5. Fraction of Collisions at Various Temperatures<a class="headerlink" href="#fraction-of-collisions-at-various-temperatures" title="Link to this heading">#</a></h2>
+<section id="a-graph-f-e-e-a-t-versus-t-for-e-a-3-10-25-and-40-kcal-mol">
+<h3>5a. Graph <span class="math notranslate nohighlight">\(f(E &gt; E_A,T)\)</span> versus <span class="math notranslate nohighlight">\(T\)</span> for <span class="math notranslate nohighlight">\(E_A\)</span> = 3, 10, 25 and 40 kcal/mol.<a class="headerlink" href="#a-graph-f-e-e-a-t-versus-t-for-e-a-3-10-25-and-40-kcal-mol" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># define constants and data storage</span>
+<span class="c1"># make a list for fraction storage</span>
+<span class="n">F3</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># redefine the range of temperature</span>
+<span class="n">T4</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>  <span class="c1"># Unit: K</span>
+<span class="c1"># make a list for energy</span>
+<span class="n">EA3</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">40</span><span class="p">]</span>  <span class="c1"># unit: kcal</span>
+
+<span class="c1"># i in terms of the order in energy EA3</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">6.4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>  <span class="c1"># Figure size 4x4 with 300 DPi</span>
+<span class="c1"># Create a loop for fraction calculation for different temperatures and to graph a semilog graph</span>
+<span class="c1"># enter equation here</span>
+<span class="c1"># Add your solution here</span>
+
+<span class="c1"># plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mf">10e-292</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">120</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>  <span class="c1"># Tick font size 15</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Major tick direction: in</span>
+<span class="c1"># plt.tick_params(which=&quot;minor&quot;,direction=&quot;in&quot;,top=True, right=True) #minor tick will make the graph look more crowded so is left out</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;T [K]&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>  <span class="c1"># axis label font size: 16, bold</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span>
+    <span class="s2">&quot;f(E &gt; $E_A$)[(mol/kcal)]&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span>
+<span class="p">)</span>  <span class="c1"># axis label font size: 16, bold</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/1458f32b794a95cd4cb0d29d32ec8467e7cd8c20634c45026d37279fc6c76390.png" src="../../_images/1458f32b794a95cd4cb0d29d32ec8467e7cd8c20634c45026d37279fc6c76390.png" />
+</div>
+</div>
+<p>Discussion:
+What do you find from the plot from above?</p>
+<p><strong>Answer</strong>:</p>
+<p>From the graph, it can be seen that any temperature the fraction of collisions with  energies greater than certain activation energy <span class="math notranslate nohighlight">\((E_A)\)</span> is inversely proportional to that activation  energy. In other words, when activation energy is low, the molecule will need less energy to get over  the activation energy barrier. At a higher temperature, the temperature will be the governing rule  for <span class="math notranslate nohighlight">\(f\)</span>.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/contrib"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Filtration.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Filtration of a Yeast Suspension</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intended-audiences">Intended Audiences:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-statement">Problem Statement:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-libraries">Import Libraries:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-fraction-of-collisions">1. Visualizing Fraction of Collisions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#determining-the-fraction-of-molecules">2. Determining the Fraction of Molecules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-the-ratio-of-the-fraction-of-energies">3. Calculating the Ratio of the Fraction of Energies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-analysis">Additional Analysis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fraction-of-collisions-that-have-energies-greater-than-a-certain-value-e-a">4. Fraction of Collisions that have Energies Greater Than a Certain Value, <span class="math notranslate nohighlight">\(E_A\)</span>.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-manually-integrate-equation-5-to-obtain-the-equation-for-fraction-of-collision-from-e-a-to-infinite-on-your-paper-to-get-to-equation-7">4a. Manually integrate equation 5 to obtain the equation for fraction of collision from <span class="math notranslate nohighlight">\(E_A\)</span> to infinite on your paper to get to equation 7.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-numeric-integration">4b. Numeric Integration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-visualization">4c. Visualization:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-what-fraction-of-collisions-have-energies-greater-than-e-25-kcal-mol">4d. What fraction of collisions have energies greater than <span class="math notranslate nohighlight">\(E\)</span> = 25 kcal/mol?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-visualization-at-different-temperature">4e. Visualization at different temperature:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-what-fraction-of-molecules-have-energies-greater-than-15-kcal-mol-at-500k">4f. What fraction of molecules have energies greater than 15 kcal/mol at 500K?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fraction-of-collisions-at-various-temperatures">5. Fraction of Collisions at Various Temperatures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-graph-f-e-e-a-t-versus-t-for-e-a-3-10-25-and-40-kcal-mol">5a. Graph <span class="math notranslate nohighlight">\(f(E &gt; E_A,T)\)</span> versus <span class="math notranslate nohighlight">\(T\)</span> for <span class="math notranslate nohighlight">\(E_A\)</span> = 3, 10, 25 and 40 kcal/mol.</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

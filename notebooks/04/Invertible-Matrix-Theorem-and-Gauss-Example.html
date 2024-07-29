@@ -1,0 +1,1565 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>4.3. Invertible Matrix Theorem and Gaussian Elimination Example &#8212; Data and Computing for Chemical Engineers</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/04/Invertible-Matrix-Theorem-and-Gauss-Example';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="4.4. LU Decomposition" href="LU-Decomposition.html" />
+    <link rel="prev" title="4.2. Gaussian Elimination" href="Gauss-Elimination.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/cbe_logo.jpg" class="logo__image only-light" alt="Data and Computing for Chemical Engineers - Home"/>
+    <script>document.write(`<img src="../../_static/cbe_logo.jpg" class="logo__image only-dark" alt="Data and Computing for Chemical Engineers - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Data and Computing for Engineers
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Python Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../01/Python-Primer.html">1. Python Primer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../01/Jupyter-Notebooks.html">1.1. Welcome to Jupyter Notebooks and Vocareum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Python-Basics-I-Variables-Strings-Bugs.html">1.2. Python Basics I: Variables, Strings, and Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Flow-control.html">1.3. Python Basics II: Loopy Logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Python-Basics-III-Lists-Dictionaries-Enumeration.html">1.4. Python Basics III: Lists, Dictionaries, and Enumeration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Functions-and-Scope.html">1.5. Functions and Scope</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Recursion.html">1.6. Recursion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Pseudocode.html">1.7. Pseudocode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Example-High-Low-Game.html">1.8. High/Low Guess My Number Game</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Modules-and-Files.html">1.9. Modules and Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/NumPy.html">1.10. Linear Algebra with Numpy and Scipy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Matplotlib.html">1.11. Visualization with matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Pandas.html">1.12. Manipulating Data with Pandas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Functions-as-Arguments.html">1.13. Functions as Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Testing-and-Debugging.html">1.14. Testing and Debugging in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../01/Publication-Quality-Figures.html">1.15. Preparing Publication Quality Figures in Python</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../02/advanced_python.html">2. Advanced Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Numerical Methods</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03/linear_algebra.html">3. Linear Algebra Primer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter1.html">3.1. Chapter 1: Math Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter2.html">3.2. Chapter 2: Intro to Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter3.html">3.3. Chapter 3: Computational linear algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter4.html">3.4. Chapter 4: Geometric Aspects of Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter5.html">3.5. Chapter 5: Linear Transformations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03/chapter6.html">3.6. Chapter 6: Theoretical Linear Algebra</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="linear_algebra.html">4. Applied Linear Algebra</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Modeling-Systems-of-Linear-Equations.html">4.1. Modeling Systems of Linear Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Gauss-Elimination.html">4.2. Gaussian Elimination</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">4.3. Invertible Matrix Theorem and Gaussian Elimination Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LU-Decomposition.html">4.4. LU Decomposition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Condition-Number.html">4.5. Errors in Linear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Example-Atomic-Mass-Balances.html">4.6. Example: Mass Balances and Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Linear-Algebra-in-Numpy.html">4.7. Linear Algebra Review and SciPy Basics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05/algorithms.html">5. Algorithm Building Blocks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../05/Taylor-Series.html">5.1. Taylor Series Approximations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05/Finite-Difference.html">5.2. Finite Difference Derivative Approximations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05/Example-Heating-a-Metal-Slab.html">5.3. Example: Heating a Metal Slab</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../06/nonlinear_systems.html">6. Nonlinear Systems of Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../06/Modeling-Systems-of-Nonlinear-Equations.html">6.1. Modeling Systems of Nonlinear Equations: Flash Calculation Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Raphson-Method-in-One-Dimension.html">6.2. Newton-Raphson Method in One Dimension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/More-Newton-Type-Methods.html">6.3. More Newton-Type Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Convergence-Analysis-for-Newton-Raphson-Methods.html">6.4. Convergence Analysis for Newton-Raphson Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Raphson-Methods-for-Systems-of-Equations.html">6.5. Newton-Raphson Methods for Systems of Equations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06/Newton-Methods-in-Scipy.html">6.6. Newton Methods in Scipy</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../07/integration.html">7. Numeric Integration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../07/Intro-and-Newton-Cotes.html">7.1. Introduction and Newton-Cotes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Gauss-Quadrature.html">7.2. Gauss Quadrature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Scipy-Library-Adaptive-Methods-for-Newton-Cotes-and-Gauss-Quadrature.html">7.3. Scipy Library: Adaptive Methods for Newton-Cotes and Gauss Quadrature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Application-Inertial-Navigation-Systems.html">7.4. Application: Inertial Navigation Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Forward-and-Backward-Euler.html">7.5. Forward and Backward Euler Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Trapezoid-Rule.html">7.6. Crank-Nicolson (Trapezoid Rule)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Stability-Analysis.html">7.7. Stability Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Explicit-Runge-Kutta.html">7.8. Explicit Range Kutta Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Systems-of-Differential-Equations-and-Scipy.html">7.9. Systems of Differential Equations and Scipy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../07/Example-Reaction-Rates.html">7.10. Example: Reaction Rates</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../08/optimization.html">8. Continuous Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../08/Pyomo-Basics.html">8.1. Pyomo Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../08/Electricity-Market-Optimization.html">8.2. Electricity Market Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../08/Flash-Calculations-in-Pyomo.html">8.3. Flash Calculations in Pyomo</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Data Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../09/stats.html">9. Descriptive Statistics and Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../09/Sampling.html">9.1. Sampling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../09/Summary-Statistics.html">9.2. Summary Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../09/Visualizing-Data.html">9.3. Visualizing Data</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../10/probability.html">10. Probability Theory</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../10/Probability-Basics.html">10.1. Basic Ideas of Probability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Random-Variables.html">10.2. Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Jointly-Distributed-Random-Variables.html">10.3. Jointly Distributed Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Jointly-Continuous-Random-Variables.html">10.4. Jointly Continuous Random Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10/Practice-Problems.html">10.5. Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../11/distributions.html">11. Common Probability Distributions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../11/Bernoulli-Probability-Distribution.html">11.1. Bernoulli Probability Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Binomial-Probability-Distribtuion.html">11.2. Binomial Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Poisson-Probability-Distribution.html">11.3. Poisson Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Normal-Probability-Distribution.html">11.4. Normal Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../11/Common-Probability-Distributions-Summary.html">11.5. Summary</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../12/uncertainty.html">12. Uncertainty and Error Propagation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../12/Measurement-Error.html">12.1. Measurement Error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Error-Propagation.html">12.2. Error Propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Measuring-Flowrate-Example.html">12.3. Measuring Flowrate Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Car-and-Incline-Example.html">12.4. Car and Incline Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Simulation.html">12.5. Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Monte-Carlo-Error-Propogation.html">12.6. Monte Carlo Error Propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../12/Practice-Problems.html">12.7. Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../13/inference.html">13. Statistical Inference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../13/Central-Limit-Theorem.html">13.1. Central Limit Theorem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Standard-Normal-Distribution.html">13.2. Standard Normal Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Confidence-Intervals.html">13.3. Confidence Intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Students-t-Distribution.html">13.4. Student’s t-Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Hypothesis-Testing-Basics.html">13.5. Hypothesis Testing Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Flavors-of-Hypothesis-Testing.html">13.6. Flavors of Hypothesis Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Type-I-and-Type-II-Errors.html">13.7. Type I and Type II Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Statistical-Power-Basics.html">13.8. Statistical Power Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Statistical-Power-in-Python.html">13.9. Statistical Power in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Statistical-Power-Practice-Problems.html">13.10. Statistical Power Practice Problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../13/Bootstrap-Confidence-Intervals.html">13.11. Bootstrap Confidence Intervals</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../14/regression.html">14. Multivariate Linear Regression</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../14/Correlation-Covariance-and-Independence.html">14.1. Correlation, Covariance, and Independence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Least-Squares-Line.html">14.2. Simple Least Squares</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Ordinary-Least-Squares-Linear-Regression.html">14.3. Ordinary Least Squares Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Residual-Analysis.html">14.4. Residual Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Regression-Assumption-Examples.html">14.5. Regression Assumption Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Uncertainty-Analysis-and-Statistical-Inference.html">14.6. Uncertainty Analysis and Statistical Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Multivariate-Linear-Regression.html">14.7. Multivariate Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../14/Linear-Regression-Practice-Problems.html">14.8. Linear Regression Practice Problems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../15/advanced_regression.html">15. Nonlinear Regression</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../15/Transformations-and-Linear-Regression.html">15.1. Transformations and Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Weighted-Regression.html">15.2. Weighted Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Regression.html">15.3. Nonlinear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Regression-Practice-Problem.html">15.4. Nonlinear Regression Practice Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression.html">15.5. Monte Carlo Uncertainty Analysis for Nonlinear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15/Nonlinear-Case-Study-Adsorptive-Membranes.html">15.6. Nonlinear Regression Case Study: Adsorptive Nanoporous Membranes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../16/design_of_experiments.html">16. Design of Experiments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../16/Reaction-MBDoE.html">16.1. Model-Based Design of Experiments</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extra Information</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2022/home.html">Fall 2022</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/schedule.html">Fall 2022 Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/project1.html">Project 1: Computating for Problem Solving (Fall 2022)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2022/project2.html">Project 2: Data Analysis (Fall 2022)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2023/home.html">Fall 2023</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/schedule.html">Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2023/project.html">Semester Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet1_F23.html">Problem Set 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet2_F23.html">Problem Set 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet3_F23.html">Problem Set 3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet4_F23.html">Problem Set 4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet5_F23.html">Problem Set 5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet6_F23.html">Problem Set 6</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../contrib/contribute.html">Contributed Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Biotransport-Entrance-Length.html">Estimating the Entrance Length of Channel Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Non_Isothermal_PBR.html">Non-Isothermal Packed Bed Reactor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Ficks_Law.html">Solving Fick’s Second Law Using Numeric Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Stochastic-Kinetics.html">Stochastic Simulation of Chemical Reactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Spaghettification.html">Spaghettification of the Magic School Bus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Alcohol-Pharmacokinetics.html">Alcohol Pharmacokinetics and  Blood Alcohol Content % Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/McCabe-Thiele.html">Plotting McCabe-Thiele diagram through computational methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Wastewater-Treatment-Mass-Balance.html">Example of Mass Balance Problem in Wastewater Treatment Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Filtration.html">Filtration of a Yeast Suspension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contrib/Fraction_of_Molecular_Collisions.html">Calculating Fraction of Molecular Collisions</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/ndcbe/data-and-computing/blob/master/notebooks/04/Invertible-Matrix-Theorem-and-Gauss-Example.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/data-and-computing" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ndcbe/data-and-computing/issues/new?title=Issue%20on%20page%20%2Fnotebooks/04/Invertible-Matrix-Theorem-and-Gauss-Example.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/04/Invertible-Matrix-Theorem-and-Gauss-Example.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Invertible Matrix Theorem and Gaussian Elimination Example</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">4.3.1. Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-algebra-invertible-matrix-theorem">4.3.2. Linear Algebra: Invertible Matrix Theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mass-balance-example-adapted-from-an-old-exam-problem">4.3.3. Mass Balance Example (Adapted from an Old Exam Problem)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-model-old-exam-question">4.3.4. Mathematical Model (Old Exam Question)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-form-old-exam-question">4.3.5. Matrix Form (Old Exam Question)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solve-with-gaussian-elimination">4.3.6. Solve with Gaussian Elimination</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flip-the-order-of-the-row">4.3.7. Flip the order of the row</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#replace-the-8th-equation-with-an-overall-mole-balance">4.3.8. Replace the 8th equation with an overall mole balance</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="invertible-matrix-theorem-and-gaussian-elimination-example">
+<h1><span class="section-number">4.3. </span>Invertible Matrix Theorem and Gaussian Elimination Example<a class="headerlink" href="#invertible-matrix-theorem-and-gaussian-elimination-example" title="Link to this heading">#</a></h1>
+<p><b>Reference:</b> Chapter 7 of <em>Computational Nuclear Engineering and Radiological Science Using Python</em>, R. McClarren (2018)</p>
+<section id="learning-objectives">
+<h2><span class="section-number">4.3.1. </span>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>After studying this notebook, completing the activities, and asking questions in class, you should be able to:</p>
+<ul class="simple">
+<li><p>Explain the Invertible Matrix Theorem to a classmate.</p></li>
+<li><p>Solve mass balance problems with linear algebra and Gaussian elimination.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="c1">#this line is only needed in Jupyter notebooks</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="linear-algebra-invertible-matrix-theorem">
+<h2><span class="section-number">4.3.2. </span>Linear Algebra: Invertible Matrix Theorem<a class="headerlink" href="#linear-algebra-invertible-matrix-theorem" title="Link to this heading">#</a></h2>
+<p>Please review <strong>The Invertible Matrix Theorem</strong> in your linear algebra textbook (by Lay et al).</p>
+<p>To paraphrase, <span class="math notranslate nohighlight">\( A \)</span> is a square <span class="math notranslate nohighlight">\(n \times n\)</span> matrix. The following statements are equivalent (all true or all false):</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(A\)</span> is invertible</p></li>
+<li><p><span class="math notranslate nohighlight">\(A\)</span> is row equivalent to the <span class="math notranslate nohighlight">\(n \times n\)</span> identify matrix</p></li>
+<li><p><span class="math notranslate nohighlight">\(A\)</span> has <span class="math notranslate nohighlight">\(n\)</span> pivot positions</p></li>
+<li><p><span class="math notranslate nohighlight">\(A x = 0\)</span> has only the trivial solution</p></li>
+<li><p>The columns of <span class="math notranslate nohighlight">\(A\)</span> form a linearly independent set</p></li>
+<li><p>The system <span class="math notranslate nohighlight">\(A x = b\)</span> has at least one solution</p></li>
+<li><p>Columns of <span class="math notranslate nohighlight">\(A\)</span> span <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(A^T\)</span> is invertible</p></li>
+<li><p>The rank of <span class="math notranslate nohighlight">\(A\)</span> is <span class="math notranslate nohighlight">\(n\)</span></p></li>
+<li><p>The determinant of <span class="math notranslate nohighlight">\(A\)</span> is not zero</p></li>
+</ul>
+</section>
+<section id="mass-balance-example-adapted-from-an-old-exam-problem">
+<h2><span class="section-number">4.3.3. </span>Mass Balance Example (Adapted from an Old Exam Problem)<a class="headerlink" href="#mass-balance-example-adapted-from-an-old-exam-problem" title="Link to this heading">#</a></h2>
+<p>Let’s see how Gaussian elimination can be applied to mass balance problems.</p>
+<p>We want to convert A into valuable product B using a process with a mixer, reactor, and separator.</p>
+<p><img alt="flowsheet" src="https://ndcbe.github.io/data-and-computing/_images/1b_fig.png" /></p>
+<p>A feed enters at a rate of 100 moles per hour and is composed 99 mole % A and the remainder B. Unfortunately, the reactor only has a 10% per pass conversion efficiency. This means that only 10% of A that enters the reactor undergoes the reaction <span class="math notranslate nohighlight">\(A \rightarrow B\)</span>. The separator splits the reactor effluent into two streams: the product and the recycle. The separator operates such that for every 1 mole of A in the product streams, there are 4 moles of A in the recycle stream. Likewise, for every 8 moles of B in the product stream, there is 1 mole of B in the recycle stream.</p>
+<p>As shown in the figure above, we can model the process using component molar flowrates as variables. The first subscript is the stream (<span class="math notranslate nohighlight">\(m\)</span>, <span class="math notranslate nohighlight">\(e\)</span>, <span class="math notranslate nohighlight">\(r\)</span>, or <span class="math notranslate nohighlight">\(p\)</span>) and the second subscript is the component (<span class="math notranslate nohighlight">\(A\)</span> or <span class="math notranslate nohighlight">\(B\)</span>).</p>
+</section>
+<section id="mathematical-model-old-exam-question">
+<h2><span class="section-number">4.3.4. </span>Mathematical Model (Old Exam Question)<a class="headerlink" href="#mathematical-model-old-exam-question" title="Link to this heading">#</a></h2>
+<p>Your classmate proposes the following mathematical model</p>
+<p>Equation A:   <span class="math notranslate nohighlight">\(n_{f,A} + n_{r,A} = n_{m,A}\)</span></p>
+<p>Equation B:   <span class="math notranslate nohighlight">\(n_{f,B} + n_{r,B} = n_{m,B}\)</span></p>
+<p>Equation C:   <span class="math notranslate nohighlight">\(0.9 ~ n_{m,A} = n_{e,A}\)</span></p>
+<p>Equation D:   <span class="math notranslate nohighlight">\(n_{m,A} + n_{m,B} = n_{e,A} + n_{e,B}\)</span></p>
+<p>Equation E:   <span class="math notranslate nohighlight">\(n_{e,A} = n_{p,A} + n_{r,A}\)</span></p>
+<p>Equation F:   <span class="math notranslate nohighlight">\(n_{e,B} = n_{p,B} + n_{r,B}\)</span></p>
+<p>Equation G:   <span class="math notranslate nohighlight">\(4 ~ n_{p,A} = n_{r,A}\)</span></p>
+<p>Equation H:   <span class="math notranslate nohighlight">\(n_{p,B} = 8 ~ n_{r,B}\)</span></p>
+<p>Multiple choice description options:</p>
+<ol class="arabic simple">
+<li><p>Entire Process: Overall mole balance</p></li>
+<li><p>Entire Process: Component A mole balance</p></li>
+<li><p>Process: Component B mole balance</p></li>
+<li><p>Mixer: Overall mole balance</p></li>
+<li><p>Mixer: Component A mole balance</p></li>
+<li><p>Mixer: Component B mole balance</p></li>
+<li><p>Mixer: Summation equation</p></li>
+<li><p>Reactor: Overall mole balance</p></li>
+<li><p>Reactor: Component A mole balance</p></li>
+<li><p>Reactor: Component B mole balance</p></li>
+<li><p>Reactor: 90% of A fed into reactor is converted to B</p></li>
+<li><p>Reactor: 10% of A fed into reactor is converted to B</p></li>
+<li><p>Separator: Overall mole balance</p></li>
+<li><p>Separator: Component A mole balance</p></li>
+<li><p>Separator: Component B mole balance</p></li>
+<li><p>Separator: For every 4 moles of A in recycle, there are 1 moles of A in product</p></li>
+<li><p>Seperator: For every 1 mole of A in recycle, there are 4 moles of A in product</p></li>
+<li><p>Seperator: For every 8 moles of B in recycle, there are 1 moles of B in product</p></li>
+<li><p>Seperator: For every 1 mole of B in recycle, there are 1 moles of B in product</p></li>
+<li><p>None of the above</p></li>
+</ol>
+<p>Hint: Choice 19 does not include a typo. It is meant to be 1 and 1.</p>
+<div class="admonition seealso">
+<p class="admonition-title"><b>Home Activity</b></p>
+<p>Match each equation to a description above. Record your answer in the dictionary <tt>eqn_names</tt> using the keys A,…,F and the values 1,…,20.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eqn_names</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;A&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">}</span>
+
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removed autograder test. You may delete this cell.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="matrix-form-old-exam-question">
+<h2><span class="section-number">4.3.5. </span>Matrix Form (Old Exam Question)<a class="headerlink" href="#matrix-form-old-exam-question" title="Link to this heading">#</a></h2>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{x} = 	\begin{bmatrix}n_{m,A} \\
+		n_{m,B} \\
+		n_{e,A} \\
+		n_{e,B} \\
+		n_{p,A} \\
+		n_{p,B} \\
+		n_{r,A} \\
+		n_{r,B} \end{bmatrix}\end{split}\]</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Convert the model to matrix form.</p>
+</div>
+</section>
+<section id="solve-with-gaussian-elimination">
+<h2><span class="section-number">4.3.6. </span>Solve with Gaussian Elimination<a class="headerlink" href="#solve-with-gaussian-elimination" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">print_solution</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Print solution for this specific mole balance problem</span>
+<span class="sd">    </span>
+<span class="sd">    Argument:</span>
+<span class="sd">        x: solution vector</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Nothing</span>
+<span class="sd">    </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stream description : Component = flowrate&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mixer outlet: A = &quot;</span><span class="p">,</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mixer effluent: B = &quot;</span><span class="p">,</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;reactor effluent: A = &quot;</span><span class="p">,</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;reactor effluent: B = &quot;</span><span class="p">,</span><span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;product: A = &quot;</span><span class="p">,</span><span class="n">x</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;product: B = &quot;</span><span class="p">,</span><span class="n">x</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;recycle: A = &quot;</span><span class="p">,</span><span class="n">x</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;recycle: B = &quot;</span><span class="p">,</span><span class="n">x</span><span class="p">[</span><span class="mi">7</span><span class="p">])</span>
+    
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Finish populating <tt>A_ex</tt> and <tt>b_ex</tt> below.</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Assemble A matrix</span>
+<span class="n">A_ex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+
+<span class="n">A_ex</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">A_ex</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="n">A_ex</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">A_ex</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="c1"># Add your solution here</span>
+<span class="n">A_ex</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">A_ex</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="n">A_ex</span><span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">A_ex</span><span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">8</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A=</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">A_ex</span><span class="p">)</span>
+
+<span class="c1">## Assemble b vector</span>
+
+<span class="n">b_ex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">b_ex</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">99</span>
+<span class="c1"># Add your solution here</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">b=</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">b_ex</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Run the following cell with the Gaussian Elimination code developed in the <a class="reference internal" href="Gauss-Elimination.html"><span class="std std-doc">last notebook</span></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">GaussElim</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">LOUD</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;create a Gaussian elimination matrix for a system</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        A: N by N array</span>
+<span class="sd">        b: array of length N</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        augmented matrix ready for back substitution</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Extract dimensions of A</span>
+    <span class="p">[</span><span class="n">Nrow</span><span class="p">,</span> <span class="n">Ncol</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span>
+    
+    <span class="c1"># Check that A is square</span>
+    <span class="k">assert</span> <span class="n">Nrow</span> <span class="o">==</span> <span class="n">Ncol</span>
+    
+    <span class="c1"># Check dimensions of b</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">Nrow</span>
+    <span class="k">assert</span> <span class="n">b</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="n">N</span>
+    
+    <span class="c1"># create augmented matrix, just like</span>
+    <span class="c1"># code at the start of motivating example</span>
+    <span class="n">aug_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">aug_matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">N</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="n">N</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">aug_matrix</span><span class="p">[:,</span><span class="n">N</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="c1">#augmented matrix is created</span>
+    
+    <span class="k">if</span> <span class="n">LOUD</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Augmented Matrix = &quot;</span><span class="p">,</span><span class="n">aug_matrix</span><span class="p">)</span>
+
+    <span class="c1"># loop over columns</span>
+    <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+        
+        <span class="c1"># loop over rows</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">column</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+            
+            <span class="c1"># select row to modify</span>
+            <span class="n">mod_row</span> <span class="o">=</span> <span class="n">aug_matrix</span><span class="p">[</span><span class="n">row</span><span class="p">,:]</span>
+            
+            <span class="c1"># modify entire row</span>
+            <span class="n">mod_row</span> <span class="o">-=</span> <span class="p">(</span><span class="n">mod_row</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">/</span><span class="n">aug_matrix</span><span class="p">[</span><span class="n">column</span><span class="p">,</span><span class="n">column</span><span class="p">]</span><span class="o">*</span>
+                        <span class="n">aug_matrix</span><span class="p">[</span><span class="n">column</span><span class="p">,:])</span>
+
+            <span class="c1"># overwrite row. Is this needed? Why or why not?</span>
+            <span class="n">aug_matrix</span><span class="p">[</span><span class="n">row</span><span class="p">]</span> <span class="o">=</span> <span class="n">mod_row</span>
+
+            
+        <span class="c1"># end loop over rows</span>
+        
+    <span class="c1"># end loop over columns</span>
+    
+    <span class="c1"># return augmented matrix</span>
+    <span class="k">return</span> <span class="n">aug_matrix</span>
+
+<span class="k">def</span> <span class="nf">swap_rows</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Rows two rows in a matrix, switch row a with row b</span>
+<span class="sd">    </span>
+<span class="sd">    args: </span>
+<span class="sd">    A: matrix to perform row swaps on</span>
+<span class="sd">    a: row index of matrix</span>
+<span class="sd">    b: row index of matrix</span>
+<span class="sd">    </span>
+<span class="sd">    returns: nothing</span>
+<span class="sd">    </span>
+<span class="sd">    side effects:</span>
+<span class="sd">    changes A to rows a and b swapped</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># A negative index will give unexpected behavior</span>
+    <span class="k">assert</span> <span class="p">(</span><span class="n">a</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">b</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1">#number of rows</span>
+    <span class="k">assert</span> <span class="p">(</span><span class="n">a</span><span class="o">&lt;</span><span class="n">N</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">b</span><span class="o">&lt;</span><span class="n">N</span><span class="p">)</span> <span class="c1">#less than because 0-based indexing</span>
+    
+    <span class="c1"># create a temporary variable to store row a</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">a</span><span class="p">,:]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    
+    <span class="c1"># move row b values into the location of row a</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">a</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">b</span><span class="p">,:]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    
+    <span class="c1"># move row a values (stored in temp) into the location of row a</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">b</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">BackSub</span><span class="p">(</span><span class="n">aug_matrix</span><span class="p">,</span><span class="n">z_tol</span><span class="o">=</span><span class="mf">1E-8</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;back substitute a N by N system after Gauss elimination</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        aug_matrix: augmented matrix with zeros below the diagonal [numpy 2D array]</span>
+<span class="sd">        z_tol: tolerance for checking for zeros below the diagonal [float]</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        x: length N vector, solution to linear system [numpy 1D array]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="p">[</span><span class="n">Nrow</span><span class="p">,</span> <span class="n">Ncol</span><span class="p">]</span> <span class="o">=</span> <span class="n">aug_matrix</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># check the dimensions</span>
+        <span class="k">assert</span> <span class="n">Nrow</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">Ncol</span>
+    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dimension checks failed.&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nrow = &quot;</span><span class="p">,</span><span class="n">Nrow</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ncol = &quot;</span><span class="p">,</span><span class="n">Ncol</span><span class="p">)</span>
+        <span class="k">raise</span>
+
+    <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">z_tol</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">float</span><span class="p">,</span> <span class="s2">&quot;z_tol must be a float&quot;</span>
+        
+    <span class="c1"># check augmented matrix is all zeros below the diagonal</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Nrow</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">r</span><span class="p">):</span>
+            <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">aug_matrix</span><span class="p">[</span><span class="n">r</span><span class="p">,</span><span class="n">c</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">z_tol</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Warning! Nonzero in position &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;,&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+
+    <span class="c1"># create vector of zeros to store solution</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">Nrow</span><span class="p">)</span>
+    
+    <span class="c1"># loop over the rows starting at the bottom</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Nrow</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">RHS</span> <span class="o">=</span> <span class="n">aug_matrix</span><span class="p">[</span><span class="n">row</span><span class="p">,</span><span class="n">Nrow</span><span class="p">]</span> <span class="c1"># far column</span>
+
+        <span class="c1"># loop over the columns to the right of the diagonal</span>
+        <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">row</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">Nrow</span><span class="p">):</span>
+            
+            <span class="c1"># subtract, i.e., substitute the already known values</span>
+            <span class="n">RHS</span> <span class="o">-=</span> <span class="n">x</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">*</span><span class="n">aug_matrix</span><span class="p">[</span><span class="n">row</span><span class="p">,</span><span class="n">column</span><span class="p">]</span>
+
+        <span class="c1"># compute the element of x corresponding to the current row</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">row</span><span class="p">]</span> <span class="o">=</span> <span class="n">RHS</span><span class="o">/</span><span class="n">aug_matrix</span><span class="p">[</span><span class="n">row</span><span class="p">,</span><span class="n">row</span><span class="p">]</span>
+        
+    <span class="k">return</span> <span class="n">x</span>
+
+<span class="k">def</span> <span class="nf">GaussElimPivotSolve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">LOUD</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;create a Gaussian elimination with pivoting matrix for a system</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        A: N by N array</span>
+<span class="sd">        b: array of length N</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        solution vector in the original order</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># checks dimensions</span>
+    <span class="p">[</span><span class="n">Nrow</span><span class="p">,</span> <span class="n">Ncol</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">assert</span> <span class="n">Nrow</span> <span class="o">==</span> <span class="n">Ncol</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">Nrow</span>
+    
+    
+    <span class="c1">#create augmented matrix</span>
+    <span class="n">aug_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">aug_matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">N</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="n">N</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span>
+    <span class="n">aug_matrix</span><span class="p">[:,</span><span class="n">N</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span>
+    <span class="c1">#augmented matrix is created</span>
+    
+    <span class="c1">#create scale factors </span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">aug_matrix</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="n">N</span><span class="p">]:</span> <span class="c1">#don&#39;t include b</span>
+        <span class="n">s</span><span class="p">[</span><span class="n">count</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fabs</span><span class="p">(</span><span class="n">row</span><span class="p">))</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+  
+    <span class="c1"># print diagnostics if requested</span>
+    <span class="k">if</span> <span class="n">LOUD</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;s =&quot;</span><span class="p">,</span><span class="n">s</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original Augmented Matrix is</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">aug_matrix</span><span class="p">)</span>
+    
+    <span class="c1">#perform elimination</span>
+    <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+        
+        <span class="c1">## swap rows if needed</span>
+        <span class="c1"># find largest position</span>
+        <span class="n">largest_pos</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fabs</span><span class="p">(</span><span class="n">aug_matrix</span><span class="p">[</span><span class="n">column</span><span class="p">:</span><span class="n">N</span><span class="p">,</span><span class="n">column</span><span class="p">]</span><span class="o">/</span>
+                                         <span class="n">s</span><span class="p">[</span><span class="n">column</span><span class="p">:</span><span class="n">N</span><span class="p">]))</span> <span class="o">+</span> <span class="n">column</span><span class="p">)</span>
+        
+        <span class="c1"># check if current column is largest position</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">largest_pos</span> <span class="o">!=</span> <span class="n">column</span><span class="p">):</span>
+            <span class="c1"># if not, swap rows</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">LOUD</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Swapping row&quot;</span><span class="p">,</span><span class="n">column</span><span class="p">,</span><span class="s2">&quot;with row&quot;</span><span class="p">,</span><span class="n">largest_pos</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pre swap</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">aug_matrix</span><span class="p">)</span>
+            <span class="n">swap_rows</span><span class="p">(</span><span class="n">aug_matrix</span><span class="p">,</span><span class="n">column</span><span class="p">,</span><span class="n">largest_pos</span><span class="p">)</span>
+            
+            <span class="c1">#re-order s</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">column</span><span class="p">]</span>
+            <span class="n">s</span><span class="p">[</span><span class="n">column</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">largest_pos</span><span class="p">]</span>
+            <span class="n">s</span><span class="p">[</span><span class="n">largest_pos</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">LOUD</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">aug_matrix</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;new_s =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+        
+        <span class="c1">#finish off the row</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">column</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+            <span class="n">mod_row</span> <span class="o">=</span> <span class="n">aug_matrix</span><span class="p">[</span><span class="n">row</span><span class="p">,:]</span>
+            <span class="n">mod_row</span> <span class="o">=</span> <span class="n">mod_row</span> <span class="o">-</span> <span class="n">mod_row</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">/</span><span class="n">aug_matrix</span><span class="p">[</span><span class="n">column</span><span class="p">,</span><span class="n">column</span><span class="p">]</span><span class="o">*</span><span class="n">aug_matrix</span><span class="p">[</span><span class="n">column</span><span class="p">,:]</span>
+            <span class="n">aug_matrix</span><span class="p">[</span><span class="n">row</span><span class="p">]</span> <span class="o">=</span> <span class="n">mod_row</span>
+    
+    <span class="c1">#now back solve</span>
+    <span class="k">if</span> <span class="n">LOUD</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Final aug_matrix is</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">aug_matrix</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BackSub</span><span class="p">(</span><span class="n">aug_matrix</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Solve</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">GaussElimPivotSolve</span><span class="p">(</span><span class="n">A_ex</span><span class="p">,</span> <span class="n">b_ex</span><span class="p">,</span> <span class="n">LOUD</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>s = [1. 1. 1. 1. 1. 1. 4. 8.]
+Original Augmented Matrix is
+ [[ 1.   0.   0.   0.   0.   0.  -1.   0.  99. ]
+ [ 0.   1.   0.   0.   0.   0.   0.  -1.   1. ]
+ [ 0.9  0.  -1.   0.   0.   0.   0.   0.   0. ]
+ [ 1.   1.  -1.  -1.   0.   0.   0.   0.   0. ]
+ [ 0.   0.   1.   0.  -1.   0.  -1.   0.   0. ]
+ [ 0.   0.   0.   1.   0.  -1.   0.  -1.   0. ]
+ [ 0.   0.   0.   0.   4.   0.  -1.   0.   0. ]
+ [ 0.   0.   0.   0.   0.   1.   0.  -8.   0. ]]
+Final aug_matrix is
+ [[ 1.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
+   0.00000000e+00  0.00000000e+00 -1.00000000e+00  0.00000000e+00
+   9.90000000e+01]
+ [ 0.00000000e+00  1.00000000e+00  0.00000000e+00  0.00000000e+00
+   0.00000000e+00  0.00000000e+00  0.00000000e+00 -1.00000000e+00
+   1.00000000e+00]
+ [ 0.00000000e+00  0.00000000e+00 -1.00000000e+00  0.00000000e+00
+   0.00000000e+00  0.00000000e+00  9.00000000e-01  0.00000000e+00
+  -8.91000000e+01]
+ [ 0.00000000e+00  0.00000000e+00  0.00000000e+00 -1.00000000e+00
+   0.00000000e+00  0.00000000e+00  1.00000000e-01  1.00000000e+00
+  -1.09000000e+01]
+ [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
+  -1.00000000e+00  0.00000000e+00 -1.00000000e-01  0.00000000e+00
+  -8.91000000e+01]
+ [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
+   0.00000000e+00 -1.00000000e+00  1.00000000e-01  0.00000000e+00
+  -1.09000000e+01]
+ [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
+   0.00000000e+00  0.00000000e+00 -1.40000000e+00  0.00000000e+00
+  -3.56400000e+02]
+ [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
+   0.00000000e+00  0.00000000e+00  1.38777878e-17 -8.00000000e+00
+  -3.63571429e+01]]
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">print_solution</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Stream description : Component = flowrate
+mixer outlet: A =  353.5714285714286
+mixer effluent: B =  5.544642857142856
+reactor effluent: A =  318.2142857142858
+reactor effluent: B =  40.9017857142857
+product: A =  63.64285714285715
+product: B =  36.35714285714285
+recycle: A =  254.5714285714286
+recycle: B =  4.544642857142856
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section id="flip-the-order-of-the-row">
+<h2><span class="section-number">4.3.7. </span>Flip the order of the row<a class="headerlink" href="#flip-the-order-of-the-row" title="Link to this heading">#</a></h2>
+<p>What happens if we write the equations in reserve order?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A_flip</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">A_ex</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+<span class="n">b_flip</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">b_ex</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A=</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">A_flip</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">b=</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">b_flip</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A=
+ [[ 0.   0.   0.   0.   0.   1.   0.  -8. ]
+ [ 0.   0.   0.   0.   4.   0.  -1.   0. ]
+ [ 0.   0.   0.   1.   0.  -1.   0.  -1. ]
+ [ 0.   0.   1.   0.  -1.   0.  -1.   0. ]
+ [ 1.   1.  -1.  -1.   0.   0.   0.   0. ]
+ [ 0.9  0.  -1.   0.   0.   0.   0.   0. ]
+ [ 0.   1.   0.   0.   0.   0.   0.  -1. ]
+ [ 1.   0.   0.   0.   0.   0.  -1.   0. ]]
+
+b=
+ [ 0.  0.  0.  0.  0.  0.  1. 99.]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_flip</span> <span class="o">=</span> <span class="n">GaussElimPivotSolve</span><span class="p">(</span><span class="n">A_flip</span><span class="p">,</span> <span class="n">b_flip</span><span class="p">,</span> <span class="n">LOUD</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>s = [8. 4. 1. 1. 1. 1. 1. 1.]
+Original Augmented Matrix is
+ [[ 0.   0.   0.   0.   0.   1.   0.  -8.   0. ]
+ [ 0.   0.   0.   0.   4.   0.  -1.   0.   0. ]
+ [ 0.   0.   0.   1.   0.  -1.   0.  -1.   0. ]
+ [ 0.   0.   1.   0.  -1.   0.  -1.   0.   0. ]
+ [ 1.   1.  -1.  -1.   0.   0.   0.   0.   0. ]
+ [ 0.9  0.  -1.   0.   0.   0.   0.   0.   0. ]
+ [ 0.   1.   0.   0.   0.   0.   0.  -1.   1. ]
+ [ 1.   0.   0.   0.   0.   0.  -1.   0.  99. ]]
+Swapping row 0 with row 4
+Pre swap
+ [[ 0.   0.   0.   0.   0.   1.   0.  -8.   0. ]
+ [ 0.   0.   0.   0.   4.   0.  -1.   0.   0. ]
+ [ 0.   0.   0.   1.   0.  -1.   0.  -1.   0. ]
+ [ 0.   0.   1.   0.  -1.   0.  -1.   0.   0. ]
+ [ 1.   1.  -1.  -1.   0.   0.   0.   0.   0. ]
+ [ 0.9  0.  -1.   0.   0.   0.   0.   0.   0. ]
+ [ 0.   1.   0.   0.   0.   0.   0.  -1.   1. ]
+ [ 1.   0.   0.   0.   0.   0.  -1.   0.  99. ]]
+A =
+ [[ 1.   1.  -1.  -1.   0.   0.   0.   0.   0. ]
+ [ 0.   0.   0.   0.   4.   0.  -1.   0.   0. ]
+ [ 0.   0.   0.   1.   0.  -1.   0.  -1.   0. ]
+ [ 0.   0.   1.   0.  -1.   0.  -1.   0.   0. ]
+ [ 0.   0.   0.   0.   0.   1.   0.  -8.   0. ]
+ [ 0.9  0.  -1.   0.   0.   0.   0.   0.   0. ]
+ [ 0.   1.   0.   0.   0.   0.   0.  -1.   1. ]
+ [ 1.   0.   0.   0.   0.   0.  -1.   0.  99. ]]
+new_s =
+ [1. 4. 1. 1. 8. 1. 1. 1.]
+Swapping row 1 with row 6
+Pre swap
+ [[ 1.   1.  -1.  -1.   0.   0.   0.   0.   0. ]
+ [ 0.   0.   0.   0.   4.   0.  -1.   0.   0. ]
+ [ 0.   0.   0.   1.   0.  -1.   0.  -1.   0. ]
+ [ 0.   0.   1.   0.  -1.   0.  -1.   0.   0. ]
+ [ 0.   0.   0.   0.   0.   1.   0.  -8.   0. ]
+ [ 0.  -0.9 -0.1  0.9  0.   0.   0.   0.   0. ]
+ [ 0.   1.   0.   0.   0.   0.   0.  -1.   1. ]
+ [ 0.  -1.   1.   1.   0.   0.  -1.   0.  99. ]]
+A =
+ [[ 1.   1.  -1.  -1.   0.   0.   0.   0.   0. ]
+ [ 0.   1.   0.   0.   0.   0.   0.  -1.   1. ]
+ [ 0.   0.   0.   1.   0.  -1.   0.  -1.   0. ]
+ [ 0.   0.   1.   0.  -1.   0.  -1.   0.   0. ]
+ [ 0.   0.   0.   0.   0.   1.   0.  -8.   0. ]
+ [ 0.  -0.9 -0.1  0.9  0.   0.   0.   0.   0. ]
+ [ 0.   0.   0.   0.   4.   0.  -1.   0.   0. ]
+ [ 0.  -1.   1.   1.   0.   0.  -1.   0.  99. ]]
+new_s =
+ [1. 1. 1. 1. 8. 1. 4. 1.]
+Swapping row 2 with row 3
+Pre swap
+ [[ 1.e+00  1.e+00 -1.e+00 -1.e+00  0.e+00  0.e+00  0.e+00  0.e+00  0.e+00]
+ [ 0.e+00  1.e+00  0.e+00  0.e+00  0.e+00  0.e+00  0.e+00 -1.e+00  1.e+00]
+ [ 0.e+00  0.e+00  0.e+00  1.e+00  0.e+00 -1.e+00  0.e+00 -1.e+00  0.e+00]
+ [ 0.e+00  0.e+00  1.e+00  0.e+00 -1.e+00  0.e+00 -1.e+00  0.e+00  0.e+00]
+ [ 0.e+00  0.e+00  0.e+00  0.e+00  0.e+00  1.e+00  0.e+00 -8.e+00  0.e+00]
+ [ 0.e+00  0.e+00 -1.e-01  9.e-01  0.e+00  0.e+00  0.e+00 -9.e-01  9.e-01]
+ [ 0.e+00  0.e+00  0.e+00  0.e+00  4.e+00  0.e+00 -1.e+00  0.e+00  0.e+00]
+ [ 0.e+00  0.e+00  1.e+00  1.e+00  0.e+00  0.e+00 -1.e+00 -1.e+00  1.e+02]]
+A =
+ [[ 1.e+00  1.e+00 -1.e+00 -1.e+00  0.e+00  0.e+00  0.e+00  0.e+00  0.e+00]
+ [ 0.e+00  1.e+00  0.e+00  0.e+00  0.e+00  0.e+00  0.e+00 -1.e+00  1.e+00]
+ [ 0.e+00  0.e+00  1.e+00  0.e+00 -1.e+00  0.e+00 -1.e+00  0.e+00  0.e+00]
+ [ 0.e+00  0.e+00  0.e+00  1.e+00  0.e+00 -1.e+00  0.e+00 -1.e+00  0.e+00]
+ [ 0.e+00  0.e+00  0.e+00  0.e+00  0.e+00  1.e+00  0.e+00 -8.e+00  0.e+00]
+ [ 0.e+00  0.e+00 -1.e-01  9.e-01  0.e+00  0.e+00  0.e+00 -9.e-01  9.e-01]
+ [ 0.e+00  0.e+00  0.e+00  0.e+00  4.e+00  0.e+00 -1.e+00  0.e+00  0.e+00]
+ [ 0.e+00  0.e+00  1.e+00  1.e+00  0.e+00  0.e+00 -1.e+00 -1.e+00  1.e+02]]
+new_s =
+ [1. 1. 1. 1. 8. 1. 4. 1.]
+Swapping row 4 with row 6
+Pre swap
+ [[ 1.e+00  1.e+00 -1.e+00 -1.e+00  0.e+00  0.e+00  0.e+00  0.e+00  0.e+00]
+ [ 0.e+00  1.e+00  0.e+00  0.e+00  0.e+00  0.e+00  0.e+00 -1.e+00  1.e+00]
+ [ 0.e+00  0.e+00  1.e+00  0.e+00 -1.e+00  0.e+00 -1.e+00  0.e+00  0.e+00]
+ [ 0.e+00  0.e+00  0.e+00  1.e+00  0.e+00 -1.e+00  0.e+00 -1.e+00  0.e+00]
+ [ 0.e+00  0.e+00  0.e+00  0.e+00  0.e+00  1.e+00  0.e+00 -8.e+00  0.e+00]
+ [ 0.e+00  0.e+00  0.e+00  0.e+00 -1.e-01  9.e-01 -1.e-01  0.e+00  9.e-01]
+ [ 0.e+00  0.e+00  0.e+00  0.e+00  4.e+00  0.e+00 -1.e+00  0.e+00  0.e+00]
+ [ 0.e+00  0.e+00  0.e+00  0.e+00  1.e+00  1.e+00  0.e+00  0.e+00  1.e+02]]
+A =
+ [[ 1.e+00  1.e+00 -1.e+00 -1.e+00  0.e+00  0.e+00  0.e+00  0.e+00  0.e+00]
+ [ 0.e+00  1.e+00  0.e+00  0.e+00  0.e+00  0.e+00  0.e+00 -1.e+00  1.e+00]
+ [ 0.e+00  0.e+00  1.e+00  0.e+00 -1.e+00  0.e+00 -1.e+00  0.e+00  0.e+00]
+ [ 0.e+00  0.e+00  0.e+00  1.e+00  0.e+00 -1.e+00  0.e+00 -1.e+00  0.e+00]
+ [ 0.e+00  0.e+00  0.e+00  0.e+00  4.e+00  0.e+00 -1.e+00  0.e+00  0.e+00]
+ [ 0.e+00  0.e+00  0.e+00  0.e+00 -1.e-01  9.e-01 -1.e-01  0.e+00  9.e-01]
+ [ 0.e+00  0.e+00  0.e+00  0.e+00  0.e+00  1.e+00  0.e+00 -8.e+00  0.e+00]
+ [ 0.e+00  0.e+00  0.e+00  0.e+00  1.e+00  1.e+00  0.e+00  0.e+00  1.e+02]]
+new_s =
+ [1. 1. 1. 1. 4. 1. 8. 1.]
+Swapping row 5 with row 7
+Pre swap
+ [[  1.      1.     -1.     -1.      0.      0.      0.      0.      0.   ]
+ [  0.      1.      0.      0.      0.      0.      0.     -1.      1.   ]
+ [  0.      0.      1.      0.     -1.      0.     -1.      0.      0.   ]
+ [  0.      0.      0.      1.      0.     -1.      0.     -1.      0.   ]
+ [  0.      0.      0.      0.      4.      0.     -1.      0.      0.   ]
+ [  0.      0.      0.      0.      0.      0.9    -0.125   0.      0.9  ]
+ [  0.      0.      0.      0.      0.      1.      0.     -8.      0.   ]
+ [  0.      0.      0.      0.      0.      1.      0.25    0.    100.   ]]
+A =
+ [[  1.      1.     -1.     -1.      0.      0.      0.      0.      0.   ]
+ [  0.      1.      0.      0.      0.      0.      0.     -1.      1.   ]
+ [  0.      0.      1.      0.     -1.      0.     -1.      0.      0.   ]
+ [  0.      0.      0.      1.      0.     -1.      0.     -1.      0.   ]
+ [  0.      0.      0.      0.      4.      0.     -1.      0.      0.   ]
+ [  0.      0.      0.      0.      0.      1.      0.25    0.    100.   ]
+ [  0.      0.      0.      0.      0.      1.      0.     -8.      0.   ]
+ [  0.      0.      0.      0.      0.      0.9    -0.125   0.      0.9  ]]
+new_s =
+ [1. 1. 1. 1. 4. 1. 8. 1.]
+Swapping row 6 with row 7
+Pre swap
+ [[   1.      1.     -1.     -1.      0.      0.      0.      0.      0.  ]
+ [   0.      1.      0.      0.      0.      0.      0.     -1.      1.  ]
+ [   0.      0.      1.      0.     -1.      0.     -1.      0.      0.  ]
+ [   0.      0.      0.      1.      0.     -1.      0.     -1.      0.  ]
+ [   0.      0.      0.      0.      4.      0.     -1.      0.      0.  ]
+ [   0.      0.      0.      0.      0.      1.      0.25    0.    100.  ]
+ [   0.      0.      0.      0.      0.      0.     -0.25   -8.   -100.  ]
+ [   0.      0.      0.      0.      0.      0.     -0.35    0.    -89.1 ]]
+A =
+ [[   1.      1.     -1.     -1.      0.      0.      0.      0.      0.  ]
+ [   0.      1.      0.      0.      0.      0.      0.     -1.      1.  ]
+ [   0.      0.      1.      0.     -1.      0.     -1.      0.      0.  ]
+ [   0.      0.      0.      1.      0.     -1.      0.     -1.      0.  ]
+ [   0.      0.      0.      0.      4.      0.     -1.      0.      0.  ]
+ [   0.      0.      0.      0.      0.      1.      0.25    0.    100.  ]
+ [   0.      0.      0.      0.      0.      0.     -0.35    0.    -89.1 ]
+ [   0.      0.      0.      0.      0.      0.     -0.25   -8.   -100.  ]]
+new_s =
+ [1. 1. 1. 1. 4. 1. 1. 8.]
+Final aug_matrix is
+ [[  1.           1.          -1.          -1.           0.
+    0.           0.           0.           0.        ]
+ [  0.           1.           0.           0.           0.
+    0.           0.          -1.           1.        ]
+ [  0.           0.           1.           0.          -1.
+    0.          -1.           0.           0.        ]
+ [  0.           0.           0.           1.           0.
+   -1.           0.          -1.           0.        ]
+ [  0.           0.           0.           0.           4.
+    0.          -1.           0.           0.        ]
+ [  0.           0.           0.           0.           0.
+    1.           0.25         0.         100.        ]
+ [  0.           0.           0.           0.           0.
+    0.          -0.35         0.         -89.1       ]
+ [  0.           0.           0.           0.           0.
+    0.           0.          -8.         -36.35714286]]
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">print_solution</span><span class="p">(</span><span class="n">x_flip</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Stream description : Component = flowrate
+mixer outlet: A =  353.5714285714286
+mixer effluent: B =  5.544642857142858
+reactor effluent: A =  318.2142857142857
+reactor effluent: B =  40.90178571428571
+product: A =  63.642857142857146
+product: B =  36.357142857142854
+recycle: A =  254.57142857142858
+recycle: B =  4.544642857142858
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>We see that we get the same order but need to pivot! Let’s try without pivoting.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aug_mat</span> <span class="o">=</span> <span class="n">GaussElim</span><span class="p">(</span><span class="n">A_flip</span><span class="p">,</span><span class="n">b_flip</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">aug_mat = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">aug_mat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>aug_mat = 
+ [[ 0.  0.  0.  0.  0.  1.  0. -8.  0.]
+ [nan nan nan nan nan nan nan nan nan]
+ [nan nan nan nan nan nan nan nan nan]
+ [nan nan nan nan nan nan nan nan nan]
+ [nan nan nan nan nan nan nan nan nan]
+ [nan nan nan nan nan nan nan nan nan]
+ [nan nan nan nan nan nan nan nan nan]
+ [nan nan nan nan nan nan nan nan nan]]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/3w/vr4xmyqs451dg23xk88pqcg00000gq/T/ipykernel_47904/826583952.py:40: RuntimeWarning: invalid value encountered in double_scalars
+  mod_row -= (mod_row[column]/aug_matrix[column,column]*
+/var/folders/3w/vr4xmyqs451dg23xk88pqcg00000gq/T/ipykernel_47904/826583952.py:40: RuntimeWarning: divide by zero encountered in double_scalars
+  mod_row -= (mod_row[column]/aug_matrix[column,column]*
+/var/folders/3w/vr4xmyqs451dg23xk88pqcg00000gq/T/ipykernel_47904/826583952.py:40: RuntimeWarning: invalid value encountered in multiply
+  mod_row -= (mod_row[column]/aug_matrix[column,column]*
+</pre></div>
+</div>
+</div>
+</div>
+<p>For this problem, we must use pivoting if we start with the equations in a certain order.</p>
+</section>
+<section id="replace-the-8th-equation-with-an-overall-mole-balance">
+<h2><span class="section-number">4.3.8. </span>Replace the 8th equation with an overall mole balance<a class="headerlink" href="#replace-the-8th-equation-with-an-overall-mole-balance" title="Link to this heading">#</a></h2>
+<div class="math notranslate nohighlight">
+\[n_{p,A} + n_{p_B} = n_{f,A} + n_{f,B} = 100\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A_new</span> <span class="o">=</span> <span class="n">A_ex</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">b_new</span> <span class="o">=</span> <span class="n">b_ex</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="n">A_new</span><span class="p">[</span><span class="mi">7</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">A_new</span><span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">A_new</span><span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">b_new</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A=</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">A_new</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">b=</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">b_new</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A=
+ [[ 1.   0.   0.   0.   0.   0.  -1.   0. ]
+ [ 0.   1.   0.   0.   0.   0.   0.  -1. ]
+ [ 0.9  0.  -1.   0.   0.   0.   0.   0. ]
+ [ 1.   1.  -1.  -1.   0.   0.   0.   0. ]
+ [ 0.   0.   1.   0.  -1.   0.  -1.   0. ]
+ [ 0.   0.   0.   1.   0.  -1.   0.  -1. ]
+ [ 0.   0.   0.   0.   4.   0.  -1.   0. ]
+ [ 0.   0.   0.   0.   1.   1.   0.   0. ]]
+
+b=
+ [ 99.   1.   0.   0.   0.   0.   0. 100.]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_new</span> <span class="o">=</span> <span class="n">GaussElimPivotSolve</span><span class="p">(</span><span class="n">A_new</span><span class="p">,</span> <span class="n">b_new</span><span class="p">,</span> <span class="n">LOUD</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>s = [1. 1. 1. 1. 1. 1. 4. 1.]
+Original Augmented Matrix is
+ [[  1.    0.    0.    0.    0.    0.   -1.    0.   99. ]
+ [  0.    1.    0.    0.    0.    0.    0.   -1.    1. ]
+ [  0.9   0.   -1.    0.    0.    0.    0.    0.    0. ]
+ [  1.    1.   -1.   -1.    0.    0.    0.    0.    0. ]
+ [  0.    0.    1.    0.   -1.    0.   -1.    0.    0. ]
+ [  0.    0.    0.    1.    0.   -1.    0.   -1.    0. ]
+ [  0.    0.    0.    0.    4.    0.   -1.    0.    0. ]
+ [  0.    0.    0.    0.    1.    1.    0.    0.  100. ]]
+Final aug_matrix is
+ [[ 1.000e+00  0.000e+00  0.000e+00  0.000e+00  0.000e+00  0.000e+00
+  -1.000e+00  0.000e+00  9.900e+01]
+ [ 0.000e+00  1.000e+00  0.000e+00  0.000e+00  0.000e+00  0.000e+00
+   0.000e+00 -1.000e+00  1.000e+00]
+ [ 0.000e+00  0.000e+00 -1.000e+00  0.000e+00  0.000e+00  0.000e+00
+   9.000e-01  0.000e+00 -8.910e+01]
+ [ 0.000e+00  0.000e+00  0.000e+00 -1.000e+00  0.000e+00  0.000e+00
+   1.000e-01  1.000e+00 -1.090e+01]
+ [ 0.000e+00  0.000e+00  0.000e+00  0.000e+00 -1.000e+00  0.000e+00
+  -1.000e-01  0.000e+00 -8.910e+01]
+ [ 0.000e+00  0.000e+00  0.000e+00  0.000e+00  0.000e+00 -1.000e+00
+   1.000e-01  0.000e+00 -1.090e+01]
+ [ 0.000e+00  0.000e+00  0.000e+00  0.000e+00  0.000e+00  0.000e+00
+  -1.400e+00  0.000e+00 -3.564e+02]
+ [ 0.000e+00  0.000e+00  0.000e+00  0.000e+00  0.000e+00  0.000e+00
+   0.000e+00  0.000e+00  0.000e+00]]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/3w/vr4xmyqs451dg23xk88pqcg00000gq/T/ipykernel_47904/826583952.py:123: RuntimeWarning: invalid value encountered in double_scalars
+  x[row] = RHS/aug_matrix[row,row]
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>Why did this fail? Especially because, 1 mole of A converts to 1 mole of B, we know the overall mole balance is a valid equation.</p>
+<div class="admonition note">
+<p class="admonition-title"><b>Class Activity</b></p>
+<p>Discuss with a partner. Hint: How is the invertible matrix theorem helpful?</p>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># hint: find the rank of A_ex</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># hint: find the rank of A_new</span>
+<span class="c1"># Add your solution here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/04"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Gauss-Elimination.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">4.2. </span>Gaussian Elimination</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="LU-Decomposition.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4.4. </span>LU Decomposition</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">4.3.1. Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-algebra-invertible-matrix-theorem">4.3.2. Linear Algebra: Invertible Matrix Theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mass-balance-example-adapted-from-an-old-exam-problem">4.3.3. Mass Balance Example (Adapted from an Old Exam Problem)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-model-old-exam-question">4.3.4. Mathematical Model (Old Exam Question)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-form-old-exam-question">4.3.5. Matrix Form (Old Exam Question)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solve-with-gaussian-elimination">4.3.6. Solve with Gaussian Elimination</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flip-the-order-of-the-row">4.3.7. Flip the order of the row</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#replace-the-8th-equation-with-an-overall-mole-balance">4.3.8. Replace the 8th equation with an overall mole balance</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alexander Dowling, Ryan McClarren, Yamil Colón, et al.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
