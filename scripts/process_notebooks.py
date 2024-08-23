@@ -101,9 +101,16 @@ def process_notebook(folder_original, folder_new, filename, verbose=1):
     # replace links to media with urls
     # 2022-09-21: removed "!" from the beginning both of these expressions to also work on handouts (pdf) in media folder
     # 2022-09-21: the use case is the error propagation handout
+
+
+    replace_markdown('../../extras/', 'https://raw.githubusercontent.com/ndcbe/data-and-computing/main/extras/')
+    
+    # Is this even needed?
+    '''
+
     MEDIA_LINK = '\[(.*)\]\(\.\./\.\./media/(.*\..*)\)'
     IMAGE_LINK = r'[\1](https://ndcbe.github.io/data-and-computing/_images/\2)'
-    
+
     for cell in nb.cells:
         if cell.cell_type == "markdown":
         # if True: # Process media links in Python code too, this did not work for chapter6 notebook
@@ -119,6 +126,7 @@ def process_notebook(folder_original, folder_new, filename, verbose=1):
                     shutil.copy2(path_to_media_file, "./_build/html/_images")
             # replace media files with urls to _images
             cell.source = re.sub(MEDIA_LINK, IMAGE_LINK, cell.source)
+    '''
 
     ## Save new notebook
     output_notebook = os.path.join(folder_new, filename)
