@@ -142,7 +142,7 @@ If there is an extenuating circumstance, please email the instructor with CBE 60
 We will use Python 3 in this class. You have three options for using Python:
 1. (Recommended for Most People.) Use Google Colab, which allows you to complete all assignments from any internet-accessible computer.
 2. (Recommended for Advanced Users.) Install [anaconda3](https://www.anaconda.com/download/) on your computer. Anaconda is a free distribution of Python that includes standard packages for data analysis and scientific computing. You must install popular packages such as `numpy`, `scipy`, `pandas`, and `matplotlib`.
-3. Use anaconda3 installed on any ESC-maintained computer, e.g., B19 in Fitzpatrick Hall.
+3. Use anaconda3 installed on any ESC-maintained computer.
 
 ## Inclusiveness, Mental Health, and Disabilities
 
