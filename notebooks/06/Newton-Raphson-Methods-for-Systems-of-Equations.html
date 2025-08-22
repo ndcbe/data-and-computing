@@ -28,11 +28,11 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -350,7 +350,13 @@
 <li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet3_F23.html">Problem Set 3</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet4_F23.html">Problem Set 4</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet5_F23.html">Problem Set 5</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet6_F23.html">Problem Set 6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet6_F23.html">Problem Set 6: Nonlinear Regression for Adsorptive Nanoporous Membranes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2025/home.html">Fall 2023</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/schedule.html">Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/project.html">Semester Project</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../contrib/contribute.html">Contributed Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -628,7 +634,7 @@ document.write(`
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </pre></div>
 </div>
 </div>
@@ -637,7 +643,7 @@ document.write(`
 <section id="motivation-flash-problem-revisited">
 <h2><span class="section-number">6.5.2. </span>Motivation: Flash Problem Revisited<a class="headerlink" href="#motivation-flash-problem-revisited" title="Link to this heading">#</a></h2>
 <p>Recall the flash problem from <a class="reference internal" href="Modeling-Systems-of-Nonlinear-Equations.html"><span class="std std-doc">the Modeling Systems of Nonlinear Equations notebook</span></a>:</p>
-<p><img alt="flash" src="media/flash-system.png" /></p>
+<p><img alt="flash" src="../../_images/flash-system.png" /></p>
 <p><strong>Parameters (given)</strong>:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(F\)</span> feed inlet flowrate, mol/time or kg/time</p></li>
@@ -731,7 +737,7 @@ y_1 + y_2 - x_1 - x_2
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">my_f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39; Nonlinear system of equations in conancial form F(x) = 0</span>
 <span class="sd">    Copied from previous notebook.</span>
 <span class="sd">    </span>
@@ -809,7 +815,7 @@ x_2 &amp; y_2 &amp; 0 &amp; L &amp; 0 &amp; V \\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_J</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">my_J</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Jacobian matrix for two phase flash problem</span>
 <span class="sd">    </span>
 <span class="sd">    Arg:</span>
@@ -938,9 +944,9 @@ J(x0) =
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="k">def</span> <span class="nf">BackSub</span><span class="p">(</span><span class="n">aug_matrix</span><span class="p">,</span><span class="n">z_tol</span><span class="o">=</span><span class="mf">1E-8</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">BackSub</span><span class="p">(</span><span class="n">aug_matrix</span><span class="p">,</span><span class="n">z_tol</span><span class="o">=</span><span class="mf">1E-8</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;back substitute a N by N system after Gauss elimination</span>
 
 <span class="sd">    Args:</span>
@@ -985,7 +991,7 @@ J(x0) =
     <span class="c1">### END SOLUTION</span>
     <span class="k">return</span> <span class="n">x</span>
 
-<span class="k">def</span> <span class="nf">swap_rows</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">swap_rows</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Rows two rows in a matrix, switch row a with row b</span>
 <span class="sd">    </span>
 <span class="sd">    args: </span>
@@ -1013,7 +1019,7 @@ J(x0) =
     <span class="c1"># move row a values (stored in temp) into the location of row a</span>
     <span class="n">A</span><span class="p">[</span><span class="n">b</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     
-<span class="k">def</span> <span class="nf">GaussElimPivotSolve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">LOUD</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">GaussElimPivotSolve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">LOUD</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;create a Gaussian elimination with pivoting matrix for a system</span>
 
 <span class="sd">    Args:</span>
@@ -1134,7 +1140,7 @@ J(x0) =
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Jacobian</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">delta</span> <span class="o">=</span> <span class="mf">1.0e-7</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">Jacobian</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">delta</span> <span class="o">=</span> <span class="mf">1.0e-7</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Approximate Jacobian using forward finite difference</span>
 
 <span class="sd">    Args:</span>
@@ -1226,7 +1232,7 @@ J(x0) =
 <p>We can now stick together i) solving a linear system, and ii) finite difference into a multivariate Newton’s method solver.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">newton_system</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x0</span><span class="p">,</span><span class="n">exact_Jac</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mf">1E-7</span><span class="p">,</span><span class="n">epsilon</span><span class="o">=</span><span class="mf">1.0e-6</span><span class="p">,</span> <span class="n">LOUD</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">newton_system</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x0</span><span class="p">,</span><span class="n">exact_Jac</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mf">1E-7</span><span class="p">,</span><span class="n">epsilon</span><span class="o">=</span><span class="mf">1.0e-6</span><span class="p">,</span> <span class="n">LOUD</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the root of the function f via exact or inexact Newton-Raphson method</span>
 <span class="sd">    Args:</span>
 <span class="sd">        f: function to find root of</span>
@@ -1360,7 +1366,7 @@ It took 2 iterations
 <span class="g g-Whitespace">    </span><span class="mi">395</span> <span class="k">return</span> <span class="n">wrap</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">result_t</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
 
 <span class="nn">File ~\anaconda3\envs\jbook\lib\site-packages\numpy\linalg\linalg.py:88,</span> in <span class="ni">_raise_linalgerror_singular</span><span class="nt">(err, flag)</span>
-<span class="g g-Whitespace">     </span><span class="mi">87</span> <span class="k">def</span> <span class="nf">_raise_linalgerror_singular</span><span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">87</span> <span class="k">def</span><span class="w"> </span><span class="nf">_raise_linalgerror_singular</span><span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
 <span class="ne">---&gt; </span><span class="mi">88</span>     <span class="k">raise</span> <span class="n">LinAlgError</span><span class="p">(</span><span class="s2">&quot;Singular matrix&quot;</span><span class="p">)</span>
 
 <span class="ne">LinAlgError</span>: Singular matrix

@@ -28,11 +28,11 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -350,7 +350,13 @@
 <li class="toctree-l2"><a class="reference internal" href="ProblemSet3_F23.html">Problem Set 3</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ProblemSet4_F23.html">Problem Set 4</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ProblemSet5_F23.html">Problem Set 5</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ProblemSet6_F23.html">Problem Set 6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ProblemSet6_F23.html">Problem Set 6: Nonlinear Regression for Adsorptive Nanoporous Membranes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2025/home.html">Fall 2023</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/schedule.html">Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/project.html">Semester Project</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../contrib/contribute.html">Contributed Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -651,10 +657,10 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load required Python libraries.</span>
 <span class="c1"># Please do not remove or rename anything in this cell. The autograder</span>
 <span class="c1"># assumes numpy is loaded as &#39;np&#39;</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">scipy</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">linalg</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">linalg</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 </pre></div>
 </div>
 </div>
@@ -753,8 +759,8 @@ document.write(`
 <p><img alt="ac" src="https://raw.githubusercontent.com/ndcbe/data-and-computing/main/media/metal-slab-3-probes.jpg" /></p>
 <p><strong>Assumption 1</strong>: Probe 1 is placed at <span class="math notranslate nohighlight">\(x=0\)</span>, probe 2 is placed at <span class="math notranslate nohighlight">\(x=h\)</span>, and probe 3 is placed at <span class="math notranslate nohighlight">\(x=2h\)</span>.</p>
 <p><strong>Assumption 2</strong>: The temperature profile in the slab given by the equation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-96de67df-d1a8-456c-8a7f-cf0f0e692848">
-<span class="eqno">(1)<a class="headerlink" href="#equation-96de67df-d1a8-456c-8a7f-cf0f0e692848" title="Permalink to this equation">#</a></span>\[\begin{equation} 
+<div class="amsmath math notranslate nohighlight" id="equation-6dcea446-648d-48d1-9bbb-e1b548e26885">
+<span class="eqno">(1)<a class="headerlink" href="#equation-6dcea446-648d-48d1-9bbb-e1b548e26885" title="Permalink to this equation">#</a></span>\[\begin{equation} 
 T = T_0 - \alpha e^{\beta x}
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\alpha\)</span> = 2 °C  and <span class="math notranslate nohighlight">\(\beta\)</span> = 0.5 cm<span class="math notranslate nohighlight">\(^{-1}\)</span>. The probes have a random error (<span class="math notranslate nohighlight">\( \sigma_T \)</span>) of <span class="math notranslate nohighlight">\(\pm\)</span>0.1 °C.</p>
@@ -762,8 +768,8 @@ T = T_0 - \alpha e^{\beta x}
 <section id="a-taylor-series-for-three-probe-system">
 <h3>2a. Taylor Series for Three Probe System<a class="headerlink" href="#a-taylor-series-for-three-probe-system" title="Link to this heading">#</a></h3>
 <p>Recall, the temperature measured by the 2 probe system was written out as a Taylor series expansion:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cc87d379-ffbf-4bd5-9189-08f1ec0e857c">
-<span class="eqno">(2)<a class="headerlink" href="#equation-cc87d379-ffbf-4bd5-9189-08f1ec0e857c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-62d6962f-871c-4dcb-9a83-e493f19a04b2">
+<span class="eqno">(2)<a class="headerlink" href="#equation-62d6962f-871c-4dcb-9a83-e493f19a04b2" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left. T \right|_{x=1h} = \left. T \right|_{x=0} + (1h) \left. \frac{\partial T}{\partial x} \right|_{x=0} + \frac{1}{2!} (1h)^2 \left. \frac{\partial^2 T}{\partial x^2} \right|_{x = l}
 \end{equation}\]</div>
 <p>Using this as a reference, write the Taylor series expansion (up to the first four terms) for <span class="math notranslate nohighlight">\(T\)</span> at <span class="math notranslate nohighlight">\(x=h\)</span> and <span class="math notranslate nohighlight">\(x=2h\)</span>.</p>
@@ -773,8 +779,8 @@ T = T_0 - \alpha e^{\beta x}
 <h3>2b. Finite Difference Formula<a class="headerlink" href="#b-finite-difference-formula" title="Link to this heading">#</a></h3>
 <p>Using your answer from 2a, write the finite difference formula for the three probe system.</p>
 <p><em>Hint</em>: Eliminate the quadratic term from the Taylor series expansion to give an expression that looks like:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d5d9e33a-d466-438c-993a-eb72348c9a8c">
-<span class="eqno">(3)<a class="headerlink" href="#equation-d5d9e33a-d466-438c-993a-eb72348c9a8c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b973f724-1197-4dd9-9d98-05a7fbb33f93">
+<span class="eqno">(3)<a class="headerlink" href="#equation-b973f724-1197-4dd9-9d98-05a7fbb33f93" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left. \frac{\partial{T}}{\partial{x}} \right|_{x=0} = \frac{\boxed{?} \ T(0) + \boxed{?} \ T(h) + \boxed{?} \ T(2h)}{h} + \boxed{?} 
 \end{equation}\]</div>
 <p>where you determine the expressions to replace <span class="math notranslate nohighlight">\(\boxed{?}\)</span>.</p>
@@ -789,8 +795,8 @@ T = T_0 - \alpha e^{\beta x}
 <h3>2d. Random Error<a class="headerlink" href="#d-random-error" title="Link to this heading">#</a></h3>
 <p>Determine the random error for estimating <span class="math notranslate nohighlight">\(\frac{\partial{T}}{\partial{x}}\)</span> at <span class="math notranslate nohighlight">\(x = 0\)</span>.</p>
 <p><em>Hint</em>: Use the addition error propagation formula given by:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ce40e1fe-b475-4e6a-9137-b5219efae778">
-<span class="eqno">(4)<a class="headerlink" href="#equation-ce40e1fe-b475-4e6a-9137-b5219efae778" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7c81405a-bad4-49c1-8927-eae2094cc1d7">
+<span class="eqno">(4)<a class="headerlink" href="#equation-7c81405a-bad4-49c1-8927-eae2094cc1d7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sigma_z^2 = \left(c_1^2 + c_2^2 + c_3^2\right)\sigma_T^2
 \end{equation}\]</div>
 <p>Submit your answer and written work via <strong>Gradescope</strong>.</p>
@@ -807,9 +813,9 @@ T = T_0 - \alpha e^{\beta x}
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Load libraries</span>
-<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">cm</span>
-<span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sym</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mpl_toolkits.mplot3d</span><span class="w"> </span><span class="kn">import</span> <span class="n">Axes3D</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">cm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sym</span>
 <span class="c1"># from sympy import symbols, diff</span>
 </pre></div>
 </div>
@@ -845,7 +851,7 @@ v &amp;= x_2 - (a_1 + a_2 u^2 \sqrt{1 - u} - a_3 u) \\
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Define Python function</span>
-<span class="k">def</span> <span class="nf">my_f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">my_f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39; Evaluate function given above at point x</span>
 
 <span class="sd">    Inputs:</span>
@@ -881,7 +887,7 @@ v &amp;= x_2 - (a_1 + a_2 u^2 \sqrt{1 - u} - a_3 u) \\
     <span class="k">return</span> <span class="n">alpha</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">beta</span><span class="p">)</span>
 
 <span class="c1">## Calculate gradient with central finite difference</span>
-<span class="k">def</span> <span class="nf">my_grad_approx</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">eps1</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">my_grad_approx</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">eps1</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Calculate gradient of function my_f using central difference formula</span>
 <span class="sd">    </span>
@@ -925,7 +931,7 @@ v &amp;= x_2 - (a_1 + a_2 u^2 \sqrt{1 - u} - a_3 u) \\
     <span class="k">return</span> <span class="n">grad</span>
 
 <span class="c1">## Calculate gradient using central finite difference and my_hes_approx</span>
-<span class="k">def</span> <span class="nf">my_hes_approx</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">grad</span><span class="p">,</span><span class="n">eps2</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">my_hes_approx</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">grad</span><span class="p">,</span><span class="n">eps2</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Calculate gradient of function my_f using central difference formula and my_grad</span>
 <span class="sd">    </span>
@@ -995,7 +1001,7 @@ v &amp;= x_2 - (a_1 + a_2 u^2 \sqrt{1 - u} - a_3 u) \\
 <span class="sd">&#39;&#39;&#39;</span>
 
 <span class="c1"># Define function to use with symbolic computing framework</span>
-<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">):</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">])</span>
     <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
     <span class="n">b1</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
@@ -1007,7 +1013,7 @@ v &amp;= x_2 - (a_1 + a_2 u^2 \sqrt{1 - u} - a_3 u) \\
     <span class="k">return</span> <span class="n">alpha</span><span class="o">*</span><span class="n">sym</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="n">beta</span><span class="p">)</span>
 
 <span class="c1"># Define function to use later</span>
-<span class="k">def</span> <span class="nf">my_grad_exact</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">my_grad_exact</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x1 x2&#39;</span><span class="p">)</span>
     <span class="n">DerivativeOfF1</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">lambdify</span><span class="p">((</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">),</span><span class="n">sym</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">),</span><span class="n">x1</span><span class="p">));</span>
     <span class="n">DerivativeOfF2</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">lambdify</span><span class="p">((</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">),</span><span class="n">sym</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">),</span><span class="n">x2</span><span class="p">));</span>
@@ -1027,7 +1033,7 @@ v &amp;= x_2 - (a_1 + a_2 u^2 \sqrt{1 - u} - a_3 u) \\
 <p>The code below assembles the analytic Hessian using the symbolic computing framework in NumPy.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">):</span>
     
     <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">])</span>
     <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
@@ -1040,7 +1046,7 @@ v &amp;= x_2 - (a_1 + a_2 u^2 \sqrt{1 - u} - a_3 u) \\
     <span class="k">return</span> <span class="n">alpha</span><span class="o">*</span><span class="n">sym</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="n">beta</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">my_hes_exact</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">my_hes_exact</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x1 x2&#39;</span><span class="p">)</span>
     <span class="n">HessianOfF11</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">lambdify</span><span class="p">((</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">),</span><span class="n">sym</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">),</span><span class="n">x1</span><span class="p">,</span><span class="n">x1</span><span class="p">));</span>
     <span class="n">HessianOfF12</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">lambdify</span><span class="p">((</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">),</span><span class="n">sym</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">),</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">));</span>
@@ -1119,7 +1125,7 @@ v &amp;= x_2 - (a_1 + a_2 u^2 \sqrt{1 - u} - a_3 u) \\
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">taylor1</span><span class="p">(</span><span class="n">xc</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">grad</span><span class="p">,</span> <span class="n">dx</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">taylor1</span><span class="p">(</span><span class="n">xc</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">grad</span><span class="p">,</span> <span class="n">dx</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Constructs a Taylor series using first derivates and visualizes in 3D</span>
 <span class="sd">    </span>
@@ -1187,7 +1193,7 @@ v &amp;= x_2 - (a_1 + a_2 u^2 \sqrt{1 - u} - a_3 u) \\
 <h3>Create a function to plot the second order Taylor series using <span class="math notranslate nohighlight">\(\nabla f\)</span> and <span class="math notranslate nohighlight">\(\nabla^2 f\)</span><a class="headerlink" href="#create-a-function-to-plot-the-second-order-taylor-series-using-nabla-f-and-nabla-2-f" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">taylor2</span><span class="p">(</span><span class="n">xc</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">grad</span><span class="p">,</span> <span class="n">hes</span><span class="p">,</span> <span class="n">dx</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">taylor2</span><span class="p">(</span><span class="n">xc</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">grad</span><span class="p">,</span> <span class="n">hes</span><span class="p">,</span> <span class="n">dx</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Constructs a Taylor series using first derivates and visualizes in 3D</span>
 <span class="sd">    </span>

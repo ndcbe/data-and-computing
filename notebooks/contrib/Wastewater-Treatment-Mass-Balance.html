@@ -28,11 +28,11 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -350,7 +350,13 @@
 <li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet3_F23.html">Problem Set 3</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet4_F23.html">Problem Set 4</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet5_F23.html">Problem Set 5</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet6_F23.html">Problem Set 6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet6_F23.html">Problem Set 6: Nonlinear Regression for Adsorptive Nanoporous Membranes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2025/home.html">Fall 2023</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/schedule.html">Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/project.html">Semester Project</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="contribute.html">Contributed Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
@@ -645,8 +651,8 @@ document.write(`
 <h3>Importing the Libraries<a class="headerlink" href="#importing-the-libraries" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 </pre></div>
 </div>
 </div>
@@ -687,8 +693,8 @@ document.write(`
 </ul>
 <p>Matrix form:
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b1aa54d5-4bbe-4d61-af86-caea8fe3f6d2">
-<span class="eqno">(90)<a class="headerlink" href="#equation-b1aa54d5-4bbe-4d61-af86-caea8fe3f6d2" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-275004b2-a903-4cc3-abb2-f7f9c360eecd">
+<span class="eqno">(90)<a class="headerlink" href="#equation-275004b2-a903-4cc3-abb2-f7f9c360eecd" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \begin{bmatrix}
 1 &amp; 0 &amp; 0 &amp; 0\\
 0 &amp; 1 &amp; 0 &amp; 0\\
@@ -718,8 +724,8 @@ $$</p>
 </ul>
 <p>Matrix form:
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8d80fb3c-063b-4a6c-bc28-10b91620ce32">
-<span class="eqno">(91)<a class="headerlink" href="#equation-8d80fb3c-063b-4a6c-bc28-10b91620ce32" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-662d6adc-8da3-4408-91c1-9fd8dcb720e1">
+<span class="eqno">(91)<a class="headerlink" href="#equation-662d6adc-8da3-4408-91c1-9fd8dcb720e1" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \begin{bmatrix}
 m_5 &amp; 0 &amp; 0 &amp; 0\\
 -m_5 &amp; m_6 &amp; 0 &amp; 0\\
@@ -752,7 +758,7 @@ First, define the function <code class="docutils literal notranslate"><span clas
 <span class="n">x1_H2O</span> <span class="o">=</span> <span class="n">x2_H2O</span> <span class="o">=</span> <span class="n">x3_H2O</span> <span class="o">=</span> <span class="mf">0.9485</span>   <span class="c1"># kg H2O/kg</span>
 <span class="n">x4_Cr</span> <span class="o">=</span> <span class="mi">1</span>                           <span class="c1"># kg Cr/kg</span>
 
-<span class="k">def</span> <span class="nf">solve_flow</span><span class="p">(</span><span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">solve_flow</span><span class="p">(</span><span class="n">m1</span><span class="p">,</span> <span class="n">m2</span><span class="p">):</span>
 <span class="w">  </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">  Function to solve the linear model developed to solve for molar flow rates.</span>
 <span class="sd">  Arguments:</span>
@@ -804,7 +810,7 @@ Condition number = 3.7320508075688776
 Next, define the function <code class="docutils literal notranslate"><span class="pre">solve_comp</span></code> to solve for all unknown mass fractions given all the molar flow rates. Store your answer in the numpy array <code class="docutils literal notranslate"><span class="pre">x_mass</span></code> and print your solutions. <em>Hint: You can solve this in the same manner as in 3a.</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">solve_comp</span><span class="p">(</span><span class="n">m2</span><span class="p">,</span> <span class="n">m_flow</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">solve_comp</span><span class="p">(</span><span class="n">m2</span><span class="p">,</span> <span class="n">m_flow</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Function to solve the linear model developed to solve for mass fractions.</span>
 <span class="sd">    Arguments:</span>

@@ -28,11 +28,11 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -350,7 +350,13 @@
 <li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet3_F23.html">Problem Set 3</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet4_F23.html">Problem Set 4</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet5_F23.html">Problem Set 5</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet6_F23.html">Problem Set 6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet6_F23.html">Problem Set 6: Nonlinear Regression for Adsorptive Nanoporous Membranes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2025/home.html">Fall 2023</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/schedule.html">Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/project.html">Semester Project</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../contrib/contribute.html">Contributed Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -626,11 +632,11 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load libraries</span>
-<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">scipy.optimize</span> <span class="k">as</span> <span class="nn">optimize</span>
-<span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">stats</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">optimize</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 </pre></div>
 </div>
 </div>
@@ -640,33 +646,33 @@ document.write(`
 <h2><span class="section-number">15.4.2. </span>Background<a class="headerlink" href="#background" title="Link to this heading">#</a></h2>
 <p>For this question, originally developed by <a class="reference external" href="https://engineering.nd.edu/faculty/david-leighton/">Prof. David T. Leighton</a>, you will use nonlinear regression to analyze the kinetics of an indicator in a strong base.</p>
 <p>Phenolphthalein is a base indicator (it turns a pretty purple), but in the presence of a strong base, it will fade over time.  This is a reversible reaction: pseudo first order in the forward (fading) direction (it is actually second order, but there is so much <span class="math notranslate nohighlight">\([OH^-]\)</span> that it can be simplified as pseudo first order) and first order in the reverse direction. The rate expression is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-eaedc576-ed33-40d4-b014-60ffbc23b4e7">
-<span class="eqno">(15.1)<a class="headerlink" href="#equation-eaedc576-ed33-40d4-b014-60ffbc23b4e7" title="Permalink to this equation">#</a></span>\[\begin{equation} 
+<div class="amsmath math notranslate nohighlight" id="equation-9ddb2322-f810-45a1-93df-700a3e690ec1">
+<span class="eqno">(15.1)<a class="headerlink" href="#equation-9ddb2322-f810-45a1-93df-700a3e690ec1" title="Permalink to this equation">#</a></span>\[\begin{equation} 
 \frac{d[P]}{dt} = -k_{1}[P][OH^-]+k_{2}[POH] ~,
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(k_{1}' = k_{1}  \cdot [OH^-]\)</span> is the pseudo first order rate. <span class="math notranslate nohighlight">\([POH]\)</span> is only produced from this reaction, thus we have the mass balance:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2e324e79-2880-4182-9f81-151578f56362">
-<span class="eqno">(15.2)<a class="headerlink" href="#equation-2e324e79-2880-4182-9f81-151578f56362" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2b72054d-146f-4c30-9a49-66eaac1d804f">
+<span class="eqno">(15.2)<a class="headerlink" href="#equation-2b72054d-146f-4c30-9a49-66eaac1d804f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 [POH] = [POH]\Big|_{t=0}+([P]_{0}-[P]) ~.
 \end{equation}\]</div>
 <p>With the initial conditions:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c625a4b2-e6ac-4650-93ec-ff64f0d2728c">
-<span class="eqno">(15.3)<a class="headerlink" href="#equation-c625a4b2-e6ac-4650-93ec-ff64f0d2728c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-18fe94de-c127-4bf4-83b1-a7e4d9d0a53f">
+<span class="eqno">(15.3)<a class="headerlink" href="#equation-18fe94de-c127-4bf4-83b1-a7e4d9d0a53f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 [P]\Big|_{t=0}=[P]_{0}\qquad; \qquad [POH]\Big|_{t=0}=0 ~.
 \end{equation}\]</div>
 <p>We can solve these equations to get the solution:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e413f0fc-b2a6-473b-87eb-5658814aee11">
-<span class="eqno">(15.4)<a class="headerlink" href="#equation-e413f0fc-b2a6-473b-87eb-5658814aee11" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e18106b1-875e-4013-8141-368043f88093">
+<span class="eqno">(15.4)<a class="headerlink" href="#equation-e18106b1-875e-4013-8141-368043f88093" title="Permalink to this equation">#</a></span>\[\begin{equation}
 [P] = [P]_{0}\Big(\frac{k_{2}}{k_{1}'+k_{2}}+\frac{k_{1}'}{k_{1}'+k_{2}}e^{-(k_{1}'+k_{2})t}\Big) ~.
 \end{equation}\]</div>
 <p>We seek best fit values for parameters</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d948d1d2-6e5b-4485-b4ad-4ef35868d383">
-<span class="eqno">(15.5)<a class="headerlink" href="#equation-d948d1d2-6e5b-4485-b4ad-4ef35868d383" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7b1a1f78-2438-4708-813b-f550f5488c56">
+<span class="eqno">(15.5)<a class="headerlink" href="#equation-7b1a1f78-2438-4708-813b-f550f5488c56" title="Permalink to this equation">#</a></span>\[\begin{equation}
 k=\begin{bmatrix}k_{1}' &amp; k_{2} &amp; k_{eq}\end{bmatrix}^T~,
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(k_{eq} = k'_1 / k_2\)</span>. However, this problem is poorly scaled with respect to <span class="math notranslate nohighlight">\(k\)</span>. Instead, we will transform it to obtain:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-96c9b5cc-ac04-4632-8dd6-641a3f440b52">
-<span class="eqno">(15.6)<a class="headerlink" href="#equation-96c9b5cc-ac04-4632-8dd6-641a3f440b52" title="Permalink to this equation">#</a></span>\[\begin{equation} 
+<div class="amsmath math notranslate nohighlight" id="equation-81b9d963-99a0-4fc7-a039-82f53bf82d34">
+<span class="eqno">(15.6)<a class="headerlink" href="#equation-81b9d963-99a0-4fc7-a039-82f53bf82d34" title="Permalink to this equation">#</a></span>\[\begin{equation} 
 [P] = [P]_{eq}+([P]_{0}-[P]_{eq})e^{-\lambda t}
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\lambda=k_{1}'+k_{2}\)</span>. These two rate constants can be calculated from the ratio of the initial and equilibrium concentrations and the exponential decay rate.</p>
@@ -726,16 +732,16 @@ k=\begin{bmatrix}k_{1}' &amp; k_{2} &amp; k_{eq}\end{bmatrix}^T~,
 <section id="transform-model-parameters">
 <h2><span class="section-number">15.4.3. </span>Transform Model Parameters<a class="headerlink" href="#transform-model-parameters" title="Link to this heading">#</a></h2>
 <p>On paper, show the following transformations are valid:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7ed5a717-7ef0-49b9-a6d3-4c64d2eedf68">
-<span class="eqno">(15.7)<a class="headerlink" href="#equation-7ed5a717-7ef0-49b9-a6d3-4c64d2eedf68" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9f668a1f-b35f-4824-aa29-0bb1f5dd1875">
+<span class="eqno">(15.7)<a class="headerlink" href="#equation-9f668a1f-b35f-4824-aa29-0bb1f5dd1875" title="Permalink to this equation">#</a></span>\[\begin{equation}
 k_{2}=\frac{[P]_{eq} \times \lambda}{[P]_{0}}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-bde5197b-f5b1-4376-bfbe-dbf088b2aac8">
-<span class="eqno">(15.8)<a class="headerlink" href="#equation-bde5197b-f5b1-4376-bfbe-dbf088b2aac8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a7291075-223f-48b4-bb97-5c12e754a627">
+<span class="eqno">(15.8)<a class="headerlink" href="#equation-a7291075-223f-48b4-bb97-5c12e754a627" title="Permalink to this equation">#</a></span>\[\begin{equation}
 k_{1}'=\lambda-k_{2}=\lambda - \frac{[P]_{eq} \times \lambda}{[P]_{0}} = \lambda \left(1 - \frac{[P]_{eq}}{[P]_{0}} \right)
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-508abccf-7b12-4a59-985b-ee06cbc70ce5">
-<span class="eqno">(15.9)<a class="headerlink" href="#equation-508abccf-7b12-4a59-985b-ee06cbc70ce5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ed080497-ef12-4476-bac0-fa1302138547">
+<span class="eqno">(15.9)<a class="headerlink" href="#equation-ed080497-ef12-4476-bac0-fa1302138547" title="Permalink to this equation">#</a></span>\[\begin{equation}
 k_{eq}=\frac{k_{1}'}{k_{2}}=\frac{[P]_{0}}{[P]_{eq}} - 1
 \end{equation}\]</div>
 <p>Hint: Compare the two models when <span class="math notranslate nohighlight">\(t \rightarrow 0\)</span> and <span class="math notranslate nohighlight">\(t \rightarrow \infty\)</span>.</p>
@@ -772,7 +778,7 @@ k_{eq}=\frac{k_{1}'}{k_{2}}=\frac{[P]_{0}}{[P]_{eq}} - 1
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define functions to evaluation model and residuals.</span>
 
-<span class="k">def</span> <span class="nf">model_func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">model_func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Function to define model being fitted</span>
 <span class="sd">    Arguments:</span>
@@ -790,7 +796,7 @@ k_{eq}=\frac{k_{1}'}{k_{2}}=\frac{[P]_{0}}{[P]_{eq}} - 1
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">regression_func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">regression_func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Function to define regression function for least-squares fitting</span>
 <span class="sd">    Arguments:</span>
@@ -859,8 +865,8 @@ lambda = 0.020845030823048914 add units
 <section id="covariance-matrix">
 <h2><span class="section-number">15.4.6. </span>Covariance Matrix<a class="headerlink" href="#covariance-matrix" title="Link to this heading">#</a></h2>
 <p>We can quickly estimate the covariance matrix:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-079b4928-4d44-441a-9b47-2ccaa84fcd81">
-<span class="eqno">(15.10)<a class="headerlink" href="#equation-079b4928-4d44-441a-9b47-2ccaa84fcd81" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3281b821-a89e-4685-9624-e10e5f2de5ca">
+<span class="eqno">(15.10)<a class="headerlink" href="#equation-3281b821-a89e-4685-9624-e10e5f2de5ca" title="Permalink to this equation">#</a></span>\[\begin{equation}
 	\Sigma_x \approx {\hat{\sigma}}^2_r \left( J^T J \right)^{-1}
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\hat{\sigma}^2_r\)</span> is the variance of the residuals and <span class="math notranslate nohighlight">\(J\)</span> is the Jacobian of the residuals with respect to the model parameters <span class="math notranslate nohighlight">\(x\)</span>.</p>

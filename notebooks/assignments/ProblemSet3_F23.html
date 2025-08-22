@@ -28,11 +28,11 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -350,7 +350,13 @@
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Problem Set 3</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ProblemSet4_F23.html">Problem Set 4</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ProblemSet5_F23.html">Problem Set 5</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ProblemSet6_F23.html">Problem Set 6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ProblemSet6_F23.html">Problem Set 6: Nonlinear Regression for Adsorptive Nanoporous Membranes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2025/home.html">Fall 2023</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/schedule.html">Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/project.html">Semester Project</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../contrib/contribute.html">Contributed Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -640,19 +646,19 @@ document.write(`
 <h2>Import Libraries<a class="headerlink" href="#import-libraries" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">optimize</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">stats</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">optimize</span>
 
-<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 <span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
     <span class="o">!</span>wget<span class="w"> </span><span class="s2">&quot;https://raw.githubusercontent.com/IDAES/idaes-pse/main/scripts/colab_helper.py&quot;</span>
-    <span class="kn">import</span> <span class="nn">colab_helper</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">colab_helper</span>
     <span class="n">colab_helper</span><span class="o">.</span><span class="n">install_idaes</span><span class="p">()</span>
     <span class="n">colab_helper</span><span class="o">.</span><span class="n">install_ipopt</span><span class="p">()</span>
 
-<span class="kn">import</span> <span class="nn">pyomo.environ</span> <span class="k">as</span> <span class="nn">pyo</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyomo.environ</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pyo</span>
 </pre></div>
 </div>
 </div>
@@ -663,13 +669,13 @@ document.write(`
 <p>Over the past few years the lottery has reached amazing heights, in part due to the decrease in the individual odds of any set of numbers winning from 1/175M to 1/292.2M which begain in the fall of 2015. The all-time record payout drawing was on 1/13/16 and was worth <span class="math notranslate nohighlight">\(\$1.586B\)</span> which, after taxes, was roughly <span class="math notranslate nohighlight">\(\$590M\)</span>. About <span class="math notranslate nohighlight">\(\$1B\)</span> in tickets were sold at <span class="math notranslate nohighlight">\(\$2\)</span> per ticket.</p>
 <p>What is the probability there will be exactly <span class="math notranslate nohighlight">\(k\)</span> winners for the lottery? If we assume that everyone choose to use the “computer option” to pick their numbers randomly, these probabilities can be computed from the binomial distribution.</p>
 <p>Here is the probability mass function (PMF) of the binomial distribution:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-131274c0-9a66-4810-bfbd-307ee9230f80">
-<span class="eqno">(12)<a class="headerlink" href="#equation-131274c0-9a66-4810-bfbd-307ee9230f80" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a64a627d-02ac-441d-9b0d-d1de3a481cbd">
+<span class="eqno">(12)<a class="headerlink" href="#equation-a64a627d-02ac-441d-9b0d-d1de3a481cbd" title="Permalink to this equation">#</a></span>\[\begin{equation}
 x(p,k,N) = \binom{N}{k} p^{k}(1-p)^{N-k}
 \end{equation}\]</div>
 <p>It uses the binomial coefficient, which is another name for combinations:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cdc945f5-0a50-4bb8-b9c1-359c657d5422">
-<span class="eqno">(13)<a class="headerlink" href="#equation-cdc945f5-0a50-4bb8-b9c1-359c657d5422" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-aa023533-9de8-4015-8f24-65f871a60ecd">
+<span class="eqno">(13)<a class="headerlink" href="#equation-aa023533-9de8-4015-8f24-65f871a60ecd" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \binom{N}{k} = \frac{N!}{k!(N-k)!} \label{eq:2}
 \end{equation}\]</div>
 <p><span class="math notranslate nohighlight">\(N\)</span> is the number of events (e.g., coin flips), <span class="math notranslate nohighlight">\(k\)</span> is the number of “successes” (e.g., heads) and <span class="math notranslate nohighlight">\(p\)</span> is the probability of success for a single event (e.g., heads for a single coin flip).</p>
@@ -677,7 +683,7 @@ x(p,k,N) = \binom{N}{k} p^{k}(1-p)^{N-k}
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define a function to calculate n choose r</span>
-<span class="k">def</span> <span class="nf">nCr</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">r</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">nCr</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">r</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39; Calculates n choose r</span>
 <span class="sd">    Args:</span>
 <span class="sd">        n : total number of items to choose from</span>
@@ -716,8 +722,8 @@ x(p,k,N) = \binom{N}{k} p^{k}(1-p)^{N-k}
 <h3>1a. Naive Calculation<a class="headerlink" href="#a-naive-calculation" title="Link to this heading">#</a></h3>
 <p>Let’s start with something simple: calculate the probability of exactly 2 winners.</p>
 <p>We will first start with computing the binomial coefficient.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-353ce928-8b4d-4ae6-899d-b5785df64f6c">
-<span class="eqno">(14)<a class="headerlink" href="#equation-353ce928-8b4d-4ae6-899d-b5785df64f6c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ba87064e-05de-491f-8ebb-eae083752424">
+<span class="eqno">(14)<a class="headerlink" href="#equation-ba87064e-05de-491f-8ebb-eae083752424" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \binom{N}{k} = \frac{N!}{k!(N-k)!} 
 \end{equation}\]</div>
 <p>Let’s divide this calculation into three pieces.</p>
@@ -733,10 +739,10 @@ x(p,k,N) = \binom{N}{k} p^{k}(1-p)^{N-k}
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configure the timer. You do not need to worry about anything in this box.</span>
-<span class="kn">import</span> <span class="nn">signal</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">signal</span>
 <span class="n">MAX_TIME</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># seconds. You may change this to 1 so that restart-run alls go faster</span>
 
-<span class="k">def</span> <span class="nf">signal_handler</span><span class="p">(</span><span class="n">signum</span><span class="p">,</span> <span class="n">frame</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">signal_handler</span><span class="p">(</span><span class="n">signum</span><span class="p">,</span> <span class="n">frame</span><span class="p">):</span>
     <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Timed out! This cell took longer than &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">MAX_TIME</span><span class="p">)</span><span class="o">+</span> <span class="s2">&quot; seconds.&quot;</span><span class="p">)</span>
 
 <span class="n">signal</span><span class="o">.</span><span class="n">signal</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">SIGALRM</span><span class="p">,</span> <span class="n">signal_handler</span><span class="p">)</span>
@@ -762,7 +768,7 @@ n! \approx \sqrt{2 \pi n} \left( \frac{n}{e} \right)^n
 <p>Finish the function below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">stirling</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">stirling</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39; Approximate n!</span>
 <span class="sd">    </span>
 <span class="sd">    Args:</span>
@@ -875,13 +881,13 @@ n! \approx \sqrt{2 \pi n} \left( \frac{n}{e} \right)^n
 <h3>1b. First Approximation<a class="headerlink" href="#b-first-approximation" title="Link to this heading">#</a></h3>
 <p>Alright, we need to new strategy to approximate the binomial coefficient. We will now build an asymptotic approximations. You’ll see this idea again in Transport.</p>
 <p>A mathematician would write:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-60aba1fe-9fff-4309-bf7d-cda155d374b0">
-<span class="eqno">(15)<a class="headerlink" href="#equation-60aba1fe-9fff-4309-bf7d-cda155d374b0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-eff45e9e-18c1-4dcb-b596-9b14bc4363da">
+<span class="eqno">(15)<a class="headerlink" href="#equation-eff45e9e-18c1-4dcb-b596-9b14bc4363da" title="Permalink to this equation">#</a></span>\[\begin{equation}
 N &gt;&gt; k \implies N - k \approx N
 \end{equation}\]</div>
 <p>Let’s take a minute to unpack this notation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3987b064-32a2-4841-a2e9-0a22b5034aee">
-<span class="eqno">(16)<a class="headerlink" href="#equation-3987b064-32a2-4841-a2e9-0a22b5034aee" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-aaea2885-16f1-4093-aa29-0c35ec8619cd">
+<span class="eqno">(16)<a class="headerlink" href="#equation-aaea2885-16f1-4093-aa29-0c35ec8619cd" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \underbrace{N}_{\mathrm{lottery \ participants}} \qquad
 \underbrace{&gt;&gt;}_{\mathrm{much \ greater \ than}} \qquad
 \underbrace{k}_{\mathrm{lottery \ winners}} \qquad
@@ -891,8 +897,8 @@ N - k
 N
 \end{equation}\]</div>
 <p>This allows us to make the following simplifications:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-805cb5dd-0a0f-4e68-900d-fe7ef3df7784">
-<span class="eqno">(17)<a class="headerlink" href="#equation-805cb5dd-0a0f-4e68-900d-fe7ef3df7784" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-e9cd4a94-a377-436c-af40-19910c7a2334">
+<span class="eqno">(17)<a class="headerlink" href="#equation-e9cd4a94-a377-436c-af40-19910c7a2334" title="Permalink to this equation">#</a></span>\[\begin{align}
 (N-k)! &amp;= (N-k) \times (N-k-1) \times ... \times 1 \\
 &amp; = (N-k) \times (N-k-1)  \times ... \times 1 \times
 \left(\frac{N \times (N-1)  \times ... \times (N-k+1)}{N \times (N-1)  \times ... \times (N-k+1)} \right)\\
@@ -900,13 +906,13 @@ N
 {N \times (N-1) \times ... \times (N -k + 1)} 
 \end{align}\]</div>
 <p>Notice that the numerator above is the definition of <span class="math notranslate nohighlight">\(N!\)</span>. We can use <span class="math notranslate nohighlight">\(N-k \approx N\)</span> to simplify the demoniation to <span class="math notranslate nohighlight">\(N\)</span> multiplied by itself <span class="math notranslate nohighlight">\(k\)</span> times. Thus we have:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-68ac12d2-8c64-4639-bd62-71abbecfaec2">
-<span class="eqno">(18)<a class="headerlink" href="#equation-68ac12d2-8c64-4639-bd62-71abbecfaec2" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-2d0d8a0a-0147-45e6-b98a-8aa565d4253c">
+<span class="eqno">(18)<a class="headerlink" href="#equation-2d0d8a0a-0147-45e6-b98a-8aa565d4253c" title="Permalink to this equation">#</a></span>\[\begin{align}
 (N-k)! \approx \frac{N!}{N^{k}} 
 \end{align}\]</div>
 <p><strong>Instructions:</strong> Starting with the definition for the binomial coefficient, show that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-dc949aa0-c6ee-4110-9050-a41ab8206e09">
-<span class="eqno">(19)<a class="headerlink" href="#equation-dc949aa0-c6ee-4110-9050-a41ab8206e09" title="Permalink to this equation">#</a></span>\[\begin{equation} \label{finapp1}
+<div class="amsmath math notranslate nohighlight" id="equation-139444d1-0e5c-4833-b8ee-25778ba5d654">
+<span class="eqno">(19)<a class="headerlink" href="#equation-139444d1-0e5c-4833-b8ee-25778ba5d654" title="Permalink to this equation">#</a></span>\[\begin{equation} \label{finapp1}
 \binom{N}{k} \approx \frac{N^k}{k!}
 \end{equation}\]</div>
 <p>In other words, write out all of the mathematical steps to go from <span class="math notranslate nohighlight">\(\binom{N}{k}\)</span> to <span class="math notranslate nohighlight">\(\frac{N^k}{k!}\)</span>, similar to a proof. Submit your written work via <strong>Gradescope</strong>.</p>
@@ -914,18 +920,18 @@ N
 <section id="c-second-approximation">
 <h3>1c. Second Approximation<a class="headerlink" href="#c-second-approximation" title="Link to this heading">#</a></h3>
 <p>Evaluation of <span class="math notranslate nohighlight">\((1-p)^{N-k}\)</span> can also be problematic. Construct a mathematical argument (i.e., proof) to establish that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bb58dd66-9787-49ee-b45b-203c446a62ca">
-<span class="eqno">(20)<a class="headerlink" href="#equation-bb58dd66-9787-49ee-b45b-203c446a62ca" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2b21e54f-ae65-40b6-9055-15053389bfce">
+<span class="eqno">(20)<a class="headerlink" href="#equation-2b21e54f-ae65-40b6-9055-15053389bfce" title="Permalink to this equation">#</a></span>\[\begin{equation}
 (1-p)^{N-k} \approx e^{-Np}
 \end{equation}\]</div>
 <p><em>Hint</em>: Consider the following Taylor series expansion:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-48b0de5d-ee9a-4ca1-882b-2728dd86928f">
-<span class="eqno">(21)<a class="headerlink" href="#equation-48b0de5d-ee9a-4ca1-882b-2728dd86928f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1a8c1d70-d2cf-44be-b66b-8b0df01d522e">
+<span class="eqno">(21)<a class="headerlink" href="#equation-1a8c1d70-d2cf-44be-b66b-8b0df01d522e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \log_e (1 - p) = -p - \frac{p^2}{2} - \frac{p^3}{3} - ...
 \end{equation}\]</div>
 <p>and truncate as follows:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-67367718-18c4-4697-a2ca-6a9acea5f59f">
-<span class="eqno">(22)<a class="headerlink" href="#equation-67367718-18c4-4697-a2ca-6a9acea5f59f" title="Permalink to this equation">#</a></span>\[\begin{equation} \label{tsep}
+<div class="amsmath math notranslate nohighlight" id="equation-c692de9f-48d5-4cbe-b1fe-bb30a2adc218">
+<span class="eqno">(22)<a class="headerlink" href="#equation-c692de9f-48d5-4cbe-b1fe-bb30a2adc218" title="Permalink to this equation">#</a></span>\[\begin{equation} \label{tsep}
 \log_e (1 - p) \approx -p
 \end{equation}\]</div>
 <p>The higher order terms (<span class="math notranslate nohighlight">\(p^2\)</span>, <span class="math notranslate nohighlight">\(p^3\)</span>, …) are incredibly small and can be ignored with negligible consequence.</p>
@@ -1141,8 +1147,8 @@ N
 <section id="a-return-rate">
 <h3>3a. Return Rate<a class="headerlink" href="#a-return-rate" title="Link to this heading">#</a></h3>
 <p>You are given a Stock_Data.csv file. Using the stock data, calculate the 1-day return rate:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c1beaf57-ecc3-4010-a555-8fa1ce101fdd">
-<span class="eqno">(23)<a class="headerlink" href="#equation-c1beaf57-ecc3-4010-a555-8fa1ce101fdd" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5fa99b32-1a46-4577-82e7-2a6a62359881">
+<span class="eqno">(23)<a class="headerlink" href="#equation-5fa99b32-1a46-4577-82e7-2a6a62359881" title="Permalink to this equation">#</a></span>\[\begin{equation}
 	r_{t,i} = \frac{p_{t+1,i} - p_{t,i}}{p_{t,i}}
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(p_{t+1,i}\)</span> and <span class="math notranslate nohighlight">\(p_{t,i}\)</span> are the <em>Adjusted Closing Prices</em> at the end of days <span class="math notranslate nohighlight">\(t+1\)</span> and <span class="math notranslate nohighlight">\(t\)</span>, respectively, for stock <span class="math notranslate nohighlight">\(i\)</span>. These results are stored in matrix <code class="docutils literal notranslate"><span class="pre">R</span></code>. <em>Hint</em>: Use Pandas.</p>
@@ -1228,8 +1234,8 @@ N
 <section id="d-markowitz-mean-variance-portfolio-model">
 <h3>3d. Markowitz Mean/Variance Portfolio Model<a class="headerlink" href="#d-markowitz-mean-variance-portfolio-model" title="Link to this heading">#</a></h3>
 <p>The Markowitz mean/variance model, shown below, computes the optimal allocation of funds in a portfolio:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-164a1c6a-8808-4671-bec8-6142a0a39fc3">
-<span class="eqno">(24)<a class="headerlink" href="#equation-164a1c6a-8808-4671-bec8-6142a0a39fc3" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-03df4ddb-73e9-4714-b805-c63af2449e05">
+<span class="eqno">(24)<a class="headerlink" href="#equation-03df4ddb-73e9-4714-b805-c63af2449e05" title="Permalink to this equation">#</a></span>\[\begin{align}
 		\min_{{x} \geq {0}} \qquad &amp; z:= {x}^T \cdot {\Sigma_r} \cdot {x} \\
 		\text{s.t.} \qquad &amp; {\bar{r}}^T \cdot {x} \geq \rho \\
 		 &amp; \sum_{i =1}^N x_i = 1 
@@ -1249,7 +1255,7 @@ N
 <span class="n">Cov_list</span> <span class="o">=</span> <span class="n">Cov</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 
 <span class="c1"># Optimization Problem</span>
-<span class="k">def</span> <span class="nf">create_model</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span><span class="n">R_avg</span><span class="p">,</span><span class="n">Cov</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_model</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span><span class="n">R_avg</span><span class="p">,</span><span class="n">Cov</span><span class="p">):</span>
 <span class="w">    </span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    This function solves for the optimal allocation of funds in a portfolio </span>
@@ -1272,7 +1278,7 @@ N
         <span class="n">init_x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">m</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Var</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">idx</span><span class="p">,</span><span class="n">initialize</span><span class="o">=</span><span class="n">init_x</span><span class="p">,</span><span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="kc">None</span><span class="p">))</span>
     
-    <span class="k">def</span> <span class="nf">Obj_func</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">Obj_func</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
         <span class="n">b</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">mult_result</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">m</span><span class="o">.</span><span class="n">idx</span><span class="p">:</span>
@@ -1286,12 +1292,12 @@ N
         <span class="k">return</span> <span class="n">mult_result</span>
     <span class="n">m</span><span class="o">.</span><span class="n">OBJ</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Objective</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="n">Obj_func</span><span class="p">)</span>
     
-    <span class="k">def</span> <span class="nf">constraint1</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">constraint1</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
         <span class="c1"># Add your solution here</span>
 
     <span class="n">m</span><span class="o">.</span><span class="n">C1</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Constraint</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="n">constraint1</span><span class="p">)</span>
     
-    <span class="k">def</span> <span class="nf">constraint2</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">constraint2</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
         <span class="c1"># Add your solution here</span>
 
     <span class="n">m</span><span class="o">.</span><span class="n">C2</span> <span class="o">=</span> <span class="n">pyo</span><span class="o">.</span><span class="n">Constraint</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="n">constraint2</span><span class="p">)</span>

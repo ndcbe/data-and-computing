@@ -28,11 +28,11 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -350,7 +350,13 @@
 <li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet3_F23.html">Problem Set 3</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet4_F23.html">Problem Set 4</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet5_F23.html">Problem Set 5</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet6_F23.html">Problem Set 6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet6_F23.html">Problem Set 6: Nonlinear Regression for Adsorptive Nanoporous Membranes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2025/home.html">Fall 2023</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/schedule.html">Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/project.html">Semester Project</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../contrib/contribute.html">Contributed Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -622,8 +628,8 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load libraries</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">optimize</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">optimize</span>
 </pre></div>
 </div>
 </div>
@@ -650,12 +656,12 @@ document.write(`
 <h2><span class="section-number">6.6.3. </span>Polynomial Example Revisited Using Scipy<a class="headerlink" href="#polynomial-example-revisited-using-scipy" title="Link to this heading">#</a></h2>
 <div class="math notranslate nohighlight">
 \[ c(x) = 3 x^3 + 2 x^2 - 5 x - 20 \]</div>
-<p><img alt="Newton Polynomial" src="media/newton_polynomial.png" /></p>
+<p><img alt="Newton Polynomial" src="../../_images/newton_polynomial.png" /></p>
 <p>In the following cells we will demonstrate the use of Scipy to perform the Newton-Raphson method for the polynomial example from <a class="reference internal" href="Newton-Raphson-Method-in-One-Dimension.html"><span class="std std-doc">this previous notebook</span></a>.</p>
 <p>First, we need to run the code we already developed for the polynomial function and its derivative.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">nonlinear_function</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">nonlinear_function</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39; compute a nonlinear function for demonstration</span>
 <span class="sd">    Arguments:</span>
 <span class="sd">        x: scalar</span>
@@ -664,7 +670,7 @@ document.write(`
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="k">return</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">5</span><span class="o">*</span><span class="n">x</span><span class="o">-</span><span class="mi">20</span>
 
-<span class="k">def</span> <span class="nf">Dnonlinear_function</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">Dnonlinear_function</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39; compute 1st derivative of nonlinear function for demonstration</span>
 <span class="sd">    Arguments:</span>
 <span class="sd">        x: scalar</span>
@@ -702,7 +708,7 @@ document.write(`
 <section id="flash-problem-revisted-using-scipy">
 <h2><span class="section-number">6.6.4. </span>Flash Problem Revisted Using Scipy<a class="headerlink" href="#flash-problem-revisted-using-scipy" title="Link to this heading">#</a></h2>
 <p>Recall the flash problem from <a class="reference internal" href="Modeling-Systems-of-Nonlinear-Equations.html"><span class="std std-doc">this previous notebook</span></a> that we solved in the <a class="reference internal" href="Newton-Raphson-Methods-for-Systems-of-Equations.html"><span class="std std-doc">Newton’s Method for Systems of Equations notebook</span></a> using Newton’s Method.  In the following cells we will demonstrate the use of Scipy to perform the Newton-Raphson method.</p>
-<p><img alt="flash" src="media/flash-system.png" /></p>
+<p><img alt="flash" src="../../_images/flash-system.png" /></p>
 <p><strong>Parameters (given)</strong>:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(F\)</span> feed inlet flowrate, mol/time or kg/time</p></li>
@@ -738,7 +744,7 @@ y_1 + y_2 - x_1 - x_2
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># nonlinear canonical system of equations</span>
-<span class="k">def</span> <span class="nf">my_f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">my_f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39; Nonlinear system of equations in conancial form F(x) = 0</span>
 <span class="sd">    Copied from previous notebook.</span>
 <span class="sd">    </span>
@@ -875,7 +881,7 @@ V \cdot 10^{\bar{y}_2} + L \cdot 10^{\bar{x}_2} - F \cdot z_2 \\
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># nonlinear canonical system of equations</span>
-<span class="k">def</span> <span class="nf">my_f_transformed</span><span class="p">(</span><span class="n">x_bar</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">my_f_transformed</span><span class="p">(</span><span class="n">x_bar</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39; Nonlinear system of equations in conancial form F(x) = 0</span>
 <span class="sd">    Copied from previous notebook.</span>
 <span class="sd">    </span>

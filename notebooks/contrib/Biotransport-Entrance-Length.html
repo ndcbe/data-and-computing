@@ -28,11 +28,11 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -350,7 +350,13 @@
 <li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet3_F23.html">Problem Set 3</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet4_F23.html">Problem Set 4</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet5_F23.html">Problem Set 5</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet6_F23.html">Problem Set 6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet6_F23.html">Problem Set 6: Nonlinear Regression for Adsorptive Nanoporous Membranes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2025/home.html">Fall 2023</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/schedule.html">Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/project.html">Semester Project</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="contribute.html">Contributed Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
@@ -649,9 +655,9 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load libraries</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">integrate</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">integrate</span>
 </pre></div>
 </div>
 </div>
@@ -670,13 +676,13 @@ document.write(`
 <section id="estimating-entrance-length">
 <h2>1. Estimating Entrance Length<a class="headerlink" href="#estimating-entrance-length" title="Link to this heading">#</a></h2>
 <p>As a first approximation, assume that the boundary layer is described by the results for flow over a flat plate. That is, the development of the boundary layer <span class="math notranslate nohighlight">\(δ\)</span> is given by</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b5e3f5fa-4bdc-4dec-a20d-e005fc44b76c">
-<span class="eqno">(28)<a class="headerlink" href="#equation-b5e3f5fa-4bdc-4dec-a20d-e005fc44b76c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a32199b7-4d02-41f6-b9b6-3ed2d0c79fcf">
+<span class="eqno">(28)<a class="headerlink" href="#equation-a32199b7-4d02-41f6-b9b6-3ed2d0c79fcf" title="Permalink to this equation">#</a></span>\[\begin{equation}
 δ(x)=5.00xRe_x^{-1/2}
 \end{equation}\]</div>
 <p>where,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1331d6ee-008f-4241-9e3c-dcdc9760aff5">
-<span class="eqno">(29)<a class="headerlink" href="#equation-1331d6ee-008f-4241-9e3c-dcdc9760aff5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4c344afd-9131-4c64-a65c-afca6bde896b">
+<span class="eqno">(29)<a class="headerlink" href="#equation-4c344afd-9131-4c64-a65c-afca6bde896b" title="Permalink to this equation">#</a></span>\[\begin{equation}
  Re_x=ρUx/μ
 \end{equation}\]</div>
 <p>Develop an expression for the entrance length in terms of the channels Reynolds number, <span class="math notranslate nohighlight">\(Re_x=2ρUH/μ = 2ρQ/wμ\)</span>, where <span class="math notranslate nohighlight">\(〈v〉\)</span> is the average velocity in the channel.</p>
@@ -688,13 +694,13 @@ document.write(`
 <section id="a-normalize-the-expression-on-paper">
 <h3>2a. Normalize the expression on paper<a class="headerlink" href="#a-normalize-the-expression-on-paper" title="Link to this heading">#</a></h3>
 <p>The analysis in Question 1 assumes that <span class="math notranslate nohighlight">\(U(x) = U_o = 〈v〉\)</span>. But in fact, the free-stream velocity changes as the boundary layer grows in the channel. Therefore, assuming a linear velocity profile, <span class="math notranslate nohighlight">\(v_x=\frac{U_xy}{δ}\)</span>, in the boundary layer, and utilizing the von Karman momentum integral equation,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0c0e6010-157b-49dd-a9df-c69e30b903f6">
-<span class="eqno">(30)<a class="headerlink" href="#equation-0c0e6010-157b-49dd-a9df-c69e30b903f6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-27dbb649-3b96-4ed1-8790-dd2f8cdb7132">
+<span class="eqno">(30)<a class="headerlink" href="#equation-27dbb649-3b96-4ed1-8790-dd2f8cdb7132" title="Permalink to this equation">#</a></span>\[\begin{equation}
 τ_w=ρ \frac{∂}{∂x} ∫_0^∞v_x (U-v_x )dy+ρ\frac{∂U}{∂x} ∫_0^∞(U-v_x )dy
 \end{equation}\]</div>
 <p>and the fact that the flow rate <span class="math notranslate nohighlight">\(Q\)</span> is constant, the following expression for the growth of the boundary layer can be derived:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-716ad7f8-e8b6-414a-8979-e864b40eb4a4">
-<span class="eqno">(31)<a class="headerlink" href="#equation-716ad7f8-e8b6-414a-8979-e864b40eb4a4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c9917a15-3183-4b92-bb33-aae1d08e9fa1">
+<span class="eqno">(31)<a class="headerlink" href="#equation-c9917a15-3183-4b92-bb33-aae1d08e9fa1" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \frac{dδ_{(x)}}{dx}=\frac{6μW}{ρδ_{(x)}Q}\frac{[H-δ_{(x)}]^2}{H+4δ_{(x)}}
 \end{equation}\]</div>
 <p>Manipulate this expression so that it can be integrated numerically. Hint: normalize it and keep symmetry in mind.</p>
@@ -706,7 +712,7 @@ document.write(`
 <p>For more information on how to use <code class="docutils literal notranslate"><span class="pre">scipy.integrate</span></code>, click <a class="reference external" href="https://ndcbe.github.io/data-and-computing/notebooks/07/Systems-of-Differential-Equations-and-Scipy.html#scipy">here</a> to go to the relevant section of the class website.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">entrance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">Re</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">entrance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">Re</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Solving for the entrance length of the tube with non constant velocity</span>
 <span class="sd">    Args:</span>
 <span class="sd">        d: δ_star; Normalized δ; partial derivative wrt x or y (numpy array)</span>

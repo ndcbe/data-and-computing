@@ -28,11 +28,11 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -350,7 +350,13 @@
 <li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet3_F23.html">Problem Set 3</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet4_F23.html">Problem Set 4</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet5_F23.html">Problem Set 5</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet6_F23.html">Problem Set 6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet6_F23.html">Problem Set 6: Nonlinear Regression for Adsorptive Nanoporous Membranes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2025/home.html">Fall 2023</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/schedule.html">Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/project.html">Semester Project</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../contrib/contribute.html">Contributed Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -650,12 +656,12 @@ document.write(`
 <h2><span class="section-number">16.1.2. </span>Import Modules<a class="headerlink" href="#import-modules" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">scipy.optimize</span> <span class="k">as</span> <span class="nn">optimize</span>
-<span class="kn">import</span> <span class="nn">scipy.linalg</span> <span class="k">as</span> <span class="nn">linalg</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">cm</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">optimize</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.linalg</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">linalg</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">cm</span>
 </pre></div>
 </div>
 </div>
@@ -693,7 +699,7 @@ document.write(`
 \[C_C(t) = C_{A,0} - \frac{k_2}{k_2 - k_1} C_{A,0} \exp(-k_1 t) + \frac{k_1}{k_2 - k_1} \exp(-k_2 t) C_{A,0} = C_{A,0} - C_{A}(t) - C_{B}(t)\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">batch_rxn_model</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">CA0</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">batch_rxn_model</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">CA0</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    </span>
 <span class="sd">    Predict batch reaction performance</span>
@@ -707,7 +713,7 @@ document.write(`
 <span class="sd">        CA, CB, CC: Concentrations at times t, [mol/L], three scalars or numpy arrays</span>
 <span class="sd">    &#39;&#39;&#39;</span>
     
-    <span class="k">def</span> <span class="nf">kinetics</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">kinetics</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39; Computes kinetics from Arrhenius equation</span>
 <span class="sd">        Arguments:</span>
 <span class="sd">            A: pre-exponential factor, [1 / hr]</span>
@@ -991,7 +997,7 @@ document.write(`
 <p>Finally, let’s plot the data and the true model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_data_and_model</span><span class="p">(</span><span class="n">theta_</span><span class="p">,</span> <span class="n">data1</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_data_and_model</span><span class="p">(</span><span class="n">theta_</span><span class="p">,</span> <span class="n">data1</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Plot regression results</span>
 
@@ -1069,8 +1075,8 @@ document.write(`
 <section id="perform-nonlinear-regression">
 <h2><span class="section-number">16.1.5. </span>Perform Nonlinear Regression<a class="headerlink" href="#perform-nonlinear-regression" title="Link to this heading">#</a></h2>
 <p>We esimate the unknown model parameters from data by solving a (weighted) nonlinear regression problem.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-fbc843ee-0287-4663-9c75-98b12b0402e7">
-<span class="eqno">(16.1)<a class="headerlink" href="#equation-fbc843ee-0287-4663-9c75-98b12b0402e7" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-38dc1bfc-7f04-4636-a32d-b1ad244e5cdb">
+<span class="eqno">(16.1)<a class="headerlink" href="#equation-38dc1bfc-7f04-4636-a32d-b1ad244e5cdb" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat{\mathbf{\theta}} = \operatorname*{argmin}_{\underline{\theta}~\leq~\theta~\leq~\overline{\theta}} \sum_{d} \left(\mathbf{y}_d - f(\mathbf{\theta}, \mathbf{x}_d) \right)^\intercal \mathbf{W}_d \left(\mathbf{y}_d - f(\mathbf{\theta}, \mathbf{x}_d) \right)
 \end{equation}\]</div>
 <p>Here <span class="math notranslate nohighlight">\(y_d = C_{B,d}\)</span> is the measured data, <span class="math notranslate nohighlight">\(\mathbf{f}(\cdot,\cdot)\)</span> is the mathematical model, <span class="math notranslate nohighlight">\(\mathbf{\theta} = [A_1, A_2, E_1, E_2]\)</span> are the regressed parameters, <span class="math notranslate nohighlight">\(\mathbf{x} = [C_{A0}, T, t]\)</span> are the conditions for each data point (experiment) <span class="math notranslate nohighlight">\(d\)</span>, and <span class="math notranslate nohighlight">\(\mathbf{W} = \mathbf{I}\)</span> is the weight matrix. For the code below, we are minimizing the sum of squared error using only data for <span class="math notranslate nohighlight">\(C_B\)</span>.</p>
@@ -1079,7 +1085,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># nonlinear parameter estimation with full physics model</span>
-<span class="k">def</span> <span class="nf">regression_func</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">regression_func</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Function to define regression function for least-squares fitting</span>
 <span class="sd">    </span>
@@ -1307,7 +1313,7 @@ Standard Deviation of Measurement Error in Synthetic Data = 0.05 mol/L
 <p>The first step of calculating the Fisher Information Matrix (FIM) is computing the sensitivity of all model outputs to each model parameter.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calc_model_output</span><span class="p">(</span><span class="n">theta_</span><span class="p">,</span><span class="n">data</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">calc_model_output</span><span class="p">(</span><span class="n">theta_</span><span class="p">,</span><span class="n">data</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Assembles matrix out model outputs (columns) by experimental conditions (rows)</span>
 <span class="sd">    </span>
@@ -1364,7 +1370,7 @@ Standard Deviation of Measurement Error in Synthetic Data = 0.05 mol/L
 <p>We’ll use finite difference to estimate the sensitivities.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calc_model_sensitivity</span><span class="p">(</span><span class="n">theta_</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">calc_model_sensitivity</span><span class="p">(</span><span class="n">theta_</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Estimate the model sensitivity matrix using forward finite difference</span>
 <span class="sd">    </span>
@@ -1579,13 +1585,13 @@ FIM for CC measurements:
 <section id="eigendecomposition">
 <h3><span class="section-number">16.1.6.4. </span>Eigendecomposition<a class="headerlink" href="#eigendecomposition" title="Link to this heading">#</a></h3>
 <p>Next let us interpret the eigendecomposition of each FIM. For simplicity, we can going to drop the index <span class="math notranslate nohighlight">\(i\)</span>. Recall <span class="math notranslate nohighlight">\(\mathbf{M} \in \mathbb{R}^{m \times m}\)</span> because <span class="math notranslate nohighlight">\(\mathbf{\theta} \in \mathbb{R}^{m}\)</span>.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f7db0b46-8b94-4d98-885e-9b56b05f83b5">
-<span class="eqno">(16.2)<a class="headerlink" href="#equation-f7db0b46-8b94-4d98-885e-9b56b05f83b5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-13a9bdca-4e93-4790-981f-e382406b73b7">
+<span class="eqno">(16.2)<a class="headerlink" href="#equation-13a9bdca-4e93-4790-981f-e382406b73b7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbf{M} = \mathbf{W} \mathbf{\Lambda} \mathbf{W}^{-1}, \quad \mathbf{W} = \begin{bmatrix} \mathbf{v}_{1} \cdots \mathbf{v}_{p} \end{bmatrix}, \quad \mathbf{\Lambda} = \begin{bmatrix} \lambda_1 &amp; \cdots &amp; 0 \\ \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; \cdots &amp; \lambda_p \end{bmatrix} 
 \end{equation} \]</div>
 <p>Here <span class="math notranslate nohighlight">\(\mathbf{W} \in \mathbb{R}^{m \times m}\)</span> is the matrix of eigenvectors <span class="math notranslate nohighlight">\(\mathbf{v}_{1},\ldots,\mathbf{v}_{p}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{\Lambda} \in \mathbb{R}^{m \times m}\)</span> is a diagonal matrix containing the corresponding eigenvalues <span class="math notranslate nohighlight">\(\lambda_1,\ldots,\lambda_p\)</span>. Because <span class="math notranslate nohighlight">\(\mathbf{M}\)</span> is a <a class="reference external" href="https://en.wikipedia.org/wiki/Eigendecomposition_of_a_matrix#Real_symmetric_matrices">real symmetric matrix</a> by definition, <span class="math notranslate nohighlight">\(\mathbf{W}^{-1} = \mathbf{W}^\intercal\)</span>, and the eigendecomposition can be written as follows:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-695def8d-a0dc-4b2b-a704-3ae05cfb94c8">
-<span class="eqno">(16.3)<a class="headerlink" href="#equation-695def8d-a0dc-4b2b-a704-3ae05cfb94c8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-66dd5078-1b0c-4127-903a-ca96e0a76fb9">
+<span class="eqno">(16.3)<a class="headerlink" href="#equation-66dd5078-1b0c-4127-903a-ca96e0a76fb9" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbf{M} = \sum_{k=1}^{p} \lambda_{k} \mathbf{v}_{k} \mathbf{v}_{k}^\intercal
 \end{equation}\]</div>
 <p>Now back to the example!</p>
@@ -1730,13 +1736,13 @@ Eigendecomposition for measurement all
 <section id="covariance-matrix-of-regressed-paramters">
 <h3><span class="section-number">16.1.6.5. </span>Covariance Matrix of Regressed Paramters<a class="headerlink" href="#covariance-matrix-of-regressed-paramters" title="Link to this heading">#</a></h3>
 <p>The covariance matrix <span class="math notranslate nohighlight">\(\mathbf{\Sigma_{\theta}}\)</span> is approximately the inverse of the Fisher information matrix <span class="math notranslate nohighlight">\(\mathbf{M}\)</span> (again dropping the measurement index <span class="math notranslate nohighlight">\(i\)</span> for simplicity):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-dd3cc95a-2483-4f1a-8502-769921546997">
-<span class="eqno">(16.4)<a class="headerlink" href="#equation-dd3cc95a-2483-4f1a-8502-769921546997" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-59abc0e0-01c1-4ab1-a1e2-1b9160c35ee2">
+<span class="eqno">(16.4)<a class="headerlink" href="#equation-59abc0e0-01c1-4ab1-a1e2-1b9160c35ee2" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbf{\Sigma_{\theta}} \approx \mathbf{M}^{-1} = \sigma^{2} \left(\mathbf{Q}^{\intercal} \mathbf{Q} \right)^{-1}
 \end{equation}\]</div>
 <p>What is we are able to measure the concentration of all of the species simultaneously? Under the assumption that the measurement errors are uncorrelated across measurement types, we can compute a total FIM as the sum of the contributions.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-77e9b6f0-8bdc-4b0b-a82a-b9e2569da2c6">
-<span class="eqno">(16.5)<a class="headerlink" href="#equation-77e9b6f0-8bdc-4b0b-a82a-b9e2569da2c6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0cc71e65-bcd0-4d04-a69f-121e32a1401e">
+<span class="eqno">(16.5)<a class="headerlink" href="#equation-0cc71e65-bcd0-4d04-a69f-121e32a1401e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbf{\Sigma_{\theta}} \approx \left(\sum_{i\in \mathcal{I}} \mathbf{M}_{i}^{-1} \right)^{-1} = \left( \sum_{i\in \mathcal{I}} \sigma_{i}^{2} \left(\mathbf{Q}_{i}^{\intercal} \mathbf{Q}_{i} \right) \right)^{-1}, \quad \mathcal{I} = \{C_{A}, C_{B}, C_{C} \}
 \end{equation}\]</div>
 <p>Now let’s compute the covariance matrices (by measurement):</p>
@@ -1841,8 +1847,8 @@ Correlation matrix for measurement all
 <p>Moreover, we can visualize the covariance matrix <span class="math notranslate nohighlight">\(\mathbf{\Sigma_{\theta}}\)</span> as an elipitical confidence region were the axes of the ellipse at the eigenvectors <span class="math notranslate nohighlight">\(\mathbf{v}_{i}\)</span> and the length of the axes are the eigenvalues <span class="math notranslate nohighlight">\(\lambda_{k}^{-1}\)</span>. The following code was adapted from this <a class="reference external" href="https://matplotlib.org/stable/gallery/statistics/confidence_ellipse.html">excellent example</a> which is based on this <a class="reference external" href="https://carstenschelp.github.io/2018/09/14/Plot_Confidence_Ellipse_001.html">excellent explanation of the underlying linear algebra</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib.patches</span> <span class="kn">import</span> <span class="n">Ellipse</span>
-<span class="kn">import</span> <span class="nn">matplotlib.transforms</span> <span class="k">as</span> <span class="nn">transforms</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="kn">import</span> <span class="n">Ellipse</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.transforms</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">transforms</span>
 
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">n</span><span class="p">,</span><span class="mi">3</span><span class="o">*</span><span class="n">n</span><span class="p">))</span>
 
@@ -1965,7 +1971,7 @@ Correlation matrix for measurement all
 <h3><span class="section-number">16.1.6.9. </span>Optimality metrics<a class="headerlink" href="#optimality-metrics" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">optimality_metrics</span><span class="p">(</span><span class="n">FIM</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">optimality_metrics</span><span class="p">(</span><span class="n">FIM</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39; Compute optimality metrics using eigenvalues</span>
 <span class="sd">    </span>
 <span class="sd">    Arguments:</span>
@@ -2117,7 +2123,7 @@ E-optimality = 0.00012678747681498252
 <p>Let’s make a function that visualizes the MBDoE metrics as a heatmap.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_contour_plot</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">zlabelstring</span><span class="p">,</span> <span class="n">clabel_fmt</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%2.2f</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="n">temperatures</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">intial_concentrations</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">create_contour_plot</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">zlabelstring</span><span class="p">,</span> <span class="n">clabel_fmt</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%2.2f</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="n">temperatures</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">intial_concentrations</span><span class="p">):</span>
     <span class="c1"># draw figure, using (6,6) because the plot is small otherwise</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
     

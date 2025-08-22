@@ -28,11 +28,11 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -350,7 +350,13 @@
 <li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet3_F23.html">Problem Set 3</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet4_F23.html">Problem Set 4</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet5_F23.html">Problem Set 5</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet6_F23.html">Problem Set 6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet6_F23.html">Problem Set 6: Nonlinear Regression for Adsorptive Nanoporous Membranes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2025/home.html">Fall 2023</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/schedule.html">Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/project.html">Semester Project</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="contribute.html">Contributed Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
@@ -706,9 +712,9 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># libraries used</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 </pre></div>
 </div>
 </div>
@@ -740,18 +746,18 @@ document.write(`
 \]</div>
 <p>We also know that the density (ρ) of a mixutre can be calculated by summing the mole fraction (X) of each component by that component’s density.
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e95d7886-31ce-461b-b77f-7eada8da9ea6">
-<span class="eqno">(83)<a class="headerlink" href="#equation-e95d7886-31ce-461b-b77f-7eada8da9ea6" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-075e785d-e538-46f3-a648-38e42fbd0843">
+<span class="eqno">(83)<a class="headerlink" href="#equation-075e785d-e538-46f3-a648-38e42fbd0843" title="Permalink to this equation">#</a></span>\[\begin{align}
         ρ_t = ρ_a X_a + ρ_b X_b
     \end{align}\]</div>
 <div class="math notranslate nohighlight">
 \[From these information, we can write a system of linear equations to calculate the mole fraction of methanol and water in each stream:\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-69bd52a6-674c-4f6f-91c3-1fc4ee7aa263">
-<span class="eqno">(84)<a class="headerlink" href="#equation-69bd52a6-674c-4f6f-91c3-1fc4ee7aa263" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-f0b3c071-c412-4b31-b035-a1e8fa8b3b73">
+<span class="eqno">(84)<a class="headerlink" href="#equation-f0b3c071-c412-4b31-b035-a1e8fa8b3b73" title="Permalink to this equation">#</a></span>\[\begin{align}
         1 = X_W + X_M
     \end{align}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-ecf09691-e8e6-4909-bb92-e7c374089b45">
-<span class="eqno">(85)<a class="headerlink" href="#equation-ecf09691-e8e6-4909-bb92-e7c374089b45" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-9f3f3a6d-d654-4b7b-b81f-16873153056a">
+<span class="eqno">(85)<a class="headerlink" href="#equation-9f3f3a6d-d654-4b7b-b81f-16873153056a" title="Permalink to this equation">#</a></span>\[\begin{align}
         ρ_t = ρ_M X_M + ρ_W X_W
     \end{align}\]</div>
 <p>$$</p>
@@ -762,8 +768,8 @@ $$</p>
 <p>An easier method to calculate the mole fraciton of Methanol in each stream is to use linear algebra.</p>
 <p>Matrix form:
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b6b3b8b3-c5a9-4962-9303-2d21a7ba3e1f">
-<span class="eqno">(86)<a class="headerlink" href="#equation-b6b3b8b3-c5a9-4962-9303-2d21a7ba3e1f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f9fa4beb-5384-430b-a608-9c6534750abd">
+<span class="eqno">(86)<a class="headerlink" href="#equation-f9fa4beb-5384-430b-a608-9c6534750abd" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \begin{bmatrix}
 ρ_W &amp; ρ_m\\
 1 &amp; 1
@@ -781,7 +787,7 @@ $$</p>
 <p>Now let’s write a function that will solve the linear system of equations to obtain the mole fraction of Methanol in each stream <strong>using Python</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">conc_solver</span><span class="p">(</span><span class="n">SG</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">conc_solver</span><span class="p">(</span><span class="n">SG</span><span class="p">):</span>
     <span class="c1"># Add your solution hereS</span>
 </pre></div>
 </div>
@@ -1042,7 +1048,7 @@ beta_hat = [ 1.56311059e-02  6.16921967e+00 -2.72479383e+01  7.04901787e+01
 <p>Create a function that is able to generate the points requried to plot the stepping line.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">stair</span><span class="p">(</span><span class="n">slope</span><span class="p">,</span> <span class="n">y_intercept</span><span class="p">,</span> <span class="n">x_start</span><span class="p">,</span> <span class="n">y_start</span><span class="p">,</span> <span class="n">y_end</span><span class="p">,</span> <span class="n">Efficiency</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">stair</span><span class="p">(</span><span class="n">slope</span><span class="p">,</span> <span class="n">y_intercept</span><span class="p">,</span> <span class="n">x_start</span><span class="p">,</span> <span class="n">y_start</span><span class="p">,</span> <span class="n">y_end</span><span class="p">,</span> <span class="n">Efficiency</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="c1"># Add your solution hereS</span>
 </pre></div>
 </div>
@@ -1075,12 +1081,12 @@ beta_hat = [ 1.56311059e-02  6.16921967e+00 -2.72479383e+01  7.04901787e+01
 <section id="solve-for-the-slope-of-the-q-and-rectifying-line">
 <h3>4.1. Solve for the slope of the q and rectifying line<a class="headerlink" href="#solve-for-the-slope-of-the-q-and-rectifying-line" title="Link to this heading">#</a></h3>
 <p>Using the relationship below, calculate the slope of the q and rectifying line. q is the mole fraction of liquid in the feed stream and R is the reflux ratio. Store the slope of q-line as <strong>m_q</strong> and slope of rectifying operating line as <strong>m_rec</strong></p>
-<div class="amsmath math notranslate nohighlight" id="equation-6d84aa46-9251-4806-948e-7fc90d3a5a7b">
-<span class="eqno">(87)<a class="headerlink" href="#equation-6d84aa46-9251-4806-948e-7fc90d3a5a7b" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-054f2721-de65-4ce9-a9dc-fde285f78c65">
+<span class="eqno">(87)<a class="headerlink" href="#equation-054f2721-de65-4ce9-a9dc-fde285f78c65" title="Permalink to this equation">#</a></span>\[\begin{align}
         m_{feed} = \frac{q}{ q - 1 }
     \end{align}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-2c061166-a27a-457f-9e7d-4add4a4bf667">
-<span class="eqno">(88)<a class="headerlink" href="#equation-2c061166-a27a-457f-9e7d-4add4a4bf667" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-6d7feb8b-2c0f-4e9d-8aa1-069b3265b9bd">
+<span class="eqno">(88)<a class="headerlink" href="#equation-6d7feb8b-2c0f-4e9d-8aa1-069b3265b9bd" title="Permalink to this equation">#</a></span>\[\begin{align}
         m_{rec} = \frac{R}{ R + 1 }        
     \end{align}\]</div>
 <div class="cell docutils container">
@@ -1110,8 +1116,8 @@ beta_hat = [ 1.56311059e-02  6.16921967e+00 -2.72479383e+01  7.04901787e+01
 \]</div>
 <p>Matrix form:
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-28a3e0e5-f06e-401f-836e-6684a67110d8">
-<span class="eqno">(89)<a class="headerlink" href="#equation-28a3e0e5-f06e-401f-836e-6684a67110d8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8b1d9b55-d5d4-4d8e-ad25-8700bdfdac3e">
+<span class="eqno">(89)<a class="headerlink" href="#equation-8b1d9b55-d5d4-4d8e-ad25-8700bdfdac3e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \begin{bmatrix}
 m_{rec} &amp; -1\\
 m_{q} &amp; -1

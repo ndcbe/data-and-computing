@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Problem Set 6 &#8212; Data and Computing for Chemical Engineers</title>
+    <title>Problem Set 6: Nonlinear Regression for Adsorptive Nanoporous Membranes &#8212; Data and Computing for Chemical Engineers</title>
   
   
   
@@ -28,11 +28,11 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/assignments/ProblemSet6_F23';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Contributed Examples" href="../contrib/contribute.html" />
+    <link rel="next" title="Fall 2023" href="../../fall2025/home.html" />
     <link rel="prev" title="Problem Set 5" href="ProblemSet5_F23.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -350,7 +350,13 @@
 <li class="toctree-l2"><a class="reference internal" href="ProblemSet3_F23.html">Problem Set 3</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ProblemSet4_F23.html">Problem Set 4</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ProblemSet5_F23.html">Problem Set 5</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Problem Set 6</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Problem Set 6: Nonlinear Regression for Adsorptive Nanoporous Membranes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2025/home.html">Fall 2023</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/schedule.html">Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/project.html">Semester Project</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../contrib/contribute.html">Contributed Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -582,7 +588,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Problem Set 6</h1>
+    <h1>Problem Set 6: Nonlinear Regression for Adsorptive Nanoporous Membranes</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -592,7 +598,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation-nonlinear-regression-for-adsorptive-nanoporous-membranes">Motivation: Nonlinear Regression for Adsorptive Nanoporous Membranes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#background">Background</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting Started</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paramter-estimation-using-a-transformation-and-linear-regression">Paramter estimation using a transformation and linear regression</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformation">Transformation</a></li>
@@ -630,14 +636,11 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="problem-set-6">
-<h1>Problem Set 6<a class="headerlink" href="#problem-set-6" title="Link to this heading">#</a></h1>
-<p>CBE 60258, University of Notre Dame. © Prof. Alexander Dowling, 2023</p>
-<p>You may not distribution homework solutions without written permissions from Prof. Alexander Dowling.</p>
-<p><strong>Your Name and Email:</strong></p>
-<section id="motivation-nonlinear-regression-for-adsorptive-nanoporous-membranes">
-<h2>Motivation: Nonlinear Regression for Adsorptive Nanoporous Membranes<a class="headerlink" href="#motivation-nonlinear-regression-for-adsorptive-nanoporous-membranes" title="Link to this heading">#</a></h2>
+  <section class="tex2jax_ignore mathjax_ignore" id="problem-set-6-nonlinear-regression-for-adsorptive-nanoporous-membranes">
+<h1>Problem Set 6: Nonlinear Regression for Adsorptive Nanoporous Membranes<a class="headerlink" href="#problem-set-6-nonlinear-regression-for-adsorptive-nanoporous-membranes" title="Link to this heading">#</a></h1>
 <p><em>Contributors:</em> <a class="reference external" href="https://github.com/elvis1090">Elvis A. Eugene</a> and <a class="reference external" href="https://github.com/adowling2">Alexander W. Dowling</a></p>
+<section id="background">
+<h2>Background<a class="headerlink" href="#background" title="Link to this heading">#</a></h2>
 <p>Prof. William Phillip has been developing novel adsorptive nanoporous membranes to remove heavy metals from water. He has asked for your help analyzing data to design a water treatment system.</p>
 <p>Assume the amount of contaminant (e.g., Pb) that adsorbs to the water treatment membranes can be modeled with the <strong>Langmuir isotherm</strong>:</p>
 <div class="math notranslate nohighlight">
@@ -690,10 +693,10 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load libraries</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">optimize</span><span class="p">,</span> <span class="n">stats</span><span class="p">,</span> <span class="n">integrate</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">optimize</span><span class="p">,</span> <span class="n">stats</span><span class="p">,</span> <span class="n">integrate</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
 <span class="c1"># define the data</span>
 <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">]);</span>
@@ -770,7 +773,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define a function to plot linearized isotherm </span>
-<span class="k">def</span> <span class="nf">plot_linearized_isotherm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">slope</span><span class="p">,</span><span class="n">intercept</span><span class="p">,</span><span class="n">title</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_linearized_isotherm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">slope</span><span class="p">,</span><span class="n">intercept</span><span class="p">,</span><span class="n">title</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39; </span>
 <span class="sd">    function to plot the linearized model and residuals</span>
 <span class="sd">    Arguments:</span>
@@ -869,7 +872,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define a function to plot Langmuir isotherm</span>
-<span class="k">def</span> <span class="nf">plot_original_isotherm</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">Q</span><span class="p">,</span><span class="n">title</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_original_isotherm</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">Q</span><span class="p">,</span><span class="n">title</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39; </span>
 <span class="sd">    function to plot fitted Langmuir isotherm and data</span>
 <span class="sd">    Arguments:</span>
@@ -1232,7 +1235,7 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Code for parameter estimation using nonlinear regression</span>
 
 <span class="c1"># define function for the model being fitted</span>
-<span class="k">def</span> <span class="nf">model_func</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">model_func</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Function to define model being fitted</span>
 <span class="sd">    Arguments:</span>
@@ -1253,7 +1256,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define function to return residuals of model being fitted</span>
-<span class="k">def</span> <span class="nf">regression_func</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">regression_func</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Function to define regression function for least-squares fitting</span>
 <span class="sd">    Arguments:</span>
@@ -1465,11 +1468,11 @@ J_{i,j} = \frac{\partial(y_i - \hat{y}_i)}{\partial \theta_j}
       </div>
     </a>
     <a class="right-next"
-       href="../contrib/contribute.html"
+       href="../../fall2025/home.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Contributed Examples</p>
+        <p class="prev-next-title">Fall 2023</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1489,7 +1492,7 @@ J_{i,j} = \frac{\partial(y_i - \hat{y}_i)}{\partial \theta_j}
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation-nonlinear-regression-for-adsorptive-nanoporous-membranes">Motivation: Nonlinear Regression for Adsorptive Nanoporous Membranes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#background">Background</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting Started</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paramter-estimation-using-a-transformation-and-linear-regression">Paramter estimation using a transformation and linear regression</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformation">Transformation</a></li>

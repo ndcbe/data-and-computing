@@ -28,11 +28,11 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -350,7 +350,13 @@
 <li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet3_F23.html">Problem Set 3</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet4_F23.html">Problem Set 4</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet5_F23.html">Problem Set 5</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet6_F23.html">Problem Set 6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet6_F23.html">Problem Set 6: Nonlinear Regression for Adsorptive Nanoporous Membranes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2025/home.html">Fall 2023</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/schedule.html">Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/project.html">Semester Project</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../contrib/contribute.html">Contributed Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -621,11 +627,11 @@ document.write(`
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">optimize</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">stats</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">optimize</span>
 </pre></div>
 </div>
 </div>
@@ -638,8 +644,8 @@ document.write(`
 <section id="approach-1">
 <h2><span class="section-number">12.4.3. </span>Approach 1<a class="headerlink" href="#approach-1" title="Link to this heading">#</a></h2>
 <p>Calculate the acceleration for approach 1,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d4ad9695-a509-4f61-bba9-52c6657ad0c6">
-<span class="eqno">(12.1)<a class="headerlink" href="#equation-d4ad9695-a509-4f61-bba9-52c6657ad0c6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-921eff9d-7848-4919-85cf-aae713b82a17">
+<span class="eqno">(12.1)<a class="headerlink" href="#equation-921eff9d-7848-4919-85cf-aae713b82a17" title="Permalink to this equation">#</a></span>\[\begin{equation}
 	a_1 = \frac{v^2}{2l} ~,
 \end{equation}\]</div>
 <p>and estimate the associated uncertainty. Round your answer to 2 decimal points and store your answers in variables  <code class="docutils literal notranslate"><span class="pre">A1</span></code> for acceleration and <code class="docutils literal notranslate"><span class="pre">U_A1</span></code> for the uncertainty.</p>
@@ -661,8 +667,8 @@ document.write(`
 <section id="approach-2">
 <h2><span class="section-number">12.4.4. </span>Approach 2<a class="headerlink" href="#approach-2" title="Link to this heading">#</a></h2>
 <p>Calculate the acceleration for approach 2,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1611546d-90f3-4d4e-ac49-43972513420a">
-<span class="eqno">(12.2)<a class="headerlink" href="#equation-1611546d-90f3-4d4e-ac49-43972513420a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3022bf4e-224e-46f8-ba32-0c91558b425c">
+<span class="eqno">(12.2)<a class="headerlink" href="#equation-3022bf4e-224e-46f8-ba32-0c91558b425c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 	a_2 = \frac{2 l}{t^2}~,
 \end{equation}\]</div>
 <p>and estimate the associated uncertainty. Round your answer to the correct number of significant digits and store your answers in variables  <code class="docutils literal notranslate"><span class="pre">A2</span></code> for acceleration and <code class="docutils literal notranslate"><span class="pre">U_A2</span></code> for the uncertainty.</p>

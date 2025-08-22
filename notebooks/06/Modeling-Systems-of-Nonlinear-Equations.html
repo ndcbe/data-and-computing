@@ -28,11 +28,11 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -350,7 +350,13 @@
 <li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet3_F23.html">Problem Set 3</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet4_F23.html">Problem Set 4</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet5_F23.html">Problem Set 5</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet6_F23.html">Problem Set 6</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../assignments/ProblemSet6_F23.html">Problem Set 6: Nonlinear Regression for Adsorptive Nanoporous Membranes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fall2025/home.html">Fall 2023</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/syllabus.html">Syllabus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/schedule.html">Schedule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fall2025/project.html">Semester Project</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../contrib/contribute.html">Contributed Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -619,7 +625,7 @@ document.write(`
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </pre></div>
 </div>
 </div>
@@ -628,7 +634,7 @@ document.write(`
 <section id="flash-calculations-are-central-to-chemical-engineering">
 <h2><span class="section-number">6.1.2. </span>Flash Calculations are Central to Chemical Engineering<a class="headerlink" href="#flash-calculations-are-central-to-chemical-engineering" title="Link to this heading">#</a></h2>
 <p>Many chemical engineering problems require solving nonlinear systems of equations. For example, we will consider the general two-phase flash calculation without the dilute assumption. The flash calculation is the main building block for steady-state process analysis. It is arguably one of the <strong>most important calculations in chemical engineering</strong>.</p>
-<p><img alt="flash" src="media/flash-system.png" />
+<p><img alt="flash" src="../../_images/flash-system.png" />
 <em>Figure 1</em>: Generic well-mixed two-phase flash system. This simple example will resurface throughout your ChE education to illustrate new concepts.</p>
 <p><strong>Parameters (given)</strong>:</p>
 <ul class="simple">
@@ -685,7 +691,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># First, we need to define a function that returns the residual for our system of equations</span>
-<span class="k">def</span> <span class="nf">my_c2</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">my_c2</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39; Nonlinear system of equations in canonical form c(x) = 0</span>
 <span class="sd">    </span>
 <span class="sd">    Arg:</span>
@@ -757,7 +763,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># You do not need to understand how this code works right now.</span>
 <span class="c1"># We will discuss Newton&#39;s Method more in depth in the next notebook.</span>
-<span class="k">def</span> <span class="nf">Jacobian</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">delta</span> <span class="o">=</span> <span class="mf">1.0e-7</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">Jacobian</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">delta</span> <span class="o">=</span> <span class="mf">1.0e-7</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Approximate Jacobian using forward finite difference</span>
 
 <span class="sd">    Args:</span>
@@ -805,7 +811,7 @@ document.write(`
     <span class="c1"># end for loop</span>
     <span class="k">return</span> <span class="n">J</span>
 
-<span class="k">def</span> <span class="nf">newton_system</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x0</span><span class="p">,</span><span class="n">exact_Jac</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mf">1E-7</span><span class="p">,</span><span class="n">epsilon</span><span class="o">=</span><span class="mf">1.0e-6</span><span class="p">,</span> <span class="n">LOUD</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">newton_system</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x0</span><span class="p">,</span><span class="n">exact_Jac</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">delta</span><span class="o">=</span><span class="mf">1E-7</span><span class="p">,</span><span class="n">epsilon</span><span class="o">=</span><span class="mf">1.0e-6</span><span class="p">,</span> <span class="n">LOUD</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the root of the function f via exact or inexact Newton-Raphson method</span>
 <span class="sd">    Args:</span>
 <span class="sd">        f: function to find root of</span>
