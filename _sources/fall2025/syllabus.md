@@ -1,159 +1,105 @@
 # Syllabus
 
-CBE 60258, Advanced Data and Computing for Chemical Engineers, University of Notre Dame, Fall 2023
+*University of Notre Dame*
+**Department of Chemical & Biomolecular Engineering**
 
-## Course Description
+## **CBE-60258-01: Advanced Data and Computing for Chemical Engineers**  
+**Fall 2025**
 
-Computing and data science skills are extremely valuable for modern scientists and engineers. *Big data*, *machine learning*, *predictive modeling*, *decision science*, and similar terms are ever-present in job postings, scientific literature, and popular news. Yet, many (chemical) engineers lack a background in the fundamentals of computer programming, applied statistics, and mathematical modeling for problem-solving. Your excitement for data-centric topics may lead you to self-study with tutorials, extracurricular projects, and online classes to assemble a *toolbox of skills* or *cookbook of recipes* without understanding the fundamentals that govern and transcend methods. 
+**Meeting times & room:** Tue/Thu, 9:30–10:45 am, Nieuwland Hall 118  
+**Instructor:** Brett Savoie ([bsavoie2@nd.edu](mailto:bsavoie2@nd.edu))  
+**Teaching Assistant:** Bryan Piguave ([bpiguave@nd.edu](mailto:bpiguave@nd.edu))  
+**Office hours:** *TBD (Instructor & TA will announce)*
 
-In this class, you will learn the fundamentals of i) computing in Python, ii) linear algebra, iii) mathematical modeling, iv) numerical methods, and v) probability and statistics. In a single-semester, graduate-level class, it is impossible to master all of the skills in numerical and statistical techniques you will encounter during your career. Instead, the overall goal of this class is to provide a solid technical foundation and nurture conceptual understanding. Our goal is to equip you with essential skills for future graduate classes and enable you to learn advanced topics via technical electives, internships, online tutorials, books, and on-the-job training throughout your professional careers.
+---
 
-## Instructor and Teaching Assistants
+## Course description
+This graduate course develops practical computation for chemical engineers with a foundation in **linear algebra**, **probability & statistics**, and **modeling**, implemented in **Python**. We revisit core algorithms (LU/QR/SVD, least squares, GLMs, classification metrics, Newton/quasi-Newton, Gauss–Newton/Levenberg–Marquardt, constrained optimization) and apply them to realistic chemical‑engineering datasets and modeling tasks. Students will be required to complete assignments **in both Python and by hand**.
 
-| | Prof. Alexander (Alex) Dowling | Ms. Kyla Jones | Mr. Wilson Raney|
-| ----------- | ----------- | ----------- | ----------- |
-| | ![](https://dowlinglab.nd.edu/assets/320333/200x200/dowling_alex_sq.jpg) | ![](https://dowlinglab.nd.edu/assets/516355/200x200/resized_portrait_grey_background.png) | ![](https://dowlinglab.nd.edu/assets/527717/200x200/wilson_raney.jpg) |
-| Office Hours | 8:45-9:15am, Tuesdays \& Thursdays in 369 Nieuwland Hall | 2pm on Thursdays in 366 Nieuwland Hall | 10am on Fridays in 366 Nieuwland Hall |
+## Learning outcomes
+By the end of the term, students will be able to:
+- Model and solve linear systems robustly (pivoting, conditioning, reuse of factorizations).
+- Use QR/SVD to diagnose rank deficiency; compute least‑squares and minimum‑norm solutions.
+- Interpret covariance and PSD structure; apply statistical inference (MLE, MAP, Bayesian updating).
+- Design and assess models (GLMs, classification) with AIC/BIC, cross‑validation, ROC/PR.
+- Implement and compare nonlinear solvers (Newton, quasi‑Newton) and *nonlinear least squares*.
+- Model noisy systems with realistic uncertainty and data.
 
-## Discussion Board (Canvas) and Email Correspondance
-* Post your questions to the **discussion board in Canvas**
-* Instructor only: adowling@nd.edu, “CBE 60258” in the subject, private official matters (e.g., excused absence, testing accommodations)
+## Software & computing
+Python 3.x with NumPy, SciPy, Matplotlib, and Pandas; Jupyter recommended. **This is not an introductory Python class.** Class time will focus on theory, algorithms, and implementation. If you have no background in Python you can still succeed, but you will need to do extra work outside of class to complete many assignments.
 
-We encourage you to post all your questions, including your mathematical models, pseudocode, and code screenshots, to the public **discussion board in Canvas**. We are doing this for a few reasons:
-1. As professionals, you'll need to be comfortable asking questions in front of a team. We want to cultivate a positive and friendly learning environment where everyone can practice this skill during the semester.
-2. By answering questions in the public discussion board, everyone in the class can access the same information.
-3. We would like to cultivate a learning community with peer instruction; as professionals, you must answer your peers' questions.
-4. Many scientific software have online discussion boards to ask technical questions and report bugs. Using the **discussion board in Canvas** will help you develop comfort in asking questions this way.
+## Class Materials
+All class notes will be distributed via Canvas or the course web book: <https://ndcbe.github.io/data-and-computing>.
 
-## Semester Organization
+## Assessments & policies
+**Quiz policy.** Short quizzes at the start of most classes. **Five lowest quiz scores are dropped.**  
+**Homework.** Assigned regularly; **due weekly on Thursdays** (submission details announced in class/Canvas).  
+**Exams.** Two in‑class exams plus a comprehensive final.  
+**Late work.** Unless otherwise announced, late homework is not accepted; plan ahead.  
+**Collaboration.** Discuss approaches with peers, but submit your own code/solutions.  
+**Honor Code.** The University of Notre Dame Honor Code applies to all work.
 
-Weeks 1 - 4 focus on linear algebra and basic Python.
+### Grade breakdown (100%)
+| Component   | Weight |
+|-------------|--------|
+| Exam 1      | 20%    |
+| Exam 2      | 20%    |
+| Final exam  | 30%    |
+| Homework    | 25%    |
+| Quizzes     | 5%     |
 
-Weeks 4 - 8 focus on numerical methods (and more Python).
+### Exam dates
+- **Exam 1 (Linear Algebra):** Thu 2025‑10‑02 (in class)  
+- **Exam 2 (Statistics):** Thu 2025‑11‑06 (in class)  
+- **Final exam:** Monday December 15, 7:30 pm – 9:30 pm (Location TBD)
 
-Weeks 8 - 16 focus on probability, statistics, and data analysis (with more Python).
+---
 
-## Textbook and Reference Materials
+## Tentative schedule
 
-We will start by studying the first six chapters of the *No Bullshit Guide to Linear Algebra* by [Dr. Ivan Savov](https://minireference.com/). Why this textbook? My research group read it during Summer 2023 to learn linear algebra, and we loved it. The book concisely explains concepts and includes a lot of great visualizations to build intuition. This is my favorite linear algebra textbook. It is also very affordable. You should **buy a copy** (either PDF or paper) and write in it!
+| Date       | Topic | Brief Description |
+|------------|-------|-------------------|
+| 2025-08-26 | Python review. | Fundamental objects and syntax. Common packages. |
+| 2025-08-28 | Basic definitions in linear algebra: vectors, matrices, determinant, inner product | Core objects and operations in linear algebra; norms and orthogonality; geometric interpretations. Conditioning and why it matters in computation. |
+| 2025-09-02 | Gaussian elimination & solving linear systems | Elimination, back‑substitution, and residual/error checks. Numerical stability, pivoting idea (preview), and interpreting solutions in `Ax=b` problems. |
+| 2025-09-04 | LU (partial pivoting) & Cholesky | Stable factorization for general matrices (`PA = LU`) and efficient solvers for symmetric positive definite (SPD) matrices (`A = LL^T`). When to use each in practice; complexity and reuse of factors. |
+| 2025-09-09 | Matrix spaces: column space, null space | Rank, independence, and the structure of solution sets. Interpreting tall systems and consistency via column space; null space as degrees of freedom. |
+| 2025-09-11 | Row space, orthogonal complements, bases, Gram–Schmidt | Building orthonormal bases; geometry of orthogonal complements. Modified Gram–Schmidt and the link to QR for stable projections. |
+| 2025-09-16 | Rank‑deficient problems: tall `A` in `Ax=b` | Least‑squares formulation; normal equations vs. QR/SVD solutions. Regularization preview and diagnostics for ill‑conditioning. |
+| 2025-09-18 | Eigendecomposition, matrix functions & orthogonal matrices | Spectral theorem, diagonalization, and matrix functions (polynomials, exponential). Orthogonal matrices and stability. |
+| 2025-09-23 | SVD & underdetermined problems: wide `A` in `Ax=b` | SVD for pseudoinverses, minimal‑norm solutions, and low‑rank structure. Connections to compression, noise filtering, and constrained degrees of freedom. |
+| 2025-09-25 | Positive definite matrices & applications | Quadratic forms, PD/PSD tests, and energy/convexity interpretations. Why PD matters in optimization, estimation, and numerical stability. |
+| 2025-09-30 | Probability & random vectors: expectation, covariance, PSD | Random vectors, moments, and covariance as a PSD operator. Linear transformations, sample vs. population quantities, and empirical estimation. |
+| 2025-10-02 | **In‑class exam #1 (Linear Algebra)** | Cumulative in‑class assessment covering the linear algebra module. |
+| 2025-10-07 | Common distributions; linear transformations | Gaussian and exponential family basics; multivariate normal geometry. Transformations of random vectors and propagation of mean/covariance. |
+| 2025-10-09 | Change of variables, Jacobians, uncertainty propagation | Jacobians and volume scaling; practical change‑of‑variables examples. First‑order and Monte‑Carlo uncertainty propagation in models. |
+| 2025-10-14 | Maximum entropy & chemical‑engineering applications | Entropy as uncertainty; deriving distributions from constraints (maxent → exponential family). Links to statistical thermodynamics and prior modeling. |
+| 2025-10-16 | Estimation theory: moments, MLE, Fisher information | Principles of parameter estimation; identifiability and variance bounds (Cramér–Rao). Using information matrices to reason about parameter precision. |
+| 2025-10-21 | No class | Fall Break. |
+| 2025-10-23 | No class | Fall Break. |
+| 2025-10-28 | Hypothesis testing: LRTs, confidence ellipsoids | Likelihood‑based tests; interpreting p‑values and power. Multivariate confidence regions (ellipsoids) and Hotelling’s T² perspective. |
+| 2025-10-30 | Bayesian inference: conjugacy, Maximum a Posteriori (MAP), updating | Prior → posterior mechanics for common models; MAP as regularization. Predictive distributions and sequential updating. |
+| 2025-11-04 | Statistics capstone (incl. experimental design) | End‑to‑end inference on a chemical‑engineering case: objectives, efficient designs (D/A/E‑optimality), data collection/analysis, and communicating uncertainty. |
+| 2025-11-06 | **In‑class exam #2 (Statistics)** | Cumulative in‑class assessment covering the statistics module. |
+| 2025-11-11 | Generalized linear models (GLMs) & model assessment; Akaike and Bayesian Information Criteria (AIC/BIC) & CV | Link functions, deviance, and when GLMs are appropriate. Model comparison and validation under realistic data conditions. Heteroscedastic/Homoscedastic. |
+| 2025-11-13 | Classification overview; Receiver Operator Characteristic (ROC) & precision–recall | Linear Discriminant Analysis (LDA), logistic classifier, SVM concepts. Evaluation under imbalance with ROC/PR and calibration. |
+| 2025-11-18 | Newton–Raphson & quasi‑Newton for nonlinear equations | Root‑finding for vector systems; Jacobians/Hessians, line search vs. trust‑region ideas. Convergence behavior and practical safeguards. |
+| 2025-11-20 | Nonlinear least squares: Gauss–Newton & Levenberg–Marquardt | Parameter estimation for nonlinear models; weighting, scaling, and robust losses. Implementation details that affect convergence. |
+| 2025-11-25 | Constrained optimization: Lagrange multipliers & KKT | Equality/inequality constraints; optimality conditions and sensitivities. Brief look at QPs and engineering design constraints. (May opt for global optimization: genetic algorithms/particle swarm optimization instead). |
+| 2025-11-27 | Thanksgiving Break — no class | No meeting (university holiday). |
+| 2025-12-02 | MAP estimation & Bayesian nonlinear models (MCMC overview) | Priors as regularization in nonlinear settings; Laplace approximation intuition. Overview of MCMC (Metropolis–Hastings/HMC). |
+| 2025-12-04 | Gaussian process regression & surrogate modeling | Nonparametric regression with kernels; posterior mean/variance and hyperparameter learning. Emulation of expensive ODE/PDE models for design and UQ. |
+| 2025-12-09 | Capstone integration: parameter estimation + UQ | Full pipeline: model specification → estimation (deterministic/Bayesian) → validation → uncertainty propagation/sensitivity → decision support. Emphasis on reproducible computation. |
 
-Most of the class sessions for numerical methods on map reference chapters from *Computational Nuclear Engineering and Radiological Science Using Python* by [Prof. Ryan McClarren in Aerospace and Mechanical Engineering](https://engineering.nd.edu/faculty/ryan-mcclarren/) (2019). As we will see throughout the class, many mathematical and computational techniques are widely applicable across engineering disciplines. This textbook is an optional reference. There are two copies on reserve in the library. We strongly recommend looking at the library copies before purchasing.
+---
 
-Another 40% of the class sessions draw from *Statistics for Engineers and Scientists* by Prof. William Navidi (2014). This is one of our favorite introductory statistics textbooks because it introduces every concept with science and engineering examples. These worked-out examples show you how to apply data analysis concepts to problems you will use as practicing engineers. The book is both mathematically rigorous and accessible. We **strongly recommend you purchase a copy to keep**. We are using the 4th edition this semester so you can buy used books.
+## Accessibility & well‑being
+Students needing accommodations are encouraged to contact the instructor early. If challenges affect your well‑being or coursework, please reach out; we will help connect you with campus resources.
 
-## Classroom Meetings
+## AI Use Policy
+**For home assignments:** By default you *can* use AI assistance on any home assignment/project. There may be assignments where the instructor will forbid AI use.  
 
-Classroom meetings involve i) traditional chalkboard instruction, ii) computer demonstrations, and iii) in-class activities. Please bring an internet-connected laptop computer. Please prepare for class by reviewing the materials list for each meeting in the [](./schedule.md).
+**In class quizzes and exams:** By default you *cannot* use AI assistance for in‑person assignments and exams. There may be times that AI use is explicitly allowed.
 
-## Assessments and Final Grades
-* Homework: 5\%
-* Python Mini-Project: 5\%
-* Quizzes (3 planned): 60\%
-* Semester Project: 30\%
-
-Senior graduate students may audit this course with the permission of the instructor. The expectations for auditing are:
-1. Attend and participate in at least 75% of the class sessions. 
-2. Attempt each homework assignment (2 hours) and the Python mini-project (4 hours). Please turn in your work via Gradescope with the rest of the class. 
-
-### Homework
-
-Homework assignments are a collection of 2 to 5 problems designed to reinforce specific concepts and skills from class. Most problems include:
-* Pencil and paper analysis (i.e., derive a model, determine degrees of freedom, write pseudocode)
-* Computer programming aspects, and 
-Interpretation of calculated results. 
-
-These problems, especially the analysis and interpretation parts, are good exam practice. Many students receive nearly full credit on the problem sets.
-
-### Collaboration Policy and Honor Code
-
-You are permitted (and encouraged) to discuss solution approaches to the weekly homework assignments with classmates. However, there must be no wholesale copying or paraphrasing of code, solutions, or written discussions. You are strongly encouraged to ask questions, including posting pseudocode or code screenshots, on the discussion board on Canvas. Likewise, you may use any material posted by the instructors or your classmates in the discussion board on Canvas that you understand. Copying code from classmates or the discussion board, you do not understand is prohibited. This policy facilitates collaboration while ensuring everyone in the class has the same access. Students MAY NOT use old files and solutions for the homework assignments: you must do the problems for homework to be able to do them on the exams too.
-
-*As a guiding principle, if you are not comfortable explaining your solution strategy to an instructor or TA, you should not turn in the work as your own.*
-
-Your work may be electronically tested for plagiarized content. For example, Gradescope can detect highly similar code (i.e., plagiarism for computer code) while distinguishing from provided templates. Plagiarism is a serious offense and will have severe consequences per University, College, and Department procedures.
-
-To remove ambiguity, the following is a non-exhaustive list of collaborative scenarios that are **PERMITTED** under the above policies:
-* You work with a group of classmates to write pseudocode together. Each group member participates at least once (e.g., asks a question). One person in the group takes a picture and emails it to everyone. Then each person rewrites the pseudocode on their own for the homework submission. You rewrite the comments in your own words (to be more evident). You also decide to replace a `while` loop with a `for` loop. The collaboration policy permits this because the work is your own. You made a clear intellectual contribution.
-* You are working on a homework assignment and get stuck on an error message. After consulting the class notes and Google for 5 minutes, you post a screenshot of your code and the error message to Canvas. A classmate posts some alternate code that fixes your error. You replied by thanking the student and asking for clarification on why the alternate code works and your approach was wrong. Your post leads to a good discussion, with the instructor explaining a concept and clearing up your confusion. The solution you turn in includes the changes suggested by your classmates. The collaboration policy permits this because you are comfortable explaining your solution strategy, including why the proposed modification was necessary to fix the error.
-* You are working on the homework assignment closer to the deadline than you would like to admit. You get stuck on an error message but quickly find a discussion thread on Canvas. You read through the suggestions from your classmates and the instructor. The post answers your significant questions, and the proposed fix works! You adopt it into your code and add a comment acknowledging your classmates on Canvas for help. You still have a minor question about if there is an alternate way to solve the problem, so you post on Canvas and continue with the assignment. The collaboration policy permits this because you made a good faith effort to understand the proposed solution. Even though you have an outstanding minor doubt, you sought help from the TAs, instructor, and classmates. You also acknowledged the source (Canvas discussion) for the code you used and thus are not presenting it as your own.  
-
-The following is a non-exhaustive list of collaborative scenarios that are **PROHIBITED** under the above policies:
-* You are working on your homework alone in the library, but two tables away, there is a group of your classmates. They work through the pseudocode on a whiteboard and do not erase it after leaving. You take a picture “just in case”. You later get stuck and frustrated. You end up copying line by line most of their pseudocode and turn this in. You have some doubts about the approach but ran out of time. The collaboration policy prohibits this because the work is not your own. Moreover, you would be unable to explain your solution approach to the TA or instructor confidently.
-* It is late at night, you are frustrated with syntax errors, and you cannot get one of the homework problems to work. You find a screenshot on Canvas of code from a classmate and an associated discussion. Desperate to finish the assignment, you adapt your code to follow the screenshot. To keep it simple, you copy line-by-line, do not change variable names, and copy some comments but skip others. You end up submitting code that looks almost identical to your classmate. You remember the instructor keeps emphasizing the comments should be in our own words to show that you understand the solution. You decide to go to bed and add those comments in the morning. You oversleep and submit the code without any comments or acknowledgments from your classmates. The collaboration policy prohibits this because you submitted work that is not your own. You should have acknowledged sources, and you can not confidently explain the solution procedure to the instructor or TA.
-* You have no prior programming experience and feel like you are falling behind. You suspect the homework takes you three times as long as your classmates. You conclude the only way you can keep up is to do the homework with a partner. They do half the assignment, and you do the other half. You then exchange solutions. The person who completes each problem then explains the answer to the partner. Each person changes the comments, adds some extra white spaces, and changes a few variable names to ensure the solutions are not identical. The collaboration policy prohibits this because each person did not make an honest effort to solve every problem on their own. Although each person either explained or had the solutions presented to them, they likely need help to defend all of their solutions to the TA or instructor. 
-
-### Quizzes
-
-We will have three 45-minute quizzes during class as indicated on the [semester schedule](./schedule.md). The quizzes will be closed book with no access to a computer. Students will be permitted to bring  letter size paper filled with handwritten notes as follows:
-* Quiz 1, 1 sheet of notes
-* Quiz 2, 2 sheets of notes
-* Quiz 3, 3 sheets of notes
-
-### Semester Project
-
-See [](./project.md)
-
-### Grading Standards
-
-All computer code must be commented. No exceptions.
-
-All graphs must have labeled axes with UNITS. Likewise, all final answers need UNITS and should be rounded to the appropriate number of significant digits.
-
-Be sure to answer the questions asked in the assignment. When discussing results, only report the appropriate number of significant figures.
-
-**Homework:** Homework assignments will be spot checked for completeness using the following grading scale:
-* Full credit: At least 90\% complete. Work must be well-organized and conform to all coding and plotting standards.
-* Most credit: At least 75\% complete. Work may not conform with all coding and plotting standards.
-* Some credit: Credit given depending on completeness. Expect to get this grade if your work is sloppy or difficult to follow.
-
-**Mini-Project:** This will be graded in-depth (unlike the homework). Be sure to triple check the Python code and plotting formatting standards. We expect [publication-quality plots](../notebooks/01/Publication-Quality-Figures.ipynb) for this project.
-
-**Formatting**: Your submission should include neatly written code with extensive comments, well-labeled graphs, and answers to any discussion questions. Your project submissions should be professionally formatted, like a laboratory report. Your response to discussion questions and code comments MUST be written in your own words.
-
-**Pseudocode:** Most assignments require you to write brief pseudocode. We will learn how to do this during the first week of the semester. Your pseudocode needs to reflect all your solution's main steps and logic. You do not need to rewrite your pseudocode if your final solution has different main steps or logic. Instead, you should update your pseudocode with a few notes showing the change. Rewriting the pseudocode is helpful if you find a logical mistake but get stuck making modifications. Prof. Dowling has been programming in Python for 20 years. He writes pseudocode, and so do other professional software developers.
-
-Please see the “Pseudocode Guidelines” and “Python and Commenting Guidelines” sections in [](../notebooks/01/Pseudocode.ipynb) for additional details.
-
-### Assignment Submission
-
-Submit all assignments electronically via Gradescope unless otherwise noted. For Jupyter Notebooks, you must upload the `.ipynb` file to Gradescope. Likewise, handwritten analysis should be scanned to a PDF and submitted via Gradescope.
-
-### Regrade Requests
-
-We will undoubtedly make some mistakes during grading. Regrades to correct these mistakes will be considered for **up to ONE week after assignment grades are posted online**. 
-
-Submit your regrade requests in writing via Gradescope. Please include a 1-3 sentence explanation of the grading mistake. We will not consider adjustments to the grading point distribution.
-
-All regrade requests will result in a reevaluation of the entire assignment. For rubric selection mistakes in Gradescope, we will recheck all rubric selections. For more substantial regrade requests, the grader may reexamine the whole problem (including all subparts) and possibly the entire assignment.
-
-### Late Policy
-
-The following policy will apply to all assignments (homework, projects, etc.):
-* Up to 1 hour late: grace period with no penalty
-* 1 hour to 24 hours late: 10% penalty of total available points
-* 24 to 48 hours late: 20% penalty of total available points
-* 48 to 72 hours: 30% penalty of total available points
-* Beyond 72 hours: assignment not accepted
-
-If there is an extenuating circumstance, please email the instructor with CBE 60258 in the subject. Please send your requests for extensions at least 24 hours before the deadline (unless your specific circumstance prevents this). Please briefly explain the extenuating circumstance when requesting an extension and propose an alternate deadline.
-
-## Software
-
-We will use Python 3 in this class. You have three options for using Python:
-1. (Recommended for Most People.) Use Google Colab, which allows you to complete all assignments from any internet-accessible computer.
-2. (Recommended for Advanced Users.) Install [anaconda3](https://www.anaconda.com/download/) on your computer. Anaconda is a free distribution of Python that includes standard packages for data analysis and scientific computing. You must install popular packages such as `numpy`, `scipy`, `pandas`, and `matplotlib`.
-3. Use anaconda3 installed on any ESC-maintained computer.
-
-## Inclusiveness, Mental Health, and Disabilities
-
-The University of Notre Dame is committed to social justice. We share that commitment and strive to maintain a positive learning environment based on open communication, mutual respect, and non-discrimination. In this class, we will not discriminate on the basis of race, sex, age, economic class, disability, veteran status, religion, sexual orientation, color, or national origin. Any suggestions as to how to further such a positive and open environment will be appreciated and given serious consideration.
-
-Diminished mental health can interfere with optimal academic performance. The source of symptoms might be related to your coursework; if so, please speak with us. However, problems with other parts of your life can also decrease academic performance. The University Counseling Center (UCC) provides cost-free and confidential mental health services to help you manage personal challenges threatening your emotional or academic well-being. Remember, getting help is a smart and courageous thing to do — for yourself and for those who care about you. For more resources, please see ucc.nd.edu. The UCC is located on the third floor of Saint Liam Hall Phone: 574-631-7336. Hours: Monday-Friday 8:30am – 5:00pm. Urgent Crisis Line 24/7. 
-
-Any student who has a documented disability and is registered with Disability Services should speak with the professor as soon as possible regarding accommodations. Students who are not registered should contact the [Office of Disability Services](https://sarabeadisabilityservices.nd.edu/). 
-
-
-
-
-
-
+## Updates
+This syllabus may be adjusted to improve pacing/learning; changes will be announced in class and on the course site.

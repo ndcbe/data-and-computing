@@ -4,128 +4,41 @@
 
 | Deadline     | Description |
 | ----------- | ----------- |
-| Monday, August 28, 2023 | [](../notebooks/03/chapter1.ipynb), finish Python intro on Udemy |
-| Friday, September 1, 2023 | [](../notebooks/03/chapter2.ipynb) and [](../notebooks/03/chapter3.ipynb) |
-| Friday, September 8, 2023 | [](../notebooks/03/chapter4.ipynb) and [](../notebooks/03/chapter5.ipynb)  |
-| Friday, September 15, 2023 | [](../notebooks/03/chapter6.ipynb) and mini-project pseudocode |
-| Friday, September 22, 2023 | Mini-Project: Simulating Games of Chance |
-| Friday, September 29, 2023 | [Problem Set 1: Linear Systems and Taylor Series](../notebooks/assignments/ProblemSet1_F23.ipynb) |
-| Friday, October 6, 2023 | [Problem Set 2: Numeric Integration](../notebooks/assignments/ProblemSet2_F23.ipynb) and Project Proposal Part 1 |
-| Friday, October 27, 2023 | [Problem Set 3: Pyomo, Pandas, and Probability](../notebooks/assignments/ProblemSet3_F23.ipynb) |
-| Friday, November 3, 2023 | Submit Project Part 1 Notebooks |
-| Friday, November 10, 2023 | [Problem Set 4: Error Propagation](../notebooks/assignments/ProblemSet4_F23.ipynb), Project Part 2 Updates Due |
-| Friday, November 17, 2023 | [Problem Set 5: Hypothesis Testing](../notebooks/assignments/ProblemSet5_F23.ipynb) |
-| Friday, December 1, 2023| [Problem Set 6: Statistical Power and Nonlinear Regression](../notebooks/assignments/ProblemSet6_F23.ipynb) |
-| Thursday, December 7, 2023 | Project Notebook(s) Due |
-| Friday, December 15, 2023, 10:30 AM - 12:30 PM (Final Exam Timeslot) | Project Presentations |
+TBD
 
 ## Class Meetings
 
-| Main Topic(s) | Supplemental Material |
-| ----------- | ----------- |
-| **Tuesday, August 22, 2023** | Python and Math Quickstart |
-| [](../notebooks/01/Jupyter-Notebooks.ipynb) | [](../notebooks/01/Python-Basics-I-Variables-Strings-Bugs.ipynb) |
-| [](../notebooks/01/Pseudocode.ipynb) | [](../notebooks/01/Flow-control.ipynb) |
-| [](../notebooks/01/Example-High-Low-Game.ipynb) | [](../notebooks/01/Python-Basics-III-Lists-Dictionaries-Enumeration.ipynb) |
-| [](../notebooks/01/Publication-Quality-Figures.ipynb) | [](../notebooks/01/Functions-and-Scope.ipynb) |
-| [](../notebooks/03/chapter1.ipynb) | [](../notebooks/01/Recursion.ipynb) |
-| | [](../notebooks/01/Modules-and-Files.ipynb) |
-| | [](../notebooks/01/NumPy.ipynb) |
-| | [](../notebooks/01/Matplotlib.ipynb) |
-| | [](../notebooks/01/Functions-as-Arguments.ipynb) |
-| | [](../notebooks/01/Testing-and-Debugging.ipynb) |
-| **Thursday, August 24, 2023** |
-| [](../notebooks/03/chapter2.ipynb) | [](../notebooks/04/Modeling-Systems-of-Linear-Equations.ipynb) |
-| | [](../notebooks/04/Linear-Algebra-in-Numpy.ipynb) |
-| **Tuesday, August 29, 2023** |
-| [](../notebooks/03/chapter3.ipynb) | [](../notebooks/04/Gauss-Elimination.ipynb) |
-| **Thursday, August 31, 2023** |
-| [](../notebooks/03/chapter4.ipynb) | [](../notebooks/04/Condition-Number.ipynb) |
-| **Tuesday, September 5, 2023** |
-| [](../notebooks/03/chapter5.ipynb) | [](../notebooks/04/Invertible-Matrix-Theorem-and-Gauss-Example.ipynb) |
-| | [](../notebooks/04/LU-Decomposition.ipynb) |
-| **Thursday, September 7, 2023** |
-| Mini-Project Hackathon | |
-| **Tuesday, September 12, 2023** |
-| [](../notebooks/03/chapter6.ipynb) | [](../notebooks/04/Condition-Number.ipynb) |
-| **Thursday, September 14, 2023** | Approximating Functions and Derivatives |
-| [](../notebooks/05/Taylor-Series.ipynb) | [](../notebooks/05/algorithms.md) |
-| [](../notebooks/05/Finite-Difference.ipynb) | [](../notebooks/05/Example-Heating-a-Metal-Slab.ipynb) |
-| [](../notebooks/05/Example-Heating-a-Metal-Slab.ipynb) |
-| **Tuesday, September 19, 2023** |
-| Linear Algebra and Python Quiz | Mini-Project Hackathon |
-| **Thursday, September 21, 2023** | Solving Nonlinear System of Equations |
-| [](../notebooks/06/Newton-Raphson-Method-in-One-Dimension.ipynb) | [](../notebooks/06/nonlinear_systems.md) |
-| [](../notebooks/06/More-Newton-Type-Methods.ipynb) | [](../notebooks/06/Convergence-Analysis-for-Newton-Raphson-Methods.ipynb) |
-| [](../notebooks/06/Newton-Raphson-Methods-for-Systems-of-Equations.ipynb) | [](../notebooks/06/Newton-Methods-in-Scipy.ipynb) |
-| **Tuesday, September 26** | Numeric Integration for Integrals
-| [](../notebooks/07/Intro-and-Newton-Cotes.ipynb) | [](../notebooks/07/integration.md) |
-| [](../notebooks/07/Gauss-Quadrature.ipynb) | [](../notebooks/07/Scipy-Library-Adaptive-Methods-for-Newton-Cotes-and-Gauss-Quadrature.ipynb) |
-| | [](../notebooks/07/Application-Inertial-Navigation-Systems.ipynb) |
-| **Thursday, September 28** | Numeric Integration for Differential Equations |
-| [](../notebooks/07/Forward-and-Backward-Euler.ipynb) | [](../notebooks/07/Explicit-Runge-Kutta.ipynb) |
-| [](../notebooks/07/Trapezoid-Rule.ipynb) | [](../notebooks/07/Example-Reaction-Rates.ipynb) |
-| [](../notebooks/07/Stability-Analysis.ipynb) | 
-| [](../notebooks/07/Systems-of-Differential-Equations-and-Scipy.ipynb) | 
-| **Tuesday, October 3** | Pyomo|
-| [](../notebooks/08/Pyomo-Basics.ipynb) | [](../notebooks/08/optimization.md) |
-| [Simulating Heat Conduction with Pyomo.dae](https://jckantor.github.io/ND-Pyomo-Cookbook/notebooks/05.03-Heat_Conduction_in_Various_Geometries.html) | [](../notebooks/08/Flash-Calculations-in-Pyomo.ipynb) |
-| [Simulating Diffusion with Adsorption in Polymers with Pyomo.dae](https://jckantor.github.io/ND-Pyomo-Cookbook/notebooks/05.04-Diffusion_Adsorption_in_Polymers.html) |
-| **Thursday, October 5** | Pandas and Data |
-| [](../notebooks/01/Pandas.ipynb) | [](../notebooks/09/stats.md) |
-| [Tiny Data](https://jckantor.github.io/cbe31358-book/notebooks/methods/05-Tidy-Data-and-Pandas.html) |
-| [](../notebooks/09/Sampling.ipynb) | 
-| [](../notebooks/09/Summary-Statistics.ipynb) | 
-| [](../notebooks/09/Visualizing-Data.ipynb) |
-| **Tuesday, October 10** | Basic Ideas of Probability |
-| [](../notebooks/10/Probability-Basics.ipynb)  | [](../notebooks/10/probability.md) |
-| **Thursday, October 12** | Random Variables |
-| [](../notebooks/10/Random-Variables.ipynb) | [](../notebooks/10/Practice-Problems.ipynb) |
-| [](../notebooks/10/Jointly-Distributed-Random-Variables.ipynb) |
-| [](../notebooks/10/Jointly-Continuous-Random-Variables.ipynb) |
-| **Tuesday, October 17** | Fall Break | 
-| **Thursday, October 19** | Fall Break |
-| **Tuesday, October 24** | Probability Distributions, Uncertainty Propagation | 
-| [](../notebooks/11/Bernoulli-Probability-Distribution.ipynb) | [](../notebooks/11/distributions.md) |
-| [](../notebooks/11/Binomial-Probability-Distribtuion.ipynb) | [](../notebooks/11/Common-Probability-Distributions-Summary.md) |
-| [](../notebooks/11/Poisson-Probability-Distribution.ipynb) |
-| [](../notebooks/11/Normal-Probability-Distribution.ipynb) |
-| [](../notebooks/12/Measurement-Error.ipynb) |
-| [](../notebooks/12/Error-Propagation.ipynb) |
-| [](../notebooks/12/Measuring-Flowrate-Example.ipynb) |
-| **Thursday, October 26** | Numerical Methods Quiz, Uncertainty Propagation |
-| [](../notebooks/12/Simulation.ipynb) | [](../notebooks/12/Car-and-Incline-Example.ipynb) |
-| [](../notebooks/12/Monte-Carlo-Error-Propogation.ipynb) | [](../notebooks/12/Practice-Problems.ipynb) |
-| **Tuesday, October 31** | Statistical Inference |
-| [](../notebooks/13/Central-Limit-Theorem.ipynb) | [](../notebooks/13/inference.md)|
-| [](../notebooks/13/Standard-Normal-Distribution.ipynb) 
-| [](../notebooks/13/Confidence-Intervals.ipynb) |
-| [](../notebooks/13/Students-t-Distribution.ipynb) |
-| **Thursday, November 2** | Hypothesis Testing |
-| [](../notebooks/13/Hypothesis-Testing-Basics.ipynb) |
-| [](../notebooks/13/Flavors-of-Hypothesis-Testing.ipynb) |
-[](../notebooks/13/Bootstrap-Confidence-Intervals.ipynb) |
-| **Tuesday, November 7** | Project Workshop | 
-| **Thursday, November 9** | Project Workshop | 
-| **Tuesday, November 14** | Multivariate Linear Regression | 
-| | [](../notebooks/14/Ordinary-Least-Squares-Linear-Regression.ipynb) |
-| | [](../notebooks/14/Residual-Analysis.ipynb) |
-| | [](../notebooks/14/Regression-Assumption-Examples.ipynb) |
-| | [](../notebooks/14/Uncertainty-Analysis-and-Statistical-Inference.ipynb) |
-| | [](../notebooks/14/Multivariate-Linear-Regression.ipynb) |
-| | [](../notebooks/14/Linear-Regression-Practice-Problems.ipynb) |
-| **Thursday, November 16** | Multivariate Linear Regression Continued |
-| **Tuesday, November 21** | Statistical Power | 
-| [](../notebooks/13/Type-I-and-Type-II-Errors.ipynb) | [](../notebooks/13/Statistical-Power-in-Python.ipynb)
-| [](../notebooks/13/Statistical-Power-Basics.ipynb) | [](../notebooks/13/Statistical-Power-Practice-Problems.ipynb)  
-| **Thursday, November 23** | Thanksgiving | 
-| **Tuesday, November 28** | Nonlinear Regression  |
-| [](../notebooks/15/Transformations-and-Linear-Regression.ipynb) |
-| [](../notebooks/15/Weighted-Regression.ipynb) |
-| [](../notebooks/15/Nonlinear-Regression.ipynb) | 
-| **Thursday, November 30** | Probability and Statistics Quiz, Nonlinear Regression Continued |
-| [](../notebooks/15/Monte-Carlo-Uncertainty-Analysis-for-Nonlinear-Regression.ipynb ) | [](../notebooks/15/Nonlinear-Case-Study-Adsorptive-Membranes.ipynb )|
-| [](../notebooks/15/Nonlinear-Regression-Practice-Problem.ipynb) |
-| **Tuesday, December 5** | Design of Experiments | 
-| [](../notebooks/16/Reaction-MBDoE.ipynb) | [](../notebooks/16/design_of_experiments.md) |
-| **Thursday, December 7** | Semester Wrap-up, Project Workshop | 
+
+| Date       | Topic | Brief Description |
+|------------|-------|-------------------|
+| 2025-08-26 | Python review. | Fundamental objects and syntax. Common packages. |
+| 2025-08-28 | Basic definitions in linear algebra: vectors, matrices, determinant, inner product | Core objects and operations in linear algebra; norms and orthogonality; geometric interpretations. Conditioning and why it matters in computation. |
+| 2025-09-02 | Gaussian elimination & solving linear systems | Elimination, back‑substitution, and residual/error checks. Numerical stability, pivoting idea (preview), and interpreting solutions in `Ax=b` problems. |
+| 2025-09-04 | LU (partial pivoting) & Cholesky | Stable factorization for general matrices (`PA = LU`) and efficient solvers for symmetric positive definite (SPD) matrices (`A = LL^T`). When to use each in practice; complexity and reuse of factors. |
+| 2025-09-09 | Matrix spaces: column space, null space | Rank, independence, and the structure of solution sets. Interpreting tall systems and consistency via column space; null space as degrees of freedom. |
+| 2025-09-11 | Row space, orthogonal complements, bases, Gram–Schmidt | Building orthonormal bases; geometry of orthogonal complements. Modified Gram–Schmidt and the link to QR for stable projections. |
+| 2025-09-16 | Rank‑deficient problems: tall `A` in `Ax=b` | Least‑squares formulation; normal equations vs. QR/SVD solutions. Regularization preview and diagnostics for ill‑conditioning. |
+| 2025-09-18 | Eigendecomposition, matrix functions & orthogonal matrices | Spectral theorem, diagonalization, and matrix functions (polynomials, exponential). Orthogonal matrices and stability. |
+| 2025-09-23 | SVD & underdetermined problems: wide `A` in `Ax=b` | SVD for pseudoinverses, minimal‑norm solutions, and low‑rank structure. Connections to compression, noise filtering, and constrained degrees of freedom. |
+| 2025-09-25 | Positive definite matrices & applications | Quadratic forms, PD/PSD tests, and energy/convexity interpretations. Why PD matters in optimization, estimation, and numerical stability. |
+| 2025-09-30 | Probability & random vectors: expectation, covariance, PSD | Random vectors, moments, and covariance as a PSD operator. Linear transformations, sample vs. population quantities, and empirical estimation. |
+| 2025-10-02 | **In‑class exam #1 (Linear Algebra)** | Cumulative in‑class assessment covering the linear algebra module. |
+| 2025-10-07 | Common distributions; linear transformations | Gaussian and exponential family basics; multivariate normal geometry. Transformations of random vectors and propagation of mean/covariance. |
+| 2025-10-09 | Change of variables, Jacobians, uncertainty propagation | Jacobians and volume scaling; practical change‑of‑variables examples. First‑order and Monte‑Carlo uncertainty propagation in models. |
+| 2025-10-14 | Maximum entropy & chemical‑engineering applications | Entropy as uncertainty; deriving distributions from constraints (maxent → exponential family). Links to statistical thermodynamics and prior modeling. |
+| 2025-10-16 | Estimation theory: moments, MLE, Fisher information | Principles of parameter estimation; identifiability and variance bounds (Cramér–Rao). Using information matrices to reason about parameter precision. |
+| 2025-10-21 | No class | Fall Break. |
+| 2025-10-23 | No class | Fall Break. |
+| 2025-10-28 | Hypothesis testing: LRTs, confidence ellipsoids | Likelihood‑based tests; interpreting p‑values and power. Multivariate confidence regions (ellipsoids) and Hotelling’s T² perspective. |
+| 2025-10-30 | Bayesian inference: conjugacy, Maximum a Posteriori (MAP), updating | Prior → posterior mechanics for common models; MAP as regularization. Predictive distributions and sequential updating. |
+| 2025-11-04 | Statistics capstone (incl. experimental design) | End‑to‑end inference on a chemical‑engineering case: objectives, efficient designs (D/A/E‑optimality), data collection/analysis, and communicating uncertainty. |
+| 2025-11-06 | **In‑class exam #2 (Statistics)** | Cumulative in‑class assessment covering the statistics module. |
+| 2025-11-11 | Generalized linear models (GLMs) & model assessment; Akaike and Bayesian Information Criteria (AIC/BIC) & CV | Link functions, deviance, and when GLMs are appropriate. Model comparison and validation under realistic data conditions. Heteroscedastic/Homoscedastic. |
+| 2025-11-13 | Classification overview; Receiver Operator Characteristic (ROC) & precision–recall | Linear Discriminant Analysis (LDA), logistic classifier, SVM concepts. Evaluation under imbalance with ROC/PR and calibration. |
+| 2025-11-18 | Newton–Raphson & quasi‑Newton for nonlinear equations | Root‑finding for vector systems; Jacobians/Hessians, line search vs. trust‑region ideas. Convergence behavior and practical safeguards. |
+| 2025-11-20 | Nonlinear least squares: Gauss–Newton & Levenberg–Marquardt | Parameter estimation for nonlinear models; weighting, scaling, and robust losses. Implementation details that affect convergence. |
+| 2025-11-25 | Constrained optimization: Lagrange multipliers & KKT | Equality/inequality constraints; optimality conditions and sensitivities. Brief look at QPs and engineering design constraints. (May opt for global optimization: genetic algorithms/particle swarm optimization instead). |
+| 2025-11-27 | Thanksgiving Break — no class | No meeting (university holiday). |
+| 2025-12-02 | MAP estimation & Bayesian nonlinear models (MCMC overview) | Priors as regularization in nonlinear settings; Laplace approximation intuition. Overview of MCMC (Metropolis–Hastings/HMC). |
+| 2025-12-04 | Gaussian process regression & surrogate modeling | Nonparametric regression with kernels; posterior mean/variance and hyperparameter learning. Emulation of expensive ODE/PDE models for design and UQ. |
+| 2025-12-09 | Capstone integration: parameter estimation + UQ | Full pipeline: model specification → estimation (deterministic/Bayesian) → validation → uncertainty propagation/sensitivity → decision support. Emphasis on reproducible computation. |
