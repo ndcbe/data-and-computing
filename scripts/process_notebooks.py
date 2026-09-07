@@ -70,6 +70,37 @@ def process_notebook(folder_original, folder_new, filename, verbose=1):
     replace_code(SOLUTION_CODE, "# Add your solution here", clear_outputs=True)
     replace_code(HIDDEN_TESTS, "# Removed autograder test. You may delete this cell.",
                  clear_outputs=True)
+
+    # -----------------------------------------------------------------------
+    # Cells that are ALREADY a placeholder in the source.
+    #
+    # The two patterns above only fire on cells that CONTAIN a solution block.
+    # Some authors skipped the markers and hand-wrote "# Add your solution
+    # here" directly -- contrib-dev/Non_Isothermal_PBR.ipynb has eighteen of
+    # them and zero solution markers. Nothing matches, clear_outputs never
+    # fires, and the cell publishes a placeholder above the stored output of
+    # the run that produced the answer.
+    #
+    # If the source says the student supplies this cell, its stored output
+    # cannot be something the student is meant to be handed. Clearing it is
+    # safe, and unlike a marker it cannot be misspelled.
+    PLACEHOLDER = "# Add your solution here"
+
+    def clear_placeholder_outputs():
+        count = 0
+        for cell in nb.cells:
+            if cell.cell_type != "code":
+                continue
+            if PLACEHOLDER not in cell.source:
+                continue
+            if cell.get("outputs") or cell.get("execution_count") is not None:
+                count += 1
+            cell.outputs = []
+            cell.execution_count = None
+        if verbose >= 1 and count:
+            print(f"  Cleared stored output from {count} placeholder cell(s)")
+
+    clear_placeholder_outputs()
     
     OLD_DATA_PATH = "../data/"
     NEW_DATA_PATH = "https://raw.githubusercontent.com/ndcbe/data-and-computing/main/notebooks/data/"    
