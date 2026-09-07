@@ -25,9 +25,12 @@ def process_notebook(folder_original, folder_new, filename, verbose=1):
         display(nb.metadata)
         
     ## Remove code elements with specific tag
-    def replace_code(pattern, replacement):
+    def replace_code(pattern, replacement, clear_outputs=False):
         ''' Replace content in code by applying regular expression
-    
+
+        clear_outputs: also discard the cell's stored outputs and execution
+            count. Required whenever the removed content is a solution --
+            see the comment above SOLUTION_CODE.
         '''
     
         if verbose >= 1:
@@ -39,6 +42,9 @@ def process_notebook(folder_original, folder_new, filename, verbose=1):
         for cell in nb.cells:
             if cell.cell_type == "code" and regex.findall(cell.source):
                 cell.source = regex.sub(replacement, cell.source)
+                if clear_outputs:
+                    cell.outputs = []
+                    cell.execution_count = None
                 count += 1
                 if verbose >= 2:
                     print(f" - {pattern} removed")
@@ -46,10 +52,24 @@ def process_notebook(folder_original, folder_new, filename, verbose=1):
         if verbose >= 1:
             print("\t",count," cells processed")
     
+    # 🔴 clear_outputs=True on BOTH solution patterns.
+    #
+    # Stripping the SOURCE is not enough: a solution cell's stored OUTPUT is
+    # the answer just as plainly. Found 2026-09-07 in
+    # notebooks/07/Intro-and-Newton-Cotes.ipynb, where cell 84 published
+    # "# Add your solution here" over an output reading "Estimate is
+    # 2.0000000108245035 Actual value is 2". Six of the seven stripped cells in
+    # that one notebook carried answer-revealing output, and
+    # `grep -r "BEGIN SOLUTION" notebooks/` saw none of it.
+    #
+    # The sibling optimization repo hit this same defect and fixed it the same
+    # way; its CLAUDE.md records thirteen graded answers going live through
+    # outputs while a source grep stayed clean.
     SOLUTION_CODE = "### BEGIN SOLUTION(.*?)### END SOLUTION"
     HIDDEN_TESTS = "### BEGIN HIDDEN TESTS(.*?)### END HIDDEN TESTS"
-    replace_code(SOLUTION_CODE, "# Add your solution here")
-    replace_code(HIDDEN_TESTS, "# Removed autograder test. You may delete this cell.")
+    replace_code(SOLUTION_CODE, "# Add your solution here", clear_outputs=True)
+    replace_code(HIDDEN_TESTS, "# Removed autograder test. You may delete this cell.",
+                 clear_outputs=True)
     
     OLD_DATA_PATH = "../data/"
     NEW_DATA_PATH = "https://raw.githubusercontent.com/ndcbe/data-and-computing/main/notebooks/data/"    
